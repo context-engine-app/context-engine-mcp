@@ -1,0 +1,203 @@
+name: Prepare draft release
+
+run-name: Prepare ${{ inputs.tag }} from source run ${{ inputs.source_run_id }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Validated source release tag
+        required: true
+        type: string
+      source_run_id:
+        description: Successful private Release workflow run ID
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prepare-draft-${{ inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  prepare-draft:
+    environment: release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      PUBLIC_RELEASE_REPOSITORY: context-engine-app/context-engine-mcp
+      SOURCE_REPOSITORY: context-engine-app/context-engine
+      SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+      TAG_NAME: ${{ inputs.tag }}
+    steps:
+      - name: Validate protected inputs
+        run: |
+          if [[ ! "$TAG_NAME" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?(\+[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?$ ]]; then
+            echo "::error::release tag is not a supported semantic version: $TAG_NAME"
+            exit 1
+          fi
+          if [[ ! "$SOURCE_RUN_ID" =~ ^[1-9][0-9]*$ ]]; then
+            echo "::error::source run ID must be a positive integer"
+            exit 1
+          fi
+
+      - name: Create read-only artifact token
+        id: artifact-reader
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.ARTIFACT_READER_APP_CLIENT_ID }}
+          private-key: ${{ secrets.ARTIFACT_READER_APP_PRIVATE_KEY }}
+          owner: context-engine-app
+          repositories: context-engine
+          permission-actions: read
+
+      - name: Verify private source workflow run
+        env:
+          GH_TOKEN: ${{ steps.artifact-reader.outputs.token }}
+        run: |
+          run_json="${RUNNER_TEMP}/source-run.json"
+          gh api "repos/${SOURCE_REPOSITORY}/actions/runs/${SOURCE_RUN_ID}" > "$run_json"
+
+          jq -e \
+            --arg tag "$TAG_NAME" \
+            --arg repository "$SOURCE_REPOSITORY" \
+            '
+              .name == "Release" and
+              .path == ".github/workflows/release.yml" and
+              .event == "push" and
+              .status == "completed" and
+              .conclusion == "success" and
+              .head_branch == $tag and
+              .repository.full_name == $repository
+            ' "$run_json" > /dev/null
+
+      - name: Download staged release artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: context-engine-release-assets
+          path: staged-release
+          github-token: ${{ steps.artifact-reader.outputs.token }}
+          repository: context-engine-app/context-engine
+          run-id: ${{ inputs.source_run_id }}
+
+      - name: Verify staged release
+        run: |
+          expected_files="${RUNNER_TEMP}/expected-files.txt"
+          actual_files="${RUNNER_TEMP}/actual-files.txt"
+          printf '%s\n' \
+            SHA256SUMS \
+            context-engine-aarch64-apple-darwin.tar.gz \
+            context-engine-x86_64-apple-darwin.tar.gz \
+            context-engine-x86_64-pc-windows-msvc.zip \
+            release-metadata.json \
+            release_notes.md \
+            | sort > "$expected_files"
+          find staged-release -mindepth 1 -maxdepth 1 -type f -printf '%f\n' \
+            | sort > "$actual_files"
+          diff -u "$expected_files" "$actual_files"
+
+          unexpected_entry=$(find staged-release -mindepth 1 -maxdepth 1 ! -type f -print -quit)
+          if [[ -n "$unexpected_entry" ]]; then
+            echo "::error::staged release contains a non-file entry: $unexpected_entry"
+            exit 1
+          fi
+
+          run_json="${RUNNER_TEMP}/source-run.json"
+          jq -e \
+            --arg tag "$TAG_NAME" \
+            --arg source_repository "$SOURCE_REPOSITORY" \
+            --arg public_release_repository "$PUBLIC_RELEASE_REPOSITORY" \
+            --arg source_commit "$(jq -r .head_sha "$run_json")" \
+            --argjson source_run_id "$SOURCE_RUN_ID" \
+            '
+              .schema_version == 1 and
+              .tag == $tag and
+              .source_repository == $source_repository and
+              .source_commit == $source_commit and
+              .source_run_id == $source_run_id and
+              .public_release_repository == $public_release_repository and
+              .build_mode == "license-enforced"
+            ' staged-release/release-metadata.json > /dev/null
+
+          (
+            cd staged-release
+            sha256sum --check SHA256SUMS
+          )
+
+      - name: Create scoped release-publisher token
+        id: release-publisher
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.RELEASE_APP_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          owner: context-engine-app
+          repositories: context-engine-mcp
+          permission-contents: write
+
+      - name: Create or resume draft release
+        env:
+          GH_TOKEN: ${{ steps.release-publisher.outputs.token }}
+        run: |
+          if gh release view "$TAG_NAME" --repo "$PUBLIC_RELEASE_REPOSITORY" > /dev/null 2>&1; then
+            is_draft=$(gh release view "$TAG_NAME" \
+              --repo "$PUBLIC_RELEASE_REPOSITORY" \
+              --json isDraft \
+              --jq .isDraft)
+            if [[ "$is_draft" != "true" ]]; then
+              echo "::error::release $TAG_NAME is already published"
+              exit 1
+            fi
+          else
+            gh release create "$TAG_NAME" \
+              --repo "$PUBLIC_RELEASE_REPOSITORY" \
+              --draft \
+              --target main \
+              --title "$TAG_NAME" \
+              --notes-file staged-release/release_notes.md
+          fi
+
+          gh release upload "$TAG_NAME" \
+            --repo "$PUBLIC_RELEASE_REPOSITORY" \
+            --clobber \
+            staged-release/context-engine-aarch64-apple-darwin.tar.gz \
+            staged-release/context-engine-x86_64-apple-darwin.tar.gz \
+            staged-release/context-engine-x86_64-pc-windows-msvc.zip \
+            staged-release/SHA256SUMS
+
+      - name: Verify draft release assets
+        env:
+          GH_TOKEN: ${{ steps.release-publisher.outputs.token }}
+        run: |
+          published_assets="${RUNNER_TEMP}/published-assets"
+          mkdir "$published_assets"
+          gh release download "$TAG_NAME" \
+            --repo "$PUBLIC_RELEASE_REPOSITORY" \
+            --dir "$published_assets"
+
+          expected_files="${RUNNER_TEMP}/expected-published-files.txt"
+          actual_files="${RUNNER_TEMP}/actual-published-files.txt"
+          printf '%s\n' \
+            SHA256SUMS \
+            context-engine-aarch64-apple-darwin.tar.gz \
+            context-engine-x86_64-apple-darwin.tar.gz \
+            context-engine-x86_64-pc-windows-msvc.zip \
+            | sort > "$expected_files"
+          find "$published_assets" -mindepth 1 -maxdepth 1 -type f -printf '%f\n' \
+            | sort > "$actual_files"
+          diff -u "$expected_files" "$actual_files"
+
+          for filename in \
+            SHA256SUMS \
+            context-engine-aarch64-apple-darwin.tar.gz \
+            context-engine-x86_64-apple-darwin.tar.gz \
+            context-engine-x86_64-pc-windows-msvc.zip
+          do
+            cmp "staged-release/${filename}" "$published_assets/${filename}"
+          done
+
+          (
+            cd "$published_assets"
+            sha256sum --check SHA256SUMS
+          )
