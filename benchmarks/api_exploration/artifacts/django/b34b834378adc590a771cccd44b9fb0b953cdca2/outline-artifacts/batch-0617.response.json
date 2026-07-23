@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/migrations_test_apps/unmigrated_app_syncdb/__init__.py",
+        "tests/migrations/migrations_test_apps/unmigrated_app_syncdb/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/migrations/migrations_test_apps/unmigrated_app_syncdb/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/migrations/migrations_test_apps/unmigrated_app_syncdb/models.py (15L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from django.db import models\n 2|\n 3|\n 4|class Classroom(models.Model):\n 5|    pass\n 6|\n 7|\n 8|class Lesson(models.Model):\n 9|    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)\n10|\n11|\n12|class VeryLongNameModel(models.Model):\n13|    class Meta:\n14|        db_table = \"long_db_table_that_should_be_truncated_before_checking\"\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

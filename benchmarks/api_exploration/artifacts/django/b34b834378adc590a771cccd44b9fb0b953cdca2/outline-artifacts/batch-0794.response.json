@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/template_loader/__init__.py",
+        "tests/template_loader/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/template_loader/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/template_loader/tests.py (183L)\nfile scope: [\"000EV00H\" full 183L | imports 7L]\n\n- @override_settings( TEMPLATES=[ { \"BACKEND\": \"django.template.backends.dummy.TemplateStrings\", \"APP_DIRS\": True, }, { \"BACKEND\": \"django.template.backends.django.DjangoTemplates\", \"OPTIONS\": { \"context_processors\": [ \"django.template.context_processors.request\", ], \"loaders\": [ \"django.template.loaders.filesystem.Loader\", \"django.template.loaders.app_directories.Loader\", ], }, }, ] ) class TemplateLoaderTests(SimpleTestCase): ... [\"000EV00G\" full 176L | code 176L]\n  - def test_get_template_first_engine(self): ... [\"000EV001\" full 3L | code 3L]\n  - def test_get_template_second_engine(self): ... [\"000EV003\" full 3L | code 3L]\n  - def test_get_template_using_engine(self): ... [\"000EV005\" full 3L | code 3L]\n  - def test_get_template_not_found(self): ... [\"000EV007\" full 8L | code 8L]\n  - def test_select_template_first_engine(self): ... [\"000EV009\" full 5L | code 5L]\n  - def test_select_template_second_engine(self): ... [\"000EV00b\" full 5L | code 5L]\n  - def test_select_template_using_engine(self): ... [\"000EV00d\" full 6L | code 6L]\n  - def test_select_template_empty(self): ... [\"000EV00e\" full 3L | code 3L]\n  - def test_select_template_string(self): ... [\"000EV00f\" full 8L | code 8L]\n  - def test_select_template_not_found(self): ... [\"000EV00h\" full 15L | code 15L]\n  - def test_select_template_tries_all_engines_before_names(self): ... [\"000EV00j\" full 5L | code 5L]\n  - def test_render_to_string_first_engine(self): ... [\"000EV00l\" full 3L | code 3L]\n  - def test_render_to_string_second_engine(self): ... [\"000EV00n\" full 3L | code 3L]\n  - def test_render_to_string_with_request(self): ... [\"000EV00q\" full 4L | code 4L]\n  - def test_render_to_string_using_engine(self): ... [\"000EV00s\" full 3L | code 3L]\n  - def test_render_to_string_not_found(self): ... [\"000EV00u\" full 8L | code 8L]\n  - def test_render_to_string_with_list_first_engine(self): ... [\"000EV00w\" full 5L | code 5L]\n  - def test_render_to_string_with_list_second_engine(self): ... [\"000EV00y\" full 5L | code 5L]\n  - def test_render_to_string_with_list_using_engine(self): ... [\"000EV00A\" full 6L | code 6L]\n  - def test_render_to_string_with_list_empty(self): ... [\"000EV00B\" full 3L | code 3L]\n  - def test_render_to_string_with_list_not_found(self): ... [\"000EV00D\" full 25L | code 25L]\n  - def test_render_to_string_with_list_tries_all_engines_before_names(self): ... [\"000EV00F\" full 5L | code 5L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

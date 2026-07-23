@@ -1,0 +1,25 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/db_functions/text/test_sha384.py",
+        "tests/db_functions/text/test_sha512.py",
+        "tests/db_functions/text/test_strindex.py",
+        "tests/db_functions/text/test_substr.py",
+        "tests/db_functions/text/test_trim.py",
+        "tests/db_functions/text/test_upper.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 11.7 KB -> 2.5 KB (79% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/db_functions/text/test_sha384.py (60L)\nfile scope: [\"000mI006\" full 60L | imports 10L]\n\n- class SHA384Tests(TestCase): ... [\"000mI005\" full 50L | code 50L]\n  - @classmethod def setUpTestData(cls): ... [\"000mI000\" full 11L | code 11L]\n  - def test_basic(self): ... [\"000mI002\" full 27L | code 27L]\n  - def test_transform(self): ... [\"000mI004\" full 9L | code 9L]\n\n# tests/db_functions/text/test_sha512.py (61L)\nfile scope: [\"000mJ006\" full 61L | imports 10L]\n\n- class SHA512Tests(TestCase): ... [\"000mJ005\" full 51L | code 51L]\n  - @classmethod def setUpTestData(cls): ... [\"000mJ000\" full 11L | code 11L]\n  - def test_basic(self): ... [\"000mJ002\" full 27L | code 27L]\n  - def test_transform(self): ... [\"000mJ004\" full 10L | code 10L]\n\n# tests/db_functions/text/test_strindex.py (75L)\nfile scope: [\"000mK009\" full 75L | imports 9L]\n\n- class StrIndexTests(TestCase): ... [\"000mK008\" full 66L | code 66L]\n  - def test_annotate_charfield(self): ... [\"000mK001\" full 8L | code 8L]\n  - def test_annotate_textfield(self): ... [\"000mK003\" full 15L | code 15L]\n  - def test_order_by(self): ... [\"000mK004\" full 22L | code 22L]\n  - def test_unicode_values(self): ... [\"000mK006\" full 6L | code 6L]\n  - def test_filtering(self): ... [\"000mK007\" full 10L | code 10L]\n\n# tests/db_functions/text/test_substr.py (49L)\nfile scope: [\"000mL009\" full 49L | imports 8L]\n\n- class SubstrTests(TestCase): ... [\"000mL008\" full 41L | code 41L]\n  - def test_basic(self): ... [\"000mL001\" full 18L | code 18L]\n  - def test_start(self): ... [\"000mL003\" full 8L | code 8L]\n  - def test_pos_gt_zero(self): ... [\"000mL004\" full 3L | code 3L]\n  - def test_expressions(self): ... [\"000mL007\" full 8L | code 8L]\n\n# tests/db_functions/text/test_trim.py (42L)\nfile scope: [\"000mM008\" full 42L | imports 9L]\n\n- class TrimTests(TestCase): ... [\"000mM007\" full 33L | code 33L]\n  - def test_trim(self): ... [\"000mM001\" full 16L | code 16L]\n  - def test_trim_transform(self): ... [\"000mM006\" full 15L | code 15L]\n\n# tests/db_functions/text/test_upper.py (44L)\nfile scope: [\"000mN005\" full 44L | imports 9L]\n\n- class UpperTests(TestCase): ... [\"000mN004\" full 35L | code 35L]\n  - def test_basic(self): ... [\"000mN001\" full 21L | code 21L]\n  - def test_transform(self): ... [\"000mN003\" full 12L | code 12L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

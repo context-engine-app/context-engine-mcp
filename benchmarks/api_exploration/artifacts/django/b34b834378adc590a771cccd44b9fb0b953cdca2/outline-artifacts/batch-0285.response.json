@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/admin_autodiscover/__init__.py",
+        "tests/admin_autodiscover/admin.py",
+        "tests/admin_autodiscover/models.py",
+        "tests/admin_autodiscover/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/admin_autodiscover/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/admin_autodiscover/admin.py (7L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.contrib import admin\n2|\n3|from .models import Story\n4|\n5|admin.site.register(Story)\n6|raise Exception(\"Bad admin module\")\nnote: EOF\n\n# tests/admin_autodiscover/models.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import models\n2|\n3|\n4|class Story(models.Model):\n5|    title = models.CharField(max_length=10)\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/admin_autodiscover/tests.py (19L)\nfile scope: [\"000eY002\" full 19L | imports 5L]\n\n- class AdminAutoDiscoverTests(SimpleTestCase): ... [\"000eY001\" full 14L | code 14L]\n  - def test_double_call_autodiscover(self): ... [\"000eY000\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio-stream/fuzz/fuzz_targets/fuzz_stream_map.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.8 KB -> 597 B (67% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio-stream/fuzz/fuzz_targets/fuzz_stream_map.rs (73L)\nfile scope: [\"00012002\" full 73L | imports 9L]\n\n- macro_rules! assert_ready_none { ... ; } [\"00012000\" full 8L | code 8L]\n\n- fn pin_box<T: Stream<Item = U> + 'static, U>(s: T) -> Pin<Box<dyn Stream<Item = U>>> { ... } [\"00012001\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

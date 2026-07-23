@@ -1,0 +1,26 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/admin_scripts/management/commands/__init__.py",
+        "tests/admin_scripts/management/commands/app_command.py",
+        "tests/admin_scripts/management/commands/base_command.py",
+        "tests/admin_scripts/management/commands/custom_startproject.py",
+        "tests/admin_scripts/management/commands/label_command.py",
+        "tests/admin_scripts/management/commands/noargs_command.py",
+        "tests/admin_scripts/management/commands/suppress_base_options_command.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/admin_scripts/management/commands/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/admin_scripts/management/commands/app_command.py (13L)\nfile scope: [\"000gm006\" full 13L | imports 4L]\n\n- class Command(AppCommand): ... [\"000gm005\" full 9L | code 9L]\n  - def handle_app_config(self, app_config, **options): ... [\"000gm004\" full 5L | code 5L]\n\n# tests/admin_scripts/management/commands/base_command.py (19L)\nfile scope: [\"000gn008\" full 19L | imports 4L]\n\n- class Command(BaseCommand): ... [\"000gn007\" full 15L | code 15L]\n  - def add_arguments(self, parser): ... [\"000gn003\" full 5L | code 5L]\n  - def handle(self, *labels, **options): ... [\"000gn006\" full 5L | code 5L]\n\n# tests/admin_scripts/management/commands/custom_startproject.py (10L)\nfile scope: [\"000go003\" full 10L | imports 4L]\n\n- class Command(BaseCommand): ... [\"000go002\" full 6L | code 6L]\n  - def add_arguments(self, parser): ... [\"000go001\" full 5L | code 5L]\n\n# tests/admin_scripts/management/commands/label_command.py (13L)\nfile scope: [\"000gp006\" full 13L | imports 4L]\n\n- class Command(LabelCommand): ... [\"000gp005\" full 9L | code 9L]\n  - def handle_label(self, label, **options): ... [\"000gp004\" full 5L | code 5L]\n\n# tests/admin_scripts/management/commands/noargs_command.py (10L)\nfile scope: [\"000gq005\" full 10L | imports 4L]\n\n- class Command(BaseCommand): ... [\"000gq004\" full 6L | code 6L]\n  - def handle(self, **options): ... [\"000gq003\" full 2L | code 2L]\n\n# tests/admin_scripts/management/commands/suppress_base_options_command.py (24L)\nfile scope: [\"000gr009\" full 24L | imports 4L]\n\n- class Command(BaseCommand): ... [\"000gr008\" full 20L | code 20L]\n  - def add_arguments(self, parser): ... [\"000gr004\" full 3L | code 3L]\n  - def handle(self, *labels, **options): ... [\"000gr007\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

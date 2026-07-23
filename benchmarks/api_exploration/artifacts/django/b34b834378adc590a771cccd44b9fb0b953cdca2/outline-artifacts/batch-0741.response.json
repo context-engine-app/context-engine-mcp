@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/resolve_url/__init__.py",
+        "tests/resolve_url/models.py",
+        "tests/resolve_url/tests.py",
+        "tests/resolve_url/urls.py",
+        "tests/resolve_url/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/resolve_url/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/resolve_url/models.py (13L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|\"\"\"\n 2|Regression tests for the resolve_url function.\n 3|\"\"\"\n 4|\n 5|from django.db import models\n 6|\n 7|\n 8|class UnimportantThing(models.Model):\n 9|    importance = models.IntegerField()\n10|\n11|    def get_absolute_url(self):\n12|        return \"/importance/%d/\" % self.importance\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/resolve_url/tests.py (105L)\nfile scope: [\"000Cp00l\" full 105L | imports 9L]\n\n- @override_settings(ROOT_URLCONF=\"resolve_url.urls\") class ResolveUrlTests(SimpleTestCase): ... [\"000Cp00k\" full 96L | code 96L]\n  - def test_url_path(self): ... [\"000Cp000\" full 5L | code 5L]\n  - def test_relative_path(self): ... [\"000Cp001\" full 8L | code 8L]\n  - def test_full_url(self): ... [\"000Cp003\" full 6L | code 6L]\n  - def test_model(self): ... [\"000Cp005\" full 7L | code 7L]\n  - def test_view_function(self): ... [\"000Cp007\" full 7L | code 7L]\n  - def test_view_function_with_kwargs(self): ... [\"000Cp008\" full 2L | code 2L]\n  - def test_view_function_with_args(self): ... [\"000Cp009\" full 2L | code 2L]\n  - def test_class_based_view(self): ... [\"000Cp00a\" full 2L | code 2L]\n  - def test_class_based_view_with_kwargs(self): ... [\"000Cp00b\" full 2L | code 2L]\n  - def test_class_based_view_with_args(self): ... [\"000Cp00c\" full 2L | code 2L]\n  - def test_missing_params_raise_no_reverse_match(self): ... [\"000Cp00d\" full 6L | code 6L]\n  - def test_lazy_reverse(self): ... [\"000Cp00f\" full 8L | code 8L]\n  - def test_valid_view_name(self): ... [\"000Cp00h\" full 7L | code 7L]\n  - def test_domain(self): ... [\"000Cp00i\" full 5L | code 5L]\n  - def test_non_view_callable_raises_no_reverse_match(self): ... [\"000Cp00j\" full 7L | code 7L]\n\n# tests/resolve_url/urls.py (11L)\nfile scope: [\"000Cq001\" full 11L | imports 5L]\n\n\n# tests/resolve_url/views.py (25L)\nfile scope: [\"000Cr00e\" full 25L | imports 7L]\n\n- def some_view(request): ... [\"000Cr001\" full 2L | code 2L]\n\n- def params_view(request, slug): ... [\"000Cr004\" full 2L | code 2L]\n\n- class SomeView(View): ... [\"000Cr007\" full 3L | code 3L]\n  - def get(self, request): ... [\"000Cr006\" full 2L | code 2L]\n\n- class ParamsView(View): ... [\"000Cr00b\" full 3L | code 3L]\n  - def get(self, request, pk): ... [\"000Cr00a\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

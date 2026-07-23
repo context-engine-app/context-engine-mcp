@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/postgres_tests/migrations/0001_setup_extensions.py",
+        "tests/postgres_tests/migrations/0002_create_test_models.py",
+        "tests/postgres_tests/migrations/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/postgres_tests/migrations/0001_setup_extensions.py (40L)\nfile scope: [\"000Bc002\" full 40L | imports 27L]\n\n- class Migration(migrations.Migration): ... [\"000Bc001\" full 13L | code 13L]\n\n# tests/postgres_tests/migrations/0002_create_test_models.py (592L)\nfile scope: [\"000Bd003\" full 592L | imports 18L]\n\n- class Migration(migrations.Migration): ... [\"000Bd002\" full 574L | code 574L]\n\n# tests/postgres_tests/migrations/__init__.py (1L)\nfile scope: [\"000Be000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

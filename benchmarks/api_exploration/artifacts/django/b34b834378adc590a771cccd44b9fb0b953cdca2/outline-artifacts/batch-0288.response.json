@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/admin_custom_urls/__init__.py",
+        "tests/admin_custom_urls/models.py",
+        "tests/admin_custom_urls/tests.py",
+        "tests/admin_custom_urls/urls.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/admin_custom_urls/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/admin_custom_urls/models.py (88L)\nfile scope: [\"000f900x\" full 88L | imports 9L]\n\n- class Action(models.Model): ... [\"000f9003\" full 6L | code 6L]\n  - def __str__(self): ... [\"000f9002\" full 2L | code 2L]\n\n- class ActionAdmin(admin.ModelAdmin): ... [\"000f900f\" full 34L | code 34L]\n  - def remove_url(self, name): ... [\"000f9006\" full 6L | code 6L]\n  - def get_urls(self): ... [\"000f900e\" full 18L | code 18L]\n    - def wrap(view): ... [\"000f900b\" full 5L | code 5L]\n      - def wrapper(*args, **kwargs): ... [\"000f900a\" full 2L | code 2L]\n\n- class Person(models.Model): ... [\"000f900h\" full 2L | code 2L]\n\n- class PersonAdmin(admin.ModelAdmin): ... [\"000f900o\" full 10L | code 10L]\n  - def response_post_save_add(self, request, obj): ... [\"000f900k\" full 4L | code 4L]\n  - def response_post_save_change(self, request, obj): ... [\"000f900n\" full 4L | code 4L]\n\n- class Car(models.Model): ... [\"000f900q\" full 2L | code 2L]\n\n- class CarAdmin(admin.ModelAdmin): ... [\"000f900v\" full 9L | code 9L]\n  - def response_add(self, request, obj, post_url_continue=None): ... [\"000f900u\" full 8L | code 8L]\n\n# tests/admin_custom_urls/tests.py (154L)\nfile scope: [\"000fa00s\" full 154L | imports 11L]\n\n- @override_settings( ROOT_URLCONF=\"admin_custom_urls.urls\", ) class AdminCustomUrlsTest(TestCase): ... [\"000fa00r\" full 143L | code 143L]\n  - @classmethod def setUpTestData(cls): ... [\"000fa000\" full 19L | code 19L]\n  - def setUp(self): ... [\"000fa002\" full 2L | code 2L]\n  - def test_basic_add_GET(self): ... [\"000fa005\" full 9L | code 9L]\n  - def test_add_with_GET_args(self): ... [\"000fa007\" full 10L | code 10L]\n  - def test_basic_add_POST(self): ... [\"000fa00a\" full 13L | code 13L]\n  - def test_admin_URLs_no_clash(self): ... [\"000fa00d\" full 19L | code 19L]\n  - def test_post_save_add_redirect(self): ... [\"000fa00i\" full 16L | code 16L]\n  - def test_post_save_change_redirect(self): ... [\"000fa00m\" full 18L | code 18L]\n  - def test_post_url_continue(self): ... [\"000fa00q\" full 18L | code 18L]\n\n# tests/admin_custom_urls/urls.py (8L)\nfile scope: [\"000fb001\" full 8L | imports 5L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

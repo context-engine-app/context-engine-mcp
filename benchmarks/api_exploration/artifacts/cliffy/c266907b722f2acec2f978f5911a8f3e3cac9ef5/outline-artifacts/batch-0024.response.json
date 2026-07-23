@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "command/upgrade/runtime/bun_runtime.ts",
+        "command/upgrade/runtime/deno_runtime.ts",
+        "command/upgrade/runtime/node_runtime.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 3.8 KB -> 1.8 KB (52% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# command/upgrade/runtime/bun_runtime.ts (36L)\nfile scope: [\"0001M008\" full 36L | module-docs 1L | imports 7L]\n\n- export class BunRuntime extends NodeRuntime { ... } [\"0001M007\" full 29L | code 29L]\n  - protected override async execute( cmdArgs: string[], isJsr: boolean, logger?: Logger, ): Promise<void> { ... } [\"0001M006\" full 27L | code 27L]\n\n# command/upgrade/runtime/deno_runtime.ts (65L)\nfile scope: [\"0001N00f\" full 65L | imports 14L]\n\n- export interface DenoRuntimeOptions { ... } [\"0001N001\" full 3L | code 3L]\n  - importMap?: string; [\"0001N000\" full 1L | code 1L]\n\n- export type DenoRuntimeUpgradeOptions = ... ; [\"0001N002\" full 3L | code 3L]\n\n- export class DenoRuntime extends Runtime { ... } [\"0001N00e\" full 49L | code 49L]\n  - async upgrade( { provider, name, main, to, importMap, verbose, logger, args = [] }: DenoRuntimeUpgradeOptions, ): Promise<void> { ... } [\"0001N006\" full 25L | code 25L]\n  - protected async execute( cmdArgs: string[], logger?: Logger, ): Promise<void> { ... } [\"0001N00d\" full 21L | code 21L]\n\n# command/upgrade/runtime/node_runtime.ts (65L)\nfile scope: [\"0001O00e\" full 65L | imports 5L]\n\n- export class NodeRuntime implements Runtime { ... } [\"0001O00d\" full 60L | code 60L]\n  - upgrade( { provider, name, main, to, verbose, logger, args = [], }: RuntimeUpgradeOptions, ): Promise<void> { ... } [\"0001O003\" full 29L | code 29L]\n  - protected async execute( cmdArgs: string[], isJsr: boolean, logger?: Logger, ): Promise<void> { ... } [\"0001O00c\" full 28L | code 28L]\n    - proc.stderr.on(\"data\") callback [\"0001O00a\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

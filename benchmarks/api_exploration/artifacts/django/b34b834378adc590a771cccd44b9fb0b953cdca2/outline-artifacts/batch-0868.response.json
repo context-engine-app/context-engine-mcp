@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/validation/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 9.4 KB -> 3.0 KB (68% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/validation/tests.py (226L)\nfile scope: [\"000KB019\" full 226L | imports 16L]\n\n- class BaseModelValidationTests(ValidationAssertions, TestCase): ... [\"000KB00u\" full 80L | code 80L]\n  - def test_missing_required_field_raises_error(self): ... [\"000KB001\" full 3L | code 3L]\n  - def test_with_correct_value_model_validates(self): ... [\"000KB003\" full 3L | code 3L]\n  - def test_custom_validate_method(self): ... [\"000KB005\" full 3L | code 3L]\n  - def test_wrong_FK_value_raises_error(self): ... [\"000KB007\" full 19L | code 19L]\n  - def test_correct_FK_value_validates(self): ... [\"000KB00a\" full 4L | code 4L]\n  - def test_limited_FK_raises_error(self): ... [\"000KB00d\" full 6L | code 6L]\n  - def test_FK_validates_using_base_manager(self): ... [\"000KB00g\" full 6L | code 6L]\n  - def test_wrong_email_value_raises_error(self): ... [\"000KB00i\" full 3L | code 3L]\n  - def test_correct_email_value_passes(self): ... [\"000KB00k\" full 3L | code 3L]\n  - def test_wrong_url_value_raises_error(self): ... [\"000KB00m\" full 5L | code 5L]\n  - def test_text_greater_that_charfields_max_length_raises_errors(self): ... [\"000KB00o\" full 3L | code 3L]\n  - def test_malformed_slug_raises_error(self): ... [\"000KB00q\" full 3L | code 3L]\n  - def test_full_clean_does_not_mutate_exclude(self): ... [\"000KB00t\" full 6L | code 6L]\n\n- class ArticleForm(forms.ModelForm): ... [\"000KB00y\" full 4L | code 4L]\n  - class Meta: ... [\"000KB00x\" full 3L | code 3L]\n\n- class ModelFormsTests(TestCase): ... [\"000KB00N\" full 40L | code 40L]\n  - @classmethod def setUpTestData(cls): ... [\"000KB00z\" full 3L | code 3L]\n  - def test_partial_validation(self): ... [\"000KB00E\" full 12L | code 12L]\n  - def test_validation_with_empty_blank_field(self): ... [\"000KB00I\" full 14L | code 14L]\n  - def test_validation_with_invalid_blank_field(self): ... [\"000KB00M\" full 7L | code 7L]\n\n- class GenericIPAddressFieldTests(ValidationAssertions, TestCase): ... [\"000KB018\" full 80L | code 80L]\n  - def test_correct_generic_ip_passes(self): ... [\"000KB00P\" full 9L | code 9L]\n  - def test_invalid_generic_ip_raises_error(self): ... [\"000KB00R\" full 9L | code 9L]\n  - def test_correct_v4_ip_passes(self): ... [\"000KB00T\" full 3L | code 3L]\n  - def test_invalid_v4_ip_raises_error(self): ... [\"000KB00V\" full 5L | code 5L]\n  - def test_correct_v6_ip_passes(self): ... [\"000KB00X\" full 3L | code 3L]\n  - def test_invalid_v6_ip_raises_error(self): ... [\"000KB00Z\" full 5L | code 5L]\n  - def test_v6_uniqueness_detection(self): ... [\"000KB011\" full 6L | code 6L]\n  - def test_v4_unpack_uniqueness_detection(self): ... [\"000KB013\" full 12L | code 12L]\n  - def test_empty_generic_ip_passes(self): ... [\"000KB015\" full 5L | code 5L]\n  - def test_multiple_invalid_ip_raises_error(self): ... [\"000KB017\" full 13L | code 13L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

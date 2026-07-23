@@ -1,0 +1,26 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/flags/collect.ts",
+        "examples/flags/custom_option_processing.ts",
+        "examples/flags/dotted_options.ts",
+        "examples/flags/error_handling.ts",
+        "examples/flags/flags.ts",
+        "examples/flags/options.ts",
+        "examples/flags/value.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.8 KB -> 882 B (69% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/flags/collect.ts (14L)\nfile scope: [\"0002T001\" full 14L | imports 5L]\n\n\n# examples/flags/custom_option_processing.ts (26L)\nfile scope: [\"0002U009\" full 26L | imports 5L]\n\n\n# examples/flags/dotted_options.ts (20L)\nfile scope: [\"0002V009\" full 20L | imports 5L]\n\n\n# examples/flags/error_handling.ts (21L)\nfile scope: [\"0002W004\" full 21L | imports 9L]\n\n\n# examples/flags/flags.ts (8L)\nfile scope: [\"0002X000\" full 8L]\n\n\n# examples/flags/options.ts (23L)\nfile scope: [\"0002Y001\" full 23L | imports 5L]\n\n\n# examples/flags/value.ts (24L)\nfile scope: [\"0002Z001\" full 24L | imports 5L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

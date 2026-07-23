@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/signed_cookies_tests/__init__.py",
+        "tests/signed_cookies_tests/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/signed_cookies_tests/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/signed_cookies_tests/tests.py (137L)\nfile scope: [\"000Dx00A\" full 137L | imports 10L]\n\n- class SignedCookieTest(SimpleTestCase): ... [\"000Dx00z\" full 127L | code 127L]\n  - def test_can_set_and_read_signed_cookies(self): ... [\"000Dx003\" full 9L | code 9L]\n  - def test_can_use_salt(self): ... [\"000Dx007\" full 9L | code 9L]\n  - def test_salt_namespace_is_unambiguous(self): ... [\"000Dx00a\" full 7L | code 7L]\n  - @ignore_warnings(category=RemovedInDjango70Warning) @override_settings(SIGNED_COOKIE_LEGACY_SALT_FALLBACK=True) def test_expired_legacy_cookie_raises_signature_expired(self): ... [\"000Dx00c\" full 11L | code 11L]\n  - @ignore_warnings(category=RemovedInDjango70Warning) @override_settings(SIGNED_COOKIE_LEGACY_SALT_FALLBACK=True) def test_legacy_salt_namespace_is_accepted(self): ... [\"000Dx00e\" full 11L | code 11L]\n  - def test_legacy_salt_namespace_not_accepted(self): ... [\"000Dx00g\" full 7L | code 7L]\n  - @ignore_warnings(category=RemovedInDjango70Warning) @override_settings(SIGNED_COOKIE_LEGACY_SALT_FALLBACK=True) def test_expired_new_style_cookie_does_not_fallback_to_legacy_salt(self): ... [\"000Dx00j\" full 11L | code 11L]\n  - def test_detects_tampering(self): ... [\"000Dx00m\" full 7L | code 7L]\n  - def test_default_argument_suppresses_exceptions(self): ... [\"000Dx00p\" full 6L | code 6L]\n  - def test_max_age_argument(self): ... [\"000Dx00t\" full 19L | code 19L]\n  - def test_set_signed_cookie_max_age_argument(self): ... [\"000Dx00v\" full 6L | code 6L]\n  - @override_settings(SECRET_KEY=b\"\\xe7\") def test_signed_cookies_with_binary_key(self): ... [\"000Dx00y\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

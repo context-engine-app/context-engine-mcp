@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "stress-test/examples/simple_echo_tcp.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.8 KB -> 663 B (65% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# stress-test/examples/simple_echo_tcp.rs (59L)\nfile scope: [\"0000B004\" full 59L | module-docs 1L | imports 11L]\n\n- const TCP_ENDPOINT: &str = \"127.0.0.1:8080\"; [\"0000B000\" full 1L | code 1L]\n\n- const NUM_MSGS: usize = 100; [\"0000B001\" full 1L | code 1L]\n\n- const MSG_SIZE: usize = 1024; [\"0000B002\" full 1L | code 1L]\n\n- fn main() { ... } [\"0000B003\" full 44L | code 44L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

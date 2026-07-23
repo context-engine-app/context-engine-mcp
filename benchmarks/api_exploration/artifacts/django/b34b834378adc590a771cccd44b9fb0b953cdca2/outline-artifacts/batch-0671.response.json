@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_squashed_partially_applied/0001_initial.py",
+        "tests/migrations/test_migrations_squashed_partially_applied/0002_mymodel1_field_1_mymodel2_field_2_and_more.py",
+        "tests/migrations/test_migrations_squashed_partially_applied/0003_alter_mymodel2_unique_together.py",
+        "tests/migrations/test_migrations_squashed_partially_applied/0004_remove_mymodel1_field_1_mymodel1_field_3_and_more.py",
+        "tests/migrations/test_migrations_squashed_partially_applied/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/test_migrations_squashed_partially_applied/0001_initial.py (36L)\nfile scope: [\"000yt002\" full 36L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000yt001\" full 32L | code 32L]\n\n# tests/migrations/test_migrations_squashed_partially_applied/0002_mymodel1_field_1_mymodel2_field_2_and_more.py (24L)\nfile scope: [\"000yu003\" full 24L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000yu002\" full 20L | code 20L]\n\n# tests/migrations/test_migrations_squashed_partially_applied/0003_alter_mymodel2_unique_together.py (13L)\nfile scope: [\"000yv003\" full 13L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000yv002\" full 9L | code 9L]\n\n# tests/migrations/test_migrations_squashed_partially_applied/0004_remove_mymodel1_field_1_mymodel1_field_3_and_more.py (23L)\nfile scope: [\"000yw003\" full 23L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000yw002\" full 19L | code 19L]\n\n# tests/migrations/test_migrations_squashed_partially_applied/__init__.py (1L)\nfile scope: [\"000yx000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

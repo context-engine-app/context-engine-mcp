@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/db_functions/window/__init__.py",
+        "tests/db_functions/window/test_validation.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/db_functions/window/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/db_functions/window/test_validation.py (40L)\nfile scope: [\"000mP00f\" full 40L | imports 5L]\n\n- class ValidationTests(SimpleTestCase): ... [\"000mP00e\" full 35L | code 35L]\n  - def test_nth_negative_nth_value(self): ... [\"000mP001\" full 4L | code 4L]\n  - def test_nth_null_expression(self): ... [\"000mP003\" full 4L | code 4L]\n  - def test_lag_negative_offset(self): ... [\"000mP005\" full 4L | code 4L]\n  - def test_lead_negative_offset(self): ... [\"000mP007\" full 4L | code 4L]\n  - def test_null_source_lead(self): ... [\"000mP009\" full 4L | code 4L]\n  - def test_null_source_lag(self): ... [\"000mP00b\" full 4L | code 4L]\n  - def test_negative_num_buckets_ntile(self): ... [\"000mP00d\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

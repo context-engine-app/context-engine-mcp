@@ -1,0 +1,35 @@
+{
+  "manifest": {
+    "file_count": 790,
+    "hash": "d36d523d2bc55dc0f47077e9ebdbac60008375ec6764e6a3c213abdef31647c8"
+  },
+  "primary_extensions": [
+    ".rs"
+  ],
+  "repository": {
+    "display_name": "Tokio",
+    "language": "Rust",
+    "requested_revision": "dac81bf8c8de0a3e35f1626643674ba9faf9569c",
+    "revision": "dac81bf8c8de0a3e35f1626643674ba9faf9569c"
+  },
+  "tokenizers": {
+    "cl100k_base": {
+      "multiplier": 2.700185844038441,
+      "outline_bytes": 1373779,
+      "outline_tokens": 515486,
+      "raw_bytes": 5604215,
+      "raw_tokens": 1391908,
+      "reduction_percent": 62.96551208844263,
+      "version": "1.0.22"
+    },
+    "o200k_base": {
+      "multiplier": 2.6931731118970412,
+      "outline_bytes": 1373779,
+      "outline_tokens": 516868,
+      "raw_bytes": 5604215,
+      "raw_tokens": 1392015,
+      "reduction_percent": 62.8690782786105,
+      "version": "1.0.22"
+    }
+  }
+}

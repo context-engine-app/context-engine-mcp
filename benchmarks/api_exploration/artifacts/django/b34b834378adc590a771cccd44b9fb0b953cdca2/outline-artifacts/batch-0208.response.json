@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/core/management/commands/__init__.py",
+        "django/core/management/commands/check.py",
+        "django/core/management/commands/compilemessages.py",
+        "django/core/management/commands/createcachetable.py",
+        "django/core/management/commands/dbshell.py",
+        "django/core/management/commands/diffsettings.py",
+        "django/core/management/commands/dumpdata.py",
+        "django/core/management/commands/flush.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/core/management/commands/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/core/management/commands/check.py (89L)\nfile scope: [\"0009u00c\" full 89L | imports 8L]\n\n- class Command(BaseCommand): ... [\"0009u00b\" full 81L | code 81L]\n  - def add_arguments(self, parser): ... [\"0009u003\" full 38L | code 38L]\n  - def handle(self, *app_labels, **options): ... [\"0009u00a\" full 37L | code 37L]\n\n# django/core/management/commands/compilemessages.py (196L)\nfile scope: [\"0009v00K\" full 196L | imports 12L]\n\n- def has_bom(fn): ... [\"0009v003\" full 6L | code 6L]\n\n- def is_dir_writable(path): ... [\"0009v005\" full 7L | code 7L]\n\n- class Command(BaseCommand): ... [\"0009v00J\" full 167L | code 167L]\n  - def add_arguments(self, parser): ... [\"0009v00b\" full 33L | code 33L]\n  - def handle(self, **options): ... [\"0009v00s\" full 70L | code 70L]\n  - def compile_messages(self, locations): ... [\"0009v00I\" full 54L | code 54L]\n\n# django/core/management/commands/createcachetable.py (132L)\nfile scope: [\"0009w00x\" full 132L | imports 15L]\n\n- class Command(BaseCommand): ... [\"0009w00w\" full 117L | code 117L]\n  - def add_arguments(self, parser): ... [\"0009w003\" full 22L | code 22L]\n  - def handle(self, *tablenames, **options): ... [\"0009w00b\" full 13L | code 13L]\n  - def create_table(self, database, tablename, dry_run): ... [\"0009w00v\" full 75L | code 75L]\n\n# django/core/management/commands/dbshell.py (50L)\nfile scope: [\"0009x00a\" full 50L | imports 7L]\n\n- class Command(BaseCommand): ... [\"0009x009\" full 43L | code 43L]\n  - def add_arguments(self, parser): ... [\"0009x004\" full 12L | code 12L]\n  - def handle(self, **options): ... [\"0009x008\" full 22L | code 22L]\n\n# django/core/management/commands/diffsettings.py (93L)\nfile scope: [\"0009y00q\" full 93L | imports 4L]\n\n- def module_to_dict(module, omittable=lambda k: k.startswith(\"_\") or not k.isupper()): ... [\"0009y002\" full 3L | code 3L]\n\n- class Command(BaseCommand): ... [\"0009y00p\" full 84L | code 84L]\n  - def add_arguments(self, parser): ... [\"0009y006\" full 29L | code 29L]\n  - def handle(self, **options): ... [\"0009y00c\" full 18L | code 18L]\n  - def output_hash(self, user_settings, default_settings, **options): ... [\"0009y00i\" full 11L | code 11L]\n  - def output_unified(self, user_settings, default_settings, **options): ... [\"0009y00o\" full 17L | code 17L]\n\n# django/core/management/commands/dumpdata.py (287L)\nfile scope: [\"0009z00O\" full 287L | imports 28L]\n\n- class ProxyModelWarning(Warning): ... [\"0009z002\" full 2L | code 2L]\n\n- class Command(BaseCommand): ... [\"0009z00N\" full 257L | code 257L]\n  - def add_arguments(self, parser): ... [\"0009z005\" full 67L | code 67L]\n  - def handle(self, *app_labels, **options): ... [\"0009z00M\" full 183L | code 183L]\n    - def get_objects(count_only=False): ... [\"0009z00B\" full 43L | code 43L]\n\n# django/core/management/commands/flush.py (92L)\nfile scope: [\"0009A00j\" full 92L | imports 10L]\n\n- class Command(BaseCommand): ... [\"0009A00i\" full 82L | code 82L]\n  - def add_arguments(self, parser): ... [\"0009A003\" full 14L | code 14L]\n  - def handle(self, **options): ... [\"0009A00g\" full 60L | code 60L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

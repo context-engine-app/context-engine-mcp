@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/keycode/example.ts",
+        "examples/keycode/read_key.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# examples/keycode/example.ts (10L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|#!/usr/bin/env -S deno run\n2|\n3|import { parse } from \"@cliffy/keycode\";\n4|\n5|console.log(\n6|  parse(\n7|    \"\\x1b[A\\x1b[B\\x1b[C\\x1b[D\\x1b[E\\x1b[F\\x1b[H\",\n8|  ),\n9|);\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/keycode/read_key.ts (34L)\nfile scope: [\"00032006\" full 34L | imports 10L]\n\n- async function* keypress(): AsyncGenerator<KeyCode, void> { ... } [\"00032004\" full 19L | code 19L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

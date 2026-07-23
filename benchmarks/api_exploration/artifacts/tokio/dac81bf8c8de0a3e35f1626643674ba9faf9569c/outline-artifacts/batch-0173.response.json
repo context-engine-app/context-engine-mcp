@@ -1,0 +1,25 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/tests/support/io_uring.rs",
+        "tokio/tests/support/io_vec.rs",
+        "tokio/tests/support/leaked_buffers.rs",
+        "tokio/tests/support/mpsc_stream.rs",
+        "tokio/tests/support/panic.rs",
+        "tokio/tests/support/signal.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 6.5 KB -> 3.2 KB (51% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/tests/support/io_uring.rs (56L)\nfile scope: [\"000bI002\" full 56L | imports 16L]\n\n- pub fn io_uring_supported() -> bool { ... } [\"000bI000\" full 14L | code 10L | docs 4L]\n\n- #[allow(dead_code)] pub async fn assert_fds_are_not_leaking(count_before: usize, opened_files: usize, timeout: u64) { ... } [\"000bI001\" full 25L | code 25L]\n\n# tokio/tests/support/io_vec.rs (46L)\nfile scope: [\"000bJ008\" full 46L | imports 5L]\n\n- pub struct IoBufs<'a, 'b>( ... ); [\"000bJ000\" full 1L | code 1L]\n\n- impl<'a, 'b> IoBufs<'a, 'b> { ... } [\"000bJ004\" full 32L | code 32L]\n  - pub fn new(slices: &'b mut [IoSlice<'a>]) -> Self { ... } [\"000bJ001\" full 3L | code 3L]\n  - pub fn is_empty(&self) -> bool { ... } [\"000bJ002\" full 3L | code 3L]\n  - pub fn advance(mut self, n: usize) -> IoBufs<'a, 'b> { ... } [\"000bJ003\" full 22L | code 22L]\n\n- impl<'a, 'b> Deref for IoBufs<'a, 'b> { ... } [\"000bJ007\" full 6L | code 6L]\n  - type Target = [IoSlice<'a>]; [\"000bJ005\" full 1L | code 1L]\n  - fn deref(&self) -> &[IoSlice<'a>] { ... } [\"000bJ006\" full 3L | code 3L]\n\n# tokio/tests/support/leaked_buffers.rs (27L)\nfile scope: [\"000bK005\" full 27L | module-docs 9L]\n\n- pub struct LeakedBuffers { ... } [\"000bK001\" full 12L | code 3L | docs 9L]\n  - leaked_vecs: Vec<Box<[u8]>> [\"000bK000\" full 1L | code 1L]\n\n- impl LeakedBuffers { ... } [\"000bK004\" full 13L | code 13L]\n  - pub fn new() -> Self { ... } [\"000bK002\" full 5L | code 5L]\n  - pub unsafe fn create<'a>(&mut self, size: usize) -> &'a mut [u8] { ... } [\"000bK003\" full 6L | code 6L]\n\n# tokio/tests/support/mpsc_stream.rs (43L)\nfile scope: [\"000bL00c\" full 43L | imports 8L]\n\n- struct UnboundedStream<T> { ... } [\"000bL001\" full 3L | code 3L]\n  - recv: UnboundedReceiver<T> [\"000bL000\" full 1L | code 1L]\n\n- impl<T> Stream for UnboundedStream<T> { ... } [\"000bL004\" full 6L | code 6L]\n  - type Item = T; [\"000bL002\" full 1L | code 1L]\n  - fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<T>> { ... } [\"000bL003\" full 3L | code 3L]\n\n- pub fn unbounded_channel_stream<T: Unpin>() -> (UnboundedSender<T>, impl Stream<Item = T>) { ... } [\"000bL005\" full 7L | code 7L]\n\n- struct BoundedStream<T> { ... } [\"000bL007\" full 3L | code 3L]\n  - recv: Receiver<T> [\"000bL006\" full 1L | code 1L]\n\n- impl<T> Stream for BoundedStream<T> { ... } [\"000bL00a\" full 6L | code 6L]\n  - type Item = T; [\"000bL008\" full 1L | code 1L]\n  - fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<T>> { ... } [\"000bL009\" full 3L | code 3L]\n\n- pub fn channel_stream<T: Unpin>(size: usize) -> (Sender<T>, impl Stream<Item = T>) { ... } [\"000bL00b\" full 7L | code 7L]\n\n# tokio/tests/support/panic.rs (35L)\nfile scope: [\"000bM002\" full 35L | imports 4L]\n\n- pub fn test_panic<Func: FnOnce() + panic::UnwindSafe>(func: Func) -> Option<String> { ... } [\"000bM001\" full 31L | code 31L]\n\n# tokio/tests/support/signal.rs (16L)\nfile scope: [\"000bN001\" full 16L]\n\n- pub fn send_signal(signal: libc::c_int) { ... } [\"000bN000\" full 15L | code 15L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

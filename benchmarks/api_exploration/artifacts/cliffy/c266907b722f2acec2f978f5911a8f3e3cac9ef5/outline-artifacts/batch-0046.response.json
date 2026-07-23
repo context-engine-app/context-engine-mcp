@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/prompt/dynamic_prompts.ts",
+        "examples/prompt/input.ts",
+        "examples/prompt/list.ts",
+        "examples/prompt/number.ts",
+        "examples/prompt/os_signals.ts",
+        "examples/prompt/prompt_demo.ts",
+        "examples/prompt/prompt_list.ts",
+        "examples/prompt/secret.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 5.0 KB -> 1.3 KB (75% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/prompt/dynamic_prompts.ts (38L)\nfile scope: [\"0003e00f\" full 38L | imports 8L]\n\n\n# examples/prompt/input.ts (15L)\nfile scope: [\"0003f006\" full 15L | imports 14L]\n\n- name [\"0003f001\" full 1L | code 1L]\n\n- defaultValue [\"0003f005\" full 1L | code 1L]\n\n# examples/prompt/list.ts (8L)\nfile scope: [\"0003g002\" full 8L | imports 8L]\n\n- keywords [\"0003g001\" full 1L | code 1L]\n\n# examples/prompt/number.ts (8L)\nfile scope: [\"0003h002\" full 8L | imports 8L]\n\n- age [\"0003h001\" full 1L | code 1L]\n\n# examples/prompt/os_signals.ts (18L)\nfile scope: [\"0003i005\" full 18L | imports 12L]\n\n- Deno.addSignalListener(\"SIGINT\") callback [\"0003i000\" full 5L | code 5L]\n\n- confirmed [\"0003i004\" full 1L | code 1L]\n\n# examples/prompt/prompt_demo.ts (92L)\nfile scope: [\"0003j00P\" full 92L | imports 16L]\n\n\n# examples/prompt/prompt_list.ts (39L)\nfile scope: [\"0003k00g\" full 39L | imports 12L]\n\n\n# examples/prompt/secret.ts (8L)\nfile scope: [\"0003l002\" full 8L | imports 8L]\n\n- password [\"0003l001\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

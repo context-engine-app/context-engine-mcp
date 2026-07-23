@@ -1,0 +1,26 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/sites/__init__.py",
+        "django/contrib/sites/admin.py",
+        "django/contrib/sites/apps.py",
+        "django/contrib/sites/checks.py",
+        "django/contrib/sites/management.py",
+        "django/contrib/sites/managers.py",
+        "django/contrib/sites/middleware.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/sites/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# django/contrib/sites/admin.py (9L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.contrib import admin\n2|from django.contrib.sites.models import Site\n3|\n4|\n5|@admin.register(Site)\n6|class SiteAdmin(admin.ModelAdmin):\n7|    list_display = (\"domain\", \"name\")\n8|    search_fields = (\"domain\", \"name\")\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/sites/apps.py (18L)\nfile scope: [\"0007U005\" full 18L | imports 10L]\n\n- class SitesConfig(AppConfig): ... [\"0007U004\" full 8L | code 8L]\n  - def ready(self): ... [\"0007U003\" full 3L | code 3L]\n\n# django/contrib/sites/checks.py (31L)\nfile scope: [\"0007V006\" full 31L | imports 6L]\n\n- def check_site_id(app_configs, **kwargs): ... [\"0007V005\" full 25L | code 25L]\n\n# django/contrib/sites/management.py (48L)\nfile scope: [\"0007W00b\" full 48L | imports 11L]\n\n- def create_default_site( app_config, verbosity=2, interactive=True, using=DEFAULT_DB_ALIAS, apps=global_apps, **kwargs, ): ... [\"0007W00a\" full 37L | code 37L]\n\n# django/contrib/sites/managers.py (66L)\nfile scope: [\"0007X00d\" full 66L | imports 7L]\n\n- class CurrentSiteManager(models.Manager): ... [\"0007X00c\" full 59L | code 59L]\n  - def __init__(self, field_name=None): ... [\"0007X002\" full 3L | code 3L]\n  - def check(self, **kwargs): ... [\"0007X006\" full 4L | code 4L]\n  - def _check_field_name(self): ... [\"0007X009\" full 26L | code 26L]\n  - def _get_field_name(self): ... [\"0007X00a\" full 11L | code 11L]\n  - def get_queryset(self): ... [\"0007X00b\" full 6L | code 6L]\n\n# django/contrib/sites/middleware.py (13L)\nfile scope: [\"0007Y003\" full 13L | imports 6L]\n\n- class CurrentSiteMiddleware(MiddlewareMixin): ... [\"0007Y002\" full 7L | code 7L]\n  - def process_request(self, request): ... [\"0007Y001\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

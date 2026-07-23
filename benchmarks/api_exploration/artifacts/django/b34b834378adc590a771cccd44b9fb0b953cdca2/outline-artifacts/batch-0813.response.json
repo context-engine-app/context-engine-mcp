@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/template_tests/templatetags/subpackage/__init__.py",
+        "tests/template_tests/templatetags/subpackage/echo.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/template_tests/templatetags/subpackage/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/template_tests/templatetags/subpackage/echo.py (9L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django import template\n2|\n3|register = template.Library()\n4|\n5|\n6|@register.simple_tag\n7|def echo2(arg):\n8|    return arg\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

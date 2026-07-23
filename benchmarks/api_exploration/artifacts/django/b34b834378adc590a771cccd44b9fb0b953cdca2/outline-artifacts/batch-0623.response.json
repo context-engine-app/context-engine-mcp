@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/migrations_test_apps/with_generic_model/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n 1|import typing\n 2|\n 3|from django.db import models\n 4|\n 5|T = typing.TypeVar(\"T\")\n 6|\n 7|\n 8|class GenericModel(typing.Generic[T], models.Model):\n 9|    \"\"\"A model inheriting from typing.Generic.\"\"\"\n10|\n11|\n12|class GenericModelPEP695[T](models.Model):\n13|    \"\"\"A model inheriting from typing.Generic via the PEP 695 syntax.\"\"\"\n14|\n15|\n16|# Example from Python docs:\n17|# https://typing.python.org/en/latest/spec/generics.html#arbitrary-generic-types-as-base-classes\n18|T1 = typing.TypeVar(\"T1\")\n19|T2 = typing.TypeVar(\"T2\")\n20|T3 = typing.TypeVar(\"T3\")\n21|\n22|\n23|class Parent1(typing.Generic[T1, T2]):\n24|    pass\n25|\n26|\n27|class Parent2(typing.Generic[T1, T2]):\n28|    pass\n29|\n30|\n31|class Child(Parent1[T1, T3], Parent2[T2, T3]):\n32|    pass\n33|\n34|\n35|class CustomGenericModel(Child[T1, T3, T2], models.Model):\n36|    \"\"\"A model inheriting from a custom subclass of typing.Generic.\"\"\"\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

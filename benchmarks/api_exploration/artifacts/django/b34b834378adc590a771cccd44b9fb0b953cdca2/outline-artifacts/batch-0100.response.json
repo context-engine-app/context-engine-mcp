@@ -1,0 +1,25 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/admindocs/__init__.py",
+        "django/contrib/admindocs/apps.py",
+        "django/contrib/admindocs/middleware.py",
+        "django/contrib/admindocs/urls.py",
+        "django/contrib/admindocs/utils.py",
+        "django/contrib/admindocs/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/admindocs/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# django/contrib/admindocs/apps.py (8L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.apps import AppConfig\n2|from django.utils.translation import gettext_lazy as _\n3|\n4|\n5|class AdminDocsConfig(AppConfig):\n6|    name = \"django.contrib.admindocs\"\n7|    verbose_name = _(\"Administrative Documentation\")\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/admindocs/middleware.py (34L)\nfile scope: [\"0003s007\" full 34L | imports 9L]\n\n- class XViewMiddleware(MiddlewareMixin): ... [\"0003s006\" full 25L | code 25L]\n  - def process_view(self, request, view_func, view_args, view_kwargs): ... [\"0003s005\" full 20L | code 20L]\n\n# django/contrib/admindocs/urls.py (51L)\nfile scope: [\"0003t001\" full 51L | imports 4L]\n\n\n# django/contrib/admindocs/utils.py (183L)\nfile scope: [\"0003u00T\" full 183L | imports 63L]\n\n- def get_view_name(view_func): ... [\"0003u005\" full 7L | code 7L]\n\n- def parse_docstring(docstring): ... [\"0003u00c\" full 26L | code 26L]\n\n- def parse_rst(text, default_reference_context, thing_being_parsed=None): ... [\"0003u00k\" full 33L | code 33L]\n\n- ROLES [\"0003u00l\" full 1L | code 1L]\n\n- def split_explicit_title(text): ... [\"0003u00p\" full 11L | code 11L]\n\n- def create_reference_role(rolename, urlbase): ... [\"0003u00E\" full 23L | code 23L]\n  - def _role(name, rawtext, text, lineno, inliner, options=None, content=None): ... [\"0003u00D\" full 17L | code 17L]\n\n- def default_reference_role( name, rawtext, text, lineno, inliner, options=None, content=None ): ... [\"0003u00O\" full 19L | code 19L]\n\n- def strip_p_tags(value): ... [\"0003u00S\" full 2L | code 2L]\n\n# django/contrib/admindocs/views.py (472L)\nfile scope: [\"0003v020\" full 472L | imports 48L]\n\n- MODEL_METHODS_EXCLUDE [\"0003v000\" full 1L | code 1L]\n\n- class BaseAdminDocsView(TemplateView): ... [\"0003v008\" full 20L | code 20L]\n  - @method_decorator(staff_member_required) def dispatch(self, request, *args, **kwargs): ... [\"0003v004\" full 7L | code 7L]\n  - def get_context_data(self, **kwargs): ... [\"0003v007\" full 7L | code 7L]\n\n- class BookmarkletsView(BaseAdminDocsView): ... [\"0003v00a\" full 2L | code 2L]\n\n- class TemplateTagIndexView(BaseAdminDocsView): ... [\"0003v00r\" full 35L | code 35L]\n  - def get_context_data(self, **kwargs): ... [\"0003v00q\" full 32L | code 32L]\n\n- class TemplateFilterIndexView(BaseAdminDocsView): ... [\"0003v00I\" full 37L | code 37L]\n  - def get_context_data(self, **kwargs): ... [\"0003v00H\" full 34L | code 34L]\n\n- class ViewIndexView(BaseAdminDocsView): ... [\"0003v00T\" full 21L | code 21L]\n  - def get_context_data(self, **kwargs): ... [\"0003v00S\" full 18L | code 18L]\n\n- class ViewDetailView(BaseAdminDocsView): ... [\"0003v019\" full 39L | code 39L]\n  - @staticmethod def _get_view_func(view): ... [\"0003v010\" full 16L | code 16L]\n  - def get_context_data(self, **kwargs): ... [\"0003v018\" full 19L | code 19L]\n\n- def user_has_model_view_permission(user, opts): ... [\"0003v01e\" full 7L | code 7L]\n\n- class ModelIndexView(BaseAdminDocsView): ... [\"0003v01j\" full 10L | code 10L]\n  - def get_context_data(self, **kwargs): ... [\"0003v01i\" full 7L | code 7L]\n\n- class ModelDetailView(BaseAdminDocsView): ... [\"0003v01H\" full 182L | code 182L]\n  - def get_context_data(self, **kwargs): ... [\"0003v01G\" full 179L | code 179L]\n\n- class TemplateDetailView(BaseAdminDocsView): ... [\"0003v01V\" full 39L | code 39L]\n  - def get_context_data(self, **kwargs): ... [\"0003v01U\" full 36L | code 36L]\n\n- def get_return_data_type(func_name): ... [\"0003v01X\" full 8L | code 8L]\n\n- def get_readable_field_data_type(field): ... [\"0003v01Z\" full 7L | code 7L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

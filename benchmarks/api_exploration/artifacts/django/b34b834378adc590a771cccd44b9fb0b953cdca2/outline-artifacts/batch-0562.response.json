@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/m2m_regress/__init__.py",
+        "tests/m2m_regress/models.py",
+        "tests/m2m_regress/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/m2m_regress/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/m2m_regress/models.py (98L)\nfile scope: [\"000tS00B\" full 98L | imports 44L]\n\n- class SelfRefer(models.Model): ... [\"000tS004\" full 7L | code 7L]\n  - def __str__(self): ... [\"000tS003\" full 2L | code 2L]\n\n- class Tag(models.Model): ... [\"000tS007\" full 5L | code 5L]\n  - def __str__(self): ... [\"000tS006\" full 2L | code 2L]\n\n- class TagCollection(Tag): ... [\"000tS00a\" full 5L | code 5L]\n  - def __str__(self): ... [\"000tS009\" full 2L | code 2L]\n\n- class Entry(models.Model): ... [\"000tS00f\" full 7L | code 7L]\n  - def __str__(self): ... [\"000tS00e\" full 2L | code 2L]\n\n- class SelfReferChild(SelfRefer): ... [\"000tS00g\" full 2L | code 2L]\n\n- class SelfReferChildSibling(SelfRefer): ... [\"000tS00h\" full 2L | code 2L]\n\n- class Line(models.Model): ... [\"000tS00k\" full 5L | code 5L]\n  - def __str__(self): ... [\"000tS00j\" full 2L | code 2L]\n\n- class Worksheet(models.Model): ... [\"000tS00n\" full 3L | code 3L]\n\n- class User(models.Model): ... [\"000tS00q\" full 3L | code 3L]\n\n- class BadModelWithSplit(models.Model): ... [\"000tS00v\" full 8L | code 8L]\n  - class Meta: ... [\"000tS00t\" full 2L | code 2L]\n  - def split(self): ... [\"000tS00u\" full 2L | code 2L]\n\n- class RegressionModelSplit(BadModelWithSplit): ... [\"000tS00x\" full 6L | code 6L]\n\n- class Post(models.Model): ... [\"000tS00A\" full 3L | code 3L]\n\n# tests/m2m_regress/tests.py (144L)\nfile scope: [\"000tT00C\" full 144L | imports 18L]\n\n- class M2MRegressionTests(TestCase): ... [\"000tT00B\" full 126L | code 126L]\n  - def test_multiple_m2m(self): ... [\"000tT006\" full 22L | code 22L]\n  - def test_internal_related_name_not_in_error_msg(self): ... [\"000tT008\" full 9L | code 9L]\n  - def test_m2m_inheritance_symmetry(self): ... [\"000tT00b\" full 13L | code 13L]\n  - def test_m2m_pk_field_type(self): ... [\"000tT00d\" full 7L | code 7L]\n  - def test_create_copy_with_m2m(self): ... [\"000tT00h\" full 13L | code 13L]\n  - def test_add_m2m_with_base_class(self): ... [\"000tT00l\" full 13L | code 13L]\n  - def test_manager_class_caching(self): ... [\"000tT00q\" full 13L | code 13L]\n  - def test_m2m_abstract_split(self): ... [\"000tT00s\" full 5L | code 5L]\n  - def test_assigning_invalid_data_to_m2m_doesnt_clear_existing_relations(self): ... [\"000tT00w\" full 11L | code 11L]\n  - def test_multiple_forwards_only_m2m(self): ... [\"000tT00A\" full 10L | code 10L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/staticfiles/storage.py",
+        "django/contrib/staticfiles/testing.py",
+        "django/contrib/staticfiles/urls.py",
+        "django/contrib/staticfiles/utils.py",
+        "django/contrib/staticfiles/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 28.2 KB -> 3.7 KB (87% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/staticfiles/storage.py (629L)\nfile scope: [\"0008f036\" full 629L | imports 36L]\n\n- class StaticFilesStorage(FileSystemStorage): ... [\"0008f00b\" full 29L | code 29L]\n  - def __init__(self, location=None, base_url=None, *args, **kwargs): ... [\"0008f006\" full 12L | code 12L]\n  - def path(self, name): ... [\"0008f00a\" full 8L | code 8L]\n\n- class HashedFilesMixin: ... [\"0008f02u\" full 469L | code 469L]\n  - def __init__(self, *args, **kwargs): ... [\"0008f00q\" full 21L | code 21L]\n  - def file_hash(self, name, content=None): ... [\"0008f00x\" full 10L | code 10L]\n  - def hashed_name(self, name, content=None, filename=None): ... [\"0008f00K\" full 33L | code 33L]\n  - def _url(self, hashed_name_func, name, force=False, hashed_files=None): ... [\"0008f00W\" full 30L | code 30L]\n  - def url(self, name, force=False): ... [\"0008f00Z\" full 5L | code 5L]\n  - def get_ignored_blocks(self, content, pattern): ... [\"0008f012\" full 8L | code 8L]\n  - def is_in_ignored_block(self, pos, ignored_blocks): ... [\"0008f017\" full 7L | code 7L]\n  - def url_converter(self, name, hashed_files, template=None, ignored_blocks=None): ... [\"0008f01x\" full 89L | code 89L]\n    - def _line_at_position(content, position): ... [\"0008f01i\" full 9L | code 9L]\n    - def converter(matchobj): ... [\"0008f01w\" full 70L | code 70L]\n  - def post_process(self, paths, dry_run=False, **options): ... [\"0008f01L\" full 63L | code 63L]\n  - def _post_process(self, paths, adjustable_paths, hashed_files): ... [\"0008f02c\" full 84L | code 84L]\n    - def path_level(name): ... [\"0008f01Q\" full 2L | code 2L]\n  - def clean_name(self, name): ... [\"0008f02e\" full 2L | code 2L]\n  - def hash_key(self, name): ... [\"0008f02g\" full 2L | code 2L]\n  - def _stored_name(self, name, hashed_files): ... [\"0008f02m\" full 11L | code 11L]\n  - def stored_name(self, name): ... [\"0008f02t\" full 23L | code 23L]\n\n- class ManifestFilesMixin(HashedFilesMixin): ... [\"0008f030\" full 76L | code 76L]\n  - def __init__(self, *args, manifest_storage=None, **kwargs): ... [\"0008f02C\" full 6L | code 6L]\n  - def read_manifest(self): ... [\"0008f02H\" full 6L | code 6L]\n  - def load_manifest(self): ... [\"0008f02L\" full 16L | code 16L]\n  - def post_process(self, *args, **kwargs): ... [\"0008f02O\" full 5L | code 5L]\n  - def save_manifest(self): ... [\"0008f02S\" full 14L | code 14L]\n  - def stored_name(self, name): ... [\"0008f02Z\" full 18L | code 18L]\n\n- class ManifestStaticFilesStorage(ManifestFilesMixin, StaticFilesStorage): ... [\"0008f031\" full 7L | code 7L]\n\n- class ConfiguredStorage(LazyObject): ... [\"0008f034\" full 3L | code 3L]\n  - def _setup(self): ... [\"0008f032\" full 2L | code 2L]\n\n# django/contrib/staticfiles/testing.py (14L)\nfile scope: [\"0008g002\" full 14L | imports 5L]\n\n- class StaticLiveServerTestCase(LiveServerTestCase): ... [\"0008g001\" full 9L | code 9L]\n\n# django/contrib/staticfiles/urls.py (20L)\nfile scope: [\"0008h003\" full 20L | imports 9L]\n\n- def staticfiles_urlpatterns(prefix=None): ... [\"0008h002\" full 7L | code 7L]\n\n# django/contrib/staticfiles/utils.py (72L)\nfile scope: [\"0008i00d\" full 72L | imports 8L]\n\n- def matches_patterns(path, patterns): ... [\"0008i002\" full 6L | code 6L]\n\n- def get_files(storage, ignore_patterns=None, location=\"\"): ... [\"0008i00a\" full 24L | code 24L]\n\n- def check_settings(base_url=None): ... [\"0008i00c\" full 30L | code 30L]\n\n# django/contrib/staticfiles/views.py (41L)\nfile scope: [\"0008j008\" full 41L | imports 16L]\n\n- def serve(request, path, insecure=False, **kwargs): ... [\"0008j007\" full 25L | code 25L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

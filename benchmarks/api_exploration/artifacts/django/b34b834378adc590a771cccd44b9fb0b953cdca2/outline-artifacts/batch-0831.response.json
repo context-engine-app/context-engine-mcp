@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/test_sqlite.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1022 B -> 566 B (45% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/test_sqlite.py (32L)\nfile scope: [\"000HZ004\" full 32L | module-docs 13L | imports 19L]\n\n- DATABASES [\"000HZ000\" full 1L | code 1L]\n\n- SECRET_KEY [\"000HZ001\" full 1L | code 1L]\n\n- PASSWORD_HASHERS [\"000HZ002\" full 1L | code 1L]\n\n- USE_TZ [\"000HZ003\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

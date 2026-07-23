@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/db/backends/base/validation.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.1 KB -> 716 B (36% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/db/backends/base/validation.py (33L)\nfile scope: [\"000al00d\" full 33L]\n\n- class BaseDatabaseValidation: ... [\"000al00c\" full 32L | code 32L]\n  - def __init__(self, connection): ... [\"000al001\" full 2L | code 2L]\n  - def __del__(self): ... [\"000al003\" full 2L | code 2L]\n  - def check(self, **kwargs): ... [\"000al005\" full 2L | code 2L]\n  - def check_field(self, field, **kwargs): ... [\"000al00b\" full 20L | code 20L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

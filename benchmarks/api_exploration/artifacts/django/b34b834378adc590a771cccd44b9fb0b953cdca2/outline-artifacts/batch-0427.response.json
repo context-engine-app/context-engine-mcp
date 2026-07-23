@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/db_utils/__init__.py",
+        "tests/db_utils/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/db_utils/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/db_utils/tests.py (93L)\nfile scope: [\"000mT00p\" full 93L | imports 12L]\n\n- class ConnectionHandlerTests(SimpleTestCase): ... [\"000mT00f\" full 49L | code 49L]\n  - def test_connection_handler_no_databases(self): ... [\"000mT001\" full 11L | code 11L]\n  - def assertImproperlyConfigured(self, DATABASES): ... [\"000mT005\" full 11L | code 11L]\n  - def test_no_default_database(self): ... [\"000mT009\" full 6L | code 6L]\n  - def test_databases_property(self): ... [\"000mT00b\" full 7L | code 7L]\n  - def test_nonexistent_alias(self): ... [\"000mT00e\" full 9L | code 9L]\n\n- class DatabaseErrorWrapperTests(TestCase): ... [\"000mT00k\" full 17L | code 17L]\n  - @unittest.skipUnless(connection.vendor == \"postgresql\", \"PostgreSQL test\") def test_reraising_backend_specific_database_exception(self): ... [\"000mT00j\" full 16L | code 16L]\n\n- class LoadBackendTests(SimpleTestCase): ... [\"000mT00o\" full 11L | code 11L]\n  - def test_load_backend_invalid_name(self): ... [\"000mT00n\" full 10L | code 10L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

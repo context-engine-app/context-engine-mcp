@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/user_commands/management/commands/subparser_dest.py",
+        "tests/user_commands/management/commands/subparser_required.py",
+        "tests/user_commands/management/commands/subparser_vanilla.py",
+        "tests/user_commands/management/commands/transaction.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/user_commands/management/commands/subparser_dest.py (12L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from django.core.management.base import BaseCommand\n 2|\n 3|\n 4|class Command(BaseCommand):\n 5|    def add_arguments(self, parser):\n 6|        subparsers = parser.add_subparsers(dest=\"subcommand\", required=True)\n 7|        parser_foo = subparsers.add_parser(\"foo\")\n 8|        parser_foo.add_argument(\"--bar\")\n 9|\n10|    def handle(self, *args, **options):\n11|        self.stdout.write(\",\".join(options))\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/user_commands/management/commands/subparser_required.py (14L)\nfile scope: [\"000Jz00a\" full 14L | imports 4L]\n\n- class Command(BaseCommand): ... [\"000Jz009\" full 10L | code 10L]\n  - def add_arguments(self, parser): ... [\"000Jz005\" full 6L | code 6L]\n  - def handle(self, *args, **options): ... [\"000Jz008\" full 2L | code 2L]\n\n# tests/user_commands/management/commands/subparser_vanilla.py (14L)\nfile scope: [\"000JA008\" full 14L | imports 6L]\n\n- class Command(BaseCommand): ... [\"000JA007\" full 8L | code 8L]\n  - def add_arguments(self, parser): ... [\"000JA003\" full 4L | code 4L]\n  - def handle(self, *args, **options): ... [\"000JA006\" full 2L | code 2L]\n\n# tests/user_commands/management/commands/transaction.py (11L)\nfile scope: [\"000JB007\" full 11L | imports 4L]\n\n- class Command(BaseCommand): ... [\"000JB006\" full 7L | code 7L]\n  - def handle(self, *args, **options): ... [\"000JB005\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

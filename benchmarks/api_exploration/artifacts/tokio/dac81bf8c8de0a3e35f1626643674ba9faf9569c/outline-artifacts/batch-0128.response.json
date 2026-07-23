@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/thread_id.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1015 B -> 718 B (29% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/thread_id.rs (38L)\nfile scope: [\"00084005\" full 38L | imports 3L]\n\n- #[derive(Eq, PartialEq, Clone, Copy, Hash, Debug)] pub(crate) struct ThreadId( ... ); [\"00084000\" full 2L | code 2L]\n\n- impl ThreadId { ... } [\"00084003\" full 26L | code 26L]\n  - pub(crate) fn next() -> Self { ... } [\"00084002\" full 24L | code 24L]\n\n- #[cold] #[allow(dead_code)] fn exhausted() -> ! { ... } [\"00084004\" full 5L | code 5L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

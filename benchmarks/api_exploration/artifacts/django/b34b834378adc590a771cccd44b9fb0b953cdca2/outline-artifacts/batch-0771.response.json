@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/sphinx/__init__.py",
+        "tests/sphinx/test_github_links.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/sphinx/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/sphinx/test_github_links.py (210L)\nfile scope: [\"000DS00Q\" full 210L | imports 17L]\n\n- def last_n_parts(path, n): ... [\"000DS002\" full 2L | code 2L]\n\n- class GitHubLinkTests(SimpleTestCase): ... [\"000DS00P\" full 194L | code 194L]\n  - @classmethod def setUpClass(cls): ... [\"000DS004\" full 15L | code 15L]\n  - def test_code_locator(self): ... [\"000DS007\" full 14L | code 14L]\n  - def test_module_name_to_file_path_package(self): ... [\"000DS009\" full 4L | code 4L]\n  - def test_module_name_to_file_path_module(self): ... [\"000DS00b\" full 4L | code 4L]\n  - def test_get_path_and_line_class(self): ... [\"000DS00e\" full 9L | code 9L]\n  - def test_get_path_and_line_func(self): ... [\"000DS00h\" full 9L | code 9L]\n  - def test_get_path_and_line_method(self): ... [\"000DS00k\" full 9L | code 9L]\n  - def test_get_path_and_line_cached_property(self): ... [\"000DS00n\" full 10L | code 10L]\n  - def test_get_path_and_line_forwarded_import(self): ... [\"000DS00q\" full 9L | code 9L]\n  - def test_get_path_and_line_wildcard_import(self): ... [\"000DS00t\" full 20L | code 20L]\n  - def test_get_path_and_line_forwarded_import_module(self): ... [\"000DS00w\" full 10L | code 10L]\n  - def test_get_branch_stable(self): ... [\"000DS00y\" full 3L | code 3L]\n  - def test_get_branch_latest(self): ... [\"000DS00A\" full 3L | code 3L]\n  - def test_github_linkcode_resolve_unspecified_domain(self): ... [\"000DS00D\" full 8L | code 8L]\n  - def test_github_linkcode_resolve_unspecified_info(self): ... [\"000DS00G\" full 8L | code 8L]\n  - def test_github_linkcode_resolve_not_found(self): ... [\"000DS00I\" full 10L | code 10L]\n  - def test_github_linkcode_resolve_link_to_object(self): ... [\"000DS00K\" full 12L | code 12L]\n  - def test_github_linkcode_resolve_link_to_class_older_version(self): ... [\"000DS00M\" full 12L | code 12L]\n  - def test_import_error(self): ... [\"000DS00O\" full 6L | code 6L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/model_package/models/__init__.py",
+        "tests/model_package/models/article.py",
+        "tests/model_package/models/publication.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/model_package/models/__init__.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|# Import all the models from subpackages\n2|from .article import Article\n3|from .publication import Publication\n4|\n5|__all__ = [\"Article\", \"Publication\"]\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/model_package/models/article.py (12L)\nfile scope: [\"000Ad006\" full 12L | imports 4L]\n\n- class Site(models.Model): ... [\"000Ad001\" full 2L | code 2L]\n\n- class Article(models.Model): ... [\"000Ad005\" full 4L | code 4L]\n\n# tests/model_package/models/publication.py (6L)\nfile scope: [\"000Ae002\" full 6L | imports 4L]\n\n- class Publication(models.Model): ... [\"000Ae001\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

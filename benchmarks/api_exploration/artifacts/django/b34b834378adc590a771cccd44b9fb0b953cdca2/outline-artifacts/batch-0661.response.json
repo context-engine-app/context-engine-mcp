@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_squashed_complex/1_auto.py",
+        "tests/migrations/test_migrations_squashed_complex/2_auto.py",
+        "tests/migrations/test_migrations_squashed_complex/3_auto.py",
+        "tests/migrations/test_migrations_squashed_complex/3_squashed_5.py",
+        "tests/migrations/test_migrations_squashed_complex/4_auto.py",
+        "tests/migrations/test_migrations_squashed_complex/5_auto.py",
+        "tests/migrations/test_migrations_squashed_complex/6_auto.py",
+        "tests/migrations/test_migrations_squashed_complex/7_auto.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/migrations/test_migrations_squashed_complex/1_auto.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import migrations\n2|\n3|\n4|class Migration(migrations.Migration):\n5|    operations = [migrations.RunPython(migrations.RunPython.noop)]\nnote: EOF\n\n# tests/migrations/test_migrations_squashed_complex/2_auto.py (8L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import migrations\n2|\n3|\n4|class Migration(migrations.Migration):\n5|    dependencies = [(\"migrations\", \"1_auto\")]\n6|\n7|    operations = [migrations.RunPython(migrations.RunPython.noop)]\nnote: EOF\n\n# tests/migrations/test_migrations_squashed_complex/3_auto.py (8L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import migrations\n2|\n3|\n4|class Migration(migrations.Migration):\n5|    dependencies = [(\"migrations\", \"2_auto\")]\n6|\n7|    operations = [migrations.RunPython(migrations.RunPython.noop)]\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/test_migrations_squashed_complex/3_squashed_5.py (14L)\nfile scope: [\"000xP004\" full 14L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000xP003\" full 10L | code 10L]\n\n# tests/migrations/test_migrations_squashed_complex/4_auto.py (8L)\nfile scope: [\"000xQ003\" full 8L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000xQ002\" full 4L | code 4L]\n\n# tests/migrations/test_migrations_squashed_complex/5_auto.py (8L)\nfile scope: [\"000xR003\" full 8L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000xR002\" full 4L | code 4L]\n\n# tests/migrations/test_migrations_squashed_complex/6_auto.py (8L)\nfile scope: [\"000xS003\" full 8L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000xS002\" full 4L | code 4L]\n\n# tests/migrations/test_migrations_squashed_complex/7_auto.py (8L)\nfile scope: [\"000xT003\" full 8L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000xT002\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

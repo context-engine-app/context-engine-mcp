@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio-util/src/net/mod.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.7 KB -> 2.2 KB (18% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio-util/src/net/mod.rs (100L)\nfile scope: [\"0002P00k\" full 100L | imports 11L]\n\n- #[cfg(unix)] pub mod unix; [\"0002P000\" full 2L | code 2L]\n\n- pub trait Listener { ... } [\"0002P006\" full 21L | code 20L | docs 1L]\n  - type Io: tokio::io::AsyncRead + tokio::io::AsyncWrite; [\"0002P001\" full 2L | code 1L | docs 1L]\n  - type Addr; [\"0002P002\" full 2L | code 1L | docs 1L]\n  - fn poll_accept(&mut self, cx: &mut Context<'_>) -> ... ; [\"0002P003\" full 2L | code 1L | docs 1L]\n  - fn accept(&mut self) -> ListenerAcceptFut<'_, Self> where Self: Sized, { ... } [\"0002P004\" full 7L | code 6L | docs 1L]\n  - fn local_addr(&self) -> ... ; [\"0002P005\" full 2L | code 1L | docs 1L]\n\n- impl Listener for tokio::net::TcpListener { ... } [\"0002P00b\" full 12L | code 12L]\n  - type Io = tokio::net::TcpStream; [\"0002P007\" full 1L | code 1L]\n  - type Addr = std::net::SocketAddr; [\"0002P008\" full 1L | code 1L]\n  - fn poll_accept(&mut self, cx: &mut Context<'_>) -> Poll<Result<(Self::Io, Self::Addr)>> { ... } [\"0002P009\" full 3L | code 3L]\n  - fn local_addr(&self) -> Result<Self::Addr> { ... } [\"0002P00a\" full 3L | code 3L]\n\n- #[derive(Debug)] #[must_use = \"futures do nothing unless you `.await` or poll them\"] pub struct ListenerAcceptFut<'a, L> { ... } [\"0002P00d\" full 6L | code 5L | docs 1L]\n  - listener: &'a mut L [\"0002P00c\" full 1L | code 1L]\n\n- impl<'a, L> Future for ListenerAcceptFut<'a, L> where L: Listener, { ... } [\"0002P00g\" full 10L | code 10L]\n  - type Output = Result<(L::Io, L::Addr)>; [\"0002P00e\" full 1L | code 1L]\n  - fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> { ... } [\"0002P00f\" full 3L | code 3L]\n\n- impl<L, R> Either<L, R> where L: Listener, R: Listener, { ... } [\"0002P00j\" full 33L | code 33L]\n  - pub async fn accept(&mut self) -> Result<Either<(L::Io, L::Addr), (R::Io, R::Addr)>> { ... } [\"0002P00h\" full 13L | code 12L | docs 1L]\n  - pub fn local_addr(&self) -> Result<Either<L::Addr, R::Addr>> { ... } [\"0002P00i\" full 13L | code 12L | docs 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/wsgi/__init__.py",
+        "tests/wsgi/tests.py",
+        "tests/wsgi/urls.py",
+        "tests/wsgi/wsgi.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/wsgi/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/wsgi/tests.py (143L)\nfile scope: [\"000L400H\" full 143L | imports 11L]\n\n- @override_settings(ROOT_URLCONF=\"wsgi.urls\") class WSGITest(SimpleTestCase): ... [\"000L400u\" full 80L | code 80L]\n  - def setUp(self): ... [\"000L4001\" full 3L | code 3L]\n  - def test_get_wsgi_application(self): ... [\"000L4009\" full 32L | code 32L]\n    - def start_response(status, headers): ... [\"000L4007\" full 3L | code 3L]\n  - def test_wsgi_cookies(self): ... [\"000L400g\" full 12L | code 12L]\n    - def start_response(status, headers): ... [\"000L400d\" full 2L | code 2L]\n  - def test_file_wrapper(self): ... [\"000L400t\" full 26L | code 26L]\n    - class FileWrapper: ... [\"000L400l\" full 4L | code 4L]\n      - def __init__(self, filelike, block_size=None): ... [\"000L400j\" full 3L | code 3L]\n    - def start_response(status, headers): ... [\"000L400r\" full 3L | code 3L]\n\n- class GetInternalWSGIApplicationTest(SimpleTestCase): ... [\"000L400G\" full 50L | code 50L]\n  - @override_settings(WSGI_APPLICATION=\"wsgi.wsgi.application\") def test_success(self): ... [\"000L400w\" full 11L | code 11L]\n  - @override_settings(WSGI_APPLICATION=None) def test_default(self): ... [\"000L400B\" full 23L | code 23L]\n    - def mock_get_wsgi_app(): ... [\"000L400y\" full 2L | code 2L]\n  - @override_settings(WSGI_APPLICATION=\"wsgi.noexist.app\") def test_bad_module(self): ... [\"000L400D\" full 5L | code 5L]\n  - @override_settings(WSGI_APPLICATION=\"wsgi.wsgi.noexist\") def test_bad_name(self): ... [\"000L400F\" full 7L | code 7L]\n\n# tests/wsgi/urls.py (20L)\nfile scope: [\"000L5006\" full 20L | imports 5L]\n\n- def helloworld(request): ... [\"000L5001\" full 2L | code 2L]\n\n- def cookie(request): ... [\"000L5004\" full 4L | code 4L]\n\n# tests/wsgi/wsgi.py (3L)\nfile scope: [\"000L6001\" full 3L | module-docs 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_non_atomic/0001_initial.py",
+        "tests/migrations/test_migrations_non_atomic/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/test_migrations_non_atomic/0001_initial.py (35L)\nfile scope: [\"000xn007\" full 35L | imports 4L]\n\n- def raise_error(apps, schema_editor): ... [\"000xn003\" full 5L | code 5L]\n\n- class Migration(migrations.Migration): ... [\"000xn006\" full 24L | code 24L]\n\n# tests/migrations/test_migrations_non_atomic/__init__.py (1L)\nfile scope: [\"000xo000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

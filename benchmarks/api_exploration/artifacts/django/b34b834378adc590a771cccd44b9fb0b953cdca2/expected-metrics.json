@@ -1,0 +1,35 @@
+{
+  "manifest": {
+    "file_count": 2924,
+    "hash": "2f79a8a5b6fcd8952ce1cbb7d7d88a56bc6f154f7c4e95a833d4c34b5e905234"
+  },
+  "primary_extensions": [
+    ".py"
+  ],
+  "repository": {
+    "display_name": "Django",
+    "language": "Python",
+    "requested_revision": "b34b834378adc590a771cccd44b9fb0b953cdca2",
+    "revision": "b34b834378adc590a771cccd44b9fb0b953cdca2"
+  },
+  "tokenizers": {
+    "cl100k_base": {
+      "multiplier": 2.809366396075518,
+      "outline_bytes": 4362428,
+      "outline_tokens": 1464448,
+      "raw_bytes": 19241801,
+      "raw_tokens": 4114171,
+      "reduction_percent": 64.40478531397942,
+      "version": "1.0.22"
+    },
+    "o200k_base": {
+      "multiplier": 2.844853099184232,
+      "outline_bytes": 4362428,
+      "outline_tokens": 1470516,
+      "raw_bytes": 19241801,
+      "raw_tokens": 4183402,
+      "reduction_percent": 64.84880009140885,
+      "version": "1.0.22"
+    }
+  }
+}

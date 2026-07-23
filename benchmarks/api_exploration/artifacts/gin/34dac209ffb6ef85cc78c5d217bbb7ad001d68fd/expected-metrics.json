@@ -1,0 +1,35 @@
+{
+  "manifest": {
+    "file_count": 99,
+    "hash": "416ac9955745984c0e7f50a164c78b8f0f852c1fbc2c671b31a37b1ca023d845"
+  },
+  "primary_extensions": [
+    ".go"
+  ],
+  "repository": {
+    "display_name": "Gin",
+    "language": "Go",
+    "requested_revision": "34dac209ffb6ef85cc78c5d217bbb7ad001d68fd",
+    "revision": "34dac209ffb6ef85cc78c5d217bbb7ad001d68fd"
+  },
+  "tokenizers": {
+    "cl100k_base": {
+      "multiplier": 2.982704207920792,
+      "outline_bytes": 177980,
+      "outline_tokens": 64640,
+      "raw_bytes": 690551,
+      "raw_tokens": 192802,
+      "reduction_percent": 66.47337683219054,
+      "version": "1.0.22"
+    },
+    "o200k_base": {
+      "multiplier": 2.9879594325496672,
+      "outline_bytes": 177980,
+      "outline_tokens": 64781,
+      "raw_bytes": 690551,
+      "raw_tokens": 193563,
+      "reduction_percent": 66.53234347473432,
+      "version": "1.0.22"
+    }
+  }
+}

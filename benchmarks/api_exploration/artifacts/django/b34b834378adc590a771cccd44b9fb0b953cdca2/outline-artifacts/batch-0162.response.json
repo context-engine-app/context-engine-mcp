@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/messages/test.py",
+        "django/contrib/messages/utils.py",
+        "django/contrib/messages/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.2 KB -> 1008 B (16% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/messages/test.py (12L)\nfile scope: [\"0006T008\" full 12L | imports 8L]\n\n- class MessagesTestMixin: ... [\"0006T007\" full 5L | code 5L]\n  - def assertMessages(self, response, expected_messages, *, ordered=True): ... [\"0006T006\" full 4L | code 4L]\n\n# django/contrib/messages/utils.py (13L)\nfile scope: [\"0006U001\" full 13L | imports 5L]\n\n- def get_level_tags(): ... [\"0006U000\" full 8L | code 8L]\n\n# django/contrib/messages/views.py (20L)\nfile scope: [\"0006V008\" full 20L | imports 4L]\n\n- class SuccessMessageMixin: ... [\"0006V007\" full 16L | code 16L]\n  - def form_valid(self, form): ... [\"0006V004\" full 6L | code 6L]\n  - def get_success_message(self, cleaned_data): ... [\"0006V006\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

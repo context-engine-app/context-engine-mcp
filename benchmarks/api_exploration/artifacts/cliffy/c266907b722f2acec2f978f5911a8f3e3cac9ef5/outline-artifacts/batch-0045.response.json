@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/prompt/data/colors.ts",
+        "examples/prompt/data/first_names.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 115.7 KB -> 481 B (100% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/prompt/data/colors.ts (2334L)\nfile scope: [\"0003c0BC\" full 2334L | imports 1L]\n\n\n# examples/prompt/data/first_names.ts (4950L)\nfile scope: [\"0003d001\" full 4950L | imports 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

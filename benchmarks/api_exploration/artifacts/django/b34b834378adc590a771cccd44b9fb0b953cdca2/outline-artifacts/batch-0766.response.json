@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/sitemaps_tests/urls/__init__.py",
+        "tests/sitemaps_tests/urls/http.py",
+        "tests/sitemaps_tests/urls/https.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/sitemaps_tests/urls/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/sitemaps_tests/urls/http.py (481L)\nfile scope: [\"000DI01G\" full 481L | imports 144L]\n\n- class SimpleSitemap(Sitemap): ... [\"000DI005\" full 8L | code 8L]\n  - def items(self): ... [\"000DI004\" full 2L | code 2L]\n\n- class SimplePagedSitemap(Sitemap): ... [\"000DI008\" full 5L | code 5L]\n  - def items(self): ... [\"000DI007\" full 2L | code 2L]\n\n- class SimpleI18nSitemap(Sitemap): ... [\"000DI00d\" full 7L | code 7L]\n  - def items(self): ... [\"000DI00c\" full 2L | code 2L]\n\n- class AlternatesI18nSitemap(SimpleI18nSitemap): ... [\"000DI00f\" full 2L | code 2L]\n\n- class LimitedI18nSitemap(AlternatesI18nSitemap): ... [\"000DI00h\" full 2L | code 2L]\n\n- class XDefaultI18nSitemap(AlternatesI18nSitemap): ... [\"000DI00j\" full 2L | code 2L]\n\n- class ItemByLangSitemap(SimpleI18nSitemap): ... [\"000DI00m\" full 5L | code 5L]\n  - def get_languages_for_item(self, item): ... [\"000DI00l\" full 4L | code 4L]\n\n- class ItemByLangAlternatesSitemap(AlternatesI18nSitemap): ... [\"000DI00q\" full 7L | code 7L]\n  - def get_languages_for_item(self, item): ... [\"000DI00p\" full 4L | code 4L]\n\n- class EmptySitemap(Sitemap): ... [\"000DI00u\" full 4L | code 4L]\n\n- class FixedLastmodSitemap(SimpleSitemap): ... [\"000DI00w\" full 2L | code 2L]\n\n- class FixedLastmodMixedSitemap(Sitemap): ... [\"000DI00E\" full 11L | code 11L]\n  - def items(self): ... [\"000DI00D\" full 5L | code 5L]\n\n- class FixedNewerLastmodSitemap(SimpleSitemap): ... [\"000DI00G\" full 2L | code 2L]\n\n- class DateSiteMap(SimpleSitemap): ... [\"000DI00I\" full 2L | code 2L]\n\n- class TimezoneSiteMap(SimpleSitemap): ... [\"000DI00K\" full 2L | code 2L]\n\n- class CallableLastmodPartialSitemap(Sitemap): ... [\"000DI00R\" full 13L | code 13L]\n  - def items(self): ... [\"000DI00O\" full 5L | code 5L]\n  - def lastmod(self, obj): ... [\"000DI00Q\" full 2L | code 2L]\n\n- class CallableLastmodFullSitemap(Sitemap): ... [\"000DI00Y\" full 14L | code 14L]\n  - def items(self): ... [\"000DI00V\" full 6L | code 6L]\n  - def lastmod(self, obj): ... [\"000DI00X\" full 2L | code 2L]\n\n- class CallableLastmodNoItemsSitemap(Sitemap): ... [\"000DI013\" full 8L | code 8L]\n  - def items(self): ... [\"000DI010\" full 2L | code 2L]\n  - def lastmod(self, obj): ... [\"000DI012\" full 2L | code 2L]\n\n- class GetLatestLastmodNoneSiteMap(Sitemap): ... [\"000DI01b\" full 13L | code 13L]\n  - def items(self): ... [\"000DI017\" full 2L | code 2L]\n  - def lastmod(self, obj): ... [\"000DI019\" full 2L | code 2L]\n  - def get_latest_lastmod(self): ... [\"000DI01a\" full 2L | code 2L]\n\n- class GetLatestLastmodSiteMap(SimpleSitemap): ... [\"000DI01d\" full 3L | code 3L]\n  - def get_latest_lastmod(self): ... [\"000DI01c\" full 2L | code 2L]\n\n- def testmodelview(request, id): ... [\"000DI01g\" full 2L | code 2L]\n\n# tests/sitemaps_tests/urls/https.py (24L)\nfile scope: [\"000DJ004\" full 24L | imports 12L]\n\n- class HTTPSSitemap(SimpleSitemap): ... [\"000DJ001\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

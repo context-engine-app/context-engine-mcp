@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/postgres/validators.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.7 KB -> 1.1 KB (58% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/postgres/validators.py (92L)\nfile scope: [\"0007n00t\" full 92L | imports 13L]\n\n- class ArrayMaxLengthValidator(MaxLengthValidator): ... [\"0007n001\" full 8L | code 8L]\n\n- class ArrayMinLengthValidator(MinLengthValidator): ... [\"0007n003\" full 8L | code 8L]\n\n- @deconstructible class KeysValidator: ... [\"0007n00i\" full 41L | code 41L]\n  - def __init__(self, keys, strict=False, messages=None): ... [\"0007n009\" full 5L | code 5L]\n  - def __call__(self, value): ... [\"0007n00f\" full 17L | code 17L]\n  - def __eq__(self, other): ... [\"0007n00h\" full 7L | code 7L]\n\n- class RangeMaxValueValidator(MaxValueValidator): ... [\"0007n00n\" full 7L | code 7L]\n  - def compare(self, a, b): ... [\"0007n00l\" full 2L | code 2L]\n\n- class RangeMinValueValidator(MinValueValidator): ... [\"0007n00s\" full 7L | code 7L]\n  - def compare(self, a, b): ... [\"0007n00q\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

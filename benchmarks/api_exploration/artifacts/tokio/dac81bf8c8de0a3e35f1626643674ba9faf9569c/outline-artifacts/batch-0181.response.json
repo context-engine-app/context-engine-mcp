@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/tests/uds_stream.rs",
+        "tokio/tests/unwindsafe.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 14.0 KB -> 2.6 KB (82% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/tests/uds_stream.rs (476L)\nfile scope: [\"000cI00g\" full 476L | imports 20L]\n\n- #[tokio::test] async fn accept_read_write() -> std::io::Result<()> { ... } [\"000cI000\" full 26L | code 26L]\n\n- #[tokio::test] async fn accept_read_write_socketaddr() -> std::io::Result<()> { ... } [\"000cI001\" full 27L | code 27L]\n\n- #[tokio::test] async fn shutdown() -> std::io::Result<()> { ... } [\"000cI002\" full 22L | code 22L]\n\n- #[tokio::test] async fn try_read_write() -> std::io::Result<()> { ... } [\"000cI003\" full 126L | code 126L]\n\n- async fn create_pair() -> (UnixStream, UnixStream) { ... } [\"000cI004\" full 12L | code 12L]\n\n- macro_rules! assert_readable_by_polling { ... ; } [\"000cI005\" full 5L | code 5L]\n\n- macro_rules! assert_not_readable_by_polling { ... ; } [\"000cI006\" full 9L | code 9L]\n\n- macro_rules! assert_writable_by_polling { ... ; } [\"000cI007\" full 5L | code 5L]\n\n- macro_rules! assert_not_writable_by_polling { ... ; } [\"000cI008\" full 9L | code 9L]\n\n- #[tokio::test] async fn poll_read_ready() { ... } [\"000cI009\" full 22L | code 22L]\n\n- #[tokio::test] async fn poll_write_ready() { ... } [\"000cI00a\" full 15L | code 15L]\n\n- fn read_until_pending(stream: &mut UnixStream) { ... } [\"000cI00b\" full 12L | code 12L]\n\n- fn write_until_pending(stream: &mut UnixStream) { ... } [\"000cI00c\" full 12L | code 12L]\n\n- #[tokio::test] async fn try_read_buf() -> std::io::Result<()> { ... } [\"000cI00d\" full 81L | code 81L]\n\n- #[tokio::test] #[cfg(not(target_os = \"macos\"))] async fn epollhup() -> io::Result<()> { ... } [\"000cI00e\" full 40L | code 39L | docs 1L]\n\n- #[tokio::test] #[cfg(any(target_os = \"linux\", target_os = \"android\"))] async fn abstract_socket_name() { ... } [\"000cI00f\" full 18L | code 17L | docs 1L]\n\n# tokio/tests/unwindsafe.rs (43L)\nfile scope: [\"000cJ006\" full 43L | imports 6L]\n\n- #[test] fn notify_is_unwind_safe() { ... } [\"000cJ000\" full 4L | code 4L]\n\n- #[test] fn join_handle_is_unwind_safe() { ... } [\"000cJ001\" full 4L | code 4L]\n\n- #[test] fn net_types_are_unwind_safe() { ... } [\"000cJ002\" full 7L | code 7L]\n\n- #[test] #[cfg(unix)] fn unix_net_types_are_unwind_safe() { ... } [\"000cJ003\" full 7L | code 7L]\n\n- #[test] #[cfg(windows)] fn windows_net_types_are_unwind_safe() { ... } [\"000cJ004\" full 9L | code 9L]\n\n- fn is_unwind_safe<T: UnwindSafe + RefUnwindSafe>() { ... } [\"000cJ005\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

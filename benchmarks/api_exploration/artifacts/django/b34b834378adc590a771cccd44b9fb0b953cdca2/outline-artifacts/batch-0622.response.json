@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/migrations_test_apps/with_generic_model/migrations/0001_initial.py",
+        "tests/migrations/migrations_test_apps/with_generic_model/migrations/0002_customgenericmodel.py",
+        "tests/migrations/migrations_test_apps/with_generic_model/migrations/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/migrations_test_apps/with_generic_model/migrations/0001_initial.py (41L)\nfile scope: [\"000wb003\" full 41L | imports 6L]\n\n- class Migration(migrations.Migration): ... [\"000wb002\" full 35L | code 35L]\n\n# tests/migrations/migrations_test_apps/with_generic_model/migrations/0002_customgenericmodel.py (32L)\nfile scope: [\"000wc003\" full 32L | imports 6L]\n\n- class Migration(migrations.Migration): ... [\"000wc002\" full 26L | code 26L]\n\n# tests/migrations/migrations_test_apps/with_generic_model/migrations/__init__.py (1L)\nfile scope: [\"000wd000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "codec/json/api.go",
+        "codec/json/go_json.go",
+        "codec/json/json.go",
+        "codec/json/jsoniter.go",
+        "codec/json/sonic.go"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 5.6 KB -> 4.2 KB (24% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# codec/json/api.go (58L)\nfile scope: [\"0000x00e\" full 58L | module-docs 3L | imports 20L]\n\n- Core interface { ... } [\"0000x006\" full 7L | code 7L]\n  - Marshal(v any) ( ... ) [\"0000x001\" full 1L | code 1L]\n  - Unmarshal(data []byte, v any) error [\"0000x002\" full 1L | code 1L]\n  - MarshalIndent(v any, prefix, indent string) ( ... ) [\"0000x003\" full 1L | code 1L]\n  - NewEncoder(writer io.Writer) Encoder [\"0000x004\" full 1L | code 1L]\n  - NewDecoder(reader io.Reader) Decoder [\"0000x005\" full 1L | code 1L]\n\n- Encoder interface { ... } [\"0000x009\" full 17L | code 17L]\n  - SetEscapeHTML( ... ) [\"0000x007\" full 1L | code 1L]\n  - Encode(v any) error [\"0000x008\" full 1L | code 1L]\n\n- Decoder interface { ... } [\"0000x00d\" full 17L | code 17L]\n  - UseNumber( ... ) [\"0000x00a\" full 1L | code 1L]\n  - DisallowUnknownFields( ... ) [\"0000x00b\" full 1L | code 1L]\n  - Decode(v any) error [\"0000x00c\" full 1L | code 1L]\n\n# codec/json/go_json.go (43L)\nfile scope: [\"0000y008\" full 43L | module-docs 5L | imports 15L]\n\n- Package = \"github.com/goccy/go-json\" [\"0000y000\" full 1L | code 1L]\n\n- func init() { ... } [\"0000y001\" full 3L | code 3L]\n\n- gojsonApi struct{ ... } [\"0000y002\" full 1L | code 1L]\n\n- func (j gojsonApi) Marshal(v any) ([]byte, error) { ... } [\"0000y003\" full 3L | code 3L]\n\n- func (j gojsonApi) Unmarshal(data []byte, v any) error { ... } [\"0000y004\" full 3L | code 3L]\n\n- func (j gojsonApi) MarshalIndent(v any, prefix, indent string) ([]byte, error) { ... } [\"0000y005\" full 3L | code 3L]\n\n- func (j gojsonApi) NewEncoder(writer io.Writer) Encoder { ... } [\"0000y006\" full 3L | code 3L]\n\n- func (j gojsonApi) NewDecoder(reader io.Reader) Decoder { ... } [\"0000y007\" full 3L | code 3L]\n\n# codec/json/json.go (42L)\nfile scope: [\"0000z008\" full 42L | module-docs 5L | imports 14L]\n\n- Package = \"encoding/json\" [\"0000z000\" full 1L | code 1L]\n\n- func init() { ... } [\"0000z001\" full 3L | code 3L]\n\n- jsonApi struct{ ... } [\"0000z002\" full 1L | code 1L]\n\n- func (j jsonApi) Marshal(v any) ([]byte, error) { ... } [\"0000z003\" full 3L | code 3L]\n\n- func (j jsonApi) Unmarshal(data []byte, v any) error { ... } [\"0000z004\" full 3L | code 3L]\n\n- func (j jsonApi) MarshalIndent(v any, prefix, indent string) ([]byte, error) { ... } [\"0000z005\" full 3L | code 3L]\n\n- func (j jsonApi) NewEncoder(writer io.Writer) Encoder { ... } [\"0000z006\" full 3L | code 3L]\n\n- func (j jsonApi) NewDecoder(reader io.Reader) Decoder { ... } [\"0000z007\" full 3L | code 3L]\n\n# codec/json/jsoniter.go (45L)\nfile scope: [\"0000A009\" full 45L | module-docs 5L | imports 18L]\n\n- Package = \"github.com/json-iterator/go\" [\"0000A000\" full 1L | code 1L]\n\n- func init() { ... } [\"0000A001\" full 3L | code 3L]\n\n- jsoniterApi struct{ ... } [\"0000A003\" full 1L | code 1L]\n\n- func (j jsoniterApi) Marshal(v any) ([]byte, error) { ... } [\"0000A004\" full 3L | code 3L]\n\n- func (j jsoniterApi) Unmarshal(data []byte, v any) error { ... } [\"0000A005\" full 3L | code 3L]\n\n- func (j jsoniterApi) MarshalIndent(v any, prefix, indent string) ([]byte, error) { ... } [\"0000A006\" full 3L | code 3L]\n\n- func (j jsoniterApi) NewEncoder(writer io.Writer) Encoder { ... } [\"0000A007\" full 3L | code 3L]\n\n- func (j jsoniterApi) NewDecoder(reader io.Reader) Decoder { ... } [\"0000A008\" full 3L | code 3L]\n\n# codec/json/sonic.go (45L)\nfile scope: [\"0000B009\" full 45L | module-docs 5L | imports 18L]\n\n- Package = \"github.com/bytedance/sonic\" [\"0000B000\" full 1L | code 1L]\n\n- func init() { ... } [\"0000B001\" full 3L | code 3L]\n\n- sonicApi struct{ ... } [\"0000B003\" full 1L | code 1L]\n\n- func (j sonicApi) Marshal(v any) ([]byte, error) { ... } [\"0000B004\" full 3L | code 3L]\n\n- func (j sonicApi) Unmarshal(data []byte, v any) error { ... } [\"0000B005\" full 3L | code 3L]\n\n- func (j sonicApi) MarshalIndent(v any, prefix, indent string) ([]byte, error) { ... } [\"0000B006\" full 3L | code 3L]\n\n- func (j sonicApi) NewEncoder(writer io.Writer) Encoder { ... } [\"0000B007\" full 3L | code 3L]\n\n- func (j sonicApi) NewDecoder(reader io.Reader) Decoder { ... } [\"0000B008\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

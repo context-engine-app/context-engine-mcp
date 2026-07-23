@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/admin_registration/__init__.py",
+        "tests/admin_registration/models.py",
+        "tests/admin_registration/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/admin_registration/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/admin_registration/models.py (29L)\nfile scope: [\"000fC00c\" full 29L | imports 8L]\n\n- class Person(models.Model): ... [\"000fC001\" full 2L | code 2L]\n\n- class Traveler(Person): ... [\"000fC002\" full 2L | code 2L]\n\n- class Location(models.Model): ... [\"000fC005\" full 3L | code 3L]\n  - class Meta: ... [\"000fC004\" full 2L | code 2L]\n\n- class Place(Location): ... [\"000fC007\" full 2L | code 2L]\n\n- class Guest(models.Model): ... [\"000fC00b\" full 4L | code 4L]\n\n# tests/admin_registration/tests.py (171L)\nfile scope: [\"000fD00C\" full 171L | imports 11L]\n\n- class NameAdmin(admin.ModelAdmin): ... [\"000fD002\" full 3L | code 3L]\n\n- class CustomSite(admin.AdminSite): ... [\"000fD003\" full 2L | code 2L]\n\n- class TestRegistration(SimpleTestCase): ... [\"000fD00r\" full 91L | code 91L]\n  - def setUp(self): ... [\"000fD004\" full 2L | code 2L]\n  - def test_bare_registration(self): ... [\"000fD006\" full 5L | code 5L]\n  - def test_registration_with_model_admin(self): ... [\"000fD007\" full 5L | code 5L]\n  - def test_prevent_double_registration(self): ... [\"000fD009\" full 5L | code 5L]\n  - def test_prevent_double_registration_for_custom_admin(self): ... [\"000fD00c\" full 11L | code 11L]\n    - class PersonAdmin(admin.ModelAdmin): ... [\"000fD00a\" full 2L | code 2L]\n  - def test_unregister_unregistered_model(self): ... [\"000fD00e\" full 4L | code 4L]\n  - def test_registration_with_star_star_options(self): ... [\"000fD00f\" full 3L | code 3L]\n  - def test_get_model_admin_unregister_model(self): ... [\"000fD00h\" full 4L | code 4L]\n  - def test_star_star_overrides(self): ... [\"000fD00j\" full 8L | code 8L]\n  - def test_iterable_registration(self): ... [\"000fD00k\" full 8L | code 8L]\n  - def test_abstract_model(self): ... [\"000fD00m\" full 8L | code 8L]\n  - def test_composite_pk_model(self): ... [\"000fD00o\" full 7L | code 7L]\n  - def test_is_registered_model(self): ... [\"000fD00p\" full 4L | code 4L]\n  - def test_is_registered_not_registered_model(self): ... [\"000fD00q\" full 3L | code 3L]\n\n- class TestRegistrationDecorator(SimpleTestCase): ... [\"000fD00B\" full 58L | code 58L]\n  - def setUp(self): ... [\"000fD00s\" full 3L | code 3L]\n  - def test_basic_registration(self): ... [\"000fD00v\" full 6L | code 6L]\n  - def test_custom_site_registration(self): ... [\"000fD00w\" full 5L | code 5L]\n  - def test_multiple_registration(self): ... [\"000fD00x\" full 10L | code 10L]\n  - def test_wrapped_class_not_a_model_admin(self): ... [\"000fD00y\" full 5L | code 5L]\n  - def test_custom_site_not_an_admin_site(self): ... [\"000fD00z\" full 3L | code 3L]\n  - def test_empty_models_list_registration_fails(self): ... [\"000fD00A\" full 5L | code 5L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

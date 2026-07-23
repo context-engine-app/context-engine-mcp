@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/conf/locale/ug/__init__.py",
+        "django/conf/locale/ug/formats.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/conf/locale/ug/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# django/conf/locale/ug/formats.py (15L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|# This file is distributed under the same license as the Django package.\n 2|#\n 3|# The *_FORMAT strings use the Django date format syntax,\n 4|# see https://docs.djangoproject.com/en/dev/ref/templates/builtins/#date\n 5|DATE_FORMAT = \"j F Y\"\n 6|TIME_FORMAT = \"G:i\"\n 7|YEAR_MONTH_FORMAT = \"F Y\"\n 8|MONTH_DAY_FORMAT = \"j F\"\n 9|SHORT_DATE_FORMAT = \"Y/m/d\"\n10|SHORT_DATETIME_FORMAT = \"Y/m/d G:i\"\n11|FIRST_DAY_OF_WEEK = 1\n12|DECIMAL_SEPARATOR = \".\"\n13|THOUSAND_SEPARATOR = \",\"\n14|NUMBER_GROUPING = 3\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

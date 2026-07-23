@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/keypress/async_iterator.ts",
+        "examples/keypress/async_iterator_with_events.ts",
+        "examples/keypress/event_target.ts",
+        "examples/keypress/event_target_propagation.ts",
+        "examples/keypress/promise.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 3.0 KB -> 1.1 KB (61% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/keypress/async_iterator.ts (22L)\nfile scope: [\"00034001\" full 22L | imports 5L]\n\n\n# examples/keypress/async_iterator_with_events.ts (24L)\nfile scope: [\"00035002\" full 24L | imports 8L]\n\n- addEventListener(\"keydown\") callback [\"00035000\" full 8L | code 8L]\n\n# examples/keypress/event_target.ts (22L)\nfile scope: [\"00036001\" full 22L | imports 5L]\n\n- addEventListener(\"keydown\") callback [\"00036000\" full 17L | code 17L]\n\n# examples/keypress/event_target_propagation.ts (46L)\nfile scope: [\"00037004\" full 46L | imports 17L]\n\n- addEventListener(\"keydown\") callback [\"00037000\" full 10L | code 10L]\n\n- addEventListener(\"keydown\") callback [\"00037001\" full 12L | code 12L]\n\n- once: true [\"00037002\" full 1L | code 1L]\n\n- addEventListener(\"keydown\") callback [\"00037003\" full 12L | code 12L]\n\n# examples/keypress/promise.ts (17L)\nfile scope: [\"00038001\" full 17L | imports 5L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

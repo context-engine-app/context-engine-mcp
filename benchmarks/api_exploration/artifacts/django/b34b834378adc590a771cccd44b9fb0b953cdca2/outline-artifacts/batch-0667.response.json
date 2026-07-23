@@ -1,0 +1,25 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_squashed_erroneous/1_auto.py",
+        "tests/migrations/test_migrations_squashed_erroneous/2_auto.py",
+        "tests/migrations/test_migrations_squashed_erroneous/3_squashed_5.py",
+        "tests/migrations/test_migrations_squashed_erroneous/6_auto.py",
+        "tests/migrations/test_migrations_squashed_erroneous/7_auto.py",
+        "tests/migrations/test_migrations_squashed_erroneous/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/migrations/test_migrations_squashed_erroneous/1_auto.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import migrations\n2|\n3|\n4|class Migration(migrations.Migration):\n5|    operations = [migrations.RunPython(migrations.RunPython.noop)]\nnote: EOF\n\n# tests/migrations/test_migrations_squashed_erroneous/2_auto.py (8L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import migrations\n2|\n3|\n4|class Migration(migrations.Migration):\n5|    dependencies = [(\"migrations\", \"1_auto\")]\n6|\n7|    operations = [migrations.RunPython(migrations.RunPython.noop)]\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/test_migrations_squashed_erroneous/3_squashed_5.py (14L)\nfile scope: [\"000ye004\" full 14L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000ye003\" full 10L | code 10L]\n\n# tests/migrations/test_migrations_squashed_erroneous/6_auto.py (8L)\nfile scope: [\"000yf003\" full 8L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000yf002\" full 4L | code 4L]\n\n# tests/migrations/test_migrations_squashed_erroneous/7_auto.py (8L)\nfile scope: [\"000yg003\" full 8L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000yg002\" full 4L | code 4L]\n\n# tests/migrations/test_migrations_squashed_erroneous/__init__.py (1L)\nfile scope: [\"000yh000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

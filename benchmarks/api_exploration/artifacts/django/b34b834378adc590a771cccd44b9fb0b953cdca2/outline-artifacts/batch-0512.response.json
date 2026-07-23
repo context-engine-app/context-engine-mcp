@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/gis_tests/rasterapp/migrations/0001_setup_extensions.py",
+        "tests/gis_tests/rasterapp/migrations/0002_rastermodels.py",
+        "tests/gis_tests/rasterapp/migrations/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/gis_tests/rasterapp/migrations/0001_setup_extensions.py (15L)\nfile scope: [\"000rP002\" full 15L | imports 13L]\n\n- class Migration(migrations.Migration): ... [\"000rP001\" full 2L | code 2L]\n\n# tests/gis_tests/rasterapp/migrations/0002_rastermodels.py (72L)\nfile scope: [\"000rQ003\" full 72L | imports 6L]\n\n- class Migration(migrations.Migration): ... [\"000rQ002\" full 66L | code 66L]\n\n# tests/gis_tests/rasterapp/migrations/__init__.py (1L)\nfile scope: [\"000rR000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

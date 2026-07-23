@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "table/test/utils_test.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.9 KB -> 1.2 KB (60% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# table/test/utils_test.ts (70L)\nfile scope: [\"0005F00e\" full 70L | imports 44L]\n\n- test(\"consume words 01\") callback [\"0005F001\" full 3L | code 3L]\n\n- test(\"consume words 02\") callback [\"0005F002\" full 6L | code 6L]\n\n- test(\"consume words 03\") callback [\"0005F003\" full 3L | code 3L]\n\n- test(\"consume words 04\") callback [\"0005F004\" full 3L | code 3L]\n\n- test(\"consume words 05\") callback [\"0005F005\" full 3L | code 3L]\n\n- test(\"consume words 06\") callback [\"0005F006\" full 3L | code 3L]\n\n- test(\"consume words 07\") callback [\"0005F007\" full 3L | code 3L]\n\n- test(\"consume words 08\") callback [\"0005F008\" full 3L | code 3L]\n\n- test(\"consume words 09\") callback [\"0005F009\" full 3L | code 3L]\n\n- test(\"consume words 10\") callback [\"0005F00a\" full 3L | code 3L]\n\n- test(\"consume words 11\") callback [\"0005F00b\" full 3L | code 3L]\n\n- test(\"consume words 12\") callback [\"0005F00d\" full 6L | code 6L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

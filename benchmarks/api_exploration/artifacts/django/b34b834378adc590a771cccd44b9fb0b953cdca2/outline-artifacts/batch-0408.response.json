@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/custom_migration_operations/__init__.py",
+        "tests/custom_migration_operations/more_operations.py",
+        "tests/custom_migration_operations/operations.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/custom_migration_operations/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/custom_migration_operations/more_operations.py (26L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from django.db.migrations.operations.base import Operation\n 2|\n 3|\n 4|class TestOperation(Operation):\n 5|    def __init__(self):\n 6|        pass\n 7|\n 8|    def deconstruct(self):\n 9|        return (self.__class__.__name__, [], {})\n10|\n11|    @property\n12|    def reversible(self):\n13|        return True\n14|\n15|    def state_forwards(self, app_label, state):\n16|        pass\n17|\n18|    def database_forwards(self, app_label, schema_editor, from_state, to_state):\n19|        pass\n20|\n21|    def state_backwards(self, app_label, state):\n22|        pass\n23|\n24|    def database_backwards(self, app_label, schema_editor, from_state, to_state):\n25|        pass\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/custom_migration_operations/operations.py (84L)\nfile scope: [\"000lw00Y\" full 84L | imports 4L]\n\n- class TestOperation(Operation): ... [\"000lw00j\" full 22L | code 22L]\n  - def __init__(self): ... [\"000lw000\" full 2L | code 2L]\n  - def deconstruct(self): ... [\"000lw001\" full 2L | code 2L]\n  - @property def reversible(self): ... [\"000lw002\" full 3L | code 3L]\n  - def state_forwards(self, app_label, state): ... [\"000lw005\" full 2L | code 2L]\n  - def database_forwards(self, app_label, schema_editor, from_state, to_state): ... [\"000lw00a\" full 2L | code 2L]\n  - def state_backwards(self, app_label, state): ... [\"000lw00d\" full 2L | code 2L]\n  - def database_backwards(self, app_label, schema_editor, from_state, to_state): ... [\"000lw00i\" full 2L | code 2L]\n\n- class CreateModel(TestOperation): ... [\"000lw00k\" full 2L | code 2L]\n\n- class ArgsOperation(TestOperation): ... [\"000lw00r\" full 6L | code 6L]\n  - def __init__(self, arg1, arg2): ... [\"000lw00n\" full 2L | code 2L]\n  - def deconstruct(self): ... [\"000lw00q\" full 2L | code 2L]\n\n- class KwargsOperation(TestOperation): ... [\"000lw00z\" full 11L | code 11L]\n  - def __init__(self, kwarg1=None, kwarg2=None): ... [\"000lw00u\" full 2L | code 2L]\n  - def deconstruct(self): ... [\"000lw00y\" full 7L | code 7L]\n\n- class ArgsKwargsOperation(TestOperation): ... [\"000lw00L\" full 16L | code 16L]\n  - def __init__(self, arg1, arg2, kwarg1=None, kwarg2=None): ... [\"000lw00E\" full 3L | code 3L]\n  - def deconstruct(self): ... [\"000lw00K\" full 11L | code 11L]\n\n- class ArgsAndKeywordOnlyArgsOperation(ArgsKwargsOperation): ... [\"000lw00R\" full 3L | code 3L]\n  - def __init__(self, arg1, arg2, *, kwarg1, kwarg2): ... [\"000lw00Q\" full 2L | code 2L]\n\n- class ExpandArgsOperation(TestOperation): ... [\"000lw00X\" full 8L | code 8L]\n  - def __init__(self, arg): ... [\"000lw00U\" full 2L | code 2L]\n  - def deconstruct(self): ... [\"000lw00W\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

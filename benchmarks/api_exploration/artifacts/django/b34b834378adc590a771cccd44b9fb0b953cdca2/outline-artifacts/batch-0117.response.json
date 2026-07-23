@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/contenttypes/models.py",
+        "django/contrib/contenttypes/prefetch.py",
+        "django/contrib/contenttypes/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 11.5 KB -> 2.4 KB (79% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/contenttypes/models.py (189L)\nfile scope: [\"0004m013\" full 189L | imports 9L]\n\n- class ContentTypeManager(models.Manager): ... [\"0004m00H\" full 123L | code 123L]\n  - def __init__(self, *args, **kwargs): ... [\"0004m003\" full 5L | code 5L]\n  - def get_by_natural_key(self, app_label, model): ... [\"0004m008\" full 7L | code 7L]\n  - def _get_opts(self, model, for_concrete_model): ... [\"0004m00b\" full 4L | code 4L]\n  - def _get_from_cache(self, opts): ... [\"0004m00e\" full 3L | code 3L]\n  - def get_for_model(self, model, for_concrete_model=True): ... [\"0004m00k\" full 27L | code 27L]\n  - def get_for_models(self, *models, for_concrete_models=True): ... [\"0004m00y\" full 40L | code 40L]\n  - def get_for_id(self, id): ... [\"0004m00B\" full 13L | code 13L]\n  - def clear_cache(self): ... [\"0004m00C\" full 5L | code 5L]\n  - def _add_to_cache(self, using, ct): ... [\"0004m00G\" full 8L | code 8L]\n\n- class ContentType(models.Model): ... [\"0004m012\" full 55L | code 55L]\n  - class Meta: ... [\"0004m00P\" full 5L | code 5L]\n  - def __str__(self): ... [\"0004m00Q\" full 2L | code 2L]\n  - @property def name(self): ... [\"0004m00S\" full 6L | code 6L]\n  - @property def app_labeled_name(self): ... [\"0004m00U\" full 9L | code 9L]\n  - def model_class(self): ... [\"0004m00V\" full 6L | code 6L]\n  - def get_object_for_this_type(self, using=None, **kwargs): ... [\"0004m00Y\" full 8L | code 8L]\n  - def get_all_objects_for_this_type(self, **kwargs): ... [\"0004m010\" full 5L | code 5L]\n  - def natural_key(self): ... [\"0004m011\" full 2L | code 2L]\n\n# django/contrib/contenttypes/prefetch.py (37L)\nfile scope: [\"0004n00c\" full 37L | imports 5L]\n\n- class GenericPrefetch(Prefetch): ... [\"0004n00b\" full 32L | code 32L]\n  - def __init__(self, lookup, querysets, to_attr=None): ... [\"0004n004\" full 14L | code 14L]\n  - def __getstate__(self): ... [\"0004n008\" full 11L | code 11L]\n  - def get_current_querysets(self, level): ... [\"0004n00a\" full 4L | code 4L]\n\n# django/contrib/contenttypes/views.py (89L)\nfile scope: [\"0004o00f\" full 89L | imports 9L]\n\n- def shortcut(request, content_type_id, object_id): ... [\"0004o00e\" full 80L | code 80L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

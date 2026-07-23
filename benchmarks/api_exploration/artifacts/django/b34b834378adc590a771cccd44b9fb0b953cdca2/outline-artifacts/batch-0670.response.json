@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_squashed_no_replaces/0001_squashed_0002.py",
+        "tests/migrations/test_migrations_squashed_no_replaces/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/test_migrations_squashed_no_replaces/0001_squashed_0002.py (24L)\nfile scope: [\"000yr002\" full 24L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000yr001\" full 20L | code 20L]\n\n# tests/migrations/test_migrations_squashed_no_replaces/__init__.py (1L)\nfile scope: [\"000ys000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

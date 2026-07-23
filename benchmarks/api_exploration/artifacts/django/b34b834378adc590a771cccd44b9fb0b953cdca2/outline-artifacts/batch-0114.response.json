@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/contenttypes/management/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 4.9 KB -> 1.1 KB (77% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/contenttypes/management/__init__.py (144L)\nfile scope: [\"0004g00L\" full 144L | imports 7L]\n\n- class RenameContentType(migrations.RunPython): ... [\"0004g00l\" full 45L | code 45L]\n  - def __init__(self, app_label, old_model, new_model): ... [\"0004g003\" full 5L | code 5L]\n  - def _rename(self, apps, schema_editor, old_model, new_model): ... [\"0004g00e\" full 32L | code 32L]\n  - def rename_forward(self, apps, schema_editor): ... [\"0004g00h\" full 2L | code 2L]\n  - def rename_backward(self, apps, schema_editor): ... [\"0004g00k\" full 2L | code 2L]\n\n- def inject_rename_contenttypes_operations( plan=None, apps=global_apps, using=DEFAULT_DB_ALIAS, **kwargs ): ... [\"0004g00y\" full 44L | code 44L]\n\n- def create_contenttypes( app_config, verbosity=2, interactive=True, using=DEFAULT_DB_ALIAS, apps=global_apps, **kwargs, ): ... [\"0004g00K\" full 44L | code 44L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

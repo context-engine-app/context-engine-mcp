@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/forms_tests/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 3.3 KB -> 1.4 KB (59% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/forms_tests/models.py (141L)\nfile scope: [\"000pz00D\" full 141L | imports 16L]\n\n- def callable_default(): ... [\"000pz001\" full 2L | code 2L]\n\n- class BoundaryModel(models.Model): ... [\"000pz004\" full 2L | code 2L]\n\n- class Defaults(models.Model): ... [\"000pz009\" full 5L | code 5L]\n\n- class ChoiceModel(models.Model): ... [\"000pz00h\" full 27L | code 27L]\n\n- class ChoiceOptionModel(models.Model): ... [\"000pz00m\" full 14L | code 14L]\n  - class Meta: ... [\"000pz00k\" full 2L | code 2L]\n  - def __str__(self): ... [\"000pz00l\" full 2L | code 2L]\n\n- def choice_default(): ... [\"000pz00n\" full 2L | code 2L]\n\n- def choice_default_list(): ... [\"000pz00o\" full 2L | code 2L]\n\n- def int_default(): ... [\"000pz00p\" full 2L | code 2L]\n\n- def int_list_default(): ... [\"000pz00q\" full 2L | code 2L]\n\n- class ChoiceFieldModel(models.Model): ... [\"000pz00v\" full 29L | code 29L]\n\n- class OptionalMultiChoiceModel(models.Model): ... [\"000pz00y\" full 12L | code 12L]\n\n- class FileModel(models.Model): ... [\"000pz00A\" full 2L | code 2L]\n\n- class Article(models.Model): ... [\"000pz00C\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

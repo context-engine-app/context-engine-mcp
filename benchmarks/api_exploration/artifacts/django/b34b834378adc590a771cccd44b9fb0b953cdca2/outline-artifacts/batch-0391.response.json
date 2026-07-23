@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/check_framework/urls/unique_namespaces.py",
+        "tests/check_framework/urls/warning_in_include.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.0 KB -> 501 B (52% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/check_framework/urls/unique_namespaces.py (27L)\nfile scope: [\"000kw003\" full 27L | imports 20L]\n\n\n# tests/check_framework/urls/warning_in_include.py (13L)\nfile scope: [\"000kx001\" full 13L | imports 3L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

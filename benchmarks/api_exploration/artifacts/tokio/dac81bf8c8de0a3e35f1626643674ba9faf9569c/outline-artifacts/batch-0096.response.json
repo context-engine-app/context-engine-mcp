@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/driver/op.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 7.8 KB -> 3.2 KB (59% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/driver/op.rs (241L)\nfile scope: [\"0006B00D\" full 241L | imports 32L]\n\n- #[allow(dead_code)] #[derive(Debug)] pub(crate) enum CancelData { ... } [\"0006B006\" full 24L | code 22L | docs 2L]\n  - Open(Open) [\"0006B000\" full 1L | code 1L]\n  - Write(Write) [\"0006B001\" full 1L | code 1L]\n  - Rename(Rename) [\"0006B002\" full 1L | code 1L]\n  - ReadVec(Read<Vec<u8>, OwnedFd>) [\"0006B003\" full 1L | code 1L]\n  - ReadBuf(Read<Buf, ArcFd>) [\"0006B004\" full 1L | code 1L]\n  - #[cfg( any(target_env = \"gnu\", target_os = \"android\") )] Statx(Statx) [\"0006B005\" full 13L | code 13L]\n\n- #[derive(Debug)] pub(crate) enum Lifecycle { ... } [\"0006B00b\" full 19L | code 19L]\n  - Submitted [\"0006B007\" full 2L | code 1L | docs 1L]\n  - Waiting(Waker) [\"0006B008\" full 2L | code 1L | docs 1L]\n  - Cancelled( #[allow(dead_code)] CancelData, ) [\"0006B009\" full 7L | code 5L | docs 2L]\n  - Completed(cqueue::Entry) [\"0006B00a\" full 2L | code 1L | docs 1L]\n\n- pub(crate) enum State { ... } [\"0006B00f\" full 5L | code 5L]\n  - Initialize(Option<Entry>) [\"0006B00c\" full 1L | code 1L]\n  - Polled(usize) [\"0006B00d\" full 1L | code 1L]\n  - Complete [\"0006B00e\" full 1L | code 1L]\n\n- pub(crate) struct Op<T: Cancellable> { ... } [\"0006B00j\" full 8L | code 8L]\n  - handle: Handle [\"0006B00g\" full 2L | code 1L | docs 1L]\n  - state: State [\"0006B00h\" full 2L | code 1L | docs 1L]\n  - data: Option<T> [\"0006B00i\" full 2L | code 1L | docs 1L]\n\n- impl<T: Cancellable> Op<T> { ... } [\"0006B00m\" full 17L | code 17L]\n  - pub(crate) unsafe fn new(entry: Entry, data: T) -> Self { ... } [\"0006B00k\" full 12L | code 8L | docs 4L]\n  - pub(crate) fn take_data(&mut self) -> Option<T> { ... } [\"0006B00l\" full 3L | code 3L]\n\n- impl<T: Cancellable> Drop for Op<T> { ... } [\"0006B00o\" full 17L | code 17L]\n  - fn drop(&mut self) { ... } [\"0006B00n\" full 15L | code 15L]\n\n- pub(crate) struct CqeResult { ... } [\"0006B00q\" full 4L | code 3L | docs 1L]\n  - pub(crate) result: io::Result<u32> [\"0006B00p\" full 1L | code 1L]\n\n- impl From<cqueue::Entry> for CqeResult { ... } [\"0006B00s\" full 11L | code 11L]\n  - fn from(cqe: cqueue::Entry) -> Self { ... } [\"0006B00r\" full 9L | code 9L]\n\n- pub(crate) trait Completable { ... } [\"0006B00w\" full 11L | code 10L | docs 1L]\n  - type Output; [\"0006B00t\" full 1L | code 1L]\n  - fn complete(self, cqe: CqeResult) -> ... ; [\"0006B00u\" full 1L | code 1L]\n  - fn complete_with_error(self, error: io::Error) -> ... ; [\"0006B00v\" full 5L | code 1L | docs 4L]\n\n- pub(crate) trait Cancellable { ... } [\"0006B00y\" full 4L | code 3L | docs 1L]\n  - fn cancel(self) -> CancelData; [\"0006B00x\" full 1L | code 1L]\n\n- impl<T: Cancellable> Unpin for Op<T> { ... } [\"0006B00z\" full 1L | code 1L]\n\n- impl<T: Cancellable + Completable + Send> Future for Op<T> { ... } [\"0006B00C\" full 77L | code 77L]\n  - type Output = T::Output; [\"0006B00A\" full 1L | code 1L]\n  - fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> { ... } [\"0006B00B\" full 73L | code 73L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

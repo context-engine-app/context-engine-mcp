@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/task/blocking.rs",
+        "tokio/src/task/builder.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 17.2 KB -> 2.3 KB (87% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/task/blocking.rs (228L)\nfile scope: [\"0009c000\" full 228L]\n\n\n# tokio/src/task/builder.rs (236L)\nfile scope: [\"0009d00b\" full 236L | imports 9L]\n\n- #[derive(Default, Debug)] #[cfg_attr(docsrs, doc(cfg(all(tokio_unstable, feature = \"tracing\"))))] pub struct Builder<'a> { ... } [\"0009d001\" full 57L | code 5L | docs 52L]\n  - name: Option<&'a str> [\"0009d000\" full 1L | code 1L]\n\n- impl<'a> Builder<'a> { ... } [\"0009d00a\" full 169L | code 169L]\n  - pub fn new() -> Self { ... } [\"0009d002\" full 4L | code 3L | docs 1L]\n  - pub fn name(&self, name: &'a str) -> Self { ... } [\"0009d003\" full 4L | code 3L | docs 1L]\n  - #[track_caller] pub fn spawn<Fut>(self, future: Fut) -> io::Result<JoinHandle<Fut::Output>> where Fut: Future + Send + 'static, Fut::Output: Send + 'static, { ... } [\"0009d004\" full 21L | code 13L | docs 8L]\n  - #[track_caller] pub fn spawn_on<Fut>(self, future: Fut, handle: &Handle) -> io::Result<JoinHandle<Fut::Output>> where Fut: Future + Send + 'static, Fut::Output: Send + 'static, { ... } [\"0009d005\" full 20L | code 13L | docs 7L]\n  - #[track_caller] pub fn spawn_local<Fut>(self, future: Fut) -> io::Result<JoinHandle<Fut::Output>> where Fut: Future + 'static, Fut::Output: 'static, { ... } [\"0009d006\" full 30L | code 13L | docs 17L]\n  - #[track_caller] pub fn spawn_local_on<Fut>( self, future: Fut, local_set: &LocalSet, ) -> io::Result<JoinHandle<Fut::Output>> where Fut: Future + 'static, Fut::Output: 'static, { ... } [\"0009d007\" full 24L | code 17L | docs 7L]\n  - #[track_caller] pub fn spawn_blocking<Function, Output>( self, function: Function, ) -> io::Result<JoinHandle<Output>> where Function: FnOnce() -> Output + Send + 'static, Output: Send + 'static, { ... } [\"0009d008\" full 20L | code 12L | docs 8L]\n  - #[track_caller] pub fn spawn_blocking_on<Function, Output>( self, function: Function, handle: &Handle, ) -> io::Result<JoinHandle<Output>> where Function: FnOnce() -> Output + Send + 'static, Output: Send + 'static, { ... } [\"0009d009\" full 37L | code 31L | docs 6L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

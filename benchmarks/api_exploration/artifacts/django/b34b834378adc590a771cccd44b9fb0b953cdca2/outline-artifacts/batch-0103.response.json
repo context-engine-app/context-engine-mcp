@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/auth/handlers/__init__.py",
+        "django/contrib/auth/handlers/modwsgi.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/auth/handlers/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/auth/handlers/modwsgi.py (59L)\nfile scope: [\"0003G00d\" full 59L | imports 8L]\n\n- def _get_user(username): ... [\"0003G003\" full 14L | code 14L]\n\n- def check_password(environ, username, password): ... [\"0003G008\" full 19L | code 19L]\n\n- def groups_for_user(environ, username): ... [\"0003G00c\" full 15L | code 15L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

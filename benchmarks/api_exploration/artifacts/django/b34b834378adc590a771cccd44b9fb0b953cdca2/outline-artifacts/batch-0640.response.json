@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_clashing_prefix/__init__.py",
+        "tests/migrations/test_migrations_clashing_prefix/a.py",
+        "tests/migrations/test_migrations_clashing_prefix/ab.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/migrations/test_migrations_clashing_prefix/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/migrations/test_migrations_clashing_prefix/a.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import migrations\n2|\n3|\n4|class Migration(migrations.Migration):\n5|    pass\nnote: EOF\n\n# tests/migrations/test_migrations_clashing_prefix/ab.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import migrations\n2|\n3|\n4|class Migration(migrations.Migration):\n5|    dependencies = [(\"migrations\", \"a\")]\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

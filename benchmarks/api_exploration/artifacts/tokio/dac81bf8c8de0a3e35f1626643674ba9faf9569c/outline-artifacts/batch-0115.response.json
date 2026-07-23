@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/scheduler/multi_thread/worker/metrics.rs",
+        "tokio/src/runtime/scheduler/multi_thread/worker/taskdump.rs",
+        "tokio/src/runtime/scheduler/multi_thread/worker/taskdump_mock.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.8 KB -> 1.3 KB (54% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/scheduler/multi_thread/worker/metrics.rs (16L)\nfile scope: [\"0007t002\" full 16L | imports 3L]\n\n- impl Shared { ... } [\"0007t001\" full 5L | code 5L]\n  - pub(crate) fn injection_queue_depth(&self) -> usize { ... } [\"0007t000\" full 3L | code 3L]\n\n# tokio/src/runtime/scheduler/multi_thread/worker/taskdump.rs (80L)\nfile scope: [\"0007u004\" full 80L | imports 10L]\n\n- impl Handle { ... } [\"0007u001\" full 49L | code 49L]\n  - pub(super) fn trace_core(&self, mut core: Box<Core>) -> Box<Core> { ... } [\"0007u000\" full 47L | code 47L]\n\n- impl Shared { ... } [\"0007u003\" full 20L | code 20L]\n  - pub(super) fn steal_all(&self) -> super::queue::Local<Arc<Handle>> { ... } [\"0007u002\" full 18L | code 17L | docs 1L]\n\n# tokio/src/runtime/scheduler/multi_thread/worker/taskdump_mock.rs (8L)\nfile scope: [\"0007v002\" full 8L | imports 3L]\n\n- impl Handle { ... } [\"0007v001\" full 5L | code 5L]\n  - pub(super) fn trace_core(&self, core: Box<Core>) -> Box<Core> { ... } [\"0007v000\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

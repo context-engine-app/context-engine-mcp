@@ -1,0 +1,5627 @@
+{
+  "batch_policy": {
+    "batches": [
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 8,
+        "files": [
+          "ansi/ansi.ts",
+          "ansi/ansi_escapes.ts",
+          "ansi/ansi_escapes_test.ts",
+          "ansi/ansi_test.ts",
+          "ansi/chain.ts",
+          "ansi/colors.ts",
+          "ansi/colors_test.ts",
+          "ansi/cursor_position.ts"
+        ],
+        "id": "batch-0001",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 9520,
+        "rendered_text_sha256": "f55968e9c59980cb2fe8a4888df53b2583f875a4820066e265ac5618ce29258f",
+        "request": {
+          "args": {
+            "files": [
+              "ansi/ansi.ts",
+              "ansi/ansi_escapes.ts",
+              "ansi/ansi_escapes_test.ts",
+              "ansi/ansi_test.ts",
+              "ansi/chain.ts",
+              "ansi/colors.ts",
+              "ansi/colors_test.ts",
+              "ansi/cursor_position.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0001.response.json",
+        "response_sha256": "e42436d7b17c8394607ab4be6e94684f3dca3c59d8f6062843a3c2731e9b0edd",
+        "start_index": 0,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 10,
+        "files": [
+          "ansi/tty.ts",
+          "ansi/tty_test.ts"
+        ],
+        "id": "batch-0002",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 2201,
+        "rendered_text_sha256": "6d9562492ae53d231e8979731078c0995b9f5f4880ccf83a249922eaf8db670c",
+        "request": {
+          "args": {
+            "files": [
+              "ansi/tty.ts",
+              "ansi/tty_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0002.response.json",
+        "response_sha256": "e4330918ebb323623fc24eda5c2e1735c1eac3bddc0cedcc030664f4e22d14b1",
+        "start_index": 8,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 16,
+        "files": [
+          "command/_argument_types.ts",
+          "command/_errors.ts",
+          "command/_spread.ts",
+          "command/_type_utils.ts",
+          "command/_utils.ts",
+          "command/command.ts"
+        ],
+        "id": "batch-0003",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 50189,
+        "rendered_text_sha256": "bffab4182197ca204188e9ed71f5957a5249ba152e1f4f0ac8c7ca66da56e60c",
+        "request": {
+          "args": {
+            "files": [
+              "command/_argument_types.ts",
+              "command/_errors.ts",
+              "command/_spread.ts",
+              "command/_type_utils.ts",
+              "command/_utils.ts",
+              "command/command.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0003.response.json",
+        "response_sha256": "616424117717411e2a3227cc5b1b0a2e00f8ca499b2ca0dd4aa3454a19e409a5",
+        "start_index": 10,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 24,
+        "files": [
+          "command/completions/_bash_completions_generator.ts",
+          "command/completions/_fish_completions_generator.ts",
+          "command/completions/_zsh_completions_generator.ts",
+          "command/completions/bash.ts",
+          "command/completions/complete.ts",
+          "command/completions/completions_command.ts",
+          "command/completions/fish.ts",
+          "command/completions/generate.ts"
+        ],
+        "id": "batch-0004",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 8930,
+        "rendered_text_sha256": "2b09ce4f950e37b83142acb97c0fd7a35a0bf8b8117ce9e7e5ea8bc1ae0ad1f3",
+        "request": {
+          "args": {
+            "files": [
+              "command/completions/_bash_completions_generator.ts",
+              "command/completions/_fish_completions_generator.ts",
+              "command/completions/_zsh_completions_generator.ts",
+              "command/completions/bash.ts",
+              "command/completions/complete.ts",
+              "command/completions/completions_command.ts",
+              "command/completions/fish.ts",
+              "command/completions/generate.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0004.response.json",
+        "response_sha256": "3839483764fd7d3a42621426643fcbea8a470df728f4ccc61f383acff10b27cd",
+        "start_index": 16,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 26,
+        "files": [
+          "command/completions/mod.ts",
+          "command/completions/zsh.ts"
+        ],
+        "id": "batch-0005",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1347,
+        "rendered_text_sha256": "421dc754393f56b0a592de30b37df4668b1696a62641dc844a4a5b835cdbcc14",
+        "request": {
+          "args": {
+            "files": [
+              "command/completions/mod.ts",
+              "command/completions/zsh.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0005.response.json",
+        "response_sha256": "008c4e5dbcf5f578fc10c4e94af9965f2dcf216c87cfc42443693f0d1c8601d1",
+        "start_index": 24,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 29,
+        "files": [
+          "command/help/_help_generator.ts",
+          "command/help/help_command.ts",
+          "command/help/mod.ts"
+        ],
+        "id": "batch-0006",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 4790,
+        "rendered_text_sha256": "15c1b72804478e087d93bb4d7487cdab04fbb49b0e93c95880d0d536d8f31882",
+        "request": {
+          "args": {
+            "files": [
+              "command/help/_help_generator.ts",
+              "command/help/help_command.ts",
+              "command/help/mod.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0006.response.json",
+        "response_sha256": "f925e7e32eaff7337cbdab2c09776a67ad0d0604ad10f6a45150787220ad631e",
+        "start_index": 26,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 30,
+        "files": [
+          "command/mod.ts"
+        ],
+        "id": "batch-0007",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 368,
+        "rendered_text_sha256": "f52f3a1053ef3d5924646daf7b492630a95921a1180ac071809a9e651f164310",
+        "request": {
+          "args": {
+            "files": [
+              "command/mod.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0007.response.json",
+        "response_sha256": "95a47ab8c691156b3d85742a94809f740f557aed6e14b7ed568b2fe2847a2daf",
+        "start_index": 29,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 38,
+        "files": [
+          "command/test/command/action_test.ts",
+          "command/test/command/alias_test.ts",
+          "command/test/command/allow_empty_test.ts",
+          "command/test/command/argument_test.ts",
+          "command/test/command/arguments_test.ts",
+          "command/test/command/command_test.ts",
+          "command/test/command/completion_test.ts",
+          "command/test/command/default_command_test.ts"
+        ],
+        "id": "batch-0008",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 14462,
+        "rendered_text_sha256": "b54f4c0cd8ee305ca1abd620d66018b562d8fbacd432a59fd5f42adf0914831d",
+        "request": {
+          "args": {
+            "files": [
+              "command/test/command/action_test.ts",
+              "command/test/command/alias_test.ts",
+              "command/test/command/allow_empty_test.ts",
+              "command/test/command/argument_test.ts",
+              "command/test/command/arguments_test.ts",
+              "command/test/command/command_test.ts",
+              "command/test/command/completion_test.ts",
+              "command/test/command/default_command_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0008.response.json",
+        "response_sha256": "a4390f616e329402e3c13fe97ff8f57cc876b790fa89c3c039d514ac7ca4f88f",
+        "start_index": 30,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 46,
+        "files": [
+          "command/test/command/dotted_options_test.ts",
+          "command/test/command/env_var_test.ts",
+          "command/test/command/error_handler_test.ts",
+          "command/test/command/example_test.ts",
+          "command/test/command/generic_types_test.ts",
+          "command/test/command/global_command_test.ts",
+          "command/test/command/help_command_test.ts",
+          "command/test/command/help_test.ts"
+        ],
+        "id": "batch-0009",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 37211,
+        "rendered_text_sha256": "58ce30096b9f87712d9db2db7c192ca078e922b18229a6d8fce979192bc7ec40",
+        "request": {
+          "args": {
+            "files": [
+              "command/test/command/dotted_options_test.ts",
+              "command/test/command/env_var_test.ts",
+              "command/test/command/error_handler_test.ts",
+              "command/test/command/example_test.ts",
+              "command/test/command/generic_types_test.ts",
+              "command/test/command/global_command_test.ts",
+              "command/test/command/help_command_test.ts",
+              "command/test/command/help_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0009.response.json",
+        "response_sha256": "f7fc56642d3e11e7385a831bbd6dfab40b9a98460aa852a2fa0499a0d5e36429",
+        "start_index": 38,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 54,
+        "files": [
+          "command/test/command/hidden_command_test.ts",
+          "command/test/command/lazy_command_test.ts",
+          "command/test/command/literal_arguments_test.ts",
+          "command/test/command/option_test.ts",
+          "command/test/command/raw_args_test.ts",
+          "command/test/command/standalone_test.ts",
+          "command/test/command/stop_early_test.ts",
+          "command/test/command/sub_command_test.ts"
+        ],
+        "id": "batch-0010",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 10054,
+        "rendered_text_sha256": "d92afa3f0dd8d56d15b33367dd08eb1415c93cfbd842b1ca577a70984b929142",
+        "request": {
+          "args": {
+            "files": [
+              "command/test/command/hidden_command_test.ts",
+              "command/test/command/lazy_command_test.ts",
+              "command/test/command/literal_arguments_test.ts",
+              "command/test/command/option_test.ts",
+              "command/test/command/raw_args_test.ts",
+              "command/test/command/standalone_test.ts",
+              "command/test/command/stop_early_test.ts",
+              "command/test/command/sub_command_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0010.response.json",
+        "response_sha256": "35511cefc837836ec83383377d29080224924603d44643d00f8e2b478308eee2",
+        "start_index": 46,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 56,
+        "files": [
+          "command/test/command/throw_test.ts",
+          "command/test/command/version_test.ts"
+        ],
+        "id": "batch-0011",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1366,
+        "rendered_text_sha256": "275c61bfab1a94984f90f297bff49a51c7ccf06391a10bddccc6e289ef92514e",
+        "request": {
+          "args": {
+            "files": [
+              "command/test/command/throw_test.ts",
+              "command/test/command/version_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0011.response.json",
+        "response_sha256": "ab18c23a26944fe023b3df42d16854809a6681f249d5ac87e5ff495eb2fc2e2d",
+        "start_index": 54,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 57,
+        "files": [
+          "command/test/integration/test.ts"
+        ],
+        "id": "batch-0012",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 4553,
+        "rendered_text_sha256": "adf3c35955c3662ee1357a677e64e386b33a74a10c940a45e737570ebf4dec43",
+        "request": {
+          "args": {
+            "files": [
+              "command/test/integration/test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0012.response.json",
+        "response_sha256": "c11da9873332c1d2de99a90729cef5397f86c53c513ec654569161947b462d69",
+        "start_index": 56,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 65,
+        "files": [
+          "command/test/option/action_test.ts",
+          "command/test/option/aliases_test.ts",
+          "command/test/option/conflicts_test.ts",
+          "command/test/option/default_test.ts",
+          "command/test/option/depends_test.ts",
+          "command/test/option/duplicate_test.ts",
+          "command/test/option/global_test.ts",
+          "command/test/option/hidden_test.ts"
+        ],
+        "id": "batch-0013",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 11634,
+        "rendered_text_sha256": "280c837943953460f640d1485c8adf700d058a3ec744f9941e2b9178aa6c4a5c",
+        "request": {
+          "args": {
+            "files": [
+              "command/test/option/action_test.ts",
+              "command/test/option/aliases_test.ts",
+              "command/test/option/conflicts_test.ts",
+              "command/test/option/default_test.ts",
+              "command/test/option/depends_test.ts",
+              "command/test/option/duplicate_test.ts",
+              "command/test/option/global_test.ts",
+              "command/test/option/hidden_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0013.response.json",
+        "response_sha256": "8a9be3b975f8625c58f95eb842be5c5b31231257a031aae28d562588d3296629",
+        "start_index": 57,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 73,
+        "files": [
+          "command/test/option/list_test.ts",
+          "command/test/option/negatable_test.ts",
+          "command/test/option/required_test.ts",
+          "command/test/option/requires_test.ts",
+          "command/test/option/standalone_test.ts",
+          "command/test/option/value_test.ts",
+          "command/test/option/variadic_test.ts",
+          "command/test/option/wildcard_test.ts"
+        ],
+        "id": "batch-0014",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 10827,
+        "rendered_text_sha256": "a0819dc82696a30f0c9ed5616c0cef186cd5599fdb1d61a850fe5afacde8ecab",
+        "request": {
+          "args": {
+            "files": [
+              "command/test/option/list_test.ts",
+              "command/test/option/negatable_test.ts",
+              "command/test/option/required_test.ts",
+              "command/test/option/requires_test.ts",
+              "command/test/option/standalone_test.ts",
+              "command/test/option/value_test.ts",
+              "command/test/option/variadic_test.ts",
+              "command/test/option/wildcard_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0014.response.json",
+        "response_sha256": "dba8737ee092a500d6b11e518d09ce9d21420d294b6341c10353cf6622657380",
+        "start_index": 65,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 81,
+        "files": [
+          "command/test/type/boolean_test.ts",
+          "command/test/type/custom_test.ts",
+          "command/test/type/enum_test.ts",
+          "command/test/type/file_test.ts",
+          "command/test/type/integer_test.ts",
+          "command/test/type/no_value_test.ts",
+          "command/test/type/number_test.ts",
+          "command/test/type/secret_test.ts"
+        ],
+        "id": "batch-0015",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 10676,
+        "rendered_text_sha256": "dbf2ab10c361757e32fc608f026b06441ec5e25659be01023b6b019c116e9707",
+        "request": {
+          "args": {
+            "files": [
+              "command/test/type/boolean_test.ts",
+              "command/test/type/custom_test.ts",
+              "command/test/type/enum_test.ts",
+              "command/test/type/file_test.ts",
+              "command/test/type/integer_test.ts",
+              "command/test/type/no_value_test.ts",
+              "command/test/type/number_test.ts",
+              "command/test/type/secret_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0015.response.json",
+        "response_sha256": "dab581ef15f21d228b34487f358e6fba47f594a302506d1b8c49e6e7600c080b",
+        "start_index": 73,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 82,
+        "files": [
+          "command/test/type/string_test.ts"
+        ],
+        "id": "batch-0016",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 970,
+        "rendered_text_sha256": "3b2cbdbcc88b70581a907cdfcec1bc095167b8844d053293062e7c149b1b0565",
+        "request": {
+          "args": {
+            "files": [
+              "command/test/type/string_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0016.response.json",
+        "response_sha256": "61ff01b7aa3fd227e8ab9e2f75bb4c41a7e7ae7c0368bfa471a09ef2ec88b556",
+        "start_index": 81,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 84,
+        "files": [
+          "command/type.ts",
+          "command/types.ts"
+        ],
+        "id": "batch-0017",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 15276,
+        "rendered_text_sha256": "e08978f7d2334f5b615cf8d193939c64050f054f383116f983df0a672ff8bd2c",
+        "request": {
+          "args": {
+            "files": [
+              "command/type.ts",
+              "command/types.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0017.response.json",
+        "response_sha256": "fbdc2f51bd5b673227e55280fee5d4054ff4f866d92bb15c84915261a5d395f6",
+        "start_index": 82,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 92,
+        "files": [
+          "command/types/action_list.ts",
+          "command/types/boolean.ts",
+          "command/types/child_command.ts",
+          "command/types/command.ts",
+          "command/types/enum.ts",
+          "command/types/file.ts",
+          "command/types/integer.ts",
+          "command/types/number.ts"
+        ],
+        "id": "batch-0018",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 3308,
+        "rendered_text_sha256": "cd0fd404c66dcde21f9f5dd23dc6fdf84c4448b8dbbce60a74de14cafd28df3d",
+        "request": {
+          "args": {
+            "files": [
+              "command/types/action_list.ts",
+              "command/types/boolean.ts",
+              "command/types/child_command.ts",
+              "command/types/command.ts",
+              "command/types/enum.ts",
+              "command/types/file.ts",
+              "command/types/integer.ts",
+              "command/types/number.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0018.response.json",
+        "response_sha256": "b584a95883dfc4e120ed5650fd715a473545f0fce3e602f109847b468d2fc442",
+        "start_index": 84,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 94,
+        "files": [
+          "command/types/secret.ts",
+          "command/types/string.ts"
+        ],
+        "id": "batch-0019",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 848,
+        "rendered_text_sha256": "2e53657769541e58860bc2eb4282521264e10cd7b8fe1526c9446124dd65b7bb",
+        "request": {
+          "args": {
+            "files": [
+              "command/types/secret.ts",
+              "command/types/string.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0019.response.json",
+        "response_sha256": "895a726082461c347bcf3d805bf558e5f7c397c526d307f8491a9ccd0948e6a3",
+        "start_index": 92,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 99,
+        "files": [
+          "command/upgrade/_check_version.ts",
+          "command/upgrade/get_runtime.ts",
+          "command/upgrade/logger.ts",
+          "command/upgrade/mod.ts",
+          "command/upgrade/provider.ts"
+        ],
+        "id": "batch-0020",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 5729,
+        "rendered_text_sha256": "9f01ace41871c32f5f07f799b09ddda3e42608bf3ca0456fdf614f0e0a5e8f66",
+        "request": {
+          "args": {
+            "files": [
+              "command/upgrade/_check_version.ts",
+              "command/upgrade/get_runtime.ts",
+              "command/upgrade/logger.ts",
+              "command/upgrade/mod.ts",
+              "command/upgrade/provider.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0020.response.json",
+        "response_sha256": "6c02e267c4af850da5a54462c7d8d3121ed4758c892d8cee73b0f246a01e89ea",
+        "start_index": 94,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 107,
+        "files": [
+          "command/upgrade/provider/deno_land.ts",
+          "command/upgrade/provider/deno_land_test.ts",
+          "command/upgrade/provider/github.ts",
+          "command/upgrade/provider/github_test.ts",
+          "command/upgrade/provider/jsr.ts",
+          "command/upgrade/provider/jsr_test.ts",
+          "command/upgrade/provider/nest_land.ts",
+          "command/upgrade/provider/nest_land_test.ts"
+        ],
+        "id": "batch-0021",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 14843,
+        "rendered_text_sha256": "4f2d8bcc50f2ff54cb42659dd29ca9d5e541348ed8e1854b5118302c9b161c6d",
+        "request": {
+          "args": {
+            "files": [
+              "command/upgrade/provider/deno_land.ts",
+              "command/upgrade/provider/deno_land_test.ts",
+              "command/upgrade/provider/github.ts",
+              "command/upgrade/provider/github_test.ts",
+              "command/upgrade/provider/jsr.ts",
+              "command/upgrade/provider/jsr_test.ts",
+              "command/upgrade/provider/nest_land.ts",
+              "command/upgrade/provider/nest_land_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0021.response.json",
+        "response_sha256": "fbc95f451a8b4add4d15589f049407345928eff6ec332bde297829aa3586d7f5",
+        "start_index": 99,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 109,
+        "files": [
+          "command/upgrade/provider/npm.ts",
+          "command/upgrade/provider/npm_test.ts"
+        ],
+        "id": "batch-0022",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 4363,
+        "rendered_text_sha256": "ad7c55cc58153239948fdfea4cc8fe73230554c145eb3257a919a30a2cf5451b",
+        "request": {
+          "args": {
+            "files": [
+              "command/upgrade/provider/npm.ts",
+              "command/upgrade/provider/npm_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0022.response.json",
+        "response_sha256": "0dd4f80c5564c4a9d73c772179ce1fb1c194e15c6dbe3493f1f4eb9e26e38777",
+        "start_index": 107,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 110,
+        "files": [
+          "command/upgrade/runtime.ts"
+        ],
+        "id": "batch-0023",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 550,
+        "rendered_text_sha256": "28635890bf79fd1d59afe9354b1c7395280b60cd8fd1da6d18192cb89ff9cbaa",
+        "request": {
+          "args": {
+            "files": [
+              "command/upgrade/runtime.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0023.response.json",
+        "response_sha256": "4c554c8a182ac1d6d7c4a82fc39f9a816bc2aeb85ab4e4ae43e55ab1b6321b1e",
+        "start_index": 109,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 113,
+        "files": [
+          "command/upgrade/runtime/bun_runtime.ts",
+          "command/upgrade/runtime/deno_runtime.ts",
+          "command/upgrade/runtime/node_runtime.ts"
+        ],
+        "id": "batch-0024",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1874,
+        "rendered_text_sha256": "758467044383550112db978862c0cf4299e8e309dda31cdb528592d48d33bda0",
+        "request": {
+          "args": {
+            "files": [
+              "command/upgrade/runtime/bun_runtime.ts",
+              "command/upgrade/runtime/deno_runtime.ts",
+              "command/upgrade/runtime/node_runtime.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0024.response.json",
+        "response_sha256": "ffa00bf18f203ca5b1cea4e614c5dbf5a34c37fc3392df8a2c16d7aed9d69071",
+        "start_index": 110,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 116,
+        "files": [
+          "command/upgrade/spinner.ts",
+          "command/upgrade/upgrade.ts",
+          "command/upgrade/upgrade_command.ts"
+        ],
+        "id": "batch-0025",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 7226,
+        "rendered_text_sha256": "1d286f96b8ce0eaeaaa3287f6fcdae39b6a69f850006c5d5ca2ae9ad4f46e9b2",
+        "request": {
+          "args": {
+            "files": [
+              "command/upgrade/spinner.ts",
+              "command/upgrade/upgrade.ts",
+              "command/upgrade/upgrade_command.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0025.response.json",
+        "response_sha256": "ca70cdc906dbf5819834fe9b29f4f915deb5f8746af21890cd9e3e91a5ec98a4",
+        "start_index": 113,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 117,
+        "files": [
+          "examples/ansi.ts"
+        ],
+        "id": "batch-0026",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 363,
+        "rendered_text_sha256": "fcddc6cd36f1f907d7bc296c64e9e0369809530d364196e80717074264be408f",
+        "request": {
+          "args": {
+            "files": [
+              "examples/ansi.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0026.response.json",
+        "response_sha256": "21afd1ebe7bb31f4404e1d0df13a1ba7e58280928907a6e04d5d1d69991f2d17",
+        "start_index": 116,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 125,
+        "files": [
+          "examples/ansi/color_themes.ts",
+          "examples/ansi/colors.ts",
+          "examples/ansi/countdown.ts",
+          "examples/ansi/cursor_position.ts",
+          "examples/ansi/custom.ts",
+          "examples/ansi/demo.ts",
+          "examples/ansi/functional.ts",
+          "examples/ansi/image.ts"
+        ],
+        "id": "batch-0027",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1396,
+        "rendered_text_sha256": "8d4b25b1a139ec556ff874f222115c74b3501d9145132c90e85db0a0c7cc14b9",
+        "request": {
+          "args": {
+            "files": [
+              "examples/ansi/color_themes.ts",
+              "examples/ansi/colors.ts",
+              "examples/ansi/countdown.ts",
+              "examples/ansi/cursor_position.ts",
+              "examples/ansi/custom.ts",
+              "examples/ansi/demo.ts",
+              "examples/ansi/functional.ts",
+              "examples/ansi/image.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0027.response.json",
+        "response_sha256": "c04da1c29bde64a512f3fe06d1206da3a0dc0107ba382515d328e7fc6d870158",
+        "start_index": 117,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 126,
+        "files": [
+          "examples/ansi/link.ts"
+        ],
+        "id": "batch-0028",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 255,
+        "rendered_text_sha256": "684fac6fef7cc7b9e7d0e63fff198929ea85738f3902a7137b1a56d6001400ef",
+        "request": {
+          "args": {
+            "files": [
+              "examples/ansi/link.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0028.response.json",
+        "response_sha256": "4db4d907e400da3a841295d6f9378a33304a4601396ede9678ccb6f0db9bf27f",
+        "start_index": 125,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 127,
+        "files": [
+          "examples/command.ts"
+        ],
+        "id": "batch-0029",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 836,
+        "rendered_text_sha256": "ca91750d94b089b07a91e80bd7b40367e192be17539f6ad31176782acf956856",
+        "request": {
+          "args": {
+            "files": [
+              "examples/command.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0029.response.json",
+        "response_sha256": "a65408353c27c5e44003ea6f4440552ee00cf1900eb35b3d7ebcc6863706f143",
+        "start_index": 126,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 135,
+        "files": [
+          "examples/command/action_handler.ts",
+          "examples/command/action_options.ts",
+          "examples/command/arguments_syntax.ts",
+          "examples/command/arguments_syntax_variadic.ts",
+          "examples/command/collect_options.ts",
+          "examples/command/common_option_types.ts",
+          "examples/command/conflicting_options.ts",
+          "examples/command/custom_option_processing.ts"
+        ],
+        "id": "batch-0030",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1373,
+        "rendered_text_sha256": "316405bfa0642718b42561aa7a214cc55481479b6a0249e27bb2236dceddd3d7",
+        "request": {
+          "args": {
+            "files": [
+              "examples/command/action_handler.ts",
+              "examples/command/action_options.ts",
+              "examples/command/arguments_syntax.ts",
+              "examples/command/arguments_syntax_variadic.ts",
+              "examples/command/collect_options.ts",
+              "examples/command/common_option_types.ts",
+              "examples/command/conflicting_options.ts",
+              "examples/command/custom_option_processing.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0030.response.json",
+        "response_sha256": "8eddddeff9cc4f55aa7d536e1c81afa69574da03647895b1dfce50af2a393752",
+        "start_index": 127,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 143,
+        "files": [
+          "examples/command/custom_option_type.ts",
+          "examples/command/custom_option_type_class.ts",
+          "examples/command/custom_option_type_class_completion.ts",
+          "examples/command/custom_option_type_completion.ts",
+          "examples/command/default_option_value.ts",
+          "examples/command/demo.ts",
+          "examples/command/depending_options.ts",
+          "examples/command/dotted_options.ts"
+        ],
+        "id": "batch-0031",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1916,
+        "rendered_text_sha256": "7317cb5e698b8b9aa8c041b67f381a6546dddb015372c698d9d812cd4a3d7a0e",
+        "request": {
+          "args": {
+            "files": [
+              "examples/command/custom_option_type.ts",
+              "examples/command/custom_option_type_class.ts",
+              "examples/command/custom_option_type_class_completion.ts",
+              "examples/command/custom_option_type_completion.ts",
+              "examples/command/default_option_value.ts",
+              "examples/command/demo.ts",
+              "examples/command/depending_options.ts",
+              "examples/command/dotted_options.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0031.response.json",
+        "response_sha256": "33449ed2a70e7cbe53202363cc6547717802a6190c63b6b4f4ad4e46ab7d050a",
+        "start_index": 135,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 151,
+        "files": [
+          "examples/command/enum_option_type.ts",
+          "examples/command/environment_variables.ts",
+          "examples/command/environment_variables_override.ts",
+          "examples/command/environment_variables_prefix.ts",
+          "examples/command/examples.ts",
+          "examples/command/general_error_handling.ts",
+          "examples/command/generic_parent_types.ts",
+          "examples/command/global_commands.ts"
+        ],
+        "id": "batch-0032",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1501,
+        "rendered_text_sha256": "e0d21e466f5d5e1218d23d520241adb56a7d0b19b4c4af669bbd0761ce917a65",
+        "request": {
+          "args": {
+            "files": [
+              "examples/command/enum_option_type.ts",
+              "examples/command/environment_variables.ts",
+              "examples/command/environment_variables_override.ts",
+              "examples/command/environment_variables_prefix.ts",
+              "examples/command/examples.ts",
+              "examples/command/general_error_handling.ts",
+              "examples/command/generic_parent_types.ts",
+              "examples/command/global_commands.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0032.response.json",
+        "response_sha256": "014fd327496d1d01401599e99fdd20dee313bfb3d3d6a91b4808ecd4397d2c28",
+        "start_index": 143,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 158,
+        "files": [
+          "examples/command/global_custom_type.ts",
+          "examples/command/global_options.ts",
+          "examples/command/grouped_options.ts",
+          "examples/command/help.ts",
+          "examples/command/help_option_and_command.ts",
+          "examples/command/hidden_commands.ts",
+          "examples/command/hidden_options.ts"
+        ],
+        "id": "batch-0033",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 904,
+        "rendered_text_sha256": "155f4652d67c891e78b65a2063c342b4771ebb883531d79a6312a6ba564bf84f",
+        "request": {
+          "args": {
+            "files": [
+              "examples/command/global_custom_type.ts",
+              "examples/command/global_options.ts",
+              "examples/command/grouped_options.ts",
+              "examples/command/help.ts",
+              "examples/command/help_option_and_command.ts",
+              "examples/command/hidden_commands.ts",
+              "examples/command/hidden_options.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0033.response.json",
+        "response_sha256": "4604bc2823268899ad761e9b774035921218b22a59b7f62a1bdd5a757204490c",
+        "start_index": 151,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 162,
+        "files": [
+          "examples/command/lazy_loading/bar_command.ts",
+          "examples/command/lazy_loading/baz_command.ts",
+          "examples/command/lazy_loading/cli.ts",
+          "examples/command/lazy_loading/foo_command.ts"
+        ],
+        "id": "batch-0034",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 689,
+        "rendered_text_sha256": "4fc74f84ed844cfe0091d46e0e0abab7a7bcd3970ce3ac441fde8c2d491b2a48",
+        "request": {
+          "args": {
+            "files": [
+              "examples/command/lazy_loading/bar_command.ts",
+              "examples/command/lazy_loading/baz_command.ts",
+              "examples/command/lazy_loading/cli.ts",
+              "examples/command/lazy_loading/foo_command.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0034.response.json",
+        "response_sha256": "f35eb220f51ec2cbdf6e09f618d0f60ad896fc707b2e95aa7e206ef25d764558",
+        "start_index": 158,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 170,
+        "files": [
+          "examples/command/list_option_type.ts",
+          "examples/command/negatable_options.ts",
+          "examples/command/options.ts",
+          "examples/command/required_options.ts",
+          "examples/command/shell-completions.ts",
+          "examples/command/standalone_options.ts",
+          "examples/command/stop_early.ts",
+          "examples/command/sub_commands.ts"
+        ],
+        "id": "batch-0035",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1989,
+        "rendered_text_sha256": "e17ee9aebb6b97817c0022addf16eb14c7626e8c8aa3214879259eee61e47885",
+        "request": {
+          "args": {
+            "files": [
+              "examples/command/list_option_type.ts",
+              "examples/command/negatable_options.ts",
+              "examples/command/options.ts",
+              "examples/command/required_options.ts",
+              "examples/command/shell-completions.ts",
+              "examples/command/standalone_options.ts",
+              "examples/command/stop_early.ts",
+              "examples/command/sub_commands.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0035.response.json",
+        "response_sha256": "1f5d9bb3fefd816e85bc4ad9e0855afd89c885feb0f168bfd05f97e5955bfd8a",
+        "start_index": 162,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 178,
+        "files": [
+          "examples/command/throw.ts",
+          "examples/command/upgrade_command.ts",
+          "examples/command/usage.ts",
+          "examples/command/use_raw_args.ts",
+          "examples/command/validation_error_handling.ts",
+          "examples/command/variadic_arguments.ts",
+          "examples/command/variadic_options.ts",
+          "examples/command/version_options.ts"
+        ],
+        "id": "batch-0036",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1399,
+        "rendered_text_sha256": "662d4e075e60d292b12a7d4233a69172407e9767c69951f34f68c090b9437ed1",
+        "request": {
+          "args": {
+            "files": [
+              "examples/command/throw.ts",
+              "examples/command/upgrade_command.ts",
+              "examples/command/usage.ts",
+              "examples/command/use_raw_args.ts",
+              "examples/command/validation_error_handling.ts",
+              "examples/command/variadic_arguments.ts",
+              "examples/command/variadic_options.ts",
+              "examples/command/version_options.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0036.response.json",
+        "response_sha256": "3317f6f896fce09ba54da21d70c5c3c9791bd0e4f5d0b229c5063e4370e4ee21",
+        "start_index": 170,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 179,
+        "files": [
+          "examples/flags.ts"
+        ],
+        "id": "batch-0037",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 363,
+        "rendered_text_sha256": "b6df70a844fb9aff5499637c319483f315ee541468522ab00466c283d5795065",
+        "request": {
+          "args": {
+            "files": [
+              "examples/flags.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0037.response.json",
+        "response_sha256": "8e880f1cf99c2645a5333d64d797b2a1c0203b791c65935e10a87caea46e23be",
+        "start_index": 178,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 186,
+        "files": [
+          "examples/flags/collect.ts",
+          "examples/flags/custom_option_processing.ts",
+          "examples/flags/dotted_options.ts",
+          "examples/flags/error_handling.ts",
+          "examples/flags/flags.ts",
+          "examples/flags/options.ts",
+          "examples/flags/value.ts"
+        ],
+        "id": "batch-0038",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 882,
+        "rendered_text_sha256": "5d40805a17f18947d9a361dd82e70fbb58b18c8289d3e89e640b9b44d6ac376c",
+        "request": {
+          "args": {
+            "files": [
+              "examples/flags/collect.ts",
+              "examples/flags/custom_option_processing.ts",
+              "examples/flags/dotted_options.ts",
+              "examples/flags/error_handling.ts",
+              "examples/flags/flags.ts",
+              "examples/flags/options.ts",
+              "examples/flags/value.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0038.response.json",
+        "response_sha256": "d516d3ae683b6d0db13a69a8c0113215170eadf30695abae2408eec29caa2d8b",
+        "start_index": 179,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 187,
+        "files": [
+          "examples/keycode.ts"
+        ],
+        "id": "batch-0039",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 366,
+        "rendered_text_sha256": "63b5bc4acc1738028ed1cd4a42e88ab4ff33f7ff98b1b49cfff24e0de7ad77f2",
+        "request": {
+          "args": {
+            "files": [
+              "examples/keycode.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0039.response.json",
+        "response_sha256": "fa0232ac6e6b5d2d178ab4f30c8ffcf9ec02a8686279ef1e48f39d762d7ba35e",
+        "start_index": 186,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 189,
+        "files": [
+          "examples/keycode/example.ts",
+          "examples/keycode/read_key.ts"
+        ],
+        "id": "batch-0040",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 731,
+        "rendered_text_sha256": "1da9bb3978a7af9facb483c2b103d5cf56768777ebc5451acf10557c1090f5e9",
+        "request": {
+          "args": {
+            "files": [
+              "examples/keycode/example.ts",
+              "examples/keycode/read_key.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0040.response.json",
+        "response_sha256": "19506087f4d9fe4e98515db35c3502b14032a0431e76c207459a32692f22ae57",
+        "start_index": 187,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 190,
+        "files": [
+          "examples/keypress.ts"
+        ],
+        "id": "batch-0041",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 437,
+        "rendered_text_sha256": "e825da616c69017cb14416605d7099d29b35a2e14d602b0dfb26be3e054bd5f0",
+        "request": {
+          "args": {
+            "files": [
+              "examples/keypress.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0041.response.json",
+        "response_sha256": "4435f1de98f8732687c093a3637c6f154c41df185d3d7aa0f2629e37cba8ce49",
+        "start_index": 189,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 195,
+        "files": [
+          "examples/keypress/async_iterator.ts",
+          "examples/keypress/async_iterator_with_events.ts",
+          "examples/keypress/event_target.ts",
+          "examples/keypress/event_target_propagation.ts",
+          "examples/keypress/promise.ts"
+        ],
+        "id": "batch-0042",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1174,
+        "rendered_text_sha256": "7000a7903e2a4affa028a143383691f69adbeb8bfa9e3832e942a62aa13209c8",
+        "request": {
+          "args": {
+            "files": [
+              "examples/keypress/async_iterator.ts",
+              "examples/keypress/async_iterator_with_events.ts",
+              "examples/keypress/event_target.ts",
+              "examples/keypress/event_target_propagation.ts",
+              "examples/keypress/promise.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0042.response.json",
+        "response_sha256": "10c4f00bab4fdd67c28af0bd8b0a0dd504169b20f8d453b38219b880f0518917",
+        "start_index": 190,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 196,
+        "files": [
+          "examples/prompt.ts"
+        ],
+        "id": "batch-0043",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 808,
+        "rendered_text_sha256": "be0cfed921d77f6332adb1ca30d04405ab530069558d0b3ed8719171bc820479",
+        "request": {
+          "args": {
+            "files": [
+              "examples/prompt.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0043.response.json",
+        "response_sha256": "f0fc9c01346727867959738e67778418015d7c75e74ca45f0df72e62125e688f",
+        "start_index": 195,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 198,
+        "files": [
+          "examples/prompt/checkbox.ts",
+          "examples/prompt/confirm.ts"
+        ],
+        "id": "batch-0044",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 538,
+        "rendered_text_sha256": "81ac763d033024e7b96c0fd48d702acdcced4873826f539353331561084ccc71",
+        "request": {
+          "args": {
+            "files": [
+              "examples/prompt/checkbox.ts",
+              "examples/prompt/confirm.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0044.response.json",
+        "response_sha256": "c663cf30ffc6add70d566fdccebc2db5d01a7145657b91dabbbbf6dc8060fe20",
+        "start_index": 196,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 200,
+        "files": [
+          "examples/prompt/data/colors.ts",
+          "examples/prompt/data/first_names.ts"
+        ],
+        "id": "batch-0045",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 481,
+        "rendered_text_sha256": "ff8dc89c36e52221c26e5e9f1ce37468931e66b77029b85816284e8ed9d9b2cf",
+        "request": {
+          "args": {
+            "files": [
+              "examples/prompt/data/colors.ts",
+              "examples/prompt/data/first_names.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0045.response.json",
+        "response_sha256": "e73f6f96bc144ef07f6a46a11bc0dc69de83224cb4fb0343dae02396036e9b06",
+        "start_index": 198,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 208,
+        "files": [
+          "examples/prompt/dynamic_prompts.ts",
+          "examples/prompt/input.ts",
+          "examples/prompt/list.ts",
+          "examples/prompt/number.ts",
+          "examples/prompt/os_signals.ts",
+          "examples/prompt/prompt_demo.ts",
+          "examples/prompt/prompt_list.ts",
+          "examples/prompt/secret.ts"
+        ],
+        "id": "batch-0046",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1297,
+        "rendered_text_sha256": "d213162045a265dedd9ced875b1437cd1a736c996e83d4187f0b7d2a3713edbf",
+        "request": {
+          "args": {
+            "files": [
+              "examples/prompt/dynamic_prompts.ts",
+              "examples/prompt/input.ts",
+              "examples/prompt/list.ts",
+              "examples/prompt/number.ts",
+              "examples/prompt/os_signals.ts",
+              "examples/prompt/prompt_demo.ts",
+              "examples/prompt/prompt_list.ts",
+              "examples/prompt/secret.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0046.response.json",
+        "response_sha256": "80f36eedac81150778954793855c7e5a270e8246a8dcfa1704594c8f31716fa5",
+        "start_index": 200,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 214,
+        "files": [
+          "examples/prompt/secret_hidden.ts",
+          "examples/prompt/select.ts",
+          "examples/prompt/suggestions.ts",
+          "examples/prompt/suggestions_list.ts",
+          "examples/prompt/suggestions_list_prompt.ts",
+          "examples/prompt/toggle.ts"
+        ],
+        "id": "batch-0047",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1263,
+        "rendered_text_sha256": "cf9d863d7413a0053f10c988e27017aaad89ba272aa90b8d0a5337fec300fc7b",
+        "request": {
+          "args": {
+            "files": [
+              "examples/prompt/secret_hidden.ts",
+              "examples/prompt/select.ts",
+              "examples/prompt/suggestions.ts",
+              "examples/prompt/suggestions_list.ts",
+              "examples/prompt/suggestions_list_prompt.ts",
+              "examples/prompt/toggle.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0047.response.json",
+        "response_sha256": "2e1afcc1dd810bce5d13964ba6777bdcee6c65506bada5118df9ed1cc949bc28",
+        "start_index": 208,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 215,
+        "files": [
+          "examples/table.ts"
+        ],
+        "id": "batch-0048",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 363,
+        "rendered_text_sha256": "77292efb2f90274f50d4d87c7461df02beb845e3ada246bb0010da6cc68818bc",
+        "request": {
+          "args": {
+            "files": [
+              "examples/table.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0048.response.json",
+        "response_sha256": "e401bf7697629e3ca94ede9be90d10defcf88bfd658fb795b539015d2a81c32a",
+        "start_index": 214,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 223,
+        "files": [
+          "examples/table/basic_usage.ts",
+          "examples/table/colspan_and_rowspan.ts",
+          "examples/table/columns.ts",
+          "examples/table/consume_words.ts",
+          "examples/table/flex_demo.ts",
+          "examples/table/header_and_body.ts",
+          "examples/table/random_table_demo.ts",
+          "examples/table/rows_and_cells.ts"
+        ],
+        "id": "batch-0049",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 2575,
+        "rendered_text_sha256": "6bcc7254e4b152410fee0ac77129e1db1613860936878e4202e88cae6b0003c5",
+        "request": {
+          "args": {
+            "files": [
+              "examples/table/basic_usage.ts",
+              "examples/table/colspan_and_rowspan.ts",
+              "examples/table/columns.ts",
+              "examples/table/consume_words.ts",
+              "examples/table/flex_demo.ts",
+              "examples/table/header_and_body.ts",
+              "examples/table/random_table_demo.ts",
+              "examples/table/rows_and_cells.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0049.response.json",
+        "response_sha256": "cb62641156dad506fd73885f39f7613f3d66baf339886b41a4f02ea0b1e9231a",
+        "start_index": 215,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 225,
+        "files": [
+          "examples/table/table_options.ts",
+          "examples/table/using_as_array.ts"
+        ],
+        "id": "batch-0050",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 454,
+        "rendered_text_sha256": "62e1acf0c39fd143d69b55f084e103be27ff82bdb6240d546d0c47d6698501cc",
+        "request": {
+          "args": {
+            "files": [
+              "examples/table/table_options.ts",
+              "examples/table/using_as_array.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0050.response.json",
+        "response_sha256": "2f8cb75b2aaa41f2e0a300ebdb2aea46d3eca73358aad456e8719405c5420e98",
+        "start_index": 223,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 230,
+        "files": [
+          "flags/_errors.ts",
+          "flags/_utils.ts",
+          "flags/_validate_flags.ts",
+          "flags/flags.ts",
+          "flags/mod.ts"
+        ],
+        "id": "batch-0051",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 11443,
+        "rendered_text_sha256": "429fe751da10ab4bd0ef047a26ab8ef0753e17884e79cd5ff30363549330fbba",
+        "request": {
+          "args": {
+            "files": [
+              "flags/_errors.ts",
+              "flags/_utils.ts",
+              "flags/_validate_flags.ts",
+              "flags/flags.ts",
+              "flags/mod.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0051.response.json",
+        "response_sha256": "afbe4033a3a18721848512fa00d13fd372fcbe48adb8d62331b1ab6e765bf369",
+        "start_index": 225,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 233,
+        "files": [
+          "flags/test/flags/arguments_test.ts",
+          "flags/test/flags/dotted_options_test.ts",
+          "flags/test/flags/empty_options_test.ts"
+        ],
+        "id": "batch-0052",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 5680,
+        "rendered_text_sha256": "9d11a49c74f52e2958255f744305b92ab0a650fd8ea8b972a4554842d4bbc757",
+        "request": {
+          "args": {
+            "files": [
+              "flags/test/flags/arguments_test.ts",
+              "flags/test/flags/dotted_options_test.ts",
+              "flags/test/flags/empty_options_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0052.response.json",
+        "response_sha256": "3c34b17c4f9ce1f9fb43d16050b7dcbaaabae7bb079183dbcf1f0a608a5aba3c",
+        "start_index": 230,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 241,
+        "files": [
+          "flags/test/option/aliases_test.ts",
+          "flags/test/option/args_test.ts",
+          "flags/test/option/collect_test.ts",
+          "flags/test/option/conflicts_test.ts",
+          "flags/test/option/default_test.ts",
+          "flags/test/option/depends_test.ts",
+          "flags/test/option/equls_sign_test.ts",
+          "flags/test/option/negatable_test.ts"
+        ],
+        "id": "batch-0053",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 13947,
+        "rendered_text_sha256": "5421d888c0855dcb6d141a314f678385544304a05ca5babe0f0a8c49ddd1eceb",
+        "request": {
+          "args": {
+            "files": [
+              "flags/test/option/aliases_test.ts",
+              "flags/test/option/args_test.ts",
+              "flags/test/option/collect_test.ts",
+              "flags/test/option/conflicts_test.ts",
+              "flags/test/option/default_test.ts",
+              "flags/test/option/depends_test.ts",
+              "flags/test/option/equls_sign_test.ts",
+              "flags/test/option/negatable_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0053.response.json",
+        "response_sha256": "91ffbdbdc33dff8d12b09ad5c5b7623ac2c3700a6e39242eab89c01e3734b88b",
+        "start_index": 233,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 248,
+        "files": [
+          "flags/test/option/parsed_flags_test.ts",
+          "flags/test/option/required_test.ts",
+          "flags/test/option/requires_test.ts",
+          "flags/test/option/standalone_test.ts",
+          "flags/test/option/unknown_test.ts",
+          "flags/test/option/value_test.ts",
+          "flags/test/option/variadic_test.ts"
+        ],
+        "id": "batch-0054",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 9060,
+        "rendered_text_sha256": "08674a40e4de0d62001f9c06b525da1157c87b5719a51a3c0c13fddb046a2971",
+        "request": {
+          "args": {
+            "files": [
+              "flags/test/option/parsed_flags_test.ts",
+              "flags/test/option/required_test.ts",
+              "flags/test/option/requires_test.ts",
+              "flags/test/option/standalone_test.ts",
+              "flags/test/option/unknown_test.ts",
+              "flags/test/option/value_test.ts",
+              "flags/test/option/variadic_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0054.response.json",
+        "response_sha256": "b21cd424e173ab0ac7f5999165446b8e7d94bc8f56a8589650fa6ed75af3d83e",
+        "start_index": 241,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 252,
+        "files": [
+          "flags/test/setting/allow_empty_test.ts",
+          "flags/test/setting/option_test.ts",
+          "flags/test/setting/stop_early_test.ts",
+          "flags/test/setting/stop_on_unknown_test.ts"
+        ],
+        "id": "batch-0055",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 4349,
+        "rendered_text_sha256": "9a56a93dd520834cef6c3ba544712d0ba5e52dd148ead1d1cf98375e57ce393f",
+        "request": {
+          "args": {
+            "files": [
+              "flags/test/setting/allow_empty_test.ts",
+              "flags/test/setting/option_test.ts",
+              "flags/test/setting/stop_early_test.ts",
+              "flags/test/setting/stop_on_unknown_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0055.response.json",
+        "response_sha256": "ea31a60dc548542a870c52353e4c027d308f366baaa869e965ec9e29cfa1270a",
+        "start_index": 248,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 257,
+        "files": [
+          "flags/test/type/boolean_test.ts",
+          "flags/test/type/integer_test.ts",
+          "flags/test/type/no_value_test.ts",
+          "flags/test/type/number_test.ts",
+          "flags/test/type/string_test.ts"
+        ],
+        "id": "batch-0056",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 8139,
+        "rendered_text_sha256": "e50c92647c853418d8ff3dda5949948eccb255fa85714494f31853d8f4156c34",
+        "request": {
+          "args": {
+            "files": [
+              "flags/test/type/boolean_test.ts",
+              "flags/test/type/integer_test.ts",
+              "flags/test/type/no_value_test.ts",
+              "flags/test/type/number_test.ts",
+              "flags/test/type/string_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0056.response.json",
+        "response_sha256": "d8fc61f592e9b374e85b82a841f11796c92b05b1a555f2c02b2634bba9b62944",
+        "start_index": 252,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 258,
+        "files": [
+          "flags/types.ts"
+        ],
+        "id": "batch-0057",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 4021,
+        "rendered_text_sha256": "459e8c038e57bc70464656a44c4ab03b8774e7677a3a3cbf7fa785da9b3d87a5",
+        "request": {
+          "args": {
+            "files": [
+              "flags/types.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0057.response.json",
+        "response_sha256": "f36b08950e93f8562159f89c56452024f6e4b85349bd1c288d3bcd94b47c31d0",
+        "start_index": 257,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 262,
+        "files": [
+          "flags/types/boolean.ts",
+          "flags/types/integer.ts",
+          "flags/types/number.ts",
+          "flags/types/string.ts"
+        ],
+        "id": "batch-0058",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 605,
+        "rendered_text_sha256": "187c92ba948f169a0f373ad0966199b4d23082062bf85cdac36a90d1866c286f",
+        "request": {
+          "args": {
+            "files": [
+              "flags/types/boolean.ts",
+              "flags/types/integer.ts",
+              "flags/types/number.ts",
+              "flags/types/string.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0058.response.json",
+        "response_sha256": "c2c99fb36e2b0d6850241475a6c2581f5c469be282076d7fc264bc75bd1f792f",
+        "start_index": 258,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 270,
+        "files": [
+          "internal/runtime/delete_env.ts",
+          "internal/runtime/exit.ts",
+          "internal/runtime/get_args.ts",
+          "internal/runtime/get_columns.ts",
+          "internal/runtime/get_env.ts",
+          "internal/runtime/get_os.ts",
+          "internal/runtime/inspect.ts",
+          "internal/runtime/is_directory.ts"
+        ],
+        "id": "batch-0059",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 2019,
+        "rendered_text_sha256": "df7dda2f75da2a1c463a1e02544126b1142f1bdb2482ed21c481ea28be3197ff",
+        "request": {
+          "args": {
+            "files": [
+              "internal/runtime/delete_env.ts",
+              "internal/runtime/exit.ts",
+              "internal/runtime/get_args.ts",
+              "internal/runtime/get_columns.ts",
+              "internal/runtime/get_env.ts",
+              "internal/runtime/get_os.ts",
+              "internal/runtime/inspect.ts",
+              "internal/runtime/is_directory.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0059.response.json",
+        "response_sha256": "e6a4a4b25a3841d0e6b6db8df615c08d97bbac22473ea032fb23aa336d241aed",
+        "start_index": 262,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 278,
+        "files": [
+          "internal/runtime/is_terminal.ts",
+          "internal/runtime/no_color.ts",
+          "internal/runtime/read.ts",
+          "internal/runtime/read_dir.ts",
+          "internal/runtime/read_sync.ts",
+          "internal/runtime/runtime_name.ts",
+          "internal/runtime/set_env.ts",
+          "internal/runtime/set_raw.ts"
+        ],
+        "id": "batch-0060",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 2334,
+        "rendered_text_sha256": "5e14d251e9f459dafcf05ac55e1a75b719ab1b97451a49e2f281e96e413c8771",
+        "request": {
+          "args": {
+            "files": [
+              "internal/runtime/is_terminal.ts",
+              "internal/runtime/no_color.ts",
+              "internal/runtime/read.ts",
+              "internal/runtime/read_dir.ts",
+              "internal/runtime/read_sync.ts",
+              "internal/runtime/runtime_name.ts",
+              "internal/runtime/set_env.ts",
+              "internal/runtime/set_raw.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0060.response.json",
+        "response_sha256": "10ebda552b4408e31752806c4e7a21493d77a4428201f883ce7384966cb1d5f8",
+        "start_index": 270,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 280,
+        "files": [
+          "internal/runtime/stat.ts",
+          "internal/runtime/write_sync.ts"
+        ],
+        "id": "batch-0061",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 766,
+        "rendered_text_sha256": "c43e48dd184f149d1957425dfcc79271c7829403aa14a177e4be0c9929b14b43",
+        "request": {
+          "args": {
+            "files": [
+              "internal/runtime/stat.ts",
+              "internal/runtime/write_sync.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0061.response.json",
+        "response_sha256": "99b8a6ab9a28f1c34662f344fb449586ead2b59abe2c8c7166c0b77cbeca220b",
+        "start_index": 278,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 283,
+        "files": [
+          "internal/testing/test/create_test.ts",
+          "internal/testing/test/create_test_function.ts",
+          "internal/testing/test/mod.ts"
+        ],
+        "id": "batch-0062",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1600,
+        "rendered_text_sha256": "aa65e1212804595e9278684d89af810260a00ad49355925f8ece0b9591ad3ca2",
+        "request": {
+          "args": {
+            "files": [
+              "internal/testing/test/create_test.ts",
+              "internal/testing/test/create_test_function.ts",
+              "internal/testing/test/mod.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0062.response.json",
+        "response_sha256": "c4736a319c9a152f0715b0837bf965f314180f5cd6c8e61b9840aedadcc2ef67",
+        "start_index": 280,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 286,
+        "files": [
+          "internal/testing/test/runtime/bun.ts",
+          "internal/testing/test/runtime/deno.ts",
+          "internal/testing/test/runtime/node.ts"
+        ],
+        "id": "batch-0063",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 4148,
+        "rendered_text_sha256": "5f3f29af62d6f68db39f921a7ecb376b6f536fee25efce1d06878d3af58c783e",
+        "request": {
+          "args": {
+            "files": [
+              "internal/testing/test/runtime/bun.ts",
+              "internal/testing/test/runtime/deno.ts",
+              "internal/testing/test/runtime/node.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0063.response.json",
+        "response_sha256": "9d7086414375d5adeec29082d3c66798d2233510fe55fcd750dffd6e1f243b2c",
+        "start_index": 283,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 287,
+        "files": [
+          "internal/testing/test/test_options.ts"
+        ],
+        "id": "batch-0064",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 617,
+        "rendered_text_sha256": "74b5a8ed3839df2083c9760e35817cf9061b179fff3ce2bbc775d965b432edcd",
+        "request": {
+          "args": {
+            "files": [
+              "internal/testing/test/test_options.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0064.response.json",
+        "response_sha256": "377303097f8c501d5306268d08d967b0ec805ddbc496d87a913467c8ab08252f",
+        "start_index": 286,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 290,
+        "files": [
+          "keycode/_key_codes.ts",
+          "keycode/key_code.ts",
+          "keycode/mod.ts"
+        ],
+        "id": "batch-0065",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1243,
+        "rendered_text_sha256": "6aa3290d8ab87bf602aef268ba3cf91c309588afc00ffc4a5d5dcb219c4d6559",
+        "request": {
+          "args": {
+            "files": [
+              "keycode/_key_codes.ts",
+              "keycode/key_code.ts",
+              "keycode/mod.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0065.response.json",
+        "response_sha256": "a766213263664b07bb056bb2af9f14d4f7f3ca520d2ab4ce7328ad7ac3ac10a9",
+        "start_index": 287,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 291,
+        "files": [
+          "keycode/test/key_code_test.ts"
+        ],
+        "id": "batch-0066",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 4625,
+        "rendered_text_sha256": "29a212fe8c64a9703e6e0db6044cf925677cd847849e963c4dfefb2db44be794",
+        "request": {
+          "args": {
+            "files": [
+              "keycode/test/key_code_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0066.response.json",
+        "response_sha256": "1bc7ae690d48f55c741e57df327d839fd75e97935df4b4818afac9c0b2d5ddb5",
+        "start_index": 290,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 293,
+        "files": [
+          "keypress/mod.ts",
+          "keypress/test.ts"
+        ],
+        "id": "batch-0067",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 6470,
+        "rendered_text_sha256": "48f9e086f39f9d8b49eb7474021123d578873bd322a6a031468e31ccb2c7c529",
+        "request": {
+          "args": {
+            "files": [
+              "keypress/mod.ts",
+              "keypress/test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0067.response.json",
+        "response_sha256": "11bd3252d5c880efeb90a5e9b909e4e8aa281f8b92af5267abe9ff3e8e699914",
+        "start_index": 291,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 301,
+        "files": [
+          "prompt/_figures.ts",
+          "prompt/_generic_input.ts",
+          "prompt/_generic_list.ts",
+          "prompt/_generic_prompt.ts",
+          "prompt/_generic_suggestions.ts",
+          "prompt/_search.ts",
+          "prompt/_utils.ts",
+          "prompt/checkbox.ts"
+        ],
+        "id": "batch-0068",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 79651,
+        "rendered_text_sha256": "c9fc9d3232a15f8796a2f8a4b7687cfa242a83f0740a9e9d61d1332afb774904",
+        "request": {
+          "args": {
+            "files": [
+              "prompt/_figures.ts",
+              "prompt/_generic_input.ts",
+              "prompt/_generic_list.ts",
+              "prompt/_generic_prompt.ts",
+              "prompt/_generic_suggestions.ts",
+              "prompt/_search.ts",
+              "prompt/_utils.ts",
+              "prompt/checkbox.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0068.response.json",
+        "response_sha256": "7f0bffde90934281757f9a511a9c415004c1b1b7eba50e7915494e1b858b39d6",
+        "start_index": 293,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 309,
+        "files": [
+          "prompt/confirm.ts",
+          "prompt/input.ts",
+          "prompt/list.ts",
+          "prompt/mod.ts",
+          "prompt/number.ts",
+          "prompt/prompt.ts",
+          "prompt/secret.ts",
+          "prompt/select.ts"
+        ],
+        "id": "batch-0069",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 27974,
+        "rendered_text_sha256": "dccefa613ddfd025f560c0536fbca4f7ffb25dbef62a53d53b198de6da1f2417",
+        "request": {
+          "args": {
+            "files": [
+              "prompt/confirm.ts",
+              "prompt/input.ts",
+              "prompt/list.ts",
+              "prompt/mod.ts",
+              "prompt/number.ts",
+              "prompt/prompt.ts",
+              "prompt/secret.ts",
+              "prompt/select.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0069.response.json",
+        "response_sha256": "a90044b43f9d10933bb6d0b16ee3942bf7d8a48feef3ac90c894fa6cf1581011",
+        "start_index": 301,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 312,
+        "files": [
+          "prompt/test/checkbox_test.ts",
+          "prompt/test/confirm_test.ts",
+          "prompt/test/input_test.ts"
+        ],
+        "id": "batch-0070",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 6738,
+        "rendered_text_sha256": "d4e47807ef137a2f1d63b7ac33214c952b40395e876439711eb49cfbe6e804ad",
+        "request": {
+          "args": {
+            "files": [
+              "prompt/test/checkbox_test.ts",
+              "prompt/test/confirm_test.ts",
+              "prompt/test/input_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0070.response.json",
+        "response_sha256": "6d893ef0af668b8a57fcf9e914283feb1d742248df354cb3fb9d1df24eb42748",
+        "start_index": 309,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 320,
+        "files": [
+          "prompt/test/integration/checkbox_group_breadcrumb_test.ts",
+          "prompt/test/integration/checkbox_group_test.ts",
+          "prompt/test/integration/checkbox_test.ts",
+          "prompt/test/integration/checkbox_value_test.ts",
+          "prompt/test/integration/confirm_test.ts",
+          "prompt/test/integration/input_test.ts",
+          "prompt/test/integration/list_test.ts",
+          "prompt/test/integration/number_test.ts"
+        ],
+        "id": "batch-0071",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 19334,
+        "rendered_text_sha256": "5ccf61c78566ade89c45a31085537ed44aed21dbb149cfa381cb51ad9b94368f",
+        "request": {
+          "args": {
+            "files": [
+              "prompt/test/integration/checkbox_group_breadcrumb_test.ts",
+              "prompt/test/integration/checkbox_group_test.ts",
+              "prompt/test/integration/checkbox_test.ts",
+              "prompt/test/integration/checkbox_value_test.ts",
+              "prompt/test/integration/confirm_test.ts",
+              "prompt/test/integration/input_test.ts",
+              "prompt/test/integration/list_test.ts",
+              "prompt/test/integration/number_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0071.response.json",
+        "response_sha256": "0eadc55bbf0271e7c98379dbeedcb62841db26e55dc7bdc7cbf16a6b4475b0a2",
+        "start_index": 312,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 326,
+        "files": [
+          "prompt/test/integration/prompt_test.ts",
+          "prompt/test/integration/secret_test.ts",
+          "prompt/test/integration/select_group_breadcrumb_test.ts",
+          "prompt/test/integration/select_group_test.ts",
+          "prompt/test/integration/select_test.ts",
+          "prompt/test/integration/toggle_test.ts"
+        ],
+        "id": "batch-0072",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 14635,
+        "rendered_text_sha256": "24896b4e2ee3d05bc99320c101f0c3d07b6d2645ccfc0582d211e5e2aeed0e00",
+        "request": {
+          "args": {
+            "files": [
+              "prompt/test/integration/prompt_test.ts",
+              "prompt/test/integration/secret_test.ts",
+              "prompt/test/integration/select_group_breadcrumb_test.ts",
+              "prompt/test/integration/select_group_test.ts",
+              "prompt/test/integration/select_test.ts",
+              "prompt/test/integration/toggle_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0072.response.json",
+        "response_sha256": "1de1e68809634ae78c3d47da4966f0c22108fc8b0019e946153f2930b00db06a",
+        "start_index": 320,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 333,
+        "files": [
+          "prompt/test/list_test.ts",
+          "prompt/test/number_test.ts",
+          "prompt/test/prompt_list_test.ts",
+          "prompt/test/search_test.ts",
+          "prompt/test/secret_test.ts",
+          "prompt/test/select_test.ts",
+          "prompt/test/toggle_test.ts"
+        ],
+        "id": "batch-0073",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 10347,
+        "rendered_text_sha256": "fffc6d3ced75924bc4be32076d3cad03566db4eb6036934bb5c467cf6a676d07",
+        "request": {
+          "args": {
+            "files": [
+              "prompt/test/list_test.ts",
+              "prompt/test/number_test.ts",
+              "prompt/test/prompt_list_test.ts",
+              "prompt/test/search_test.ts",
+              "prompt/test/secret_test.ts",
+              "prompt/test/select_test.ts",
+              "prompt/test/toggle_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0073.response.json",
+        "response_sha256": "122f1b21e919bc4b642f882e9b6d29619262b92732d6cadfbbfb6a4c6093abf9",
+        "start_index": 326,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 334,
+        "files": [
+          "prompt/toggle.ts"
+        ],
+        "id": "batch-0074",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 3022,
+        "rendered_text_sha256": "2fdef936f7e8786e029579e18902fe33b33413f4b0b944bbd2994c8424ef361c",
+        "request": {
+          "args": {
+            "files": [
+              "prompt/toggle.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0074.response.json",
+        "response_sha256": "8e1486236126487d4aac371c8abaa3ed3d75f5fc92ef37d83023353cdc2cf414",
+        "start_index": 333,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 342,
+        "files": [
+          "table/_layout.ts",
+          "table/_utils.ts",
+          "table/border.ts",
+          "table/cell.ts",
+          "table/column.ts",
+          "table/consume_words.ts",
+          "table/mod.ts",
+          "table/row.ts"
+        ],
+        "id": "batch-0075",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 11775,
+        "rendered_text_sha256": "59c195f35c49a580f6cbc51d233dac7b69f6bc293a4f6f950d112ddd350bc0ea",
+        "request": {
+          "args": {
+            "files": [
+              "table/_layout.ts",
+              "table/_utils.ts",
+              "table/border.ts",
+              "table/cell.ts",
+              "table/column.ts",
+              "table/consume_words.ts",
+              "table/mod.ts",
+              "table/row.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0075.response.json",
+        "response_sha256": "decbedfa3cd9f9741dbbaddf1cde4e645fadd5fd58ffda500b9316f0399ca379",
+        "start_index": 334,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 343,
+        "files": [
+          "table/table.ts"
+        ],
+        "id": "batch-0076",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 6136,
+        "rendered_text_sha256": "8890ad7d1018599cc18f26013510c6cc155b2ed6395c418dd839cc80d348700f",
+        "request": {
+          "args": {
+            "files": [
+              "table/table.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0076.response.json",
+        "response_sha256": "98ed39ce778a7c248fb066b4397729bb52580c2929d649e9af521d6560a8d2ec",
+        "start_index": 342,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 351,
+        "files": [
+          "table/test/align_test.ts",
+          "table/test/ansi_regex_source_test.ts",
+          "table/test/ansi_wrapping_within_cell_test.ts",
+          "table/test/border_test.ts",
+          "table/test/column_test.ts",
+          "table/test/span_test.ts",
+          "table/test/special_chars_test.ts",
+          "table/test/table_test.ts"
+        ],
+        "id": "batch-0077",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 9088,
+        "rendered_text_sha256": "d35473f3536e812a179efbfc3a2daca575c01bb565dbc423bbc9a087cfca3fd2",
+        "request": {
+          "args": {
+            "files": [
+              "table/test/align_test.ts",
+              "table/test/ansi_regex_source_test.ts",
+              "table/test/ansi_wrapping_within_cell_test.ts",
+              "table/test/border_test.ts",
+              "table/test/column_test.ts",
+              "table/test/span_test.ts",
+              "table/test/special_chars_test.ts",
+              "table/test/table_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0077.response.json",
+        "response_sha256": "71ca016ec81169dcab229cbd65db19159b036d958cff355e62986936cabd3cc1",
+        "start_index": 343,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 352,
+        "files": [
+          "table/test/utils_test.ts"
+        ],
+        "id": "batch-0078",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1188,
+        "rendered_text_sha256": "72569c89e32670c96c40c8068bb2cbc28b0895b065aafa7441220b14119f2936",
+        "request": {
+          "args": {
+            "files": [
+              "table/test/utils_test.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0078.response.json",
+        "response_sha256": "a0f4e5595d95100edfd12cc634b8c644a5634ed666813d153a6911e51d0b70f6",
+        "start_index": 351,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 353,
+        "files": [
+          "table/unicode_width.ts"
+        ],
+        "id": "batch-0079",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 890,
+        "rendered_text_sha256": "441909af5da7a9b6d12f5160bcdf55ca02d30fa16e7ec4817d773d8d3d7b021f",
+        "request": {
+          "args": {
+            "files": [
+              "table/unicode_width.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0079.response.json",
+        "response_sha256": "455ac7f2093fb2f79f2fc752b80381e2f12ec83f405f5e9f4855af0a486bb5ed",
+        "start_index": 352,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 354,
+        "files": [
+          "tasks/setup_node.ts"
+        ],
+        "id": "batch-0080",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 2054,
+        "rendered_text_sha256": "87a272f6bb81da47e754212ae438c954eb1a339236ed42bbafd0da7fa42c858b",
+        "request": {
+          "args": {
+            "files": [
+              "tasks/setup_node.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0080.response.json",
+        "response_sha256": "009ad4926b5c64b7466494558031a990b96842285a25181eeb93c4a1b83de7c2",
+        "start_index": 353,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 361,
+        "files": [
+          "testing/_quote_string.ts",
+          "testing/mod.ts",
+          "testing/snapshot.ts",
+          "testing/snapshot_only_test.ts",
+          "testing/snapshot_only_test_fixture.ts",
+          "testing/snapshot_test.ts",
+          "testing/snapshot_test_fixture.ts"
+        ],
+        "id": "batch-0081",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 9276,
+        "rendered_text_sha256": "0fc0487893f4c8909134f9a7320f8281019ecb72878fc05fc025d2c5b0b1307b",
+        "request": {
+          "args": {
+            "files": [
+              "testing/_quote_string.ts",
+              "testing/mod.ts",
+              "testing/snapshot.ts",
+              "testing/snapshot_only_test.ts",
+              "testing/snapshot_only_test_fixture.ts",
+              "testing/snapshot_test.ts",
+              "testing/snapshot_test_fixture.ts"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0081.response.json",
+        "response_sha256": "d2884b454a42787088cc53b4b342db351ba3fda6fb2a8e6e68f793ff1ea6afc5",
+        "start_index": 354,
+        "status": "accepted"
+      }
+    ],
+    "count": 81,
+    "size": 8,
+    "split_events": [],
+    "strategy": "adjacent_parent_directory_then_maximum_size"
+  },
+  "capture": {
+    "acceptance": {
+      "invariant": "final accepted batches cover every manifest file exactly once and in manifest order",
+      "recursive_split_only_on_verified_truncation": true
+    },
+    "cache_enabled": true,
+    "captured_at": "2026-07-22T04:40:16.000Z",
+    "ce": {
+      "binary_sha256": "6350b9a03a1136d94ec242afb1b87aa13abe47978262b43b864dbce8e231ab9a",
+      "protocol_version": "2025-06-18",
+      "server_info": {
+        "name": "rmcp",
+        "version": "2.2.0"
+      },
+      "version": "context-engine 0.1.0 (UNLICENSED DEV BUILD)"
+    },
+    "language_server": {
+      "identity": "deno lsp",
+      "version": "deno 2.9.2; TypeScript 6.0.3"
+    },
+    "partial_failures": [],
+    "rendering": {
+      "exclude_host_wrapper_text": true,
+      "include_saved_receipts": true,
+      "include_service_guidance": true,
+      "outline": "sum content[].text joined with LF within each final accepted MCP response without separators between responses",
+      "source": "sum UTF-8 bytes and tokenizer counts per manifest file without separators"
+    },
+    "script_revision": "d0d747dd2099b996b99032ee5c8a9bb69183cec9",
+    "script_sha256": "1dfa61d08d63b0987ee7076bcd467cddb94ff1936bbe13d4afb7cc1ab04541be",
+    "status": "accepted",
+    "tooling_identities": {
+      "capture_script": {
+        "path": "scripts/capture_repository_outlines.mjs",
+        "sha256": "1dfa61d08d63b0987ee7076bcd467cddb94ff1936bbe13d4afb7cc1ab04541be"
+      },
+      "shared_script": {
+        "path": "scripts/repository_outline_common.mjs",
+        "sha256": "04229018142879248065b767ccb028fba7a27e8daf323f8e30c4bc599cb648b3"
+      }
+    },
+    "truncation_rejected": true,
+    "warnings": [
+      "server initialized the workspace during startup"
+    ],
+    "workspace_root": "<repository-root>"
+  },
+  "files": [
+    {
+      "batch_id": "batch-0001",
+      "batch_position": 0,
+      "path": "ansi/ansi.ts",
+      "response_file": "batch-0001.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0001",
+      "batch_position": 1,
+      "path": "ansi/ansi_escapes.ts",
+      "response_file": "batch-0001.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0001",
+      "batch_position": 2,
+      "path": "ansi/ansi_escapes_test.ts",
+      "response_file": "batch-0001.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0001",
+      "batch_position": 3,
+      "path": "ansi/ansi_test.ts",
+      "response_file": "batch-0001.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0001",
+      "batch_position": 4,
+      "path": "ansi/chain.ts",
+      "response_file": "batch-0001.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0001",
+      "batch_position": 5,
+      "path": "ansi/colors.ts",
+      "response_file": "batch-0001.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0001",
+      "batch_position": 6,
+      "path": "ansi/colors_test.ts",
+      "response_file": "batch-0001.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0001",
+      "batch_position": 7,
+      "path": "ansi/cursor_position.ts",
+      "response_file": "batch-0001.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0002",
+      "batch_position": 0,
+      "path": "ansi/tty.ts",
+      "response_file": "batch-0002.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0002",
+      "batch_position": 1,
+      "path": "ansi/tty_test.ts",
+      "response_file": "batch-0002.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0003",
+      "batch_position": 0,
+      "path": "command/_argument_types.ts",
+      "response_file": "batch-0003.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0003",
+      "batch_position": 1,
+      "path": "command/_errors.ts",
+      "response_file": "batch-0003.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0003",
+      "batch_position": 2,
+      "path": "command/_spread.ts",
+      "response_file": "batch-0003.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0003",
+      "batch_position": 3,
+      "path": "command/_type_utils.ts",
+      "response_file": "batch-0003.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0003",
+      "batch_position": 4,
+      "path": "command/_utils.ts",
+      "response_file": "batch-0003.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0003",
+      "batch_position": 5,
+      "path": "command/command.ts",
+      "response_file": "batch-0003.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0004",
+      "batch_position": 0,
+      "path": "command/completions/_bash_completions_generator.ts",
+      "response_file": "batch-0004.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0004",
+      "batch_position": 1,
+      "path": "command/completions/_fish_completions_generator.ts",
+      "response_file": "batch-0004.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0004",
+      "batch_position": 2,
+      "path": "command/completions/_zsh_completions_generator.ts",
+      "response_file": "batch-0004.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0004",
+      "batch_position": 3,
+      "path": "command/completions/bash.ts",
+      "response_file": "batch-0004.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0004",
+      "batch_position": 4,
+      "path": "command/completions/complete.ts",
+      "response_file": "batch-0004.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0004",
+      "batch_position": 5,
+      "path": "command/completions/completions_command.ts",
+      "response_file": "batch-0004.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0004",
+      "batch_position": 6,
+      "path": "command/completions/fish.ts",
+      "response_file": "batch-0004.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0004",
+      "batch_position": 7,
+      "path": "command/completions/generate.ts",
+      "response_file": "batch-0004.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0005",
+      "batch_position": 0,
+      "path": "command/completions/mod.ts",
+      "response_file": "batch-0005.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0005",
+      "batch_position": 1,
+      "path": "command/completions/zsh.ts",
+      "response_file": "batch-0005.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0006",
+      "batch_position": 0,
+      "path": "command/help/_help_generator.ts",
+      "response_file": "batch-0006.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0006",
+      "batch_position": 1,
+      "path": "command/help/help_command.ts",
+      "response_file": "batch-0006.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0006",
+      "batch_position": 2,
+      "path": "command/help/mod.ts",
+      "response_file": "batch-0006.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0007",
+      "batch_position": 0,
+      "path": "command/mod.ts",
+      "response_file": "batch-0007.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0008",
+      "batch_position": 0,
+      "path": "command/test/command/action_test.ts",
+      "response_file": "batch-0008.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0008",
+      "batch_position": 1,
+      "path": "command/test/command/alias_test.ts",
+      "response_file": "batch-0008.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0008",
+      "batch_position": 2,
+      "path": "command/test/command/allow_empty_test.ts",
+      "response_file": "batch-0008.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0008",
+      "batch_position": 3,
+      "path": "command/test/command/argument_test.ts",
+      "response_file": "batch-0008.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0008",
+      "batch_position": 4,
+      "path": "command/test/command/arguments_test.ts",
+      "response_file": "batch-0008.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0008",
+      "batch_position": 5,
+      "path": "command/test/command/command_test.ts",
+      "response_file": "batch-0008.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0008",
+      "batch_position": 6,
+      "path": "command/test/command/completion_test.ts",
+      "response_file": "batch-0008.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0008",
+      "batch_position": 7,
+      "path": "command/test/command/default_command_test.ts",
+      "response_file": "batch-0008.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0009",
+      "batch_position": 0,
+      "path": "command/test/command/dotted_options_test.ts",
+      "response_file": "batch-0009.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0009",
+      "batch_position": 1,
+      "path": "command/test/command/env_var_test.ts",
+      "response_file": "batch-0009.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0009",
+      "batch_position": 2,
+      "path": "command/test/command/error_handler_test.ts",
+      "response_file": "batch-0009.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0009",
+      "batch_position": 3,
+      "path": "command/test/command/example_test.ts",
+      "response_file": "batch-0009.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0009",
+      "batch_position": 4,
+      "path": "command/test/command/generic_types_test.ts",
+      "response_file": "batch-0009.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0009",
+      "batch_position": 5,
+      "path": "command/test/command/global_command_test.ts",
+      "response_file": "batch-0009.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0009",
+      "batch_position": 6,
+      "path": "command/test/command/help_command_test.ts",
+      "response_file": "batch-0009.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0009",
+      "batch_position": 7,
+      "path": "command/test/command/help_test.ts",
+      "response_file": "batch-0009.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0010",
+      "batch_position": 0,
+      "path": "command/test/command/hidden_command_test.ts",
+      "response_file": "batch-0010.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0010",
+      "batch_position": 1,
+      "path": "command/test/command/lazy_command_test.ts",
+      "response_file": "batch-0010.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0010",
+      "batch_position": 2,
+      "path": "command/test/command/literal_arguments_test.ts",
+      "response_file": "batch-0010.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0010",
+      "batch_position": 3,
+      "path": "command/test/command/option_test.ts",
+      "response_file": "batch-0010.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0010",
+      "batch_position": 4,
+      "path": "command/test/command/raw_args_test.ts",
+      "response_file": "batch-0010.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0010",
+      "batch_position": 5,
+      "path": "command/test/command/standalone_test.ts",
+      "response_file": "batch-0010.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0010",
+      "batch_position": 6,
+      "path": "command/test/command/stop_early_test.ts",
+      "response_file": "batch-0010.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0010",
+      "batch_position": 7,
+      "path": "command/test/command/sub_command_test.ts",
+      "response_file": "batch-0010.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0011",
+      "batch_position": 0,
+      "path": "command/test/command/throw_test.ts",
+      "response_file": "batch-0011.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0011",
+      "batch_position": 1,
+      "path": "command/test/command/version_test.ts",
+      "response_file": "batch-0011.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0012",
+      "batch_position": 0,
+      "path": "command/test/integration/test.ts",
+      "response_file": "batch-0012.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0013",
+      "batch_position": 0,
+      "path": "command/test/option/action_test.ts",
+      "response_file": "batch-0013.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0013",
+      "batch_position": 1,
+      "path": "command/test/option/aliases_test.ts",
+      "response_file": "batch-0013.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0013",
+      "batch_position": 2,
+      "path": "command/test/option/conflicts_test.ts",
+      "response_file": "batch-0013.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0013",
+      "batch_position": 3,
+      "path": "command/test/option/default_test.ts",
+      "response_file": "batch-0013.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0013",
+      "batch_position": 4,
+      "path": "command/test/option/depends_test.ts",
+      "response_file": "batch-0013.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0013",
+      "batch_position": 5,
+      "path": "command/test/option/duplicate_test.ts",
+      "response_file": "batch-0013.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0013",
+      "batch_position": 6,
+      "path": "command/test/option/global_test.ts",
+      "response_file": "batch-0013.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0013",
+      "batch_position": 7,
+      "path": "command/test/option/hidden_test.ts",
+      "response_file": "batch-0013.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0014",
+      "batch_position": 0,
+      "path": "command/test/option/list_test.ts",
+      "response_file": "batch-0014.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0014",
+      "batch_position": 1,
+      "path": "command/test/option/negatable_test.ts",
+      "response_file": "batch-0014.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0014",
+      "batch_position": 2,
+      "path": "command/test/option/required_test.ts",
+      "response_file": "batch-0014.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0014",
+      "batch_position": 3,
+      "path": "command/test/option/requires_test.ts",
+      "response_file": "batch-0014.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0014",
+      "batch_position": 4,
+      "path": "command/test/option/standalone_test.ts",
+      "response_file": "batch-0014.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0014",
+      "batch_position": 5,
+      "path": "command/test/option/value_test.ts",
+      "response_file": "batch-0014.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0014",
+      "batch_position": 6,
+      "path": "command/test/option/variadic_test.ts",
+      "response_file": "batch-0014.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0014",
+      "batch_position": 7,
+      "path": "command/test/option/wildcard_test.ts",
+      "response_file": "batch-0014.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0015",
+      "batch_position": 0,
+      "path": "command/test/type/boolean_test.ts",
+      "response_file": "batch-0015.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0015",
+      "batch_position": 1,
+      "path": "command/test/type/custom_test.ts",
+      "response_file": "batch-0015.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0015",
+      "batch_position": 2,
+      "path": "command/test/type/enum_test.ts",
+      "response_file": "batch-0015.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0015",
+      "batch_position": 3,
+      "path": "command/test/type/file_test.ts",
+      "response_file": "batch-0015.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0015",
+      "batch_position": 4,
+      "path": "command/test/type/integer_test.ts",
+      "response_file": "batch-0015.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0015",
+      "batch_position": 5,
+      "path": "command/test/type/no_value_test.ts",
+      "response_file": "batch-0015.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0015",
+      "batch_position": 6,
+      "path": "command/test/type/number_test.ts",
+      "response_file": "batch-0015.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0015",
+      "batch_position": 7,
+      "path": "command/test/type/secret_test.ts",
+      "response_file": "batch-0015.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0016",
+      "batch_position": 0,
+      "path": "command/test/type/string_test.ts",
+      "response_file": "batch-0016.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0017",
+      "batch_position": 0,
+      "path": "command/type.ts",
+      "response_file": "batch-0017.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0017",
+      "batch_position": 1,
+      "path": "command/types.ts",
+      "response_file": "batch-0017.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0018",
+      "batch_position": 0,
+      "path": "command/types/action_list.ts",
+      "response_file": "batch-0018.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0018",
+      "batch_position": 1,
+      "path": "command/types/boolean.ts",
+      "response_file": "batch-0018.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0018",
+      "batch_position": 2,
+      "path": "command/types/child_command.ts",
+      "response_file": "batch-0018.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0018",
+      "batch_position": 3,
+      "path": "command/types/command.ts",
+      "response_file": "batch-0018.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0018",
+      "batch_position": 4,
+      "path": "command/types/enum.ts",
+      "response_file": "batch-0018.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0018",
+      "batch_position": 5,
+      "path": "command/types/file.ts",
+      "response_file": "batch-0018.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0018",
+      "batch_position": 6,
+      "path": "command/types/integer.ts",
+      "response_file": "batch-0018.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0018",
+      "batch_position": 7,
+      "path": "command/types/number.ts",
+      "response_file": "batch-0018.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0019",
+      "batch_position": 0,
+      "path": "command/types/secret.ts",
+      "response_file": "batch-0019.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0019",
+      "batch_position": 1,
+      "path": "command/types/string.ts",
+      "response_file": "batch-0019.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0020",
+      "batch_position": 0,
+      "path": "command/upgrade/_check_version.ts",
+      "response_file": "batch-0020.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0020",
+      "batch_position": 1,
+      "path": "command/upgrade/get_runtime.ts",
+      "response_file": "batch-0020.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0020",
+      "batch_position": 2,
+      "path": "command/upgrade/logger.ts",
+      "response_file": "batch-0020.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0020",
+      "batch_position": 3,
+      "path": "command/upgrade/mod.ts",
+      "response_file": "batch-0020.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0020",
+      "batch_position": 4,
+      "path": "command/upgrade/provider.ts",
+      "response_file": "batch-0020.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0021",
+      "batch_position": 0,
+      "path": "command/upgrade/provider/deno_land.ts",
+      "response_file": "batch-0021.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0021",
+      "batch_position": 1,
+      "path": "command/upgrade/provider/deno_land_test.ts",
+      "response_file": "batch-0021.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0021",
+      "batch_position": 2,
+      "path": "command/upgrade/provider/github.ts",
+      "response_file": "batch-0021.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0021",
+      "batch_position": 3,
+      "path": "command/upgrade/provider/github_test.ts",
+      "response_file": "batch-0021.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0021",
+      "batch_position": 4,
+      "path": "command/upgrade/provider/jsr.ts",
+      "response_file": "batch-0021.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0021",
+      "batch_position": 5,
+      "path": "command/upgrade/provider/jsr_test.ts",
+      "response_file": "batch-0021.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0021",
+      "batch_position": 6,
+      "path": "command/upgrade/provider/nest_land.ts",
+      "response_file": "batch-0021.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0021",
+      "batch_position": 7,
+      "path": "command/upgrade/provider/nest_land_test.ts",
+      "response_file": "batch-0021.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0022",
+      "batch_position": 0,
+      "path": "command/upgrade/provider/npm.ts",
+      "response_file": "batch-0022.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0022",
+      "batch_position": 1,
+      "path": "command/upgrade/provider/npm_test.ts",
+      "response_file": "batch-0022.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0023",
+      "batch_position": 0,
+      "path": "command/upgrade/runtime.ts",
+      "response_file": "batch-0023.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0024",
+      "batch_position": 0,
+      "path": "command/upgrade/runtime/bun_runtime.ts",
+      "response_file": "batch-0024.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0024",
+      "batch_position": 1,
+      "path": "command/upgrade/runtime/deno_runtime.ts",
+      "response_file": "batch-0024.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0024",
+      "batch_position": 2,
+      "path": "command/upgrade/runtime/node_runtime.ts",
+      "response_file": "batch-0024.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0025",
+      "batch_position": 0,
+      "path": "command/upgrade/spinner.ts",
+      "response_file": "batch-0025.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0025",
+      "batch_position": 1,
+      "path": "command/upgrade/upgrade.ts",
+      "response_file": "batch-0025.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0025",
+      "batch_position": 2,
+      "path": "command/upgrade/upgrade_command.ts",
+      "response_file": "batch-0025.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0026",
+      "batch_position": 0,
+      "path": "examples/ansi.ts",
+      "response_file": "batch-0026.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0027",
+      "batch_position": 0,
+      "path": "examples/ansi/color_themes.ts",
+      "response_file": "batch-0027.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0027",
+      "batch_position": 1,
+      "path": "examples/ansi/colors.ts",
+      "response_file": "batch-0027.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0027",
+      "batch_position": 2,
+      "path": "examples/ansi/countdown.ts",
+      "response_file": "batch-0027.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0027",
+      "batch_position": 3,
+      "path": "examples/ansi/cursor_position.ts",
+      "response_file": "batch-0027.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0027",
+      "batch_position": 4,
+      "path": "examples/ansi/custom.ts",
+      "response_file": "batch-0027.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0027",
+      "batch_position": 5,
+      "path": "examples/ansi/demo.ts",
+      "response_file": "batch-0027.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0027",
+      "batch_position": 6,
+      "path": "examples/ansi/functional.ts",
+      "response_file": "batch-0027.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0027",
+      "batch_position": 7,
+      "path": "examples/ansi/image.ts",
+      "response_file": "batch-0027.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0028",
+      "batch_position": 0,
+      "path": "examples/ansi/link.ts",
+      "response_file": "batch-0028.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0029",
+      "batch_position": 0,
+      "path": "examples/command.ts",
+      "response_file": "batch-0029.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0030",
+      "batch_position": 0,
+      "path": "examples/command/action_handler.ts",
+      "response_file": "batch-0030.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0030",
+      "batch_position": 1,
+      "path": "examples/command/action_options.ts",
+      "response_file": "batch-0030.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0030",
+      "batch_position": 2,
+      "path": "examples/command/arguments_syntax.ts",
+      "response_file": "batch-0030.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0030",
+      "batch_position": 3,
+      "path": "examples/command/arguments_syntax_variadic.ts",
+      "response_file": "batch-0030.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0030",
+      "batch_position": 4,
+      "path": "examples/command/collect_options.ts",
+      "response_file": "batch-0030.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0030",
+      "batch_position": 5,
+      "path": "examples/command/common_option_types.ts",
+      "response_file": "batch-0030.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0030",
+      "batch_position": 6,
+      "path": "examples/command/conflicting_options.ts",
+      "response_file": "batch-0030.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0030",
+      "batch_position": 7,
+      "path": "examples/command/custom_option_processing.ts",
+      "response_file": "batch-0030.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0031",
+      "batch_position": 0,
+      "path": "examples/command/custom_option_type.ts",
+      "response_file": "batch-0031.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0031",
+      "batch_position": 1,
+      "path": "examples/command/custom_option_type_class.ts",
+      "response_file": "batch-0031.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0031",
+      "batch_position": 2,
+      "path": "examples/command/custom_option_type_class_completion.ts",
+      "response_file": "batch-0031.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0031",
+      "batch_position": 3,
+      "path": "examples/command/custom_option_type_completion.ts",
+      "response_file": "batch-0031.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0031",
+      "batch_position": 4,
+      "path": "examples/command/default_option_value.ts",
+      "response_file": "batch-0031.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0031",
+      "batch_position": 5,
+      "path": "examples/command/demo.ts",
+      "response_file": "batch-0031.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0031",
+      "batch_position": 6,
+      "path": "examples/command/depending_options.ts",
+      "response_file": "batch-0031.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0031",
+      "batch_position": 7,
+      "path": "examples/command/dotted_options.ts",
+      "response_file": "batch-0031.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0032",
+      "batch_position": 0,
+      "path": "examples/command/enum_option_type.ts",
+      "response_file": "batch-0032.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0032",
+      "batch_position": 1,
+      "path": "examples/command/environment_variables.ts",
+      "response_file": "batch-0032.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0032",
+      "batch_position": 2,
+      "path": "examples/command/environment_variables_override.ts",
+      "response_file": "batch-0032.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0032",
+      "batch_position": 3,
+      "path": "examples/command/environment_variables_prefix.ts",
+      "response_file": "batch-0032.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0032",
+      "batch_position": 4,
+      "path": "examples/command/examples.ts",
+      "response_file": "batch-0032.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0032",
+      "batch_position": 5,
+      "path": "examples/command/general_error_handling.ts",
+      "response_file": "batch-0032.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0032",
+      "batch_position": 6,
+      "path": "examples/command/generic_parent_types.ts",
+      "response_file": "batch-0032.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0032",
+      "batch_position": 7,
+      "path": "examples/command/global_commands.ts",
+      "response_file": "batch-0032.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0033",
+      "batch_position": 0,
+      "path": "examples/command/global_custom_type.ts",
+      "response_file": "batch-0033.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0033",
+      "batch_position": 1,
+      "path": "examples/command/global_options.ts",
+      "response_file": "batch-0033.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0033",
+      "batch_position": 2,
+      "path": "examples/command/grouped_options.ts",
+      "response_file": "batch-0033.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0033",
+      "batch_position": 3,
+      "path": "examples/command/help.ts",
+      "response_file": "batch-0033.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0033",
+      "batch_position": 4,
+      "path": "examples/command/help_option_and_command.ts",
+      "response_file": "batch-0033.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0033",
+      "batch_position": 5,
+      "path": "examples/command/hidden_commands.ts",
+      "response_file": "batch-0033.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0033",
+      "batch_position": 6,
+      "path": "examples/command/hidden_options.ts",
+      "response_file": "batch-0033.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0034",
+      "batch_position": 0,
+      "path": "examples/command/lazy_loading/bar_command.ts",
+      "response_file": "batch-0034.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0034",
+      "batch_position": 1,
+      "path": "examples/command/lazy_loading/baz_command.ts",
+      "response_file": "batch-0034.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0034",
+      "batch_position": 2,
+      "path": "examples/command/lazy_loading/cli.ts",
+      "response_file": "batch-0034.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0034",
+      "batch_position": 3,
+      "path": "examples/command/lazy_loading/foo_command.ts",
+      "response_file": "batch-0034.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0035",
+      "batch_position": 0,
+      "path": "examples/command/list_option_type.ts",
+      "response_file": "batch-0035.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0035",
+      "batch_position": 1,
+      "path": "examples/command/negatable_options.ts",
+      "response_file": "batch-0035.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0035",
+      "batch_position": 2,
+      "path": "examples/command/options.ts",
+      "response_file": "batch-0035.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0035",
+      "batch_position": 3,
+      "path": "examples/command/required_options.ts",
+      "response_file": "batch-0035.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0035",
+      "batch_position": 4,
+      "path": "examples/command/shell-completions.ts",
+      "response_file": "batch-0035.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0035",
+      "batch_position": 5,
+      "path": "examples/command/standalone_options.ts",
+      "response_file": "batch-0035.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0035",
+      "batch_position": 6,
+      "path": "examples/command/stop_early.ts",
+      "response_file": "batch-0035.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0035",
+      "batch_position": 7,
+      "path": "examples/command/sub_commands.ts",
+      "response_file": "batch-0035.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0036",
+      "batch_position": 0,
+      "path": "examples/command/throw.ts",
+      "response_file": "batch-0036.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0036",
+      "batch_position": 1,
+      "path": "examples/command/upgrade_command.ts",
+      "response_file": "batch-0036.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0036",
+      "batch_position": 2,
+      "path": "examples/command/usage.ts",
+      "response_file": "batch-0036.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0036",
+      "batch_position": 3,
+      "path": "examples/command/use_raw_args.ts",
+      "response_file": "batch-0036.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0036",
+      "batch_position": 4,
+      "path": "examples/command/validation_error_handling.ts",
+      "response_file": "batch-0036.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0036",
+      "batch_position": 5,
+      "path": "examples/command/variadic_arguments.ts",
+      "response_file": "batch-0036.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0036",
+      "batch_position": 6,
+      "path": "examples/command/variadic_options.ts",
+      "response_file": "batch-0036.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0036",
+      "batch_position": 7,
+      "path": "examples/command/version_options.ts",
+      "response_file": "batch-0036.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0037",
+      "batch_position": 0,
+      "path": "examples/flags.ts",
+      "response_file": "batch-0037.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0038",
+      "batch_position": 0,
+      "path": "examples/flags/collect.ts",
+      "response_file": "batch-0038.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0038",
+      "batch_position": 1,
+      "path": "examples/flags/custom_option_processing.ts",
+      "response_file": "batch-0038.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0038",
+      "batch_position": 2,
+      "path": "examples/flags/dotted_options.ts",
+      "response_file": "batch-0038.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0038",
+      "batch_position": 3,
+      "path": "examples/flags/error_handling.ts",
+      "response_file": "batch-0038.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0038",
+      "batch_position": 4,
+      "path": "examples/flags/flags.ts",
+      "response_file": "batch-0038.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0038",
+      "batch_position": 5,
+      "path": "examples/flags/options.ts",
+      "response_file": "batch-0038.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0038",
+      "batch_position": 6,
+      "path": "examples/flags/value.ts",
+      "response_file": "batch-0038.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0039",
+      "batch_position": 0,
+      "path": "examples/keycode.ts",
+      "response_file": "batch-0039.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0040",
+      "batch_position": 0,
+      "path": "examples/keycode/example.ts",
+      "response_file": "batch-0040.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0040",
+      "batch_position": 1,
+      "path": "examples/keycode/read_key.ts",
+      "response_file": "batch-0040.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0041",
+      "batch_position": 0,
+      "path": "examples/keypress.ts",
+      "response_file": "batch-0041.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0042",
+      "batch_position": 0,
+      "path": "examples/keypress/async_iterator.ts",
+      "response_file": "batch-0042.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0042",
+      "batch_position": 1,
+      "path": "examples/keypress/async_iterator_with_events.ts",
+      "response_file": "batch-0042.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0042",
+      "batch_position": 2,
+      "path": "examples/keypress/event_target.ts",
+      "response_file": "batch-0042.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0042",
+      "batch_position": 3,
+      "path": "examples/keypress/event_target_propagation.ts",
+      "response_file": "batch-0042.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0042",
+      "batch_position": 4,
+      "path": "examples/keypress/promise.ts",
+      "response_file": "batch-0042.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0043",
+      "batch_position": 0,
+      "path": "examples/prompt.ts",
+      "response_file": "batch-0043.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0044",
+      "batch_position": 0,
+      "path": "examples/prompt/checkbox.ts",
+      "response_file": "batch-0044.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0044",
+      "batch_position": 1,
+      "path": "examples/prompt/confirm.ts",
+      "response_file": "batch-0044.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0045",
+      "batch_position": 0,
+      "path": "examples/prompt/data/colors.ts",
+      "response_file": "batch-0045.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0045",
+      "batch_position": 1,
+      "path": "examples/prompt/data/first_names.ts",
+      "response_file": "batch-0045.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0046",
+      "batch_position": 0,
+      "path": "examples/prompt/dynamic_prompts.ts",
+      "response_file": "batch-0046.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0046",
+      "batch_position": 1,
+      "path": "examples/prompt/input.ts",
+      "response_file": "batch-0046.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0046",
+      "batch_position": 2,
+      "path": "examples/prompt/list.ts",
+      "response_file": "batch-0046.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0046",
+      "batch_position": 3,
+      "path": "examples/prompt/number.ts",
+      "response_file": "batch-0046.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0046",
+      "batch_position": 4,
+      "path": "examples/prompt/os_signals.ts",
+      "response_file": "batch-0046.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0046",
+      "batch_position": 5,
+      "path": "examples/prompt/prompt_demo.ts",
+      "response_file": "batch-0046.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0046",
+      "batch_position": 6,
+      "path": "examples/prompt/prompt_list.ts",
+      "response_file": "batch-0046.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0046",
+      "batch_position": 7,
+      "path": "examples/prompt/secret.ts",
+      "response_file": "batch-0046.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0047",
+      "batch_position": 0,
+      "path": "examples/prompt/secret_hidden.ts",
+      "response_file": "batch-0047.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0047",
+      "batch_position": 1,
+      "path": "examples/prompt/select.ts",
+      "response_file": "batch-0047.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0047",
+      "batch_position": 2,
+      "path": "examples/prompt/suggestions.ts",
+      "response_file": "batch-0047.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0047",
+      "batch_position": 3,
+      "path": "examples/prompt/suggestions_list.ts",
+      "response_file": "batch-0047.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0047",
+      "batch_position": 4,
+      "path": "examples/prompt/suggestions_list_prompt.ts",
+      "response_file": "batch-0047.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0047",
+      "batch_position": 5,
+      "path": "examples/prompt/toggle.ts",
+      "response_file": "batch-0047.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0048",
+      "batch_position": 0,
+      "path": "examples/table.ts",
+      "response_file": "batch-0048.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0049",
+      "batch_position": 0,
+      "path": "examples/table/basic_usage.ts",
+      "response_file": "batch-0049.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0049",
+      "batch_position": 1,
+      "path": "examples/table/colspan_and_rowspan.ts",
+      "response_file": "batch-0049.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0049",
+      "batch_position": 2,
+      "path": "examples/table/columns.ts",
+      "response_file": "batch-0049.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0049",
+      "batch_position": 3,
+      "path": "examples/table/consume_words.ts",
+      "response_file": "batch-0049.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0049",
+      "batch_position": 4,
+      "path": "examples/table/flex_demo.ts",
+      "response_file": "batch-0049.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0049",
+      "batch_position": 5,
+      "path": "examples/table/header_and_body.ts",
+      "response_file": "batch-0049.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0049",
+      "batch_position": 6,
+      "path": "examples/table/random_table_demo.ts",
+      "response_file": "batch-0049.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0049",
+      "batch_position": 7,
+      "path": "examples/table/rows_and_cells.ts",
+      "response_file": "batch-0049.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0050",
+      "batch_position": 0,
+      "path": "examples/table/table_options.ts",
+      "response_file": "batch-0050.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0050",
+      "batch_position": 1,
+      "path": "examples/table/using_as_array.ts",
+      "response_file": "batch-0050.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0051",
+      "batch_position": 0,
+      "path": "flags/_errors.ts",
+      "response_file": "batch-0051.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0051",
+      "batch_position": 1,
+      "path": "flags/_utils.ts",
+      "response_file": "batch-0051.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0051",
+      "batch_position": 2,
+      "path": "flags/_validate_flags.ts",
+      "response_file": "batch-0051.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0051",
+      "batch_position": 3,
+      "path": "flags/flags.ts",
+      "response_file": "batch-0051.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0051",
+      "batch_position": 4,
+      "path": "flags/mod.ts",
+      "response_file": "batch-0051.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0052",
+      "batch_position": 0,
+      "path": "flags/test/flags/arguments_test.ts",
+      "response_file": "batch-0052.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0052",
+      "batch_position": 1,
+      "path": "flags/test/flags/dotted_options_test.ts",
+      "response_file": "batch-0052.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0052",
+      "batch_position": 2,
+      "path": "flags/test/flags/empty_options_test.ts",
+      "response_file": "batch-0052.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0053",
+      "batch_position": 0,
+      "path": "flags/test/option/aliases_test.ts",
+      "response_file": "batch-0053.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0053",
+      "batch_position": 1,
+      "path": "flags/test/option/args_test.ts",
+      "response_file": "batch-0053.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0053",
+      "batch_position": 2,
+      "path": "flags/test/option/collect_test.ts",
+      "response_file": "batch-0053.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0053",
+      "batch_position": 3,
+      "path": "flags/test/option/conflicts_test.ts",
+      "response_file": "batch-0053.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0053",
+      "batch_position": 4,
+      "path": "flags/test/option/default_test.ts",
+      "response_file": "batch-0053.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0053",
+      "batch_position": 5,
+      "path": "flags/test/option/depends_test.ts",
+      "response_file": "batch-0053.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0053",
+      "batch_position": 6,
+      "path": "flags/test/option/equls_sign_test.ts",
+      "response_file": "batch-0053.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0053",
+      "batch_position": 7,
+      "path": "flags/test/option/negatable_test.ts",
+      "response_file": "batch-0053.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0054",
+      "batch_position": 0,
+      "path": "flags/test/option/parsed_flags_test.ts",
+      "response_file": "batch-0054.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0054",
+      "batch_position": 1,
+      "path": "flags/test/option/required_test.ts",
+      "response_file": "batch-0054.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0054",
+      "batch_position": 2,
+      "path": "flags/test/option/requires_test.ts",
+      "response_file": "batch-0054.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0054",
+      "batch_position": 3,
+      "path": "flags/test/option/standalone_test.ts",
+      "response_file": "batch-0054.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0054",
+      "batch_position": 4,
+      "path": "flags/test/option/unknown_test.ts",
+      "response_file": "batch-0054.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0054",
+      "batch_position": 5,
+      "path": "flags/test/option/value_test.ts",
+      "response_file": "batch-0054.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0054",
+      "batch_position": 6,
+      "path": "flags/test/option/variadic_test.ts",
+      "response_file": "batch-0054.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0055",
+      "batch_position": 0,
+      "path": "flags/test/setting/allow_empty_test.ts",
+      "response_file": "batch-0055.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0055",
+      "batch_position": 1,
+      "path": "flags/test/setting/option_test.ts",
+      "response_file": "batch-0055.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0055",
+      "batch_position": 2,
+      "path": "flags/test/setting/stop_early_test.ts",
+      "response_file": "batch-0055.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0055",
+      "batch_position": 3,
+      "path": "flags/test/setting/stop_on_unknown_test.ts",
+      "response_file": "batch-0055.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0056",
+      "batch_position": 0,
+      "path": "flags/test/type/boolean_test.ts",
+      "response_file": "batch-0056.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0056",
+      "batch_position": 1,
+      "path": "flags/test/type/integer_test.ts",
+      "response_file": "batch-0056.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0056",
+      "batch_position": 2,
+      "path": "flags/test/type/no_value_test.ts",
+      "response_file": "batch-0056.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0056",
+      "batch_position": 3,
+      "path": "flags/test/type/number_test.ts",
+      "response_file": "batch-0056.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0056",
+      "batch_position": 4,
+      "path": "flags/test/type/string_test.ts",
+      "response_file": "batch-0056.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0057",
+      "batch_position": 0,
+      "path": "flags/types.ts",
+      "response_file": "batch-0057.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0058",
+      "batch_position": 0,
+      "path": "flags/types/boolean.ts",
+      "response_file": "batch-0058.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0058",
+      "batch_position": 1,
+      "path": "flags/types/integer.ts",
+      "response_file": "batch-0058.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0058",
+      "batch_position": 2,
+      "path": "flags/types/number.ts",
+      "response_file": "batch-0058.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0058",
+      "batch_position": 3,
+      "path": "flags/types/string.ts",
+      "response_file": "batch-0058.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0059",
+      "batch_position": 0,
+      "path": "internal/runtime/delete_env.ts",
+      "response_file": "batch-0059.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0059",
+      "batch_position": 1,
+      "path": "internal/runtime/exit.ts",
+      "response_file": "batch-0059.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0059",
+      "batch_position": 2,
+      "path": "internal/runtime/get_args.ts",
+      "response_file": "batch-0059.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0059",
+      "batch_position": 3,
+      "path": "internal/runtime/get_columns.ts",
+      "response_file": "batch-0059.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0059",
+      "batch_position": 4,
+      "path": "internal/runtime/get_env.ts",
+      "response_file": "batch-0059.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0059",
+      "batch_position": 5,
+      "path": "internal/runtime/get_os.ts",
+      "response_file": "batch-0059.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0059",
+      "batch_position": 6,
+      "path": "internal/runtime/inspect.ts",
+      "response_file": "batch-0059.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0059",
+      "batch_position": 7,
+      "path": "internal/runtime/is_directory.ts",
+      "response_file": "batch-0059.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0060",
+      "batch_position": 0,
+      "path": "internal/runtime/is_terminal.ts",
+      "response_file": "batch-0060.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0060",
+      "batch_position": 1,
+      "path": "internal/runtime/no_color.ts",
+      "response_file": "batch-0060.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0060",
+      "batch_position": 2,
+      "path": "internal/runtime/read.ts",
+      "response_file": "batch-0060.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0060",
+      "batch_position": 3,
+      "path": "internal/runtime/read_dir.ts",
+      "response_file": "batch-0060.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0060",
+      "batch_position": 4,
+      "path": "internal/runtime/read_sync.ts",
+      "response_file": "batch-0060.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0060",
+      "batch_position": 5,
+      "path": "internal/runtime/runtime_name.ts",
+      "response_file": "batch-0060.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0060",
+      "batch_position": 6,
+      "path": "internal/runtime/set_env.ts",
+      "response_file": "batch-0060.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0060",
+      "batch_position": 7,
+      "path": "internal/runtime/set_raw.ts",
+      "response_file": "batch-0060.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0061",
+      "batch_position": 0,
+      "path": "internal/runtime/stat.ts",
+      "response_file": "batch-0061.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0061",
+      "batch_position": 1,
+      "path": "internal/runtime/write_sync.ts",
+      "response_file": "batch-0061.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0062",
+      "batch_position": 0,
+      "path": "internal/testing/test/create_test.ts",
+      "response_file": "batch-0062.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0062",
+      "batch_position": 1,
+      "path": "internal/testing/test/create_test_function.ts",
+      "response_file": "batch-0062.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0062",
+      "batch_position": 2,
+      "path": "internal/testing/test/mod.ts",
+      "response_file": "batch-0062.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0063",
+      "batch_position": 0,
+      "path": "internal/testing/test/runtime/bun.ts",
+      "response_file": "batch-0063.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0063",
+      "batch_position": 1,
+      "path": "internal/testing/test/runtime/deno.ts",
+      "response_file": "batch-0063.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0063",
+      "batch_position": 2,
+      "path": "internal/testing/test/runtime/node.ts",
+      "response_file": "batch-0063.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0064",
+      "batch_position": 0,
+      "path": "internal/testing/test/test_options.ts",
+      "response_file": "batch-0064.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0065",
+      "batch_position": 0,
+      "path": "keycode/_key_codes.ts",
+      "response_file": "batch-0065.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0065",
+      "batch_position": 1,
+      "path": "keycode/key_code.ts",
+      "response_file": "batch-0065.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0065",
+      "batch_position": 2,
+      "path": "keycode/mod.ts",
+      "response_file": "batch-0065.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0066",
+      "batch_position": 0,
+      "path": "keycode/test/key_code_test.ts",
+      "response_file": "batch-0066.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0067",
+      "batch_position": 0,
+      "path": "keypress/mod.ts",
+      "response_file": "batch-0067.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0067",
+      "batch_position": 1,
+      "path": "keypress/test.ts",
+      "response_file": "batch-0067.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0068",
+      "batch_position": 0,
+      "path": "prompt/_figures.ts",
+      "response_file": "batch-0068.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0068",
+      "batch_position": 1,
+      "path": "prompt/_generic_input.ts",
+      "response_file": "batch-0068.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0068",
+      "batch_position": 2,
+      "path": "prompt/_generic_list.ts",
+      "response_file": "batch-0068.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0068",
+      "batch_position": 3,
+      "path": "prompt/_generic_prompt.ts",
+      "response_file": "batch-0068.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0068",
+      "batch_position": 4,
+      "path": "prompt/_generic_suggestions.ts",
+      "response_file": "batch-0068.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0068",
+      "batch_position": 5,
+      "path": "prompt/_search.ts",
+      "response_file": "batch-0068.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0068",
+      "batch_position": 6,
+      "path": "prompt/_utils.ts",
+      "response_file": "batch-0068.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0068",
+      "batch_position": 7,
+      "path": "prompt/checkbox.ts",
+      "response_file": "batch-0068.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0069",
+      "batch_position": 0,
+      "path": "prompt/confirm.ts",
+      "response_file": "batch-0069.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0069",
+      "batch_position": 1,
+      "path": "prompt/input.ts",
+      "response_file": "batch-0069.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0069",
+      "batch_position": 2,
+      "path": "prompt/list.ts",
+      "response_file": "batch-0069.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0069",
+      "batch_position": 3,
+      "path": "prompt/mod.ts",
+      "response_file": "batch-0069.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0069",
+      "batch_position": 4,
+      "path": "prompt/number.ts",
+      "response_file": "batch-0069.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0069",
+      "batch_position": 5,
+      "path": "prompt/prompt.ts",
+      "response_file": "batch-0069.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0069",
+      "batch_position": 6,
+      "path": "prompt/secret.ts",
+      "response_file": "batch-0069.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0069",
+      "batch_position": 7,
+      "path": "prompt/select.ts",
+      "response_file": "batch-0069.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0070",
+      "batch_position": 0,
+      "path": "prompt/test/checkbox_test.ts",
+      "response_file": "batch-0070.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0070",
+      "batch_position": 1,
+      "path": "prompt/test/confirm_test.ts",
+      "response_file": "batch-0070.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0070",
+      "batch_position": 2,
+      "path": "prompt/test/input_test.ts",
+      "response_file": "batch-0070.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0071",
+      "batch_position": 0,
+      "path": "prompt/test/integration/checkbox_group_breadcrumb_test.ts",
+      "response_file": "batch-0071.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0071",
+      "batch_position": 1,
+      "path": "prompt/test/integration/checkbox_group_test.ts",
+      "response_file": "batch-0071.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0071",
+      "batch_position": 2,
+      "path": "prompt/test/integration/checkbox_test.ts",
+      "response_file": "batch-0071.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0071",
+      "batch_position": 3,
+      "path": "prompt/test/integration/checkbox_value_test.ts",
+      "response_file": "batch-0071.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0071",
+      "batch_position": 4,
+      "path": "prompt/test/integration/confirm_test.ts",
+      "response_file": "batch-0071.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0071",
+      "batch_position": 5,
+      "path": "prompt/test/integration/input_test.ts",
+      "response_file": "batch-0071.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0071",
+      "batch_position": 6,
+      "path": "prompt/test/integration/list_test.ts",
+      "response_file": "batch-0071.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0071",
+      "batch_position": 7,
+      "path": "prompt/test/integration/number_test.ts",
+      "response_file": "batch-0071.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0072",
+      "batch_position": 0,
+      "path": "prompt/test/integration/prompt_test.ts",
+      "response_file": "batch-0072.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0072",
+      "batch_position": 1,
+      "path": "prompt/test/integration/secret_test.ts",
+      "response_file": "batch-0072.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0072",
+      "batch_position": 2,
+      "path": "prompt/test/integration/select_group_breadcrumb_test.ts",
+      "response_file": "batch-0072.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0072",
+      "batch_position": 3,
+      "path": "prompt/test/integration/select_group_test.ts",
+      "response_file": "batch-0072.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0072",
+      "batch_position": 4,
+      "path": "prompt/test/integration/select_test.ts",
+      "response_file": "batch-0072.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0072",
+      "batch_position": 5,
+      "path": "prompt/test/integration/toggle_test.ts",
+      "response_file": "batch-0072.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0073",
+      "batch_position": 0,
+      "path": "prompt/test/list_test.ts",
+      "response_file": "batch-0073.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0073",
+      "batch_position": 1,
+      "path": "prompt/test/number_test.ts",
+      "response_file": "batch-0073.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0073",
+      "batch_position": 2,
+      "path": "prompt/test/prompt_list_test.ts",
+      "response_file": "batch-0073.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0073",
+      "batch_position": 3,
+      "path": "prompt/test/search_test.ts",
+      "response_file": "batch-0073.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0073",
+      "batch_position": 4,
+      "path": "prompt/test/secret_test.ts",
+      "response_file": "batch-0073.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0073",
+      "batch_position": 5,
+      "path": "prompt/test/select_test.ts",
+      "response_file": "batch-0073.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0073",
+      "batch_position": 6,
+      "path": "prompt/test/toggle_test.ts",
+      "response_file": "batch-0073.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0074",
+      "batch_position": 0,
+      "path": "prompt/toggle.ts",
+      "response_file": "batch-0074.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0075",
+      "batch_position": 0,
+      "path": "table/_layout.ts",
+      "response_file": "batch-0075.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0075",
+      "batch_position": 1,
+      "path": "table/_utils.ts",
+      "response_file": "batch-0075.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0075",
+      "batch_position": 2,
+      "path": "table/border.ts",
+      "response_file": "batch-0075.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0075",
+      "batch_position": 3,
+      "path": "table/cell.ts",
+      "response_file": "batch-0075.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0075",
+      "batch_position": 4,
+      "path": "table/column.ts",
+      "response_file": "batch-0075.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0075",
+      "batch_position": 5,
+      "path": "table/consume_words.ts",
+      "response_file": "batch-0075.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0075",
+      "batch_position": 6,
+      "path": "table/mod.ts",
+      "response_file": "batch-0075.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0075",
+      "batch_position": 7,
+      "path": "table/row.ts",
+      "response_file": "batch-0075.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0076",
+      "batch_position": 0,
+      "path": "table/table.ts",
+      "response_file": "batch-0076.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0077",
+      "batch_position": 0,
+      "path": "table/test/align_test.ts",
+      "response_file": "batch-0077.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0077",
+      "batch_position": 1,
+      "path": "table/test/ansi_regex_source_test.ts",
+      "response_file": "batch-0077.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0077",
+      "batch_position": 2,
+      "path": "table/test/ansi_wrapping_within_cell_test.ts",
+      "response_file": "batch-0077.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0077",
+      "batch_position": 3,
+      "path": "table/test/border_test.ts",
+      "response_file": "batch-0077.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0077",
+      "batch_position": 4,
+      "path": "table/test/column_test.ts",
+      "response_file": "batch-0077.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0077",
+      "batch_position": 5,
+      "path": "table/test/span_test.ts",
+      "response_file": "batch-0077.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0077",
+      "batch_position": 6,
+      "path": "table/test/special_chars_test.ts",
+      "response_file": "batch-0077.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0077",
+      "batch_position": 7,
+      "path": "table/test/table_test.ts",
+      "response_file": "batch-0077.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0078",
+      "batch_position": 0,
+      "path": "table/test/utils_test.ts",
+      "response_file": "batch-0078.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0079",
+      "batch_position": 0,
+      "path": "table/unicode_width.ts",
+      "response_file": "batch-0079.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0080",
+      "batch_position": 0,
+      "path": "tasks/setup_node.ts",
+      "response_file": "batch-0080.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0081",
+      "batch_position": 0,
+      "path": "testing/_quote_string.ts",
+      "response_file": "batch-0081.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0081",
+      "batch_position": 1,
+      "path": "testing/mod.ts",
+      "response_file": "batch-0081.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0081",
+      "batch_position": 2,
+      "path": "testing/snapshot.ts",
+      "response_file": "batch-0081.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0081",
+      "batch_position": 3,
+      "path": "testing/snapshot_only_test.ts",
+      "response_file": "batch-0081.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0081",
+      "batch_position": 4,
+      "path": "testing/snapshot_only_test_fixture.ts",
+      "response_file": "batch-0081.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0081",
+      "batch_position": 5,
+      "path": "testing/snapshot_test.ts",
+      "response_file": "batch-0081.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0081",
+      "batch_position": 6,
+      "path": "testing/snapshot_test_fixture.ts",
+      "response_file": "batch-0081.response.json",
+      "status": "accepted"
+    }
+  ],
+  "manifest": {
+    "file_count": 361,
+    "files": [
+      "ansi/ansi.ts",
+      "ansi/ansi_escapes.ts",
+      "ansi/ansi_escapes_test.ts",
+      "ansi/ansi_test.ts",
+      "ansi/chain.ts",
+      "ansi/colors.ts",
+      "ansi/colors_test.ts",
+      "ansi/cursor_position.ts",
+      "ansi/tty.ts",
+      "ansi/tty_test.ts",
+      "command/_argument_types.ts",
+      "command/_errors.ts",
+      "command/_spread.ts",
+      "command/_type_utils.ts",
+      "command/_utils.ts",
+      "command/command.ts",
+      "command/completions/_bash_completions_generator.ts",
+      "command/completions/_fish_completions_generator.ts",
+      "command/completions/_zsh_completions_generator.ts",
+      "command/completions/bash.ts",
+      "command/completions/complete.ts",
+      "command/completions/completions_command.ts",
+      "command/completions/fish.ts",
+      "command/completions/generate.ts",
+      "command/completions/mod.ts",
+      "command/completions/zsh.ts",
+      "command/help/_help_generator.ts",
+      "command/help/help_command.ts",
+      "command/help/mod.ts",
+      "command/mod.ts",
+      "command/test/command/action_test.ts",
+      "command/test/command/alias_test.ts",
+      "command/test/command/allow_empty_test.ts",
+      "command/test/command/argument_test.ts",
+      "command/test/command/arguments_test.ts",
+      "command/test/command/command_test.ts",
+      "command/test/command/completion_test.ts",
+      "command/test/command/default_command_test.ts",
+      "command/test/command/dotted_options_test.ts",
+      "command/test/command/env_var_test.ts",
+      "command/test/command/error_handler_test.ts",
+      "command/test/command/example_test.ts",
+      "command/test/command/generic_types_test.ts",
+      "command/test/command/global_command_test.ts",
+      "command/test/command/help_command_test.ts",
+      "command/test/command/help_test.ts",
+      "command/test/command/hidden_command_test.ts",
+      "command/test/command/lazy_command_test.ts",
+      "command/test/command/literal_arguments_test.ts",
+      "command/test/command/option_test.ts",
+      "command/test/command/raw_args_test.ts",
+      "command/test/command/standalone_test.ts",
+      "command/test/command/stop_early_test.ts",
+      "command/test/command/sub_command_test.ts",
+      "command/test/command/throw_test.ts",
+      "command/test/command/version_test.ts",
+      "command/test/integration/test.ts",
+      "command/test/option/action_test.ts",
+      "command/test/option/aliases_test.ts",
+      "command/test/option/conflicts_test.ts",
+      "command/test/option/default_test.ts",
+      "command/test/option/depends_test.ts",
+      "command/test/option/duplicate_test.ts",
+      "command/test/option/global_test.ts",
+      "command/test/option/hidden_test.ts",
+      "command/test/option/list_test.ts",
+      "command/test/option/negatable_test.ts",
+      "command/test/option/required_test.ts",
+      "command/test/option/requires_test.ts",
+      "command/test/option/standalone_test.ts",
+      "command/test/option/value_test.ts",
+      "command/test/option/variadic_test.ts",
+      "command/test/option/wildcard_test.ts",
+      "command/test/type/boolean_test.ts",
+      "command/test/type/custom_test.ts",
+      "command/test/type/enum_test.ts",
+      "command/test/type/file_test.ts",
+      "command/test/type/integer_test.ts",
+      "command/test/type/no_value_test.ts",
+      "command/test/type/number_test.ts",
+      "command/test/type/secret_test.ts",
+      "command/test/type/string_test.ts",
+      "command/type.ts",
+      "command/types.ts",
+      "command/types/action_list.ts",
+      "command/types/boolean.ts",
+      "command/types/child_command.ts",
+      "command/types/command.ts",
+      "command/types/enum.ts",
+      "command/types/file.ts",
+      "command/types/integer.ts",
+      "command/types/number.ts",
+      "command/types/secret.ts",
+      "command/types/string.ts",
+      "command/upgrade/_check_version.ts",
+      "command/upgrade/get_runtime.ts",
+      "command/upgrade/logger.ts",
+      "command/upgrade/mod.ts",
+      "command/upgrade/provider.ts",
+      "command/upgrade/provider/deno_land.ts",
+      "command/upgrade/provider/deno_land_test.ts",
+      "command/upgrade/provider/github.ts",
+      "command/upgrade/provider/github_test.ts",
+      "command/upgrade/provider/jsr.ts",
+      "command/upgrade/provider/jsr_test.ts",
+      "command/upgrade/provider/nest_land.ts",
+      "command/upgrade/provider/nest_land_test.ts",
+      "command/upgrade/provider/npm.ts",
+      "command/upgrade/provider/npm_test.ts",
+      "command/upgrade/runtime.ts",
+      "command/upgrade/runtime/bun_runtime.ts",
+      "command/upgrade/runtime/deno_runtime.ts",
+      "command/upgrade/runtime/node_runtime.ts",
+      "command/upgrade/spinner.ts",
+      "command/upgrade/upgrade.ts",
+      "command/upgrade/upgrade_command.ts",
+      "examples/ansi.ts",
+      "examples/ansi/color_themes.ts",
+      "examples/ansi/colors.ts",
+      "examples/ansi/countdown.ts",
+      "examples/ansi/cursor_position.ts",
+      "examples/ansi/custom.ts",
+      "examples/ansi/demo.ts",
+      "examples/ansi/functional.ts",
+      "examples/ansi/image.ts",
+      "examples/ansi/link.ts",
+      "examples/command.ts",
+      "examples/command/action_handler.ts",
+      "examples/command/action_options.ts",
+      "examples/command/arguments_syntax.ts",
+      "examples/command/arguments_syntax_variadic.ts",
+      "examples/command/collect_options.ts",
+      "examples/command/common_option_types.ts",
+      "examples/command/conflicting_options.ts",
+      "examples/command/custom_option_processing.ts",
+      "examples/command/custom_option_type.ts",
+      "examples/command/custom_option_type_class.ts",
+      "examples/command/custom_option_type_class_completion.ts",
+      "examples/command/custom_option_type_completion.ts",
+      "examples/command/default_option_value.ts",
+      "examples/command/demo.ts",
+      "examples/command/depending_options.ts",
+      "examples/command/dotted_options.ts",
+      "examples/command/enum_option_type.ts",
+      "examples/command/environment_variables.ts",
+      "examples/command/environment_variables_override.ts",
+      "examples/command/environment_variables_prefix.ts",
+      "examples/command/examples.ts",
+      "examples/command/general_error_handling.ts",
+      "examples/command/generic_parent_types.ts",
+      "examples/command/global_commands.ts",
+      "examples/command/global_custom_type.ts",
+      "examples/command/global_options.ts",
+      "examples/command/grouped_options.ts",
+      "examples/command/help.ts",
+      "examples/command/help_option_and_command.ts",
+      "examples/command/hidden_commands.ts",
+      "examples/command/hidden_options.ts",
+      "examples/command/lazy_loading/bar_command.ts",
+      "examples/command/lazy_loading/baz_command.ts",
+      "examples/command/lazy_loading/cli.ts",
+      "examples/command/lazy_loading/foo_command.ts",
+      "examples/command/list_option_type.ts",
+      "examples/command/negatable_options.ts",
+      "examples/command/options.ts",
+      "examples/command/required_options.ts",
+      "examples/command/shell-completions.ts",
+      "examples/command/standalone_options.ts",
+      "examples/command/stop_early.ts",
+      "examples/command/sub_commands.ts",
+      "examples/command/throw.ts",
+      "examples/command/upgrade_command.ts",
+      "examples/command/usage.ts",
+      "examples/command/use_raw_args.ts",
+      "examples/command/validation_error_handling.ts",
+      "examples/command/variadic_arguments.ts",
+      "examples/command/variadic_options.ts",
+      "examples/command/version_options.ts",
+      "examples/flags.ts",
+      "examples/flags/collect.ts",
+      "examples/flags/custom_option_processing.ts",
+      "examples/flags/dotted_options.ts",
+      "examples/flags/error_handling.ts",
+      "examples/flags/flags.ts",
+      "examples/flags/options.ts",
+      "examples/flags/value.ts",
+      "examples/keycode.ts",
+      "examples/keycode/example.ts",
+      "examples/keycode/read_key.ts",
+      "examples/keypress.ts",
+      "examples/keypress/async_iterator.ts",
+      "examples/keypress/async_iterator_with_events.ts",
+      "examples/keypress/event_target.ts",
+      "examples/keypress/event_target_propagation.ts",
+      "examples/keypress/promise.ts",
+      "examples/prompt.ts",
+      "examples/prompt/checkbox.ts",
+      "examples/prompt/confirm.ts",
+      "examples/prompt/data/colors.ts",
+      "examples/prompt/data/first_names.ts",
+      "examples/prompt/dynamic_prompts.ts",
+      "examples/prompt/input.ts",
+      "examples/prompt/list.ts",
+      "examples/prompt/number.ts",
+      "examples/prompt/os_signals.ts",
+      "examples/prompt/prompt_demo.ts",
+      "examples/prompt/prompt_list.ts",
+      "examples/prompt/secret.ts",
+      "examples/prompt/secret_hidden.ts",
+      "examples/prompt/select.ts",
+      "examples/prompt/suggestions.ts",
+      "examples/prompt/suggestions_list.ts",
+      "examples/prompt/suggestions_list_prompt.ts",
+      "examples/prompt/toggle.ts",
+      "examples/table.ts",
+      "examples/table/basic_usage.ts",
+      "examples/table/colspan_and_rowspan.ts",
+      "examples/table/columns.ts",
+      "examples/table/consume_words.ts",
+      "examples/table/flex_demo.ts",
+      "examples/table/header_and_body.ts",
+      "examples/table/random_table_demo.ts",
+      "examples/table/rows_and_cells.ts",
+      "examples/table/table_options.ts",
+      "examples/table/using_as_array.ts",
+      "flags/_errors.ts",
+      "flags/_utils.ts",
+      "flags/_validate_flags.ts",
+      "flags/flags.ts",
+      "flags/mod.ts",
+      "flags/test/flags/arguments_test.ts",
+      "flags/test/flags/dotted_options_test.ts",
+      "flags/test/flags/empty_options_test.ts",
+      "flags/test/option/aliases_test.ts",
+      "flags/test/option/args_test.ts",
+      "flags/test/option/collect_test.ts",
+      "flags/test/option/conflicts_test.ts",
+      "flags/test/option/default_test.ts",
+      "flags/test/option/depends_test.ts",
+      "flags/test/option/equls_sign_test.ts",
+      "flags/test/option/negatable_test.ts",
+      "flags/test/option/parsed_flags_test.ts",
+      "flags/test/option/required_test.ts",
+      "flags/test/option/requires_test.ts",
+      "flags/test/option/standalone_test.ts",
+      "flags/test/option/unknown_test.ts",
+      "flags/test/option/value_test.ts",
+      "flags/test/option/variadic_test.ts",
+      "flags/test/setting/allow_empty_test.ts",
+      "flags/test/setting/option_test.ts",
+      "flags/test/setting/stop_early_test.ts",
+      "flags/test/setting/stop_on_unknown_test.ts",
+      "flags/test/type/boolean_test.ts",
+      "flags/test/type/integer_test.ts",
+      "flags/test/type/no_value_test.ts",
+      "flags/test/type/number_test.ts",
+      "flags/test/type/string_test.ts",
+      "flags/types.ts",
+      "flags/types/boolean.ts",
+      "flags/types/integer.ts",
+      "flags/types/number.ts",
+      "flags/types/string.ts",
+      "internal/runtime/delete_env.ts",
+      "internal/runtime/exit.ts",
+      "internal/runtime/get_args.ts",
+      "internal/runtime/get_columns.ts",
+      "internal/runtime/get_env.ts",
+      "internal/runtime/get_os.ts",
+      "internal/runtime/inspect.ts",
+      "internal/runtime/is_directory.ts",
+      "internal/runtime/is_terminal.ts",
+      "internal/runtime/no_color.ts",
+      "internal/runtime/read.ts",
+      "internal/runtime/read_dir.ts",
+      "internal/runtime/read_sync.ts",
+      "internal/runtime/runtime_name.ts",
+      "internal/runtime/set_env.ts",
+      "internal/runtime/set_raw.ts",
+      "internal/runtime/stat.ts",
+      "internal/runtime/write_sync.ts",
+      "internal/testing/test/create_test.ts",
+      "internal/testing/test/create_test_function.ts",
+      "internal/testing/test/mod.ts",
+      "internal/testing/test/runtime/bun.ts",
+      "internal/testing/test/runtime/deno.ts",
+      "internal/testing/test/runtime/node.ts",
+      "internal/testing/test/test_options.ts",
+      "keycode/_key_codes.ts",
+      "keycode/key_code.ts",
+      "keycode/mod.ts",
+      "keycode/test/key_code_test.ts",
+      "keypress/mod.ts",
+      "keypress/test.ts",
+      "prompt/_figures.ts",
+      "prompt/_generic_input.ts",
+      "prompt/_generic_list.ts",
+      "prompt/_generic_prompt.ts",
+      "prompt/_generic_suggestions.ts",
+      "prompt/_search.ts",
+      "prompt/_utils.ts",
+      "prompt/checkbox.ts",
+      "prompt/confirm.ts",
+      "prompt/input.ts",
+      "prompt/list.ts",
+      "prompt/mod.ts",
+      "prompt/number.ts",
+      "prompt/prompt.ts",
+      "prompt/secret.ts",
+      "prompt/select.ts",
+      "prompt/test/checkbox_test.ts",
+      "prompt/test/confirm_test.ts",
+      "prompt/test/input_test.ts",
+      "prompt/test/integration/checkbox_group_breadcrumb_test.ts",
+      "prompt/test/integration/checkbox_group_test.ts",
+      "prompt/test/integration/checkbox_test.ts",
+      "prompt/test/integration/checkbox_value_test.ts",
+      "prompt/test/integration/confirm_test.ts",
+      "prompt/test/integration/input_test.ts",
+      "prompt/test/integration/list_test.ts",
+      "prompt/test/integration/number_test.ts",
+      "prompt/test/integration/prompt_test.ts",
+      "prompt/test/integration/secret_test.ts",
+      "prompt/test/integration/select_group_breadcrumb_test.ts",
+      "prompt/test/integration/select_group_test.ts",
+      "prompt/test/integration/select_test.ts",
+      "prompt/test/integration/toggle_test.ts",
+      "prompt/test/list_test.ts",
+      "prompt/test/number_test.ts",
+      "prompt/test/prompt_list_test.ts",
+      "prompt/test/search_test.ts",
+      "prompt/test/secret_test.ts",
+      "prompt/test/select_test.ts",
+      "prompt/test/toggle_test.ts",
+      "prompt/toggle.ts",
+      "table/_layout.ts",
+      "table/_utils.ts",
+      "table/border.ts",
+      "table/cell.ts",
+      "table/column.ts",
+      "table/consume_words.ts",
+      "table/mod.ts",
+      "table/row.ts",
+      "table/table.ts",
+      "table/test/align_test.ts",
+      "table/test/ansi_regex_source_test.ts",
+      "table/test/ansi_wrapping_within_cell_test.ts",
+      "table/test/border_test.ts",
+      "table/test/column_test.ts",
+      "table/test/span_test.ts",
+      "table/test/special_chars_test.ts",
+      "table/test/table_test.ts",
+      "table/test/utils_test.ts",
+      "table/unicode_width.ts",
+      "tasks/setup_node.ts",
+      "testing/_quote_string.ts",
+      "testing/mod.ts",
+      "testing/snapshot.ts",
+      "testing/snapshot_only_test.ts",
+      "testing/snapshot_only_test_fixture.ts",
+      "testing/snapshot_test.ts",
+      "testing/snapshot_test_fixture.ts"
+    ],
+    "hash": "951c254a07eeac8fbff656dd944556510b768007a786c6800a2d5b14ef3b862c",
+    "path": "manifest.txt"
+  },
+  "repository": {
+    "display_name": "Cliffy",
+    "language": "TypeScript",
+    "requested_revision": "c266907b722f2acec2f978f5911a8f3e3cac9ef5",
+    "revision": "c266907b722f2acec2f978f5911a8f3e3cac9ef5"
+  },
+  "schema_version": 2
+}

@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/check_framework/urls/good_error_handler_deferred_annotations.py",
+        "tests/check_framework/urls/good_function_based_error_handlers.py",
+        "tests/check_framework/urls/include_contains_tuple.py",
+        "tests/check_framework/urls/include_with_dollar.py",
+        "tests/check_framework/urls/name_with_colon.py",
+        "tests/check_framework/urls/no_warnings.py",
+        "tests/check_framework/urls/no_warnings_i18n.py",
+        "tests/check_framework/urls/non_unique_namespaces.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.9 KB -> 1.3 KB (31% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/check_framework/urls/good_error_handler_deferred_annotations.py (16L)\nfile scope: [\"000ki008\" full 16L | imports 19L]\n\n- def good_handler_deferred_annotations(request: HttpRequest, exception=None): ... [\"000ki007\" full 2L | code 2L]\n\n# tests/check_framework/urls/good_function_based_error_handlers.py (11L)\nfile scope: [\"000kj009\" full 11L | imports 13L]\n\n- def good_handler(request, exception=None, foo=\"bar\"): ... [\"000kj008\" full 2L | code 2L]\n\n# tests/check_framework/urls/include_contains_tuple.py (6L)\nfile scope: [\"000kk001\" full 6L | imports 3L]\n\n\n# tests/check_framework/urls/include_with_dollar.py (6L)\nfile scope: [\"000kl001\" full 6L | imports 3L]\n\n\n# tests/check_framework/urls/name_with_colon.py (6L)\nfile scope: [\"000km001\" full 6L | imports 3L]\n\n\n# tests/check_framework/urls/no_warnings.py (15L)\nfile scope: [\"000kn001\" full 15L | imports 3L]\n\n\n# tests/check_framework/urls/no_warnings_i18n.py (8L)\nfile scope: [\"000ko001\" full 8L | imports 5L]\n\n\n# tests/check_framework/urls/non_unique_namespaces.py (17L)\nfile scope: [\"000kp002\" full 17L | imports 12L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

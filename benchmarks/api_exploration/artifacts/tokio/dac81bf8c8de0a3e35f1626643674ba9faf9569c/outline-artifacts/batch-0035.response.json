@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio-util/src/future/with_cancellation_token.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.7 KB -> 1.4 KB (50% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio-util/src/future/with_cancellation_token.rs (80L)\nfile scope: [\"0002B00a\" full 80L | imports 42L]\n\n- impl<'a, F: Future> WithCancellationTokenFuture<'a, F> { ... } [\"0002B001\" full 8L | code 8L]\n  - pub(crate) fn new(cancellation_token: &'a CancellationToken, future: F) -> Self { ... } [\"0002B000\" full 6L | code 6L]\n\n- impl<'a, F: Future> Future for WithCancellationTokenFuture<'a, F> { ... } [\"0002B004\" full 11L | code 11L]\n  - type Output = Option<F::Output>; [\"0002B002\" full 1L | code 1L]\n  - fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> { ... } [\"0002B003\" full 7L | code 7L]\n\n- impl<F: Future> WithCancellationTokenFutureOwned<F> { ... } [\"0002B006\" full 8L | code 8L]\n  - pub(crate) fn new(cancellation_token: CancellationToken, future: F) -> Self { ... } [\"0002B005\" full 6L | code 6L]\n\n- impl<F: Future> Future for WithCancellationTokenFutureOwned<F> { ... } [\"0002B009\" full 11L | code 11L]\n  - type Output = Option<F::Output>; [\"0002B007\" full 1L | code 1L]\n  - fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> { ... } [\"0002B008\" full 7L | code 7L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

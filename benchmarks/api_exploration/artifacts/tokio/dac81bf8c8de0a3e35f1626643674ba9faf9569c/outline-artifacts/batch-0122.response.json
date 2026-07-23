@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/task_hooks.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.6 KB -> 2.3 KB (11% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/task_hooks.rs (84L)\nfile scope: [\"0007O00i\" full 84L | imports 4L]\n\n- impl TaskHooks { ... } [\"0007O004\" full 35L | code 35L]\n  - pub(crate) fn spawn(&self, meta: &TaskMeta<'_>) { ... } [\"0007O000\" full 5L | code 5L]\n  - #[allow(dead_code)] pub(crate) fn from_config(config: &Config) -> Self { ... } [\"0007O001\" full 11L | code 11L]\n  - #[cfg(tokio_unstable)] #[inline] pub(crate) fn poll_start_callback(&self, meta: &TaskMeta<'_>) { ... } [\"0007O002\" full 7L | code 7L]\n  - #[cfg(tokio_unstable)] #[inline] pub(crate) fn poll_stop_callback(&self, meta: &TaskMeta<'_>) { ... } [\"0007O003\" full 7L | code 7L]\n\n- #[derive(Clone)] pub(crate) struct TaskHooks { ... } [\"0007O009\" full 9L | code 9L]\n  - pub(crate) task_spawn_callback: Option<TaskCallback> [\"0007O005\" full 1L | code 1L]\n  - pub(crate) task_terminate_callback: Option<TaskCallback> [\"0007O006\" full 1L | code 1L]\n  - #[cfg(tokio_unstable)] pub(crate) before_poll_callback: Option<TaskCallback> [\"0007O007\" full 2L | code 2L]\n  - #[cfg(tokio_unstable)] pub(crate) after_poll_callback: Option<TaskCallback> [\"0007O008\" full 2L | code 2L]\n\n- #[allow(missing_debug_implementations)] #[cfg_attr(not(tokio_unstable), allow(unreachable_pub))] pub struct TaskMeta<'a> { ... } [\"0007O00d\" full 17L | code 10L | docs 7L]\n  - pub(crate) id: super::task::Id [\"0007O00a\" full 2L | code 1L | docs 1L]\n  - #[cfg_attr(not(tokio_unstable), allow(unreachable_pub, dead_code))] pub(crate) spawned_at: crate::runtime::task::SpawnLocation [\"0007O00b\" full 3L | code 2L | docs 1L]\n  - pub(crate) _phantom: PhantomData<&'a ()> [\"0007O00c\" full 1L | code 1L]\n\n- impl<'a> TaskMeta<'a> { ... } [\"0007O00g\" full 13L | code 13L]\n  - #[cfg_attr(not(tokio_unstable), allow(unreachable_pub, dead_code))] pub fn id(&self) -> super::task::Id { ... } [\"0007O00e\" full 5L | code 4L | docs 1L]\n  - #[cfg(tokio_unstable)] pub fn spawned_at(&self) -> &'static std::panic::Location<'static> { ... } [\"0007O00f\" full 5L | code 4L | docs 1L]\n\n- pub(crate) type TaskCallback = std::sync::Arc<dyn Fn(&TaskMeta<'_>) + Send + Sync>; [\"0007O00h\" full 2L | code 1L | docs 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

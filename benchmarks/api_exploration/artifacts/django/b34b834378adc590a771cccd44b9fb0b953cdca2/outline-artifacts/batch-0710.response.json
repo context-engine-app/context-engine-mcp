@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/null_fk/__init__.py",
+        "tests/null_fk/models.py",
+        "tests/null_fk/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/null_fk/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/null_fk/models.py (53L)\nfile scope: [\"000AF00p\" full 53L | imports 15L]\n\n- class SystemDetails(models.Model): ... [\"000AF001\" full 2L | code 2L]\n\n- class SystemInfo(models.Model): ... [\"000AF004\" full 3L | code 3L]\n\n- class Forum(models.Model): ... [\"000AF007\" full 3L | code 3L]\n\n- class Post(models.Model): ... [\"000AF00b\" full 6L | code 6L]\n  - def __str__(self): ... [\"000AF00a\" full 2L | code 2L]\n\n- class Comment(models.Model): ... [\"000AF00g\" full 6L | code 6L]\n  - class Meta: ... [\"000AF00f\" full 2L | code 2L]\n\n- class Item(models.Model): ... [\"000AF00i\" full 2L | code 2L]\n\n- class PropertyValue(models.Model): ... [\"000AF00k\" full 2L | code 2L]\n\n- class Property(models.Model): ... [\"000AF00o\" full 4L | code 4L]\n\n# tests/null_fk/tests.py (68L)\nfile scope: [\"000AG00i\" full 68L | imports 7L]\n\n- class NullFkTests(TestCase): ... [\"000AG00h\" full 61L | code 61L]\n  - def test_null_fk(self): ... [\"000AG007\" full 38L | code 38L]\n  - def test_combine_isnull(self): ... [\"000AG00g\" full 21L | code 21L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

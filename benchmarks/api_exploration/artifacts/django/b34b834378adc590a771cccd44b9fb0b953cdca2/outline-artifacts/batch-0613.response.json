@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/migrations_test_apps/mutate_state_b/migrations/0001_initial.py",
+        "tests/migrations/migrations_test_apps/mutate_state_b/migrations/0002_add_field.py",
+        "tests/migrations/migrations_test_apps/mutate_state_b/migrations/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/migrations_test_apps/mutate_state_b/migrations/0001_initial.py (28L)\nfile scope: [\"000vU003\" full 28L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000vU002\" full 24L | code 24L]\n\n# tests/migrations/migrations_test_apps/mutate_state_b/migrations/0002_add_field.py (21L)\nfile scope: [\"000vV003\" full 21L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000vV002\" full 17L | code 17L]\n\n# tests/migrations/migrations_test_apps/mutate_state_b/migrations/__init__.py (1L)\nfile scope: [\"000vW000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/template_backends/apps/good/templatetags/subpackage/__init__.py",
+        "tests/template_backends/apps/good/templatetags/subpackage/tags.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/template_backends/apps/good/templatetags/subpackage/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/template_backends/apps/good/templatetags/subpackage/tags.py (4L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.template import Library\n2|\n3|register = Library()\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

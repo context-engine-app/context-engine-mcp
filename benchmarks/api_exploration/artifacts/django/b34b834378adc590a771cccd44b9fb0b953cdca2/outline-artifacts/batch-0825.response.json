@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/test_runner_apps/failures/__init__.py",
+        "tests/test_runner_apps/failures/tests_failures.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/test_runner_apps/failures/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/test_runner_apps/failures/tests_failures.py (24L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from unittest import TestCase, expectedFailure\n 2|\n 3|\n 4|class FailureTestCase(TestCase):\n 5|    def test_sample(self):\n 6|        self.assertEqual(0, 1)\n 7|\n 8|\n 9|class ErrorTestCase(TestCase):\n10|    def test_sample(self):\n11|        raise Exception(\"test\")\n12|\n13|\n14|class ExpectedFailureTestCase(TestCase):\n15|    @expectedFailure\n16|    def test_sample(self):\n17|        self.assertEqual(0, 1)\n18|\n19|\n20|class UnexpectedSuccessTestCase(TestCase):\n21|    @expectedFailure\n22|    def test_sample(self):\n23|        self.assertEqual(1, 1)\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

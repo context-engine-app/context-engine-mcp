@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "command/mod.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 3.0 KB -> 368 B (88% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# command/mod.ts (109L)\nfile scope: [\"0000t000\" full 109L | module-docs 63L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/db/backends/oracle/schema.py",
+        "django/db/backends/oracle/utils.py",
+        "django/db/backends/oracle/validation.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 14.1 KB -> 2.7 KB (81% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/db/backends/oracle/schema.py (257L)\nfile scope: [\"000aI01b\" full 257L | imports 13L]\n\n- class DatabaseSchemaEditor(BaseDatabaseSchemaEditor): ... [\"000aI01a\" full 244L | code 244L]\n  - def quote_value(self, value): ... [\"000aI00b\" full 13L | code 13L]\n  - def remove_field(self, model, field): ... [\"000aI00e\" full 6L | code 6L]\n  - def delete_model(self, model): ... [\"000aI00g\" full 22L | code 22L]\n  - def alter_field(self, model, old_field, new_field, strict=False): ... [\"000aI00n\" full 29L | code 29L]\n  - def _alter_field_type_workaround(self, model, old_field, new_field): ... [\"000aI00x\" full 67L | code 67L]\n  - def _alter_column_type_sql( self, model, old_field, new_field, new_type, old_collation, new_collation ): ... [\"000aI00F\" full 14L | code 14L]\n  - def normalize_name(self, name): ... [\"000aI00I\" full 9L | code 9L]\n  - def _generate_temp_name(self, for_name): ... [\"000aI00L\" full 4L | code 4L]\n  - def prepare_default(self, value): ... [\"000aI00N\" full 2L | code 2L]\n  - def _field_should_be_indexed(self, model, field): ... [\"000aI00S\" full 9L | code 9L]\n  - def _is_identity_column(self, table_name, column_name): ... [\"000aI00X\" full 16L | code 16L]\n  - def _drop_identity(self, table_name, column_name): ... [\"000aI010\" full 8L | code 8L]\n  - def _get_default_collation(self, table_name): ... [\"000aI013\" full 9L | code 9L]\n  - def _collate_sql(self, collation, old_collation=None, table_name=None): ... [\"000aI017\" full 4L | code 4L]\n  - def _column_generated_persistency_sql(self, field): ... [\"000aI019\" full 2L | code 2L]\n\n# django/db/backends/oracle/utils.py (100L)\nfile scope: [\"000aJ00p\" full 100L | imports 7L]\n\n- class BoundVar: ... [\"000aJ009\" full 35L | code 35L]\n  - def __init__(self, field): ... [\"000aJ003\" full 4L | code 4L]\n  - def bind_parameter(self, cursor): ... [\"000aJ007\" full 3L | code 3L]\n  - def get_value(self): ... [\"000aJ008\" full 2L | code 2L]\n\n- class Oracle_datetime(datetime.datetime): ... [\"000aJ00d\" full 19L | code 19L]\n  - @classmethod def from_datetime(cls, dt): ... [\"000aJ00c\" full 11L | code 11L]\n\n- class BulkInsertMapper: ... [\"000aJ00l\" full 28L | code 28L]\n\n- def dsn(settings_dict): ... [\"000aJ00o\" full 5L | code 5L]\n\n# django/db/backends/oracle/validation.py (23L)\nfile scope: [\"000aK005\" full 23L | imports 5L]\n\n- class DatabaseValidation(BaseDatabaseValidation): ... [\"000aK004\" full 18L | code 18L]\n  - def check_field_type(self, field, field_type): ... [\"000aK003\" full 17L | code 17L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

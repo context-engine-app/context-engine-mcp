@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/staticfiles_tests/urls/__init__.py",
+        "tests/staticfiles_tests/urls/default.py",
+        "tests/staticfiles_tests/urls/helper.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/staticfiles_tests/urls/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/staticfiles_tests/urls/default.py (7L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.contrib.staticfiles import views\n2|from django.urls import re_path\n3|\n4|urlpatterns = [\n5|    re_path(\"^static/(?P<path>.*)$\", views.serve),\n6|]\nnote: EOF\n\n# tests/staticfiles_tests/urls/helper.py (4L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.contrib.staticfiles.urls import staticfiles_urlpatterns\n2|\n3|urlpatterns = staticfiles_urlpatterns()\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

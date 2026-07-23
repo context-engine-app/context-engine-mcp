@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/scheduler/block_in_place.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n1|use crate::runtime::scheduler;\n2|\n3|#[track_caller]\n4|pub(crate) fn block_in_place<F, R>(f: F) -> R\n5|where\n6|    F: FnOnce() -> R,\n7|{\n8|    scheduler::multi_thread::block_in_place(f)\n9|}\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

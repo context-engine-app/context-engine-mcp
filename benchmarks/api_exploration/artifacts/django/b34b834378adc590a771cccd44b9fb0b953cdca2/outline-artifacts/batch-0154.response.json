@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/gis/shortcuts.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.0 KB -> 587 B (43% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/gis/shortcuts.py (41L)\nfile scope: [\"0006u00a\" full 41L | imports 15L]\n\n- def compress_kml(kml): ... [\"0006u003\" full 7L | code 7L]\n\n- def render_to_kml(*args, **kwargs): ... [\"0006u006\" full 6L | code 6L]\n\n- def render_to_kmz(*args, **kwargs): ... [\"0006u009\" full 9L | code 9L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

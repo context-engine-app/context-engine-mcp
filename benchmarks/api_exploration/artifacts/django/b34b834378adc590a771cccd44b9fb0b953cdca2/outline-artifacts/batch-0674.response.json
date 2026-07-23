@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_squashed_ref_squashed/app2/1_auto.py",
+        "tests/migrations/test_migrations_squashed_ref_squashed/app2/1_squashed_2.py",
+        "tests/migrations/test_migrations_squashed_ref_squashed/app2/2_auto.py",
+        "tests/migrations/test_migrations_squashed_ref_squashed/app2/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/migrations/test_migrations_squashed_ref_squashed/app2/1_auto.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import migrations\n2|\n3|\n4|class Migration(migrations.Migration):\n5|    dependencies = [(\"app1\", \"1_auto\")]\nnote: EOF\n\n# tests/migrations/test_migrations_squashed_ref_squashed/app2/1_squashed_2.py (11L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from django.db import migrations\n 2|\n 3|\n 4|class Migration(migrations.Migration):\n 5|    replaces = [\n 6|        (\"app2\", \"1_auto\"),\n 7|        (\"app2\", \"2_auto\"),\n 8|    ]\n 9|\n10|    dependencies = [(\"app1\", \"1_auto\")]\nnote: EOF\n\n# tests/migrations/test_migrations_squashed_ref_squashed/app2/2_auto.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import migrations\n2|\n3|\n4|class Migration(migrations.Migration):\n5|    dependencies = [(\"app2\", \"1_auto\")]\nnote: EOF\n\n# tests/migrations/test_migrations_squashed_ref_squashed/app2/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

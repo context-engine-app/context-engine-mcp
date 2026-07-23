@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/ansi/color_themes.ts",
+        "examples/ansi/colors.ts",
+        "examples/ansi/countdown.ts",
+        "examples/ansi/cursor_position.ts",
+        "examples/ansi/custom.ts",
+        "examples/ansi/demo.ts",
+        "examples/ansi/functional.ts",
+        "examples/ansi/image.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 4.7 KB -> 1.4 KB (71% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/ansi/color_themes.ts (19L)\nfile scope: [\"0001T003\" full 19L | imports 10L]\n\n\n# examples/ansi/colors.ts (8L)\nfile scope: [\"0001U000\" full 8L]\n\n\n# examples/ansi/countdown.ts (13L)\nfile scope: [\"0001V001\" full 13L | imports 6L]\n\n\n# examples/ansi/cursor_position.ts (7L)\nfile scope: [\"0001W000\" full 7L]\n\n\n# examples/ansi/custom.ts (50L)\nfile scope: [\"0001X009\" full 50L | imports 36L]\n\n- Deno.addSignalListener(\"SIGINT\") callback [\"0001X002\" full 5L | code 5L]\n\n- width: 29 [\"0001X003\" full 1L | code 1L]\n\n- preserveAspectRatio: true [\"0001X004\" full 1L | code 1L]\n\n- setInterval() callback [\"0001X005\" full 6L | code 6L]\n\n# examples/ansi/demo.ts (103L)\nfile scope: [\"0001Y00b\" full 103L | imports 50L]\n\n- colorNames.map() callback [\"0001Y008\" full 1L | code 1L]\n\n- ansiEscapeNames.map() callback [\"0001Y00a\" full 1L | code 1L]\n\n# examples/ansi/functional.ts (19L)\nfile scope: [\"0001Z004\" full 19L | imports 16L]\n\n- width: 29 [\"0001Z002\" full 1L | code 1L]\n\n- preserveAspectRatio: true [\"0001Z003\" full 1L | code 1L]\n\n# examples/ansi/image.ts (10L)\nfile scope: [\"00020002\" full 10L | imports 7L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

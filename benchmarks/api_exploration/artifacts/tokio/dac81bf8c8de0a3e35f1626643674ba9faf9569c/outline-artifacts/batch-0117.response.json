@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/signal/mod.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 4.9 KB -> 1.6 KB (67% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/signal/mod.rs (144L)\nfile scope: [\"0007y00f\" full 144L | imports 23L]\n\n- #[derive(Debug)] pub(crate) struct Driver { ... } [\"0007y003\" full 18L | code 13L | docs 5L]\n  - io: io::Driver [\"0007y000\" full 2L | code 1L | docs 1L]\n  - receiver: UnixStream [\"0007y001\" full 2L | code 1L | docs 1L]\n  - inner: Arc<()> [\"0007y002\" full 4L | code 1L | docs 3L]\n\n- #[derive(Debug, Default)] pub(crate) struct Handle { ... } [\"0007y005\" full 6L | code 6L]\n  - inner: Weak<()> [\"0007y004\" full 3L | code 1L | docs 2L]\n\n- impl Driver { ... } [\"0007y00c\" full 88L | code 88L]\n  - pub(crate) fn new(io: io::Driver, io_handle: &io::Handle) -> std_io::Result<Self> { ... } [\"0007y006\" full 40L | code 39L | docs 1L]\n  - pub(crate) fn handle(&self) -> Handle { ... } [\"0007y007\" full 7L | code 5L | docs 2L]\n  - pub(crate) fn park(&mut self, handle: &driver::Handle) { ... } [\"0007y008\" full 4L | code 4L]\n  - pub(crate) fn park_timeout(&mut self, handle: &driver::Handle, duration: Duration) { ... } [\"0007y009\" full 4L | code 4L]\n  - pub(crate) fn shutdown(&mut self, handle: &driver::Handle) { ... } [\"0007y00a\" full 3L | code 3L]\n  - fn process(&mut self) { ... } [\"0007y00b\" full 23L | code 23L]\n\n- impl Handle { ... } [\"0007y00e\" full 12L | code 12L]\n  - pub(crate) fn check_inner(&self) -> std_io::Result<()> { ... } [\"0007y00d\" full 10L | code 10L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/core/cache/utils.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 479 B -> 536 B (-12% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/core/cache/utils.py (14L)\nfile scope: [\"0008y007\" full 14L | imports 7L]\n\n- TEMPLATE_FRAGMENT_KEY_TEMPLATE [\"0008y000\" full 1L | code 1L]\n\n- def make_template_fragment_key(fragment_name, vary_on=None): ... [\"0008y006\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

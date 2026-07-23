@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/fs/open_options/mock_open_options.rs",
+        "tokio/src/fs/open_options/uring_open_options.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 5.2 KB -> 2.4 KB (54% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/fs/open_options/mock_open_options.rs (40L)\nfile scope: [\"00042000\" full 40L]\n\n\n# tokio/src/fs/open_options/uring_open_options.rs (129L)\nfile scope: [\"0004300n\" full 129L | imports 8L]\n\n- #[derive(Debug, Clone)] pub(crate) struct UringOpenOptions { ... } [\"00043008\" full 11L | code 11L]\n  - pub(crate) read: bool [\"00043000\" full 1L | code 1L]\n  - pub(crate) write: bool [\"00043001\" full 1L | code 1L]\n  - pub(crate) append: bool [\"00043002\" full 1L | code 1L]\n  - pub(crate) truncate: bool [\"00043003\" full 1L | code 1L]\n  - pub(crate) create: bool [\"00043004\" full 1L | code 1L]\n  - pub(crate) create_new: bool [\"00043005\" full 1L | code 1L]\n  - pub(crate) mode: libc::mode_t [\"00043006\" full 1L | code 1L]\n  - pub(crate) custom_flags: libc::c_int [\"00043007\" full 1L | code 1L]\n\n- impl UringOpenOptions { ... } [\"0004300k\" full 91L | code 91L]\n  - pub(crate) fn new() -> Self { ... } [\"00043009\" full 12L | code 12L]\n  - pub(crate) fn append(&mut self, append: bool) -> &mut Self { ... } [\"0004300a\" full 4L | code 4L]\n  - pub(crate) fn create(&mut self, create: bool) -> &mut Self { ... } [\"0004300b\" full 4L | code 4L]\n  - pub(crate) fn create_new(&mut self, create_new: bool) -> &mut Self { ... } [\"0004300c\" full 4L | code 4L]\n  - pub(crate) fn read(&mut self, read: bool) -> &mut Self { ... } [\"0004300d\" full 4L | code 4L]\n  - pub(crate) fn write(&mut self, write: bool) -> &mut Self { ... } [\"0004300e\" full 4L | code 4L]\n  - pub(crate) fn truncate(&mut self, truncate: bool) -> &mut Self { ... } [\"0004300f\" full 4L | code 4L]\n  - pub(crate) fn mode(&mut self, mode: u32) -> &mut Self { ... } [\"0004300g\" full 4L | code 4L]\n  - pub(crate) fn custom_flags(&mut self, flags: i32) -> &mut Self { ... } [\"0004300h\" full 4L | code 4L]\n  - pub(crate) fn access_mode(&self) -> io::Result<libc::c_int> { ... } [\"0004300i\" full 11L | code 10L | docs 1L]\n  - pub(crate) fn creation_mode(&self) -> io::Result<libc::c_int> { ... } [\"0004300j\" full 24L | code 23L | docs 1L]\n\n- impl From<UringOpenOptions> for StdOpenOptions { ... } [\"0004300m\" full 17L | code 17L]\n  - fn from(value: UringOpenOptions) -> Self { ... } [\"0004300l\" full 15L | code 15L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

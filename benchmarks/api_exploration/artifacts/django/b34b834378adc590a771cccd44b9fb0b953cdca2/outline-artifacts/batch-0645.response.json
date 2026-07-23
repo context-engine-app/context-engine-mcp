@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_fake_split_initial/0001_initial.py",
+        "tests/migrations/test_migrations_fake_split_initial/0002_second.py",
+        "tests/migrations/test_migrations_fake_split_initial/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/test_migrations_fake_split_initial/0001_initial.py (30L)\nfile scope: [\"000wX003\" full 30L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000wX002\" full 26L | code 26L]\n\n# tests/migrations/test_migrations_fake_split_initial/0002_second.py (24L)\nfile scope: [\"000wY004\" full 24L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000wY003\" full 20L | code 20L]\n\n# tests/migrations/test_migrations_fake_split_initial/__init__.py (1L)\nfile scope: [\"000wZ000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

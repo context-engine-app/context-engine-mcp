@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/gis/utils/__init__.py",
+        "django/contrib/gis/utils/layermapping.py",
+        "django/contrib/gis/utils/ogrinfo.py",
+        "django/contrib/gis/utils/ogrinspect.py",
+        "django/contrib/gis/utils/srs.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 42.6 KB -> 3.4 KB (92% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/gis/utils/__init__.py (18L)\nfile scope: [\"0006y001\" full 18L | imports 10L]\n\n\n# django/contrib/gis/utils/layermapping.py (738L)\nfile scope: [\"0006z02c\" full 738L | module-docs 1L | imports 39L]\n\n- class LayerMapError(Exception): ... [\"0006z000\" full 2L | code 2L]\n\n- class InvalidString(LayerMapError): ... [\"0006z001\" full 2L | code 2L]\n\n- class InvalidDecimal(LayerMapError): ... [\"0006z002\" full 2L | code 2L]\n\n- class InvalidInteger(LayerMapError): ... [\"0006z003\" full 2L | code 2L]\n\n- class MissingForeignKey(LayerMapError): ... [\"0006z004\" full 2L | code 2L]\n\n- class LayerMapping: ... [\"0006z02b\" full 679L | code 679L]\n  - def __init__( self, model, data, mapping, layer=0, source_srs=None, encoding=\"utf-8\", transaction_mode=\"commit_on_success\", transform=True, unique=None, using=None, ): ... [\"0006z00i\" full 81L | code 81L]\n  - def check_fid_range(self, fid_range): ... [\"0006z00x\" full 11L | code 11L]\n  - def check_layer(self): ... [\"0006z00P\" full 117L | code 117L]\n    - def check_ogr_fld(ogr_map_fld): ... [\"0006z00C\" full 8L | code 8L]\n  - def check_srs(self, source_srs): ... [\"0006z00V\" full 17L | code 17L]\n  - def check_unique(self, unique): ... [\"0006z00Y\" full 15L | code 15L]\n  - def feature_kwargs(self, feat): ... [\"0006z015\" full 32L | code 32L]\n  - def unique_kwargs(self, kwargs): ... [\"0006z017\" full 10L | code 10L]\n  - def verify_ogr_field(self, ogr_field, model_field): ... [\"0006z01h\" full 73L | code 73L]\n  - def verify_fk(self, feat, rel_model, rel_mapping): ... [\"0006z01o\" full 24L | code 24L]\n  - def verify_geom(self, geom, model_field): ... [\"0006z01t\" full 30L | code 30L]\n  - def coord_transform(self): ... [\"0006z01x\" full 17L | code 17L]\n  - def geometry_field(self): ... [\"0006z01z\" full 9L | code 9L]\n  - def make_multi(self, geom_type, model_field): ... [\"0006z01C\" full 10L | code 10L]\n  - def save( self, verbose=False, fid_range=False, step=False, progress=False, silent=False, stream=sys.stdout, strict=False, ): ... [\"0006z02a\" full 178L | code 178L]\n    - def _save(feat_range=default_range, num_feat=0, num_saved=0): ... [\"0006z020\" full 83L | code 83L]\n\n# django/contrib/gis/utils/ogrinfo.py (54L)\nfile scope: [\"0006A00f\" full 54L | imports 11L]\n\n- def ogrinfo(data_source, num_features=10): ... [\"0006A00e\" full 43L | code 43L]\n\n# django/contrib/gis/utils/ogrinspect.py (270L)\nfile scope: [\"0006B00H\" full 270L | imports 19L]\n\n- def mapping(data_source, geom_name=\"geom\", layer_key=0, multi_geom=False): ... [\"0006B008\" full 38L | code 38L]\n\n- def ogrinspect(*args, **kwargs): ... [\"0006B00b\" full 69L | code 69L]\n\n- def _ogrinspect( data_source, model_name, geom_name=\"geom\", layer_key=0, srid=None, multi_geom=False, name_field=None, imports=True, decimal=False, blank=False, null=False, ): ... [\"0006B00G\" full 140L | code 140L]\n  - def process_kwarg(kwarg): ... [\"0006B00q\" full 7L | code 7L]\n  - def get_kwargs_str(field_name): ... [\"0006B00w\" full 10L | code 10L]\n\n# django/contrib/gis/utils/srs.py (79L)\nfile scope: [\"0006C00a\" full 79L | imports 5L]\n\n- def add_srs_entry( srs, auth_name=\"EPSG\", auth_srid=None, ref_sys_name=None, database=None ): ... [\"0006C009\" full 74L | code 74L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/signing/__init__.py",
+        "tests/signing/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/signing/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/signing/tests.py (252L)\nfile scope: [\"000Dz01g\" full 252L | imports 10L]\n\n- class TestSigner(SimpleTestCase): ... [\"000Dz016\" full 216L | code 216L]\n  - def test_signature(self): ... [\"000Dz003\" full 19L | code 19L]\n  - def test_signature_with_salt(self): ... [\"000Dz005\" full 15L | code 15L]\n  - def test_base64_hmac_default_algorithm_deprecation(self): ... [\"000Dz007\" full 8L | code 8L]\n  - def test_custom_algorithm(self): ... [\"000Dz009\" full 7L | code 7L]\n  - def test_invalid_algorithm(self): ... [\"000Dz00c\" full 5L | code 5L]\n  - def test_sign_unsign(self): ... [\"000Dz00h\" full 15L | code 15L]\n  - def test_sign_unsign_non_string(self): ... [\"000Dz00m\" full 14L | code 14L]\n  - def test_unsign_detects_tampering(self): ... [\"000Dz00s\" full 15L | code 15L]\n  - def test_sign_unsign_object(self): ... [\"000Dz00x\" full 15L | code 15L]\n  - def test_dumps_loads(self): ... [\"000Dz00A\" full 12L | code 12L]\n  - def test_decode_detects_tampering(self): ... [\"000Dz00F\" full 17L | code 17L]\n  - def test_works_with_non_ascii_keys(self): ... [\"000Dz00I\" full 8L | code 8L]\n  - def test_valid_sep(self): ... [\"000Dz00M\" full 8L | code 8L]\n  - def test_invalid_sep(self): ... [\"000Dz00Q\" full 9L | code 9L]\n  - def test_verify_with_non_default_key(self): ... [\"000Dz00U\" full 7L | code 7L]\n  - def test_sign_unsign_multiple_keys(self): ... [\"000Dz00X\" full 5L | code 5L]\n  - @override_settings( SECRET_KEY=\"secret\", SECRET_KEY_FALLBACKS=[\"oldsecret\"], ) def test_sign_unsign_ignore_secret_key_fallbacks(self): ... [\"000Dz011\" full 10L | code 10L]\n  - @override_settings( SECRET_KEY=\"secret\", SECRET_KEY_FALLBACKS=[\"oldsecret\"], ) def test_default_keys_verification(self): ... [\"000Dz015\" full 9L | code 9L]\n\n- class TestTimestampSigner(SimpleTestCase): ... [\"000Dz01b\" full 17L | code 17L]\n  - def test_timestamp_signer(self): ... [\"000Dz01a\" full 16L | code 16L]\n\n- class TestBase62(SimpleTestCase): ... [\"000Dz01f\" full 5L | code 5L]\n  - def test_base62(self): ... [\"000Dz01e\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

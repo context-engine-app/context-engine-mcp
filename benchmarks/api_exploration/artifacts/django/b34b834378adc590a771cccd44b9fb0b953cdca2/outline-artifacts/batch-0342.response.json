@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/apps/two_configs_app/__init__.py",
+        "tests/apps/two_configs_app/apps.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/apps/two_configs_app/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/apps/two_configs_app/apps.py (10L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.apps import AppConfig\n2|\n3|\n4|class TwoConfig(AppConfig):\n5|    name = \"apps.two_configs_app\"\n6|\n7|\n8|class TwoConfigBis(AppConfig):\n9|    name = \"apps.two_configs_app\"\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

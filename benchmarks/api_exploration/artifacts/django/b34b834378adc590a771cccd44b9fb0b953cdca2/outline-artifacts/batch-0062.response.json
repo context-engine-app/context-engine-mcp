@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/conf/locale/mn/__init__.py",
+        "django/conf/locale/mn/formats.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/conf/locale/mn/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/conf/locale/mn/formats.py (22L)\nfile scope: [\"0001Z003\" full 22L | module-docs 4L | imports 7L]\n\n- DATE_FORMAT [\"0001Z000\" full 1L | code 1L]\n\n- TIME_FORMAT [\"0001Z001\" full 1L | code 1L]\n\n- SHORT_DATE_FORMAT [\"0001Z002\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

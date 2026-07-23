@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/core/management/sql.py",
+        "django/core/management/templates.py",
+        "django/core/management/utils.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 22.4 KB -> 2.7 KB (88% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/core/management/sql.py (60L)\nfile scope: [\"0009U00k\" full 60L | imports 7L]\n\n- def sql_flush(style, connection, reset_sequences=True, allow_cascade=False): ... [\"0009U005\" full 13L | code 13L]\n\n- def emit_pre_migrate_signal(verbosity, interactive, db, **kwargs): ... [\"0009U00c\" full 18L | code 18L]\n\n- def emit_post_migrate_signal(verbosity, interactive, db, **kwargs): ... [\"0009U00j\" full 18L | code 18L]\n\n# django/core/management/templates.py (406L)\nfile scope: [\"0009V01E\" full 406L | imports 26L]\n\n- class TemplateCommand(BaseCommand): ... [\"0009V01D\" full 380L | code 380L]\n  - def add_arguments(self, parser): ... [\"0009V004\" full 41L | code 41L]\n  - def handle(self, app_or_project, name, target=None, **options): ... [\"0009V00H\" full 147L | code 147L]\n  - def handle_template(self, template, subdir): ... [\"0009V00Q\" full 25L | code 25L]\n  - def validate_name(self, name, name_or_dir=\"name\"): ... [\"0009V00T\" full 30L | code 30L]\n  - def download(self, url): ... [\"0009V01h\" full 61L | code 61L]\n    - def cleanup_url(url): ... [\"0009V00Z\" full 8L | code 8L]\n  - def splitext(self, the_path): ... [\"0009V01l\" full 9L | code 9L]\n  - def extract(self, filename): ... [\"0009V01q\" full 17L | code 17L]\n  - def is_url(self, template): ... [\"0009V01t\" full 6L | code 6L]\n  - def apply_umask(self, old_path, new_path): ... [\"0009V01y\" full 5L | code 5L]\n  - def make_writeable(self, filename): ... [\"0009V01C\" full 9L | code 9L]\n\n# django/core/management/utils.py (182L)\nfile scope: [\"0009W00O\" full 182L | imports 17L]\n\n- def popen_wrapper(args, stdout_encoding=\"utf-8\"): ... [\"0009W004\" full 15L | code 15L]\n\n- def handle_extensions(extensions): ... [\"0009W009\" full 20L | code 20L]\n\n- def find_command(cmd, path=None, pathext=None): ... [\"0009W00h\" full 23L | code 23L]\n\n- def get_random_secret_key(): ... [\"0009W00j\" full 6L | code 6L]\n\n- def parse_apps_and_model_labels(labels): ... [\"0009W00r\" full 25L | code 25L]\n\n- def get_command_line_option(argv, option): ... [\"0009W00w\" full 14L | code 14L]\n\n- def normalize_path_patterns(patterns): ... [\"0009W00C\" full 13L | code 13L]\n\n- def is_ignored_path(path, ignore_patterns): ... [\"0009W00H\" full 13L | code 13L]\n  - def ignore(pattern): ... [\"0009W00G\" full 4L | code 4L]\n\n- def find_formatters(): ... [\"0009W00I\" full 2L | code 2L]\n\n- def run_formatters(written_files, black_path=(sentinel := object()), stderr=sys.stderr): ... [\"0009W00M\" full 16L | code 16L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

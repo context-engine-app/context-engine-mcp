@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/fs/read.rs",
+        "tokio/src/fs/read_dir.rs",
+        "tokio/src/fs/read_link.rs",
+        "tokio/src/fs/read_to_string.rs",
+        "tokio/src/fs/read_uring.rs",
+        "tokio/src/fs/remove_dir.rs",
+        "tokio/src/fs/remove_dir_all.rs",
+        "tokio/src/fs/remove_file.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 21.3 KB -> 4.6 KB (79% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/fs/read.rs (95L)\nfile scope: [\"00044002\" full 95L | imports 5L]\n\n- pub async fn read(path: impl AsRef<Path>) -> io::Result<Vec<u8>> { ... } [\"00044000\" full 85L | code 34L | docs 51L]\n\n- async fn read_spawn_blocking(path: &Path) -> io::Result<Vec<u8>> { ... } [\"00044001\" full 4L | code 4L]\n\n# tokio/src/fs/read_dir.rs (358L)\nfile scope: [\"0004500j\" full 358L | imports 55L]\n\n- const CHUNK_SIZE: usize = 32; [\"00045000\" full 1L | code 1L]\n\n- pub async fn read_dir(path: impl AsRef<Path>) -> io::Result<ReadDir> { ... } [\"00045001\" full 19L | code 11L | docs 8L]\n\n- #[derive(Debug)] #[must_use = \"streams do nothing unless polled\"] pub struct ReadDir( ... ); [\"00045002\" full 21L | code 3L | docs 18L]\n\n- #[derive(Debug)] enum State { ... } [\"00045005\" full 5L | code 5L]\n  - Idle(Option<(VecDeque<io::Result<DirEntry>>, std::fs::ReadDir, bool)>) [\"00045003\" full 1L | code 1L]\n  - Pending(JoinHandle<(VecDeque<io::Result<DirEntry>>, std::fs::ReadDir, bool)>) [\"00045004\" full 1L | code 1L]\n\n- impl ReadDir { ... } [\"00045009\" full 86L | code 86L]\n  - pub async fn next_entry(&mut self) -> io::Result<Option<DirEntry>> { ... } [\"00045006\" full 9L | code 4L | docs 5L]\n  - pub fn poll_next_entry(&mut self, cx: &mut Context<'_>) -> Poll<io::Result<Option<DirEntry>>> { ... } [\"00045007\" full 43L | code 25L | docs 18L]\n  - fn next_chunk(buf: &mut VecDeque<io::Result<DirEntry>>, std: &mut std::fs::ReadDir) -> bool { ... } [\"00045008\" full 30L | code 30L]\n\n- #[derive(Debug)] pub struct DirEntry { ... } [\"0004500c\" full 24L | code 14L | docs 10L]\n  - #[cfg(not(any( target_os = \"solaris\", target_os = \"illumos\", target_os = \"haiku\", target_os = \"vxworks\", target_os = \"aix\", target_os = \"nto\", target_os = \"vita\", )))] file_type: Option<FileType> [\"0004500a\" full 10L | code 10L]\n  - std: Arc<std::fs::DirEntry> [\"0004500b\" full 1L | code 1L]\n\n- impl DirEntry { ... } [\"0004500i\" full 144L | code 144L]\n  - pub fn path(&self) -> PathBuf { ... } [\"0004500d\" full 32L | code 3L | docs 29L]\n  - pub fn file_name(&self) -> OsString { ... } [\"0004500e\" full 20L | code 3L | docs 17L]\n  - pub async fn metadata(&self) -> io::Result<Metadata> { ... } [\"0004500f\" full 34L | code 4L | docs 30L]\n  - pub async fn file_type(&self) -> io::Result<FileType> { ... } [\"0004500g\" full 47L | code 17L | docs 30L]\n  - #[cfg(unix)] pub(super) fn as_inner(&self) -> &std::fs::DirEntry { ... } [\"0004500h\" full 5L | code 4L | docs 1L]\n\n# tokio/src/fs/read_link.rs (13L)\nfile scope: [\"00046001\" full 13L | imports 6L]\n\n- pub async fn read_link(path: impl AsRef<Path>) -> io::Result<PathBuf> { ... } [\"00046000\" full 7L | code 4L | docs 3L]\n\n# tokio/src/fs/read_to_string.rs (31L)\nfile scope: [\"00047001\" full 31L | imports 5L]\n\n- pub async fn read_to_string(path: impl AsRef<Path>) -> io::Result<String> { ... } [\"00047000\" full 26L | code 4L | docs 22L]\n\n# tokio/src/fs/read_uring.rs (152L)\nfile scope: [\"00048007\" full 152L | imports 9L]\n\n- const PROBE_SIZE: usize = 32; [\"00048000\" full 3L | code 1L | docs 2L]\n\n- const PROBE_SIZE_U32: u32 = PROBE_SIZE as u32; [\"00048001\" full 1L | code 1L]\n\n- const MAX_READ_SIZE: usize = 64 * 1024 * 1024; [\"00048002\" full 4L | code 1L | docs 3L]\n\n- pub(crate) async fn read_uring(path: &Path) -> io::Result<Vec<u8>> { ... } [\"00048003\" full 36L | code 36L]\n\n- async fn read_to_end_uring(mut fd: OwnedFd, mut buf: Vec<u8>) -> io::Result<Vec<u8>> { ... } [\"00048004\" full 43L | code 43L]\n\n- async fn small_probe_read( fd: OwnedFd, mut buf: Vec<u8>, offset: &mut u64, ) -> io::Result<(OwnedFd, Vec<u8>, bool)> { ... } [\"00048005\" full 25L | code 25L]\n\n- async fn op_read( mut fd: OwnedFd, mut buf: Vec<u8>, offset: &mut u64, read_len: u32, ) -> io::Result<(OwnedFd, Vec<u8>, bool)> { ... } [\"00048006\" full 26L | code 23L | docs 3L]\n\n# tokio/src/fs/remove_dir.rs (13L)\nfile scope: [\"00049001\" full 13L | imports 6L]\n\n- pub async fn remove_dir(path: impl AsRef<Path>) -> io::Result<()> { ... } [\"00049000\" full 7L | code 4L | docs 3L]\n\n# tokio/src/fs/remove_dir_all.rs (15L)\nfile scope: [\"0004a001\" full 15L | imports 6L]\n\n- pub async fn remove_dir_all(path: impl AsRef<Path>) -> io::Result<()> { ... } [\"0004a000\" full 9L | code 4L | docs 5L]\n\n# tokio/src/fs/remove_file.rs (17L)\nfile scope: [\"0004b001\" full 17L | imports 6L]\n\n- pub async fn remove_file(path: impl AsRef<Path>) -> io::Result<()> { ... } [\"0004b000\" full 11L | code 4L | docs 7L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/get_object_or_404/__init__.py",
+        "tests/get_object_or_404/models.py",
+        "tests/get_object_or_404/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/get_object_or_404/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/get_object_or_404/models.py (36L)\nfile scope: [\"000qM00c\" full 36L | imports 16L]\n\n- class Author(models.Model): ... [\"000qM001\" full 2L | code 2L]\n\n- class ArticleManager(models.Manager): ... [\"000qM003\" full 3L | code 3L]\n  - def get_queryset(self): ... [\"000qM002\" full 2L | code 2L]\n\n- class AttributeErrorManager(models.Manager): ... [\"000qM005\" full 3L | code 3L]\n  - def get_queryset(self): ... [\"000qM004\" full 2L | code 2L]\n\n- class Article(models.Model): ... [\"000qM00b\" full 6L | code 6L]\n\n# tests/get_object_or_404/tests.py (125L)\nfile scope: [\"000qN00a\" full 125L | imports 9L]\n\n- class GetObjectOr404Tests(TestCase): ... [\"000qN009\" full 116L | code 116L]\n  - def test_get_object_or_404(self): ... [\"000qN003\" full 77L | code 77L]\n  - def test_bad_class(self): ... [\"000qN006\" full 27L | code 27L]\n    - class CustomClass: ... [\"000qN005\" full 2L | code 2L]\n  - def test_get_object_or_404_queryset_attribute_error(self): ... [\"000qN007\" full 4L | code 4L]\n  - def test_get_list_or_404_queryset_attribute_error(self): ... [\"000qN008\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

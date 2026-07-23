@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/fuzz/fuzz_targets/fuzz_linked_list.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n1|#![no_main]\n2|\n3|use libfuzzer_sys::fuzz_target;\n4|\n5|fuzz_target!(|data: &[u8]| {\n6|    tokio::fuzz::fuzz_linked_list(data);\n7|});\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

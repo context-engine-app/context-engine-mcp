@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_backwards_deps_1/0001_initial.py",
+        "tests/migrations/test_migrations_backwards_deps_1/0002_second.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/migrations/test_migrations_backwards_deps_1/0001_initial.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import migrations\n2|\n3|\n4|class Migration(migrations.Migration):\n5|    operations = []\nnote: EOF\n\n# tests/migrations/test_migrations_backwards_deps_1/0002_second.py (7L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import migrations\n2|\n3|\n4|class Migration(migrations.Migration):\n5|    dependencies = [(\"migrations\", \"0001_initial\")]\n6|    operations = []\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

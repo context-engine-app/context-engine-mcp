@@ -1,0 +1,25 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/sphinx/testdata/package/__init__.py",
+        "tests/sphinx/testdata/package/import_error.py",
+        "tests/sphinx/testdata/package/module.py",
+        "tests/sphinx/testdata/package/other_module.py",
+        "tests/sphinx/testdata/package/wildcard_base.py",
+        "tests/sphinx/testdata/package/wildcard_module.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/sphinx/testdata/package/__init__.py (3L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|# This file should never get imported. If it is, then something failed already.\n2|raise Exception\nnote: EOF\n\n# tests/sphinx/testdata/package/import_error.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from .....test import Test  # noqa\n2|\n3|\n4|class MyClass:\n5|    pass\nnote: EOF\n\n# tests/sphinx/testdata/package/module.py (26L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|\"\"\"\n 2|Example docstring\n 3|\"\"\"\n 4|\n 5|from django.utils.functional import cached_property\n 6|from tests.sphinx.testdata.package.wildcard_module import *  # noqa\n 7|\n 8|from . import other_module  # noqa\n 9|from .other_module import MyOtherClass  # noqa\n10|\n11|\n12|class MyClass(object):\n13|    def __init__(self):\n14|        pass\n15|\n16|    def my_method(self):\n17|        pass\n18|\n19|    @cached_property\n20|    def my_cached_property(self):\n21|        pass\n22|\n23|\n24|def my_function(self):\n25|    pass\nnote: EOF\n\n# tests/sphinx/testdata/package/other_module.py (3L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|class MyOtherClass:\n2|    pass\nnote: EOF\n\n# tests/sphinx/testdata/package/wildcard_base.py (3L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|class WildcardMixin:\n2|    pass\nnote: EOF\n\n# tests/sphinx/testdata/package/wildcard_module.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from .wildcard_base import WildcardMixin  # noqa\n2|\n3|\n4|class WildcardClass:\n5|    pass\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

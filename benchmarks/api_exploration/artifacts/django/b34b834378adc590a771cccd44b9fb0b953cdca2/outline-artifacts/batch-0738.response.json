@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/redirects_tests/__init__.py",
+        "tests/redirects_tests/tests.py",
+        "tests/redirects_tests/urls.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/redirects_tests/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/redirects_tests/tests.py (114L)\nfile scope: [\"000Ce00v\" full 114L | imports 10L]\n\n- @modify_settings( MIDDLEWARE={ \"append\": \"django.contrib.redirects.middleware.RedirectFallbackMiddleware\" } ) @override_settings(APPEND_SLASH=False, ROOT_URLCONF=\"redirects_tests.urls\") class RedirectTests(TestCase): ... [\"000Ce00k\" full 77L | code 77L]\n  - @classmethod def setUpTestData(cls): ... [\"000Ce000\" full 3L | code 3L]\n  - def test_model(self): ... [\"000Ce003\" full 5L | code 5L]\n  - def test_redirect(self): ... [\"000Ce005\" full 8L | code 8L]\n  - @override_settings(APPEND_SLASH=True) def test_redirect_with_append_slash(self): ... [\"000Ce007\" full 9L | code 9L]\n  - @override_settings(APPEND_SLASH=True) def test_redirect_with_append_slash_and_query_string(self): ... [\"000Ce009\" full 9L | code 9L]\n  - @override_settings(APPEND_SLASH=True) def test_redirect_not_found_with_append_slash(self): ... [\"000Ce00b\" full 8L | code 8L]\n  - def test_redirect_shortcircuits_non_404_response(self): ... [\"000Ce00d\" full 4L | code 4L]\n  - def test_response_gone(self): ... [\"000Ce00f\" full 5L | code 5L]\n  - @modify_settings(INSTALLED_APPS={\"remove\": \"django.contrib.sites\"}) def test_sites_not_installed(self): ... [\"000Ce00j\" full 11L | code 11L]\n    - def get_response(request): ... [\"000Ce00h\" full 2L | code 2L]\n\n- class OverriddenRedirectFallbackMiddleware(RedirectFallbackMiddleware): ... [\"000Ce00n\" full 4L | code 4L]\n\n- @modify_settings( MIDDLEWARE={\"append\": \"redirects_tests.tests.OverriddenRedirectFallbackMiddleware\"} ) class OverriddenRedirectMiddlewareTests(TestCase): ... [\"000Ce00u\" full 19L | code 19L]\n  - @classmethod def setUpTestData(cls): ... [\"000Ce00o\" full 3L | code 3L]\n  - def test_response_gone_class(self): ... [\"000Ce00r\" full 4L | code 4L]\n  - def test_response_redirect_class(self): ... [\"000Ce00t\" full 6L | code 6L]\n\n# tests/redirects_tests/urls.py (7L)\nfile scope: [\"000Cf001\" full 7L | imports 4L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

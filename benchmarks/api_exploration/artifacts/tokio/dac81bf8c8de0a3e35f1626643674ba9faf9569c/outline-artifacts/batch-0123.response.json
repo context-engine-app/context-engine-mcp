@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/tests/inject.rs",
+        "tokio/src/runtime/tests/loom_blocking.rs",
+        "tokio/src/runtime/tests/loom_current_thread.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 11.7 KB -> 2.8 KB (76% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/tests/inject.rs (55L)\nfile scope: [\"0007P004\" full 55L | imports 3L]\n\n- #[test] fn push_and_pop() { ... } [\"0007P001\" full 21L | code 21L]\n\n- #[test] fn push_batch_and_pop() { ... } [\"0007P002\" full 15L | code 15L]\n\n- #[test] fn pop_n_drains_on_drop() { ... } [\"0007P003\" full 14L | code 14L]\n\n# tokio/src/runtime/tests/loom_blocking.rs (141L)\nfile scope: [\"0007Q006\" full 141L | imports 6L]\n\n- #[test] fn blocking_shutdown() { ... } [\"0007Q000\" full 20L | code 20L]\n\n- #[test] fn spawn_mandatory_blocking_should_always_run() { ... } [\"0007Q001\" full 20L | code 20L]\n\n- #[test] fn spawn_mandatory_blocking_should_run_even_when_shutting_down_from_other_thread() { ... } [\"0007Q002\" full 28L | code 28L]\n\n- #[test] fn spawn_blocking_when_paused() { ... } [\"0007Q003\" full 19L | code 19L]\n\n- #[test] fn spawn_blocking_then_shutdown() { ... } [\"0007Q004\" full 37L | code 37L]\n\n- fn mk_runtime(num_threads: usize) -> Runtime { ... } [\"0007Q005\" full 6L | code 6L]\n\n# tokio/src/runtime/tests/loom_current_thread.rs (199L)\nfile scope: [\"0007R00l\" full 199L | imports 14L]\n\n- mod yield_now; [\"0007R000\" full 1L | code 1L]\n\n- fn assert_at_most_num_polls(rt: Arc<Runtime>, at_most_polls: usize) { ... } [\"0007R001\" full 21L | code 21L]\n\n- #[test] fn block_on_num_polls() { ... } [\"0007R002\" full 33L | code 33L]\n\n- #[test] fn assert_no_unnecessary_polls() { ... } [\"0007R003\" full 38L | code 38L]\n\n- #[test] fn drop_jh_during_schedule() { ... } [\"0007R008\" full 53L | code 53L]\n  - unsafe fn waker_clone(ptr: *const ()) -> RawWaker { ... } [\"0007R004\" full 5L | code 5L]\n  - unsafe fn waker_drop(ptr: *const ()) { ... } [\"0007R005\" full 4L | code 4L]\n  - unsafe fn waker_nop(_ptr: *const ()) { ... } [\"0007R006\" full 1L | code 1L]\n\n- struct BlockedFuture { ... } [\"0007R00b\" full 4L | code 4L]\n  - rx: Receiver<()> [\"0007R009\" full 1L | code 1L]\n  - num_polls: Arc<AtomicUsize> [\"0007R00a\" full 1L | code 1L]\n\n- impl Future for BlockedFuture { ... } [\"0007R00e\" full 12L | code 12L]\n  - type Output = (); [\"0007R00c\" full 1L | code 1L]\n  - fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> { ... } [\"0007R00d\" full 8L | code 8L]\n\n- struct ResetFuture { ... } [\"0007R00h\" full 4L | code 4L]\n  - rx: Receiver<()> [\"0007R00f\" full 1L | code 1L]\n  - pending_cnt: Arc<AtomicUsize> [\"0007R00g\" full 1L | code 1L]\n\n- impl Future for ResetFuture { ... } [\"0007R00k\" full 13L | code 13L]\n  - type Output = (); [\"0007R00i\" full 1L | code 1L]\n  - fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> { ... } [\"0007R00j\" full 9L | code 9L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/empty_models/__init__.py",
+        "tests/empty_models/models.py",
+        "tests/empty_models/test_commands.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/empty_models/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/empty_models/models.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/empty_models/test_commands.py (23L)\nfile scope: [\"000nG008\" full 23L | imports 7L]\n\n- class CoreCommandsNoOutputTests(TestCase): ... [\"000nG007\" full 16L | code 16L]\n  - def test_sqlflush_no_tables(self): ... [\"000nG003\" full 6L | code 6L]\n  - def test_sqlsequencereset_no_sequences(self): ... [\"000nG006\" full 6L | code 6L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

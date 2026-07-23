@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/user_commands/management/commands/outputwrapper.py",
+        "tests/user_commands/management/commands/required_constant_option.py",
+        "tests/user_commands/management/commands/required_list_option.py",
+        "tests/user_commands/management/commands/required_option.py",
+        "tests/user_commands/management/commands/reverse_url.py",
+        "tests/user_commands/management/commands/set_option.py",
+        "tests/user_commands/management/commands/specific_system_checks.py",
+        "tests/user_commands/management/commands/subparser.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/user_commands/management/commands/outputwrapper.py (9L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.core.management.base import BaseCommand\n2|\n3|\n4|class Command(BaseCommand):\n5|    def handle(self, **options):\n6|        self.stdout.write(\"Working...\")\n7|        self.stdout.flush()\n8|        self.stdout.write(\"OK\")\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/user_commands/management/commands/required_constant_option.py (21L)\nfile scope: [\"000Jr008\" full 21L | imports 4L]\n\n- class Command(BaseCommand): ... [\"000Jr007\" full 17L | code 17L]\n  - def add_arguments(self, parser): ... [\"000Jr001\" full 11L | code 11L]\n  - def handle(self, *args, **options): ... [\"000Jr006\" full 4L | code 4L]\n\n# tests/user_commands/management/commands/required_list_option.py (11L)\nfile scope: [\"000Js008\" full 11L | imports 4L]\n\n- class Command(BaseCommand): ... [\"000Js007\" full 7L | code 7L]\n  - def add_arguments(self, parser): ... [\"000Js001\" full 2L | code 2L]\n  - def handle(self, *args, **options): ... [\"000Js006\" full 3L | code 3L]\n\n# tests/user_commands/management/commands/required_option.py (11L)\nfile scope: [\"000Jt006\" full 11L | imports 4L]\n\n- class Command(BaseCommand): ... [\"000Jt005\" full 7L | code 7L]\n  - def add_arguments(self, parser): ... [\"000Jt001\" full 3L | code 3L]\n  - def handle(self, *args, **options): ... [\"000Jt004\" full 2L | code 2L]\n\n# tests/user_commands/management/commands/reverse_url.py (12L)\nfile scope: [\"000Ju004\" full 12L | imports 5L]\n\n- class Command(BaseCommand): ... [\"000Ju003\" full 7L | code 7L]\n  - def handle(self, *args, **options): ... [\"000Ju002\" full 2L | code 2L]\n\n# tests/user_commands/management/commands/set_option.py (10L)\nfile scope: [\"000Jv005\" full 10L | imports 4L]\n\n- class Command(BaseCommand): ... [\"000Jv004\" full 6L | code 6L]\n  - def add_arguments(self, parser): ... [\"000Jv001\" full 2L | code 2L]\n  - def handle(self, **options): ... [\"000Jv003\" full 2L | code 2L]\n\n# tests/user_commands/management/commands/specific_system_checks.py (10L)\nfile scope: [\"000Jw005\" full 10L | imports 5L]\n\n- class Command(BaseCommand): ... [\"000Jw004\" full 5L | code 5L]\n  - def handle(self, *args, **options): ... [\"000Jw003\" full 2L | code 2L]\n\n# tests/user_commands/management/commands/subparser.py (12L)\nfile scope: [\"000Jx008\" full 12L | imports 4L]\n\n- class Command(BaseCommand): ... [\"000Jx007\" full 8L | code 8L]\n  - def add_arguments(self, parser): ... [\"000Jx003\" full 4L | code 4L]\n  - def handle(self, *args, **options): ... [\"000Jx006\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

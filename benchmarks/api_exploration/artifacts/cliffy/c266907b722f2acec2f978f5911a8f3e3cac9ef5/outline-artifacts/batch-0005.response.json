@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "command/completions/mod.ts",
+        "command/completions/zsh.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.4 KB -> 1.3 KB (5% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# command/completions/mod.ts (9L)\nfile scope: [\"0000o000\" full 9L]\n\n\n# command/completions/zsh.ts (36L)\nfile scope: [\"0000p008\" full 36L | imports 6L]\n\n- export class ZshCompletionsCommand extends Command<void, void, { name: string }> { ... } [\"0000p007\" full 30L | code 30L]\n  - readonly #cmd?: Command; [\"0000p000\" full 1L | code 1L]\n  - constructor [\"0000p006\" full 25L | code 25L]\n    - description() callback [\"0000p002\" full 10L | code 10L]\n    - public constructor(cmd?: Command) { super(); this.#cmd = cmd; return this .description(() => { const baseCmd = this.#cmd || this.getMainCommand(); return `Generate shell completions for zsh. To enable zsh completions for this program add following line to your ${ dim(italic(\"~/.zshrc\")) }: ${dim(italic(`source <(${baseCmd.getPath()} completions zsh)`))}`; }) .noGlobals() .option( \"-n, --name <command-name>\", \"The name of the main command.\", { default: () => this.getMainCommand().getName() }, ) .action( ... ); } [\"0000p003\" full 1L | code 25L]\n    - action() callback [\"0000p005\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

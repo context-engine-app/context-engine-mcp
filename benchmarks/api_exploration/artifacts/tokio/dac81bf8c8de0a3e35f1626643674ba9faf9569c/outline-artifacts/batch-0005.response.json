@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/graceful-shutdown.rs",
+        "examples/hello_world.rs",
+        "examples/named-pipe-multi-client.rs",
+        "examples/named-pipe-ready.rs",
+        "examples/named-pipe.rs",
+        "examples/prewarm-fd-table.rs",
+        "examples/print_each_packet.rs",
+        "examples/proxy.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 21.7 KB -> 2.7 KB (88% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/graceful-shutdown.rs (121L)\nfile scope: [\"0000p004\" full 121L | module-docs 21L | imports 14L]\n\n- #[tokio::main] async fn main() -> Result<(), Box<dyn Error>> { ... } [\"0000p000\" full 42L | code 42L]\n\n- async fn handle_connection(mut socket: TcpStream, addr: SocketAddr, token: CancellationToken) { ... } [\"0000p001\" full 10L | code 10L]\n\n- async fn echo(socket: &mut TcpStream) { ... } [\"0000p002\" full 21L | code 17L | docs 4L]\n\n- async fn notify_shutdown(socket: &mut TcpStream) { ... } [\"0000p003\" full 11L | code 7L | docs 4L]\n\n# examples/hello_world.rs (32L)\nfile scope: [\"0000q001\" full 32L | module-docs 10L | imports 10L]\n\n- #[tokio::main] pub async fn main() -> Result<(), Box<dyn Error>> { ... } [\"0000q000\" full 13L | code 13L]\n\n# examples/named-pipe-multi-client.rs (99L)\nfile scope: [\"0000r004\" full 99L | imports 3L]\n\n- #[cfg(windows)] async fn windows_main() -> io::Result<()> { ... } [\"0000r002\" full 81L | code 81L]\n\n- #[tokio::main] async fn main() -> io::Result<()> { ... } [\"0000r003\" full 14L | code 14L]\n\n# examples/named-pipe-ready.rs (162L)\nfile scope: [\"0000s003\" full 162L | imports 3L]\n\n- #[cfg(windows)] async fn windows_main() -> io::Result<()> { ... } [\"0000s001\" full 144L | code 144L]\n\n- #[tokio::main] async fn main() -> io::Result<()> { ... } [\"0000s002\" full 14L | code 14L]\n\n# examples/named-pipe.rs (61L)\nfile scope: [\"0000t003\" full 61L | imports 3L]\n\n- #[cfg(windows)] async fn windows_main() -> io::Result<()> { ... } [\"0000t001\" full 43L | code 43L]\n\n- #[tokio::main] async fn main() -> io::Result<()> { ... } [\"0000t002\" full 14L | code 14L]\n\n# examples/prewarm-fd-table.rs (87L)\nfile scope: [\"0000u004\" full 87L | module-docs 23L | imports 5L]\n\n- #[cfg(target_os = \"linux\")] fn prewarm_fd_table(target: i32) -> std::io::Result<()> { ... } [\"0000u000\" full 26L | code 22L | docs 4L]\n\n- #[cfg(target_os = \"linux\")] #[allow(dead_code)] fn prewarm_fd_table_safe(target: i32) -> std::io::Result<()> { ... } [\"0000u001\" full 11L | code 9L | docs 2L]\n\n- fn main() { ... } [\"0000u003\" full 21L | code 21L]\n\n# examples/print_each_packet.rs (107L)\nfile scope: [\"0000v001\" full 107L | module-docs 53L | imports 11L]\n\n- #[tokio::main] async fn main() -> Result<(), Box<dyn std::error::Error>> { ... } [\"0000v000\" full 44L | code 44L]\n\n# examples/proxy.rs (65L)\nfile scope: [\"0000w001\" full 65L | module-docs 21L | imports 11L]\n\n- #[tokio::main] async fn main() -> Result<(), Box<dyn Error>> { ... } [\"0000w000\" full 34L | code 34L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

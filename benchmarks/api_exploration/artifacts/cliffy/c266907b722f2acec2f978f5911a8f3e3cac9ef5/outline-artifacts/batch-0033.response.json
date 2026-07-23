@@ -1,0 +1,26 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/command/global_custom_type.ts",
+        "examples/command/global_options.ts",
+        "examples/command/grouped_options.ts",
+        "examples/command/help.ts",
+        "examples/command/help_option_and_command.ts",
+        "examples/command/hidden_commands.ts",
+        "examples/command/hidden_options.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.5 KB -> 904 B (64% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/command/global_custom_type.ts (14L)\nfile scope: [\"0002r000\" full 14L]\n\n\n# examples/command/global_options.ts (26L)\nfile scope: [\"0002s000\" full 26L]\n\n\n# examples/command/grouped_options.ts (16L)\nfile scope: [\"0002t000\" full 16L]\n\n\n# examples/command/help.ts (18L)\nfile scope: [\"0002u000\" full 18L]\n\n\n# examples/command/help_option_and_command.ts (15L)\nfile scope: [\"0002v000\" full 15L]\n\n\n# examples/command/hidden_commands.ts (9L)\nfile scope: [\"0002w000\" full 9L]\n\n\n# examples/command/hidden_options.ts (10L)\nfile scope: [\"0002x001\" full 10L | imports 7L]\n\n- hidden: true [\"0002x000\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

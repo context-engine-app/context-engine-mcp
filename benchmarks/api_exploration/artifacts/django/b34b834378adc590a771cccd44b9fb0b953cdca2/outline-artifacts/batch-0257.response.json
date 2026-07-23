@@ -1,0 +1,25 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/template/backends/__init__.py",
+        "django/template/backends/base.py",
+        "django/template/backends/django.py",
+        "django/template/backends/dummy.py",
+        "django/template/backends/jinja2.py",
+        "django/template/backends/utils.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/template/backends/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/template/backends/base.py (84L)\nfile scope: [\"000cN00i\" full 84L | imports 7L]\n\n- class BaseEngine: ... [\"000cN00h\" full 77L | code 77L]\n  - def __init__(self, params): ... [\"000cN001\" full 14L | code 14L]\n  - def check(self, **kwargs): ... [\"000cN006\" full 2L | code 2L]\n  - @property def app_dirname(self): ... [\"000cN007\" full 6L | code 6L]\n  - def from_string(self, template_code): ... [\"000cN009\" full 9L | code 9L]\n  - def get_template(self, template_name): ... [\"000cN00b\" full 9L | code 9L]\n  - @cached_property def template_dirs(self): ... [\"000cN00d\" full 10L | code 10L]\n  - def iter_template_filenames(self, template_name): ... [\"000cN00g\" full 14L | code 14L]\n\n# django/template/backends/django.py (183L)\nfile scope: [\"000cO00U\" full 183L | imports 16L]\n\n- class DjangoTemplates(BaseEngine): ... [\"000cO00p\" full 75L | code 75L]\n  - def __init__(self, params): ... [\"000cO004\" full 10L | code 10L]\n  - def check(self, **kwargs): ... [\"000cO007\" full 5L | code 5L]\n  - def _check_string_if_invalid_is_string(self): ... [\"000cO009\" full 12L | code 12L]\n  - def _check_for_template_tags_with_the_same_name(self): ... [\"000cO00g\" full 24L | code 24L]\n  - def from_string(self, template_code): ... [\"000cO00i\" full 2L | code 2L]\n  - def get_template(self, template_name): ... [\"000cO00l\" full 5L | code 5L]\n  - def get_templatetag_libraries(self, custom_libraries): ... [\"000cO00o\" full 8L | code 8L]\n\n- class Template: ... [\"000cO00A\" full 17L | code 17L]\n  - def __init__(self, template, backend): ... [\"000cO00s\" full 3L | code 3L]\n  - @property def origin(self): ... [\"000cO00v\" full 3L | code 3L]\n  - def render(self, context=None, request=None): ... [\"000cO00z\" full 8L | code 8L]\n\n- def copy_exception(exc, backend=None): ... [\"000cO00E\" full 11L | code 11L]\n\n- def reraise(exc, backend): ... [\"000cO00I\" full 6L | code 6L]\n\n- def get_template_tag_modules(): ... [\"000cO00N\" full 20L | code 20L]\n\n- def get_installed_libraries(): ... [\"000cO00O\" full 10L | code 10L]\n\n- def get_package_libraries(pkg): ... [\"000cO00T\" full 16L | code 16L]\n\n# django/template/backends/dummy.py (52L)\nfile scope: [\"000cP00h\" full 52L | imports 11L]\n\n- class TemplateStrings(BaseEngine): ... [\"000cP00c\" full 29L | code 29L]\n  - def __init__(self, params): ... [\"000cP003\" full 6L | code 6L]\n  - def from_string(self, template_code): ... [\"000cP005\" full 2L | code 2L]\n  - def get_template(self, template_name): ... [\"000cP00b\" full 16L | code 16L]\n\n- class Template(string.Template): ... [\"000cP00g\" full 10L | code 10L]\n  - def render(self, context=None, request=None): ... [\"000cP00f\" full 9L | code 9L]\n\n# django/template/backends/jinja2.py (126L)\nfile scope: [\"000cQ00K\" full 126L | imports 14L]\n\n- class Jinja2(BaseEngine): ... [\"000cQ00f\" full 39L | code 39L]\n  - def __init__(self, params): ... [\"000cQ005\" full 19L | code 19L]\n  - def from_string(self, template_code): ... [\"000cQ009\" full 2L | code 2L]\n  - def get_template(self, template_name): ... [\"000cQ00d\" full 9L | code 9L]\n  - @cached_property def template_context_processors(self): ... [\"000cQ00e\" full 3L | code 3L]\n\n- class Template: ... [\"000cQ00s\" full 24L | code 24L]\n  - def __init__(self, template, backend): ... [\"000cQ00i\" full 7L | code 7L]\n  - def render(self, context=None, request=None): ... [\"000cQ00r\" full 15L | code 15L]\n\n- class Origin: ... [\"000cQ00y\" full 9L | code 9L]\n  - def __init__(self, name, template_name): ... [\"000cQ00v\" full 3L | code 3L]\n\n- def get_exception_info(exception): ... [\"000cQ00J\" full 34L | code 34L]\n\n# django/template/backends/utils.py (16L)\nfile scope: [\"000cR004\" full 16L | imports 9L]\n\n- def csrf_input(request): ... [\"000cR001\" full 5L | code 5L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/migrations_test_apps/lookuperror_a/migrations/0001_initial.py",
+        "tests/migrations/migrations_test_apps/lookuperror_a/migrations/0002_a2.py",
+        "tests/migrations/migrations_test_apps/lookuperror_a/migrations/0003_a3.py",
+        "tests/migrations/migrations_test_apps/lookuperror_a/migrations/0004_a4.py",
+        "tests/migrations/migrations_test_apps/lookuperror_a/migrations/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/migrations_test_apps/lookuperror_a/migrations/0001_initial.py (23L)\nfile scope: [\"000vq003\" full 23L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000vq002\" full 19L | code 19L]\n\n# tests/migrations/migrations_test_apps/lookuperror_a/migrations/0002_a2.py (25L)\nfile scope: [\"000vr003\" full 25L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000vr002\" full 21L | code 21L]\n\n# tests/migrations/migrations_test_apps/lookuperror_a/migrations/0003_a3.py (29L)\nfile scope: [\"000vs003\" full 29L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000vs002\" full 25L | code 25L]\n\n# tests/migrations/migrations_test_apps/lookuperror_a/migrations/0004_a4.py (25L)\nfile scope: [\"000vt003\" full 25L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000vt002\" full 21L | code 21L]\n\n# tests/migrations/migrations_test_apps/lookuperror_a/migrations/__init__.py (1L)\nfile scope: [\"000vu000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

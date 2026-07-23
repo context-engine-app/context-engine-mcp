@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/order_with_respect_to/__init__.py",
+        "tests/order_with_respect_to/base_tests.py",
+        "tests/order_with_respect_to/models.py",
+        "tests/order_with_respect_to/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/order_with_respect_to/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/order_with_respect_to/base_tests.py (278L)\nfile scope: [\"000AU01u\" full 278L | imports 9L]\n\n- class BaseOrderWithRespectToTests: ... [\"000AU01t\" full 269L | code 269L]\n  - @classmethod def setUpTestData(cls): ... [\"000AU004\" full 9L | code 9L]\n  - def test_default_to_insertion_order(self): ... [\"000AU00a\" full 12L | code 12L]\n  - def test_previous_and_next_in_order(self): ... [\"000AU00d\" full 10L | code 10L]\n  - def test_item_ordering(self): ... [\"000AU00h\" full 12L | code 12L]\n  - def test_set_order_unrelated_object(self): ... [\"000AU00k\" full 6L | code 6L]\n  - def test_change_ordering(self): ... [\"000AU00o\" full 20L | code 20L]\n  - def test_recursive_ordering(self): ... [\"000AU00u\" full 8L | code 8L]\n  - def test_delete_and_insert(self): ... [\"000AU00C\" full 13L | code 13L]\n  - def test_database_routing(self): ... [\"000AU00H\" full 16L | code 16L]\n    - class WriteToOtherRouter: ... [\"000AU00G\" full 3L | code 3L]\n      - def db_for_write(self, model, **hints): ... [\"000AU00F\" full 2L | code 2L]\n  - def test_bulk_create_with_empty_parent(self): ... [\"000AU00N\" full 12L | code 12L]\n  - def test_bulk_create_with_existing_children(self): ... [\"000AU00S\" full 15L | code 15L]\n  - def test_bulk_create_multiple_parents(self): ... [\"000AU011\" full 21L | code 21L]\n  - def test_bulk_create_mixed_scenario(self): ... [\"000AU019\" full 22L | code 22L]\n  - def test_bulk_create_respects_mixed_manual_order(self): ... [\"000AU01k\" full 42L | code 42L]\n  - def test_bulk_create_allows_duplicate_order_values(self): ... [\"000AU01s\" full 29L | code 29L]\n\n# tests/order_with_respect_to/models.py (50L)\nfile scope: [\"000AV00l\" full 50L | imports 13L]\n\n- class Question(models.Model): ... [\"000AV001\" full 2L | code 2L]\n\n- class Answer(models.Model): ... [\"000AV007\" full 9L | code 9L]\n  - class Meta: ... [\"000AV005\" full 2L | code 2L]\n  - def __str__(self): ... [\"000AV006\" full 2L | code 2L]\n\n- class Post(models.Model): ... [\"000AV00d\" full 11L | code 11L]\n  - class Meta: ... [\"000AV00b\" full 2L | code 2L]\n  - def __str__(self): ... [\"000AV00c\" full 2L | code 2L]\n\n- class Entity(models.Model): ... [\"000AV00e\" full 2L | code 2L]\n\n- class Dimension(models.Model): ... [\"000AV00g\" full 2L | code 2L]\n\n- class Component(models.Model): ... [\"000AV00k\" full 5L | code 5L]\n  - class Meta: ... [\"000AV00j\" full 2L | code 2L]\n\n# tests/order_with_respect_to/tests.py (50L)\nfile scope: [\"000AW00n\" full 50L | imports 11L]\n\n- class OrderWithRespectToBaseTests(BaseOrderWithRespectToTests, TestCase): ... [\"000AW003\" full 4L | code 4L]\n\n- class OrderWithRespectToTests(SimpleTestCase): ... [\"000AW00g\" full 21L | code 21L]\n  - @isolate_apps(\"order_with_respect_to\") def test_duplicate_order_field(self): ... [\"000AW00f\" full 20L | code 20L]\n    - class Bar(models.Model): ... [\"000AW006\" full 3L | code 3L]\n      - class Meta: ... [\"000AW005\" full 2L | code 2L]\n    - class Foo(models.Model): ... [\"000AW00c\" full 7L | code 7L]\n      - class Meta: ... [\"000AW00b\" full 3L | code 3L]\n\n- class TestOrderWithRespectToOneToOnePK(TestCase): ... [\"000AW00m\" full 10L | code 10L]\n  - def test_set_order(self): ... [\"000AW00l\" full 9L | code 9L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/dates/__init__.py",
+        "tests/dates/models.py",
+        "tests/dates/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/dates/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/dates/models.py (22L)\nfile scope: [\"000lF00c\" full 22L | imports 5L]\n\n- class Article(models.Model): ... [\"000lF004\" full 6L | code 6L]\n\n- class Comment(models.Model): ... [\"000lF009\" full 5L | code 5L]\n\n- class Category(models.Model): ... [\"000lF00b\" full 2L | code 2L]\n\n# tests/dates/tests.py (143L)\nfile scope: [\"000lG00g\" full 143L | imports 11L]\n\n- class DatesTests(TestCase): ... [\"000lG00f\" full 132L | code 132L]\n  - def test_related_model_traverse(self): ... [\"000lG004\" full 80L | code 80L]\n  - def test_dates_fails_when_no_arguments_are_provided(self): ... [\"000lG005\" full 3L | code 3L]\n  - def test_dates_fails_when_given_invalid_field_argument(self): ... [\"000lG006\" full 7L | code 7L]\n  - def test_dates_fails_when_given_invalid_kind_argument(self): ... [\"000lG008\" full 4L | code 4L]\n  - def test_dates_fails_when_given_invalid_order_argument(self): ... [\"000lG00a\" full 4L | code 4L]\n  - @override_settings(USE_TZ=False) def test_dates_trunc_datetime_fields(self): ... [\"000lG00b\" full 18L | code 18L]\n  - @skipUnless(connection.vendor == \"mysql\", \"Test checks MySQL query syntax\") def test_dates_avoid_datetime_cast(self): ... [\"000lG00e\" full 9L | code 9L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

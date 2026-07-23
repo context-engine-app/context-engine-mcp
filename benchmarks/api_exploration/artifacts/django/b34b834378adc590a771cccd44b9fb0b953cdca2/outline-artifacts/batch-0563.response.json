@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/m2m_signals/__init__.py",
+        "tests/m2m_signals/models.py",
+        "tests/m2m_signals/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/m2m_signals/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/m2m_signals/models.py (31L)\nfile scope: [\"000tV00i\" full 31L | imports 4L]\n\n- class Part(models.Model): ... [\"000tV003\" full 5L | code 5L]\n  - class Meta: ... [\"000tV002\" full 2L | code 2L]\n\n- class Car(models.Model): ... [\"000tV009\" full 7L | code 7L]\n  - class Meta: ... [\"000tV008\" full 2L | code 2L]\n\n- class SportsCar(Car): ... [\"000tV00b\" full 2L | code 2L]\n\n- class Person(models.Model): ... [\"000tV00h\" full 7L | code 7L]\n  - class Meta: ... [\"000tV00g\" full 2L | code 2L]\n\n# tests/m2m_signals/tests.py (702L)\nfile scope: [\"000tW00T\" full 702L | imports 11L]\n\n- class ManyToManySignalsTest(TestCase): ... [\"000tW00S\" full 691L | code 691L]\n  - @classmethod def setUpTestData(cls): ... [\"000tW000\" full 16L | code 16L]\n  - def setUp(self): ... [\"000tW00d\" full 2L | code 2L]\n  - def m2m_changed_signal_receiver(self, signal, sender, **kwargs): ... [\"000tW00j\" full 13L | code 13L]\n  - def tearDown(self): ... [\"000tW00k\" full 14L | code 14L]\n  - def _initialize_signal_car(self, add_default_parts_before_set_signal=False): ... [\"000tW00m\" full 11L | code 11L]\n  - def test_pk_set_on_repeated_add_remove(self): ... [\"000tW00t\" full 32L | code 32L]\n    - def handler(signal, sender, **kwargs): ... [\"000tW00r\" full 3L | code 3L]\n  - def test_m2m_relations_add_remove_clear(self): ... [\"000tW00v\" full 51L | code 51L]\n  - def test_m2m_relations_signals_remove_relation(self): ... [\"000tW00w\" full 26L | code 26L]\n  - def test_m2m_relations_signals_give_the_self_vw_some_optional_parts(self): ... [\"000tW00y\" full 52L | code 52L]\n  - def test_m2m_relations_signals_reverse_relation_with_custom_related_name(self): ... [\"000tW00z\" full 26L | code 26L]\n  - def test_m2m_relations_signals_clear_all_parts_of_the_self_vw(self): ... [\"000tW00A\" full 23L | code 23L]\n  - def test_m2m_relations_signals_all_the_doors_off_of_cars(self): ... [\"000tW00B\" full 23L | code 23L]\n  - def test_m2m_relations_signals_reverse_relation(self): ... [\"000tW00C\" full 24L | code 24L]\n  - def test_m2m_relations_signals_alternative_ways(self): ... [\"000tW00F\" full 73L | code 73L]\n  - def test_m2m_relations_signals_clearing_removing(self): ... [\"000tW00H\" full 70L | code 70L]\n  - def test_m2m_relations_signals_when_inheritance(self): ... [\"000tW00L\" full 53L | code 53L]\n  - def _initialize_signal_person(self): ... [\"000tW00M\" full 8L | code 8L]\n  - def test_m2m_relations_with_self_add_friends(self): ... [\"000tW00N\" full 24L | code 24L]\n  - def test_m2m_relations_with_self_add_fan(self): ... [\"000tW00O\" full 24L | code 24L]\n  - def test_m2m_relations_with_self_add_idols(self): ... [\"000tW00P\" full 24L | code 24L]\n  - def test_m2m_relations_set_base_raw(self): ... [\"000tW00Q\" full 41L | code 41L]\n  - def test_m2m_relations_set_base_raw_clear(self): ... [\"000tW00R\" full 39L | code 39L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/contenttypes_tests/urls.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n1|from django.contrib.contenttypes import views\n2|from django.urls import re_path\n3|\n4|urlpatterns = [\n5|    re_path(r\"^shortcut/([0-9]+)/(.*)/$\", views.shortcut),\n6|]\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

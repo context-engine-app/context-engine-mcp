@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/m2m_and_m2o/__init__.py",
+        "tests/m2m_and_m2o/models.py",
+        "tests/m2m_and_m2o/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/m2m_and_m2o/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/m2m_and_m2o/models.py (28L)\nfile scope: [\"000tG00b\" full 28L | imports 10L]\n\n- class User(models.Model): ... [\"000tG001\" full 2L | code 2L]\n\n- class Issue(models.Model): ... [\"000tG008\" full 10L | code 10L]\n  - class Meta: ... [\"000tG006\" full 2L | code 2L]\n  - def __str__(self): ... [\"000tG007\" full 2L | code 2L]\n\n- class StringReferenceModel(models.Model): ... [\"000tG00a\" full 2L | code 2L]\n\n# tests/m2m_and_m2o/tests.py (99L)\nfile scope: [\"000tH00e\" full 99L | imports 7L]\n\n- class RelatedObjectTests(TestCase): ... [\"000tH009\" full 79L | code 79L]\n  - def test_related_objects_have_name_attribute(self): ... [\"000tH002\" full 4L | code 4L]\n  - def test_m2m_and_m2o(self): ... [\"000tH008\" full 73L | code 73L]\n\n- class RelatedObjectUnicodeTests( ... ): def test_m2m_with_unicode_reference(self): \"\"\" Regression test for #6045: references to other models can be strings, providing they are directly convertible to ASCII. \"\"\" m1 = StringReferenceModel.objects.create() m2 = StringReferenceModel.objects.create() m2.others.add(m1) m2.save() list(m2.others.all()) [\"000tH00d\" full 11L | code 11L]\n  - def test_m2m_with_unicode_reference(self): ... [\"000tH00c\" full 10L | code 10L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

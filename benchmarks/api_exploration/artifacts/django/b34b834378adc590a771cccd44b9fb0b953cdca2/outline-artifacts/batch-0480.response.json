@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/forms_tests/urls.py",
+        "tests/forms_tests/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 928 B -> 775 B (16% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/forms_tests/urls.py (9L)\nfile scope: [\"000pO001\" full 9L | imports 5L]\n\n\n# tests/forms_tests/views.py (30L)\nfile scope: [\"000pP00f\" full 30L | imports 9L]\n\n- class ArticleForm(forms.ModelForm): ... [\"000pP004\" full 6L | code 6L]\n  - class Meta: ... [\"000pP003\" full 3L | code 3L]\n\n- class ArticleFormView(UpdateView): ... [\"000pP008\" full 4L | code 4L]\n\n- def form_view(request): ... [\"000pP00e\" full 7L | code 7L]\n  - class Form(forms.Form): ... [\"000pP00b\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

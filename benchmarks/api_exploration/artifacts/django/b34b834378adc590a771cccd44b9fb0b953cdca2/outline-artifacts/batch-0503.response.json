@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/gis_tests/geogapp/__init__.py",
+        "tests/gis_tests/geogapp/models.py",
+        "tests/gis_tests/geogapp/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/gis_tests/geogapp/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/gis_tests/geogapp/models.py (45L)\nfile scope: [\"000rt00m\" full 45L | imports 4L]\n\n- class NamedModel(models.Model): ... [\"000rt004\" full 8L | code 8L]\n  - class Meta: ... [\"000rt002\" full 2L | code 2L]\n  - def __str__(self): ... [\"000rt003\" full 2L | code 2L]\n\n- class City(NamedModel): ... [\"000rt008\" full 5L | code 5L]\n  - class Meta: ... [\"000rt007\" full 2L | code 2L]\n\n- class CityUnique(NamedModel): ... [\"000rt00c\" full 8L | code 8L]\n  - class Meta: ... [\"000rt00b\" full 5L | code 5L]\n\n- class Zipcode(NamedModel): ... [\"000rt00f\" full 3L | code 3L]\n\n- class County(NamedModel): ... [\"000rt00l\" full 9L | code 9L]\n  - class Meta: ... [\"000rt00j\" full 2L | code 2L]\n  - def __str__(self): ... [\"000rt00k\" full 2L | code 2L]\n\n# tests/gis_tests/geogapp/tests.py (196L)\nfile scope: [\"000ru00M\" full 196L | imports 20L]\n\n- class GeographyTest(TestCase): ... [\"000ru00t\" full 96L | code 96L]\n  - def test01_fixture_load(self): ... [\"000ru001\" full 3L | code 3L]\n  - @skipUnlessDBFeature(\"supports_distances_lookups\", \"supports_distance_geodetic\") def test02_distance_lookup(self): ... [\"000ru006\" full 16L | code 16L]\n  - @skipUnlessDBFeature(\"supports_geography\", \"supports_geometry_field_unique_index\") def test_geography_unique(self): ... [\"000ru00a\" full 12L | code 12L]\n  - @skipUnlessDBFeature(\"supports_geography\") def test_operators_functions_unavailable_for_geography(self): ... [\"000ru00g\" full 27L | code 27L]\n  - def test05_geography_layermapping(self): ... [\"000ru00s\" full 31L | code 31L]\n\n- class GeographyFunctionTests(FuncTestMixin, TestCase): ... [\"000ru00L\" full 78L | code 78L]\n  - @skipUnlessDBFeature(\"supports_extent_aggr\") def test_cast_aggregate(self): ... [\"000ru00z\" full 19L | code 19L]\n  - @skipUnlessDBFeature(\"has_Distance_function\", \"supports_distance_geodetic\") def test_distance_function(self): ... [\"000ru00G\" full 34L | code 34L]\n  - @skipUnlessDBFeature(\"has_Area_function\", \"supports_area_geodetic\") def test_geography_area(self): ... [\"000ru00J\" full 12L | code 12L]\n  - @skipUnlessDBFeature(\"has_Area_function\") @skipIfDBFeature(\"supports_area_geodetic\") def test_geodetic_area_raises_if_not_supported(self): ... [\"000ru00K\" full 7L | code 7L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/apps/query_performing_app/__init__.py",
+        "tests/apps/query_performing_app/apps.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/apps/query_performing_app/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/apps/query_performing_app/apps.py (93L)\nfile scope: [\"000hu00I\" full 93L | imports 5L]\n\n- class BaseAppConfig(AppConfig): ... [\"000hu008\" full 14L | code 14L]\n  - def __init__(self, *args, **kwargs): ... [\"000hu004\" full 3L | code 3L]\n  - def ready(self): ... [\"000hu006\" full 3L | code 3L]\n  - def _perform_query(self): ... [\"000hu007\" full 2L | code 2L]\n\n- class ModelQueryAppConfig(BaseAppConfig): ... [\"000hu00c\" full 7L | code 7L]\n  - def _perform_query(self): ... [\"000hu00a\" full 6L | code 6L]\n\n- class QueryDefaultDatabaseModelAppConfig(ModelQueryAppConfig): ... [\"000hu00e\" full 2L | code 2L]\n\n- class QueryOtherDatabaseModelAppConfig(ModelQueryAppConfig): ... [\"000hu00g\" full 2L | code 2L]\n\n- class CursorQueryAppConfig(BaseAppConfig): ... [\"000hu00l\" full 6L | code 6L]\n  - def _perform_query(self): ... [\"000hu00j\" full 5L | code 5L]\n\n- class QueryDefaultDatabaseCursorAppConfig(CursorQueryAppConfig): ... [\"000hu00n\" full 2L | code 2L]\n\n- class QueryOtherDatabaseCursorAppConfig(CursorQueryAppConfig): ... [\"000hu00p\" full 2L | code 2L]\n\n- class CursorQueryManyAppConfig(BaseAppConfig): ... [\"000hu00v\" full 16L | code 16L]\n  - def _perform_query(self): ... [\"000hu00t\" full 15L | code 15L]\n\n- class QueryDefaultDatabaseCursorManyAppConfig(CursorQueryManyAppConfig): ... [\"000hu00x\" full 2L | code 2L]\n\n- class QueryOtherDatabaseCursorManyAppConfig(CursorQueryManyAppConfig): ... [\"000hu00z\" full 2L | code 2L]\n\n- class StoredProcedureQueryAppConfig(BaseAppConfig): ... [\"000hu00D\" full 5L | code 5L]\n  - def _perform_query(self): ... [\"000hu00B\" full 4L | code 4L]\n\n- class QueryDefaultDatabaseStoredProcedureAppConfig(StoredProcedureQueryAppConfig): ... [\"000hu00F\" full 2L | code 2L]\n\n- class QueryOtherDatabaseStoredProcedureAppConfig(StoredProcedureQueryAppConfig): ... [\"000hu00H\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

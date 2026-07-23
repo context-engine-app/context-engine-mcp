@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/db_functions/text/test_pad.py",
+        "tests/db_functions/text/test_repeat.py",
+        "tests/db_functions/text/test_replace.py",
+        "tests/db_functions/text/test_reverse.py",
+        "tests/db_functions/text/test_right.py",
+        "tests/db_functions/text/test_sha1.py",
+        "tests/db_functions/text/test_sha224.py",
+        "tests/db_functions/text/test_sha256.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 15.7 KB -> 3.8 KB (76% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/db_functions/text/test_pad.py (59L)\nfile scope: [\"000mA00b\" full 59L | imports 9L]\n\n- class PadTests(TestCase): ... [\"000mA00a\" full 50L | code 50L]\n  - def test_pad(self): ... [\"000mA005\" full 31L | code 31L]\n  - def test_pad_negative_length(self): ... [\"000mA007\" full 7L | code 7L]\n  - def test_combined_with_length(self): ... [\"000mA009\" full 9L | code 9L]\n\n# tests/db_functions/text/test_repeat.py (36L)\nfile scope: [\"000mB008\" full 36L | imports 9L]\n\n- class RepeatTests(TestCase): ... [\"000mB007\" full 27L | code 27L]\n  - def test_basic(self): ... [\"000mB005\" full 20L | code 20L]\n  - def test_negative_number(self): ... [\"000mB006\" full 5L | code 5L]\n\n# tests/db_functions/text/test_replace.py (84L)\nfile scope: [\"000mC00b\" full 84L | imports 8L]\n\n- class ReplaceTests(TestCase): ... [\"000mC00a\" full 76L | code 76L]\n  - @classmethod def setUpTestData(cls): ... [\"000mC000\" full 4L | code 4L]\n  - def test_replace_with_empty_string(self): ... [\"000mC002\" full 13L | code 13L]\n  - def test_case_sensitive(self): ... [\"000mC004\" full 13L | code 13L]\n  - def test_replace_expression(self): ... [\"000mC006\" full 15L | code 15L]\n  - def test_update(self): ... [\"000mC007\" full 13L | code 13L]\n  - def test_replace_with_default_arg(self): ... [\"000mC009\" full 12L | code 12L]\n\n# tests/db_functions/text/test_reverse.py (66L)\nfile scope: [\"000mD00e\" full 66L | imports 10L]\n\n- class ReverseTests(TestCase): ... [\"000mD00d\" full 56L | code 56L]\n  - @classmethod def setUpTestData(cls): ... [\"000mD000\" full 5L | code 5L]\n  - def test_null(self): ... [\"000mD005\" full 8L | code 8L]\n  - def test_basic(self): ... [\"000mD007\" full 15L | code 15L]\n  - def test_transform(self): ... [\"000mD009\" full 10L | code 10L]\n  - def test_expressions(self): ... [\"000mD00c\" full 13L | code 13L]\n\n# tests/db_functions/text/test_right.py (52L)\nfile scope: [\"000mE009\" full 52L | imports 9L]\n\n- class RightTests(TestCase): ... [\"000mE008\" full 43L | code 43L]\n  - @classmethod def setUpTestData(cls): ... [\"000mE000\" full 4L | code 4L]\n  - def test_basic(self): ... [\"000mE002\" full 10L | code 10L]\n  - def test_invalid_length(self): ... [\"000mE003\" full 3L | code 3L]\n  - def test_zero_length(self): ... [\"000mE005\" full 14L | code 14L]\n  - def test_expressions(self): ... [\"000mE007\" full 7L | code 7L]\n\n# tests/db_functions/text/test_sha1.py (52L)\nfile scope: [\"000mF006\" full 52L | imports 10L]\n\n- class SHA1Tests(TestCase): ... [\"000mF005\" full 42L | code 42L]\n  - @classmethod def setUpTestData(cls): ... [\"000mF000\" full 11L | code 11L]\n  - def test_basic(self): ... [\"000mF002\" full 22L | code 22L]\n  - def test_transform(self): ... [\"000mF004\" full 6L | code 6L]\n\n# tests/db_functions/text/test_sha224.py (64L)\nfile scope: [\"000mG008\" full 64L | imports 12L]\n\n- class SHA224Tests(TestCase): ... [\"000mG007\" full 52L | code 52L]\n  - @classmethod def setUpTestData(cls): ... [\"000mG000\" full 11L | code 11L]\n  - def test_basic(self): ... [\"000mG002\" full 22L | code 22L]\n  - def test_transform(self): ... [\"000mG004\" full 8L | code 8L]\n  - @unittest.skipUnless( connection.vendor == \"oracle\", \"Oracle doesn't support SHA224.\" ) def test_unsupported(self): ... [\"000mG006\" full 7L | code 7L]\n\n# tests/db_functions/text/test_sha256.py (54L)\nfile scope: [\"000mH006\" full 54L | imports 10L]\n\n- class SHA256Tests(TestCase): ... [\"000mH005\" full 44L | code 44L]\n  - @classmethod def setUpTestData(cls): ... [\"000mH000\" full 11L | code 11L]\n  - def test_basic(self): ... [\"000mH002\" full 22L | code 22L]\n  - def test_transform(self): ... [\"000mH004\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "internal/runtime/is_terminal.ts",
+        "internal/runtime/no_color.ts",
+        "internal/runtime/read.ts",
+        "internal/runtime/read_dir.ts",
+        "internal/runtime/read_sync.ts",
+        "internal/runtime/runtime_name.ts",
+        "internal/runtime/set_env.ts",
+        "internal/runtime/set_raw.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 4.8 KB -> 2.3 KB (52% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# internal/runtime/is_terminal.ts (20L)\nfile scope: [\"0004m003\" full 20L | module-docs 7L]\n\n- export function isTerminal(): boolean { ... } [\"0004m002\" full 12L | code 12L]\n\n# internal/runtime/no_color.ts (21L)\nfile scope: [\"0004n003\" full 21L | module-docs 7L]\n\n- export function getNoColor(): boolean { ... } [\"0004n002\" full 13L | code 13L]\n\n# internal/runtime/read.ts (45L)\nfile scope: [\"0004o009\" full 45L | module-docs 8L]\n\n- export function read(data: Uint8Array): Promise<number | null> { ... } [\"0004o008\" full 36L | code 36L]\n  - <function> [\"0004o007\" full 25L | code 25L]\n    - process.stdin.once(\"readable\") callback [\"0004o006\" full 19L | code 19L]\n\n# internal/runtime/read_dir.ts (32L)\nfile scope: [\"0004p009\" full 32L | module-docs 8L]\n\n- export async function readDir(path: string): Promise<Array<{ name: string }>> { ... } [\"0004p008\" full 23L | code 23L]\n  - <function> [\"0004p007\" full 7L | code 7L]\n    - fs.readdir() callback [\"0004p006\" full 2L | code 2L]\n      - files.map() callback [\"0004p005\" full 1L | code 1L]\n        - name [\"0004p004\" full 1L | code 1L]\n\n# internal/runtime/read_sync.ts (49L)\nfile scope: [\"0004q00a\" full 49L | module-docs 1L | imports 12L]\n\n- type ReadSyncNode = ... ; [\"0004q000\" full 7L | code 7L]\n\n- export function readSync(data: Uint8Array): number { ... } [\"0004q009\" full 30L | code 30L]\n\n# internal/runtime/runtime_name.ts (16L)\nfile scope: [\"0004r002\" full 16L | module-docs 1L]\n\n- export type RuntimeName = ... ; [\"0004r000\" full 1L | code 1L]\n\n- export function getRuntimeName(): RuntimeName { ... } [\"0004r001\" full 12L | code 12L]\n\n# internal/runtime/set_env.ts (22L)\nfile scope: [\"0004s003\" full 22L | module-docs 9L]\n\n- export function setEnv(name: string, value: string): void { ... } [\"0004s002\" full 12L | code 12L]\n\n# internal/runtime/set_raw.ts (25L)\nfile scope: [\"0004t004\" full 25L | module-docs 9L]\n\n- export function setRaw( mode: boolean, { cbreak }: { cbreak?: boolean } = {}, ): void { ... } [\"0004t003\" full 15L | code 15L]\n  - cbreak [\"0004t002\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

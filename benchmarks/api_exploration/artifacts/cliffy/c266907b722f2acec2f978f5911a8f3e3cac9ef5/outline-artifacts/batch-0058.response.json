@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "flags/types/boolean.ts",
+        "flags/types/integer.ts",
+        "flags/types/number.ts",
+        "flags/types/string.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.4 KB -> 605 B (59% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# flags/types/boolean.ts (18L)\nfile scope: [\"0004a001\" full 18L | imports 5L]\n\n\n# flags/types/integer.ts (13L)\nfile scope: [\"0004b002\" full 13L | imports 5L]\n\n\n# flags/types/number.ts (15L)\nfile scope: [\"0004c002\" full 15L | imports 5L]\n\n\n# flags/types/string.ts (9L)\nfile scope: [\"0004d002\" full 9L | imports 4L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

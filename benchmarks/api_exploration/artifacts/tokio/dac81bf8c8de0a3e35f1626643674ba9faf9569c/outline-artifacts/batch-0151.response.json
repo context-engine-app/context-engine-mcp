@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/task/coop/consume_budget.rs",
+        "tokio/src/task/coop/mod.rs",
+        "tokio/src/task/coop/unconstrained.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 21.9 KB -> 2.9 KB (87% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/task/coop/consume_budget.rs (40L)\nfile scope: [\"0009e001\" full 40L | module-docs 23L]\n\n- #[cfg_attr(docsrs, doc(cfg(feature = \"rt\")))] pub async fn consume_budget() { ... } [\"0009e000\" full 39L | code 16L | docs 23L]\n\n# tokio/src/task/coop/mod.rs (574L)\nfile scope: [\"0009f00j\" full 574L | imports 363L]\n\n- #[derive(Debug, Copy, Clone)] pub(crate) struct Budget( ... ); [\"0009f000\" full 4L | code 2L | docs 2L]\n\n- pub(crate) struct BudgetDecrement { ... } [\"0009f003\" full 4L | code 4L]\n  - success: bool [\"0009f001\" full 1L | code 1L]\n  - hit_zero: bool [\"0009f002\" full 1L | code 1L]\n\n- impl Budget { ... } [\"0009f007\" full 24L | code 24L]\n  - const fn initial() -> Budget { ... } [\"0009f004\" full 13L | code 3L | docs 10L]\n  - pub(crate) const fn unconstrained() -> Budget { ... } [\"0009f005\" full 4L | code 3L | docs 1L]\n  - fn has_remaining(self) -> bool { ... } [\"0009f006\" full 3L | code 3L]\n\n- #[inline(always)] pub(crate) fn budget<R>(f: impl FnOnce() -> R) -> R { ... } [\"0009f008\" full 6L | code 4L | docs 2L]\n\n- #[inline(always)] pub(crate) fn with_unconstrained<R>(f: impl FnOnce() -> R) -> R { ... } [\"0009f009\" full 6L | code 4L | docs 2L]\n\n- #[inline(always)] fn with_budget<R>(budget: Budget, f: impl FnOnce() -> R) -> R { ... } [\"0009f00e\" full 26L | code 26L]\n  - struct ResetGuard { ... } [\"0009f00b\" full 3L | code 3L]\n    - prev: Budget [\"0009f00a\" full 1L | code 1L]\n  - impl Drop for ResetGuard { ... } [\"0009f00d\" full 7L | code 7L]\n    - fn drop(&mut self) { ... } [\"0009f00c\" full 5L | code 5L]\n\n- #[inline(always)] #[cfg_attr(docsrs, doc(cfg(feature = \"rt\")))] pub fn has_budget_remaining() -> bool { ... } [\"0009f00f\" full 58L | code 7L | docs 51L]\n\n- #[cfg(all(test, not(loom)))] mod test { ... } [\"0009f00i\" full 79L | code 79L]\n  - fn get() -> Budget { ... } [\"0009f00g\" full 3L | code 3L]\n  - #[test] fn budgeting() { ... } [\"0009f00h\" full 67L | code 67L]\n\n# tokio/src/task/coop/unconstrained.rs (46L)\nfile scope: [\"0009g003\" full 46L | imports 16L]\n\n- impl<F> Future for Unconstrained<F> where F: Future, { ... cfg_coop! { fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> { let inner = self.project().inner; crate::task::coop::with_unconstrained(|| inner.poll(cx)) } } cfg_not_coop! { fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> { let inner = self.project().inner; inner.poll(cx) } } } [\"0009g001\" full 20L | code 20L]\n  - type Output = <F as Future>::Output; [\"0009g000\" full 1L | code 1L]\n\n- #[cfg_attr(docsrs, doc(cfg(feature = \"rt\")))] pub fn unconstrained<F>(inner: F) -> Unconstrained<F> { ... } [\"0009g002\" full 9L | code 4L | docs 5L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

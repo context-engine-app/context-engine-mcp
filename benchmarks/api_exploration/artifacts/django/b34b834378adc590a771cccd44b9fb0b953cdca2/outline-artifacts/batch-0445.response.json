@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/extra_regress/__init__.py",
+        "tests/extra_regress/models.py",
+        "tests/extra_regress/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/extra_regress/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/extra_regress/models.py (39L)\nfile scope: [\"000nS00j\" full 39L | imports 8L]\n\n- class RevisionableModel(models.Model): ... [\"000nS00a\" full 17L | code 17L]\n  - def save(self, *args, force_insert=False, force_update=False, **kwargs): ... [\"000nS007\" full 7L | code 7L]\n  - def new_revision(self): ... [\"000nS009\" full 4L | code 4L]\n\n- class Order(models.Model): ... [\"000nS00d\" full 3L | code 3L]\n\n- class TestObject(models.Model): ... [\"000nS00i\" full 7L | code 7L]\n  - def __str__(self): ... [\"000nS00h\" full 2L | code 2L]\n\n# tests/extra_regress/tests.py (472L)\nfile scope: [\"000nT00t\" full 472L | imports 9L]\n\n- class ExtraRegressTests(TestCase): ... [\"000nT00s\" full 463L | code 463L]\n  - @classmethod def setUpTestData(cls): ... [\"000nT000\" full 5L | code 5L]\n  - def test_regression_7314_7372(self): ... [\"000nT006\" full 56L | code 56L]\n  - def test_extra_stay_tied(self): ... [\"000nT008\" full 13L | code 13L]\n  - def test_regression_7957(self): ... [\"000nT009\" full 23L | code 23L]\n  - def test_regression_7961(self): ... [\"000nT00a\" full 14L | code 14L]\n  - def test_regression_8063(self): ... [\"000nT00c\" full 8L | code 8L]\n  - def test_regression_8039(self): ... [\"000nT00d\" full 15L | code 15L]\n  - def test_regression_8819(self): ... [\"000nT00e\" full 23L | code 23L]\n  - def test_dates_query(self): ... [\"000nT00f\" full 16L | code 16L]\n  - def test_values_with_extra(self): ... [\"000nT00h\" full 194L | code 194L]\n  - def test_regression_10847(self): ... [\"000nT00j\" full 39L | code 39L]\n  - def test_regression_17877(self): ... [\"000nT00n\" full 28L | code 28L]\n  - def test_extra_values_distinct_ordering(self): ... [\"000nT00r\" full 16L | code 16L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

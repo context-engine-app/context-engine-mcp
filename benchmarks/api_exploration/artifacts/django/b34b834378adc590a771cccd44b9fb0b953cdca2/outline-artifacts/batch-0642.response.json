@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_conflict_long_name/0001_initial.py",
+        "tests/migrations/test_migrations_conflict_long_name/0002_conflicting_second_migration_with_long_name.py",
+        "tests/migrations/test_migrations_conflict_long_name/0002_second.py",
+        "tests/migrations/test_migrations_conflict_long_name/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/test_migrations_conflict_long_name/0001_initial.py (15L)\nfile scope: [\"000wQ003\" full 15L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000wQ002\" full 11L | code 11L]\n\n# tests/migrations/test_migrations_conflict_long_name/0002_conflicting_second_migration_with_long_name.py (15L)\nfile scope: [\"000wR003\" full 15L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000wR002\" full 11L | code 11L]\n\n# tests/migrations/test_migrations_conflict_long_name/0002_second.py (15L)\nfile scope: [\"000wS003\" full 15L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000wS002\" full 11L | code 11L]\n\n# tests/migrations/test_migrations_conflict_long_name/__init__.py (1L)\nfile scope: [\"000wT000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

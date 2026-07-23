@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/apps/__init__.py",
+        "django/apps/config.py",
+        "django/apps/registry.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/apps/__init__.py (5L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from .config import AppConfig\n2|from .registry import apps\n3|\n4|__all__ = [\"AppConfig\", \"apps\"]\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/apps/config.py (275L)\nfile scope: [\"0000300G\" full 275L | imports 15L]\n\n- APPS_MODULE_NAME [\"00003000\" full 1L | code 1L]\n\n- MODELS_MODULE_NAME [\"00003001\" full 1L | code 1L]\n\n- class AppConfig: ... [\"0000300F\" full 262L | code 262L]\n  - def __init__(self, app_name, app_module): ... [\"00003004\" full 41L | code 41L]\n  - def __repr__(self): ... [\"0000300d\" full 2L | code 2L]\n  - @cached_property def default_auto_field(self): ... [\"0000300e\" full 5L | code 5L]\n  - @property def _is_default_auto_field_overridden(self): ... [\"0000300f\" full 3L | code 3L]\n  - def _path_from_module(self, module): ... [\"0000300j\" full 27L | code 27L]\n  - @classmethod def create(cls, entry): ... [\"0000300u\" full 124L | code 124L]\n  - def get_model(self, model_name, require_ready=True): ... [\"0000300x\" full 16L | code 16L]\n  - def get_models(self, include_auto_created=False, include_swapped=False): ... [\"0000300B\" full 20L | code 20L]\n  - def import_models(self): ... [\"0000300D\" full 8L | code 8L]\n  - def ready(self): ... [\"0000300E\" full 4L | code 4L]\n\n# django/apps/registry.py (439L)\nfile scope: [\"0000401i\" full 439L | imports 13L]\n\n- class Apps: ... [\"0000401g\" full 423L | code 423L]\n  - def __init__(self, installed_apps=()): ... [\"00004001\" full 40L | code 40L]\n  - def populate(self, installed_apps=None): ... [\"0000400h\" full 67L | code 67L]\n  - def check_apps_ready(self): ... [\"0000400i\" full 10L | code 10L]\n  - def check_models_ready(self): ... [\"0000400j\" full 4L | code 4L]\n  - def get_app_configs(self): ... [\"0000400k\" full 4L | code 4L]\n  - def get_app_config(self, app_label): ... [\"0000400o\" full 16L | code 16L]\n  - @functools.cache def get_models(self, include_auto_created=False, include_swapped=False): ... [\"0000400t\" full 19L | code 19L]\n  - def get_model(self, app_label, model_name=None, require_ready=True): ... [\"0000400y\" full 26L | code 26L]\n  - def register_model(self, app_label, model): ... [\"0000400D\" full 26L | code 26L]\n  - def is_installed(self, app_name): ... [\"0000400F\" full 8L | code 8L]\n  - def get_containing_app_config(self, object_name): ... [\"0000400K\" full 18L | code 18L]\n  - def get_registered_model(self, app_label, model_name): ... [\"0000400O\" full 12L | code 12L]\n  - @functools.cache def get_swappable_settings_name(self, to_string): ... [\"0000400S\" full 22L | code 22L]\n  - def set_available_apps(self, available): ... [\"0000400V\" full 27L | code 27L]\n  - def unset_available_apps(self): ... [\"0000400W\" full 4L | code 4L]\n  - def set_installed_apps(self, installed): ... [\"0000400Y\" full 24L | code 24L]\n  - def unset_installed_apps(self): ... [\"0000400Z\" full 5L | code 5L]\n  - def clear_cache(self): ... [\"00004012\" full 17L | code 17L]\n  - def lazy_model_operation(self, function, *model_keys): ... [\"0000401b\" full 39L | code 39L]\n    - def apply_next_model(model): ... [\"00004019\" full 3L | code 3L]\n  - def do_pending_operations(self, model): ... [\"0000401f\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

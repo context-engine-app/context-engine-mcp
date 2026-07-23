@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/command/enum_option_type.ts",
+        "examples/command/environment_variables.ts",
+        "examples/command/environment_variables_override.ts",
+        "examples/command/environment_variables_prefix.ts",
+        "examples/command/examples.ts",
+        "examples/command/general_error_handling.ts",
+        "examples/command/generic_parent_types.ts",
+        "examples/command/global_commands.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 3.1 KB -> 1.5 KB (53% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/command/enum_option_type.ts (32L)\nfile scope: [\"0002j006\" full 32L | imports 27L]\n\n- enum Animal { ... } [\"0002j002\" full 4L | code 4L]\n  - Dog = \"dog\" [\"0002j000\" full 1L | code 1L]\n  - Cat = \"cat\" [\"0002j001\" full 1L | code 1L]\n\n- action() callback [\"0002j005\" full 4L | code 4L]\n\n# examples/command/environment_variables.ts (9L)\nfile scope: [\"0002k001\" full 9L | imports 7L]\n\n- action() callback [\"0002k000\" full 1L | code 1L]\n\n# examples/command/environment_variables_override.ts (17L)\nfile scope: [\"0002l002\" full 17L | imports 16L]\n\n- prefix: \"DENO_\" [\"0002l000\" full 1L | code 1L]\n\n- action() callback [\"0002l001\" full 1L | code 1L]\n\n# examples/command/environment_variables_prefix.ts (15L)\nfile scope: [\"0002m002\" full 15L | imports 14L]\n\n- prefix: \"DENO_\" [\"0002m000\" full 1L | code 1L]\n\n- action() callback [\"0002m001\" full 1L | code 1L]\n\n# examples/command/examples.ts (13L)\nfile scope: [\"0002n000\" full 13L]\n\n\n# examples/command/general_error_handling.ts (15L)\nfile scope: [\"0002o003\" full 15L | imports 8L]\n\n\n# examples/command/generic_parent_types.ts (34L)\nfile scope: [\"0002p005\" full 34L | imports 8L]\n\n\n# examples/command/global_commands.ts (20L)\nfile scope: [\"0002q000\" full 20L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

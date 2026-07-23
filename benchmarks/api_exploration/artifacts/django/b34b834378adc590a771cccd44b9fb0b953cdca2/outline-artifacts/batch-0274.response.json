@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/views/decorators/http.py",
+        "django/views/decorators/vary.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 7.5 KB -> 1.5 KB (80% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/views/decorators/http.py (169L)\nfile scope: [\"000et00G\" full 169L | imports 41L]\n\n- def require_http_methods(request_method_list): ... [\"000et009\" full 48L | code 48L]\n  - def decorator(func): ... [\"000et008\" full 34L | code 34L]\n    - @wraps(func) def inner(request, *args, **kwargs): ... [\"000et007\" full 13L | code 13L]\n\n- def condition(etag_func=None, last_modified_func=None): ... [\"000et00B\" full 78L | code 78L]\n  - def decorator(func): ... [\"000et00A\" full 53L | code 53L]\n    - def _pre_process_request(request, *args, **kwargs): ... [\"000et00n\" full 17L | code 17L]\n    - def _post_process_request(request, response, res_etag, res_last_modified): ... [\"000et00s\" full 8L | code 8L]\n    - @wraps(func) def inner(request, *args, **kwargs): ... [\"000et00z\" full 9L | code 9L]\n\n- def etag(etag_func): ... [\"000et00D\" full 2L | code 2L]\n\n- def last_modified(last_modified_func): ... [\"000et00F\" full 2L | code 2L]\n\n# django/views/decorators/vary.py (44L)\nfile scope: [\"000eu00a\" full 44L | imports 7L]\n\n- def vary_on_headers(*headers): ... [\"000eu008\" full 30L | code 30L]\n  - def decorator(func): ... [\"000eu007\" full 16L | code 16L]\n    - def _view_wrapper(request, *args, **kwargs): ... [\"000eu006\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/field_subclassing/__init__.py",
+        "tests/field_subclassing/fields.py",
+        "tests/field_subclassing/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/field_subclassing/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/field_subclassing/fields.py (27L)\nfile scope: [\"000o000g\" full 27L | imports 5L]\n\n- class CustomTypedField(models.TextField): ... [\"000o0002\" full 3L | code 3L]\n  - def db_type(self, connection): ... [\"000o0001\" full 2L | code 2L]\n\n- class CustomDeferredAttribute(DeferredAttribute): ... [\"000o000d\" full 13L | code 13L]\n  - def __get__(self, instance, cls=None): ... [\"000o0004\" full 3L | code 3L]\n  - def __set__(self, instance, value): ... [\"000o0007\" full 3L | code 3L]\n  - def _count_call(self, instance, get_or_set): ... [\"000o000c\" full 4L | code 4L]\n\n- class CustomDescriptorField(models.CharField): ... [\"000o000f\" full 2L | code 2L]\n\n# tests/field_subclassing/tests.py (34L)\nfile scope: [\"000o1008\" full 34L | imports 7L]\n\n- class TestDbType(SimpleTestCase): ... [\"000o1002\" full 4L | code 4L]\n  - def test_db_parameters_respects_db_type(self): ... [\"000o1001\" full 3L | code 3L]\n\n- class DescriptorClassTest(SimpleTestCase): ... [\"000o1007\" full 21L | code 21L]\n  - def test_descriptor_class(self): ... [\"000o1006\" full 20L | code 20L]\n    - class CustomDescriptorModel(models.Model): ... [\"000o1004\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

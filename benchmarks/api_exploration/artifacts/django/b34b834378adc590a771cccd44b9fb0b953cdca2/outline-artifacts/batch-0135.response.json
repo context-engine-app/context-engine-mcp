@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/gis/db/backends/utils.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 789 B -> 709 B (10% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/gis/db/backends/utils.py (30L)\nfile scope: [\"0005k00e\" full 30L | imports 7L]\n\n- class SpatialOperator: ... [\"0005k00d\" full 23L | code 23L]\n  - def __init__(self, op=None, func=None): ... [\"0005k003\" full 3L | code 3L]\n  - @property def default_template(self): ... [\"0005k006\" full 6L | code 6L]\n  - def as_sql(self, connection, lookup, template_params, sql_params): ... [\"0005k00c\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

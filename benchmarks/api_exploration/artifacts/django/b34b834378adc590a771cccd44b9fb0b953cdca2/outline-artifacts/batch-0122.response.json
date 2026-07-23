@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/flatpages/urls.py",
+        "django/contrib/flatpages/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/flatpages/urls.py (7L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.contrib.flatpages import views\n2|from django.urls import path\n3|\n4|urlpatterns = [\n5|    path(\"<path:url>\", views.flatpage, name=\"django.contrib.flatpages.views.flatpage\"),\n6|]\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/flatpages/views.py (71L)\nfile scope: [\"0004B00a\" full 71L | imports 23L]\n\n- DEFAULT_TEMPLATE [\"0004B000\" full 1L | code 1L]\n\n- def flatpage(request, url): ... [\"0004B005\" full 24L | code 24L]\n\n- @csrf_protect def render_flatpage(request, f): ... [\"0004B009\" full 23L | code 23L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

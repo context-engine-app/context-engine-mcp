@@ -1,0 +1,25 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_squashed_double/0001_initial.py",
+        "tests/migrations/test_migrations_squashed_double/0002_auto.py",
+        "tests/migrations/test_migrations_squashed_double/0003_squashed_0001_and_0002.py",
+        "tests/migrations/test_migrations_squashed_double/0004_auto.py",
+        "tests/migrations/test_migrations_squashed_double/0005_squashed_0003_and_0004.py",
+        "tests/migrations/test_migrations_squashed_double/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/test_migrations_squashed_double/0001_initial.py (22L)\nfile scope: [\"000y6002\" full 22L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000y6001\" full 18L | code 18L]\n\n# tests/migrations/test_migrations_squashed_double/0002_auto.py (13L)\nfile scope: [\"000y7003\" full 13L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000y7002\" full 9L | code 9L]\n\n# tests/migrations/test_migrations_squashed_double/0003_squashed_0001_and_0002.py (23L)\nfile scope: [\"000y8003\" full 23L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000y8002\" full 19L | code 19L]\n\n# tests/migrations/test_migrations_squashed_double/0004_auto.py (13L)\nfile scope: [\"000y9003\" full 13L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000y9002\" full 9L | code 9L]\n\n# tests/migrations/test_migrations_squashed_double/0005_squashed_0003_and_0004.py (26L)\nfile scope: [\"000ya003\" full 26L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000ya002\" full 22L | code 22L]\n\n# tests/migrations/test_migrations_squashed_double/__init__.py (1L)\nfile scope: [\"000yb000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

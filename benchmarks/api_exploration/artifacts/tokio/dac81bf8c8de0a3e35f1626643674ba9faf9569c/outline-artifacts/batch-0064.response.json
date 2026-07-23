@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/future/block_on.rs",
+        "tokio/src/future/maybe_done.rs",
+        "tokio/src/future/mod.rs",
+        "tokio/src/future/trace.rs",
+        "tokio/src/future/try_join.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 7.4 KB -> 3.2 KB (57% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/future/block_on.rs (23L)\nfile scope: [\"0004k000\" full 23L]\n\n\n# tokio/src/future/maybe_done.rs (124L)\nfile scope: [\"0004l00h\" full 124L | module-docs 1L | imports 25L]\n\n- pub fn maybe_done<F: IntoFuture>(future: F) -> MaybeDone<F::IntoFuture> { ... } [\"0004l000\" full 6L | code 5L | docs 1L]\n\n- impl<Fut: Future> MaybeDone<Fut> { ... } [\"0004l003\" full 27L | code 27L]\n  - pub fn output_mut(self: Pin<&mut Self>) -> Option<&mut Fut::Output> { ... } [\"0004l001\" full 10L | code 6L | docs 4L]\n  - #[inline] pub fn take_output(self: Pin<&mut Self>) -> Option<Fut::Output> { ... } [\"0004l002\" full 14L | code 12L | docs 2L]\n\n- impl<Fut: Future> Future for MaybeDone<Fut> { ... } [\"0004l006\" full 13L | code 13L]\n  - type Output = (); [\"0004l004\" full 1L | code 1L]\n  - fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> { ... } [\"0004l005\" full 9L | code 9L]\n\n- #[cfg(test)] mod miri_tests { ... } [\"0004l00g\" full 50L | code 49L | docs 1L]\n  - struct ThingAdder<'a> { ... } [\"0004l008\" full 3L | code 3L]\n    - thing: &'a mut String [\"0004l007\" full 1L | code 1L]\n  - impl Future for ThingAdder<'_> { ... } [\"0004l00b\" full 10L | code 10L]\n    - type Output = (); [\"0004l009\" full 1L | code 1L]\n    - fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> { ... } [\"0004l00a\" full 6L | code 6L]\n  - #[test] fn maybe_done_miri() { ... } [\"0004l00c\" full 16L | code 16L]\n  - struct DummyWaker; [\"0004l00d\" full 1L | code 1L]\n  - impl Wake for DummyWaker { ... } [\"0004l00f\" full 3L | code 3L]\n    - fn wake(self: Arc<Self>) { ... } [\"0004l00e\" full 1L | code 1L]\n\n# tokio/src/future/mod.rs (29L)\nfile scope: [\"0004m001\" full 29L | imports 5L]\n\n- #[cfg(any(feature = \"macros\", feature = \"process\"))] pub(crate) mod maybe_done; [\"0004m000\" full 2L | code 2L]\n\n# tokio/src/future/trace.rs (12L)\nfile scope: [\"0004n004\" full 12L | imports 3L]\n\n- pub(crate) trait InstrumentedFuture: Future { ... } [\"0004n001\" full 3L | code 3L]\n  - fn id(&self) -> ... ; [\"0004n000\" full 1L | code 1L]\n\n- impl<F: Future> InstrumentedFuture for tracing::instrument::Instrumented<F> { ... } [\"0004n003\" full 5L | code 5L]\n  - fn id(&self) -> Option<tracing::Id> { ... } [\"0004n002\" full 3L | code 3L]\n\n# tokio/src/future/try_join.rs (83L)\nfile scope: [\"0004o004\" full 83L | imports 27L]\n\n- pub(crate) fn try_join3<T1, F1, T2, F2, T3, F3, E>( future1: F1, future2: F2, future3: F3, ) -> TryJoin3<F1, F2, F3> where F1: Future<Output = Result<T1, E>>, F2: Future<Output = Result<T2, E>>, F3: Future<Output = Result<T3, E>>, { ... } [\"0004o000\" full 16L | code 16L]\n\n- impl<T1, F1, T2, F2, T3, F3, E> Future for TryJoin3<F1, F2, F3> where F1: Future<Output = Result<T1, E>>, F2: Future<Output = Result<T2, E>>, F3: Future<Output = Result<T3, E>>, { ... } [\"0004o003\" full 42L | code 42L]\n  - type Output = Result<(T1, T2, T3), E>; [\"0004o001\" full 1L | code 1L]\n  - fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> { ... } [\"0004o002\" full 33L | code 33L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

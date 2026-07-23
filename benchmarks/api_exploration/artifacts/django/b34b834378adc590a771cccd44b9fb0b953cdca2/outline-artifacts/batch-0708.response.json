@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/nested_foreign_keys/__init__.py",
+        "tests/nested_foreign_keys/models.py",
+        "tests/nested_foreign_keys/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/nested_foreign_keys/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/nested_foreign_keys/models.py (31L)\nfile scope: [\"000AA00e\" full 31L | imports 4L]\n\n- class Person(models.Model): ... [\"000AA001\" full 2L | code 2L]\n\n- class Movie(models.Model): ... [\"000AA004\" full 3L | code 3L]\n\n- class Event(models.Model): ... [\"000AA005\" full 2L | code 2L]\n\n- class Screening(Event): ... [\"000AA007\" full 2L | code 2L]\n\n- class ScreeningNullFK(Event): ... [\"000AA009\" full 2L | code 2L]\n\n- class Package(models.Model): ... [\"000AA00b\" full 2L | code 2L]\n\n- class PackageNullFK(models.Model): ... [\"000AA00d\" full 2L | code 2L]\n\n# tests/nested_foreign_keys/tests.py (309L)\nfile scope: [\"000AB00k\" full 309L | imports 40L]\n\n- class NestedForeignKeysTests(TestCase): ... [\"000AB00c\" full 137L | code 137L]\n  - @classmethod def setUpTestData(cls): ... [\"000AB000\" full 6L | code 6L]\n  - def test_inheritance(self): ... [\"000AB003\" full 24L | code 24L]\n  - def test_inheritance_null_FK(self): ... [\"000AB004\" full 28L | code 28L]\n  - def test_null_exclude(self): ... [\"000AB006\" full 6L | code 6L]\n  - def test_explicit_ForeignKey(self): ... [\"000AB008\" full 27L | code 27L]\n  - def test_explicit_ForeignKey_NullFK(self): ... [\"000AB00b\" full 34L | code 34L]\n\n- class DeeplyNestedForeignKeysTests(TestCase): ... [\"000AB00j\" full 134L | code 134L]\n  - @classmethod def setUpTestData(cls): ... [\"000AB00d\" full 6L | code 6L]\n  - def test_inheritance(self): ... [\"000AB00g\" full 61L | code 61L]\n  - def test_explicit_ForeignKey(self): ... [\"000AB00i\" full 64L | code 64L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

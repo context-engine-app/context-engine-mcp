@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/postgres/aggregates/__init__.py",
+        "django/contrib/postgres/aggregates/general.py",
+        "django/contrib/postgres/aggregates/mixins.py",
+        "django/contrib/postgres/aggregates/statistics.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/postgres/aggregates/__init__.py (3L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from .general import *  # NOQA\n2|from .statistics import *  # NOQA\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/postgres/aggregates/general.py (108L)\nfile scope: [\"0006Y00y\" full 108L | imports 31L]\n\n- class ArrayAgg(Aggregate): ... [\"0006Y005\" full 8L | code 8L]\n  - @property def output_field(self): ... [\"0006Y004\" full 3L | code 3L]\n\n- class BitAnd(_BitAnd): ... [\"0006Y009\" full 9L | code 9L]\n  - def __init__(self, expression, **extra): ... [\"0006Y008\" full 8L | code 8L]\n\n- class BitOr(_BitOr): ... [\"0006Y00d\" full 9L | code 9L]\n  - def __init__(self, expression, **extra): ... [\"0006Y00c\" full 8L | code 8L]\n\n- class BitXor(_BitXor): ... [\"0006Y00h\" full 9L | code 9L]\n  - def __init__(self, expression, **extra): ... [\"0006Y00g\" full 8L | code 8L]\n\n- class BoolAnd(Aggregate): ... [\"0006Y00k\" full 3L | code 3L]\n\n- class BoolOr(Aggregate): ... [\"0006Y00n\" full 3L | code 3L]\n\n- class JSONBAgg(Aggregate): ... [\"0006Y00s\" full 5L | code 5L]\n\n- class StringAgg(_StringAgg): ... [\"0006Y00x\" full 22L | code 22L]\n  - def __init__(self, expression, delimiter, **extra): ... [\"0006Y00w\" full 20L | code 20L]\n\n# django/contrib/postgres/aggregates/mixins.py (19L)\nfile scope: [\"0006Z005\" full 19L | module-docs 1L | imports 8L]\n\n- class OrderableAggMixin: ... [\"0006Z004\" full 11L | code 11L]\n  - def __init_subclass__(cls, /, *args, **kwargs): ... [\"0006Z003\" full 8L | code 8L]\n\n# django/contrib/postgres/aggregates/statistics.py (76L)\nfile scope: [\"0007000D\" full 76L | imports 20L]\n\n- class StatAggregate(Aggregate): ... [\"00070008\" full 9L | code 9L]\n  - def __init__(self, y, x, output_field=None, filter=None, default=None): ... [\"00070007\" full 6L | code 6L]\n\n- class Corr(StatAggregate): ... [\"0007000a\" full 2L | code 2L]\n\n- class CovarPop(StatAggregate): ... [\"0007000i\" full 4L | code 4L]\n  - def __init__(self, y, x, sample=False, filter=None, default=None): ... [\"0007000g\" full 3L | code 3L]\n\n- class RegrAvgX(StatAggregate): ... [\"0007000k\" full 2L | code 2L]\n\n- class RegrAvgY(StatAggregate): ... [\"0007000m\" full 2L | code 2L]\n\n- class RegrCount(StatAggregate): ... [\"0007000q\" full 4L | code 4L]\n\n- class RegrIntercept(StatAggregate): ... [\"0007000s\" full 2L | code 2L]\n\n- class RegrR2(StatAggregate): ... [\"0007000u\" full 2L | code 2L]\n\n- class RegrSlope(StatAggregate): ... [\"0007000w\" full 2L | code 2L]\n\n- class RegrSXX(StatAggregate): ... [\"0007000y\" full 2L | code 2L]\n\n- class RegrSXY(StatAggregate): ... [\"0007000A\" full 2L | code 2L]\n\n- class RegrSYY(StatAggregate): ... [\"0007000C\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

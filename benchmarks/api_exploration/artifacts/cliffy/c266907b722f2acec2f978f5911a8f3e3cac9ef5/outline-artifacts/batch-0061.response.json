@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "internal/runtime/stat.ts",
+        "internal/runtime/write_sync.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 922 B -> 766 B (17% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# internal/runtime/stat.ts (25L)\nfile scope: [\"0004u005\" full 25L | module-docs 8L]\n\n- export async function stat(input: string): Promise<{ isDirectory: boolean }> { ... } [\"0004u004\" full 16L | code 16L]\n  - get isDirectory() { return stats.isDirectory(); } [\"0004u003\" full 3L | code 3L]\n\n# internal/runtime/write_sync.ts (22L)\nfile scope: [\"0004v003\" full 22L | module-docs 8L]\n\n- export function writeSync(data: Uint8Array): number { ... } [\"0004v002\" full 13L | code 13L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

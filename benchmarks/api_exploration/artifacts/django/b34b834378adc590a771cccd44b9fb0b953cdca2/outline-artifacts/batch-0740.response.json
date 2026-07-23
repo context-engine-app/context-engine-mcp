@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/reserved_names/__init__.py",
+        "tests/reserved_names/models.py",
+        "tests/reserved_names/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/reserved_names/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/reserved_names/models.py (28L)\nfile scope: [\"000Cl00c\" full 28L | imports 13L]\n\n- class Thing(models.Model): ... [\"000Cl00b\" full 15L | code 15L]\n  - class Meta: ... [\"000Cl009\" full 2L | code 2L]\n  - def __str__(self): ... [\"000Cl00a\" full 2L | code 2L]\n\n# tests/reserved_names/tests.py (83L)\nfile scope: [\"000Cm00g\" full 83L | imports 8L]\n\n- class ReservedNameTests(TestCase): ... [\"000Cm00f\" full 75L | code 75L]\n  - def generate(self): ... [\"000Cm002\" full 22L | code 22L]\n  - def test_simple(self): ... [\"000Cm007\" full 25L | code 25L]\n  - def test_order_by(self): ... [\"000Cm009\" full 4L | code 4L]\n  - def test_fields(self): ... [\"000Cm00b\" full 5L | code 5L]\n  - def test_dates(self): ... [\"000Cm00d\" full 10L | code 10L]\n  - def test_month_filter(self): ... [\"000Cm00e\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

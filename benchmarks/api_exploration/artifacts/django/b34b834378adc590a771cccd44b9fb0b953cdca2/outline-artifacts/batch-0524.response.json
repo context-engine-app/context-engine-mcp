@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/i18n/exclude/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 435 B -> 394 B (9% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/i18n/exclude/__init__.py (13L)\nfile scope: [\"000sm002\" full 13L | module-docs 4L | imports 10L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

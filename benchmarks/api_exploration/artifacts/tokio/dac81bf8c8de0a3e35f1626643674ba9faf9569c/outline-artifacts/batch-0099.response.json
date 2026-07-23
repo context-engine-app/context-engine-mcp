@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/io/driver/signal.rs",
+        "tokio/src/runtime/io/driver/uring.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tokio/src/runtime/io/driver/signal.rs (23L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|use super::{Driver, Handle, TOKEN_SIGNAL};\n 2|\n 3|use std::io;\n 4|\n 5|impl Handle {\n 6|    pub(crate) fn register_signal_receiver(\n 7|        &self,\n 8|        receiver: &mut mio::net::UnixStream,\n 9|    ) -> io::Result<()> {\n10|        self.registry\n11|            .register(receiver, TOKEN_SIGNAL, mio::Interest::READABLE)?;\n12|        Ok(())\n13|    }\n14|}\n15|\n16|impl Driver {\n17|    pub(crate) fn consume_signal_ready(&mut self) -> bool {\n18|        let ret = self.signal_ready;\n19|        self.signal_ready = false;\n20|        ret\n21|    }\n22|}\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/io/driver/uring.rs (330L)\nfile scope: [\"0006H00n\" full 330L | imports 15L]\n\n- const DEFAULT_RING_SIZE: u32 = 256; [\"0006H000\" full 1L | code 1L]\n\n- pub(crate) struct UringContext { ... } [\"0006H003\" full 4L | code 4L]\n  - pub(crate) uring: Option<io_uring::IoUring> [\"0006H001\" full 1L | code 1L]\n  - pub(crate) ops: slab::Slab<Lifecycle> [\"0006H002\" full 1L | code 1L]\n\n- impl UringContext { ... } [\"0006H00b\" full 110L | code 110L]\n  - pub(crate) fn new() -> Self { ... } [\"0006H004\" full 6L | code 6L]\n  - pub(crate) fn ring(&self) -> &io_uring::IoUring { ... } [\"0006H005\" full 3L | code 3L]\n  - pub(crate) fn ring_mut(&mut self) -> &mut io_uring::IoUring { ... } [\"0006H006\" full 3L | code 3L]\n  - pub(crate) fn try_init(&mut self, probe: &mut Probe) -> io::Result<bool> { ... } [\"0006H007\" full 26L | code 21L | docs 5L]\n  - pub(crate) fn dispatch_completions(&mut self) { ... } [\"0006H008\" full 42L | code 42L]\n  - pub(crate) fn submit(&mut self) -> io::Result<()> { ... } [\"0006H009\" full 19L | code 19L]\n  - pub(crate) fn remove_op(&mut self, index: usize) -> Lifecycle { ... } [\"0006H00a\" full 3L | code 3L]\n\n- impl Drop for UringContext { ... } [\"0006H00d\" full 41L | code 40L | docs 1L]\n  - fn drop(&mut self) { ... } [\"0006H00c\" full 38L | code 38L]\n\n- impl Handle { ... } [\"0006H00m\" full 155L | code 155L]\n  - fn add_uring_source(&self, uringfd: RawFd) -> io::Result<()> { ... } [\"0006H00e\" full 5L | code 5L]\n  - pub(crate) fn get_uring(&self) -> &Mutex<UringContext> { ... } [\"0006H00f\" full 3L | code 3L]\n  - #[cfg_attr(test, allow(dead_code))] pub(crate) fn is_uring_ready(&self, opcode: u8) -> bool { ... } [\"0006H00g\" full 11L | code 7L | docs 4L]\n  - #[cfg_attr(test, allow(dead_code))] pub(crate) fn is_uring_probed(&self) -> bool { ... } [\"0006H00h\" full 7L | code 4L | docs 3L]\n  - pub(crate) async fn check_and_init(&self, opcode: u8) -> io::Result<bool> { ... } [\"0006H00i\" full 35L | code 23L | docs 12L]\n  - fn try_init(&self, probe: &mut Probe) -> io::Result<()> { ... } [\"0006H00j\" full 9L | code 8L | docs 1L]\n  - pub(crate) unsafe fn register_op(&self, entry: Entry, waker: Waker) -> io::Result<usize> { ... } [\"0006H00k\" full 45L | code 35L | docs 10L]\n  - pub(crate) fn cancel_op<T: Cancellable>(&self, index: usize, data: Option<T>) { ... } [\"0006H00l\" full 31L | code 31L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

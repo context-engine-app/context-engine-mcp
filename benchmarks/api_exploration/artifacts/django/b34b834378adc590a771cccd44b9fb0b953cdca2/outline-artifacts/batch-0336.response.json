@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/apps/__init__.py",
+        "tests/apps/apps.py",
+        "tests/apps/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/apps/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/apps/apps.py (39L)\nfile scope: [\"000hn00k\" full 39L | imports 4L]\n\n- class MyAdmin(AppConfig): ... [\"000hn002\" full 3L | code 3L]\n\n- class MyAuth(AppConfig): ... [\"000hn006\" full 4L | code 4L]\n\n- class BadConfig(AppConfig): ... [\"000hn007\" full 2L | code 2L]\n\n- class NotAConfig: ... [\"000hn009\" full 2L | code 2L]\n\n- class NoSuchApp(AppConfig): ... [\"000hn00b\" full 2L | code 2L]\n\n- class PlainAppsConfig(AppConfig): ... [\"000hn00d\" full 2L | code 2L]\n\n- class RelabeledAppsConfig(AppConfig): ... [\"000hn00g\" full 3L | code 3L]\n\n- class ModelPKAppsConfig(AppConfig): ... [\"000hn00j\" full 3L | code 3L]\n\n# tests/apps/models.py (18L)\nfile scope: [\"000ho007\" full 18L | imports 10L]\n\n- class TotallyNormal(models.Model): ... [\"000ho002\" full 2L | code 2L]\n\n- class SoAlternative(models.Model): ... [\"000ho006\" full 5L | code 5L]\n  - class Meta: ... [\"000ho005\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

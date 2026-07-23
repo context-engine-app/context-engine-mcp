@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/contenttypes/migrations/0001_initial.py",
+        "django/contrib/contenttypes/migrations/0002_remove_content_type_name.py",
+        "django/contrib/contenttypes/migrations/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/contenttypes/migrations/0001_initial.py (46L)\nfile scope: [\"0004j003\" full 46L | imports 5L]\n\n- class Migration(migrations.Migration): ... [\"0004j002\" full 41L | code 41L]\n\n# django/contrib/contenttypes/migrations/0002_remove_content_type_name.py (43L)\nfile scope: [\"0004k009\" full 43L | imports 4L]\n\n- def add_legacy_name(apps, schema_editor): ... [\"0004k005\" full 9L | code 9L]\n\n- class Migration(migrations.Migration): ... [\"0004k008\" full 28L | code 28L]\n\n# django/contrib/contenttypes/migrations/__init__.py (1L)\nfile scope: [\"0004l000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

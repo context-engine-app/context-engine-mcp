@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/views/i18n.py",
+        "django/views/static.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 12.8 KB -> 1.9 KB (85% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/views/i18n.py (254L)\nfile scope: [\"000eC00Y\" full 254L | imports 21L]\n\n- LANGUAGE_QUERY_PARAMETER [\"000eC000\" full 1L | code 1L]\n\n- def builtin_template_path(name): ... [\"000eC002\" full 8L | code 8L]\n\n- def set_language(request): ... [\"000eC008\" full 45L | code 45L]\n\n- def get_formats(): ... [\"000eC00a\" full 19L | code 19L]\n\n- class JavaScriptCatalog(View): ... [\"000eC00T\" full 134L | code 134L]\n  - def get(self, request, *args, **kwargs): ... [\"000eC00l\" full 11L | code 11L]\n  - def get_paths(self, packages): ... [\"000eC00r\" full 15L | code 15L]\n  - @property def _num_plurals(self): ... [\"000eC00t\" full 10L | code 10L]\n  - @property def _plural_string(self): ... [\"000eC00v\" full 11L | code 11L]\n  - def get_plural(self): ... [\"000eC00x\" full 13L | code 13L]\n  - def get_catalog(self): ... [\"000eC00J\" full 26L | code 26L]\n  - def get_context_data(self, **kwargs): ... [\"000eC00L\" full 6L | code 6L]\n  - def render_to_response(self, context, **response_kwargs): ... [\"000eC00S\" full 18L | code 18L]\n    - def indent(s): ... [\"000eC00P\" full 2L | code 2L]\n\n- class JSONCatalog(JavaScriptCatalog): ... [\"000eC00X\" full 20L | code 20L]\n  - def render_to_response(self, context, **response_kwargs): ... [\"000eC00W\" full 2L | code 2L]\n\n# django/views/static.py (123L)\nfile scope: [\"000eD00q\" full 123L | imports 27L]\n\n- def builtin_template_path(name): ... [\"000eD001\" full 8L | code 8L]\n\n- def serve(request, path, document_root=None, show_indexes=False): ... [\"000eD00b\" full 37L | code 37L]\n\n- def directory_index(path, fullpath): ... [\"000eD00l\" full 30L | code 30L]\n\n- def was_modified_since(header=None, mtime=0): ... [\"000eD00p\" full 20L | code 20L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

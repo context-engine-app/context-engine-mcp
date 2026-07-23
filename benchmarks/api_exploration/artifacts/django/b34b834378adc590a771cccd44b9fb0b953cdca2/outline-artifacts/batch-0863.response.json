@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/utils_tests/test_module/child_module/__init__.py",
+        "tests/utils_tests/test_module/child_module/grandchild_module.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/utils_tests/test_module/child_module/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/utils_tests/test_module/child_module/grandchild_module.py (2L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|content = \"Grandchild Module\"\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

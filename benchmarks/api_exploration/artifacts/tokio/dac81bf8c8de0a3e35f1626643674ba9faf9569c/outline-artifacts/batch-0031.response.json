@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio-util/src/cfg.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.6 KB -> 816 B (49% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio-util/src/cfg.rs (81L)\nfile scope: [\"0002l007\" full 81L | imports 15L]\n\n- macro_rules! cfg_codec { ... } [\"0002l000\" full 9L | code 9L]\n\n- macro_rules! cfg_compat { ... } [\"0002l001\" full 9L | code 9L]\n\n- macro_rules! cfg_net { ... } [\"0002l002\" full 9L | code 9L]\n\n- macro_rules! cfg_io { ... } [\"0002l003\" full 9L | code 9L]\n\n- macro_rules! cfg_rt { ... } [\"0002l004\" full 9L | code 9L]\n\n- macro_rules! cfg_not_rt { ... } [\"0002l005\" full 8L | code 8L]\n\n- macro_rules! cfg_time { ... } [\"0002l006\" full 9L | code 9L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

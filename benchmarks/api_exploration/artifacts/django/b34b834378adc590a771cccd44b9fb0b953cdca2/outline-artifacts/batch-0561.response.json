@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/m2m_recursive/__init__.py",
+        "tests/m2m_recursive/models.py",
+        "tests/m2m_recursive/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/m2m_recursive/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/m2m_recursive/models.py (36L)\nfile scope: [\"000tP00a\" full 36L | imports 22L]\n\n- class Person(models.Model): ... [\"000tP005\" full 8L | code 8L]\n  - def __str__(self): ... [\"000tP004\" full 2L | code 2L]\n\n- class Colleague(models.Model): ... [\"000tP009\" full 4L | code 4L]\n\n# tests/m2m_recursive/tests.py (134L)\nfile scope: [\"000tQ00s\" full 134L | imports 8L]\n\n- class RecursiveM2MTests(TestCase): ... [\"000tQ00e\" full 56L | code 56L]\n  - @classmethod def setUpTestData(cls): ... [\"000tQ000\" full 9L | code 9L]\n  - def test_recursive_m2m_all(self): ... [\"000tQ007\" full 9L | code 9L]\n  - def test_recursive_m2m_reverse_add(self): ... [\"000tQ008\" full 5L | code 5L]\n  - def test_recursive_m2m_remove(self): ... [\"000tQ009\" full 4L | code 4L]\n  - def test_recursive_m2m_clear(self): ... [\"000tQ00a\" full 7L | code 7L]\n  - def test_recursive_m2m_add_via_related_name(self): ... [\"000tQ00b\" full 5L | code 5L]\n  - def test_recursive_m2m_add_in_both_directions(self): ... [\"000tQ00c\" full 5L | code 5L]\n  - def test_recursive_m2m_related_to_self(self): ... [\"000tQ00d\" full 4L | code 4L]\n\n- class RecursiveSymmetricalM2MThroughTests(TestCase): ... [\"000tQ00r\" full 68L | code 68L]\n  - @classmethod def setUpTestData(cls): ... [\"000tQ00f\" full 21L | code 21L]\n  - def test_recursive_m2m_all(self): ... [\"000tQ00m\" full 9L | code 9L]\n  - def test_recursive_m2m_reverse_add(self): ... [\"000tQ00n\" full 10L | code 10L]\n  - def test_recursive_m2m_remove(self): ... [\"000tQ00o\" full 4L | code 4L]\n  - def test_recursive_m2m_clear(self): ... [\"000tQ00p\" full 7L | code 7L]\n  - def test_recursive_m2m_set(self): ... [\"000tQ00q\" full 11L | code 11L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/core/mail/backends/__init__.py",
+        "django/core/mail/backends/base.py",
+        "django/core/mail/backends/console.py",
+        "django/core/mail/backends/dummy.py",
+        "django/core/mail/backends/filebased.py",
+        "django/core/mail/backends/locmem.py",
+        "django/core/mail/backends/smtp.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/core/mail/backends/__init__.py (2L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|# Mail backends shipped with Django.\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/core/mail/backends/base.py (127L)\nfile scope: [\"0009f00o\" full 127L | imports 11L]\n\n- _NOT_PROVIDED [\"0009f000\" full 1L | code 1L]\n\n- class BaseEmailBackend: ... [\"0009f00n\" full 117L | code 117L]\n  - def __init__( self, fail_silently=_NOT_PROVIDED, *, alias=None, _ignore_unknown_kwargs=None, **kwargs, ): ... [\"0009f008\" full 43L | code 43L]\n  - def __getattr__(self, name): ... [\"0009f00d\" full 11L | code 11L]\n  - def open(self): ... [\"0009f00e\" full 18L | code 18L]\n  - def close(self): ... [\"0009f00f\" full 3L | code 3L]\n  - def __enter__(self): ... [\"0009f00g\" full 7L | code 7L]\n  - def __exit__(self, exc_type, exc_value, traceback): ... [\"0009f00k\" full 2L | code 2L]\n  - def send_messages(self, email_messages): ... [\"0009f00m\" full 8L | code 8L]\n\n# django/core/mail/backends/console.py (47L)\nfile scope: [\"0009g00h\" full 47L | imports 11L]\n\n- class EmailBackend(BaseEmailBackend): ... [\"0009g00g\" full 36L | code 36L]\n  - def __init__(self, fail_silently=False, **kwargs): ... [\"0009g002\" full 5L | code 5L]\n  - def write_message(self, message): ... [\"0009g00a\" full 10L | code 10L]\n  - def send_messages(self, email_messages): ... [\"0009g00f\" full 18L | code 18L]\n\n# django/core/mail/backends/dummy.py (11L)\nfile scope: [\"0009h003\" full 11L | imports 8L]\n\n- class EmailBackend(BaseEmailBackend): ... [\"0009h002\" full 3L | code 3L]\n  - def send_messages(self, email_messages): ... [\"0009h001\" full 2L | code 2L]\n\n# django/core/mail/backends/filebased.py (98L)\nfile scope: [\"0009i00g\" full 98L | imports 12L]\n\n- class EmailBackend(ConsoleEmailBackend): ... [\"0009i00f\" full 86L | code 86L]\n  - def __init__(self, fail_silently=False, file_path=None, **kwargs): ... [\"0009i004\" full 59L | code 59L]\n  - def write_message(self, message): ... [\"0009i008\" full 4L | code 4L]\n  - def _get_filename(self): ... [\"0009i00b\" full 7L | code 7L]\n  - def open(self): ... [\"0009i00c\" full 5L | code 5L]\n  - def close(self): ... [\"0009i00e\" full 6L | code 6L]\n\n# django/core/mail/backends/locmem.py (38L)\nfile scope: [\"0009j009\" full 38L | imports 11L]\n\n- class EmailBackend(BaseEmailBackend): ... [\"0009j008\" full 27L | code 27L]\n  - def __init__(self, *args, **kwargs): ... [\"0009j002\" full 4L | code 4L]\n  - def send_messages(self, messages): ... [\"0009j007\" full 10L | code 10L]\n\n# django/core/mail/backends/smtp.py (257L)\nfile scope: [\"0009k00S\" full 257L | imports 18L]\n\n- class EmailBackend(BaseEmailBackend): ... [\"0009k00R\" full 239L | code 239L]\n  - def __init__( self, host=None, port=None, username=None, password=None, use_tls=None, fail_silently=False, use_ssl=None, timeout=None, ssl_keyfile=None, ssl_certfile=None, **kwargs, ): ... [\"0009k00c\" full 77L | code 77L]\n  - @property def connection_class(self): ... [\"0009k00q\" full 3L | code 3L]\n  - @cached_property def ssl_context(self): ... [\"0009k00s\" full 8L | code 8L]\n  - def open(self): ... [\"0009k00u\" full 42L | code 42L]\n  - def _close_connection(self, connection): ... [\"0009k00w\" full 12L | code 12L]\n  - def close(self): ... [\"0009k00x\" full 12L | code 12L]\n  - def send_messages(self, email_messages): ... [\"0009k00D\" full 23L | code 23L]\n  - def _send(self, email_message): ... [\"0009k00I\" full 14L | code 14L]\n  - def prep_address(self, address, force_ascii=True): ... [\"0009k00Q\" full 35L | code 35L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

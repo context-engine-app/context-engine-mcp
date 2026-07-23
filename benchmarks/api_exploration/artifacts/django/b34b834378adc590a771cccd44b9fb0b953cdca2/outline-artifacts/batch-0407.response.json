@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/custom_methods/__init__.py",
+        "tests/custom_methods/models.py",
+        "tests/custom_methods/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/custom_methods/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/custom_methods/models.py (42L)\nfile scope: [\"000ls008\" full 42L | imports 12L]\n\n- class Article(models.Model): ... [\"000ls007\" full 30L | code 30L]\n  - def __str__(self): ... [\"000ls002\" full 2L | code 2L]\n  - def was_published_today(self): ... [\"000ls003\" full 2L | code 2L]\n  - def articles_from_same_day_1(self): ... [\"000ls004\" full 2L | code 2L]\n  - def articles_from_same_day_2(self): ... [\"000ls006\" full 17L | code 17L]\n\n# tests/custom_methods/tests.py (47L)\nfile scope: [\"000lt004\" full 47L | imports 8L]\n\n- class MethodsTests(TestCase): ... [\"000lt003\" full 39L | code 39L]\n  - def test_custom_methods(self): ... [\"000lt002\" full 38L | code 38L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

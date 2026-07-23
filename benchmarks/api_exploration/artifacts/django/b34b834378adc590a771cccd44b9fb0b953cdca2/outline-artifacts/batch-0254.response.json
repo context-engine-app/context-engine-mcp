@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/tasks/backends/__init__.py",
+        "django/tasks/backends/base.py",
+        "django/tasks/backends/dummy.py",
+        "django/tasks/backends/immediate.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/tasks/backends/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/tasks/backends/base.py (113L)\nfile scope: [\"000cD00t\" full 113L | imports 19L]\n\n- class BaseTaskBackend(metaclass=ABCMeta): ... [\"000cD00s\" full 94L | code 94L]\n  - def __init__(self, alias, params): ... [\"000cD007\" full 4L | code 4L]\n  - def validate_task(self, task): ... [\"000cD00d\" full 42L | code 42L]\n  - @abstractmethod def enqueue(self, task, args, kwargs): ... [\"000cD00h\" full 3L | code 3L]\n  - async def aenqueue(self, task, args, kwargs): ... [\"000cD00l\" full 5L | code 5L]\n  - def get_result(self, result_id): ... [\"000cD00n\" full 9L | code 9L]\n  - async def aget_result(self, result_id): ... [\"000cD00p\" full 5L | code 5L]\n  - def check(self, **kwargs): ... [\"000cD00r\" full 2L | code 2L]\n\n# django/tasks/backends/dummy.py (65L)\nfile scope: [\"000cE00k\" full 65L | imports 12L]\n\n- class DummyBackend(BaseTaskBackend): ... [\"000cE00j\" full 53L | code 53L]\n  - def __init__(self, alias, params): ... [\"000cE005\" full 3L | code 3L]\n  - def _store_result(self, result): ... [\"000cE008\" full 4L | code 4L]\n  - def enqueue(self, task, args, kwargs): ... [\"000cE00d\" full 22L | code 22L]\n  - def get_result(self, result_id): ... [\"000cE00f\" full 7L | code 7L]\n  - async def aget_result(self, result_id): ... [\"000cE00h\" full 5L | code 5L]\n  - def clear(self): ... [\"000cE00i\" full 2L | code 2L]\n\n# django/tasks/backends/immediate.py (96L)\nfile scope: [\"000cF00k\" full 96L | imports 16L]\n\n- class ImmediateBackend(BaseTaskBackend): ... [\"000cF00j\" full 81L | code 81L]\n  - def __init__(self, alias, params): ... [\"000cF005\" full 3L | code 3L]\n  - def _execute_task(self, task_result): ... [\"000cF00d\" full 51L | code 51L]\n  - def enqueue(self, task, args, kwargs): ... [\"000cF00i\" full 21L | code 21L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

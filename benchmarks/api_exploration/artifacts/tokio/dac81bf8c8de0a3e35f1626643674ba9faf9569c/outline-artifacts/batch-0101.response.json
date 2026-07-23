@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/local_runtime/mod.rs",
+        "tokio/src/runtime/local_runtime/options.rs",
+        "tokio/src/runtime/local_runtime/runtime.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tokio/src/runtime/local_runtime/mod.rs (8L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|mod runtime;\n2|\n3|mod options;\n4|\n5|pub use options::LocalOptions;\n6|pub use runtime::LocalRuntime;\n7|pub(super) use runtime::LocalRuntimeScheduler;\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/local_runtime/options.rs (19L)\nfile scope: [\"0006O002\" full 19L | imports 3L]\n\n- #[derive(Default, Debug)] #[non_exhaustive] pub struct LocalOptions { ... } [\"0006O001\" full 16L | code 6L | docs 10L]\n  - _phantom: PhantomData<*mut u8> [\"0006O000\" full 2L | code 1L | docs 1L]\n\n# tokio/src/runtime/local_runtime/runtime.rs (402L)\nfile scope: [\"0006P00n\" full 402L | imports 14L]\n\n- #[derive(Debug)] pub struct LocalRuntime { ... } [\"0006P004\" full 31L | code 14L | docs 17L]\n  - scheduler: LocalRuntimeScheduler [\"0006P000\" full 2L | code 1L | docs 1L]\n  - handle: Handle [\"0006P001\" full 2L | code 1L | docs 1L]\n  - blocking_pool: BlockingPool [\"0006P002\" full 2L | code 1L | docs 1L]\n  - _phantom: PhantomData<*mut u8> [\"0006P003\" full 2L | code 1L | docs 1L]\n\n- #[derive(Debug)] pub(crate) enum LocalRuntimeScheduler { ... } [\"0006P006\" full 6L | code 5L | docs 1L]\n  - CurrentThread(CurrentThread) [\"0006P005\" full 2L | code 1L | docs 1L]\n\n- impl LocalRuntime { ... } [\"0006P00i\" full 332L | code 332L]\n  - pub(crate) fn from_parts( scheduler: LocalRuntimeScheduler, handle: Handle, blocking_pool: BlockingPool, ) -> LocalRuntime { ... } [\"0006P007\" full 12L | code 12L]\n  - pub fn new() -> std::io::Result<LocalRuntime> { ... } [\"0006P008\" full 29L | code 5L | docs 24L]\n  - pub fn handle(&self) -> &Handle { ... } [\"0006P009\" full 25L | code 3L | docs 22L]\n  - #[track_caller] pub fn spawn_local<F>(&self, future: F) -> JoinHandle<F::Output> where F: Future + 'static, F::Output: 'static, { ... } [\"0006P00a\" full 40L | code 18L | docs 22L]\n  - #[track_caller] pub fn spawn_blocking<F, R>(&self, func: F) -> JoinHandle<R> where F: FnOnce() -> R + Send + 'static, R: Send + 'static, { ... } [\"0006P00b\" full 32L | code 8L | docs 24L]\n  - #[track_caller] pub fn block_on<F: Future>(&self, future: F) -> F::Output { ... } [\"0006P00c\" full 32L | code 11L | docs 21L]\n  - #[track_caller] fn block_on_inner<F: Future>(&self, future: F, _meta: SpawnMeta<'_>) -> F::Output { ... } [\"0006P00d\" full 32L | code 32L]\n  - pub fn enter(&self) -> EnterGuard<'_> { ... } [\"0006P00e\" full 45L | code 3L | docs 42L]\n  - pub fn shutdown_timeout(mut self, duration: Duration) { ... } [\"0006P00f\" full 37L | code 5L | docs 32L]\n  - pub fn shutdown_background(self) { ... } [\"0006P00g\" full 31L | code 3L | docs 28L]\n  - pub fn metrics(&self) -> crate::runtime::RuntimeMetrics { ... } [\"0006P00h\" full 5L | code 3L | docs 2L]\n\n- impl Drop for LocalRuntime { ... } [\"0006P00k\" full 12L | code 12L]\n  - fn drop(&mut self) { ... } [\"0006P00j\" full 10L | code 10L]\n\n- impl std::panic::UnwindSafe for LocalRuntime { ... } [\"0006P00l\" full 1L | code 1L]\n\n- impl std::panic::RefUnwindSafe for LocalRuntime { ... } [\"0006P00m\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

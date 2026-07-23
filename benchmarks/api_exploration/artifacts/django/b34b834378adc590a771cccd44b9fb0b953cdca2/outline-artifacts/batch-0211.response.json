@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/core/management/commands/startproject.py",
+        "django/core/management/commands/test.py",
+        "django/core/management/commands/testserver.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 5.3 KB -> 1.2 KB (77% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/core/management/commands/startproject.py (21L)\nfile scope: [\"0009R007\" full 21L | imports 6L]\n\n- class Command(TemplateCommand): ... [\"0009R006\" full 15L | code 15L]\n  - def handle(self, **options): ... [\"0009R005\" full 8L | code 8L]\n\n# django/core/management/commands/test.py (67L)\nfile scope: [\"0009S00h\" full 67L | imports 10L]\n\n- class Command(BaseCommand): ... [\"0009S00g\" full 57L | code 57L]\n  - def run_from_argv(self, argv): ... [\"0009S004\" full 8L | code 8L]\n  - def add_arguments(self, parser): ... [\"0009S007\" full 27L | code 27L]\n  - def handle(self, *test_labels, **options): ... [\"0009S00f\" full 13L | code 13L]\n\n# django/core/management/commands/testserver.py (66L)\nfile scope: [\"0009T00d\" full 66L | imports 6L]\n\n- class Command(BaseCommand): ... [\"0009T00c\" full 60L | code 60L]\n  - def add_arguments(self, parser): ... [\"0009T003\" full 26L | code 26L]\n  - def handle(self, *fixture_labels, **options): ... [\"0009T00b\" full 28L | code 28L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

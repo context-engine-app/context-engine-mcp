@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/conf/urls/__init__.py",
+        "django/conf/urls/i18n.py",
+        "django/conf/urls/static.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.3 KB -> 823 B (65% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/conf/urls/__init__.py (10L)\nfile scope: [\"0002S005\" full 10L | imports 13L]\n\n\n# django/conf/urls/i18n.py (40L)\nfile scope: [\"0002T007\" full 40L | imports 8L]\n\n- def i18n_patterns(*urls, prefix_default_language=True): ... [\"0002T002\" full 13L | code 13L]\n\n- @functools.cache def is_language_prefix_patterns_used(urlconf): ... [\"0002T005\" full 12L | code 12L]\n\n# django/conf/urls/static.py (31L)\nfile scope: [\"0002U004\" full 31L | imports 10L]\n\n- def static(prefix, view=serve, **kwargs): ... [\"0002U003\" full 21L | code 21L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

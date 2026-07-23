@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/conf/locale/ka/__init__.py",
+        "django/conf/locale/ka/formats.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/conf/locale/ka/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/conf/locale/ka/formats.py (49L)\nfile scope: [\"0001H00d\" full 49L | module-docs 4L | imports 55L]\n\n- DATE_FORMAT [\"0001H000\" full 1L | code 1L]\n\n- TIME_FORMAT [\"0001H001\" full 1L | code 1L]\n\n- DATETIME_FORMAT [\"0001H002\" full 1L | code 1L]\n\n- YEAR_MONTH_FORMAT [\"0001H003\" full 1L | code 1L]\n\n- MONTH_DAY_FORMAT [\"0001H004\" full 1L | code 1L]\n\n- SHORT_DATE_FORMAT [\"0001H005\" full 1L | code 1L]\n\n- SHORT_DATETIME_FORMAT [\"0001H006\" full 1L | code 1L]\n\n- FIRST_DAY_OF_WEEK [\"0001H007\" full 1L | code 1L]\n\n- DATE_INPUT_FORMATS [\"0001H008\" full 1L | code 1L]\n\n- DATETIME_INPUT_FORMATS [\"0001H009\" full 1L | code 1L]\n\n- DECIMAL_SEPARATOR [\"0001H00a\" full 1L | code 1L]\n\n- THOUSAND_SEPARATOR [\"0001H00b\" full 1L | code 1L]\n\n- NUMBER_GROUPING [\"0001H00c\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

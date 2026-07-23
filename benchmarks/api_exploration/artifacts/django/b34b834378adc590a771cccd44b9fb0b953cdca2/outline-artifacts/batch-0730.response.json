@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/proxy_model_inheritance/app1/__init__.py",
+        "tests/proxy_model_inheritance/app1/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/proxy_model_inheritance/app1/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/proxy_model_inheritance/app1/models.py (7L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from app2.models import NiceModel\n2|\n3|\n4|class ProxyModel(NiceModel):\n5|    class Meta:\n6|        proxy = True\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

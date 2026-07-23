@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/select_related_onetoone/__init__.py",
+        "tests/select_related_onetoone/models.py",
+        "tests/select_related_onetoone/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/select_related_onetoone/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/select_related_onetoone/models.py (79L)\nfile scope: [\"000CP00E\" full 79L | imports 4L]\n\n- class User(models.Model): ... [\"000CP002\" full 3L | code 3L]\n\n- class UserProfile(models.Model): ... [\"000CP006\" full 4L | code 4L]\n\n- class UserStatResult(models.Model): ... [\"000CP008\" full 2L | code 2L]\n\n- class UserStat(models.Model): ... [\"000CP00c\" full 4L | code 4L]\n\n- class StatDetails(models.Model): ... [\"000CP00f\" full 3L | code 3L]\n\n- class AdvancedUserStat(UserStat): ... [\"000CP00h\" full 2L | code 2L]\n\n- class Image(models.Model): ... [\"000CP00j\" full 2L | code 2L]\n\n- class Product(models.Model): ... [\"000CP00m\" full 3L | code 3L]\n\n- class Parent1(models.Model): ... [\"000CP00o\" full 2L | code 2L]\n\n- class Parent2(models.Model): ... [\"000CP00r\" full 4L | code 4L]\n\n- class Child1(Parent1, Parent2): ... [\"000CP00t\" full 2L | code 2L]\n\n- class Child2(Parent1): ... [\"000CP00w\" full 3L | code 3L]\n\n- class Child3(Child2): ... [\"000CP00y\" full 2L | code 2L]\n\n- class Child4(Child1): ... [\"000CP00A\" full 2L | code 2L]\n\n- class LinkedList(models.Model): ... [\"000CP00D\" full 9L | code 9L]\n\n# tests/select_related_onetoone/tests.py (312L)\nfile scope: [\"000CQ016\" full 312L | imports 26L]\n\n- class ReverseSelectRelatedTestCase(TestCase): ... [\"000CQ00Y\" full 248L | code 248L]\n  - @classmethod def setUpTestData(cls): ... [\"000CQ00a\" full 22L | code 22L]\n  - def test_basic(self): ... [\"000CQ00c\" full 4L | code 4L]\n  - def test_follow_next_level(self): ... [\"000CQ00e\" full 5L | code 5L]\n  - def test_follow_two(self): ... [\"000CQ00g\" full 7L | code 7L]\n  - def test_follow_two_next_level(self): ... [\"000CQ00i\" full 7L | code 7L]\n  - def test_forward_and_back(self): ... [\"000CQ00k\" full 7L | code 7L]\n  - def test_back_and_forward(self): ... [\"000CQ00m\" full 4L | code 4L]\n  - def test_not_followed_by_default(self): ... [\"000CQ00o\" full 12L | code 12L]\n  - def test_follow_from_child_class(self): ... [\"000CQ00q\" full 7L | code 7L]\n  - def test_follow_inheritance(self): ... [\"000CQ00s\" full 9L | code 9L]\n  - def test_nullable_relation(self): ... [\"000CQ00x\" full 16L | code 16L]\n  - def test_missing_reverse(self): ... [\"000CQ00z\" full 9L | code 9L]\n  - def test_nullable_missing_reverse(self): ... [\"000CQ00B\" full 11L | code 11L]\n  - def test_parent_only(self): ... [\"000CQ00D\" full 6L | code 6L]\n  - def test_multiple_subclass(self): ... [\"000CQ00F\" full 4L | code 4L]\n  - def test_onetoone_with_subclass(self): ... [\"000CQ00H\" full 4L | code 4L]\n  - def test_onetoone_with_two_subclasses(self): ... [\"000CQ00L\" full 20L | code 20L]\n  - def test_multiinheritance_two_subclasses(self): ... [\"000CQ00N\" full 22L | code 22L]\n  - def test_inheritance_deferred(self): ... [\"000CQ00Q\" full 24L | code 24L]\n  - def test_inheritance_deferred2(self): ... [\"000CQ00U\" full 21L | code 21L]\n  - def test_self_relation(self): ... [\"000CQ00X\" full 6L | code 6L]\n\n- class ReverseSelectRelatedValidationTests(SimpleTestCase): ... [\"000CQ015\" full 36L | code 36L]\n  - def test_reverse_related_validation(self): ... [\"000CQ012\" full 12L | code 12L]\n  - def test_reverse_related_validation_with_filtered_relation(self): ... [\"000CQ014\" full 10L | code 10L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

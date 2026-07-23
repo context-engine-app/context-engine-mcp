@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests-integration/tests/macros_main.rs",
+        "tests-integration/tests/macros_pin.rs",
+        "tests-integration/tests/macros_select.rs",
+        "tests-integration/tests/process_stdio.rs",
+        "tests-integration/tests/rt_yield.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 9.7 KB -> 2.6 KB (73% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests-integration/tests/macros_main.rs (39L)\nfile scope: [\"0000U006\" full 39L | imports 3L]\n\n- #[tokio::main] async fn basic_main() -> usize { ... } [\"0000U000\" full 4L | code 4L]\n\n- #[tokio::main] async fn generic_fun<T: Default>() -> T { ... } [\"0000U001\" full 4L | code 4L]\n\n- #[tokio::main] async fn spawning() -> usize { ... } [\"0000U002\" full 5L | code 5L]\n\n- #[cfg(tokio_unstable)] #[tokio::main(flavor = \"local\")] async fn local_main() -> usize { ... } [\"0000U003\" full 6L | code 6L]\n\n- #[test] fn main_with_spawn() { ... } [\"0000U004\" full 4L | code 4L]\n\n- #[test] fn shell() { ... } [\"0000U005\" full 8L | code 8L]\n\n# tests-integration/tests/macros_pin.rs (13L)\nfile scope: [\"0000V002\" full 13L | imports 3L]\n\n- async fn my_async_fn() { ... } [\"0000V000\" full 1L | code 1L]\n\n- #[test] fn pin() { ... } [\"0000V001\" full 8L | code 8L]\n\n# tests-integration/tests/macros_select.rs (38L)\nfile scope: [\"0000W001\" full 38L | imports 7L]\n\n- #[cfg_attr( not(feature = \"rt-multi-thread\"), ignore = \"WASI: std::thread::spawn not supported\" )] #[test] fn join_with_select() { ... } [\"0000W000\" full 31L | code 31L]\n\n# tests-integration/tests/process_stdio.rs (244L)\nfile scope: [\"0000X008\" full 244L | imports 15L]\n\n- fn cat() -> Command { ... } [\"0000X000\" full 5L | code 5L]\n\n- async fn feed_cat(mut cat: Child, n: usize) -> io::Result<ExitStatus> { ... } [\"0000X001\" full 51L | code 51L]\n\n- #[tokio::test] async fn feed_a_lot() { ... } [\"0000X002\" full 17L | code 6L | docs 11L]\n\n- #[tokio::test] async fn wait_with_output_captures() { ... } [\"0000X003\" full 20L | code 20L]\n\n- #[tokio::test] async fn status_closes_any_pipes() { ... } [\"0000X004\" full 9L | code 9L]\n\n- #[tokio::test] async fn try_wait() { ... } [\"0000X005\" full 22L | code 22L]\n\n- #[tokio::test] async fn pipe_from_one_command_to_another() { ... } [\"0000X006\" full 48L | code 48L]\n\n- #[tokio::test] async fn vectored_writes() { ... } [\"0000X007\" full 50L | code 50L]\n\n# tests-integration/tests/rt_yield.rs (42L)\nfile scope: [\"0000Y005\" full 42L | imports 4L]\n\n- async fn spawn_send() { ... } [\"0000Y000\" full 14L | code 14L]\n\n- #[tokio::main(flavor = \"current_thread\")] async fn entry_point() { ... } [\"0000Y001\" full 4L | code 4L]\n\n- #[tokio::test] async fn test_macro() { ... } [\"0000Y002\" full 4L | code 4L]\n\n- #[test] fn main_macro() { ... } [\"0000Y003\" full 4L | code 4L]\n\n- #[test] fn manual_rt() { ... } [\"0000Y004\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

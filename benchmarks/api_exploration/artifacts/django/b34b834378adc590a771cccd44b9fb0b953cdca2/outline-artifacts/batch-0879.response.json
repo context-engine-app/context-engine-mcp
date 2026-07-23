@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/view_tests/templatetags/__init__.py",
+        "tests/view_tests/templatetags/debugtags.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/view_tests/templatetags/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/view_tests/templatetags/debugtags.py (9L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django import template\n2|\n3|register = template.Library()\n4|\n5|\n6|@register.simple_tag\n7|def go_boom():\n8|    raise Exception(\"boom\")\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

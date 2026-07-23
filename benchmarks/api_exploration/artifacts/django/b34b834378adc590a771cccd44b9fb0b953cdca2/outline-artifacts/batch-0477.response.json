@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/forms_tests/templatetags/__init__.py",
+        "tests/forms_tests/templatetags/tags.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/forms_tests/templatetags/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/forms_tests/templatetags/tags.py (22L)\nfile scope: [\"000pB009\" full 22L | imports 7L]\n\n- class CountRenderNode(Node): ... [\"000pB005\" full 11L | code 11L]\n  - def render(self, context): ... [\"000pB004\" full 8L | code 8L]\n\n- @register.tag def count_render(parser, token): ... [\"000pB008\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

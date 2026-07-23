@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/model_package/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.6 KB -> 779 B (70% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/model_package/tests.py (75L)\nfile scope: [\"000Af00c\" full 75L | imports 9L]\n\n- class Advertisement(models.Model): ... [\"000Af002\" full 3L | code 3L]\n\n- class ModelPackageTests(TestCase): ... [\"000Af00b\" full 61L | code 61L]\n  - def test_m2m_tables_in_subpackage_models(self): ... [\"000Af006\" full 16L | code 16L]\n  - def test_models_in_the_test_package(self): ... [\"000Af009\" full 10L | code 10L]\n  - def test_automatic_m2m_column_names(self): ... [\"000Af00a\" full 32L | code 32L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

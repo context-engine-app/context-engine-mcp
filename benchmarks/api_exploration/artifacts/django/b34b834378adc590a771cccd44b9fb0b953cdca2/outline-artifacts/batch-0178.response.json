@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/sessions/middleware.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 3.7 KB -> 702 B (81% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/sessions/middleware.py (83L)\nfile scope: [\"0007K00i\" full 83L | imports 12L]\n\n- class SessionMiddleware(MiddlewareMixin): ... [\"0007K00h\" full 71L | code 71L]\n  - def __init__(self, get_response): ... [\"0007K002\" full 4L | code 4L]\n  - def process_request(self, request): ... [\"0007K006\" full 3L | code 3L]\n  - def process_response(self, request, response): ... [\"0007K00g\" full 61L | code 61L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

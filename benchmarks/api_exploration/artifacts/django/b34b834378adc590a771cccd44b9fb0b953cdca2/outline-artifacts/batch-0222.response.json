@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/db/backends/dummy/__init__.py",
+        "django/db/backends/dummy/base.py",
+        "django/db/backends/dummy/features.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/db/backends/dummy/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/db/backends/dummy/base.py (77L)\nfile scope: [\"000ao00A\" full 77L | imports 20L]\n\n- def complain(*args, **kwargs): ... [\"000ao002\" full 6L | code 6L]\n\n- def ignore(*args, **kwargs): ... [\"000ao005\" full 2L | code 2L]\n\n- class DatabaseOperations(BaseDatabaseOperations): ... [\"000ao007\" full 2L | code 2L]\n\n- class DatabaseClient(BaseDatabaseClient): ... [\"000ao009\" full 2L | code 2L]\n\n- class DatabaseCreation(BaseDatabaseCreation): ... [\"000ao00d\" full 4L | code 4L]\n\n- class DatabaseIntrospection(BaseDatabaseIntrospection): ... [\"000ao00i\" full 5L | code 5L]\n\n- class DatabaseWrapper(BaseDatabaseWrapper): ... [\"000ao00z\" full 24L | code 24L]\n  - def is_usable(self): ... [\"000ao00y\" full 2L | code 2L]\n\n# django/db/backends/dummy/features.py (7L)\nfile scope: [\"000ap003\" full 7L | imports 4L]\n\n- class DummyDatabaseFeatures(BaseDatabaseFeatures): ... [\"000ap002\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

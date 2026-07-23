@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/command/action_handler.ts",
+        "examples/command/action_options.ts",
+        "examples/command/arguments_syntax.ts",
+        "examples/command/arguments_syntax_variadic.ts",
+        "examples/command/collect_options.ts",
+        "examples/command/common_option_types.ts",
+        "examples/command/conflicting_options.ts",
+        "examples/command/custom_option_processing.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 3.6 KB -> 1.3 KB (62% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/command/action_handler.ts (14L)\nfile scope: [\"00023001\" full 14L | imports 10L]\n\n- action() callback [\"00023000\" full 3L | code 3L]\n\n# examples/command/action_options.ts (28L)\nfile scope: [\"00024003\" full 28L | imports 21L]\n\n- action: ... [\"00024000\" full 10L | code 10L]\n\n- standalone: true [\"00024001\" full 1L | code 1L]\n\n- action() callback [\"00024002\" full 1L | code 1L]\n\n# examples/command/arguments_syntax.ts (10L)\nfile scope: [\"00025001\" full 10L | imports 5L]\n\n\n# examples/command/arguments_syntax_variadic.ts (13L)\nfile scope: [\"00026002\" full 13L | imports 7L]\n\n- action() callback [\"00026001\" full 5L | code 5L]\n  - dirs.forEach() callback [\"00026000\" full 3L | code 3L]\n\n# examples/command/collect_options.ts (10L)\nfile scope: [\"00027001\" full 10L | imports 5L]\n\n\n# examples/command/common_option_types.ts (23L)\nfile scope: [\"00028001\" full 23L | imports 5L]\n\n\n# examples/command/conflicting_options.ts (13L)\nfile scope: [\"00029001\" full 13L | imports 5L]\n\n\n# examples/command/custom_option_processing.ts (31L)\nfile scope: [\"0002a001\" full 31L | imports 5L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

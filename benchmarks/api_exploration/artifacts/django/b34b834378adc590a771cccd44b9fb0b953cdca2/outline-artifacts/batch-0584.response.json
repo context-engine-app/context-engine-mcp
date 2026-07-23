@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/deprecated_field_migrations/0001_initial.py",
+        "tests/migrations/deprecated_field_migrations/0002_remove_ipaddressfield_ip.py",
+        "tests/migrations/deprecated_field_migrations/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/deprecated_field_migrations/0001_initial.py (24L)\nfile scope: [\"000v5003\" full 24L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000v5002\" full 20L | code 20L]\n\n# tests/migrations/deprecated_field_migrations/0002_remove_ipaddressfield_ip.py (15L)\nfile scope: [\"000v6003\" full 15L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000v6002\" full 11L | code 11L]\n\n# tests/migrations/deprecated_field_migrations/__init__.py (1L)\nfile scope: [\"000v7000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

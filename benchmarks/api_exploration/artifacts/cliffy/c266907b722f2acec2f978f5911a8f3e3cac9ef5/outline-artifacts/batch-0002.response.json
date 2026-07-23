@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "ansi/tty.ts",
+        "ansi/tty_test.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 4.2 KB -> 2.1 KB (49% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# ansi/tty.ts (131L)\nfile scope: [\"0000800x\" full 131L | imports 62L]\n\n- export interface TtyOptions { ... } [\"00008002\" full 6L | code 6L]\n  - writer?: WriterSync; [\"00008000\" full 1L | code 1L]\n  - reader?: ReaderSync & { setRaw(mode: boolean, options?: Deno.SetRawOptions): void; }; [\"00008001\" full 3L | code 3L]\n\n- type Executor = ... ; [\"00008003\" full 1L | code 1L]\n\n- type Args = ... ; [\"00008004\" full 1L | code 1L]\n\n- type Property = ... ; [\"00008005\" full 1L | code 1L]\n\n- type PropertyNames = ... ; [\"00008006\" full 1L | code 1L]\n\n- export interface TtyChain extends Exclude<Chain<TtyChain>, \"cursorPosition\"> { ... } [\"00008009\" full 6L | code 6L]\n  - (): void; [\"00008007\" full 1L | code 1L]\n  - getCursorPosition(): ... ; [\"00008008\" full 1L | code 1L]\n\n- export type TtyFactory = ... ; [\"0000800a\" full 1L | code 1L]\n\n- export type Tty = ... ; [\"0000800b\" full 1L | code 1L]\n\n- function factory(options?: TtyOptions): Tty { ... } [\"0000800w\" full 60L | code 60L]\n  - text [\"0000800m\" full 6L | code 6L]\n  - getCursorPosition [\"0000800p\" full 1L | code 1L]\n    - writer [\"0000800n\" full 1L | code 1L]\n    - reader [\"0000800o\" full 1L | code 1L]\n  - get(this: TtyChain) { ... } [\"0000800t\" full 4L | code 4L]\n  - function update(args?: Args) { ... } [\"0000800v\" full 14L | code 14L]\n    - stack.reduce(\"\") callback [\"0000800u\" full 2L | code 2L]\n\n# ansi/tty_test.ts (40L)\nfile scope: [\"00009007\" full 40L | imports 24L]\n\n- name: \"ansi - tty - chainable tty\" [\"00009000\" full 1L | code 1L]\n\n- fn() { ... } [\"00009001\" full 23L | code 23L]\n  - writer: (globalThis as any).Deno.stdout [\"00009005\" full 1L | code 1L]\n  - reader: (globalThis as any).Deno.stdin [\"00009006\" full 1L | code 1L]\n\n- name: \"ansi - tty - chainable tty custom instance\" [\"00009002\" full 1L | code 1L]\n\n- name: \"ansi - empty ansi chain\" [\"00009003\" full 1L | code 1L]\n\n- ignore: [\"node\", \"bun\"] [\"00009004\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

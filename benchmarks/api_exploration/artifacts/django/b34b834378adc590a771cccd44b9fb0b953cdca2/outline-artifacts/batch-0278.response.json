@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "docs/_ext/djangodocs.py",
+        "docs/_ext/github_links.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 17.7 KB -> 3.4 KB (81% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# docs/_ext/djangodocs.py (375L)\nfile scope: [\"000eE01M\" full 375L | imports 24L]\n\n- def setup(app): ... [\"000eE003\" full 44L | code 44L]\n\n- def set_django_html_translator(app): ... [\"000eE005\" full 3L | code 3L]\n\n- class VersionDirective(Directive): ... [\"000eE00g\" full 29L | code 29L]\n  - def run(self): ... [\"000eE00f\" full 22L | code 22L]\n\n- class DjangoHTMLTranslator(HTMLTranslator): ... [\"000eE00K\" full 72L | code 72L]\n  - def visit_table(self, node): ... [\"000eE00i\" full 6L | code 6L]\n  - def depart_table(self, node): ... [\"000eE00l\" full 4L | code 4L]\n  - def visit_desc_parameterlist(self, node): ... [\"000eE00o\" full 19L | code 19L]\n  - def depart_desc_parameterlist(self, node): ... [\"000eE00z\" full 2L | code 2L]\n  - def visit_versionmodified(self, node): ... [\"000eE00E\" full 6L | code 6L]\n  - def depart_versionmodified(self, node): ... [\"000eE00G\" full 2L | code 2L]\n  - def visit_section(self, node): ... [\"000eE00J\" full 6L | code 6L]\n\n- def parse_django_admin_node(env, sig, signode): ... [\"000eE00Q\" full 6L | code 6L]\n\n- class ConsoleNode(nodes.literal_block): ... [\"000eE00X\" full 15L | code 15L]\n  - def __init__(self, litblk_obj): ... [\"000eE00T\" full 2L | code 2L]\n  - def __getattr__(self, attr): ... [\"000eE00W\" full 4L | code 4L]\n\n- def visit_console_dummy(self, node): ... [\"000eE00Z\" full 3L | code 3L]\n\n- def depart_console_dummy(self, node): ... [\"000eE011\" full 3L | code 3L]\n\n- def visit_console_html(self, node): ... [\"000eE01a\" full 47L | code 47L]\n  - def warner(msg): ... [\"000eE018\" full 2L | code 2L]\n\n- class ConsoleDirective(CodeBlock): ... [\"000eE01w\" full 93L | code 93L]\n  - def run(self): ... [\"000eE01t\" full 80L | code 80L]\n    - def args_to_win(cmdline): ... [\"000eE01h\" full 21L | code 21L]\n    - def cmdline_to_win(line): ... [\"000eE01j\" full 20L | code 20L]\n    - def code_block_to_win(content): ... [\"000eE01p\" full 13L | code 13L]\n\n- def html_page_context_hook(app, pagename, templatename, context, doctree): ... [\"000eE01C\" full 7L | code 7L]\n\n- def default_role_error( name, rawtext, text, lineno, inliner, options=None, content=None ): ... [\"000eE01L\" full 9L | code 9L]\n\n# docs/_ext/github_links.py (150L)\nfile scope: [\"000eF00T\" full 150L | imports 7L]\n\n- class CodeLocator(ast.NodeVisitor): ... [\"000eF00k\" full 45L | code 45L]\n  - def __init__(self): ... [\"000eF000\" full 5L | code 5L]\n  - @classmethod def from_code(cls, code): ... [\"000eF007\" full 6L | code 6L]\n  - def visit_node(self, node): ... [\"000eF009\" full 5L | code 5L]\n  - def visit_FunctionDef(self, node): ... [\"000eF00b\" full 2L | code 2L]\n  - def visit_ClassDef(self, node): ... [\"000eF00d\" full 2L | code 2L]\n  - def visit_ImportFrom(self, node): ... [\"000eF00j\" full 19L | code 19L]\n\n- @functools.lru_cache(maxsize=1024) def get_locator(file): ... [\"000eF00n\" full 4L | code 4L]\n\n- class CodeNotFound(Exception): ... [\"000eF00o\" full 2L | code 2L]\n\n- def module_name_to_file_path(module_name): ... [\"000eF00s\" full 12L | code 12L]\n\n- def get_path_and_line(module, fullname): ... [\"000eF00E\" full 45L | code 45L]\n\n- def get_branch(version, next_version): ... [\"000eF00H\" full 5L | code 5L]\n\n- def github_linkcode_resolve(domain, info, *, version, next_version): ... [\"000eF00S\" full 18L | code 18L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

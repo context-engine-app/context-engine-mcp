@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests-build/tests/macros.rs",
+        "tests-build/tests/macros_clippy.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.2 KB -> 670 B (44% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests-build/tests/macros.rs (41L)\nfile scope: [\"0000J001\" full 41L]\n\n- #[test] #[cfg_attr(miri, ignore)] fn compile_fail_full() { ... } [\"0000J000\" full 40L | code 40L]\n\n# tests-build/tests/macros_clippy.rs (8L)\nfile scope: [\"0000K001\" full 8L]\n\n- #[cfg(feature = \"full\")] #[tokio::test] async fn test_with_semicolon_without_return_type() { ... } [\"0000K000\" full 7L | code 7L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

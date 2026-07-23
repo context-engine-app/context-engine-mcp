@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/auth/migrations/0001_initial.py",
+        "django/contrib/auth/migrations/0002_alter_permission_name_max_length.py",
+        "django/contrib/auth/migrations/0003_alter_user_email_max_length.py",
+        "django/contrib/auth/migrations/0004_alter_user_username_opts.py",
+        "django/contrib/auth/migrations/0005_alter_user_last_login_null.py",
+        "django/contrib/auth/migrations/0006_require_contenttypes_0002.py",
+        "django/contrib/auth/migrations/0007_alter_validators_add_error_messages.py",
+        "django/contrib/auth/migrations/0008_alter_user_username_max_length.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 11.1 KB -> 1.9 KB (83% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/auth/migrations/0001_initial.py (205L)\nfile scope: [\"0003N003\" full 205L | imports 7L]\n\n- class Migration(migrations.Migration): ... [\"0003N002\" full 198L | code 198L]\n\n# django/contrib/auth/migrations/0002_alter_permission_name_max_length.py (16L)\nfile scope: [\"0003O003\" full 16L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"0003O002\" full 12L | code 12L]\n\n# django/contrib/auth/migrations/0003_alter_user_email_max_length.py (18L)\nfile scope: [\"0003P003\" full 18L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"0003P002\" full 14L | code 14L]\n\n# django/contrib/auth/migrations/0004_alter_user_username_opts.py (28L)\nfile scope: [\"0003Q003\" full 28L | imports 5L]\n\n- class Migration(migrations.Migration): ... [\"0003Q002\" full 23L | code 23L]\n\n# django/contrib/auth/migrations/0005_alter_user_last_login_null.py (18L)\nfile scope: [\"0003R003\" full 18L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"0003R002\" full 14L | code 14L]\n\n# django/contrib/auth/migrations/0006_require_contenttypes_0002.py (14L)\nfile scope: [\"0003S003\" full 14L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"0003S002\" full 10L | code 10L]\n\n# django/contrib/auth/migrations/0007_alter_validators_add_error_messages.py (27L)\nfile scope: [\"0003T003\" full 27L | imports 5L]\n\n- class Migration(migrations.Migration): ... [\"0003T002\" full 22L | code 22L]\n\n# django/contrib/auth/migrations/0008_alter_user_username_max_length.py (27L)\nfile scope: [\"0003U003\" full 27L | imports 5L]\n\n- class Migration(migrations.Migration): ... [\"0003U002\" full 22L | code 22L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

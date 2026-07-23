@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/i18n/project_dir/app_no_locale/__init__.py",
+        "tests/i18n/project_dir/app_no_locale/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/i18n/project_dir/app_no_locale/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/i18n/project_dir/app_no_locale/models.py (4L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.utils.translation import gettext as _\n2|\n3|string = _(\"This app has no locale directory\")\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

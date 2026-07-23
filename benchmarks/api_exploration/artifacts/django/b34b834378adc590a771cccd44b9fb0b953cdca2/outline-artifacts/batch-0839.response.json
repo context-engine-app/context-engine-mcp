@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/update_only_fields/__init__.py",
+        "tests/update_only_fields/models.py",
+        "tests/update_only_fields/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/update_only_fields/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/update_only_fields/models.py (44L)\nfile scope: [\"000Is00n\" full 44L | imports 4L]\n\n- class Account(models.Model): ... [\"000Is001\" full 2L | code 2L]\n\n- class Person(models.Model): ... [\"000Is006\" full 8L | code 8L]\n\n- class Employee(Person): ... [\"000Is00a\" full 6L | code 6L]\n\n- class NonConcreteField(models.IntegerField): ... [\"000Is00f\" full 7L | code 7L]\n  - def db_type(self, connection): ... [\"000Is00c\" full 2L | code 2L]\n  - def get_attname_column(self): ... [\"000Is00e\" full 3L | code 3L]\n\n- class Profile(models.Model): ... [\"000Is00j\" full 4L | code 4L]\n\n- class ProxyEmployee(Employee): ... [\"000Is00m\" full 3L | code 3L]\n  - class Meta: ... [\"000Is00l\" full 2L | code 2L]\n\n# tests/update_only_fields/tests.py (325L)\nfile scope: [\"000It01l\" full 325L | imports 10L]\n\n- class UpdateOnlyFieldsTests(TestCase): ... [\"000It01k\" full 315L | code 315L]\n  - def test_update_fields_basic(self): ... [\"000It002\" full 11L | code 11L]\n  - def test_update_fields_deferred(self): ... [\"000It006\" full 14L | code 14L]\n  - def test_update_fields_only_1(self): ... [\"000It00a\" full 14L | code 14L]\n  - def test_update_fields_only_2(self): ... [\"000It00e\" full 14L | code 14L]\n  - def test_update_fields_only_repeated(self): ... [\"000It00h\" full 12L | code 12L]\n  - def test_update_fields_inheritance_defer(self): ... [\"000It00k\" full 10L | code 10L]\n  - def test_update_fields_fk_defer(self): ... [\"000It00o\" full 15L | code 15L]\n  - def test_select_related_only_interaction(self): ... [\"000It00s\" full 20L | code 20L]\n  - def test_update_fields_m2m(self): ... [\"000It00x\" full 11L | code 11L]\n  - def test_update_fields_inheritance(self): ... [\"000It00E\" full 31L | code 31L]\n  - def test_update_fields_inheritance_with_proxy_model(self): ... [\"000It00K\" full 23L | code 23L]\n  - def test_update_fields_signals(self): ... [\"000It00S\" full 24L | code 24L]\n    - def pre_save_receiver(**kwargs): ... [\"000It00O\" full 2L | code 2L]\n    - def post_save_receiver(**kwargs): ... [\"000It00R\" full 2L | code 2L]\n  - def test_update_fields_incorrect_params(self): ... [\"000It00U\" full 10L | code 10L]\n  - def test_empty_update_fields(self): ... [\"000It012\" full 23L | code 23L]\n    - def pre_save_receiver(**kwargs): ... [\"000It00Y\" full 2L | code 2L]\n    - def post_save_receiver(**kwargs): ... [\"000It011\" full 2L | code 2L]\n  - def test_num_queries_inheritance(self): ... [\"000It014\" full 21L | code 21L]\n  - def test_update_non_concrete_field(self): ... [\"000It016\" full 4L | code 4L]\n  - def test_update_pk_field(self): ... [\"000It018\" full 4L | code 4L]\n  - def test_update_inherited_pk_field(self): ... [\"000It01a\" full 4L | code 4L]\n  - def test_update_fields_not_updated(self): ... [\"000It01f\" full 13L | code 13L]\n  - def test_update_fields_expression(self): ... [\"000It01j\" full 12L | code 12L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

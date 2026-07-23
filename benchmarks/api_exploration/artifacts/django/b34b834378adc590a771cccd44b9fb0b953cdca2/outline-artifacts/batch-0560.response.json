@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/m2m_multiple/__init__.py",
+        "tests/m2m_multiple/models.py",
+        "tests/m2m_multiple/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/m2m_multiple/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/m2m_multiple/models.py (38L)\nfile scope: [\"000tM00d\" full 38L | imports 13L]\n\n- class Category(models.Model): ... [\"000tM004\" full 8L | code 8L]\n  - class Meta: ... [\"000tM002\" full 2L | code 2L]\n  - def __str__(self): ... [\"000tM003\" full 2L | code 2L]\n\n- class Article(models.Model): ... [\"000tM00c\" full 15L | code 15L]\n  - class Meta: ... [\"000tM00a\" full 2L | code 2L]\n  - def __str__(self): ... [\"000tM00b\" full 2L | code 2L]\n\n# tests/m2m_multiple/tests.py (84L)\nfile scope: [\"000tN008\" full 84L | imports 8L]\n\n- class M2MMultipleTests(TestCase): ... [\"000tN007\" full 76L | code 76L]\n  - def test_multiple(self): ... [\"000tN006\" full 75L | code 75L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

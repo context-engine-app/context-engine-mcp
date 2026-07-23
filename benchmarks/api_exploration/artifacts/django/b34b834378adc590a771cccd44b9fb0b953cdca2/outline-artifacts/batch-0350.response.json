@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/auth_tests/operations_migrations/0001_initial.py",
+        "tests/auth_tests/operations_migrations/0002_rename_oldmodel_to_newmodel.py",
+        "tests/auth_tests/operations_migrations/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/auth_tests/operations_migrations/0001_initial.py (15L)\nfile scope: [\"000i6003\" full 15L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000i6002\" full 11L | code 11L]\n\n# tests/auth_tests/operations_migrations/0002_rename_oldmodel_to_newmodel.py (15L)\nfile scope: [\"000i7003\" full 15L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000i7002\" full 11L | code 11L]\n\n# tests/auth_tests/operations_migrations/__init__.py (1L)\nfile scope: [\"000i8000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

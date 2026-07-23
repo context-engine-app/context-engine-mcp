@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/io/bsd/poll_aio.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 8.3 KB -> 2.8 KB (66% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/io/bsd/poll_aio.rs (219L)\nfile scope: [\"0004w00r\" full 219L | module-docs 1L | imports 21L]\n\n- pub trait AioSource { ... } [\"0004w003\" full 30L | code 25L | docs 5L]\n  - #[deprecated(since = \"1.52.0\", note = \"use register_borrowed instead\")] fn register(&mut self, _kq: RawFd, _token: usize) { ... } [\"0004w000\" full 12L | code 6L | docs 6L]\n  - fn register_borrowed(&mut self, kq: BorrowedFd<'_>, token: usize) { ... } [\"0004w001\" full 7L | code 6L | docs 1L]\n  - fn deregister( ... ); [\"0004w002\" full 2L | code 1L | docs 1L]\n\n- struct MioSource<T>( ... ); [\"0004w004\" full 3L | code 1L | docs 2L]\n\n- impl<T: AioSource> Source for MioSource<T> { ... } [\"0004w008\" full 30L | code 30L]\n  - fn register( &mut self, registry: &Registry, token: Token, interests: mio::Interest, ) -> io::Result<()> { ... } [\"0004w005\" full 11L | code 11L]\n  - fn deregister(&mut self, _registry: &Registry) -> io::Result<()> { ... } [\"0004w006\" full 4L | code 4L]\n  - fn reregister( &mut self, registry: &Registry, token: Token, interests: mio::Interest, ) -> io::Result<()> { ... } [\"0004w007\" full 11L | code 11L]\n\n- pub struct Aio<E> { ... } [\"0004w00b\" full 33L | code 4L | docs 29L]\n  - io: MioSource<E> [\"0004w009\" full 1L | code 1L]\n  - registration: Registration [\"0004w00a\" full 1L | code 1L]\n\n- impl<E: AioSource> Aio<E> { ... } [\"0004w00i\" full 75L | code 75L]\n  - pub fn new_for_aio(io: E) -> io::Result<Self> { ... } [\"0004w00c\" full 9L | code 3L | docs 6L]\n  - pub fn new_for_lio(io: E) -> io::Result<Self> { ... } [\"0004w00d\" full 11L | code 3L | docs 8L]\n  - fn new_with_interest(io: E, interest: Interest) -> io::Result<Self> { ... } [\"0004w00e\" full 6L | code 6L]\n  - pub fn clear_ready(&self, ev: AioEvent) { ... } [\"0004w00f\" full 20L | code 3L | docs 17L]\n  - pub fn into_inner(self) -> E { ... } [\"0004w00g\" full 4L | code 3L | docs 1L]\n  - pub fn poll_ready(&self, cx: &mut Context<'_>) -> Poll<io::Result<AioEvent>> { ... } [\"0004w00h\" full 18L | code 4L | docs 14L]\n\n- impl<E: AioSource> Deref for Aio<E> { ... } [\"0004w00l\" full 7L | code 7L]\n  - type Target = E; [\"0004w00j\" full 1L | code 1L]\n  - fn deref(&self) -> &E { ... } [\"0004w00k\" full 3L | code 3L]\n\n- impl<E: AioSource> DerefMut for Aio<E> { ... } [\"0004w00n\" full 5L | code 5L]\n  - fn deref_mut(&mut self) -> &mut E { ... } [\"0004w00m\" full 3L | code 3L]\n\n- impl<E: AioSource + fmt::Debug> fmt::Debug for Aio<E> { ... } [\"0004w00p\" full 5L | code 5L]\n  - fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result { ... } [\"0004w00o\" full 3L | code 3L]\n\n- #[derive(Debug)] pub struct AioEvent( ... ); [\"0004w00q\" full 5L | code 2L | docs 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

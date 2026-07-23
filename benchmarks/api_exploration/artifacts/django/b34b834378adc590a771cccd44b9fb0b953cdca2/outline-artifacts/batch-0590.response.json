@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/migrations_test_apps/alter_fk/author_app/migrations/0001_initial.py",
+        "tests/migrations/migrations_test_apps/alter_fk/author_app/migrations/0002_alter_id.py",
+        "tests/migrations/migrations_test_apps/alter_fk/author_app/migrations/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/migrations_test_apps/alter_fk/author_app/migrations/0001_initial.py (21L)\nfile scope: [\"000ve003\" full 21L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000ve002\" full 17L | code 17L]\n\n# tests/migrations/migrations_test_apps/alter_fk/author_app/migrations/0002_alter_id.py (17L)\nfile scope: [\"000vf003\" full 17L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000vf002\" full 13L | code 13L]\n\n# tests/migrations/migrations_test_apps/alter_fk/author_app/migrations/__init__.py (1L)\nfile scope: [\"000vg000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/backends/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 4.5 KB -> 2.7 KB (39% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/backends/models.py (173L)\nfile scope: [\"000iM01o\" full 173L | imports 6L]\n\n- class Square(models.Model): ... [\"000iM003\" full 6L | code 6L]\n  - def __str__(self): ... [\"000iM002\" full 2L | code 2L]\n\n- class Person(models.Model): ... [\"000iM007\" full 6L | code 6L]\n  - def __str__(self): ... [\"000iM006\" full 2L | code 2L]\n\n- class SchoolClassManager(models.Manager): ... [\"000iM009\" full 3L | code 3L]\n  - def get_queryset(self): ... [\"000iM008\" full 2L | code 2L]\n\n- class SchoolClass(models.Model): ... [\"000iM00e\" full 6L | code 6L]\n\n- class SchoolBusManager(models.Manager): ... [\"000iM00g\" full 3L | code 3L]\n  - def get_queryset(self): ... [\"000iM00f\" full 2L | code 2L]\n\n- class SchoolBus(models.Model): ... [\"000iM00m\" full 7L | code 7L]\n  - class Meta: ... [\"000iM00l\" full 2L | code 2L]\n\n- class VeryLongModelNameZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ(models.Model): ... [\"000iM00q\" full 10L | code 10L]\n\n- class Tag(models.Model): ... [\"000iM00v\" full 7L | code 7L]\n\n- class Post(models.Model): ... [\"000iM00B\" full 7L | code 7L]\n  - class Meta: ... [\"000iM00A\" full 2L | code 2L]\n\n- class Reporter(models.Model): ... [\"000iM00F\" full 6L | code 6L]\n  - def __str__(self): ... [\"000iM00E\" full 2L | code 2L]\n\n- class ReporterProxy(Reporter): ... [\"000iM00I\" full 3L | code 3L]\n  - class Meta: ... [\"000iM00H\" full 2L | code 2L]\n\n- class Article(models.Model): ... [\"000iM00O\" full 13L | code 13L]\n  - def __str__(self): ... [\"000iM00N\" full 2L | code 2L]\n\n- class Item(models.Model): ... [\"000iM00U\" full 8L | code 8L]\n  - def __str__(self): ... [\"000iM00T\" full 2L | code 2L]\n\n- class Object(models.Model): ... [\"000iM00Y\" full 8L | code 8L]\n  - def __str__(self): ... [\"000iM00X\" full 2L | code 2L]\n\n- class ObjectReference(models.Model): ... [\"000iM011\" full 5L | code 5L]\n  - def __str__(self): ... [\"000iM010\" full 2L | code 2L]\n\n- class ObjectSelfReference(models.Model): ... [\"000iM014\" full 3L | code 3L]\n\n- class CircularA(models.Model): ... [\"000iM018\" full 6L | code 6L]\n  - def natural_key(self): ... [\"000iM017\" full 2L | code 2L]\n\n- class CircularB(models.Model): ... [\"000iM01c\" full 6L | code 6L]\n  - def natural_key(self): ... [\"000iM01b\" full 2L | code 2L]\n\n- class RawData(models.Model): ... [\"000iM01e\" full 2L | code 2L]\n\n- class Author(models.Model): ... [\"000iM01g\" full 2L | code 2L]\n\n- class Book(models.Model): ... [\"000iM01i\" full 2L | code 2L]\n\n- class SQLKeywordsModel(models.Model): ... [\"000iM01n\" full 6L | code 6L]\n  - class Meta: ... [\"000iM01m\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

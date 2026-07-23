@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/project_template/__init__.py",
+        "tests/project_template/test_settings.py",
+        "tests/project_template/urls.py",
+        "tests/project_template/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/project_template/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/project_template/test_settings.py (59L)\nfile scope: [\"000BD00a\" full 59L | imports 12L]\n\n- class TestStartProjectSettings(SimpleTestCase): ... [\"000BD009\" full 47L | code 47L]\n  - def setUp(self): ... [\"000BD002\" full 11L | code 11L]\n  - def test_middleware_headers(self): ... [\"000BD006\" full 26L | code 26L]\n  - def test_mailers(self): ... [\"000BD008\" full 7L | code 7L]\n\n# tests/project_template/urls.py (8L)\nfile scope: [\"000BE001\" full 8L | imports 5L]\n\n\n# tests/project_template/views.py (6L)\nfile scope: [\"000BF004\" full 6L | imports 4L]\n\n- def empty_view(request, *args, **kwargs): ... [\"000BF003\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

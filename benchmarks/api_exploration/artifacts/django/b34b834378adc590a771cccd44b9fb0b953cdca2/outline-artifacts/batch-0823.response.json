@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/test_runner_apps/buffer/tests_buffer.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n 1|import sys\n 2|from unittest import TestCase\n 3|\n 4|\n 5|class WriteToStdoutStderrTestCase(TestCase):\n 6|    def test_pass(self):\n 7|        sys.stderr.write(\"Write to stderr.\")\n 8|        sys.stdout.write(\"Write to stdout.\")\n 9|        self.assertTrue(True)\n10|\n11|    def test_fail(self):\n12|        sys.stderr.write(\"Write to stderr.\")\n13|        sys.stdout.write(\"Write to stdout.\")\n14|        self.assertTrue(False)\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

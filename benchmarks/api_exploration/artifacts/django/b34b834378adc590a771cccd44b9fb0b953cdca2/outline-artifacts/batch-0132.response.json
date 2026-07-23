@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/gis/db/backends/postgis/pgraster.py",
+        "django/contrib/gis/db/backends/postgis/schema.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 8.9 KB -> 1.7 KB (80% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/gis/db/backends/postgis/pgraster.py (153L)\nfile scope: [\"0005900t\" full 153L | imports 16L]\n\n- def pack(structure, data): ... [\"00059002\" full 5L | code 5L]\n\n- def unpack(structure, data): ... [\"00059005\" full 5L | code 5L]\n\n- def chunk(data, index): ... [\"00059008\" full 5L | code 5L]\n\n- def from_pgraster(data): ... [\"0005900k\" full 61L | code 61L]\n\n- def to_pgraster(rast): ... [\"0005900s\" full 53L | code 53L]\n\n# django/contrib/gis/db/backends/postgis/schema.py (126L)\nfile scope: [\"0005a00N\" full 126L | imports 6L]\n\n- class PostGISSchemaEditor(DatabaseSchemaEditor): ... [\"0005a00M\" full 120L | code 120L]\n  - def geo_quote_name(self, name): ... [\"0005a006\" full 2L | code 2L]\n  - def _field_should_be_indexed(self, model, field): ... [\"0005a009\" full 4L | code 4L]\n  - def _create_index_sql(self, model, *, fields=None, **kwargs): ... [\"0005a00d\" full 5L | code 5L]\n  - def _alter_column_type_sql( self, table, old_field, new_field, new_type, old_collation, new_collation ): ... [\"0005a00l\" full 29L | code 29L]\n  - def _alter_field( self, model, old_field, new_field, old_type, new_type, old_db_params, new_db_params, strict=False, ): ... [\"0005a00w\" full 32L | code 32L]\n  - def _create_spatial_index_name(self, model, field): ... [\"0005a00z\" full 2L | code 2L]\n  - def _create_spatial_index_sql(self, model, field, **kwargs): ... [\"0005a00H\" full 24L | code 24L]\n  - def _delete_spatial_index_sql(self, model, field): ... [\"0005a00L\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

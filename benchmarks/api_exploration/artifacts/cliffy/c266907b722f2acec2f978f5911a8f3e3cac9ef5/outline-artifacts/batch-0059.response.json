@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "internal/runtime/delete_env.ts",
+        "internal/runtime/exit.ts",
+        "internal/runtime/get_args.ts",
+        "internal/runtime/get_columns.ts",
+        "internal/runtime/get_env.ts",
+        "internal/runtime/get_os.ts",
+        "internal/runtime/inspect.ts",
+        "internal/runtime/is_directory.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 3.3 KB -> 2.0 KB (40% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# internal/runtime/delete_env.ts (21L)\nfile scope: [\"0004e003\" full 21L | module-docs 8L]\n\n- export function deleteEnv(name: string): string | undefined { ... } [\"0004e002\" full 12L | code 12L]\n\n# internal/runtime/exit.ts (20L)\nfile scope: [\"0004f004\" full 20L | module-docs 8L]\n\n- export function exit(code: number): never { ... } [\"0004f003\" full 11L | code 11L]\n\n# internal/runtime/get_args.ts (14L)\nfile scope: [\"0004g004\" full 14L | module-docs 7L]\n\n- export function getArgs(): Array<string> { ... } [\"0004g003\" full 6L | code 6L]\n\n# internal/runtime/get_columns.ts (27L)\nfile scope: [\"0004h006\" full 27L | module-docs 7L]\n\n- export function getColumns(): number | null { ... } [\"0004h005\" full 19L | code 19L]\n\n# internal/runtime/get_env.ts (21L)\nfile scope: [\"0004i003\" full 21L | module-docs 8L]\n\n- export function getEnv(name: string): string | undefined { ... } [\"0004i002\" full 12L | code 12L]\n\n# internal/runtime/get_os.ts (32L)\nfile scope: [\"0004j003\" full 32L | module-docs 7L]\n\n- export function getOs(): | \"darwin\" | \"linux\" | \"android\" | \"windows\" | \"freebsd\" | \"netbsd\" | \"aix\" | \"solaris\" | \"illumos\" | \"openbsd\" | \"sunos\" | \"win32\" { ... } [\"0004j002\" full 24L | code 24L]\n\n# internal/runtime/inspect.ts (17L)\nfile scope: [\"0004k005\" full 17L | module-docs 7L]\n\n- export function inspect(value: unknown, colors: boolean): string { ... } [\"0004k004\" full 9L | code 9L]\n  - depth: 1 [\"0004k001\" full 1L | code 1L]\n  - colors [\"0004k002\" full 1L | code 1L]\n  - trailingComma: false [\"0004k003\" full 1L | code 1L]\n\n# internal/runtime/is_directory.ts (17L)\nfile scope: [\"0004l002\" full 17L | imports 9L]\n\n- export async function isDirectory(path: string): Promise<boolean> { ... } [\"0004l001\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

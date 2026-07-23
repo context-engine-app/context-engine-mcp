@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/conf/locale/es_NI/__init__.py",
+        "django/conf/locale/es_NI/formats.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/conf/locale/es_NI/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# django/conf/locale/es_NI/formats.py (27L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|# This file is distributed under the same license as the Django package.\n 2|#\n 3|DATE_FORMAT = r\"j \\d\\e F \\d\\e Y\"\n 4|TIME_FORMAT = \"H:i\"\n 5|DATETIME_FORMAT = r\"j \\d\\e F \\d\\e Y \\a \\l\\a\\s H:i\"\n 6|YEAR_MONTH_FORMAT = r\"F \\d\\e Y\"\n 7|MONTH_DAY_FORMAT = r\"j \\d\\e F\"\n 8|SHORT_DATE_FORMAT = \"d/m/Y\"\n 9|SHORT_DATETIME_FORMAT = \"d/m/Y H:i\"\n10|FIRST_DAY_OF_WEEK = 1  # Monday: ISO 8601\n11|DATE_INPUT_FORMATS = [\n12|    \"%d/%m/%Y\",  # '25/10/2006'\n13|    \"%d/%m/%y\",  # '25/10/06'\n14|    \"%Y%m%d\",  # '20061025'\n15|]\n16|DATETIME_INPUT_FORMATS = [\n17|    \"%d/%m/%Y %H:%M:%S\",\n18|    \"%d/%m/%Y %H:%M:%S.%f\",\n19|    \"%d/%m/%Y %H:%M\",\n20|    \"%d/%m/%y %H:%M:%S\",\n21|    \"%d/%m/%y %H:%M:%S.%f\",\n22|    \"%d/%m/%y %H:%M\",\n23|]\n24|DECIMAL_SEPARATOR = \".\"\n25|THOUSAND_SEPARATOR = \",\"\n26|NUMBER_GROUPING = 3\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/template/loaders/__init__.py",
+        "django/template/loaders/app_directories.py",
+        "django/template/loaders/base.py",
+        "django/template/loaders/cached.py",
+        "django/template/loaders/filesystem.py",
+        "django/template/loaders/locmem.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/template/loaders/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/template/loaders/app_directories.py (14L)\nfile scope: [\"000d3002\" full 14L | imports 11L]\n\n- class Loader(FilesystemLoader): ... [\"000d3001\" full 3L | code 3L]\n  - def get_dirs(self): ... [\"000d3000\" full 2L | code 2L]\n\n# django/template/loaders/base.py (52L)\nfile scope: [\"000d400d\" full 52L | imports 4L]\n\n- class Loader: ... [\"000d400c\" full 48L | code 48L]\n  - def __init__(self, engine): ... [\"000d4001\" full 2L | code 2L]\n  - def get_template(self, template_name, skip=None): ... [\"000d4008\" full 28L | code 28L]\n  - def get_template_sources(self, template_name): ... [\"000d400a\" full 8L | code 8L]\n  - def reset(self): ... [\"000d400b\" full 6L | code 6L]\n\n# django/template/loaders/cached.py (101L)\nfile scope: [\"000d500s\" full 101L | imports 14L]\n\n- class Loader(BaseLoader): ... [\"000d500r\" full 87L | code 87L]\n  - def __init__(self, engine, loaders): ... [\"000d5002\" full 4L | code 4L]\n  - def get_dirs(self): ... [\"000d5006\" full 4L | code 4L]\n  - def get_contents(self, origin): ... [\"000d5008\" full 2L | code 2L]\n  - def get_template(self, template_name, skip=None): ... [\"000d500f\" full 39L | code 39L]\n  - def get_template_sources(self, template_name): ... [\"000d500i\" full 3L | code 3L]\n  - def cache_key(self, template_name, skip=None): ... [\"000d500n\" full 22L | code 22L]\n  - def generate_hash(self, values): ... [\"000d500p\" full 2L | code 2L]\n  - def reset(self): ... [\"000d500q\" full 3L | code 3L]\n\n# django/template/loaders/filesystem.py (46L)\nfile scope: [\"000d600d\" full 46L | imports 12L]\n\n- class Loader(BaseLoader): ... [\"000d600c\" full 34L | code 34L]\n  - def __init__(self, engine, dirs=None): ... [\"000d6002\" full 3L | code 3L]\n  - def get_dirs(self): ... [\"000d6004\" full 2L | code 2L]\n  - def get_contents(self, origin): ... [\"000d6007\" full 6L | code 6L]\n  - def get_template_sources(self, template_name): ... [\"000d600b\" full 19L | code 19L]\n\n# django/template/loaders/locmem.py (27L)\nfile scope: [\"000d7009\" full 27L | imports 10L]\n\n- class Loader(BaseLoader): ... [\"000d7008\" full 17L | code 17L]\n  - def __init__(self, engine, templates_dict): ... [\"000d7002\" full 3L | code 3L]\n  - def get_contents(self, origin): ... [\"000d7005\" full 5L | code 5L]\n  - def get_template_sources(self, template_name): ... [\"000d7007\" full 6L | code 6L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

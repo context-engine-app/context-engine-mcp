@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/sites_framework/migrations/0001_initial.py",
+        "tests/sites_framework/migrations/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/sites_framework/migrations/0001_initial.py (93L)\nfile scope: [\"000DL003\" full 93L | imports 6L]\n\n- class Migration(migrations.Migration): ... [\"000DL002\" full 87L | code 87L]\n\n# tests/sites_framework/migrations/__init__.py (1L)\nfile scope: [\"000DM000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

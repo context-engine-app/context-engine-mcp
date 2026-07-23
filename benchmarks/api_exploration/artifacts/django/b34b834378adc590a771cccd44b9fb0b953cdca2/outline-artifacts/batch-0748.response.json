@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/select_related/__init__.py",
+        "tests/select_related/models.py",
+        "tests/select_related/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/select_related/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/select_related/models.py (87L)\nfile scope: [\"000CM00E\" full 87L | imports 24L]\n\n- class Domain(models.Model): ... [\"000CM001\" full 2L | code 2L]\n\n- class Kingdom(models.Model): ... [\"000CM004\" full 3L | code 3L]\n\n- class Phylum(models.Model): ... [\"000CM007\" full 3L | code 3L]\n\n- class Klass(models.Model): ... [\"000CM00a\" full 3L | code 3L]\n\n- class Order(models.Model): ... [\"000CM00d\" full 3L | code 3L]\n\n- class Family(models.Model): ... [\"000CM00g\" full 3L | code 3L]\n\n- class Genus(models.Model): ... [\"000CM00j\" full 3L | code 3L]\n\n- class Species(models.Model): ... [\"000CM00m\" full 3L | code 3L]\n\n- class HybridSpecies(models.Model): ... [\"000CM00q\" full 4L | code 4L]\n\n- class Topping(models.Model): ... [\"000CM00s\" full 2L | code 2L]\n\n- class Pizza(models.Model): ... [\"000CM00v\" full 3L | code 3L]\n\n- class TaggedItem(models.Model): ... [\"000CM00A\" full 8L | code 8L]\n\n- class Bookmark(models.Model): ... [\"000CM00D\" full 3L | code 3L]\n\n# tests/select_related/tests.py (356L)\nfile scope: [\"000CN016\" full 356L | imports 25L]\n\n- class SelectRelatedTests(TestCase): ... [\"000CN00W\" full 258L | code 258L]\n  - @classmethod def create_tree(cls, stringtree): ... [\"000CN007\" full 19L | code 19L]\n  - @classmethod def setUpTestData(cls): ... [\"000CN008\" full 17L | code 17L]\n  - def setup_gc_debug(self): ... [\"000CN009\" full 7L | code 7L]\n  - def assert_no_local_function_leaks(self): ... [\"000CN00b\" full 6L | code 6L]\n  - def test_access_fks_without_select_related(self): ... [\"000CN00e\" full 8L | code 8L]\n  - def test_access_fks_with_select_related(self): ... [\"000CN00h\" full 11L | code 11L]\n  - def test_list_without_select_related(self): ... [\"000CN00k\" full 13L | code 13L]\n  - def test_list_with_select_related(self): ... [\"000CN00n\" full 18L | code 18L]\n  - def test_select_related_no_arguments_deprecated(self): ... [\"000CN00p\" full 7L | code 7L]\n  - def test_list_with_depth(self): ... [\"000CN00s\" full 12L | code 12L]\n  - def test_select_related_with_extra(self): ... [\"000CN00u\" full 7L | code 7L]\n  - @requires_gil def test_select_related_memory_leak(self): ... [\"000CN00v\" full 5L | code 5L]\n  - def test_certain_fields(self): ... [\"000CN00y\" full 15L | code 15L]\n  - def test_more_certain_fields(self): ... [\"000CN00B\" full 11L | code 11L]\n  - def test_field_traversal(self): ... [\"000CN00D\" full 10L | code 10L]\n  - def test_none_clears_list(self): ... [\"000CN00F\" full 3L | code 3L]\n  - def test_chaining(self): ... [\"000CN00K\" full 12L | code 12L]\n  - def test_reverse_relation_caching(self): ... [\"000CN00M\" full 10L | code 10L]\n  - def test_select_related_after_values(self): ... [\"000CN00O\" full 7L | code 7L]\n  - def test_select_related_after_values_list(self): ... [\"000CN00Q\" full 7L | code 7L]\n  - def test_fetch_mode_copied_fetching_one(self): ... [\"000CN00S\" full 15L | code 15L]\n  - def test_fetch_mode_copied_fetching_many(self): ... [\"000CN00V\" full 14L | code 14L]\n\n- class SelectRelatedValidationTests(SimpleTestCase): ... [\"000CN015\" full 71L | code 71L]\n  - def test_non_relational_field(self): ... [\"000CN00Z\" full 15L | code 15L]\n  - def test_non_relational_field_nested(self): ... [\"000CN010\" full 5L | code 5L]\n  - def test_many_to_many_field(self): ... [\"000CN011\" full 5L | code 5L]\n  - def test_reverse_relational_field(self): ... [\"000CN012\" full 5L | code 5L]\n  - def test_invalid_field(self): ... [\"000CN013\" full 15L | code 15L]\n  - def test_generic_relations(self): ... [\"000CN014\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

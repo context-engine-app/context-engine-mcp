@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/forms_tests/field_tests/filepathfield_test_dir/__init__.py",
+        "tests/forms_tests/field_tests/filepathfield_test_dir/a.py",
+        "tests/forms_tests/field_tests/filepathfield_test_dir/ab.py",
+        "tests/forms_tests/field_tests/filepathfield_test_dir/b.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/forms_tests/field_tests/filepathfield_test_dir/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/forms_tests/field_tests/filepathfield_test_dir/a.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/forms_tests/field_tests/filepathfield_test_dir/ab.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/forms_tests/field_tests/filepathfield_test_dir/b.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/runtests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 27.1 KB -> 2.4 KB (91% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/runtests.py (809L)\nfile scope: [\"000Cz02e\" full 809L | module-docs 1L | imports 398L]\n\n- RUNTESTS_DIR [\"000Cz001\" full 1L | code 1L]\n\n- TEMPLATE_DIR [\"000Cz002\" full 1L | code 1L]\n\n- SUBDIRS_TO_SKIP [\"000Cz003\" full 1L | code 1L]\n\n- ALWAYS_INSTALLED_APPS [\"000Cz004\" full 1L | code 1L]\n\n- ALWAYS_MIDDLEWARE [\"000Cz005\" full 1L | code 1L]\n\n- CONTRIB_TESTS_TO_APPS [\"000Cz006\" full 1L | code 1L]\n\n- def get_test_modules(gis_enabled): ... [\"000Cz00f\" full 30L | code 30L]\n\n- def get_label_module(label): ... [\"000Cz00j\" full 14L | code 14L]\n\n- def get_filtered_test_modules(start_at, start_after, gis_enabled, test_labels=None): ... [\"000Cz00v\" full 36L | code 36L]\n  - def _module_match_label(module_name, label): ... [\"000Cz00t\" full 3L | code 3L]\n\n- def setup_collect_tests(start_at, start_after, test_labels=None): ... [\"000Cz00E\" full 68L | code 68L]\n\n- def teardown_collect_tests(state): ... [\"000Cz00I\" full 4L | code 4L]\n\n- def get_installed(): ... [\"000Cz00J\" full 2L | code 2L]\n\n- def get_apps_to_install(test_modules): ... [\"000Cz00M\" full 10L | code 10L]\n\n- def setup_run_tests(verbosity, start_at, start_after, test_labels=None): ... [\"000Cz00W\" full 31L | code 31L]\n  - def no_available_apps(cls): ... [\"000Cz00V\" full 4L | code 4L]\n\n- def teardown_run_tests(state): ... [\"000Cz00Y\" full 3L | code 3L]\n\n- class ActionSelenium(argparse.Action): ... [\"000Cz017\" full 19L | code 19L]\n  - def __call__(self, parser, namespace, values, option_string=None): ... [\"000Cz016\" full 14L | code 14L]\n\n- def django_tests( verbosity, interactive, failfast, keepdb, reverse, test_labels, debug_sql, parallel, tags, exclude_tags, test_name_patterns, start_at, start_after, pdb, buffer, timing, shuffle, durations=None, ): ... [\"000Cz01x\" full 69L | code 69L]\n\n- def collect_test_modules(start_at, start_after): ... [\"000Cz01C\" full 4L | code 4L]\n\n- def get_subprocess_args(options): ... [\"000Cz01F\" full 18L | code 18L]\n\n- def bisect_tests(bisection_label, options, test_labels, start_at, start_after): ... [\"000Cz01T\" full 47L | code 47L]\n\n- def paired_tests(paired_test, options, test_labels, start_at, start_after): ... [\"000Cz023\" full 27L | code 27L]\n\n- TMPDIR [\"000Cz024\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

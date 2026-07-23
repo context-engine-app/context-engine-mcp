@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/humanize/templatetags/__init__.py",
+        "django/contrib/humanize/templatetags/humanize.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/humanize/templatetags/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/humanize/templatetags/humanize.py (347L)\nfile scope: [\"0006H00D\" full 347L | imports 73L]\n\n- @register.filter(is_safe=True) def ordinal(value): ... [\"0006H003\" full 47L | code 47L]\n\n- @register.filter(is_safe=True) def intcomma(value, use_l10n=True): ... [\"0006H00a\" full 24L | code 24L]\n\n- @register.filter(is_safe=False) def intword(value): ... [\"0006H00j\" full 25L | code 25L]\n\n- @register.filter(is_safe=True) def apnumber(value): ... [\"0006H00l\" full 23L | code 23L]\n\n- @register.filter(expects_localtime=True) def naturalday(value, arg=None): ... [\"0006H00r\" full 22L | code 22L]\n\n- @register.filter def naturaltime(value): ... [\"0006H00t\" full 7L | code 7L]\n\n- class NaturalTimeFormatter: ... [\"0006H00C\" full 128L | code 128L]\n  - @classmethod def string_for(cls, value): ... [\"0006H00B\" full 42L | code 42L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

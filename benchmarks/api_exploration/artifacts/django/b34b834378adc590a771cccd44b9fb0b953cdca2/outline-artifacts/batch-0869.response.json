@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/validators/__init__.py",
+        "tests/validators/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/validators/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/validators/tests.py (946L)\nfile scope: [\"000KD00A\" full 946L | imports 709L]\n\n- PILLOW_IS_INSTALLED [\"000KD000\" full 1L | code 1L]\n\n- NOW [\"000KD001\" full 1L | code 1L]\n\n- EXTENDED_SCHEMES [\"000KD002\" full 1L | code 1L]\n\n- VALID_URLS [\"000KD003\" full 1L | code 1L]\n\n- INVALID_URLS [\"000KD004\" full 1L | code 1L]\n\n- TEST_DATA [\"000KD005\" full 1L | code 1L]\n\n- class TestValidators(SimpleTestCase): ... [\"000KD00m\" full 55L | code 55L]\n  - def test_validators(self): ... [\"000KD00b\" full 23L | code 23L]\n  - def test_single_message(self): ... [\"000KD00d\" full 4L | code 4L]\n  - def test_message_list(self): ... [\"000KD00f\" full 6L | code 6L]\n  - def test_message_dict(self): ... [\"000KD00h\" full 4L | code 4L]\n  - def test_regex_validator_flags(self): ... [\"000KD00j\" full 4L | code 4L]\n  - def test_max_length_validator_message(self): ... [\"000KD00l\" full 8L | code 8L]\n\n- class TestValidatorEquality(TestCase): ... [\"000KD00z\" full 186L | code 186L]\n  - def test_regex_equality(self): ... [\"000KD00n\" full 31L | code 31L]\n  - def test_regex_equality_nocache(self): ... [\"000KD00r\" full 10L | code 10L]\n  - def test_regex_equality_blank(self): ... [\"000KD00s\" full 5L | code 5L]\n  - def test_email_equality(self): ... [\"000KD00t\" full 17L | code 17L]\n  - def test_basic_equality(self): ... [\"000KD00u\" full 22L | code 22L]\n  - def test_decimal_equality(self): ... [\"000KD00v\" full 17L | code 17L]\n  - def test_file_extension_equality(self): ... [\"000KD00w\" full 34L | code 34L]\n  - def test_prohibit_null_characters_validator_equality(self): ... [\"000KD00x\" full 16L | code 16L]\n  - def test_domain_name_equality(self): ... [\"000KD00y\" full 21L | code 21L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

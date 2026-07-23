@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/sync/task/atomic_waker.rs",
+        "tokio/src/sync/task/mod.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 15.5 KB -> 2.7 KB (82% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/sync/task/atomic_waker.rs (384L)\nfile scope: [\"0008V00u\" full 384L | imports 111L]\n\n- pub(crate) struct AtomicWaker { ... } [\"0008V002\" full 19L | code 4L | docs 15L]\n  - state: AtomicUsize [\"0008V000\" full 1L | code 1L]\n  - waker: UnsafeCell<Option<Waker>> [\"0008V001\" full 1L | code 1L]\n\n- impl RefUnwindSafe for AtomicWaker { ... } [\"0008V003\" full 1L | code 1L]\n\n- impl UnwindSafe for AtomicWaker { ... } [\"0008V004\" full 1L | code 1L]\n\n- const WAITING: usize = 0; [\"0008V005\" full 2L | code 1L | docs 1L]\n\n- const REGISTERING: usize = 0b01; [\"0008V006\" full 2L | code 1L | docs 1L]\n\n- const WAKING: usize = 0b10; [\"0008V007\" full 2L | code 1L | docs 1L]\n\n- impl AtomicWaker { ... } [\"0008V00e\" full 204L | code 204L]\n  - pub(crate) fn new() -> AtomicWaker { ... } [\"0008V008\" full 7L | code 6L | docs 1L]\n  - pub(crate) fn register_by_ref(&self, waker: &Waker) { ... } [\"0008V009\" full 18L | code 3L | docs 15L]\n  - fn do_register<W>(&self, waker: W) where W: WakerRef, { ... } [\"0008V00b\" full 124L | code 124L]\n    - fn catch_unwind<F: FnOnce() -> R, R>(f: F) -> std::thread::Result<R> { ... } [\"0008V00a\" full 3L | code 3L]\n  - pub(crate) fn wake(&self) { ... } [\"0008V00c\" full 10L | code 7L | docs 3L]\n  - pub(crate) fn take_waker(&self) -> Option<Waker> { ... } [\"0008V00d\" full 32L | code 30L | docs 2L]\n\n- impl Default for AtomicWaker { ... } [\"0008V00g\" full 5L | code 5L]\n  - fn default() -> Self { ... } [\"0008V00f\" full 3L | code 3L]\n\n- impl fmt::Debug for AtomicWaker { ... } [\"0008V00i\" full 5L | code 5L]\n  - fn fmt(&self, fmt: &mut fmt::Formatter<'_>) -> fmt::Result { ... } [\"0008V00h\" full 3L | code 3L]\n\n- unsafe impl Send for AtomicWaker { ... } [\"0008V00j\" full 1L | code 1L]\n\n- unsafe impl Sync for AtomicWaker { ... } [\"0008V00k\" full 1L | code 1L]\n\n- trait WakerRef { ... } [\"0008V00n\" full 4L | code 4L]\n  - fn wake( ... ); [\"0008V00l\" full 1L | code 1L]\n  - fn into_waker(self) -> Waker; [\"0008V00m\" full 1L | code 1L]\n\n- impl WakerRef for Waker { ... } [\"0008V00q\" full 9L | code 9L]\n  - fn wake(self) { ... } [\"0008V00o\" full 3L | code 3L]\n  - fn into_waker(self) -> Waker { ... } [\"0008V00p\" full 3L | code 3L]\n\n- impl WakerRef for &Waker { ... } [\"0008V00t\" full 9L | code 9L]\n  - fn wake(self) { ... } [\"0008V00r\" full 3L | code 3L]\n  - fn into_waker(self) -> Waker { ... } [\"0008V00s\" full 3L | code 3L]\n\n# tokio/src/sync/task/mod.rs (5L)\nfile scope: [\"0008W001\" full 5L | module-docs 1L]\n\n- mod atomic_waker; [\"0008W000\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

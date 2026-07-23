@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/db_functions/math/test_power.py",
+        "tests/db_functions/math/test_radians.py",
+        "tests/db_functions/math/test_random.py",
+        "tests/db_functions/math/test_round.py",
+        "tests/db_functions/math/test_sign.py",
+        "tests/db_functions/math/test_sin.py",
+        "tests/db_functions/math/test_sqrt.py",
+        "tests/db_functions/math/test_tan.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 19.1 KB -> 4.5 KB (76% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/db_functions/math/test_power.py (46L)\nfile scope: [\"000me009\" full 46L | imports 9L]\n\n- class PowerTests(TestCase): ... [\"000me008\" full 37L | code 37L]\n  - def test_null(self): ... [\"000me001\" full 10L | code 10L]\n  - def test_decimal(self): ... [\"000me003\" full 5L | code 5L]\n  - def test_float(self): ... [\"000me005\" full 5L | code 5L]\n  - def test_integer(self): ... [\"000me007\" full 13L | code 13L]\n\n# tests/db_functions/math/test_radians.py (58L)\nfile scope: [\"000mf00b\" full 58L | imports 12L]\n\n- class RadiansTests(TestCase): ... [\"000mf00a\" full 46L | code 46L]\n  - def test_null(self): ... [\"000mf001\" full 4L | code 4L]\n  - def test_decimal(self): ... [\"000mf003\" full 9L | code 9L]\n  - def test_float(self): ... [\"000mf005\" full 9L | code 9L]\n  - def test_integer(self): ... [\"000mf007\" full 13L | code 13L]\n  - def test_transform(self): ... [\"000mf009\" full 6L | code 6L]\n\n# tests/db_functions/math/test_random.py (14L)\nfile scope: [\"000mg003\" full 14L | imports 7L]\n\n- class RandomTests(TestCase): ... [\"000mg002\" full 7L | code 7L]\n  - def test(self): ... [\"000mg001\" full 6L | code 6L]\n\n# tests/db_functions/math/test_round.py (134L)\nfile scope: [\"000mh00u\" full 134L | imports 13L]\n\n- class RoundTests(TestCase): ... [\"000mh00t\" full 121L | code 121L]\n  - def test_null(self): ... [\"000mh001\" full 4L | code 4L]\n  - def test_null_with_precision(self): ... [\"000mh003\" full 4L | code 4L]\n  - def test_null_with_negative_precision(self): ... [\"000mh005\" full 4L | code 4L]\n  - def test_decimal(self): ... [\"000mh007\" full 9L | code 9L]\n  - def test_decimal_with_precision(self): ... [\"000mh009\" full 10L | code 10L]\n  - def test_decimal_with_negative_precision(self): ... [\"000mh00b\" full 5L | code 5L]\n  - def test_float(self): ... [\"000mh00d\" full 9L | code 9L]\n  - def test_float_with_precision(self): ... [\"000mh00f\" full 10L | code 10L]\n  - def test_float_with_negative_precision(self): ... [\"000mh00h\" full 5L | code 5L]\n  - def test_integer(self): ... [\"000mh00j\" full 13L | code 13L]\n  - def test_integer_with_precision(self): ... [\"000mh00l\" full 13L | code 13L]\n  - def test_integer_with_negative_precision(self): ... [\"000mh00o\" full 6L | code 6L]\n  - def test_transform(self): ... [\"000mh00q\" full 6L | code 6L]\n  - @unittest.skipUnless( connection.vendor == \"sqlite\", \"SQLite doesn't support negative precision.\", ) def test_unsupported_negative_precision(self): ... [\"000mh00s\" full 9L | code 9L]\n\n# tests/db_functions/math/test_sign.py (57L)\nfile scope: [\"000mi00b\" full 57L | imports 11L]\n\n- class SignTests(TestCase): ... [\"000mi00a\" full 46L | code 46L]\n  - def test_null(self): ... [\"000mi001\" full 4L | code 4L]\n  - def test_decimal(self): ... [\"000mi003\" full 9L | code 9L]\n  - def test_float(self): ... [\"000mi005\" full 9L | code 9L]\n  - def test_integer(self): ... [\"000mi007\" full 13L | code 13L]\n  - def test_transform(self): ... [\"000mi009\" full 6L | code 6L]\n\n# tests/db_functions/math/test_sin.py (54L)\nfile scope: [\"000mj00b\" full 54L | imports 12L]\n\n- class SinTests(TestCase): ... [\"000mj00a\" full 42L | code 42L]\n  - def test_null(self): ... [\"000mj001\" full 4L | code 4L]\n  - def test_decimal(self): ... [\"000mj003\" full 7L | code 7L]\n  - def test_float(self): ... [\"000mj005\" full 7L | code 7L]\n  - def test_integer(self): ... [\"000mj007\" full 13L | code 13L]\n  - def test_transform(self): ... [\"000mj009\" full 6L | code 6L]\n\n# tests/db_functions/math/test_sqrt.py (58L)\nfile scope: [\"000mk00b\" full 58L | imports 12L]\n\n- class SqrtTests(TestCase): ... [\"000mk00a\" full 46L | code 46L]\n  - def test_null(self): ... [\"000mk001\" full 4L | code 4L]\n  - def test_decimal(self): ... [\"000mk003\" full 9L | code 9L]\n  - def test_float(self): ... [\"000mk005\" full 9L | code 9L]\n  - def test_integer(self): ... [\"000mk007\" full 13L | code 13L]\n  - def test_transform(self): ... [\"000mk009\" full 6L | code 6L]\n\n# tests/db_functions/math/test_tan.py (54L)\nfile scope: [\"000ml00b\" full 54L | imports 12L]\n\n- class TanTests(TestCase): ... [\"000ml00a\" full 42L | code 42L]\n  - def test_null(self): ... [\"000ml001\" full 4L | code 4L]\n  - def test_decimal(self): ... [\"000ml003\" full 7L | code 7L]\n  - def test_float(self): ... [\"000ml005\" full 7L | code 7L]\n  - def test_integer(self): ... [\"000ml007\" full 13L | code 13L]\n  - def test_transform(self): ... [\"000ml009\" full 6L | code 6L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

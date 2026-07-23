@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/auth/management/commands/__init__.py",
+        "django/contrib/auth/management/commands/changepassword.py",
+        "django/contrib/auth/management/commands/createsuperuser.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/auth/management/commands/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/auth/management/commands/changepassword.py (83L)\nfile scope: [\"0003K00l\" full 83L | imports 13L]\n\n- class Command(BaseCommand): ... [\"0003K00k\" full 71L | code 71L]\n  - def _get_pass(self, prompt=\"Password: \"): ... [\"0003K006\" full 5L | code 5L]\n  - def add_arguments(self, parser): ... [\"0003K008\" full 15L | code 15L]\n  - def handle(self, *args, **options): ... [\"0003K00j\" full 44L | code 44L]\n\n# django/contrib/auth/management/commands/createsuperuser.py (322L)\nfile scope: [\"0003L00V\" full 322L | imports 23L]\n\n- class NotRunningInTTYException(Exception): ... [\"0003L000\" full 2L | code 2L]\n\n- PASSWORD_FIELD [\"0003L001\" full 1L | code 1L]\n\n- class Command(BaseCommand): ... [\"0003L00U\" full 296L | code 296L]\n  - def __init__(self, *args, **kwargs): ... [\"0003L007\" full 6L | code 6L]\n  - def add_arguments(self, parser): ... [\"0003L00d\" full 49L | code 49L]\n  - def execute(self, *args, **options): ... [\"0003L00g\" full 3L | code 3L]\n  - def handle(self, *args, **options): ... [\"0003L00C\" full 163L | code 163L]\n  - def get_input_data(self, field, message, default=None): ... [\"0003L00J\" full 15L | code 15L]\n  - def _get_input_message(self, field, default=None): ... [\"0003L00M\" full 18L | code 18L]\n  - @cached_property def username_is_unique(self): ... [\"0003L00N\" full 9L | code 9L]\n  - @cached_property def natural_key_defined(self): ... [\"0003L00O\" full 3L | code 3L]\n  - def _validate_username(self, username, verbose_field_name, database): ... [\"0003L00T\" full 17L | code 17L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

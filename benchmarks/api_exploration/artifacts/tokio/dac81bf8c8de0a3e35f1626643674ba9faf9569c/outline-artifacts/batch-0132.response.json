@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/time_alt/cancellation_queue.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.9 KB -> 2.0 KB (-2% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/time_alt/cancellation_queue.rs (91L)\nfile scope: [\"0008c00m\" full 91L | imports 5L]\n\n- #[derive(Debug, Default)] struct Inner { ... } [\"0008c001\" full 4L | code 4L]\n  - list: LinkedList<CancellationQueueEntry> [\"0008c000\" full 1L | code 1L]\n\n- impl Drop for Inner { ... } [\"0008c003\" full 8L | code 8L]\n  - fn drop(&mut self) { ... } [\"0008c002\" full 6L | code 6L]\n\n- impl Inner { ... } [\"0008c00b\" full 30L | code 30L]\n  - fn new() -> Self { ... } [\"0008c004\" full 5L | code 5L]\n  - unsafe fn push_front(&mut self, hdl: EntryHandle) { ... } [\"0008c005\" full 8L | code 3L | docs 5L]\n  - fn into_iter(self) -> impl Iterator<Item = EntryHandle> { ... } [\"0008c00a\" full 13L | code 13L]\n    - struct Iter( ... ); [\"0008c006\" full 1L | code 1L]\n    - impl Iterator for Iter { ... } [\"0008c009\" full 7L | code 7L]\n      - type Item = EntryHandle; [\"0008c007\" full 1L | code 1L]\n      - fn next(&mut self) -> Option<Self::Item> { ... } [\"0008c008\" full 3L | code 3L]\n\n- #[derive(Debug, Clone)] pub(crate) struct Sender { ... } [\"0008c00d\" full 4L | code 4L]\n  - inner: Arc<Mutex<Inner>> [\"0008c00c\" full 1L | code 1L]\n\n- impl Sender { ... } [\"0008c00f\" full 12L | code 12L]\n  - pub(crate) unsafe fn send(&self, hdl: EntryHandle) { ... } [\"0008c00e\" full 10L | code 5L | docs 5L]\n\n- #[derive(Debug)] pub(crate) struct Receiver { ... } [\"0008c00h\" full 4L | code 4L]\n  - inner: Arc<Mutex<Inner>> [\"0008c00g\" full 1L | code 1L]\n\n- impl Receiver { ... } [\"0008c00j\" full 5L | code 5L]\n  - pub(crate) fn recv_all(&mut self) -> impl Iterator<Item = EntryHandle> { ... } [\"0008c00i\" full 3L | code 3L]\n\n- pub(crate) fn new() -> (Sender, Receiver) { ... } [\"0008c00k\" full 9L | code 9L]\n\n- #[cfg(test)] mod tests; [\"0008c00l\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

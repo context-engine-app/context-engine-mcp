@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio-stream/tests/time_throttle.rs",
+        "tokio-stream/tests/watch.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.9 KB -> 830 B (58% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio-stream/tests/time_throttle.rs (29L)\nfile scope: [\"00029001\" full 29L | imports 10L]\n\n- #[tokio::test] async fn usage() { ... } [\"00029000\" full 19L | code 19L]\n\n# tokio-stream/tests/watch.rs (58L)\nfile scope: [\"0002a003\" full 58L | imports 9L]\n\n- #[tokio::test] async fn watch_stream_message_not_twice() { ... } [\"0002a000\" full 23L | code 23L]\n\n- #[tokio::test] async fn watch_stream_from_rx() { ... } [\"0002a001\" full 12L | code 12L]\n\n- #[tokio::test] async fn watch_stream_from_changes() { ... } [\"0002a002\" full 12L | code 12L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

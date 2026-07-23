@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "binding/msgpack_test.go",
+        "binding/multipart_form_mapping.go",
+        "binding/multipart_form_mapping_test.go",
+        "binding/plain.go",
+        "binding/protobuf.go",
+        "binding/query.go",
+        "binding/toml.go",
+        "binding/toml_test.go"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 10.0 KB -> 4.0 KB (60% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# binding/msgpack_test.go (35L)\nfile scope: [\"0000j002\" full 35L | module-docs 5L | imports 14L]\n\n- func TestMsgpackBindingBindBody(t *testing.T) { ... } [\"0000j000\" full 9L | code 9L]\n\n- func msgpackBody(t *testing.T, obj any) []byte { ... } [\"0000j001\" full 7L | code 7L]\n\n# binding/multipart_form_mapping.go (75L)\nfile scope: [\"0000k006\" full 75L | module-docs 3L | imports 28L]\n\n- multipartRequest ... [\"0000k000\" full 1L | code 1L]\n\n- func (r *multipartRequest) TrySet(value reflect.Value, field reflect.StructField, key string, opt setOptions) (bool, error) { ... } [\"0000k003\" full 7L | code 7L]\n\n- func setByMultipartFormFile(value reflect.Value, field reflect.StructField, files []*multipart.FileHeader) (isSet bool, err error) { ... } [\"0000k004\" full 27L | code 27L]\n\n- func setArrayOfMultipartFormFiles(value reflect.Value, field reflect.StructField, files []*multipart.FileHeader) (isSet bool, err error) { ... } [\"0000k005\" full 12L | code 12L]\n\n# binding/multipart_form_mapping_test.go (140L)\nfile scope: [\"0000l009\" full 140L | module-docs 3L | imports 19L]\n\n- func TestFormMultipartBindingBindOneFile(t *testing.T) { ... } [\"0000l000\" full 24L | code 24L]\n\n- func TestFormMultipartBindingBindTwoFiles(t *testing.T) { ... } [\"0000l001\" full 28L | code 28L]\n\n- func TestFormMultipartBindingBindError(t *testing.T) { ... } [\"0000l002\" full 25L | code 25L]\n\n- testFile struct { ... } [\"0000l006\" full 5L | code 5L]\n  - Fieldname string [\"0000l003\" full 1L | code 1L]\n  - Filename string [\"0000l004\" full 1L | code 1L]\n  - Content []byte [\"0000l005\" full 1L | code 1L]\n\n- func createRequestMultipartFiles(t *testing.T, files ...testFile) *http.Request { ... } [\"0000l007\" full 21L | code 21L]\n\n- func assertMultipartFileHeader(t *testing.T, fh *multipart.FileHeader, file testFile) { ... } [\"0000l008\" full 14L | code 14L]\n\n# binding/plain.go (57L)\nfile scope: [\"0000m005\" full 57L | imports 12L]\n\n- plainBinding struct{ ... } [\"0000m000\" full 1L | code 1L]\n\n- func (plainBinding) Name() string { ... } [\"0000m001\" full 3L | code 3L]\n\n- func (plainBinding) Bind(req *http.Request, obj any) error { ... } [\"0000m002\" full 8L | code 8L]\n\n- func (plainBinding) BindBody(body []byte, obj any) error { ... } [\"0000m003\" full 3L | code 3L]\n\n- func decodePlain(data []byte, obj any) error { ... } [\"0000m004\" full 26L | code 26L]\n\n# binding/protobuf.go (42L)\nfile scope: [\"0000n004\" full 42L | module-docs 3L | imports 13L]\n\n- protobufBinding struct{ ... } [\"0000n000\" full 1L | code 1L]\n\n- func (protobufBinding) Name() string { ... } [\"0000n001\" full 3L | code 3L]\n\n- func (b protobufBinding) Bind(req *http.Request, obj any) error { ... } [\"0000n002\" full 7L | code 7L]\n\n- func (protobufBinding) BindBody(body []byte, obj any) error { ... } [\"0000n003\" full 13L | code 13L]\n\n# binding/query.go (22L)\nfile scope: [\"0000o003\" full 22L | module-docs 3L | imports 7L]\n\n- queryBinding struct{ ... } [\"0000o000\" full 1L | code 1L]\n\n- func (queryBinding) Name() string { ... } [\"0000o001\" full 3L | code 3L]\n\n- func (queryBinding) Bind(req *http.Request, obj any) error { ... } [\"0000o002\" full 7L | code 7L]\n\n# binding/toml.go (36L)\nfile scope: [\"0000p005\" full 36L | module-docs 3L | imports 13L]\n\n- tomlBinding struct{ ... } [\"0000p000\" full 1L | code 1L]\n\n- func (tomlBinding) Name() string { ... } [\"0000p001\" full 3L | code 3L]\n\n- func (tomlBinding) Bind(req *http.Request, obj any) error { ... } [\"0000p002\" full 3L | code 3L]\n\n- func (tomlBinding) BindBody(body []byte, obj any) error { ... } [\"0000p003\" full 3L | code 3L]\n\n- func decodeToml(r io.Reader, obj any) error { ... } [\"0000p004\" full 7L | code 7L]\n\n# binding/toml_test.go (23L)\nfile scope: [\"0000q001\" full 23L | module-docs 3L | imports 12L]\n\n- func TestTOMLBindingBindBody(t *testing.T) { ... } [\"0000q000\" full 9L | code 9L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

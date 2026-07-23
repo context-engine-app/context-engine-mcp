@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/bash_completion/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 3.8 KB -> 1.2 KB (69% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/bash_completion/tests.py (107L)\nfile scope: [\"000jn00r\" full 107L | imports 14L]\n\n- class BashCompletionTests(unittest.TestCase): ... [\"000jn00q\" full 93L | code 93L]\n  - def setUp(self): ... [\"000jn000\" full 3L | code 3L]\n  - def tearDown(self): ... [\"000jn002\" full 5L | code 5L]\n  - def _user_input(self, input_str): ... [\"000jn006\" full 19L | code 19L]\n  - def _run_autocomplete(self): ... [\"000jn009\" full 8L | code 8L]\n  - def test_django_admin_py(self): ... [\"000jn00b\" full 5L | code 5L]\n  - def test_manage_py(self): ... [\"000jn00d\" full 5L | code 5L]\n  - def test_custom_command(self): ... [\"000jn00f\" full 5L | code 5L]\n  - def test_subcommands(self): ... [\"000jn00h\" full 5L | code 5L]\n  - def test_completed_subcommand(self): ... [\"000jn00k\" full 6L | code 6L]\n  - def test_help(self): ... [\"000jn00m\" full 5L | code 5L]\n  - def test_app_completion(self): ... [\"000jn00p\" full 10L | code 10L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

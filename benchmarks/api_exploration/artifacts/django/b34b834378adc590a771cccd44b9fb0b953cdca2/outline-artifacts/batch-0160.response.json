@@ -1,0 +1,25 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/messages/__init__.py",
+        "django/contrib/messages/api.py",
+        "django/contrib/messages/apps.py",
+        "django/contrib/messages/constants.py",
+        "django/contrib/messages/context_processors.py",
+        "django/contrib/messages/middleware.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/messages/__init__.py (4L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.contrib.messages.api import *  # NOQA\n2|from django.contrib.messages.constants import *  # NOQA\n3|from django.contrib.messages.storage.base import Message  # NOQA\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/messages/api.py (128L)\nfile scope: [\"0006J00G\" full 128L | imports 19L]\n\n- class MessageFailure(Exception): ... [\"0006J001\" full 2L | code 2L]\n\n- def add_message(request, level, message, extra_tags=\"\", fail_silently=False): ... [\"0006J008\" full 19L | code 19L]\n\n- def get_messages(request): ... [\"0006J00a\" full 6L | code 6L]\n\n- def get_level(request): ... [\"0006J00d\" full 9L | code 9L]\n\n- def set_level(request, level): ... [\"0006J00g\" full 11L | code 11L]\n\n- def debug(request, message, extra_tags=\"\", fail_silently=False): ... [\"0006J00l\" full 9L | code 9L]\n\n- def info(request, message, extra_tags=\"\", fail_silently=False): ... [\"0006J00q\" full 9L | code 9L]\n\n- def success(request, message, extra_tags=\"\", fail_silently=False): ... [\"0006J00v\" full 9L | code 9L]\n\n- def warning(request, message, extra_tags=\"\", fail_silently=False): ... [\"0006J00A\" full 9L | code 9L]\n\n- def error(request, message, extra_tags=\"\", fail_silently=False): ... [\"0006J00F\" full 9L | code 9L]\n\n# django/contrib/messages/apps.py (20L)\nfile scope: [\"0006K007\" full 20L | imports 9L]\n\n- def update_level_tags(setting, **kwargs): ... [\"0006K002\" full 3L | code 3L]\n\n- class MessagesConfig(AppConfig): ... [\"0006K006\" full 6L | code 6L]\n  - def ready(self): ... [\"0006K005\" full 2L | code 2L]\n\n# django/contrib/messages/constants.py (22L)\nfile scope: [\"0006L007\" full 22L | imports 20L]\n\n- DEBUG [\"0006L000\" full 1L | code 1L]\n\n- INFO [\"0006L001\" full 1L | code 1L]\n\n- SUCCESS [\"0006L002\" full 1L | code 1L]\n\n- WARNING [\"0006L003\" full 1L | code 1L]\n\n- ERROR [\"0006L004\" full 1L | code 1L]\n\n- DEFAULT_TAGS [\"0006L005\" full 1L | code 1L]\n\n- DEFAULT_LEVELS [\"0006L006\" full 1L | code 1L]\n\n# django/contrib/messages/context_processors.py (14L)\nfile scope: [\"0006M002\" full 14L | imports 5L]\n\n- def messages(request): ... [\"0006M001\" full 9L | code 9L]\n\n# django/contrib/messages/middleware.py (27L)\nfile scope: [\"0006N007\" full 27L | imports 6L]\n\n- class MessageMiddleware(MiddlewareMixin): ... [\"0006N006\" full 21L | code 21L]\n  - def process_request(self, request): ... [\"0006N001\" full 2L | code 2L]\n  - def process_response(self, request, response): ... [\"0006N005\" full 13L | code 13L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

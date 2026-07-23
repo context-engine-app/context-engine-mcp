@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio-util/src/udp/frame.rs",
+        "tokio-util/src/udp/mod.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 8.1 KB -> 3.1 KB (61% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio-util/src/udp/frame.rs (256L)\nfile scope: [\"0003d00u\" full 256L | imports 16L]\n\n- #[must_use = \"sinks do nothing unless polled\"] #[derive(Debug)] pub struct UdpFramed<C, T = UdpSocket> { ... } [\"0003d008\" full 38L | code 12L | docs 26L]\n  - socket: T [\"0003d000\" full 1L | code 1L]\n  - codec: C [\"0003d001\" full 1L | code 1L]\n  - rd: BytesMut [\"0003d002\" full 1L | code 1L]\n  - wr: BytesMut [\"0003d003\" full 1L | code 1L]\n  - out_addr: SocketAddr [\"0003d004\" full 1L | code 1L]\n  - flushed: bool [\"0003d005\" full 1L | code 1L]\n  - is_readable: bool [\"0003d006\" full 1L | code 1L]\n  - current_addr: Option<SocketAddr> [\"0003d007\" full 1L | code 1L]\n\n- const INITIAL_RD_CAPACITY: usize = 64 * 1024; [\"0003d009\" full 1L | code 1L]\n\n- const INITIAL_WR_CAPACITY: usize = 8 * 1024; [\"0003d00a\" full 1L | code 1L]\n\n- impl<C, T> Unpin for UdpFramed<C, T> { ... } [\"0003d00b\" full 1L | code 1L]\n\n- impl<C, T> Stream for UdpFramed<C, T> where T: Borrow<UdpSocket>, C: Decoder, { ... } [\"0003d00e\" full 53L | code 53L]\n  - type Item = Result<(C::Item, SocketAddr), C::Error>; [\"0003d00c\" full 1L | code 1L]\n  - fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>> { ... } [\"0003d00d\" full 45L | code 45L]\n\n- impl<I, C, T> Sink<(I, SocketAddr)> for UdpFramed<C, T> where T: Borrow<UdpSocket>, C: Encoder<I>, { ... } [\"0003d00k\" full 66L | code 66L]\n  - type Error = C::Error; [\"0003d00f\" full 1L | code 1L]\n  - fn poll_ready(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> { ... } [\"0003d00g\" full 10L | code 10L]\n  - fn start_send(self: Pin<&mut Self>, item: (I, SocketAddr)) -> Result<(), Self::Error> { ... } [\"0003d00h\" full 11L | code 11L]\n  - fn poll_flush(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> { ... } [\"0003d00i\" full 30L | code 30L]\n  - fn poll_close(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> { ... } [\"0003d00j\" full 4L | code 4L]\n\n- impl<C, T> UdpFramed<C, T> where T: Borrow<UdpSocket>, { ... } [\"0003d00t\" full 75L | code 75L]\n  - pub fn new(socket: T, codec: C) -> UdpFramed<C, T> { ... } [\"0003d00l\" full 15L | code 12L | docs 3L]\n  - pub fn get_ref(&self) -> &T { ... } [\"0003d00m\" full 10L | code 3L | docs 7L]\n  - pub fn get_mut(&mut self) -> &mut T { ... } [\"0003d00n\" full 10L | code 3L | docs 7L]\n  - pub fn codec(&self) -> &C { ... } [\"0003d00o\" full 8L | code 3L | docs 5L]\n  - pub fn codec_mut(&mut self) -> &mut C { ... } [\"0003d00p\" full 8L | code 3L | docs 5L]\n  - pub fn read_buffer(&self) -> &BytesMut { ... } [\"0003d00q\" full 4L | code 3L | docs 1L]\n  - pub fn read_buffer_mut(&mut self) -> &mut BytesMut { ... } [\"0003d00r\" full 4L | code 3L | docs 1L]\n  - pub fn into_inner(self) -> T { ... } [\"0003d00s\" full 4L | code 3L | docs 1L]\n\n# tokio-util/src/udp/mod.rs (7L)\nfile scope: [\"0003e001\" full 7L | imports 5L]\n\n- mod frame; [\"0003e000\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

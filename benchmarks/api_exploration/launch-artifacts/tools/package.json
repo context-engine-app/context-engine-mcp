@@ -1,0 +1,6 @@
+{
+  "name": "launch-artifact-tools",
+  "private": true,
+  "type": "module",
+  "dependencies": { "tiktoken": "^1.0.0" }
+}

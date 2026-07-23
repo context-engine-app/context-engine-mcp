@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/db/backends/mysql/schema.py",
+        "django/db/backends/mysql/validation.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 12.7 KB -> 2.6 KB (79% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/db/backends/mysql/schema.py (250L)\nfile scope: [\"000ay01w\" full 250L | imports 6L]\n\n- class DatabaseSchemaEditor(BaseDatabaseSchemaEditor): ... [\"000ay01v\" full 244L | code 244L]\n  - @property def sql_delete_check(self): ... [\"000ay00f\" full 8L | code 8L]\n  - def quote_value(self, value): ... [\"000ay00i\" full 9L | code 9L]\n  - def _is_limited_data_type(self, field): ... [\"000ay00l\" full 6L | code 6L]\n  - def _is_text_or_blob(self, field): ... [\"000ay00o\" full 3L | code 3L]\n  - def skip_default(self, field): ... [\"000ay00r\" full 5L | code 5L]\n  - def skip_default_on_alter(self, field): ... [\"000ay00t\" full 8L | code 8L]\n  - def _column_default_sql(self, field): ... [\"000ay00v\" full 6L | code 6L]\n  - def add_field(self, model, field): ... [\"000ay00z\" full 15L | code 15L]\n  - def remove_constraint(self, model, constraint): ... [\"000ay00C\" full 11L | code 11L]\n  - def remove_index(self, model, index): ... [\"000ay00F\" full 7L | code 7L]\n  - def _field_should_be_indexed(self, model, field): ... [\"000ay00J\" full 17L | code 17L]\n  - def _create_missing_fk_index( self, model, *, fields, expressions=None, ): ... [\"000ay00S\" full 49L | code 49L]\n  - def _delete_composed_index(self, model, fields, *args): ... [\"000ay00W\" full 3L | code 3L]\n  - def _set_field_new_type(self, field, new_type): ... [\"000ay011\" full 14L | code 14L]\n  - def _alter_column_type_sql( self, model, old_field, new_field, new_type, old_collation, new_collation ): ... [\"000ay018\" full 7L | code 7L]\n  - def _field_db_check(self, field, field_db_params): ... [\"000ay01b\" full 6L | code 6L]\n  - def _rename_field_sql(self, table, old_field, new_field, new_type): ... [\"000ay01g\" full 3L | code 3L]\n  - def _alter_column_comment_sql(self, model, new_field, new_type, new_db_comment): ... [\"000ay01l\" full 3L | code 3L]\n  - def _comment_sql(self, comment): ... [\"000ay01o\" full 3L | code 3L]\n  - def _alter_column_null_sql(self, model, old_field, new_field): ... [\"000ay01u\" full 14L | code 14L]\n\n# django/db/backends/mysql/validation.py (78L)\nfile scope: [\"000az00a\" full 78L | imports 6L]\n\n- class DatabaseValidation(BaseDatabaseValidation): ... [\"000az009\" full 72L | code 72L]\n  - def check(self, **kwargs): ... [\"000az002\" full 4L | code 4L]\n  - def _check_sql_mode(self, **kwargs): ... [\"000az004\" full 25L | code 25L]\n  - def check_field_type(self, field, field_type): ... [\"000az008\" full 40L | code 40L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

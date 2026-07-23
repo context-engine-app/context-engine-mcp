@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "internal/fs/fs.go",
+        "internal/fs/fs_test.go"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.2 KB -> 1.0 KB (15% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# internal/fs/fs.go (22L)\nfile scope: [\"0000X003\" full 22L | imports 13L]\n\n- FileSystem struct { ... } [\"0000X001\" full 3L | code 3L]\n  - http.FileSystem [\"0000X000\" full 1L | code 1L]\n\n- func (o FileSystem) Open(name string) (fs.File, error) { ... } [\"0000X002\" full 8L | code 8L]\n\n# internal/fs/fs_test.go (50L)\nfile scope: [\"0000Y005\" full 50L | imports 13L]\n\n- mockFileSystem struct { ... } [\"0000Y001\" full 3L | code 3L]\n  - open func(name string) (http.File, error) [\"0000Y000\" full 1L | code 1L]\n\n- func (m *mockFileSystem) Open(name string) (http.File, error) { ... } [\"0000Y002\" full 3L | code 3L]\n\n- func TestFileSystem_Open(t *testing.T) { ... } [\"0000Y003\" full 14L | code 14L]\n\n- func TestFileSystem_Open_err(t *testing.T) { ... } [\"0000Y004\" full 14L | code 14L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

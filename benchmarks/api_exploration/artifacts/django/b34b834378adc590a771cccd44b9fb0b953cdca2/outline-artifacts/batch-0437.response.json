@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/distinct_on_fields/__init__.py",
+        "tests/distinct_on_fields/models.py",
+        "tests/distinct_on_fields/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/distinct_on_fields/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/distinct_on_fields/models.py (55L)\nfile scope: [\"000ny00n\" full 55L | imports 4L]\n\n- class Tag(models.Model): ... [\"000ny005\" full 15L | code 15L]\n  - class Meta: ... [\"000ny003\" full 2L | code 2L]\n  - def __str__(self): ... [\"000ny004\" full 2L | code 2L]\n\n- class Celebrity(models.Model): ... [\"000ny009\" full 11L | code 11L]\n  - def __str__(self): ... [\"000ny008\" full 2L | code 2L]\n\n- class Fan(models.Model): ... [\"000ny00b\" full 2L | code 2L]\n\n- class Staff(models.Model): ... [\"000ny00i\" full 9L | code 9L]\n  - def __str__(self): ... [\"000ny00h\" full 2L | code 2L]\n\n- class StaffTag(models.Model): ... [\"000ny00m\" full 6L | code 6L]\n  - def __str__(self): ... [\"000ny00l\" full 2L | code 2L]\n\n# tests/distinct_on_fields/tests.py (187L)\nfile scope: [\"000nz00E\" full 187L | imports 10L]\n\n- @skipUnlessDBFeature(\"can_distinct_on_fields\") @skipUnlessDBFeature(\"supports_nullable_unique_constraints\") class DistinctOnTests(TestCase): ... [\"000nz00D\" full 177L | code 177L]\n  - @classmethod def setUpTestData(cls): ... [\"000nz000\" full 22L | code 22L]\n  - def test_basic_distinct_on(self): ... [\"000nz00n\" full 84L | code 84L]\n  - def test_sliced_queryset(self): ... [\"000nz00p\" full 4L | code 4L]\n  - def test_transform(self): ... [\"000nz00r\" full 9L | code 9L]\n  - def test_distinct_not_implemented_checks(self): ... [\"000nz00t\" full 15L | code 15L]\n  - def test_distinct_on_in_ordered_subquery(self): ... [\"000nz00v\" full 7L | code 7L]\n  - def test_distinct_on_get_ordering_preserved(self): ... [\"000nz00x\" full 11L | code 11L]\n  - def test_distinct_on_mixed_case_annotation(self): ... [\"000nz00z\" full 9L | code 9L]\n  - def test_disallowed_update_distinct_on(self): ... [\"000nz00C\" full 5L | code 5L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/template_backends/apps/good/templatetags/__init__.py",
+        "tests/template_backends/apps/good/templatetags/empty.py",
+        "tests/template_backends/apps/good/templatetags/good_tags.py",
+        "tests/template_backends/apps/good/templatetags/override.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/template_backends/apps/good/templatetags/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/template_backends/apps/good/templatetags/empty.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/template_backends/apps/good/templatetags/good_tags.py (4L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.template import Library\n2|\n3|register = Library()\nnote: EOF\n\n# tests/template_backends/apps/good/templatetags/override.py (4L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.template import Library\n2|\n3|register = Library()\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

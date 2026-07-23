@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/template_backends/apps/importerror/templatetags/__init__.py",
+        "tests/template_backends/apps/importerror/templatetags/broken_tags.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/template_backends/apps/importerror/templatetags/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/template_backends/apps/importerror/templatetags/broken_tags.py (2L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|import DoesNotExist  # noqa\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

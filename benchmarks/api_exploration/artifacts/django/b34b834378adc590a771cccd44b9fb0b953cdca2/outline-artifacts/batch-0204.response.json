@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/core/mail/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 12.1 KB -> 1.9 KB (85% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/core/mail/__init__.py (400L)\nfile scope: [\"0009d00W\" full 400L | imports 109L]\n\n- @deprecate_posargs(RemovedInDjango70Warning, [\"fail_silently\"]) def get_connection(backend=None, *, fail_silently=False, **kwds): ... [\"0009d007\" full 29L | code 29L]\n\n- @deprecate_posargs( RemovedInDjango70Warning, [ \"fail_silently\", \"auth_user\", \"auth_password\", \"connection\", \"html_message\", ], ) def send_mail( subject, message, from_email, recipient_list, *, fail_silently=False, auth_user=None, auth_password=None, connection=None, html_message=None, using=None, ): ... [\"0009d00k\" full 81L | code 81L]\n\n- @deprecate_posargs( RemovedInDjango70Warning, [ \"fail_silently\", \"auth_user\", \"auth_password\", \"connection\", ], ) def send_mass_mail( datatuple, *, fail_silently=False, auth_user=None, auth_password=None, connection=None, using=None, ): ... [\"0009d00t\" full 72L | code 72L]\n\n- def _send_server_message( *, setting_name, subject, message, html_message=None, fail_silently=False, connection=None, using=None, ): ... [\"0009d00D\" full 61L | code 61L]\n\n- @deprecate_posargs( RemovedInDjango70Warning, [\"fail_silently\", \"connection\", \"html_message\"] ) def mail_admins( subject, message, *, fail_silently=False, connection=None, html_message=None, using=None, ): ... [\"0009d00K\" full 22L | code 22L]\n\n- @deprecate_posargs( RemovedInDjango70Warning, [\"fail_silently\", \"connection\", \"html_message\"] ) def mail_managers( subject, message, *, fail_silently=False, connection=None, html_message=None, using=None, ): ... [\"0009d00R\" full 22L | code 22L]\n\n- def __getattr__(name): ... [\"0009d00V\" full 11L | code 11L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

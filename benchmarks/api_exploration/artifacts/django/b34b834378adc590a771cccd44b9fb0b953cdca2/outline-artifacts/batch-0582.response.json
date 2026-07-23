@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migration_test_data_persistence/models.py",
+        "tests/migration_test_data_persistence/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/migration_test_data_persistence/models.py (13L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from django.db import models\n 2|\n 3|\n 4|class Book(models.Model):\n 5|    title = models.CharField(max_length=100)\n 6|\n 7|\n 8|class Unmanaged(models.Model):\n 9|    title = models.CharField(max_length=100)\n10|\n11|    class Meta:\n12|        managed = False\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migration_test_data_persistence/tests.py (53L)\nfile scope: [\"000v200c\" full 53L | imports 7L]\n\n- class MigrationDataPersistenceTestCase(TransactionTestCase): ... [\"000v2003\" full 14L | code 14L]\n  - def test_persistence(self): ... [\"000v2002\" full 5L | code 5L]\n\n- class MigrationDataPersistenceClassSetup(TransactionTestCase): ... [\"000v2009\" full 18L | code 18L]\n  - @classmethod def setUpClass(cls): ... [\"000v2006\" full 6L | code 6L]\n  - def test_data_available_in_class_setup(self): ... [\"000v2008\" full 2L | code 2L]\n\n- class MigrationDataNormalPersistenceTestCase(TestCase): ... [\"000v200b\" full 10L | code 10L]\n  - def test_persistence(self): ... [\"000v200a\" full 5L | code 5L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

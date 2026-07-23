@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/table/basic_usage.ts",
+        "examples/table/colspan_and_rowspan.ts",
+        "examples/table/columns.ts",
+        "examples/table/consume_words.ts",
+        "examples/table/flex_demo.ts",
+        "examples/table/header_and_body.ts",
+        "examples/table/random_table_demo.ts",
+        "examples/table/rows_and_cells.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 11.3 KB -> 2.5 KB (78% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/table/basic_usage.ts (13L)\nfile scope: [\"0003t001\" full 13L | imports 5L]\n\n\n# examples/table/colspan_and_rowspan.ts (23L)\nfile scope: [\"0003u000\" full 23L]\n\n\n# examples/table/columns.ts (21L)\nfile scope: [\"0003v004\" full 21L | imports 15L]\n\n- border: true [\"0003v000\" full 1L | code 1L]\n\n- minWidth: 20 [\"0003v001\" full 1L | code 1L]\n\n- align: \"center\" [\"0003v002\" full 1L | code 1L]\n\n- align: \"right\" [\"0003v003\" full 1L | code 1L]\n\n# examples/table/consume_words.ts (15L)\nfile scope: [\"0003w004\" full 15L | imports 11L]\n\n\n# examples/table/flex_demo.ts (239L)\nfile scope: [\"0003x00F\" full 239L | imports 43L]\n\n- addEventListener(\"keydown\") callback [\"0003x00f\" full 15L | code 15L]\n\n- setInterval() callback [\"0003x00h\" full 6L | code 6L]\n\n- Deno.addSignalListener(\"SIGINT\") callback [\"0003x00i\" full 4L | code 4L]\n\n- type Slide = { ... }; [\"0003x00j\" full 4L | code 4L]\n\n- interface JsrPackage { ... } [\"0003x00o\" full 6L | code 6L]\n  - name: string; [\"0003x00k\" full 1L | code 1L]\n  - description: string; [\"0003x00l\" full 1L | code 1L]\n  - latestVersion: string; [\"0003x00m\" full 1L | code 1L]\n  - score: number; [\"0003x00n\" full 1L | code 1L]\n\n- function render(): void { ... } [\"0003x00w\" full 27L | code 27L]\n\n- async function fetchPackages(): Promise<Array<JsrPackage>> { ... } [\"0003x00z\" full 8L | code 8L]\n\n- function getColumns(): number { ... } [\"0003x00A\" full 7L | code 7L]\n\n- function ln(snippet?: string): void { ... } [\"0003x00B\" full 7L | code 7L]\n\n- function hint(...lines: string[]): void { ... } [\"0003x00D\" full 5L | code 5L]\n\n- function label(text: string): void { ... } [\"0003x00E\" full 3L | code 3L]\n\n# examples/table/header_and_body.ts (14L)\nfile scope: [\"0003y000\" full 14L]\n\n\n# examples/table/random_table_demo.ts (129L)\nfile scope: [\"0003z00f\" full 129L | imports 25L]\n\n- Deno.addSignalListener(\"SIGINT\") callback [\"0003z000\" full 5L | code 5L]\n\n- function loop() { ... } [\"0003z002\" full 6L | code 6L]\n\n- function createTable(): Table { ... } [\"0003z005\" full 54L | code 54L]\n  - map() callback [\"0003z003\" full 1L | code 1L]\n  - map() callback [\"0003z004\" full 1L | code 1L]\n\n- function randomizeRow(row: Array<CellType>) { ... } [\"0003z00e\" full 39L | code 39L]\n\n# examples/table/rows_and_cells.ts (22L)\nfile scope: [\"0003A000\" full 22L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

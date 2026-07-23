@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio-util/src/tracing.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n1|macro_rules! trace {\n2|    ($($arg:tt)*) => {\n3|        #[cfg(feature = \"tracing\")]\n4|        tracing::trace!($($arg)*);\n5|    };\n6|}\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

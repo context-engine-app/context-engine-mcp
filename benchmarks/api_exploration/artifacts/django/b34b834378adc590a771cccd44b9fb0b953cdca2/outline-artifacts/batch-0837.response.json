@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/unmanaged_models/__init__.py",
+        "tests/unmanaged_models/models.py",
+        "tests/unmanaged_models/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/unmanaged_models/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/unmanaged_models/models.py (121L)\nfile scope: [\"000Im00Y\" full 121L | imports 50L]\n\n- class A01(models.Model): ... [\"000Im004\" full 6L | code 6L]\n  - class Meta: ... [\"000Im003\" full 2L | code 2L]\n\n- class B01(models.Model): ... [\"000Im00b\" full 9L | code 9L]\n  - class Meta: ... [\"000Im00a\" full 4L | code 4L]\n\n- class C01(models.Model): ... [\"000Im00h\" full 7L | code 7L]\n  - class Meta: ... [\"000Im00g\" full 2L | code 2L]\n\n- class A02(models.Model): ... [\"000Im00m\" full 6L | code 6L]\n  - class Meta: ... [\"000Im00l\" full 3L | code 3L]\n\n- class B02(models.Model): ... [\"000Im00t\" full 8L | code 8L]\n  - class Meta: ... [\"000Im00p\" full 3L | code 3L]\n\n- class C02(models.Model): ... [\"000Im00A\" full 8L | code 8L]\n  - class Meta: ... [\"000Im00z\" full 3L | code 3L]\n\n- class Intermediate(models.Model): ... [\"000Im00G\" full 7L | code 7L]\n  - class Meta: ... [\"000Im00F\" full 3L | code 3L]\n\n- class Proxy1(models.Model): ... [\"000Im00J\" full 3L | code 3L]\n  - class Meta: ... [\"000Im00I\" full 2L | code 2L]\n\n- class Proxy2(models.Model): ... [\"000Im00M\" full 3L | code 3L]\n  - class Meta: ... [\"000Im00L\" full 2L | code 2L]\n\n- class Unmanaged1(models.Model): ... [\"000Im00Q\" full 4L | code 4L]\n  - class Meta: ... [\"000Im00P\" full 3L | code 3L]\n\n- class Unmanaged2(models.Model): ... [\"000Im00V\" full 6L | code 6L]\n  - class Meta: ... [\"000Im00U\" full 3L | code 3L]\n\n- class Managed1(models.Model): ... [\"000Im00X\" full 2L | code 2L]\n\n# tests/unmanaged_models/tests.py (62L)\nfile scope: [\"000In00e\" full 62L | imports 7L]\n\n- class SimpleTests(TestCase): ... [\"000In006\" full 33L | code 33L]\n  - def test_simple(self): ... [\"000In005\" full 32L | code 32L]\n\n- class ManyToManyUnmanagedTests(TestCase): ... [\"000In00d\" full 20L | code 20L]\n  - def test_many_to_many_between_unmanaged(self): ... [\"000In009\" full 10L | code 10L]\n  - def test_many_to_many_between_unmanaged_and_managed(self): ... [\"000In00c\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

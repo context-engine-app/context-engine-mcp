@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/template_tests/templatetags/tag_27584.py",
+        "tests/template_tests/templatetags/testtags.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/template_tests/templatetags/tag_27584.py (16L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from django import template\n 2|\n 3|register = template.Library()\n 4|\n 5|\n 6|@register.tag\n 7|def badtag(parser, token):\n 8|    parser.parse((\"endbadtag\",))\n 9|    parser.delete_first_token()\n10|    return BadNode()\n11|\n12|\n13|class BadNode(template.Node):\n14|    def render(self, context):\n15|        raise template.TemplateSyntaxError(\"error\")\nnote: EOF\n\n# tests/template_tests/templatetags/testtags.py (25L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from django.template import Library, Node\n 2|\n 3|register = Library()\n 4|\n 5|\n 6|class EchoNode(Node):\n 7|    def __init__(self, contents):\n 8|        self.contents = contents\n 9|\n10|    def render(self, context):\n11|        return \" \".join(self.contents)\n12|\n13|\n14|@register.tag\n15|def echo(parser, token):\n16|    return EchoNode(token.contents.split()[1:])\n17|\n18|\n19|register.tag(\"other_echo\", echo)\n20|\n21|\n22|@register.filter\n23|def upper(value):\n24|    return value.upper()\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

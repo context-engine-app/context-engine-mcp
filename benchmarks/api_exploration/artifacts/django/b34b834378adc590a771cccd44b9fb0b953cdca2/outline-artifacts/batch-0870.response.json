@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/version/__init__.py",
+        "tests/version/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/version/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/version/tests.py (63L)\nfile scope: [\"000KF00e\" full 63L | imports 13L]\n\n- class VersionTests(SimpleTestCase): ... [\"000KF00d\" full 50L | code 50L]\n  - def test_development(self): ... [\"000KF002\" full 7L | code 7L]\n  - @skipUnless( hasattr(django.utils.version, \"__file__\"), \"test_development() checks the same when __file__ is already missing, \" \"e.g. in a frozen environments\", ) def test_development_no_file(self): ... [\"000KF004\" full 13L | code 13L]\n  - def test_releases(self): ... [\"000KF008\" full 11L | code 11L]\n  - def test_get_version_tuple(self): ... [\"000KF009\" full 4L | code 4L]\n  - def test_get_version_invalid_version(self): ... [\"000KF00c\" full 10L | code 10L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

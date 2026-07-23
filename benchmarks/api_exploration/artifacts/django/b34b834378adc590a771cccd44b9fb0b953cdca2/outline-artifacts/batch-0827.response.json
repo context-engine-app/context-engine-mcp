@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/test_runner_apps/sample/tests/__init__.py",
+        "tests/test_runner_apps/sample/tests/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/test_runner_apps/sample/tests/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/test_runner_apps/sample/tests/tests.py (7L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from unittest import TestCase\n2|\n3|\n4|class Test(TestCase):\n5|    def test_sample(self):\n6|        pass\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

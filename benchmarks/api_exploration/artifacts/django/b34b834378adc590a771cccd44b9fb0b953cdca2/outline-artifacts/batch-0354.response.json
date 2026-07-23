@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/auth_tests/urls_admin.py",
+        "tests/auth_tests/urls_custom_user_admin.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.1 KB -> 634 B (45% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/auth_tests/urls_admin.py (19L)\nfile scope: [\"000ix001\" full 19L | imports 12L]\n\n\n# tests/auth_tests/urls_custom_user_admin.py (24L)\nfile scope: [\"000iy008\" full 24L | imports 16L]\n\n- class CustomUserAdmin(UserAdmin): ... [\"000iy006\" full 8L | code 8L]\n  - def log_change(self, request, obj, message): ... [\"000iy005\" full 7L | code 7L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

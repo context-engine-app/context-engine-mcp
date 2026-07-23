@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/scheduler/lock.rs",
+        "tokio/src/runtime/scheduler/mod.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tokio/src/runtime/scheduler/lock.rs (7L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|/// A lock (mutex) yielding generic data.\n2|pub(crate) trait Lock<T> {\n3|    type Handle: AsMut<T>;\n4|\n5|    fn lock(self) -> Self::Handle;\n6|}\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/scheduler/mod.rs (325L)\nfile scope: [\"0007f00a\" full 325L | imports 32L]\n\n- pub(super) mod util; [\"0007f000\" full 1L | code 1L]\n\n- #[derive(Debug, Clone)] pub(crate) enum Handle { ... } [\"0007f004\" full 14L | code 14L]\n  - #[cfg(feature = \"rt\")] CurrentThread(Arc<current_thread::Handle>) [\"0007f001\" full 2L | code 2L]\n  - #[cfg(feature = \"rt-multi-thread\")] MultiThread(Arc<multi_thread::Handle>) [\"0007f002\" full 2L | code 2L]\n  - #[cfg(not(feature = \"rt\"))] #[allow(dead_code)] Disabled [\"0007f003\" full 5L | code 3L | docs 2L]\n\n- #[cfg(feature = \"rt\")] pub(super) enum Context { ... } [\"0007f007\" full 7L | code 7L]\n  - CurrentThread(current_thread::Context) [\"0007f005\" full 1L | code 1L]\n  - #[cfg(feature = \"rt-multi-thread\")] MultiThread(multi_thread::Context) [\"0007f006\" full 2L | code 2L]\n\n- impl Handle { ... } [\"0007f009\" full 15L | code 15L]\n  - #[cfg_attr(not(feature = \"full\"), allow(dead_code))] pub(crate) fn driver(&self) -> &driver::Handle { ... } [\"0007f008\" full 13L | code 13L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

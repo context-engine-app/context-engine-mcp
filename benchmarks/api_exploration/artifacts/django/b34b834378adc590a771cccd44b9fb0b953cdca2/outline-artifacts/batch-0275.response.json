@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/views/defaults.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 4.6 KB -> 1.2 KB (74% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/views/defaults.py (151L)\nfile scope: [\"000ev00t\" full 151L | imports 39L]\n\n- ERROR_404_TEMPLATE_NAME [\"000ev000\" full 1L | code 1L]\n\n- ERROR_403_TEMPLATE_NAME [\"000ev001\" full 1L | code 1L]\n\n- ERROR_400_TEMPLATE_NAME [\"000ev002\" full 1L | code 1L]\n\n- ERROR_500_TEMPLATE_NAME [\"000ev003\" full 1L | code 1L]\n\n- ERROR_PAGE_TEMPLATE [\"000ev004\" full 1L | code 1L]\n\n- @requires_csrf_token def page_not_found(request, exception, template_name=ERROR_404_TEMPLATE_NAME): ... [\"000ev00d\" full 46L | code 46L]\n\n- @requires_csrf_token def server_error(request, template_name=ERROR_500_TEMPLATE_NAME): ... [\"000ev00h\" full 18L | code 18L]\n\n- @requires_csrf_token def bad_request(request, exception, template_name=ERROR_400_TEMPLATE_NAME): ... [\"000ev00n\" full 21L | code 21L]\n\n- @requires_csrf_token def permission_denied(request, exception, template_name=ERROR_403_TEMPLATE_NAME): ... [\"000ev00s\" full 26L | code 26L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

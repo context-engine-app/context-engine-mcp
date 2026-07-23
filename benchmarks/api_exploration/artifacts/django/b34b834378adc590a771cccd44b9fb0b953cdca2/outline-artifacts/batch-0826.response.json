@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/test_runner_apps/sample/__init__.py",
+        "tests/test_runner_apps/sample/doctests.py",
+        "tests/test_runner_apps/sample/empty.py",
+        "tests/test_runner_apps/sample/pattern_tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/test_runner_apps/sample/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/test_runner_apps/sample/doctests.py (48L)\nfile scope: [\"000HN004\" full 48L | imports 7L]\n\n- def factorial(n): ... [\"000HN003\" full 41L | code 41L]\n\n# tests/test_runner_apps/sample/empty.py (1L)\nfile scope: [\"000HO000\" full 1L]\n\n\n# tests/test_runner_apps/sample/pattern_tests.py (7L)\nfile scope: [\"000HP002\" full 7L | imports 4L]\n\n- class Test(TestCase): ... [\"000HP001\" full 3L | code 3L]\n  - def test_sample(self): ... [\"000HP000\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

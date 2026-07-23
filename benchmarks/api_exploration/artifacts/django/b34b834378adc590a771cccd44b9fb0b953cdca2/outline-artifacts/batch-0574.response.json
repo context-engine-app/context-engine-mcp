@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/messages_tests/test_session.py",
+        "tests/messages_tests/tests.py",
+        "tests/messages_tests/urls.py",
+        "tests/messages_tests/utils.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 12.8 KB -> 3.5 KB (73% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/messages_tests/test_session.py (64L)\nfile scope: [\"000uB00m\" full 64L | imports 11L]\n\n- def set_session_data(storage, messages): ... [\"000uB002\" full 8L | code 8L]\n\n- def stored_session_messages_count(storage): ... [\"000uB005\" full 5L | code 5L]\n\n- class SessionTests(BaseTests, TestCase): ... [\"000uB00l\" full 36L | code 36L]\n  - def get_request(self): ... [\"000uB008\" full 5L | code 5L]\n  - def stored_messages_count(self, storage, response): ... [\"000uB00c\" full 2L | code 2L]\n  - def test_no_session(self): ... [\"000uB00e\" full 8L | code 8L]\n  - def test_get(self): ... [\"000uB00h\" full 5L | code 5L]\n  - def test_safedata(self): ... [\"000uB00k\" full 9L | code 9L]\n\n# tests/messages_tests/tests.py (204L)\nfile scope: [\"000uC00J\" full 204L | imports 16L]\n\n- class MessageTests(SimpleTestCase): ... [\"000uC00b\" full 39L | code 39L]\n  - def test_eq(self): ... [\"000uC003\" full 9L | code 9L]\n  - @override_settings( MESSAGE_TAGS={ constants.WARNING: \"caution\", constants.ERROR: \"\", 12: \"custom\", } ) def test_repr(self): ... [\"000uC00a\" full 28L | code 28L]\n\n- class TestLevelTags(SimpleTestCase): ... [\"000uC00k\" full 38L | code 38L]\n  - @override_settings(MESSAGE_TAGS=message_tags) def test_override_settings_level_tags(self): ... [\"000uC00d\" full 3L | code 3L]\n  - def test_lazy(self): ... [\"000uC00i\" full 17L | code 17L]\n  - @override_settings(MESSAGE_TAGS=message_tags) def test_override_settings_lazy(self): ... [\"000uC00j\" full 6L | code 6L]\n\n- class FakeResponse: ... [\"000uC00o\" full 5L | code 5L]\n  - def __init__(self): ... [\"000uC00m\" full 4L | code 4L]\n\n- class AssertMessagesTest(MessagesTestMixin, SimpleTestCase): ... [\"000uC00I\" full 100L | code 100L]\n  - def test_assertion(self): ... [\"000uC00q\" full 17L | code 17L]\n  - def test_with_tags(self): ... [\"000uC00s\" full 35L | code 35L]\n  - @override_settings(MESSAGE_TAGS={42: \"CUSTOM\"}) def test_custom_levelname(self): ... [\"000uC00u\" full 5L | code 5L]\n  - def test_ordered(self): ... [\"000uC00x\" full 11L | code 11L]\n  - def test_mismatching_length(self): ... [\"000uC00A\" full 13L | code 13L]\n  - def test_method_frames_ignored_by_unittest(self): ... [\"000uC00H\" full 13L | code 13L]\n\n# tests/messages_tests/urls.py (92L)\nfile scope: [\"000uD00s\" full 92L | imports 26L]\n\n- TEMPLATE [\"000uD000\" full 1L | code 1L]\n\n- @never_cache def add(request, message_type): ... [\"000uD005\" full 11L | code 11L]\n\n- @never_cache def add_template_response(request, message_type): ... [\"000uD009\" full 5L | code 5L]\n\n- @never_cache def show(request): ... [\"000uD00c\" full 4L | code 4L]\n\n- @never_cache def show_template_response(request): ... [\"000uD00f\" full 4L | code 4L]\n\n- class ContactForm(forms.Form): ... [\"000uD00i\" full 3L | code 3L]\n\n- class ContactFormViewWithMsg(SuccessMessageMixin, FormView): ... [\"000uD00m\" full 4L | code 4L]\n\n- class DeleteFormViewWithMsg(SuccessMessageMixin, DeleteView): ... [\"000uD00q\" full 4L | code 4L]\n\n# tests/messages_tests/utils.py (15L)\nfile scope: [\"000uE008\" full 15L | imports 4L]\n\n- class DummyStorage: ... [\"000uE007\" full 11L | code 11L]\n  - def __init__(self): ... [\"000uE000\" full 2L | code 2L]\n  - def add(self, level, message, extra_tags=\"\"): ... [\"000uE005\" full 2L | code 2L]\n  - def __iter__(self): ... [\"000uE006\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

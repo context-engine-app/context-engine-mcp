@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "prompt/toggle.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 4.4 KB -> 3.0 KB (34% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# prompt/toggle.ts (167L)\nfile scope: [\"0005n00A\" full 167L | imports 31L]\n\n- export interface ToggleOptions extends GenericPromptOptions<boolean, string> { ... } [\"0005n003\" full 8L | code 8L]\n  - keys?: ToggleKeys; [\"0005n000\" full 1L | code 1L]\n  - active?: string; [\"0005n001\" full 1L | code 1L]\n  - inactive?: string; [\"0005n002\" full 1L | code 1L]\n\n- interface ToggleSettings extends GenericPromptSettings<boolean, string> { ... } [\"0005n007\" full 5L | code 5L]\n  - keys: ToggleKeys; [\"0005n004\" full 1L | code 1L]\n  - active: string; [\"0005n005\" full 1L | code 1L]\n  - inactive: string; [\"0005n006\" full 1L | code 1L]\n\n- export interface ToggleKeys extends GenericPromptKeys { ... } [\"0005n00a\" full 6L | code 6L]\n  - active?: string[]; [\"0005n008\" full 1L | code 1L]\n  - inactive?: string[]; [\"0005n009\" full 1L | code 1L]\n\n- export class Toggle extends GenericPrompt<boolean, string> { ... } [\"0005n00z\" full 123L | code 123L]\n  - protected readonly settings: ToggleSettings; [\"0005n00b\" full 1L | code 1L]\n  - protected status: string; [\"0005n00c\" full 1L | code 1L]\n  - public static prompt( options: string | ToggleOptions, ): Promise<boolean> { ... } [\"0005n00d\" full 5L | code 5L]\n  - constructor [\"0005n00f\" full 10L | code 10L]\n    - message: options [\"0005n00e\" full 1L | code 1L]\n  - public override getDefaultSettings(options: ToggleOptions): ToggleSettings { ... } [\"0005n00o\" full 13L | code 13L]\n    - ...settings [\"0005n00h\" full 1L | code 1L]\n    - active: options.active || \"Yes\" [\"0005n00i\" full 1L | code 1L]\n    - inactive: options.inactive || \"No\" [\"0005n00j\" full 1L | code 1L]\n    - keys: { active: [\"right\", \"y\", \"j\", \"s\", \"o\"], inactive: [\"left\", \"n\"], ...(settings.keys ?? {}), } [\"0005n00n\" full 5L | code 5L]\n      - active: [\"right\", \"y\", \"j\", \"s\", \"o\"] [\"0005n00k\" full 1L | code 1L]\n      - inactive: [\"left\", \"n\"] [\"0005n00l\" full 1L | code 1L]\n      - ...(settings.keys ?? {}) [\"0005n00m\" full 1L | code 1L]\n  - protected override message(): string { ... } [\"0005n00q\" full 15L | code 15L]\n  - protected override read(): Promise<boolean> { ... } [\"0005n00r\" full 4L | code 4L]\n  - protected override async handleEvent(event: KeyCode): Promise<void> { ... } [\"0005n00s\" full 14L | code 14L]\n  - protected selectActive(): void { ... } [\"0005n00t\" full 3L | code 3L]\n  - protected selectInactive(): void { ... } [\"0005n00u\" full 3L | code 3L]\n  - protected validate(value: string): boolean | string { ... } [\"0005n00v\" full 3L | code 3L]\n  - protected transform(value: string): boolean | undefined { ... } [\"0005n00w\" full 8L | code 8L]\n  - protected format(value: boolean): string { ... } [\"0005n00x\" full 3L | code 3L]\n  - protected getValue(): string { ... } [\"0005n00y\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

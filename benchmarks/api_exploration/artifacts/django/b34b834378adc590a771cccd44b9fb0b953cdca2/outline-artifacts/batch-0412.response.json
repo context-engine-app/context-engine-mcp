@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/datetimes/__init__.py",
+        "tests/datetimes/models.py",
+        "tests/datetimes/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/datetimes/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/datetimes/models.py (27L)\nfile scope: [\"000lI00e\" full 27L | imports 4L]\n\n- class Article(models.Model): ... [\"000lI005\" full 9L | code 9L]\n  - def __str__(self): ... [\"000lI004\" full 2L | code 2L]\n\n- class Comment(models.Model): ... [\"000lI00b\" full 8L | code 8L]\n  - def __str__(self): ... [\"000lI00a\" full 2L | code 2L]\n\n- class Category(models.Model): ... [\"000lI00d\" full 2L | code 2L]\n\n# tests/datetimes/tests.py (202L)\nfile scope: [\"000lJ00q\" full 202L | imports 9L]\n\n- class DateTimesTests(TestCase): ... [\"000lJ00p\" full 193L | code 193L]\n  - def test_related_model_traverse(self): ... [\"000lJ004\" full 80L | code 80L]\n  - @override_settings(USE_TZ=True) def test_21432(self): ... [\"000lJ007\" full 6L | code 6L]\n  - def test_datetimes_returns_available_dates_for_given_scope_and_given_field(self): ... [\"000lJ00b\" full 49L | code 49L]\n  - def test_datetimes_has_lazy_iterator(self): ... [\"000lJ00i\" full 29L | code 29L]\n  - def test_datetimes_disallows_date_fields(self): ... [\"000lJ00k\" full 11L | code 11L]\n  - def test_datetimes_fails_when_given_invalid_kind_argument(self): ... [\"000lJ00m\" full 7L | code 7L]\n  - def test_datetimes_fails_when_given_invalid_order_argument(self): ... [\"000lJ00o\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/prompt/secret_hidden.ts",
+        "examples/prompt/select.ts",
+        "examples/prompt/suggestions.ts",
+        "examples/prompt/suggestions_list.ts",
+        "examples/prompt/suggestions_list_prompt.ts",
+        "examples/prompt/toggle.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# examples/prompt/secret_hidden.ts (11L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|#!/usr/bin/env -S deno run\n 2|\n 3|import { Secret } from \"@cliffy/prompt/secret\";\n 4|\n 5|const password: string = await Secret.prompt({\n 6|  message: \"Enter your password\",\n 7|  hidden: true,\n 8|});\n 9|\n10|console.log({ password });\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/prompt/select.ts (71L)\nfile scope: [\"0003n00l\" full 71L | imports 8L]\n\n- title [\"0003n00k\" full 1L | code 1L]\n\n# examples/prompt/suggestions.ts (14L)\nfile scope: [\"0003o005\" full 14L | imports 12L]\n\n- color [\"0003o004\" full 1L | code 1L]\n\n# examples/prompt/suggestions_list.ts (16L)\nfile scope: [\"0003p007\" full 16L | imports 12L]\n\n- color [\"0003p006\" full 1L | code 1L]\n\n# examples/prompt/suggestions_list_prompt.ts (14L)\nfile scope: [\"0003q005\" full 14L | imports 12L]\n\n- color [\"0003q004\" full 1L | code 1L]\n\n# examples/prompt/toggle.ts (8L)\nfile scope: [\"0003r002\" full 8L | imports 8L]\n\n- confirmed [\"0003r001\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/gis/sitemaps/__init__.py",
+        "django/contrib/gis/sitemaps/kml.py",
+        "django/contrib/gis/sitemaps/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/gis/sitemaps/__init__.py (5L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|# Geo-enabled Sitemap classes.\n2|from django.contrib.gis.sitemaps.kml import KMLSitemap, KMZSitemap\n3|\n4|__all__ = [\"KMLSitemap\", \"KMZSitemap\"]\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/gis/sitemaps/kml.py (79L)\nfile scope: [\"0006w00l\" full 79L | imports 8L]\n\n- class KMLSitemap(Sitemap): ... [\"0006w00i\" full 67L | code 67L]\n  - def __init__(self, locations=None): ... [\"0006w002\" full 4L | code 4L]\n  - def _build_kml_sources(self, sources): ... [\"0006w008\" full 32L | code 32L]\n  - def get_urls(self, page=1, site=None, protocol=None): ... [\"0006w00e\" full 9L | code 9L]\n  - def items(self): ... [\"0006w00f\" full 2L | code 2L]\n  - def location(self, obj): ... [\"0006w00h\" full 9L | code 9L]\n\n- class KMZSitemap(KMLSitemap): ... [\"0006w00k\" full 2L | code 2L]\n\n# django/contrib/gis/sitemaps/views.py (66L)\nfile scope: [\"0006x00k\" full 66L | imports 10L]\n\n- def kml(request, label, model, field_name=None, compress=False, using=DEFAULT_DB_ALIAS): ... [\"0006x00d\" full 49L | code 49L]\n\n- def kmz(request, label, model, field_name=None, using=DEFAULT_DB_ALIAS): ... [\"0006x00j\" full 5L | code 5L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

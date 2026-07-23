@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/tests/signal_twice.rs",
+        "tokio/tests/signal_usr1.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 965 B -> 825 B (15% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/tests/signal_twice.rs (24L)\nfile scope: [\"000bG003\" full 24L | imports 12L]\n\n- mod support { ... } [\"000bG001\" full 3L | code 3L]\n  - pub mod signal; [\"000bG000\" full 1L | code 1L]\n\n- #[tokio::test] async fn twice() { ... } [\"000bG002\" full 11L | code 11L]\n\n# tokio/tests/signal_usr1.rs (25L)\nfile scope: [\"000bH003\" full 25L | imports 13L]\n\n- mod support { ... } [\"000bH001\" full 3L | code 3L]\n  - pub mod signal; [\"000bH000\" full 1L | code 1L]\n\n- #[tokio::test] async fn signal_usr1() { ... } [\"000bH002\" full 11L | code 11L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

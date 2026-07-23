@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/contenttypes_tests/__init__.py",
+        "tests/contenttypes_tests/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/contenttypes_tests/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/contenttypes_tests/models.py (123L)\nfile scope: [\"000kV00T\" full 123L | imports 10L]\n\n- class Site(models.Model): ... [\"000kV002\" full 3L | code 3L]\n\n- class Author(models.Model): ... [\"000kV005\" full 5L | code 5L]\n  - def get_absolute_url(self): ... [\"000kV004\" full 2L | code 2L]\n\n- class Article(models.Model): ... [\"000kV00a\" full 5L | code 5L]\n\n- class SchemeIncludedURL(models.Model): ... [\"000kV00d\" full 5L | code 5L]\n  - def get_absolute_url(self): ... [\"000kV00c\" full 2L | code 2L]\n\n- class ConcreteModel(models.Model): ... [\"000kV00f\" full 2L | code 2L]\n\n- class ProxyModel(ConcreteModel): ... [\"000kV00i\" full 3L | code 3L]\n  - class Meta: ... [\"000kV00h\" full 2L | code 2L]\n\n- class FooWithoutUrl(models.Model): ... [\"000kV00k\" full 7L | code 7L]\n\n- class FooWithUrl(FooWithoutUrl): ... [\"000kV00m\" full 8L | code 8L]\n  - def get_absolute_url(self): ... [\"000kV00l\" full 2L | code 2L]\n\n- class FooWithBrokenAbsoluteUrl(FooWithoutUrl): ... [\"000kV00o\" full 7L | code 7L]\n  - def get_absolute_url(self): ... [\"000kV00n\" full 2L | code 2L]\n\n- class Question(models.Model): ... [\"000kV00r\" full 3L | code 3L]\n\n- class Answer(models.Model): ... [\"000kV00y\" full 8L | code 8L]\n  - class Meta: ... [\"000kV00x\" full 2L | code 2L]\n\n- class Post(models.Model): ... [\"000kV00G\" full 11L | code 11L]\n  - class Meta: ... [\"000kV00F\" full 2L | code 2L]\n\n- class ModelWithNullFKToSite(models.Model): ... [\"000kV00L\" full 7L | code 7L]\n  - def get_absolute_url(self): ... [\"000kV00K\" full 2L | code 2L]\n\n- class ModelWithM2MToSite(models.Model): ... [\"000kV00P\" full 6L | code 6L]\n  - def get_absolute_url(self): ... [\"000kV00O\" full 2L | code 2L]\n\n- class UUIDModel(models.Model): ... [\"000kV00S\" full 5L | code 5L]\n  - def get_absolute_url(self): ... [\"000kV00R\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

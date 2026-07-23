@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/get_earliest_or_latest/__init__.py",
+        "tests/get_earliest_or_latest/models.py",
+        "tests/get_earliest_or_latest/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/get_earliest_or_latest/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/get_earliest_or_latest/models.py (47L)\nfile scope: [\"000qJ00l\" full 47L | imports 16L]\n\n- class Article(models.Model): ... [\"000qJ005\" full 7L | code 7L]\n  - class Meta: ... [\"000qJ004\" full 2L | code 2L]\n\n- class Person( ... ): name = models.CharField(max_length=30) birthday = models.DateField() [\"000qJ008\" full 3L | code 3L]\n\n- class Comment(models.Model): ... [\"000qJ00b\" full 3L | code 3L]\n\n- class OrderedArticle(models.Model): ... [\"000qJ00g\" full 6L | code 6L]\n  - class Meta: ... [\"000qJ00f\" full 2L | code 2L]\n\n- class IndexErrorQuerySet(models.QuerySet): ... [\"000qJ00i\" full 8L | code 8L]\n  - def __iter__(self): ... [\"000qJ00h\" full 2L | code 2L]\n\n- class IndexErrorArticle(Article): ... [\"000qJ00k\" full 2L | code 2L]\n\n# tests/get_earliest_or_latest/tests.py (296L)\nfile scope: [\"000qK00E\" full 296L | imports 10L]\n\n- class EarliestOrLatestTests(TestCase): ... [\"000qK00k\" full 188L | code 188L]\n  - @classmethod def setUpClass(cls): ... [\"000qK000\" full 4L | code 4L]\n  - def tearDown(self): ... [\"000qK002\" full 2L | code 2L]\n  - def test_earliest(self): ... [\"000qK007\" full 77L | code 77L]\n  - def test_earliest_sliced_queryset(self): ... [\"000qK009\" full 4L | code 4L]\n  - def test_latest(self): ... [\"000qK00e\" full 76L | code 76L]\n  - def test_latest_sliced_queryset(self): ... [\"000qK00g\" full 4L | code 4L]\n  - def test_latest_manual(self): ... [\"000qK00j\" full 12L | code 12L]\n\n- class TestFirstLast(TestCase): ... [\"000qK00D\" full 96L | code 96L]\n  - def test_first(self): ... [\"000qK00n\" full 11L | code 11L]\n  - def test_last(self): ... [\"000qK00q\" full 12L | code 12L]\n  - def test_index_error_not_suppressed(self): ... [\"000qK00s\" full 25L | code 25L]\n    - def check(): ... [\"000qK00r\" full 9L | code 9L]\n  - def test_first_last_unordered_qs_aggregation_error(self): ... [\"000qK00w\" full 17L | code 17L]\n  - def test_first_last_empty_order_by_has_no_pk_ordering(self): ... [\"000qK00z\" full 13L | code 13L]\n  - def test_first_last_empty_order_by_clears_default_ordering(self): ... [\"000qK00C\" full 12L | code 12L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

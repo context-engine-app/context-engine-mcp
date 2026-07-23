@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/gis/geos/prototypes/threadsafe.py",
+        "django/contrib/gis/geos/prototypes/topology.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 4.5 KB -> 1.4 KB (69% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/gis/geos/prototypes/threadsafe.py (78L)\nfile scope: [\"0006k00s\" full 78L | imports 17L]\n\n- class GEOSContextHandle(GEOSBase): ... [\"0006k004\" full 10L | code 10L]\n  - def __init__(self): ... [\"0006k002\" full 4L | code 4L]\n\n- class GEOSContext(threading.local): ... [\"0006k006\" full 2L | code 2L]\n\n- class GEOSFunc: ... [\"0006k00r\" full 50L | code 50L]\n  - def __init__(self, func_name): ... [\"0006k009\" full 7L | code 7L]\n  - def __call__(self, *args): ... [\"0006k00d\" full 6L | code 6L]\n  - def __str__(self): ... [\"0006k00e\" full 2L | code 2L]\n  - def _get_argtypes(self): ... [\"0006k00f\" full 2L | code 2L]\n  - def _set_argtypes(self, argtypes): ... [\"0006k00h\" full 2L | code 2L]\n  - def _get_restype(self): ... [\"0006k00j\" full 2L | code 2L]\n  - def _set_restype(self, restype): ... [\"0006k00l\" full 2L | code 2L]\n  - def _get_errcheck(self): ... [\"0006k00n\" full 2L | code 2L]\n  - def _set_errcheck(self, errcheck): ... [\"0006k00p\" full 2L | code 2L]\n\n# django/contrib/gis/geos/prototypes/topology.py (75L)\nfile scope: [\"0006l00o\" full 75L | imports 87L]\n\n- class Topology(GEOSFuncFactory): ... [\"0006l003\" full 6L | code 6L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

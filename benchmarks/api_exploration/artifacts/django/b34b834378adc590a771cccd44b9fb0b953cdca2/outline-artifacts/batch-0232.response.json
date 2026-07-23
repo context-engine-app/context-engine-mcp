@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/db/backends/utils.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 10.9 KB -> 2.4 KB (78% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/db/backends/utils.py (343L)\nfile scope: [\"000b501M\" full 343L | imports 40L]\n\n- class CursorWrapper: ... [\"000b500G\" full 98L | code 98L]\n  - def __init__(self, cursor, db): ... [\"000b5003\" full 3L | code 3L]\n  - def __getattr__(self, attr): ... [\"000b500a\" full 6L | code 6L]\n  - def __iter__(self): ... [\"000b500b\" full 3L | code 3L]\n  - def __enter__(self): ... [\"000b500c\" full 2L | code 2L]\n  - def __exit__(self, type, value, traceback): ... [\"000b500g\" full 8L | code 8L]\n  - def callproc(self, procname, params=None, kparams=None): ... [\"000b500k\" full 21L | code 21L]\n  - def execute(self, sql, params=None): ... [\"000b500n\" full 4L | code 4L]\n  - def executemany(self, sql, param_list): ... [\"000b500q\" full 4L | code 4L]\n  - def _execute_with_wrappers(self, sql, params, many, executor): ... [\"000b500x\" full 5L | code 5L]\n  - def _execute(self, sql, params, *ignored_wrapper_args): ... [\"000b500B\" full 12L | code 12L]\n  - def _executemany(self, sql, param_list, *ignored_wrapper_args): ... [\"000b500F\" full 8L | code 8L]\n\n- class CursorDebugWrapper(CursorWrapper): ... [\"000b500W\" full 47L | code 47L]\n  - def execute(self, sql, params=None): ... [\"000b500J\" full 3L | code 3L]\n  - def executemany(self, sql, param_list): ... [\"000b500M\" full 3L | code 3L]\n  - @contextmanager def debug_sql( self, sql=None, params=None, use_last_executed_query=False, many=False ): ... [\"000b500V\" full 36L | code 36L]\n\n- @contextmanager def debug_transaction(connection, sql): ... [\"000b5012\" full 27L | code 27L]\n\n- def split_tzname_delta(tzname): ... [\"000b5017\" full 12L | code 12L]\n\n- def typecast_date(s): ... [\"000b5019\" full 4L | code 4L]\n\n- def typecast_time(s): ... [\"000b501f\" full 11L | code 11L]\n\n- def typecast_timestamp(s): ... [\"000b501n\" full 29L | code 29L]\n\n- def split_identifier(identifier): ... [\"000b501r\" full 12L | code 12L]\n\n- def truncate_name(identifier, length=None, hash_len=4): ... [\"000b501y\" full 19L | code 19L]\n\n- def names_digest(*args, length): ... [\"000b501D\" full 9L | code 9L]\n\n- def format_number(value, max_digits, decimal_places): ... [\"000b501I\" full 18L | code 18L]\n\n- def strip_quotes(table_name): ... [\"000b501L\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

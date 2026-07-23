@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/sessions/models.py",
+        "django/contrib/sessions/serializers.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.3 KB -> 792 B (42% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/sessions/models.py (36L)\nfile scope: [\"0007N007\" full 36L | imports 4L]\n\n- class SessionManager(BaseSessionManager): ... [\"0007N001\" full 2L | code 2L]\n\n- class Session(AbstractBaseSession): ... [\"0007N006\" full 28L | code 28L]\n  - @classmethod def get_session_store_class(cls): ... [\"0007N003\" full 5L | code 5L]\n  - class Meta(AbstractBaseSession.Meta): ... [\"0007N005\" full 2L | code 2L]\n\n# django/contrib/sessions/serializers.py (4L)\nfile scope: [\"0007O001\" full 4L | imports 3L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

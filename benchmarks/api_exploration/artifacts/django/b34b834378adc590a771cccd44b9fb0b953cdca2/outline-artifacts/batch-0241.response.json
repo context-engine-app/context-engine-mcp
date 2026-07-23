@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/db/models/functions/window.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.8 KB -> 1.5 KB (45% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/db/models/functions/window.py (121L)\nfile scope: [\"000bS00X\" full 121L | imports 20L]\n\n- class CumeDist(Func): ... [\"000bS004\" full 4L | code 4L]\n\n- class DenseRank(Func): ... [\"000bS008\" full 4L | code 4L]\n\n- class FirstValue(Func): ... [\"000bS00c\" full 4L | code 4L]\n\n- class LagLeadFunction(Func): ... [\"000bS00m\" full 21L | code 21L]\n  - def __init__(self, expression, offset=1, default=None, **extra): ... [\"000bS00j\" full 14L | code 14L]\n  - def _resolve_output_field(self): ... [\"000bS00l\" full 3L | code 3L]\n\n- class Lag(LagLeadFunction): ... [\"000bS00o\" full 2L | code 2L]\n\n- class LastValue(Func): ... [\"000bS00s\" full 4L | code 4L]\n\n- class Lead(LagLeadFunction): ... [\"000bS00u\" full 2L | code 2L]\n\n- class NthValue(Func): ... [\"000bS00D\" full 18L | code 18L]\n  - def __init__(self, expression, nth=1, **extra): ... [\"000bS00A\" full 10L | code 10L]\n  - def _resolve_output_field(self): ... [\"000bS00C\" full 3L | code 3L]\n\n- class Ntile(Func): ... [\"000bS00K\" full 9L | code 9L]\n  - def __init__(self, num_buckets=1, **extra): ... [\"000bS00J\" full 4L | code 4L]\n\n- class PercentRank(Func): ... [\"000bS00O\" full 4L | code 4L]\n\n- class Rank(Func): ... [\"000bS00S\" full 4L | code 4L]\n\n- class RowNumber(Func): ... [\"000bS00W\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

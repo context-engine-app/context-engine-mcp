@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/from_db_value/__init__.py",
+        "tests/from_db_value/models.py",
+        "tests/from_db_value/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/from_db_value/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/from_db_value/models.py (24L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|import decimal\n 2|\n 3|from django.db import models\n 4|\n 5|\n 6|class Cash(decimal.Decimal):\n 7|    currency = \"USD\"\n 8|\n 9|\n10|class CashField(models.DecimalField):\n11|    def __init__(self, **kwargs):\n12|        kwargs[\"max_digits\"] = 20\n13|        kwargs[\"decimal_places\"] = 2\n14|        super().__init__(**kwargs)\n15|\n16|    def from_db_value(self, value, expression, connection):\n17|        cash = Cash(value)\n18|        cash.vendor = connection.vendor\n19|        return cash\n20|\n21|\n22|class CashModel(models.Model):\n23|    cash = CashField()\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/from_db_value/tests.py (36L)\nfile scope: [\"000ql00e\" full 36L | imports 8L]\n\n- class FromDBValueTest(TestCase): ... [\"000ql00d\" full 28L | code 28L]\n  - @classmethod def setUpTestData(cls): ... [\"000ql000\" full 3L | code 3L]\n  - def test_simple_load(self): ... [\"000ql002\" full 3L | code 3L]\n  - def test_values_list(self): ... [\"000ql004\" full 3L | code 3L]\n  - def test_values(self): ... [\"000ql006\" full 3L | code 3L]\n  - def test_aggregation(self): ... [\"000ql008\" full 3L | code 3L]\n  - def test_defer(self): ... [\"000ql00a\" full 3L | code 3L]\n  - def test_connection(self): ... [\"000ql00c\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

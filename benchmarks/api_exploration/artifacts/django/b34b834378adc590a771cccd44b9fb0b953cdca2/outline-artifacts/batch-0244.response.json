@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/db/models/utils.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.5 KB -> 952 B (63% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/db/models/utils.py (82L)\nfile scope: [\"000c700n\" full 82L | imports 11L]\n\n- def make_model_tuple(model): ... [\"000c7004\" full 21L | code 21L]\n\n- def resolve_callables(mapping): ... [\"000c7008\" full 7L | code 7L]\n\n- def unpickle_named_row(names, values): ... [\"000c700b\" full 2L | code 2L]\n\n- @functools.lru_cache def create_namedtuple_class(*names): ... [\"000c700e\" full 12L | code 12L]\n  - def __reduce__(self): ... [\"000c700d\" full 2L | code 2L]\n\n- class AltersData: ... [\"000c700l\" full 15L | code 15L]\n  - def __init_subclass__(cls, **kwargs): ... [\"000c700k\" full 10L | code 10L]\n\n- def get_blank_choice_label(): ... [\"000c700m\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

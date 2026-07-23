@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/fixtures_model_package/models/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n 1|from django.db import models\n 2|\n 3|\n 4|class Article(models.Model):\n 5|    headline = models.CharField(max_length=100, default=\"Default headline\")\n 6|    pub_date = models.DateTimeField()\n 7|\n 8|    class Meta:\n 9|        app_label = \"fixtures_model_package\"\n10|        ordering = (\"-pub_date\", \"headline\")\n11|\n12|    def __str__(self):\n13|        return self.headline\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

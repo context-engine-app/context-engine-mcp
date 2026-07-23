@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/migrations_test_apps/migrated_unapplied_app/migrations/0001_initial.py",
+        "tests/migrations/migrations_test_apps/migrated_unapplied_app/migrations/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/migrations_test_apps/migrated_unapplied_app/migrations/0001_initial.py (17L)\nfile scope: [\"000vN002\" full 17L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000vN001\" full 13L | code 13L]\n\n# tests/migrations/migrations_test_apps/migrated_unapplied_app/migrations/__init__.py (1L)\nfile scope: [\"000vO000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}
