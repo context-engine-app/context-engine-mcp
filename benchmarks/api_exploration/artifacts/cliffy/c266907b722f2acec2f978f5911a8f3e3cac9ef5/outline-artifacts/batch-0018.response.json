@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "command/types/action_list.ts",
+        "command/types/boolean.ts",
+        "command/types/child_command.ts",
+        "command/types/command.ts",
+        "command/types/enum.ts",
+        "command/types/file.ts",
+        "command/types/integer.ts",
+        "command/types/number.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# command/types/action_list.ts (18L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|import type { Command } from \"../command.ts\";\n 2|import { StringType } from \"./string.ts\";\n 3|\n 4|/** Completion list type. */\n 5|export class ActionListType extends StringType {\n 6|  constructor(protected cmd: Command) {\n 7|    super();\n 8|  }\n 9|\n10|  /** Complete action names. */\n11|  public override complete(): string[] {\n12|    return this.cmd.getCompletions()\n13|      .map((type) => type.name)\n14|      // filter unique values\n15|      .filter((value, index, self) => self.indexOf(value) === index);\n16|  }\n17|}\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# command/types/boolean.ts (17L)\nfile scope: [\"0001n003\" full 17L | imports 6L]\n\n- export class BooleanType extends Type<boolean> { ... } [\"0001n002\" full 11L | code 11L]\n  - public parse(type: ArgumentValue): boolean { ... } [\"0001n000\" full 3L | code 3L]\n  - public override complete(): string[] { ... } [\"0001n001\" full 3L | code 3L]\n\n# command/types/child_command.ts (19L)\nfile scope: [\"0001o005\" full 19L | imports 5L]\n\n- export class ChildCommandType extends StringType { ... } [\"0001o004\" full 14L | code 14L]\n  - #cmd?: Command; [\"0001o000\" full 1L | code 1L]\n  - constructor [\"0001o001\" full 4L | code 4L]\n  - public override complete(cmd: Command): string[] { ... } [\"0001o003\" full 4L | code 4L]\n    - map() callback [\"0001o002\" full 1L | code 1L]\n\n# command/types/command.ts (12L)\nfile scope: [\"0001p003\" full 12L | imports 5L]\n\n- export class CommandType extends StringType { ... } [\"0001p002\" full 7L | code 7L]\n  - public override complete(_cmd: Command, parent?: Command): string[] { ... } [\"0001p001\" full 4L | code 4L]\n    - map() callback [\"0001p000\" full 1L | code 1L]\n\n# command/types/enum.ts (33L)\nfile scope: [\"0001q007\" full 33L | imports 6L]\n\n- export class EnumType<const TValue extends string | number | boolean> extends Type<TValue> { ... } [\"0001q006\" full 27L | code 27L]\n  - private readonly allowedValues: ReadonlyArray<TValue>; [\"0001q000\" full 1L | code 1L]\n  - constructor [\"0001q001\" full 4L | code 4L]\n  - public parse(type: ArgumentValue): TValue { ... } [\"0001q003\" full 9L | code 9L]\n  - public override values(): Array<TValue> { ... } [\"0001q004\" full 3L | code 3L]\n  - public override complete(): Array<TValue> { ... } [\"0001q005\" full 3L | code 3L]\n\n# command/types/file.ts (19L)\nfile scope: [\"0001r002\" full 19L | imports 10L]\n\n- export class FileType extends StringType { ... } [\"0001r001\" full 9L | code 9L]\n  - constructor [\"0001r000\" full 3L | code 3L]\n\n# command/types/integer.ts (12L)\nfile scope: [\"0001s002\" full 12L | imports 6L]\n\n- export class IntegerType extends Type<number> { ... } [\"0001s001\" full 6L | code 6L]\n  - public parse(type: ArgumentValue): number { ... } [\"0001s000\" full 3L | code 3L]\n\n# command/types/number.ts (12L)\nfile scope: [\"0001t002\" full 12L | imports 6L]\n\n- export class NumberType extends Type<number> { ... } [\"0001t001\" full 6L | code 6L]\n  - public parse(type: ArgumentValue): number { ... } [\"0001t000\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

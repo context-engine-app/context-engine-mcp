@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations2/__init__.py",
+        "tests/migrations2/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/migrations2/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/migrations2/models.py (2L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|# Required for migration detection (#22645)\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

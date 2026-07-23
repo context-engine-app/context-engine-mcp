@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/staticfiles_tests/apps/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

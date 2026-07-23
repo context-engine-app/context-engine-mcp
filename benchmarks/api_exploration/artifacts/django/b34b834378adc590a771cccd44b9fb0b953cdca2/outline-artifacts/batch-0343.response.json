@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/apps/two_configs_one_default_app/__init__.py",
+        "tests/apps/two_configs_one_default_app/apps.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/apps/two_configs_one_default_app/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/apps/two_configs_one_default_app/apps.py (11L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from django.apps import AppConfig\n 2|\n 3|\n 4|class TwoConfig(AppConfig):\n 5|    default = True\n 6|    name = \"apps.two_configs_one_default_app\"\n 7|\n 8|\n 9|class TwoConfigAlt(AppConfig):\n10|    name = \"apps.two_configs_one_default_app\"\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

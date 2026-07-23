@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/app_loading/not_installed/__init__.py",
+        "tests/app_loading/not_installed/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/app_loading/not_installed/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/app_loading/not_installed/models.py (21L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from django.db import models\n 2|\n 3|\n 4|class NotInstalledModel(models.Model):\n 5|    class Meta:\n 6|        app_label = \"not_installed\"\n 7|\n 8|\n 9|class RelatedModel(models.Model):\n10|    class Meta:\n11|        app_label = \"not_installed\"\n12|\n13|    not_installed = models.ForeignKey(NotInstalledModel, models.CASCADE)\n14|\n15|\n16|class M2MRelatedModel(models.Model):\n17|    class Meta:\n18|        app_label = \"not_installed\"\n19|\n20|    not_installed = models.ManyToManyField(NotInstalledModel)\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

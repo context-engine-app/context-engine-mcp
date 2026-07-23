@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/humanize/__init__.py",
+        "django/contrib/humanize/apps.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/humanize/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# django/contrib/humanize/apps.py (8L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.apps import AppConfig\n2|from django.utils.translation import gettext_lazy as _\n3|\n4|\n5|class HumanizeConfig(AppConfig):\n6|    name = \"django.contrib.humanize\"\n7|    verbose_name = _(\"Humanize\")\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/auth/middleware.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 11.5 KB -> 2.0 KB (82% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/auth/middleware.py (293L)\nfile scope: [\"0003M017\" full 293L | imports 17L]\n\n- def get_user(request): ... [\"0003M001\" full 4L | code 4L]\n\n- async def auser(request): ... [\"0003M003\" full 4L | code 4L]\n\n- class AuthenticationMiddleware(MiddlewareMixin): ... [\"0003M006\" full 12L | code 12L]\n  - def process_request(self, request): ... [\"0003M005\" full 11L | code 11L]\n\n- class LoginRequiredMiddleware(MiddlewareMixin): ... [\"0003M00r\" full 48L | code 48L]\n  - def process_view(self, request, view_func, view_args, view_kwargs): ... [\"0003M00c\" full 8L | code 8L]\n  - def get_login_url(self, view_func): ... [\"0003M00f\" full 9L | code 9L]\n  - def get_redirect_field_name(self, view_func): ... [\"0003M00h\" full 2L | code 2L]\n  - def handle_no_permission(self, request, view_func): ... [\"0003M00q\" full 17L | code 17L]\n\n- class RemoteUserMiddleware: ... [\"0003M014\" full 186L | code 186L]\n  - def __init__(self, get_response): ... [\"0003M00v\" full 8L | code 8L]\n  - def __call__(self, request): ... [\"0003M00B\" full 5L | code 5L]\n  - def process_request(self, request): ... [\"0003M00F\" full 37L | code 37L]\n  - async def __acall__(self, request): ... [\"0003M00H\" full 3L | code 3L]\n  - async def aprocess_request(self, request): ... [\"0003M00L\" full 40L | code 40L]\n  - def clean_username(self, username, request): ... [\"0003M00Q\" full 12L | code 12L]\n  - async def aclean_username(self, username, request): ... [\"0003M00V\" full 9L | code 9L]\n  - def get_username(self, request): ... [\"0003M00X\" full 7L | code 7L]\n  - def _remove_invalid_user(self, request): ... [\"0003M010\" full 15L | code 15L]\n  - async def _aremove_invalid_user(self, request): ... [\"0003M013\" full 15L | code 15L]\n\n- class PersistentRemoteUserMiddleware(RemoteUserMiddleware): ... [\"0003M016\" full 12L | code 12L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

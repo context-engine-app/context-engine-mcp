@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/m2m_intermediary/__init__.py",
+        "tests/m2m_intermediary/models.py",
+        "tests/m2m_intermediary/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/m2m_intermediary/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/m2m_intermediary/models.py (33L)\nfile scope: [\"000tJ00b\" full 33L | imports 16L]\n\n- class Reporter(models.Model): ... [\"000tJ003\" full 6L | code 6L]\n  - def __str__(self): ... [\"000tJ002\" full 2L | code 2L]\n\n- class Article(models.Model): ... [\"000tJ006\" full 3L | code 3L]\n\n- class Writer(models.Model): ... [\"000tJ00a\" full 4L | code 4L]\n\n# tests/m2m_intermediary/tests.py (39L)\nfile scope: [\"000tK007\" full 39L | imports 8L]\n\n- class M2MIntermediaryTests(TestCase): ... [\"000tK006\" full 31L | code 31L]\n  - def test_intermediary(self): ... [\"000tK005\" full 30L | code 30L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

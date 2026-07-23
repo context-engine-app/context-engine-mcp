@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio-util/src/sync/cancellation_token/guard.rs",
+        "tokio-util/src/sync/cancellation_token/guard_ref.rs",
+        "tokio-util/src/sync/cancellation_token/tree_node.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 16.0 KB -> 3.6 KB (78% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio-util/src/sync/cancellation_token/guard.rs (37L)\nfile scope: [\"0002S007\" full 37L | imports 3L]\n\n- #[derive(Debug)] pub struct DropGuard { ... } [\"0002S001\" full 8L | code 4L | docs 4L]\n  - pub(super) inner: Option<CancellationToken> [\"0002S000\" full 1L | code 1L]\n\n- impl DropGuard { ... } [\"0002S004\" full 17L | code 17L]\n  - pub fn token(&self) -> &CancellationToken { ... } [\"0002S002\" full 6L | code 5L | docs 1L]\n  - pub fn disarm(mut self) -> CancellationToken { ... } [\"0002S003\" full 8L | code 5L | docs 3L]\n\n- impl Drop for DropGuard { ... } [\"0002S006\" full 7L | code 7L]\n  - fn drop(&mut self) { ... } [\"0002S005\" full 5L | code 5L]\n\n# tokio-util/src/sync/cancellation_token/guard_ref.rs (40L)\nfile scope: [\"0002T007\" full 40L | imports 3L]\n\n- #[derive(Debug)] pub struct DropGuardRef<'a> { ... } [\"0002T001\" full 11L | code 4L | docs 7L]\n  - pub(super) inner: Option<&'a CancellationToken> [\"0002T000\" full 1L | code 1L]\n\n- impl<'a> DropGuardRef<'a> { ... } [\"0002T004\" full 17L | code 17L]\n  - pub fn token(&self) -> &CancellationToken { ... } [\"0002T002\" full 6L | code 5L | docs 1L]\n  - pub fn disarm(mut self) -> &'a CancellationToken { ... } [\"0002T003\" full 8L | code 5L | docs 3L]\n\n- impl Drop for DropGuardRef<'_> { ... } [\"0002T006\" full 7L | code 7L]\n  - fn drop(&mut self) { ... } [\"0002T005\" full 5L | code 5L]\n\n# tokio-util/src/sync/cancellation_token/tree_node.rs (368L)\nfile scope: [\"0002U00l\" full 368L | module-docs 40L | imports 4L]\n\n- pub(crate) struct TreeNode { ... } [\"0002U002\" full 7L | code 4L | docs 3L]\n  - inner: Mutex<Inner> [\"0002U000\" full 1L | code 1L]\n  - waker: tokio::sync::Notify [\"0002U001\" full 1L | code 1L]\n\n- impl TreeNode { ... } [\"0002U005\" full 18L | code 18L]\n  - pub(crate) fn new() -> Self { ... } [\"0002U003\" full 12L | code 12L]\n  - pub(crate) fn notified(&self) -> tokio::sync::futures::Notified<'_> { ... } [\"0002U004\" full 3L | code 3L]\n\n- struct Inner { ... } [\"0002U00b\" full 11L | code 7L | docs 4L]\n  - parent: Option<Arc<TreeNode>> [\"0002U006\" full 1L | code 1L]\n  - parent_idx: usize [\"0002U007\" full 1L | code 1L]\n  - children: Vec<Arc<TreeNode>> [\"0002U008\" full 1L | code 1L]\n  - is_cancelled: bool [\"0002U009\" full 1L | code 1L]\n  - num_handles: usize [\"0002U00a\" full 1L | code 1L]\n\n- pub(crate) fn is_cancelled(node: &Arc<TreeNode>) -> bool { ... } [\"0002U00c\" full 4L | code 3L | docs 1L]\n\n- pub(crate) fn child_node(parent: &Arc<TreeNode>) -> Arc<TreeNode> { ... } [\"0002U00d\" full 35L | code 34L | docs 1L]\n\n- fn disconnect_children(node: &mut Inner) { ... } [\"0002U00e\" full 10L | code 7L | docs 3L]\n\n- fn with_locked_node_and_parent<F, Ret>(node: &Arc<TreeNode>, func: F) -> Ret where F: FnOnce(MutexGuard<'_, Inner>, Option<MutexGuard<'_, Inner>>) -> Ret, { ... } [\"0002U00f\" full 62L | code 45L | docs 17L]\n\n- fn move_children_to_parent(node: &mut Inner, parent: &mut Inner) { ... } [\"0002U00g\" full 19L | code 13L | docs 6L]\n\n- fn remove_child(parent: &mut Inner, mut node: MutexGuard<'_, Inner>) { ... } [\"0002U00h\" full 31L | code 27L | docs 4L]\n\n- pub(crate) fn increase_handle_refcount(node: &Arc<TreeNode>) { ... } [\"0002U00i\" full 10L | code 9L | docs 1L]\n\n- pub(crate) fn decrease_handle_refcount(node: &Arc<TreeNode>) { ... } [\"0002U00j\" full 36L | code 32L | docs 4L]\n\n- pub(crate) fn cancel(node: &Arc<TreeNode>) { ... } [\"0002U00k\" full 72L | code 71L | docs 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

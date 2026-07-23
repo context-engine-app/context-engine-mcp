@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/admin_scripts/app_raising_messages/__init__.py",
+        "tests/admin_scripts/app_raising_messages/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/admin_scripts/app_raising_messages/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/admin_scripts/app_raising_messages/models.py (13L)\nfile scope: [\"000fK003\" full 13L | imports 5L]\n\n- class ModelRaisingMessages(models.Model): ... [\"000fK002\" full 8L | code 8L]\n  - @classmethod def check(self, **kwargs): ... [\"000fK001\" full 7L | code 7L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

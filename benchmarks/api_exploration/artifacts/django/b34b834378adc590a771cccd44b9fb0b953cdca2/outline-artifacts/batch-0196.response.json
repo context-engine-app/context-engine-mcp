@@ -1,0 +1,25 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/core/checks/database.py",
+        "django/core/checks/files.py",
+        "django/core/checks/mail.py",
+        "django/core/checks/messages.py",
+        "django/core/checks/model_checks.py",
+        "django/core/checks/registry.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 17.4 KB -> 4.3 KB (76% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/core/checks/database.py (15L)\nfile scope: [\"0008F006\" full 15L | imports 6L]\n\n- @register(Tags.database) def check_database_backends(databases=None, **kwargs): ... [\"0008F005\" full 9L | code 9L]\n\n# django/core/checks/files.py (20L)\nfile scope: [\"0008G004\" full 20L | imports 8L]\n\n- @register(Tags.files) def check_setting_file_upload_temp_dir(app_configs, **kwargs): ... [\"0008G003\" full 12L | code 12L]\n\n# django/core/checks/mail.py (64L)\nfile scope: [\"0008H009\" full 64L | imports 15L]\n\n- @register(Tags.mail) def check_mailers_default_alias(app_configs, **kwargs): ... [\"0008H003\" full 24L | code 24L]\n\n- NON_PRODUCTION_EMAIL_BACKENDS [\"0008H004\" full 1L | code 1L]\n\n- @register(Tags.mail, deploy=True) def check_mailers_production_backend(app_configs, **kwargs): ... [\"0008H008\" full 24L | code 24L]\n\n# django/core/checks/messages.py (83L)\nfile scope: [\"0008I00L\" full 83L | module-docs 1L | imports 12L]\n\n- DEBUG [\"0008I000\" full 1L | code 1L]\n\n- INFO [\"0008I001\" full 1L | code 1L]\n\n- WARNING [\"0008I002\" full 1L | code 1L]\n\n- ERROR [\"0008I003\" full 1L | code 1L]\n\n- CRITICAL [\"0008I004\" full 1L | code 1L]\n\n- class CheckMessage: ... [\"0008I00q\" full 49L | code 49L]\n  - def __init__(self, level, msg, hint=None, obj=None, id=None): ... [\"0008I00a\" full 8L | code 8L]\n  - def __eq__(self, other): ... [\"0008I00h\" full 5L | code 5L]\n  - def __str__(self): ... [\"0008I00l\" full 15L | code 15L]\n  - def __repr__(self): ... [\"0008I00m\" full 9L | code 9L]\n  - def is_serious(self, level=ERROR): ... [\"0008I00o\" full 2L | code 2L]\n  - def is_silenced(self): ... [\"0008I00p\" full 4L | code 4L]\n\n- class Debug(CheckMessage): ... [\"0008I00u\" full 3L | code 3L]\n  - def __init__(self, *args, **kwargs): ... [\"0008I00t\" full 2L | code 2L]\n\n- class Info(CheckMessage): ... [\"0008I00y\" full 3L | code 3L]\n  - def __init__(self, *args, **kwargs): ... [\"0008I00x\" full 2L | code 2L]\n\n- class Warning(CheckMessage): ... [\"0008I00C\" full 3L | code 3L]\n  - def __init__(self, *args, **kwargs): ... [\"0008I00B\" full 2L | code 2L]\n\n- class Error(CheckMessage): ... [\"0008I00G\" full 3L | code 3L]\n  - def __init__(self, *args, **kwargs): ... [\"0008I00F\" full 2L | code 2L]\n\n- class Critical(CheckMessage): ... [\"0008I00K\" full 3L | code 3L]\n  - def __init__(self, *args, **kwargs): ... [\"0008I00J\" full 2L | code 2L]\n\n# django/core/checks/model_checks.py (228L)\nfile scope: [\"0008J015\" full 228L | imports 11L]\n\n- @register(Tags.models) def check_all_models(app_configs, **kwargs): ... [\"0008J00i\" full 80L | code 80L]\n\n- def _check_lazy_references(apps, ignore=None): ... [\"0008J011\" full 130L | code 130L]\n  - def extract_operation(obj): ... [\"0008J00r\" full 16L | code 16L]\n  - def app_model_error(model_key): ... [\"0008J00u\" full 7L | code 7L]\n  - def field_error(model_key, func, args, keywords): ... [\"0008J00B\" full 11L | code 11L]\n  - def signal_connect_error(model_key, func, args, keywords): ... [\"0008J00L\" full 25L | code 25L]\n  - def default_error(model_key, func, args, keywords): ... [\"0008J00S\" full 10L | code 10L]\n  - def build_error(model_key, func, args, keywords): ... [\"0008J010\" full 4L | code 4L]\n\n- @register(Tags.models) def check_lazy_references(app_configs, **kwargs): ... [\"0008J014\" full 3L | code 3L]\n\n# django/core/checks/registry.py (129L)\nfile scope: [\"0008K00N\" full 129L | imports 14L]\n\n- class Tags: ... [\"0008K00g\" full 21L | code 21L]\n\n- class CheckRegistry: ... [\"0008K00I\" full 92L | code 92L]\n  - def __init__(self): ... [\"0008K00h\" full 3L | code 3L]\n  - def register(self, check=None, *tags, **kwargs): ... [\"0008K00q\" full 37L | code 37L]\n    - def inner(check): ... [\"0008K00p\" full 13L | code 13L]\n  - def run_checks( self, app_configs=None, tags=None, include_deployment_checks=False, databases=None, ): ... [\"0008K00z\" full 33L | code 33L]\n  - def tag_exists(self, tag, include_deployment_checks=False): ... [\"0008K00C\" full 2L | code 2L]\n  - def tags_available(self, deployment_checks=False): ... [\"0008K00E\" full 6L | code 6L]\n  - def get_checks(self, include_deployment_checks=False): ... [\"0008K00H\" full 5L | code 5L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

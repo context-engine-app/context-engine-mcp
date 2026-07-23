@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/scheduler/util/mod.rs",
+        "tokio/src/runtime/scheduler/util/time_alt.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tokio/src/runtime/scheduler/util/mod.rs (3L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|#[cfg(all(tokio_unstable, feature = \"time\", feature = \"rt-multi-thread\"))]\n2|pub(in crate::runtime) mod time_alt;\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/scheduler/util/time_alt.rs (180L)\nfile scope: [\"0007x00b\" full 180L | imports 6L]\n\n- pub(crate) fn min_duration(a: Option<Duration>, b: Option<Duration>) -> Option<Duration> { ... } [\"0007x000\" full 8L | code 8L]\n\n- pub(crate) fn process_registration_queue( registration_queue: &mut RegistrationQueue, wheel: &mut Wheel, tx: &Sender, wake_queue: &mut WakeQueue, ) { ... } [\"0007x001\" full 19L | code 19L]\n\n- pub(crate) fn insert_inject_timers( wheel: &mut Wheel, tx: &Sender, inject: Vec<EntryHandle>, wake_queue: &mut WakeQueue, ) { ... } [\"0007x002\" full 19L | code 19L]\n\n- pub(crate) fn remove_cancelled_timers(wheel: &mut Wheel, rx: &mut Receiver) { ... } [\"0007x003\" full 12L | code 12L]\n\n- pub(crate) fn next_expiration_time(wheel: &Wheel, drv_hdl: &driver::Handle) -> Option<Duration> { ... } [\"0007x004\" full 16L | code 16L]\n\n- #[cfg(feature = \"test-util\")] pub(crate) fn pre_auto_advance(drv_hdl: &driver::Handle, duration: Option<Duration>) -> bool { ... } [\"0007x005\" full 20L | code 20L]\n\n- pub(crate) fn process_expired_timers( wheel: &mut Wheel, drv_hdl: &driver::Handle, wake_queue: &mut WakeQueue, ) { ... } [\"0007x006\" full 18L | code 18L]\n\n- pub(crate) fn shutdown_local_timers( wheel: &mut Wheel, rx: &mut Receiver, inject: Vec<EntryHandle>, drv_hdl: &driver::Handle, ) { ... } [\"0007x007\" full 26L | code 26L]\n\n- #[cfg(feature = \"test-util\")] pub(crate) fn post_auto_advance(drv_hdl: &driver::Handle, duration: Option<Duration>) { ... } [\"0007x008\" full 18L | code 18L]\n\n- #[cfg(not(feature = \"test-util\"))] pub(crate) fn pre_auto_advance(_drv_hdl: &driver::Handle, _duration: Option<Duration>) -> bool { ... } [\"0007x009\" full 4L | code 4L]\n\n- #[cfg(not(feature = \"test-util\"))] pub(crate) fn post_auto_advance(_drv_hdl: &driver::Handle, _duration: Option<Duration>) { ... } [\"0007x00a\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

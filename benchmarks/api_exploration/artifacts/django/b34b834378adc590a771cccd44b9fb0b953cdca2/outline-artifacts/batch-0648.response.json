@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_manual_porting/0001_initial.py",
+        "tests/migrations/test_migrations_manual_porting/0002_second.py",
+        "tests/migrations/test_migrations_manual_porting/0003_third.py",
+        "tests/migrations/test_migrations_manual_porting/0004_fourth.py",
+        "tests/migrations/test_migrations_manual_porting/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/test_migrations_manual_porting/0001_initial.py (16L)\nfile scope: [\"000x5003\" full 16L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000x5002\" full 12L | code 12L]\n\n# tests/migrations/test_migrations_manual_porting/0002_second.py (16L)\nfile scope: [\"000x6006\" full 16L | imports 4L]\n\n- def forwards(apps, schema_editor): ... [\"000x6002\" full 2L | code 2L]\n\n- class Migration(migrations.Migration): ... [\"000x6005\" full 8L | code 8L]\n\n# tests/migrations/test_migrations_manual_porting/0003_third.py (24L)\nfile scope: [\"000x7006\" full 24L | imports 4L]\n\n- def forwards(apps, schema_editor): ... [\"000x7002\" full 2L | code 2L]\n\n- class Migration(migrations.Migration): ... [\"000x7005\" full 16L | code 16L]\n\n# tests/migrations/test_migrations_manual_porting/0004_fourth.py (28L)\nfile scope: [\"000x8007\" full 28L | imports 4L]\n\n- def forwards(apps, schema_editor): ... [\"000x8002\" full 2L | code 2L]\n\n- class Migration(migrations.Migration): ... [\"000x8006\" full 20L | code 20L]\n\n# tests/migrations/test_migrations_manual_porting/__init__.py (1L)\nfile scope: [\"000x9000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

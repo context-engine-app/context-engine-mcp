@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/forms_tests/widget_tests/test_telinput.py",
+        "tests/forms_tests/widget_tests/test_textarea.py",
+        "tests/forms_tests/widget_tests/test_textinput.py",
+        "tests/forms_tests/widget_tests/test_timeinput.py",
+        "tests/forms_tests/widget_tests/test_widget.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/forms_tests/widget_tests/test_telinput.py (13L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from django.forms import TelInput\n 2|\n 3|from .base import WidgetTest\n 4|\n 5|\n 6|class TelInputTest(WidgetTest):\n 7|    widget = TelInput()\n 8|\n 9|    def test_render(self):\n10|        self.check_html(\n11|            self.widget, \"telephone\", \"\", html='<input type=\"tel\" name=\"telephone\">'\n12|        )\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/forms_tests/widget_tests/test_textarea.py (79L)\nfile scope: [\"000qf00e\" full 79L | imports 7L]\n\n- class TextareaTest(WidgetTest): ... [\"000qf00d\" full 72L | code 72L]\n  - def test_render(self): ... [\"000qf001\" full 7L | code 7L]\n  - def test_render_required(self): ... [\"000qf003\" full 9L | code 9L]\n  - def test_render_empty(self): ... [\"000qf004\" full 7L | code 7L]\n  - def test_render_none(self): ... [\"000qf005\" full 7L | code 7L]\n  - def test_escaping(self): ... [\"000qf006\" full 10L | code 10L]\n  - def test_mark_safe(self): ... [\"000qf007\" full 10L | code 10L]\n  - def test_fieldset(self): ... [\"000qf00c\" full 13L | code 13L]\n    - class TestForm(Form): ... [\"000qf00a\" full 3L | code 3L]\n\n# tests/forms_tests/widget_tests/test_textinput.py (135L)\nfile scope: [\"000qg00l\" full 135L | imports 7L]\n\n- class TextInputTest(WidgetTest): ... [\"000qg00k\" full 128L | code 128L]\n  - def test_render(self): ... [\"000qg001\" full 4L | code 4L]\n  - def test_render_none(self): ... [\"000qg002\" full 4L | code 4L]\n  - def test_render_value(self): ... [\"000qg003\" full 7L | code 7L]\n  - def test_render_boolean(self): ... [\"000qg004\" full 17L | code 17L]\n  - def test_render_quoted(self): ... [\"000qg005\" full 10L | code 10L]\n  - def test_render_custom_attrs(self): ... [\"000qg006\" full 10L | code 10L]\n  - def test_render_unicode(self): ... [\"000qg007\" full 11L | code 11L]\n  - def test_constructor_attrs(self): ... [\"000qg009\" full 13L | code 13L]\n  - def test_attrs_precedence(self): ... [\"000qg00b\" full 13L | code 13L]\n  - def test_attrs_safestring(self): ... [\"000qg00d\" full 8L | code 8L]\n  - def test_use_required_attribute(self): ... [\"000qg00e\" full 5L | code 5L]\n  - def test_fieldset(self): ... [\"000qg00j\" full 12L | code 12L]\n    - class TestForm(Form): ... [\"000qg00h\" full 3L | code 3L]\n\n# tests/forms_tests/widget_tests/test_timeinput.py (83L)\nfile scope: [\"000qh00g\" full 83L | imports 9L]\n\n- class TimeInputTest(WidgetTest): ... [\"000qh00f\" full 74L | code 74L]\n  - def test_render_none(self): ... [\"000qh001\" full 4L | code 4L]\n  - def test_render_value(self): ... [\"000qh003\" full 24L | code 24L]\n  - def test_string(self): ... [\"000qh004\" full 8L | code 8L]\n  - def test_format(self): ... [\"000qh007\" full 9L | code 9L]\n  - @translation.override(\"de-at\") def test_l10n(self): ... [\"000qh009\" full 9L | code 9L]\n  - def test_fieldset(self): ... [\"000qh00e\" full 12L | code 12L]\n    - class TestForm(Form): ... [\"000qh00c\" full 3L | code 3L]\n\n# tests/forms_tests/widget_tests/test_widget.py (37L)\nfile scope: [\"000qi008\" full 37L | imports 9L]\n\n- class WidgetTests(WidgetTest): ... [\"000qi007\" full 28L | code 28L]\n  - def test_format_value(self): ... [\"000qi001\" full 7L | code 7L]\n  - def test_value_omitted_from_data(self): ... [\"000qi003\" full 6L | code 6L]\n  - def test_no_trailing_newline_in_attrs(self): ... [\"000qi004\" full 8L | code 8L]\n  - def test_attr_false_not_rendered(self): ... [\"000qi006\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

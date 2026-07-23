@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/ansi/link.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n1|#!/usr/bin/env -S deno run --allow-net=deno.land\n2|\n3|import { link } from \"@cliffy/ansi/ansi-escapes\";\n4|\n5|console.log(link(\"Click me.\", \"https://deno.land\"));\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

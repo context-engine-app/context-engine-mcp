@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/utils/tree.py",
+        "django/utils/version.py",
+        "django/utils/warnings.py",
+        "django/utils/xmlutils.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 9.6 KB -> 2.9 KB (70% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/utils/tree.py (127L)\nfile scope: [\"000ee00z\" full 127L | imports 11L]\n\n- class Node: ... [\"000ee00y\" full 116L | code 116L]\n  - def __init__(self, children=None, connector=None, negated=False): ... [\"000ee004\" full 5L | code 5L]\n  - @classmethod def create(cls, children=None, connector=None, negated=False): ... [\"000ee00c\" full 11L | code 11L]\n  - def __str__(self): ... [\"000ee00e\" full 3L | code 3L]\n  - def __repr__(self): ... [\"000ee00f\" full 2L | code 2L]\n  - def __copy__(self): ... [\"000ee00h\" full 4L | code 4L]\n  - def __deepcopy__(self, memodict): ... [\"000ee00l\" full 4L | code 4L]\n  - def __len__(self): ... [\"000ee00m\" full 3L | code 3L]\n  - def __bool__(self): ... [\"000ee00n\" full 3L | code 3L]\n  - def __contains__(self, other): ... [\"000ee00p\" full 3L | code 3L]\n  - def __eq__(self, other): ... [\"000ee00r\" full 7L | code 7L]\n  - def __hash__(self): ... [\"000ee00s\" full 9L | code 9L]\n  - def add(self, data, conn_type): ... [\"000ee00w\" full 34L | code 34L]\n  - def negate(self): ... [\"000ee00x\" full 3L | code 3L]\n\n# django/utils/version.py (124L)\nfile scope: [\"000ef00v\" full 124L | imports 35L]\n\n- PYPY [\"000ef000\" full 1L | code 1L]\n\n- PY310 [\"000ef001\" full 1L | code 1L]\n\n- PY311 [\"000ef002\" full 1L | code 1L]\n\n- PY312 [\"000ef003\" full 1L | code 1L]\n\n- PY313 [\"000ef004\" full 1L | code 1L]\n\n- PY314 [\"000ef005\" full 1L | code 1L]\n\n- PY315 [\"000ef006\" full 1L | code 1L]\n\n- def get_version(version=None): ... [\"000ef00c\" full 22L | code 22L]\n\n- def get_main_version(version=None): ... [\"000ef00f\" full 5L | code 5L]\n\n- def get_complete_version(version=None): ... [\"000ef00h\" full 12L | code 12L]\n\n- def get_docs_version(version=None): ... [\"000ef00j\" full 6L | code 6L]\n\n- @functools.lru_cache def get_git_changeset(): ... [\"000ef00o\" full 27L | code 27L]\n\n- def get_version_tuple(version): ... [\"000ef00u\" full 15L | code 15L]\n\n# django/utils/warnings.py (13L)\nfile scope: [\"000eg002\" full 13L | imports 7L]\n\n- @functools.cache def django_file_prefixes(): ... [\"000eg001\" full 6L | code 6L]\n\n# django/utils/xmlutils.py (41L)\nfile scope: [\"000eh00g\" full 41L | imports 13L]\n\n- class UnserializableContentError(ValueError): ... [\"000eh003\" full 3L | code 3L]\n  - def __init__(self, msg=\"Control characters are not supported in XML 1.0\"): ... [\"000eh002\" full 2L | code 2L]\n\n- class SimplerXMLGenerator(XMLGenerator): ... [\"000eh00f\" full 24L | code 24L]\n  - def addQuickElement(self, name, contents=None, attrs=None): ... [\"000eh007\" full 8L | code 8L]\n  - def characters(self, content): ... [\"000eh009\" full 6L | code 6L]\n  - def startElement(self, name, attrs): ... [\"000eh00e\" full 7L | code 7L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

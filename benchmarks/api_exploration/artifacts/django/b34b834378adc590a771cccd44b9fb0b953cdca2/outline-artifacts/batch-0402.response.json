@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/context_processors/__init__.py",
+        "tests/context_processors/models.py",
+        "tests/context_processors/tests.py",
+        "tests/context_processors/urls.py",
+        "tests/context_processors/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/context_processors/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/context_processors/models.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import models\n2|\n3|\n4|class DebugObject(models.Model):\n5|    pass\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/context_processors/tests.py (162L)\nfile scope: [\"000la00u\" full 162L | imports 9L]\n\n- @override_settings( ROOT_URLCONF=\"context_processors.urls\", TEMPLATES=[ { \"BACKEND\": \"django.template.backends.django.DjangoTemplates\", \"APP_DIRS\": True, \"OPTIONS\": { \"context_processors\": [ \"django.template.context_processors.request\", ], }, } ], ) class RequestContextProcessorTests(SimpleTestCase): ... [\"000la003\" full 42L | code 42L]\n  - def test_request_attributes(self): ... [\"000la002\" full 23L | code 23L]\n\n- @override_settings( DEBUG=True, INTERNAL_IPS=[\"127.0.0.1\"], ROOT_URLCONF=\"context_processors.urls\", TEMPLATES=[ { \"BACKEND\": \"django.template.backends.django.DjangoTemplates\", \"APP_DIRS\": True, \"OPTIONS\": { \"context_processors\": [ \"django.template.context_processors.debug\", ], }, } ], ) class DebugContextProcessorTests(TestCase): ... [\"000la00b\" full 47L | code 47L]\n  - def test_debug(self): ... [\"000la007\" full 10L | code 10L]\n  - def test_sql_queries(self): ... [\"000la00a\" full 13L | code 13L]\n\n- @override_settings( ROOT_URLCONF=\"context_processors.urls\", TEMPLATES=[ { \"BACKEND\": \"django.template.backends.django.DjangoTemplates\", \"APP_DIRS\": True, \"OPTIONS\": { \"context_processors\": [ \"django.template.context_processors.csp\", ], }, } ], MIDDLEWARE=[ \"django.middleware.csp.ContentSecurityPolicyMiddleware\", ], SECURE_CSP={ \"script-src\": [CSP.SELF, CSP.NONCE], }, ) class CSPContextProcessorTests( ... ): \"\"\" Tests for the django.template.context_processors.csp_nonce processor. \"\"\" def test_csp_nonce_in_context(self): response = self.client.get(\"/csp_nonce/\") self.assertIn(\"csp_nonce\", response.context) @modify_settings( MIDDLEWARE={\"remove\": \"django.middleware.csp.ContentSecurityPolicyMiddleware\"} ) def test_csp_nonce_in_context_no_middleware(self): response = self.client.get(\"/csp_nonce/\") self.assertIn(\"csp_nonce\", response.context) def test_csp_nonce_in_header(self): response = self.client.get(\"/csp_nonce/\") self.assertIn(CSP.HEADER_ENFORCE, response.headers) csp_header = response.headers[CSP.HEADER_ENFORCE] nonce = response.context[\"csp_nonce\"] self.assertIn(f\"'nonce-{nonce}'\", csp_header) def test_different_nonce_per_request(self): response1 = self.client.get(\"/csp_nonce/\") response2 = self.client.get(\"/csp_nonce/\") self.assertNotEqual( response1.context[\"csp_nonce\"], response2.context[\"csp_nonce\"], ) def test_csp_nonce_in_template(self): response = self.client.get(\"/csp_nonce/\") nonce = response.context[\"csp_nonce\"] self.assertIn(f'<script nonce=\"{nonce}\">', response.text) def test_csp_nonce_length(self): response = self.client.get(\"/csp_nonce/\") nonce = response.context[\"csp_nonce\"] self.assertEqual(len(nonce), 22) [\"000la00t\" full 60L | code 60L]\n  - def test_csp_nonce_in_context(self): ... [\"000la00d\" full 3L | code 3L]\n  - @modify_settings( MIDDLEWARE={\"remove\": \"django.middleware.csp.ContentSecurityPolicyMiddleware\"} ) def test_csp_nonce_in_context_no_middleware(self): ... [\"000la00f\" full 6L | code 6L]\n  - def test_csp_nonce_in_header(self): ... [\"000la00j\" full 6L | code 6L]\n  - def test_different_nonce_per_request(self): ... [\"000la00m\" full 7L | code 7L]\n  - def test_csp_nonce_in_template(self): ... [\"000la00p\" full 4L | code 4L]\n  - def test_csp_nonce_length(self): ... [\"000la00s\" full 4L | code 4L]\n\n# tests/context_processors/urls.py (10L)\nfile scope: [\"000lb001\" full 10L | imports 5L]\n\n\n# tests/context_processors/views.py (20L)\nfile scope: [\"000lc007\" full 20L | imports 6L]\n\n- def request_processor(request): ... [\"000lc001\" full 2L | code 2L]\n\n- def debug_processor(request): ... [\"000lc004\" full 6L | code 6L]\n\n- def csp_nonce_processor(request): ... [\"000lc006\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

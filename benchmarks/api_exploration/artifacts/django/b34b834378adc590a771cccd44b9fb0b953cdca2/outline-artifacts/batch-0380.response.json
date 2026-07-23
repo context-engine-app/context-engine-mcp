@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/check_framework/template_test_apps/different_tags_app/__init__.py",
+        "tests/check_framework/template_test_apps/different_tags_app/apps.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/check_framework/template_test_apps/different_tags_app/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/check_framework/template_test_apps/different_tags_app/apps.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.apps import AppConfig\n2|\n3|\n4|class DifferentTagsAppAppConfig(AppConfig):\n5|    name = \"check_framework.template_test_apps.different_tags_app\"\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

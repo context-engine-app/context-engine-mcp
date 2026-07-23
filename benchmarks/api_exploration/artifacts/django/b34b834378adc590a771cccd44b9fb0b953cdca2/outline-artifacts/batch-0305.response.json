@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/admin_scripts/app_with_import/__init__.py",
+        "tests/admin_scripts/app_with_import/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/admin_scripts/app_with_import/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/admin_scripts/app_with_import/models.py (9L)\nfile scope: [\"000fS002\" full 9L | imports 7L]\n\n- class UserProfile(models.Model): ... [\"000fS001\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

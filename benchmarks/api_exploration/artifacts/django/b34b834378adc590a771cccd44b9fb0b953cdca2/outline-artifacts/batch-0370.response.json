@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/bash_completion/management/commands/__init__.py",
+        "tests/bash_completion/management/commands/test_command.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/bash_completion/management/commands/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/bash_completion/management/commands/test_command.py (10L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.core.management.base import BaseCommand\n2|\n3|\n4|class Command(BaseCommand):\n5|    def add_arguments(self, parser):\n6|        parser.add_argument(\"--list\", action=\"store_true\", help=\"Print all options\")\n7|\n8|    def handle(self, *args, **options):\n9|        pass\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

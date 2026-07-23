@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/template/loader.py",
+        "django/template/loader_tags.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 15.2 KB -> 2.8 KB (82% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/template/loader.py (67L)\nfile scope: [\"000d000n\" full 67L | imports 5L]\n\n- def get_template(template_name, using=None): ... [\"000d0006\" full 15L | code 15L]\n\n- def select_template(template_name_list, using=None): ... [\"000d000e\" full 28L | code 28L]\n\n- def render_to_string(template_name, context=None, request=None, using=None): ... [\"000d000k\" full 11L | code 11L]\n\n- def _engine_list(using=None): ... [\"000d000m\" full 2L | code 2L]\n\n# django/template/loader_tags.py (371L)\nfile scope: [\"000d101M\" full 371L | imports 16L]\n\n- BLOCK_CONTEXT_KEY [\"000d1001\" full 1L | code 1L]\n\n- class BlockContext: ... [\"000d100g\" full 26L | code 26L]\n  - def __init__(self): ... [\"000d1002\" full 3L | code 3L]\n  - def __repr__(self): ... [\"000d1004\" full 2L | code 2L]\n  - def add_blocks(self, blocks): ... [\"000d1008\" full 3L | code 3L]\n  - def pop(self, name): ... [\"000d100a\" full 5L | code 5L]\n  - def push(self, name, block): ... [\"000d100d\" full 2L | code 2L]\n  - def get_block(self, name): ... [\"000d100f\" full 5L | code 5L]\n\n- class BlockNode(Node): ... [\"000d100x\" full 42L | code 42L]\n  - def __init__(self, name, nodelist, parent=None): ... [\"000d100k\" full 4L | code 4L]\n  - def __repr__(self): ... [\"000d100o\" full 2L | code 2L]\n  - def render(self, context): ... [\"000d100u\" full 19L | code 19L]\n  - def super(self): ... [\"000d100w\" full 13L | code 13L]\n\n- class ExtendsNode(Node): ... [\"000d100Z\" full 75L | code 75L]\n  - def __init__(self, nodelist, parent_name, template_dirs=None): ... [\"000d100D\" full 5L | code 5L]\n  - def __repr__(self): ... [\"000d100I\" full 2L | code 2L]\n  - def find_template(self, template_name, context): ... [\"000d100O\" full 17L | code 17L]\n  - def get_parent(self, context): ... [\"000d100S\" full 16L | code 16L]\n  - def render(self, context): ... [\"000d100Y\" full 27L | code 27L]\n\n- class IncludeNode(Node): ... [\"000d101h\" full 49L | code 49L]\n  - def __init__( self, template, *args, extra_context=None, isolated_context=False, **kwargs ): ... [\"000d1016\" full 7L | code 7L]\n  - def __repr__(self): ... [\"000d101a\" full 2L | code 2L]\n  - def render(self, context): ... [\"000d101g\" full 35L | code 35L]\n\n- @register.tag(\"block\") def do_block(parser, token): ... [\"000d101p\" full 30L | code 30L]\n\n- def construct_relative_path( current_template_name, relative_name, allow_recursion=False, ): ... [\"000d101v\" full 43L | code 43L]\n\n- @register.tag(\"extends\") def do_extends(parser, token): ... [\"000d101B\" full 22L | code 22L]\n\n- @register.tag(\"include\") def do_include(parser, token): ... [\"000d101L\" full 56L | code 56L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

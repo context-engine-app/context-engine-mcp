@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/check_framework/custom_commands_app/management/commands/makemigrations.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n1|from django.core.management.commands.makemigrations import (\n2|    Command as MakeMigrationsCommand,\n3|)\n4|\n5|\n6|class Command(MakeMigrationsCommand):\n7|    autodetector = int\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

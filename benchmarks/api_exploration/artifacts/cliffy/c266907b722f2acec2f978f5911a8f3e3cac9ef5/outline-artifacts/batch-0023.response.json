@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "command/upgrade/runtime.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n 1|import type { Logger } from \"./logger.ts\";\n 2|import type { Provider, ProviderUpgradeOptions } from \"./provider.ts\";\n 3|\n 4|/** Options for upgrading a package for a specific runtime. */\n 5|export interface RuntimeUpgradeOptions extends ProviderUpgradeOptions {\n 6|  provider: Provider;\n 7|  logger?: Logger;\n 8|}\n 9|\n10|/** Runtime handler. */\n11|export abstract class Runtime {\n12|  abstract upgrade(_options: RuntimeUpgradeOptions): Promise<void>;\n13|}\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

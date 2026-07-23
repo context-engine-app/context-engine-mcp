@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/util/rand/rt.rs",
+        "tokio/src/util/rand/rt_unstable.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.4 KB -> 1.3 KB (47% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/util/rand/rt.rs (62L)\nfile scope: [\"0009I008\" full 62L | imports 5L]\n\n- #[derive(Debug)] pub(crate) struct RngSeedGenerator { ... } [\"0009I001\" full 14L | code 6L | docs 8L]\n  - state: Mutex<FastRand> [\"0009I000\" full 3L | code 1L | docs 2L]\n\n- impl RngSeedGenerator { ... } [\"0009I005\" full 26L | code 26L]\n  - pub(crate) fn new(seed: RngSeed) -> Self { ... } [\"0009I002\" full 6L | code 5L | docs 1L]\n  - pub(crate) fn next_seed(&self) -> RngSeed { ... } [\"0009I003\" full 12L | code 11L | docs 1L]\n  - pub(crate) fn next_generator(&self) -> Self { ... } [\"0009I004\" full 4L | code 3L | docs 1L]\n\n- impl FastRand { ... } [\"0009I007\" full 15L | code 15L]\n  - pub(crate) fn replace_seed(&mut self, seed: RngSeed) -> RngSeed { ... } [\"0009I006\" full 13L | code 8L | docs 5L]\n\n# tokio/src/util/rand/rt_unstable.rs (21L)\nfile scope: [\"0009J002\" full 21L | imports 6L]\n\n- impl RngSeed { ... } [\"0009J001\" full 15L | code 15L]\n  - pub fn from_bytes(bytes: &[u8]) -> Self { ... } [\"0009J000\" full 13L | code 5L | docs 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

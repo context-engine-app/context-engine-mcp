@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/builtin_server/__init__.py",
+        "tests/builtin_server/tests.py",
+        "tests/builtin_server/urls.py",
+        "tests/builtin_server/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/builtin_server/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/builtin_server/tests.py (171L)\nfile scope: [\"000js00Z\" full 171L | imports 19L]\n\n- MAX_SOCKET_CHUNK_SIZE [\"000js000\" full 1L | code 1L]\n\n- class ServerHandler(simple_server.ServerHandler): ... [\"000js009\" full 27L | code 27L]\n  - def write(self, data): ... [\"000js004\" full 20L | code 20L]\n  - def error_output(self, environ, start_response): ... [\"000js008\" full 3L | code 3L]\n\n- class DummyHandler: ... [\"000js00d\" full 3L | code 3L]\n  - def log_request(self, *args, **kwargs): ... [\"000js00c\" full 2L | code 2L]\n\n- class FileWrapperHandler(ServerHandler): ... [\"000js00k\" full 9L | code 9L]\n  - def __init__(self, *args, **kwargs): ... [\"000js00g\" full 4L | code 4L]\n  - def sendfile(self): ... [\"000js00j\" full 3L | code 3L]\n\n- def wsgi_app(environ, start_response): ... [\"000js00n\" full 3L | code 3L]\n\n- def wsgi_app_file_wrapper(environ, start_response): ... [\"000js00q\" full 3L | code 3L]\n\n- class WSGIFileWrapperTests(TestCase): ... [\"000js00H\" full 54L | code 54L]\n  - def test_file_wrapper_uses_sendfile(self): ... [\"000js00t\" full 7L | code 7L]\n  - def test_file_wrapper_no_sendfile(self): ... [\"000js00w\" full 7L | code 7L]\n  - @override_settings(ROOT_URLCONF=\"builtin_server.urls\") def test_file_response_closing(self): ... [\"000js00C\" full 20L | code 20L]\n  - @override_settings(ROOT_URLCONF=\"builtin_server.urls\") def test_file_response_call_request_finished(self): ... [\"000js00G\" full 8L | code 8L]\n\n- class WriteChunkCounterHandler(ServerHandler): ... [\"000js00R\" full 20L | code 20L]\n  - def __init__(self, *args, **kwargs): ... [\"000js00K\" full 5L | code 5L]\n  - def send_headers(self): ... [\"000js00O\" full 3L | code 3L]\n  - def _write(self, data): ... [\"000js00Q\" full 4L | code 4L]\n\n- def send_big_data_app(environ, start_response): ... [\"000js00U\" full 4L | code 4L]\n\n- class ServerHandlerChunksProperly(TestCase): ... [\"000js00Y\" full 14L | code 14L]\n  - def test_chunked_data(self): ... [\"000js00X\" full 5L | code 5L]\n\n# tests/builtin_server/urls.py (8L)\nfile scope: [\"000jt001\" full 8L | imports 5L]\n\n\n# tests/builtin_server/views.py (16L)\nfile scope: [\"000ju006\" full 16L | imports 9L]\n\n- FILE_RESPONSE_HOLDER [\"000ju000\" full 1L | code 1L]\n\n- def file_response(request): ... [\"000ju005\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

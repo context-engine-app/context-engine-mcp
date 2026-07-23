@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/tasks/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.2 KB -> 535 B (55% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/tasks/__init__.py (46L)\nfile scope: [\"000cB00c\" full 46L | imports 33L]\n\n- class TaskBackendHandler(BaseConnectionHandler): ... [\"000cB009\" full 12L | code 12L]\n  - def create_connection(self, alias): ... [\"000cB008\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/empty/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 365 B -> 500 B (-37% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/empty/tests.py (16L)\nfile scope: [\"000nD004\" full 16L | imports 6L]\n\n- class EmptyModelTests(TestCase): ... [\"000nD003\" full 10L | code 10L]\n  - def test_empty(self): ... [\"000nD002\" full 9L | code 9L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

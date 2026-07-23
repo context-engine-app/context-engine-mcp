@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/gis_tests/geo3d/__init__.py",
+        "tests/gis_tests/geo3d/models.py",
+        "tests/gis_tests/geo3d/tests.py",
+        "tests/gis_tests/geo3d/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/gis_tests/geo3d/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/gis_tests/geo3d/models.py (76L)\nfile scope: [\"000r800F\" full 76L | imports 4L]\n\n- class NamedModel(models.Model): ... [\"000r8004\" full 8L | code 8L]\n  - class Meta: ... [\"000r8002\" full 2L | code 2L]\n  - def __str__(self): ... [\"000r8003\" full 2L | code 2L]\n\n- class City3D(NamedModel): ... [\"000r8009\" full 6L | code 6L]\n  - class Meta: ... [\"000r8008\" full 2L | code 2L]\n\n- class Interstate2D(NamedModel): ... [\"000r800b\" full 2L | code 2L]\n\n- class Interstate3D(NamedModel): ... [\"000r800f\" full 5L | code 5L]\n  - class Meta: ... [\"000r800e\" full 2L | code 2L]\n\n- class InterstateProj2D(NamedModel): ... [\"000r800h\" full 2L | code 2L]\n\n- class InterstateProj3D(NamedModel): ... [\"000r800l\" full 5L | code 5L]\n  - class Meta: ... [\"000r800k\" full 2L | code 2L]\n\n- class Polygon2D(NamedModel): ... [\"000r800n\" full 2L | code 2L]\n\n- class Polygon3D(NamedModel): ... [\"000r800r\" full 5L | code 5L]\n  - class Meta: ... [\"000r800q\" full 2L | code 2L]\n\n- class SimpleModel(models.Model): ... [\"000r800u\" full 3L | code 3L]\n  - class Meta: ... [\"000r800t\" full 2L | code 2L]\n\n- class Point2D(SimpleModel): ... [\"000r800w\" full 2L | code 2L]\n\n- class Point3D(SimpleModel): ... [\"000r800A\" full 5L | code 5L]\n  - class Meta: ... [\"000r800z\" full 2L | code 2L]\n\n- class MultiPoint3D(SimpleModel): ... [\"000r800E\" full 5L | code 5L]\n  - class Meta: ... [\"000r800D\" full 2L | code 2L]\n\n# tests/gis_tests/geo3d/tests.py (369L)\nfile scope: [\"000r901m\" full 369L | imports 110L]\n\n- class Geo3DLoadingHelper: ... [\"000r900l\" full 30L | code 30L]\n  - def _load_interstate_data(self): ... [\"000r900c\" full 12L | code 12L]\n  - def _load_city_data(self): ... [\"000r900f\" full 7L | code 7L]\n  - def _load_polygon_data(self): ... [\"000r900k\" full 8L | code 8L]\n\n- @skipUnlessDBFeature(\"supports_3d_storage\") class Geo3DTest(Geo3DLoadingHelper, TestCase): ... [\"000r900U\" full 126L | code 126L]\n  - def test_3d_hasz(self): ... [\"000r900u\" full 21L | code 21L]\n  - def test_3d_polygons(self): ... [\"000r900w\" full 9L | code 9L]\n  - def test_3d_layermapping(self): ... [\"000r900A\" full 30L | code 30L]\n  - def test_bulk_create_point_field(self): ... [\"000r900C\" full 3L | code 3L]\n  - @skipUnlessDBFeature(\"supports_3d_functions\") def test_union(self): ... [\"000r900G\" full 19L | code 19L]\n  - @skipUnlessDBFeature(\"supports_3d_functions\") def test_extent(self): ... [\"000r900O\" full 18L | code 18L]\n    - def check_extent3d(extent3d, tol=6): ... [\"000r900N\" full 3L | code 3L]\n  - @skipUnlessDBFeature(\"supports_3d_functions\") def test_extent3d_filter(self): ... [\"000r900T\" full 9L | code 9L]\n\n- @skipUnlessDBFeature(\"supports_3d_functions\") class Geo3DFunctionsTests(FuncTestMixin, Geo3DLoadingHelper, TestCase): ... [\"000r901l\" full 106L | code 106L]\n  - def test_kml(self): ... [\"000r900X\" full 12L | code 12L]\n  - def test_geojson(self): ... [\"000r9010\" full 15L | code 15L]\n  - def test_perimeter(self): ... [\"000r9016\" full 19L | code 19L]\n  - def test_length(self): ... [\"000r901c\" full 32L | code 32L]\n  - def test_scale(self): ... [\"000r901g\" full 10L | code 10L]\n  - def test_translate(self): ... [\"000r901k\" full 11L | code 11L]\n\n# tests/gis_tests/geo3d/views.py (2L)\nfile scope: [\"000ra000\" full 2L | module-docs 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

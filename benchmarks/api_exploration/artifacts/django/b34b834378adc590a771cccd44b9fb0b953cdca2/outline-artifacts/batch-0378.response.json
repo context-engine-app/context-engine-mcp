@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/check_framework/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n 1|from django.core.checks import register\n 2|from django.db import models\n 3|\n 4|\n 5|class SimpleModel(models.Model):\n 6|    field = models.IntegerField()\n 7|    manager = models.manager.Manager()\n 8|\n 9|\n10|@register(\"tests\")\n11|def my_check(app_configs, **kwargs):\n12|    my_check.did_run = True\n13|    return []\n14|\n15|\n16|my_check.did_run = False\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

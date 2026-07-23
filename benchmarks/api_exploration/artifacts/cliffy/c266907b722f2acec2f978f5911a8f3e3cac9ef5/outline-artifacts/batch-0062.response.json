@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "internal/testing/test/create_test.ts",
+        "internal/testing/test/create_test_function.ts",
+        "internal/testing/test/mod.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.9 KB -> 1.6 KB (19% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# internal/testing/test/create_test.ts (22L)\nfile scope: [\"0004w007\" full 22L | imports 3L]\n\n- export interface TestFunction { ... } [\"0004w002\" full 4L | code 4L]\n  - (testOptions: TestOptions): void; [\"0004w000\" full 1L | code 1L]\n  - (name: string, fn: TestFn): void; [\"0004w001\" full 1L | code 1L]\n\n- export async function createTest(): Promise<TestFunction> { ... } [\"0004w006\" full 14L | code 14L]\n\n# internal/testing/test/create_test_function.ts (35L)\nfile scope: [\"0004x00a\" full 35L | imports 5L]\n\n- export interface GenericTestFunction<T> { ... } [\"0004x003\" full 5L | code 5L]\n  - (testOptions: TestOptions): T; [\"0004x000\" full 1L | code 1L]\n  - (name: string, fn: TestFn): T; [\"0004x001\" full 1L | code 1L]\n  - (fn: TestFn): T; [\"0004x002\" full 1L | code 1L]\n\n- export function createTestFunction<T>( runTest: (options: TestOptions) => T, ): GenericTestFunction<T> { ... } [\"0004x009\" full 24L | code 24L]\n  - <function> [\"0004x008\" full 20L | code 20L]\n    - name: nameOrOptionsOrFn [\"0004x004\" full 1L | code 1L]\n    - fn: fn as TestFn [\"0004x005\" full 1L | code 1L]\n    - name: nameOrOptionsOrFn.name || \"unnamed test\" [\"0004x006\" full 1L | code 1L]\n    - fn: nameOrOptionsOrFn [\"0004x007\" full 1L | code 1L]\n\n# internal/testing/test/mod.ts (6L)\nfile scope: [\"0004y001\" full 6L | imports 5L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

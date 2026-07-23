@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/select_related_regress/__init__.py",
+        "tests/select_related_regress/models.py",
+        "tests/select_related_regress/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/select_related_regress/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/select_related_regress/models.py (145L)\nfile scope: [\"000CS012\" full 145L | imports 33L]\n\n- class Building(models.Model): ... [\"000CS001\" full 2L | code 2L]\n\n- class Device(models.Model): ... [\"000CS004\" full 3L | code 3L]\n\n- class Port(models.Model): ... [\"000CS008\" full 6L | code 6L]\n  - def __str__(self): ... [\"000CS007\" full 2L | code 2L]\n\n- class Connection(models.Model): ... [\"000CS00b\" full 13L | code 13L]\n\n- class TUser(models.Model): ... [\"000CS00d\" full 2L | code 2L]\n\n- class Person(models.Model): ... [\"000CS00f\" full 2L | code 2L]\n\n- class Organizer(models.Model): ... [\"000CS00h\" full 2L | code 2L]\n\n- class Student(models.Model): ... [\"000CS00j\" full 2L | code 2L]\n\n- class Class(models.Model): ... [\"000CS00l\" full 2L | code 2L]\n\n- class Enrollment(models.Model): ... [\"000CS00o\" full 3L | code 3L]\n\n- class Country(models.Model): ... [\"000CS00q\" full 2L | code 2L]\n\n- class State(models.Model): ... [\"000CS00t\" full 3L | code 3L]\n\n- class ClientStatus(models.Model): ... [\"000CS00v\" full 2L | code 2L]\n\n- class Client(models.Model): ... [\"000CS00z\" full 4L | code 4L]\n\n- class SpecialClient(Client): ... [\"000CS00B\" full 2L | code 2L]\n\n- class Parent(models.Model): ... [\"000CS00D\" full 2L | code 2L]\n\n- class Child(Parent): ... [\"000CS00F\" full 2L | code 2L]\n\n- class Item(models.Model): ... [\"000CS00J\" full 6L | code 6L]\n  - def __str__(self): ... [\"000CS00I\" full 2L | code 2L]\n\n- class Fowl(models.Model): ... [\"000CS00L\" full 2L | code 2L]\n\n- class Hen(Fowl): ... [\"000CS00M\" full 2L | code 2L]\n\n- class Chick(Fowl): ... [\"000CS00O\" full 2L | code 2L]\n\n- class Base(models.Model): ... [\"000CS00T\" full 6L | code 6L]\n  - class Meta: ... [\"000CS00S\" full 2L | code 2L]\n\n- class A(Base): ... [\"000CS00V\" full 2L | code 2L]\n\n- class B(Base): ... [\"000CS00X\" full 2L | code 2L]\n\n- class C(Base): ... [\"000CS011\" full 4L | code 4L]\n\n# tests/select_related_regress/tests.py (261L)\nfile scope: [\"000CT00R\" full 261L | imports 29L]\n\n- class SelectRelatedRegressTests(TestCase): ... [\"000CT00Q\" full 232L | code 232L]\n  - def test_regression_7110(self): ... [\"000CT00a\" full 47L | code 47L]\n  - def test_regression_8106(self): ... [\"000CT00j\" full 21L | code 21L]\n  - def test_regression_8036(self): ... [\"000CT00m\" full 29L | code 29L]\n  - def test_multi_table_inheritance(self): ... [\"000CT00q\" full 10L | code 10L]\n  - def test_regression_12851(self): ... [\"000CT00w\" full 56L | code 56L]\n  - def test_null_join_promotion(self): ... [\"000CT00D\" full 22L | code 22L]\n  - def test_regression_19870(self): ... [\"000CT00F\" full 6L | code 6L]\n  - def test_regression_10733(self): ... [\"000CT00L\" full 23L | code 23L]\n  - def test_regression_22508(self): ... [\"000CT00P\" full 9L | code 9L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

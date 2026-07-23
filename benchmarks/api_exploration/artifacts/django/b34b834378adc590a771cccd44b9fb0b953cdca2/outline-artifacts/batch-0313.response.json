@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/admin_scripts/configured_dynamic_settings_manage.py",
+        "tests/admin_scripts/configured_settings_manage.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 728 B -> 709 B (3% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/admin_scripts/configured_dynamic_settings_manage.py (21L)\nfile scope: [\"000ga004\" full 21L | module-docs 1L | imports 8L]\n\n- class Settings: ... [\"000ga003\" full 8L | code 8L]\n  - def __getattr__(self, name): ... [\"000ga001\" full 4L | code 4L]\n  - def __dir__(self): ... [\"000ga002\" full 2L | code 2L]\n\n# tests/admin_scripts/configured_settings_manage.py (10L)\nfile scope: [\"000gb000\" full 10L | module-docs 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

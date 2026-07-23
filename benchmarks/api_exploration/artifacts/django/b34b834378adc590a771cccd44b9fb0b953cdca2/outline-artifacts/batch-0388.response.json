@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/check_framework/urls/__init__.py",
+        "tests/check_framework/urls/bad_class_based_error_handlers.py",
+        "tests/check_framework/urls/bad_error_handlers_invalid_path.py",
+        "tests/check_framework/urls/bad_function_based_error_handlers.py",
+        "tests/check_framework/urls/beginning_with_slash.py",
+        "tests/check_framework/urls/cbv_as_view.py",
+        "tests/check_framework/urls/contains_tuple.py",
+        "tests/check_framework/urls/good_class_based_error_handlers.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/check_framework/urls/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/check_framework/urls/bad_class_based_error_handlers.py (17L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|urlpatterns = []\n 2|\n 3|\n 4|class HandlerView:\n 5|    @classmethod\n 6|    def as_view(cls):\n 7|        def view():\n 8|            pass\n 9|\n10|        return view\n11|\n12|\n13|handler400 = HandlerView.as_view()\n14|handler403 = HandlerView.as_view()\n15|handler404 = HandlerView.as_view()\n16|handler500 = HandlerView.as_view()\nnote: EOF\n\n# tests/check_framework/urls/bad_error_handlers_invalid_path.py (7L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|urlpatterns = []\n2|\n3|handler400 = \"django.views.bad_handler\"\n4|handler403 = \"django.invalid_module.bad_handler\"\n5|handler404 = \"invalid_module.bad_handler\"\n6|handler500 = \"django\"\nnote: EOF\n\n# tests/check_framework/urls/bad_function_based_error_handlers.py (11L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|urlpatterns = []\n 2|\n 3|handler400 = __name__ + \".bad_handler\"\n 4|handler403 = __name__ + \".bad_handler\"\n 5|handler404 = __name__ + \".bad_handler\"\n 6|handler500 = __name__ + \".bad_handler\"\n 7|\n 8|\n 9|def bad_handler():\n10|    pass\nnote: EOF\n\n# tests/check_framework/urls/beginning_with_slash.py (7L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.urls import path, re_path\n2|\n3|urlpatterns = [\n4|    path(\"/path-starting-with-slash/\", lambda x: x),\n5|    re_path(r\"/url-starting-with-slash/$\", lambda x: x),\n6|]\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/check_framework/urls/cbv_as_view.py (20L)\nfile scope: [\"000kf007\" full 20L | imports 6L]\n\n- class EmptyCBV(View): ... [\"000kf000\" full 2L | code 2L]\n\n- class EmptyCallableView: ... [\"000kf005\" full 3L | code 3L]\n  - def __call__(self, request, *args, **kwargs): ... [\"000kf004\" full 2L | code 2L]\n\n# tests/check_framework/urls/contains_tuple.py (4L)\nfile scope: [\"000kg001\" full 4L]\n\n\n# tests/check_framework/urls/good_class_based_error_handlers.py (10L)\nfile scope: [\"000kh005\" full 10L | imports 13L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

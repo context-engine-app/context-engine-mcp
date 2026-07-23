@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/command/list_option_type.ts",
+        "examples/command/negatable_options.ts",
+        "examples/command/options.ts",
+        "examples/command/required_options.ts",
+        "examples/command/shell-completions.ts",
+        "examples/command/standalone_options.ts",
+        "examples/command/stop_early.ts",
+        "examples/command/sub_commands.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 4.8 KB -> 1.9 KB (60% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/command/list_option_type.ts (17L)\nfile scope: [\"0002C001\" full 17L | imports 5L]\n\n\n# examples/command/negatable_options.ts (16L)\nfile scope: [\"0002D001\" full 16L | imports 5L]\n\n\n# examples/command/options.ts (13L)\nfile scope: [\"0002E001\" full 13L | imports 5L]\n\n\n# examples/command/required_options.ts (11L)\nfile scope: [\"0002F001\" full 11L | imports 8L]\n\n- required: true [\"0002F000\" full 1L | code 1L]\n\n# examples/command/shell-completions.ts (56L)\nfile scope: [\"0002G00e\" full 56L | imports 67L]\n\n- complete(\"verbose\") callback [\"0002G000\" full 1L | code 1L]\n\n- global: true [\"0002G001\" full 4L | code 4L]\n\n- value: ... [\"0002G002\" full 1L | code 1L]\n\n- complete(\"animal\") callback [\"0002G003\" full 1L | code 1L]\n\n- action() callback [\"0002G004\" full 1L | code 1L]\n\n- complete(\"country\") callback [\"0002G005\" full 1L | code 1L]\n\n- action() callback [\"0002G006\" full 1L | code 1L]\n\n- complete(\"color\") callback [\"0002G007\" full 1L | code 1L]\n\n- complete(\"audi\") callback [\"0002G008\" full 1L | code 1L]\n\n- action() callback [\"0002G00b\" full 3L | code 3L]\n  - color [\"0002G009\" full 3L | code 3L]\n  - model [\"0002G00a\" full 3L | code 3L]\n\n- complete(\"bmw\") callback [\"0002G00c\" full 1L | code 1L]\n\n- complete(\"porsche\") callback [\"0002G00d\" full 1L | code 1L]\n\n# examples/command/standalone_options.ts (11L)\nfile scope: [\"0002H001\" full 11L | imports 7L]\n\n- standalone: true [\"0002H000\" full 1L | code 1L]\n\n# examples/command/stop_early.ts (15L)\nfile scope: [\"0002I001\" full 15L | imports 9L]\n\n- action() callback [\"0002I000\" full 5L | code 5L]\n\n# examples/command/sub_commands.ts (28L)\nfile scope: [\"0002J001\" full 28L | imports 22L]\n\n- action() callback [\"0002J000\" full 6L | code 6L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

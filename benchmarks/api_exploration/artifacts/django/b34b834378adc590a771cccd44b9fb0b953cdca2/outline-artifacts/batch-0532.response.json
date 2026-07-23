@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/i18n/other/locale/fr/__init__.py",
+        "tests/i18n/other/locale/fr/formats.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/i18n/other/locale/fr/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/i18n/other/locale/fr/formats.py (3L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|# A user-defined format\n2|CUSTOM_DAY_FORMAT = \"d/m/Y CUSTOM\"\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

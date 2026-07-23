@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/signal/windows/stub.rs",
+        "tokio/src/signal/windows/sys.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tokio/src/signal/windows/stub.rs (26L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|//! Stub implementations for the platform API so that rustdoc can build linkable\n 2|//! documentation on non-windows platforms.\n 3|\n 4|use crate::signal::RxFuture;\n 5|use std::io;\n 6|\n 7|pub(super) fn ctrl_break() -> io::Result<RxFuture> {\n 8|    panic!()\n 9|}\n10|\n11|pub(super) fn ctrl_close() -> io::Result<RxFuture> {\n12|    panic!()\n13|}\n14|\n15|pub(super) fn ctrl_c() -> io::Result<RxFuture> {\n16|    panic!()\n17|}\n18|\n19|pub(super) fn ctrl_logoff() -> io::Result<RxFuture> {\n20|    panic!()\n21|}\n22|\n23|pub(super) fn ctrl_shutdown() -> io::Result<RxFuture> {\n24|    panic!()\n25|}\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/signal/windows/sys.rs (247L)\nfile scope: [\"0008w00y\" full 247L | imports 12L]\n\n- type EventInfo = watch::Sender<()>; [\"0008w000\" full 1L | code 1L]\n\n- #[derive(Clone, Copy)] #[repr(u32)] enum SignalKind { ... } [\"0008w006\" full 9L | code 9L]\n  - CtrlC = console::CTRL_C_EVENT [\"0008w001\" full 1L | code 1L]\n  - CtrlBreak = console::CTRL_BREAK_EVENT [\"0008w002\" full 1L | code 1L]\n  - CtrlClose = console::CTRL_CLOSE_EVENT [\"0008w003\" full 1L | code 1L]\n  - CtrlLogoff = console::CTRL_LOGOFF_EVENT [\"0008w004\" full 1L | code 1L]\n  - CtrlShutdown = console::CTRL_SHUTDOWN_EVENT [\"0008w005\" full 1L | code 1L]\n\n- impl SignalKind { ... } [\"0008w008\" full 14L | code 14L]\n  - const fn terminates(&self) -> bool { ... } [\"0008w007\" full 12L | code 12L]\n\n- pub(super) fn ctrl_break() -> io::Result<RxFuture> { ... } [\"0008w009\" full 3L | code 3L]\n\n- pub(super) fn ctrl_close() -> io::Result<RxFuture> { ... } [\"0008w00a\" full 3L | code 3L]\n\n- pub(super) fn ctrl_c() -> io::Result<RxFuture> { ... } [\"0008w00b\" full 3L | code 3L]\n\n- pub(super) fn ctrl_logoff() -> io::Result<RxFuture> { ... } [\"0008w00c\" full 3L | code 3L]\n\n- pub(super) fn ctrl_shutdown() -> io::Result<RxFuture> { ... } [\"0008w00d\" full 3L | code 3L]\n\n- fn new(signal: SignalKind) -> io::Result<RxFuture> { ... } [\"0008w00e\" full 14L | code 14L]\n\n- #[derive(Debug, Default)] struct Registry { ... } [\"0008w00k\" full 8L | code 8L]\n  - ctrl_break: EventInfo [\"0008w00f\" full 1L | code 1L]\n  - ctrl_close: EventInfo [\"0008w00g\" full 1L | code 1L]\n  - ctrl_c: EventInfo [\"0008w00h\" full 1L | code 1L]\n  - ctrl_logoff: EventInfo [\"0008w00i\" full 1L | code 1L]\n  - ctrl_shutdown: EventInfo [\"0008w00j\" full 1L | code 1L]\n\n- impl Index<SignalKind> for Registry { ... } [\"0008w00n\" full 13L | code 13L]\n  - type Output = EventInfo; [\"0008w00l\" full 1L | code 1L]\n  - fn index(&self, signal: SignalKind) -> &Self::Output { ... } [\"0008w00m\" full 9L | code 9L]\n\n- static REGISTRY: OnceLock<Result<Registry, i32>> = OnceLock::new(); [\"0008w00o\" full 1L | code 1L]\n\n- unsafe extern \"system\" fn handler(ty: u32) -> BOOL { ... } [\"0008w00p\" full 33L | code 33L]\n\n- #[cfg(all(test, not(loom)))] mod tests { ... } [\"0008w00x\" full 114L | code 114L]\n  - unsafe fn raise_event(signal: SignalKind) { ... } [\"0008w00q\" full 9L | code 9L]\n  - #[test] fn ctrl_c() { ... } [\"0008w00r\" full 18L | code 18L]\n  - #[test] fn ctrl_break() { ... } [\"0008w00s\" full 17L | code 17L]\n  - #[test] fn ctrl_close() { ... } [\"0008w00t\" full 17L | code 17L]\n  - #[test] fn ctrl_shutdown() { ... } [\"0008w00u\" full 17L | code 17L]\n  - #[test] fn ctrl_logoff() { ... } [\"0008w00v\" full 17L | code 17L]\n  - fn rt() -> Runtime { ... } [\"0008w00w\" full 5L | code 5L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

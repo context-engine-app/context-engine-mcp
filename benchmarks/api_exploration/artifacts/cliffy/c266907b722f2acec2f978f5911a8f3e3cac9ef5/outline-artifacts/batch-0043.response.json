@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/prompt.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n 1|#!/usr/bin/env -S deno run\n 2|\n 3|import { Confirm, Input, Number, Secret } from \"@cliffy/prompt\";\n 4|\n 5|let hostname: string, port: number, password: string;\n 6|\n 7|await main();\n 8|\n 9|async function main() {\n10|  hostname = await Input.prompt({\n11|    message: \"Enter the hostname\",\n12|    default: hostname ?? \"localhost\",\n13|  });\n14|\n15|  port = await Number.prompt({\n16|    message: \"Enter the port number\",\n17|    default: port ?? 80,\n18|  });\n19|\n20|  password = await Secret.prompt({\n21|    message: \"Enter your password\",\n22|    default: password,\n23|  });\n24|\n25|  console.log({ port, hostname, password });\n26|  if (!await Confirm.prompt(\"Is everything correct?\")) {\n27|    await main();\n28|  }\n29|}\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

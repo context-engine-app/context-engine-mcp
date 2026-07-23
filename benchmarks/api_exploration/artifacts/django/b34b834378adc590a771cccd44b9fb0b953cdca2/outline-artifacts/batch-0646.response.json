@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_first/__init__.py",
+        "tests/migrations/test_migrations_first/second.py",
+        "tests/migrations/test_migrations_first/thefirst.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/migrations/test_migrations_first/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/test_migrations_first/second.py (25L)\nfile scope: [\"000x1003\" full 25L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000x1002\" full 21L | code 21L]\n\n# tests/migrations/test_migrations_first/thefirst.py (24L)\nfile scope: [\"000x2002\" full 24L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000x2001\" full 20L | code 20L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

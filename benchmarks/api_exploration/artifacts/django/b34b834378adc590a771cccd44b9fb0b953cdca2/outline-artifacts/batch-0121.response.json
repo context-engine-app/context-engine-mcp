@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/flatpages/templatetags/__init__.py",
+        "django/contrib/flatpages/templatetags/flatpages.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/flatpages/templatetags/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/flatpages/templatetags/flatpages.py (102L)\nfile scope: [\"0004z00m\" full 102L | imports 10L]\n\n- class FlatpageNode(template.Node): ... [\"0004z00d\" full 35L | code 35L]\n  - def __init__(self, context_name, starts_with=None, user=None): ... [\"0004z004\" full 10L | code 10L]\n  - def render(self, context): ... [\"0004z00c\" full 23L | code 23L]\n\n- @register.tag def get_flatpages(parser, token): ... [\"0004z00l\" full 56L | code 56L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/template_tests/filter_tests/test_wordcount.py",
+        "tests/template_tests/filter_tests/test_wordwrap.py",
+        "tests/template_tests/filter_tests/test_yesno.py",
+        "tests/template_tests/filter_tests/timezone_utils.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 7.3 KB -> 3.4 KB (54% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/template_tests/filter_tests/test_wordcount.py (43L)\nfile scope: [\"000FU00a\" full 43L | imports 8L]\n\n- class WordcountTests(SimpleTestCase): ... [\"000FU004\" full 21L | code 21L]\n  - @setup( { \"wordcount01\": ( \"{% autoescape off %}{{ a|wordcount }} {{ b|wordcount }}\" \"{% endautoescape %}\" ) } ) def test_wordcount01(self): ... [\"000FU001\" full 13L | code 13L]\n  - @setup({\"wordcount02\": \"{{ a|wordcount }} {{ b|wordcount }}\"}) def test_wordcount02(self): ... [\"000FU003\" full 6L | code 6L]\n\n- class FunctionTests(SimpleTestCase): ... [\"000FU009\" full 12L | code 12L]\n  - def test_empty_string(self): ... [\"000FU005\" full 2L | code 2L]\n  - def test_count_one(self): ... [\"000FU006\" full 2L | code 2L]\n  - def test_count_multiple(self): ... [\"000FU007\" full 2L | code 2L]\n  - def test_non_string_input(self): ... [\"000FU008\" full 2L | code 2L]\n\n# tests/template_tests/filter_tests/test_wordwrap.py (133L)\nfile scope: [\"000FV00o\" full 133L | imports 9L]\n\n- class WordwrapTests(SimpleTestCase): ... [\"000FV004\" full 21L | code 21L]\n  - @setup( { \"wordwrap01\": ( '{% autoescape off %}{{ a|wordwrap:\"3\" }} {{ b|wordwrap:\"3\" }}' \"{% endautoescape %}\" ) } ) def test_wordwrap01(self): ... [\"000FV001\" full 13L | code 13L]\n  - @setup({\"wordwrap02\": '{{ a|wordwrap:\"3\" }} {{ b|wordwrap:\"3\" }}'}) def test_wordwrap02(self): ... [\"000FV003\" full 6L | code 6L]\n\n- class FunctionTests(SimpleTestCase): ... [\"000FV00n\" full 101L | code 101L]\n  - def test_wrap(self): ... [\"000FV005\" full 10L | code 10L]\n  - def test_indent(self): ... [\"000FV006\" full 10L | code 10L]\n  - def test_indent2(self): ... [\"000FV007\" full 10L | code 10L]\n  - def test_non_string_input(self): ... [\"000FV008\" full 2L | code 2L]\n  - def test_wrap_lazy_string(self): ... [\"000FV009\" full 12L | code 12L]\n  - def test_wrap_long_text(self): ... [\"000FV00b\" full 10L | code 10L]\n  - def test_wrap_preserve_newlines(self): ... [\"000FV00g\" full 15L | code 15L]\n  - def test_wrap_preserve_whitespace(self): ... [\"000FV00m\" full 24L | code 24L]\n\n# tests/template_tests/filter_tests/test_yesno.py (42L)\nfile scope: [\"000FW00c\" full 42L | imports 7L]\n\n- class YesNoTests(SimpleTestCase): ... [\"000FW002\" full 5L | code 5L]\n  - @setup({\"t\": '{{ var|yesno:\"yup,nup,mup\" }} {{ var|yesno }}'}) def test_true(self): ... [\"000FW001\" full 4L | code 4L]\n\n- class FunctionTests(SimpleTestCase): ... [\"000FW00b\" full 28L | code 28L]\n  - def test_true(self): ... [\"000FW003\" full 2L | code 2L]\n  - def test_false(self): ... [\"000FW004\" full 2L | code 2L]\n  - def test_none(self): ... [\"000FW005\" full 2L | code 2L]\n  - def test_true_arguments(self): ... [\"000FW006\" full 2L | code 2L]\n  - def test_false_arguments(self): ... [\"000FW007\" full 4L | code 4L]\n  - def test_none_two_arguments(self): ... [\"000FW008\" full 2L | code 2L]\n  - def test_none_three_arguments(self): ... [\"000FW009\" full 2L | code 2L]\n  - def test_invalid_value(self): ... [\"000FW00a\" full 4L | code 4L]\n\n# tests/template_tests/filter_tests/timezone_utils.py (19L)\nfile scope: [\"000FX006\" full 19L | imports 7L]\n\n- class TimezoneTestCase(SimpleTestCase): ... [\"000FX005\" full 12L | code 12L]\n  - def setUp(self): ... [\"000FX000\" full 11L | code 11L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

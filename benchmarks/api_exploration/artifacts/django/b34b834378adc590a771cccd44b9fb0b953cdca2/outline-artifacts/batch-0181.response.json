@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/sitemaps/__init__.py",
+        "django/contrib/sitemaps/apps.py",
+        "django/contrib/sitemaps/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 11.6 KB -> 2.7 KB (77% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/sitemaps/__init__.py (203L)\nfile scope: [\"0007P017\" full 203L | imports 8L]\n\n- class Sitemap: ... [\"0007P00R\" full 165L | code 165L]\n  - def _get(self, name, item, default=None): ... [\"0007P00b\" full 12L | code 12L]\n  - def get_languages_for_item(self, item): ... [\"0007P00d\" full 3L | code 3L]\n  - def _languages(self): ... [\"0007P00e\" full 4L | code 4L]\n  - def _items(self): ... [\"0007P00g\" full 12L | code 12L]\n  - def _location(self, item, force_lang_code=None): ... [\"0007P00l\" full 8L | code 8L]\n  - @property def paginator(self): ... [\"0007P00m\" full 3L | code 3L]\n  - def items(self): ... [\"0007P00n\" full 2L | code 2L]\n  - def location(self, item): ... [\"0007P00p\" full 2L | code 2L]\n  - def get_protocol(self, protocol=None): ... [\"0007P00r\" full 3L | code 3L]\n  - def get_domain(self, site=None): ... [\"0007P00u\" full 15L | code 15L]\n  - def get_urls(self, page=1, site=None, protocol=None): ... [\"0007P00z\" full 4L | code 4L]\n  - def get_latest_lastmod(self): ... [\"0007P00A\" full 10L | code 10L]\n  - def _urls(self, page, protocol, domain): ... [\"0007P00P\" full 54L | code 54L]\n\n- class GenericSitemap(Sitemap): ... [\"0007P016\" full 28L | code 28L]\n  - def __init__(self, info_dict, priority=None, changefreq=None, protocol=None): ... [\"0007P00Y\" full 6L | code 6L]\n  - def items(self): ... [\"0007P012\" full 3L | code 3L]\n  - def lastmod(self, item): ... [\"0007P014\" full 4L | code 4L]\n  - def get_latest_lastmod(self): ... [\"0007P015\" full 8L | code 8L]\n\n# django/contrib/sitemaps/apps.py (9L)\nfile scope: [\"0007Q004\" full 9L | imports 5L]\n\n- class SiteMapsConfig(AppConfig): ... [\"0007Q003\" full 4L | code 4L]\n\n# django/contrib/sitemaps/views.py (141L)\nfile scope: [\"0007R00M\" full 141L | imports 14L]\n\n- @dataclass class SitemapIndexItem: ... [\"0007R002\" full 4L | code 4L]\n\n- def x_robots_tag(func): ... [\"0007R009\" full 8L | code 8L]\n  - @wraps(func) def inner(request, *args, **kwargs): ... [\"0007R008\" full 5L | code 5L]\n\n- def _get_latest_lastmod(current_lastmod, new_lastmod): ... [\"0007R00c\" full 10L | code 10L]\n\n- @x_robots_tag def index( request, sitemaps, template_name=\"sitemap_index.xml\", content_type=\"application/xml\", sitemap_url_name=\"django.contrib.sitemaps.views.sitemap\", ): ... [\"0007R00v\" full 47L | code 47L]\n\n- @x_robots_tag def sitemap( request, sitemaps, section=None, template_name=\"sitemap.xml\", content_type=\"application/xml\", ): ... [\"0007R00L\" full 50L | code 50L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

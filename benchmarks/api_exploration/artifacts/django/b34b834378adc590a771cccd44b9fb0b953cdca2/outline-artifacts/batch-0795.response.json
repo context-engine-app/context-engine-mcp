@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/template_tests/__init__.py",
+        "tests/template_tests/alternate_urls.py",
+        "tests/template_tests/annotated_tag_function.py",
+        "tests/template_tests/broken_tag.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/template_tests/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/template_tests/alternate_urls.py (11L)\nfile scope: [\"000EX001\" full 11L | imports 5L]\n\n\n# tests/template_tests/annotated_tag_function.py (9L)\nfile scope: [\"000EY003\" full 9L | imports 7L]\n\n- @register.simple_tag() def annotated_tag_function(val: int): ... [\"000EY002\" full 3L | code 3L]\n\n# tests/template_tests/broken_tag.py (2L)\nfile scope: [\"000EZ000\" full 2L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

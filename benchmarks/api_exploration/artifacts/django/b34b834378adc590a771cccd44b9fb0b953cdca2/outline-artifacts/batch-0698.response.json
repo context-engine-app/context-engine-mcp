@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/model_options/models/__init__.py",
+        "tests/model_options/models/default_related_name.py",
+        "tests/model_options/models/tablespaces.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/model_options/models/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/model_options/models/default_related_name.py (42L)\nfile scope: [\"000A600p\" full 42L | imports 4L]\n\n- class Author(models.Model): ... [\"000A6002\" full 3L | code 3L]\n\n- class Editor(models.Model): ... [\"000A6005\" full 3L | code 3L]\n\n- class Book(models.Model): ... [\"000A600b\" full 7L | code 7L]\n  - class Meta: ... [\"000A600a\" full 2L | code 2L]\n\n- class Store(models.Model): ... [\"000A600h\" full 7L | code 7L]\n  - class Meta: ... [\"000A600g\" full 3L | code 3L]\n\n- class BookStore(Store): ... [\"000A600j\" full 2L | code 2L]\n\n- class EditorStore(Store): ... [\"000A600o\" full 6L | code 6L]\n  - class Meta: ... [\"000A600n\" full 2L | code 2L]\n\n# tests/model_options/models/tablespaces.py (54L)\nfile scope: [\"000A700o\" full 54L | imports 21L]\n\n- class ScientistRef(models.Model): ... [\"000A7001\" full 2L | code 2L]\n\n- class ArticleRef(models.Model): ... [\"000A7006\" full 7L | code 7L]\n\n- class Scientist(models.Model): ... [\"000A700c\" full 7L | code 7L]\n  - class Meta: ... [\"000A700b\" full 4L | code 4L]\n\n- class Article(models.Model): ... [\"000A700l\" full 12L | code 12L]\n  - class Meta: ... [\"000A700k\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

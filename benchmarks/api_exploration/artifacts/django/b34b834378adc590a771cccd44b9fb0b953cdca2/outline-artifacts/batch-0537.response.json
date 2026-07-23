@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/i18n/patterns/urls/__init__.py",
+        "tests/i18n/patterns/urls/default.py",
+        "tests/i18n/patterns/urls/disabled.py",
+        "tests/i18n/patterns/urls/included.py",
+        "tests/i18n/patterns/urls/namespace.py",
+        "tests/i18n/patterns/urls/path_unused.py",
+        "tests/i18n/patterns/urls/wrong.py",
+        "tests/i18n/patterns/urls/wrong_namespace.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/i18n/patterns/urls/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/i18n/patterns/urls/default.py (39L)\nfile scope: [\"000sF002\" full 39L | imports 9L]\n\n\n# tests/i18n/patterns/urls/disabled.py (10L)\nfile scope: [\"000sG002\" full 10L | imports 8L]\n\n\n# tests/i18n/patterns/urls/included.py (9L)\nfile scope: [\"000sH002\" full 9L | imports 7L]\n\n\n# tests/i18n/patterns/urls/namespace.py (13L)\nfile scope: [\"000sI003\" full 13L | imports 10L]\n\n\n# tests/i18n/patterns/urls/path_unused.py (9L)\nfile scope: [\"000sJ002\" full 9L | imports 7L]\n\n\n# tests/i18n/patterns/urls/wrong.py (11L)\nfile scope: [\"000sK001\" full 11L | imports 5L]\n\n\n# tests/i18n/patterns/urls/wrong_namespace.py (12L)\nfile scope: [\"000sL003\" full 12L | imports 11L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

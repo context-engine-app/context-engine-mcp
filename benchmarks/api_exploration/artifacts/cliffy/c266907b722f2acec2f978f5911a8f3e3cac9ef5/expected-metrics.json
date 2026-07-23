@@ -1,0 +1,35 @@
+{
+  "manifest": {
+    "file_count": 361,
+    "hash": "951c254a07eeac8fbff656dd944556510b768007a786c6800a2d5b14ef3b862c"
+  },
+  "primary_extensions": [
+    ".ts"
+  ],
+  "repository": {
+    "display_name": "Cliffy",
+    "language": "TypeScript",
+    "requested_revision": "c266907b722f2acec2f978f5911a8f3e3cac9ef5",
+    "revision": "c266907b722f2acec2f978f5911a8f3e3cac9ef5"
+  },
+  "tokenizers": {
+    "cl100k_base": {
+      "multiplier": 1.8367939149455357,
+      "outline_bytes": 540642,
+      "outline_tokens": 181954,
+      "raw_bytes": 1227792,
+      "raw_tokens": 334212,
+      "reduction_percent": 45.55731092839276,
+      "version": "1.0.22"
+    },
+    "o200k_base": {
+      "multiplier": 1.8389021741515106,
+      "outline_bytes": 540642,
+      "outline_tokens": 182324,
+      "raw_bytes": 1227792,
+      "raw_tokens": 335276,
+      "reduction_percent": 45.619728223911046,
+      "version": "1.0.22"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/db/backends/sqlite3/schema.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 19.9 KB -> 1.7 KB (91% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/db/backends/sqlite3/schema.py (503L)\nfile scope: [\"000b401o\" full 503L | imports 15L]\n\n- class DatabaseSchemaEditor(BaseDatabaseSchemaEditor): ... [\"000b401n\" full 488L | code 488L]\n  - def __enter__(self): ... [\"000b4008\" full 12L | code 12L]\n  - def __exit__(self, exc_type, exc_value, traceback): ... [\"000b400c\" full 4L | code 4L]\n  - def quote_value(self, value): ... [\"000b400e\" full 30L | code 30L]\n  - def prepare_default(self, value): ... [\"000b400g\" full 2L | code 2L]\n  - def _remake_table( self, model, create_field=None, delete_field=None, alter_fields=None ): ... [\"000b400J\" full 203L | code 203L]\n    - def is_self_referential(f): ... [\"000b400m\" full 2L | code 2L]\n  - def delete_model(self, model, handle_autom2m=True): ... [\"000b400O\" full 17L | code 17L]\n  - def add_field(self, model, field): ... [\"000b400R\" full 30L | code 30L]\n  - def remove_field(self, model, field): ... [\"000b400U\" full 26L | code 26L]\n  - def _alter_field( self, model, old_field, new_field, old_type, new_type, old_db_params, new_db_params, strict=False, ): ... [\"000b4019\" full 54L | code 54L]\n  - def _alter_many_to_many(self, model, old_field, new_field, strict): ... [\"000b401e\" full 63L | code 63L]\n  - def add_constraint(self, model, constraint): ... [\"000b401h\" full 10L | code 10L]\n  - def remove_constraint(self, model, constraint): ... [\"000b401k\" full 10L | code 10L]\n  - def _collate_sql(self, collation): ... [\"000b401m\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

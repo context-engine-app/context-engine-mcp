@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/test_utils/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 475 B -> 574 B (-21% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/test_utils/views.py (20L)\nfile scope: [\"000I8009\" full 20L | imports 8L]\n\n- def get_person(request, pk): ... [\"000I8003\" full 3L | code 3L]\n\n- def no_template_used(request): ... [\"000I8006\" full 3L | code 3L]\n\n- def empty_response(request): ... [\"000I8008\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

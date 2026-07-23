@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio-util/src/util/maybe_dangling.rs",
+        "tokio-util/src/util/memchr.rs",
+        "tokio-util/src/util/mod.rs",
+        "tokio-util/src/util/poll_buf.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 10.5 KB -> 2.9 KB (72% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio-util/src/util/maybe_dangling.rs (68L)\nfile scope: [\"0003f00c\" full 68L | imports 6L]\n\n- #[repr(transparent)] pub(crate) struct MaybeDangling<T>( ... ); [\"0003f000\" full 23L | code 2L | docs 21L]\n\n- impl<T> Drop for MaybeDangling<T> { ... } [\"0003f002\" full 6L | code 6L]\n  - fn drop(&mut self) { ... } [\"0003f001\" full 4L | code 4L]\n\n- impl<T> MaybeDangling<T> { ... } [\"0003f004\" full 5L | code 5L]\n  - pub(crate) fn new(inner: T) -> Self { ... } [\"0003f003\" full 3L | code 3L]\n\n- impl<F: Future> Future for MaybeDangling<F> { ... } [\"0003f007\" full 9L | code 9L]\n  - type Output = F::Output; [\"0003f005\" full 1L | code 1L]\n  - fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> { ... } [\"0003f006\" full 5L | code 5L]\n\n- #[test] fn maybedangling_runs_drop() { ... } [\"0003f00b\" full 15L | code 15L]\n  - struct SetOnDrop<'a>( ... ); [\"0003f008\" full 1L | code 1L]\n  - impl Drop for SetOnDrop<'_> { ... } [\"0003f00a\" full 5L | code 5L]\n    - fn drop(&mut self) { ... } [\"0003f009\" full 3L | code 3L]\n\n# tokio-util/src/util/memchr.rs (103L)\nfile scope: [\"0003g007\" full 103L | module-docs 4L]\n\n- #[cfg(not(all(unix, feature = \"libc\")))] fn memchr_inner(needle: u8, haystack: &[u8]) -> Option<usize> { ... } [\"0003g000\" full 4L | code 4L]\n\n- #[cfg(all(unix, feature = \"libc\"))] fn memchr_inner(needle: u8, haystack: &[u8]) -> Option<usize> { ... } [\"0003g001\" full 24L | code 24L]\n\n- pub(crate) fn memchr(needle: u8, haystack: &[u8]) -> Option<usize> { ... } [\"0003g002\" full 16L | code 16L]\n\n- #[cfg(test)] mod tests { ... } [\"0003g006\" full 50L | code 50L]\n  - #[test] fn memchr_test() { ... } [\"0003g003\" full 23L | code 23L]\n  - #[test] fn memchr_all() { ... } [\"0003g004\" full 14L | code 14L]\n  - #[test] fn memchr_empty() { ... } [\"0003g005\" full 6L | code 6L]\n\n# tokio-util/src/util/mod.rs (34L)\nfile scope: [\"0003h003\" full 34L]\n\n- mod maybe_dangling; [\"0003h000\" full 1L | code 1L]\n\n- #[cfg(feature = \"codec\")] pub(crate) mod memchr; [\"0003h001\" full 2L | code 2L]\n\n- #[cfg(any(feature = \"io\", feature = \"codec\"))] mod poll_buf; [\"0003h002\" full 2L | code 2L]\n\n# tokio-util/src/util/poll_buf.rs (144L)\nfile scope: [\"0003i003\" full 144L | imports 8L]\n\n- #[cfg_attr(not(feature = \"io\"), allow(unreachable_pub))] pub fn poll_read_buf<T: AsyncRead + ?Sized, B: BufMut>( io: Pin<&mut T>, cx: &mut Context<'_>, buf: &mut B, ) -> Poll<io::Result<usize>> { ... } [\"0003i000\" full 71L | code 33L | docs 38L]\n\n- #[cfg_attr(not(feature = \"io\"), allow(unreachable_pub))] pub fn poll_write_buf<T: AsyncWrite + ?Sized, B: Buf>( io: Pin<&mut T>, cx: &mut Context<'_>, buf: &mut B, ) -> Poll<io::Result<usize>> { ... } [\"0003i002\" full 64L | code 24L | docs 40L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/table.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 570 B -> 363 B (36% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/table.ts (27L)\nfile scope: [\"0003s001\" full 27L | imports 5L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

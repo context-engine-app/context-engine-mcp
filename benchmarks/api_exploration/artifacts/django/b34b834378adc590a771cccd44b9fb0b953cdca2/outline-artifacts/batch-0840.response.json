@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/urlpatterns/__init__.py",
+        "tests/urlpatterns/converter_urls.py",
+        "tests/urlpatterns/converters.py",
+        "tests/urlpatterns/included_urls.py",
+        "tests/urlpatterns/lazy_path_urls.py",
+        "tests/urlpatterns/more_urls.py",
+        "tests/urlpatterns/path_base64_urls.py",
+        "tests/urlpatterns/path_dynamic_urls.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/urlpatterns/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/urlpatterns/converter_urls.py (9L)\nfile scope: [\"000Iv001\" full 9L | imports 5L]\n\n\n# tests/urlpatterns/converters.py (39L)\nfile scope: [\"000Iw00i\" full 39L | imports 4L]\n\n- class Base64Converter: ... [\"000Iw005\" full 8L | code 8L]\n  - def to_python(self, value): ... [\"000Iw002\" full 2L | code 2L]\n  - def to_url(self, value): ... [\"000Iw004\" full 2L | code 2L]\n\n- class DynamicConverter: ... [\"000Iw00h\" full 25L | code 25L]\n  - @regex.setter def regex(self): ... [\"000Iw008\" full 3L | code 3L]\n  - def to_python(self, value): ... [\"000Iw00a\" full 2L | code 2L]\n  - def to_url(self, value): ... [\"000Iw00c\" full 2L | code 2L]\n  - @classmethod def register_to_python(cls, value): ... [\"000Iw00e\" full 3L | code 3L]\n  - @classmethod def register_to_url(cls, value): ... [\"000Iw00g\" full 3L | code 3L]\n\n# tests/urlpatterns/included_urls.py (9L)\nfile scope: [\"000Ix001\" full 9L | imports 5L]\n\n\n# tests/urlpatterns/lazy_path_urls.py (10L)\nfile scope: [\"000Iy001\" full 10L | imports 6L]\n\n\n# tests/urlpatterns/more_urls.py (13L)\nfile scope: [\"000Iz001\" full 13L | imports 5L]\n\n\n# tests/urlpatterns/path_base64_urls.py (28L)\nfile scope: [\"000IA003\" full 28L | imports 23L]\n\n\n# tests/urlpatterns/path_dynamic_urls.py (10L)\nfile scope: [\"000IB001\" full 10L | imports 7L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

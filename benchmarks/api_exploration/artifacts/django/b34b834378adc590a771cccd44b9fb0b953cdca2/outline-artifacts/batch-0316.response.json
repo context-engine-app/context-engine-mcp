@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/admin_scripts/custom_templates/project_template/additional_dir/additional_file.py",
+        "tests/admin_scripts/custom_templates/project_template/additional_dir/extra.py",
+        "tests/admin_scripts/custom_templates/project_template/additional_dir/localized.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/admin_scripts/custom_templates/project_template/additional_dir/additional_file.py (2L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|# some file for {{ project_name }} test project\nnote: EOF\n\n# tests/admin_scripts/custom_templates/project_template/additional_dir/extra.py (2L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|# this file uses the {{ extra }} variable\nnote: EOF\n\n# tests/admin_scripts/custom_templates/project_template/additional_dir/localized.py (3L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|# Regression for #22699.\n2|# Generated at {% now \"DATE_FORMAT\" %}\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

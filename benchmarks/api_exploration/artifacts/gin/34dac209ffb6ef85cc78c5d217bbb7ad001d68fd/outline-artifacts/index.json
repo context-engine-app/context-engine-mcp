@@ -1,0 +1,1543 @@
+{
+  "batch_policy": {
+    "batches": [
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 3,
+        "files": [
+          "auth.go",
+          "auth_test.go",
+          "benchmarks_test.go"
+        ],
+        "id": "batch-0001",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 4079,
+        "rendered_text_sha256": "8c8a97237038ed9818d5cf213344acc272dcaed4302e0becda639946bd7470ca",
+        "request": {
+          "args": {
+            "files": [
+              "auth.go",
+              "auth_test.go",
+              "benchmarks_test.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0001.response.json",
+        "response_sha256": "93c00938371de88bd4840f787aa54957fc1f89571e89d6cecca9cd9df95ab427",
+        "start_index": 0,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 11,
+        "files": [
+          "binding/binding.go",
+          "binding/binding_msgpack_test.go",
+          "binding/binding_nomsgpack.go",
+          "binding/binding_test.go",
+          "binding/bson.go",
+          "binding/default_validator.go",
+          "binding/default_validator_benchmark_test.go",
+          "binding/default_validator_test.go"
+        ],
+        "id": "batch-0002",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 21290,
+        "rendered_text_sha256": "1328e5bd82e9f041fd45c471a172dbbb126b096218cfc0874fb07807876fb9ab",
+        "request": {
+          "args": {
+            "files": [
+              "binding/binding.go",
+              "binding/binding_msgpack_test.go",
+              "binding/binding_nomsgpack.go",
+              "binding/binding_test.go",
+              "binding/bson.go",
+              "binding/default_validator.go",
+              "binding/default_validator_benchmark_test.go",
+              "binding/default_validator_test.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0002.response.json",
+        "response_sha256": "7939e1a151dae61ac6b647ed00690bc25ef064f54edb2ba73ba2df10143ab583",
+        "start_index": 3,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 19,
+        "files": [
+          "binding/form.go",
+          "binding/form_mapping.go",
+          "binding/form_mapping_benchmark_test.go",
+          "binding/form_mapping_test.go",
+          "binding/header.go",
+          "binding/json.go",
+          "binding/json_test.go",
+          "binding/msgpack.go"
+        ],
+        "id": "batch-0003",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 18773,
+        "rendered_text_sha256": "30836f7c81ff771b9e4608a9ef7830f35943bbde0f426cb1c354a5d6366553dd",
+        "request": {
+          "args": {
+            "files": [
+              "binding/form.go",
+              "binding/form_mapping.go",
+              "binding/form_mapping_benchmark_test.go",
+              "binding/form_mapping_test.go",
+              "binding/header.go",
+              "binding/json.go",
+              "binding/json_test.go",
+              "binding/msgpack.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0003.response.json",
+        "response_sha256": "f0938d582a633c2ad3c8e7fd116301d38c227a2c847588e005d755314ad829cc",
+        "start_index": 11,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 27,
+        "files": [
+          "binding/msgpack_test.go",
+          "binding/multipart_form_mapping.go",
+          "binding/multipart_form_mapping_test.go",
+          "binding/plain.go",
+          "binding/protobuf.go",
+          "binding/query.go",
+          "binding/toml.go",
+          "binding/toml_test.go"
+        ],
+        "id": "batch-0004",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 4091,
+        "rendered_text_sha256": "525fbd033eca9f9c355af76a911eff9775c805d449e0dd4a045eed0cffdeeca0",
+        "request": {
+          "args": {
+            "files": [
+              "binding/msgpack_test.go",
+              "binding/multipart_form_mapping.go",
+              "binding/multipart_form_mapping_test.go",
+              "binding/plain.go",
+              "binding/protobuf.go",
+              "binding/query.go",
+              "binding/toml.go",
+              "binding/toml_test.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0004.response.json",
+        "response_sha256": "8615f1a3e62fc185035f79fe0e8af525f40528071361c0dfdf07cdef2ffc2e30",
+        "start_index": 19,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 33,
+        "files": [
+          "binding/uri.go",
+          "binding/validate_test.go",
+          "binding/xml.go",
+          "binding/xml_test.go",
+          "binding/yaml.go",
+          "binding/yaml_test.go"
+        ],
+        "id": "batch-0005",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 6800,
+        "rendered_text_sha256": "21383d9631847c6f265885515e8b11ce799d5e69222e633f9aa68ac798d3df1b",
+        "request": {
+          "args": {
+            "files": [
+              "binding/uri.go",
+              "binding/validate_test.go",
+              "binding/xml.go",
+              "binding/xml_test.go",
+              "binding/yaml.go",
+              "binding/yaml_test.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0005.response.json",
+        "response_sha256": "19a2652ae06be2833978e2380cae4576b3b9bc9b82d918b943591f0b68aaf812",
+        "start_index": 27,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 38,
+        "files": [
+          "codec/json/api.go",
+          "codec/json/go_json.go",
+          "codec/json/json.go",
+          "codec/json/jsoniter.go",
+          "codec/json/sonic.go"
+        ],
+        "id": "batch-0006",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 4329,
+        "rendered_text_sha256": "195237730f6b70f9ef6411100dcc5fe934a9b1939b61239868a751bb543010b2",
+        "request": {
+          "args": {
+            "files": [
+              "codec/json/api.go",
+              "codec/json/go_json.go",
+              "codec/json/json.go",
+              "codec/json/jsoniter.go",
+              "codec/json/sonic.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0006.response.json",
+        "response_sha256": "c714f68104158e7b99e103f04af4c11efce6d2298d4a80b0d7856583eac0a789",
+        "start_index": 33,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 46,
+        "files": [
+          "context.go",
+          "context_appengine.go",
+          "context_file_test.go",
+          "context_test.go",
+          "debug.go",
+          "debug_test.go",
+          "deprecated.go",
+          "deprecated_test.go"
+        ],
+        "id": "batch-0007",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 37626,
+        "rendered_text_sha256": "82f7ae00be1acf26cf191c478549a799869fb6fb115cd8f27515669256504c65",
+        "request": {
+          "args": {
+            "files": [
+              "context.go",
+              "context_appengine.go",
+              "context_file_test.go",
+              "context_test.go",
+              "debug.go",
+              "debug_test.go",
+              "deprecated.go",
+              "deprecated_test.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0007.response.json",
+        "response_sha256": "720b7d8c2c9a79a8f30aac8e7ea68ef825d2370ecc0935142b1691c56390de8a",
+        "start_index": 38,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 52,
+        "files": [
+          "doc.go",
+          "errors.go",
+          "errors_test.go",
+          "fs.go",
+          "fs_test.go",
+          "gin.go"
+        ],
+        "id": "batch-0008",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 11081,
+        "rendered_text_sha256": "6f8fbd8532db030d60ace8d11e48b0a8972e8f971787ff515cfc79fe112260e2",
+        "request": {
+          "args": {
+            "files": [
+              "doc.go",
+              "errors.go",
+              "errors_test.go",
+              "fs.go",
+              "fs_test.go",
+              "gin.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0008.response.json",
+        "response_sha256": "36fa0c3bf9c54e61518b7484984a178b35e01a8bf2659bad47472d8baf32b35b",
+        "start_index": 46,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 54,
+        "files": [
+          "ginS/gins.go",
+          "ginS/gins_test.go"
+        ],
+        "id": "batch-0009",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 4326,
+        "rendered_text_sha256": "924ab2c9cd2a3050ea09227020e8fcc1fe4b36be32c18c182583315f9224df38",
+        "request": {
+          "args": {
+            "files": [
+              "ginS/gins.go",
+              "ginS/gins_test.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0009.response.json",
+        "response_sha256": "4975c34bd2eb5bc601feda07afdd621d4fa938d195c44ea464b161ad22f14b4e",
+        "start_index": 52,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 57,
+        "files": [
+          "gin_integration_test.go",
+          "gin_test.go",
+          "githubapi_test.go"
+        ],
+        "id": "batch-0010",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 8129,
+        "rendered_text_sha256": "7d0adde41d2e54624cbee0a84cb5ce7faeb2c53e558d65820846b3bb070e617e",
+        "request": {
+          "args": {
+            "files": [
+              "gin_integration_test.go",
+              "gin_test.go",
+              "githubapi_test.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0010.response.json",
+        "response_sha256": "e81e83ad8fc433cc94c81933b0c2c16bfb46ed735fc33c2ebd6aef8e6277dede",
+        "start_index": 54,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 59,
+        "files": [
+          "internal/bytesconv/bytesconv.go",
+          "internal/bytesconv/bytesconv_test.go"
+        ],
+        "id": "batch-0011",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1901,
+        "rendered_text_sha256": "3520412195c5565e96eac62d5824a41716bb6eb9827d1e92783bc4074b3028f8",
+        "request": {
+          "args": {
+            "files": [
+              "internal/bytesconv/bytesconv.go",
+              "internal/bytesconv/bytesconv_test.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0011.response.json",
+        "response_sha256": "88c562db25799a19b831f69411d9bf8b03f8a7a4ff52fc9f93e9adf7eedf3990",
+        "start_index": 57,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 61,
+        "files": [
+          "internal/fs/fs.go",
+          "internal/fs/fs_test.go"
+        ],
+        "id": "batch-0012",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1068,
+        "rendered_text_sha256": "9b888599f518dbdaad3735b2353b36d443c9e80de0b9125b379867277b33d72f",
+        "request": {
+          "args": {
+            "files": [
+              "internal/fs/fs.go",
+              "internal/fs/fs_test.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0012.response.json",
+        "response_sha256": "40e75ea91818750026adc71e1a7c7e3429a0e5cc565e6b7873e80703068e41db",
+        "start_index": 59,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 69,
+        "files": [
+          "logger.go",
+          "logger_test.go",
+          "middleware_test.go",
+          "mode.go",
+          "mode_test.go",
+          "path.go",
+          "path_test.go",
+          "recovery.go"
+        ],
+        "id": "batch-0013",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 9446,
+        "rendered_text_sha256": "1af206a7f63d7ad4c22218d23dd67479f9c6878622ad61b05c33fde835818057",
+        "request": {
+          "args": {
+            "files": [
+              "logger.go",
+              "logger_test.go",
+              "middleware_test.go",
+              "mode.go",
+              "mode_test.go",
+              "path.go",
+              "path_test.go",
+              "recovery.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0013.response.json",
+        "response_sha256": "d913d095d4c13c2316e7f090fe77826ce8549ecf3a4f146aab78cb71be1b5a36",
+        "start_index": 61,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 70,
+        "files": [
+          "recovery_test.go"
+        ],
+        "id": "batch-0014",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 1488,
+        "rendered_text_sha256": "2ddd308a5e8a42306e1849514c50f2ef571246f4a225d711fc3fd74a90aca9ae",
+        "request": {
+          "args": {
+            "files": [
+              "recovery_test.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0014.response.json",
+        "response_sha256": "d070c998d642d07fd40f7bbe030fe677650fcff9f8477a6496e9eb7b6d3f17e1",
+        "start_index": 69,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 78,
+        "files": [
+          "render/bson.go",
+          "render/data.go",
+          "render/html.go",
+          "render/json.go",
+          "render/msgpack.go",
+          "render/pdf.go",
+          "render/protobuf.go",
+          "render/reader.go"
+        ],
+        "id": "batch-0015",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 6740,
+        "rendered_text_sha256": "f03c76d9f6090d5f45d6061ecfd7b762575a6fde0807a58b60e71b65951091c8",
+        "request": {
+          "args": {
+            "files": [
+              "render/bson.go",
+              "render/data.go",
+              "render/html.go",
+              "render/json.go",
+              "render/msgpack.go",
+              "render/pdf.go",
+              "render/protobuf.go",
+              "render/reader.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0015.response.json",
+        "response_sha256": "3afe416701e40740bafe5a2c5ed73dc2e8043d215654b8db08d832de30712d7a",
+        "start_index": 70,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 86,
+        "files": [
+          "render/reader_test.go",
+          "render/redirect.go",
+          "render/render.go",
+          "render/render_msgpack_test.go",
+          "render/render_test.go",
+          "render/text.go",
+          "render/toml.go",
+          "render/xml.go"
+        ],
+        "id": "batch-0016",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 7789,
+        "rendered_text_sha256": "622476d659f269249c1d284feee52b40bc62e962fda701d956c636298b6f95dc",
+        "request": {
+          "args": {
+            "files": [
+              "render/reader_test.go",
+              "render/redirect.go",
+              "render/render.go",
+              "render/render_msgpack_test.go",
+              "render/render_test.go",
+              "render/text.go",
+              "render/toml.go",
+              "render/xml.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0016.response.json",
+        "response_sha256": "db765260b111b63ca426622fe2aaddd668458ef0af5c754ac267238a81365f3f",
+        "start_index": 78,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 87,
+        "files": [
+          "render/yaml.go"
+        ],
+        "id": "batch-0017",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 665,
+        "rendered_text_sha256": "905cc90fae4afd6aef99ab7298cff255cf0f067ec398f3d47ad2cc1b4bdbb5a3",
+        "request": {
+          "args": {
+            "files": [
+              "render/yaml.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0017.response.json",
+        "response_sha256": "89ff2a34732b89dfd35c48b180b106ec5ecb93047727fbd8a54661dc36786eb7",
+        "start_index": 86,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 93,
+        "files": [
+          "response_writer.go",
+          "response_writer_test.go",
+          "routergroup.go",
+          "routergroup_test.go",
+          "routes_test.go",
+          "test_helpers.go"
+        ],
+        "id": "batch-0018",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 14473,
+        "rendered_text_sha256": "438842a9b961c544b5ef7921f7148bab88a9fee3e03efef090c2854b90e6e06e",
+        "request": {
+          "args": {
+            "files": [
+              "response_writer.go",
+              "response_writer_test.go",
+              "routergroup.go",
+              "routergroup_test.go",
+              "routes_test.go",
+              "test_helpers.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0018.response.json",
+        "response_sha256": "2a7eca6bad12785b449fef010fdec9425788cb3fdaffe4b318a1a155703541e9",
+        "start_index": 87,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 94,
+        "files": [
+          "testdata/protoexample/test.pb.go"
+        ],
+        "id": "batch-0019",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 3749,
+        "rendered_text_sha256": "d292652b8a43c6233fb0cf1039464daf66d2cf8efc2f3798a359d0275acfb49b",
+        "request": {
+          "args": {
+            "files": [
+              "testdata/protoexample/test.pb.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0019.response.json",
+        "response_sha256": "87665878246ed47b9c30c57196d4108b0496120ad3f1e9b398ffc8f266542daa",
+        "start_index": 93,
+        "status": "accepted"
+      },
+      {
+        "content_block_types": [
+          "text"
+        ],
+        "end_index": 99,
+        "files": [
+          "tree.go",
+          "tree_test.go",
+          "utils.go",
+          "utils_test.go",
+          "version.go"
+        ],
+        "id": "batch-0020",
+        "ignored_content_block_types": [],
+        "rendered_bytes": 10137,
+        "rendered_text_sha256": "d836163e6cbef0f6d5d7027edf113833524756cc76a29f85f336e1f653a5d267",
+        "request": {
+          "args": {
+            "files": [
+              "tree.go",
+              "tree_test.go",
+              "utils.go",
+              "utils_test.go",
+              "version.go"
+            ],
+            "workspace_root": "<repository-root>"
+          },
+          "tool": "outline"
+        },
+        "response_file": "batch-0020.response.json",
+        "response_sha256": "832ba468333952693fe88bb736d285cd784e9e740669ee824617802b959098c4",
+        "start_index": 94,
+        "status": "accepted"
+      }
+    ],
+    "count": 20,
+    "size": 8,
+    "split_events": [],
+    "strategy": "adjacent_parent_directory_then_maximum_size"
+  },
+  "capture": {
+    "acceptance": {
+      "invariant": "final accepted batches cover every manifest file exactly once and in manifest order",
+      "recursive_split_only_on_verified_truncation": true
+    },
+    "cache_enabled": true,
+    "captured_at": "2026-07-22T04:39:06.802Z",
+    "ce": {
+      "binary_sha256": "6350b9a03a1136d94ec242afb1b87aa13abe47978262b43b864dbce8e231ab9a",
+      "protocol_version": "2025-06-18",
+      "server_info": {
+        "name": "rmcp",
+        "version": "2.2.0"
+      },
+      "version": "context-engine 0.1.0 (UNLICENSED DEV BUILD)"
+    },
+    "language_server": {
+      "identity": "gopls",
+      "version": "golang.org/x/tools/gopls v0.23.0"
+    },
+    "partial_failures": [],
+    "rendering": {
+      "exclude_host_wrapper_text": true,
+      "include_saved_receipts": true,
+      "include_service_guidance": true,
+      "outline": "sum content[].text joined with LF within each final accepted MCP response without separators between responses",
+      "source": "sum UTF-8 bytes and tokenizer counts per manifest file without separators"
+    },
+    "script_revision": "d0d747dd2099b996b99032ee5c8a9bb69183cec9",
+    "script_sha256": "1dfa61d08d63b0987ee7076bcd467cddb94ff1936bbe13d4afb7cc1ab04541be",
+    "status": "accepted",
+    "tooling_identities": {
+      "capture_script": {
+        "path": "scripts/capture_repository_outlines.mjs",
+        "sha256": "1dfa61d08d63b0987ee7076bcd467cddb94ff1936bbe13d4afb7cc1ab04541be"
+      },
+      "shared_script": {
+        "path": "scripts/repository_outline_common.mjs",
+        "sha256": "04229018142879248065b767ccb028fba7a27e8daf323f8e30c4bc599cb648b3"
+      }
+    },
+    "truncation_rejected": true,
+    "warnings": [
+      "server initialized the workspace during startup"
+    ],
+    "workspace_root": "<repository-root>"
+  },
+  "files": [
+    {
+      "batch_id": "batch-0001",
+      "batch_position": 0,
+      "path": "auth.go",
+      "response_file": "batch-0001.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0001",
+      "batch_position": 1,
+      "path": "auth_test.go",
+      "response_file": "batch-0001.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0001",
+      "batch_position": 2,
+      "path": "benchmarks_test.go",
+      "response_file": "batch-0001.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0002",
+      "batch_position": 0,
+      "path": "binding/binding.go",
+      "response_file": "batch-0002.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0002",
+      "batch_position": 1,
+      "path": "binding/binding_msgpack_test.go",
+      "response_file": "batch-0002.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0002",
+      "batch_position": 2,
+      "path": "binding/binding_nomsgpack.go",
+      "response_file": "batch-0002.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0002",
+      "batch_position": 3,
+      "path": "binding/binding_test.go",
+      "response_file": "batch-0002.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0002",
+      "batch_position": 4,
+      "path": "binding/bson.go",
+      "response_file": "batch-0002.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0002",
+      "batch_position": 5,
+      "path": "binding/default_validator.go",
+      "response_file": "batch-0002.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0002",
+      "batch_position": 6,
+      "path": "binding/default_validator_benchmark_test.go",
+      "response_file": "batch-0002.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0002",
+      "batch_position": 7,
+      "path": "binding/default_validator_test.go",
+      "response_file": "batch-0002.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0003",
+      "batch_position": 0,
+      "path": "binding/form.go",
+      "response_file": "batch-0003.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0003",
+      "batch_position": 1,
+      "path": "binding/form_mapping.go",
+      "response_file": "batch-0003.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0003",
+      "batch_position": 2,
+      "path": "binding/form_mapping_benchmark_test.go",
+      "response_file": "batch-0003.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0003",
+      "batch_position": 3,
+      "path": "binding/form_mapping_test.go",
+      "response_file": "batch-0003.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0003",
+      "batch_position": 4,
+      "path": "binding/header.go",
+      "response_file": "batch-0003.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0003",
+      "batch_position": 5,
+      "path": "binding/json.go",
+      "response_file": "batch-0003.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0003",
+      "batch_position": 6,
+      "path": "binding/json_test.go",
+      "response_file": "batch-0003.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0003",
+      "batch_position": 7,
+      "path": "binding/msgpack.go",
+      "response_file": "batch-0003.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0004",
+      "batch_position": 0,
+      "path": "binding/msgpack_test.go",
+      "response_file": "batch-0004.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0004",
+      "batch_position": 1,
+      "path": "binding/multipart_form_mapping.go",
+      "response_file": "batch-0004.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0004",
+      "batch_position": 2,
+      "path": "binding/multipart_form_mapping_test.go",
+      "response_file": "batch-0004.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0004",
+      "batch_position": 3,
+      "path": "binding/plain.go",
+      "response_file": "batch-0004.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0004",
+      "batch_position": 4,
+      "path": "binding/protobuf.go",
+      "response_file": "batch-0004.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0004",
+      "batch_position": 5,
+      "path": "binding/query.go",
+      "response_file": "batch-0004.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0004",
+      "batch_position": 6,
+      "path": "binding/toml.go",
+      "response_file": "batch-0004.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0004",
+      "batch_position": 7,
+      "path": "binding/toml_test.go",
+      "response_file": "batch-0004.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0005",
+      "batch_position": 0,
+      "path": "binding/uri.go",
+      "response_file": "batch-0005.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0005",
+      "batch_position": 1,
+      "path": "binding/validate_test.go",
+      "response_file": "batch-0005.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0005",
+      "batch_position": 2,
+      "path": "binding/xml.go",
+      "response_file": "batch-0005.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0005",
+      "batch_position": 3,
+      "path": "binding/xml_test.go",
+      "response_file": "batch-0005.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0005",
+      "batch_position": 4,
+      "path": "binding/yaml.go",
+      "response_file": "batch-0005.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0005",
+      "batch_position": 5,
+      "path": "binding/yaml_test.go",
+      "response_file": "batch-0005.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0006",
+      "batch_position": 0,
+      "path": "codec/json/api.go",
+      "response_file": "batch-0006.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0006",
+      "batch_position": 1,
+      "path": "codec/json/go_json.go",
+      "response_file": "batch-0006.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0006",
+      "batch_position": 2,
+      "path": "codec/json/json.go",
+      "response_file": "batch-0006.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0006",
+      "batch_position": 3,
+      "path": "codec/json/jsoniter.go",
+      "response_file": "batch-0006.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0006",
+      "batch_position": 4,
+      "path": "codec/json/sonic.go",
+      "response_file": "batch-0006.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0007",
+      "batch_position": 0,
+      "path": "context.go",
+      "response_file": "batch-0007.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0007",
+      "batch_position": 1,
+      "path": "context_appengine.go",
+      "response_file": "batch-0007.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0007",
+      "batch_position": 2,
+      "path": "context_file_test.go",
+      "response_file": "batch-0007.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0007",
+      "batch_position": 3,
+      "path": "context_test.go",
+      "response_file": "batch-0007.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0007",
+      "batch_position": 4,
+      "path": "debug.go",
+      "response_file": "batch-0007.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0007",
+      "batch_position": 5,
+      "path": "debug_test.go",
+      "response_file": "batch-0007.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0007",
+      "batch_position": 6,
+      "path": "deprecated.go",
+      "response_file": "batch-0007.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0007",
+      "batch_position": 7,
+      "path": "deprecated_test.go",
+      "response_file": "batch-0007.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0008",
+      "batch_position": 0,
+      "path": "doc.go",
+      "response_file": "batch-0008.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0008",
+      "batch_position": 1,
+      "path": "errors.go",
+      "response_file": "batch-0008.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0008",
+      "batch_position": 2,
+      "path": "errors_test.go",
+      "response_file": "batch-0008.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0008",
+      "batch_position": 3,
+      "path": "fs.go",
+      "response_file": "batch-0008.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0008",
+      "batch_position": 4,
+      "path": "fs_test.go",
+      "response_file": "batch-0008.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0008",
+      "batch_position": 5,
+      "path": "gin.go",
+      "response_file": "batch-0008.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0009",
+      "batch_position": 0,
+      "path": "ginS/gins.go",
+      "response_file": "batch-0009.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0009",
+      "batch_position": 1,
+      "path": "ginS/gins_test.go",
+      "response_file": "batch-0009.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0010",
+      "batch_position": 0,
+      "path": "gin_integration_test.go",
+      "response_file": "batch-0010.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0010",
+      "batch_position": 1,
+      "path": "gin_test.go",
+      "response_file": "batch-0010.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0010",
+      "batch_position": 2,
+      "path": "githubapi_test.go",
+      "response_file": "batch-0010.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0011",
+      "batch_position": 0,
+      "path": "internal/bytesconv/bytesconv.go",
+      "response_file": "batch-0011.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0011",
+      "batch_position": 1,
+      "path": "internal/bytesconv/bytesconv_test.go",
+      "response_file": "batch-0011.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0012",
+      "batch_position": 0,
+      "path": "internal/fs/fs.go",
+      "response_file": "batch-0012.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0012",
+      "batch_position": 1,
+      "path": "internal/fs/fs_test.go",
+      "response_file": "batch-0012.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0013",
+      "batch_position": 0,
+      "path": "logger.go",
+      "response_file": "batch-0013.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0013",
+      "batch_position": 1,
+      "path": "logger_test.go",
+      "response_file": "batch-0013.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0013",
+      "batch_position": 2,
+      "path": "middleware_test.go",
+      "response_file": "batch-0013.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0013",
+      "batch_position": 3,
+      "path": "mode.go",
+      "response_file": "batch-0013.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0013",
+      "batch_position": 4,
+      "path": "mode_test.go",
+      "response_file": "batch-0013.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0013",
+      "batch_position": 5,
+      "path": "path.go",
+      "response_file": "batch-0013.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0013",
+      "batch_position": 6,
+      "path": "path_test.go",
+      "response_file": "batch-0013.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0013",
+      "batch_position": 7,
+      "path": "recovery.go",
+      "response_file": "batch-0013.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0014",
+      "batch_position": 0,
+      "path": "recovery_test.go",
+      "response_file": "batch-0014.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0015",
+      "batch_position": 0,
+      "path": "render/bson.go",
+      "response_file": "batch-0015.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0015",
+      "batch_position": 1,
+      "path": "render/data.go",
+      "response_file": "batch-0015.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0015",
+      "batch_position": 2,
+      "path": "render/html.go",
+      "response_file": "batch-0015.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0015",
+      "batch_position": 3,
+      "path": "render/json.go",
+      "response_file": "batch-0015.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0015",
+      "batch_position": 4,
+      "path": "render/msgpack.go",
+      "response_file": "batch-0015.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0015",
+      "batch_position": 5,
+      "path": "render/pdf.go",
+      "response_file": "batch-0015.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0015",
+      "batch_position": 6,
+      "path": "render/protobuf.go",
+      "response_file": "batch-0015.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0015",
+      "batch_position": 7,
+      "path": "render/reader.go",
+      "response_file": "batch-0015.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0016",
+      "batch_position": 0,
+      "path": "render/reader_test.go",
+      "response_file": "batch-0016.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0016",
+      "batch_position": 1,
+      "path": "render/redirect.go",
+      "response_file": "batch-0016.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0016",
+      "batch_position": 2,
+      "path": "render/render.go",
+      "response_file": "batch-0016.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0016",
+      "batch_position": 3,
+      "path": "render/render_msgpack_test.go",
+      "response_file": "batch-0016.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0016",
+      "batch_position": 4,
+      "path": "render/render_test.go",
+      "response_file": "batch-0016.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0016",
+      "batch_position": 5,
+      "path": "render/text.go",
+      "response_file": "batch-0016.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0016",
+      "batch_position": 6,
+      "path": "render/toml.go",
+      "response_file": "batch-0016.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0016",
+      "batch_position": 7,
+      "path": "render/xml.go",
+      "response_file": "batch-0016.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0017",
+      "batch_position": 0,
+      "path": "render/yaml.go",
+      "response_file": "batch-0017.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0018",
+      "batch_position": 0,
+      "path": "response_writer.go",
+      "response_file": "batch-0018.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0018",
+      "batch_position": 1,
+      "path": "response_writer_test.go",
+      "response_file": "batch-0018.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0018",
+      "batch_position": 2,
+      "path": "routergroup.go",
+      "response_file": "batch-0018.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0018",
+      "batch_position": 3,
+      "path": "routergroup_test.go",
+      "response_file": "batch-0018.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0018",
+      "batch_position": 4,
+      "path": "routes_test.go",
+      "response_file": "batch-0018.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0018",
+      "batch_position": 5,
+      "path": "test_helpers.go",
+      "response_file": "batch-0018.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0019",
+      "batch_position": 0,
+      "path": "testdata/protoexample/test.pb.go",
+      "response_file": "batch-0019.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0020",
+      "batch_position": 0,
+      "path": "tree.go",
+      "response_file": "batch-0020.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0020",
+      "batch_position": 1,
+      "path": "tree_test.go",
+      "response_file": "batch-0020.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0020",
+      "batch_position": 2,
+      "path": "utils.go",
+      "response_file": "batch-0020.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0020",
+      "batch_position": 3,
+      "path": "utils_test.go",
+      "response_file": "batch-0020.response.json",
+      "status": "accepted"
+    },
+    {
+      "batch_id": "batch-0020",
+      "batch_position": 4,
+      "path": "version.go",
+      "response_file": "batch-0020.response.json",
+      "status": "accepted"
+    }
+  ],
+  "manifest": {
+    "file_count": 99,
+    "files": [
+      "auth.go",
+      "auth_test.go",
+      "benchmarks_test.go",
+      "binding/binding.go",
+      "binding/binding_msgpack_test.go",
+      "binding/binding_nomsgpack.go",
+      "binding/binding_test.go",
+      "binding/bson.go",
+      "binding/default_validator.go",
+      "binding/default_validator_benchmark_test.go",
+      "binding/default_validator_test.go",
+      "binding/form.go",
+      "binding/form_mapping.go",
+      "binding/form_mapping_benchmark_test.go",
+      "binding/form_mapping_test.go",
+      "binding/header.go",
+      "binding/json.go",
+      "binding/json_test.go",
+      "binding/msgpack.go",
+      "binding/msgpack_test.go",
+      "binding/multipart_form_mapping.go",
+      "binding/multipart_form_mapping_test.go",
+      "binding/plain.go",
+      "binding/protobuf.go",
+      "binding/query.go",
+      "binding/toml.go",
+      "binding/toml_test.go",
+      "binding/uri.go",
+      "binding/validate_test.go",
+      "binding/xml.go",
+      "binding/xml_test.go",
+      "binding/yaml.go",
+      "binding/yaml_test.go",
+      "codec/json/api.go",
+      "codec/json/go_json.go",
+      "codec/json/json.go",
+      "codec/json/jsoniter.go",
+      "codec/json/sonic.go",
+      "context.go",
+      "context_appengine.go",
+      "context_file_test.go",
+      "context_test.go",
+      "debug.go",
+      "debug_test.go",
+      "deprecated.go",
+      "deprecated_test.go",
+      "doc.go",
+      "errors.go",
+      "errors_test.go",
+      "fs.go",
+      "fs_test.go",
+      "gin.go",
+      "ginS/gins.go",
+      "ginS/gins_test.go",
+      "gin_integration_test.go",
+      "gin_test.go",
+      "githubapi_test.go",
+      "internal/bytesconv/bytesconv.go",
+      "internal/bytesconv/bytesconv_test.go",
+      "internal/fs/fs.go",
+      "internal/fs/fs_test.go",
+      "logger.go",
+      "logger_test.go",
+      "middleware_test.go",
+      "mode.go",
+      "mode_test.go",
+      "path.go",
+      "path_test.go",
+      "recovery.go",
+      "recovery_test.go",
+      "render/bson.go",
+      "render/data.go",
+      "render/html.go",
+      "render/json.go",
+      "render/msgpack.go",
+      "render/pdf.go",
+      "render/protobuf.go",
+      "render/reader.go",
+      "render/reader_test.go",
+      "render/redirect.go",
+      "render/render.go",
+      "render/render_msgpack_test.go",
+      "render/render_test.go",
+      "render/text.go",
+      "render/toml.go",
+      "render/xml.go",
+      "render/yaml.go",
+      "response_writer.go",
+      "response_writer_test.go",
+      "routergroup.go",
+      "routergroup_test.go",
+      "routes_test.go",
+      "test_helpers.go",
+      "testdata/protoexample/test.pb.go",
+      "tree.go",
+      "tree_test.go",
+      "utils.go",
+      "utils_test.go",
+      "version.go"
+    ],
+    "hash": "416ac9955745984c0e7f50a164c78b8f0f852c1fbc2c671b31a37b1ca023d845",
+    "path": "manifest.txt"
+  },
+  "repository": {
+    "display_name": "Gin",
+    "language": "Go",
+    "requested_revision": "34dac209ffb6ef85cc78c5d217bbb7ad001d68fd",
+    "revision": "34dac209ffb6ef85cc78c5d217bbb7ad001d68fd"
+  },
+  "schema_version": 2
+}

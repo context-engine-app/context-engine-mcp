@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/staticfiles/management/commands/__init__.py",
+        "django/contrib/staticfiles/management/commands/collectstatic.py",
+        "django/contrib/staticfiles/management/commands/findstatic.py",
+        "django/contrib/staticfiles/management/commands/runserver.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/staticfiles/management/commands/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/staticfiles/management/commands/collectstatic.py (404L)\nfile scope: [\"0008c01m\" full 404L | imports 13L]\n\n- class Command(BaseCommand): ... [\"0008c01l\" full 391L | code 391L]\n  - def __init__(self, *args, **kwargs): ... [\"0008c004\" full 10L | code 10L]\n  - @cached_property def local(self): ... [\"0008c00d\" full 7L | code 7L]\n  - def add_arguments(self, parser): ... [\"0008c00f\" full 52L | code 52L]\n  - def set_options(self, **options): ... [\"0008c00i\" full 14L | code 14L]\n  - def collect(self): ... [\"0008c00B\" full 69L | code 69L]\n  - def handle(self, **options): ... [\"0008c00M\" full 79L | code 79L]\n  - def log(self, msg, level=2): ... [\"0008c00P\" full 6L | code 6L]\n  - def is_local_storage(self): ... [\"0008c00Q\" full 2L | code 2L]\n  - def clear_dir(self, path): ... [\"0008c00Y\" full 28L | code 28L]\n  - def delete_file(self, path, prefixed_path, source_storage): ... [\"0008c017\" full 50L | code 50L]\n  - def link_file(self, path, prefixed_path, source_storage): ... [\"0008c01e\" full 34L | code 34L]\n  - def copy_file(self, path, prefixed_path, source_storage): ... [\"0008c01k\" full 20L | code 20L]\n\n# django/contrib/staticfiles/management/commands/findstatic.py (49L)\nfile scope: [\"0008d00d\" full 49L | imports 7L]\n\n- class Command(LabelCommand): ... [\"0008d00c\" full 42L | code 42L]\n  - def add_arguments(self, parser): ... [\"0008d003\" full 8L | code 8L]\n  - def handle_label(self, path, **options): ... [\"0008d00b\" full 29L | code 29L]\n\n# django/contrib/staticfiles/management/commands/runserver.py (37L)\nfile scope: [\"0008e00a\" full 37L | imports 6L]\n\n- class Command(RunserverCommand): ... [\"0008e009\" full 31L | code 31L]\n  - def add_arguments(self, parser): ... [\"0008e002\" full 14L | code 14L]\n  - def get_handler(self, *args, **options): ... [\"0008e008\" full 11L | code 11L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

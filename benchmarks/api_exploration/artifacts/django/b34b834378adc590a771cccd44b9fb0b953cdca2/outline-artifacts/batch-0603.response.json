@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/migrations_test_apps/lookuperror_c/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n 1|from django.db import models\n 2|\n 3|\n 4|class C1(models.Model):\n 5|    pass\n 6|\n 7|\n 8|class C2(models.Model):\n 9|    a1 = models.ForeignKey(\"lookuperror_a.A1\", models.CASCADE)\n10|\n11|\n12|class C3(models.Model):\n13|    pass\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

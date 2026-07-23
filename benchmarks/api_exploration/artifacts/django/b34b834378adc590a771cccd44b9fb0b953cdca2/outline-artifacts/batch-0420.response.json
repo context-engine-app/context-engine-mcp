@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/db_functions/migrations/0001_setup_extensions.py",
+        "tests/db_functions/migrations/0002_create_test_models.py",
+        "tests/db_functions/migrations/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/db_functions/migrations/0001_setup_extensions.py (14L)\nfile scope: [\"000mm002\" full 14L | imports 11L]\n\n- class Migration(migrations.Migration): ... [\"000mm001\" full 3L | code 3L]\n\n# tests/db_functions/migrations/0002_create_test_models.py (171L)\nfile scope: [\"000mn003\" full 171L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000mn002\" full 167L | code 167L]\n\n# tests/db_functions/migrations/__init__.py (1L)\nfile scope: [\"000mo000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

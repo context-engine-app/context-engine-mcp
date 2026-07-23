@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/migrations_test_apps/unmigrated_app_simple/__init__.py",
+        "tests/migrations/migrations_test_apps/unmigrated_app_simple/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/migrations/migrations_test_apps/unmigrated_app_simple/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/migrations/migrations_test_apps/unmigrated_app_simple/models.py (11L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from django.db import models\n 2|\n 3|\n 4|class UnmigratedModel(models.Model):\n 5|    \"\"\"\n 6|    A model that is in a migration-less app (which this app is\n 7|    if its migrations directory has not been repointed)\n 8|    \"\"\"\n 9|\n10|    pass\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

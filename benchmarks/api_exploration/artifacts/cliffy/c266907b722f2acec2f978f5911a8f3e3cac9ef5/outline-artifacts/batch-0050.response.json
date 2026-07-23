@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/table/table_options.ts",
+        "examples/table/using_as_array.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 878 B -> 454 B (48% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/table/table_options.ts (18L)\nfile scope: [\"0003B000\" full 18L]\n\n\n# examples/table/using_as_array.ts (14L)\nfile scope: [\"0003C001\" full 14L | imports 5L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

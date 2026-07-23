@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/auth/management/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 9.0 KB -> 1.1 KB (87% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/auth/management/__init__.py (293L)\nfile scope: [\"0003I01b\" full 293L | imports 18L]\n\n- def _get_all_permissions(opts): ... [\"0003I001\" full 5L | code 5L]\n\n- def _get_builtin_permissions(opts): ... [\"0003I005\" full 14L | code 14L]\n\n- def create_permissions( app_config, verbosity=2, interactive=True, using=DEFAULT_DB_ALIAS, apps=global_apps, **kwargs, ): ... [\"0003I00p\" full 71L | code 71L]\n\n- def _get_permission_metadata(apps, app_label, model_name): ... [\"0003I00v\" full 11L | code 11L]\n\n- def rename_permissions_after_model_rename( app_config, verbosity=2, plan=None, using=DEFAULT_DB_ALIAS, apps=global_apps, stdout=sys.stdout, **kwargs, ): ... [\"0003I014\" full 100L | code 100L]\n\n- def get_system_username(): ... [\"0003I016\" full 15L | code 15L]\n\n- def get_default_username(check_db=True, database=DEFAULT_DB_ALIAS): ... [\"0003I01a\" full 47L | code 47L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

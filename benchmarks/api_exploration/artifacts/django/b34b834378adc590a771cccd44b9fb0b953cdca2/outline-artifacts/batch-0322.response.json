@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/admin_scripts/simple_app/management/commands/__init__.py",
+        "tests/admin_scripts/simple_app/management/commands/duplicate.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/admin_scripts/simple_app/management/commands/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/admin_scripts/simple_app/management/commands/duplicate.py (7L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.core.management.base import BaseCommand\n2|\n3|\n4|class Command(BaseCommand):\n5|    def handle(self, **options):\n6|        self.stdout.write(\"simple_app\")\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

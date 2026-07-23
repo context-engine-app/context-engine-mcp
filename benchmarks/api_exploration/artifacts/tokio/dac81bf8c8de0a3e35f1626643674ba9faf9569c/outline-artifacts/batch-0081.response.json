@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/macros/thread_local.rs",
+        "tokio/src/macros/trace.rs",
+        "tokio/src/macros/try_join.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tokio/src/macros/thread_local.rs (19L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|#[cfg(all(loom, test))]\n 2|macro_rules! tokio_thread_local {\n 3|    ($(#[$attrs:meta])* $vis:vis static $name:ident: $ty:ty = const { $expr:expr } $(;)?) => {\n 4|        loom::thread_local! {\n 5|            $(#[$attrs])*\n 6|            $vis static $name: $ty = $expr;\n 7|        }\n 8|    };\n 9|\n10|    ($($tts:tt)+) => { loom::thread_local!{ $($tts)+ } }\n11|}\n12|\n13|#[cfg(not(all(loom, test)))]\n14|macro_rules! tokio_thread_local {\n15|    ($($tts:tt)+) => {\n16|        ::std::thread_local!{ $($tts)+ }\n17|    }\n18|}\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/macros/trace.rs (27L)\nfile scope: [\"0005R000\" full 27L]\n\n\n# tokio/src/macros/try_join.rs (281L)\nfile scope: [\"0005S001\" full 281L]\n\n- macro_rules! doc { ... ; } [\"0005S000\" full 157L | code 157L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

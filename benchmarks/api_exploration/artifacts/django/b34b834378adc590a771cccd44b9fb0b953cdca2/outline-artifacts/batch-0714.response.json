@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/or_lookups/__init__.py",
+        "tests/or_lookups/models.py",
+        "tests/or_lookups/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/or_lookups/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/or_lookups/models.py (23L)\nfile scope: [\"000AR006\" full 23L | imports 14L]\n\n- class Article(models.Model): ... [\"000AR005\" full 9L | code 9L]\n  - class Meta: ... [\"000AR003\" full 2L | code 2L]\n  - def __str__(self): ... [\"000AR004\" full 2L | code 2L]\n\n# tests/or_lookups/tests.py (223L)\nfile scope: [\"000AS00j\" full 223L | imports 10L]\n\n- class OrLookupsTests(TestCase): ... [\"000AS00i\" full 213L | code 213L]\n  - @classmethod def setUpTestData(cls): ... [\"000AS000\" full 11L | code 11L]\n  - def test_filter_or(self): ... [\"000AS004\" full 31L | code 31L]\n  - def test_stages(self): ... [\"000AS006\" full 15L | code 15L]\n  - def test_pk_q(self): ... [\"000AS007\" full 12L | code 12L]\n  - def test_pk_in(self): ... [\"000AS008\" full 18L | code 18L]\n  - def test_q_repr(self): ... [\"000AS00b\" full 5L | code 5L]\n  - def test_q_negated(self): ... [\"000AS00c\" full 20L | code 20L]\n  - def test_complex_filter(self): ... [\"000AS00d\" full 15L | code 15L]\n  - def test_empty_in(self): ... [\"000AS00e\" full 9L | code 9L]\n  - def test_q_and(self): ... [\"000AS00f\" full 24L | code 24L]\n  - def test_q_exclude(self): ... [\"000AS00g\" full 6L | code 6L]\n  - def test_other_arg_queries(self): ... [\"000AS00h\" full 35L | code 35L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

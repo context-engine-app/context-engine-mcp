@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/postgres/forms/__init__.py",
+        "django/contrib/postgres/forms/array.py",
+        "django/contrib/postgres/forms/hstore.py",
+        "django/contrib/postgres/forms/ranges.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/postgres/forms/__init__.py (4L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from .array import *  # NOQA\n2|from .hstore import *  # NOQA\n3|from .ranges import *  # NOQA\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/postgres/forms/array.py (251L)\nfile scope: [\"0007c01F\" full 251L | imports 14L]\n\n- class SimpleArrayField(forms.CharField): ... [\"0007c00D\" full 99L | code 99L]\n  - def __init__( self, base_field, *, delimiter=\",\", max_length=None, min_length=None, **kwargs ): ... [\"0007c006\" full 12L | code 12L]\n  - def clean(self, value): ... [\"0007c00c\" full 3L | code 3L]\n  - def prepare_value(self, value): ... [\"0007c00e\" full 6L | code 6L]\n  - def to_python(self, value): ... [\"0007c00m\" full 24L | code 24L]\n  - def validate(self, value): ... [\"0007c00s\" full 17L | code 17L]\n  - def run_validators(self, value): ... [\"0007c00y\" full 17L | code 17L]\n  - def has_changed(self, initial, data): ... [\"0007c00C\" full 9L | code 9L]\n\n- class SplitArrayWidget(forms.Widget): ... [\"0007c01a\" full 65L | code 65L]\n  - def __init__(self, widget, size, **kwargs): ... [\"0007c00I\" full 4L | code 4L]\n  - @property def is_hidden(self): ... [\"0007c00L\" full 3L | code 3L]\n  - def value_from_datadict(self, data, files, name): ... [\"0007c00P\" full 5L | code 5L]\n  - def value_omitted_from_data(self, data, files, name): ... [\"0007c00T\" full 5L | code 5L]\n  - def id_for_label(self, id_): ... [\"0007c00V\" full 5L | code 5L]\n  - def get_context(self, name, value, attrs=None): ... [\"0007c014\" full 22L | code 22L]\n  - @property def media(self): ... [\"0007c015\" full 3L | code 3L]\n  - def __deepcopy__(self, memo): ... [\"0007c018\" full 4L | code 4L]\n  - @property def needs_multipart_form(self): ... [\"0007c019\" full 3L | code 3L]\n\n- class SplitArrayField(forms.Field): ... [\"0007c01E\" full 69L | code 69L]\n  - def __init__(self, base_field, size, *, remove_trailing_nulls=False, **kwargs): ... [\"0007c01h\" full 7L | code 7L]\n  - def _remove_trailing_nulls(self, values): ... [\"0007c01p\" full 11L | code 11L]\n  - def to_python(self, value): ... [\"0007c01r\" full 3L | code 3L]\n  - def clean(self, value): ... [\"0007c01A\" full 29L | code 29L]\n  - def has_changed(self, initial, data): ... [\"0007c01D\" full 10L | code 10L]\n\n# django/contrib/postgres/forms/hstore.py (60L)\nfile scope: [\"0007d00e\" full 60L | imports 11L]\n\n- class HStoreField(forms.CharField): ... [\"0007d00d\" full 50L | code 50L]\n  - def prepare_value(self, value): ... [\"0007d004\" full 4L | code 4L]\n  - def to_python(self, value): ... [\"0007d008\" full 24L | code 24L]\n  - def has_changed(self, initial, data): ... [\"0007d00c\" full 9L | code 9L]\n\n# django/contrib/postgres/forms/ranges.py (120L)\nfile scope: [\"0007e00H\" full 120L | imports 23L]\n\n- class RangeWidget(MultiWidget): ... [\"0007e007\" full 9L | code 9L]\n  - def __init__(self, base_widget, attrs=None): ... [\"0007e004\" full 3L | code 3L]\n  - def decompress(self, value): ... [\"0007e006\" full 4L | code 4L]\n\n- class HiddenRangeWidget(RangeWidget): ... [\"0007e00a\" full 5L | code 5L]\n  - def __init__(self, attrs=None): ... [\"0007e009\" full 2L | code 2L]\n\n- class BaseRangeField(forms.MultiValueField): ... [\"0007e00q\" full 56L | code 56L]\n  - def __init__(self, **kwargs): ... [\"0007e00f\" full 14L | code 14L]\n  - def prepare_value(self, value): ... [\"0007e00k\" full 13L | code 13L]\n  - def compress(self, values): ... [\"0007e00p\" full 18L | code 18L]\n\n- class IntegerRangeField(BaseRangeField): ... [\"0007e00u\" full 4L | code 4L]\n\n- class DecimalRangeField(BaseRangeField): ... [\"0007e00y\" full 4L | code 4L]\n\n- class DateTimeRangeField(BaseRangeField): ... [\"0007e00C\" full 4L | code 4L]\n\n- class DateRangeField(BaseRangeField): ... [\"0007e00G\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "benches/time_timeout.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.8 KB -> 1.3 KB (54% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# benches/time_timeout.rs (110L)\nfile scope: [\"0000g00a\" full 110L | imports 9L]\n\n- async fn quick_job() -> usize { ... } [\"0000g000\" full 4L | code 3L | docs 1L]\n\n- fn build_run_time(workers: usize) -> Runtime { ... } [\"0000g001\" full 14L | code 14L]\n\n- fn single_thread_scheduler_timeout(c: &mut Criterion) { ... } [\"0000g002\" full 3L | code 3L]\n\n- fn multi_thread_scheduler_timeout(c: &mut Criterion) { ... } [\"0000g003\" full 3L | code 3L]\n\n- fn do_timeout_test(c: &mut Criterion, workers: usize, name: &str) { ... } [\"0000g004\" full 12L | code 12L]\n\n- async fn spawn_timeout_job(iters: usize, procs: usize) { ... } [\"0000g005\" full 14L | code 14L]\n\n- fn single_thread_scheduler_sleep(c: &mut Criterion) { ... } [\"0000g006\" full 3L | code 3L]\n\n- fn multi_thread_scheduler_sleep(c: &mut Criterion) { ... } [\"0000g007\" full 3L | code 3L]\n\n- fn do_sleep_test(c: &mut Criterion, workers: usize, name: &str) { ... } [\"0000g008\" full 13L | code 13L]\n\n- async fn spawn_sleep_job(iters: usize, procs: usize) { ... } [\"0000g009\" full 13L | code 13L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

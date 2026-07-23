@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/migrations_test_apps/migrated_unapplied_app/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n 1|from django.db import models\n 2|\n 3|\n 4|class OtherAuthor(models.Model):\n 5|    id = models.AutoField(primary_key=True)\n 6|    name = models.CharField(max_length=255)\n 7|    slug = models.SlugField(null=True)\n 8|    age = models.IntegerField(default=0)\n 9|    silly_field = models.BooleanField(default=False)\n10|\n11|    class Meta:\n12|        app_label = \"migrated_unapplied_app\"\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

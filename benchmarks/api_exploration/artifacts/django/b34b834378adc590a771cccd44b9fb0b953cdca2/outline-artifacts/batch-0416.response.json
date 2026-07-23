@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/db_functions/json/__init__.py",
+        "tests/db_functions/json/test_json_array.py",
+        "tests/db_functions/json/test_json_object.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/db_functions/json/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/db_functions/json/test_json_array.py (178L)\nfile scope: [\"000lW00x\" full 178L | imports 13L]\n\n- @skipUnlessDBFeature(\"supports_json_field\") class JSONArrayTests(TestCase): ... [\"000lW00l\" full 96L | code 96L]\n  - @classmethod def setUpTestData(cls): ... [\"000lW000\" full 3L | code 3L]\n  - def test_empty(self): ... [\"000lW002\" full 3L | code 3L]\n  - def test_basic(self): ... [\"000lW004\" full 5L | code 5L]\n  - def test_expressions(self): ... [\"000lW006\" full 20L | code 20L]\n  - def test_nested_json_array(self): ... [\"000lW008\" full 14L | code 14L]\n  - def test_nested_empty_json_array(self): ... [\"000lW00a\" full 14L | code 14L]\n  - def test_textfield(self): ... [\"000lW00c\" full 8L | code 8L]\n  - @unittest.skipUnless(connection.vendor == \"postgresql\", \"PostgreSQL specific tests\") def test_explicit_cast(self): ... [\"000lW00g\" full 10L | code 10L]\n  - def test_order_by_key(self): ... [\"000lW00i\" full 3L | code 3L]\n  - def test_order_by_nested_key(self): ... [\"000lW00k\" full 5L | code 5L]\n\n- @skipIfDBFeature(\"supports_json_field\") class JSONArrayNotSupportedTests(TestCase): ... [\"000lW00o\" full 6L | code 6L]\n  - def test_not_supported(self): ... [\"000lW00n\" full 4L | code 4L]\n\n- @skipUnlessDBFeature(\"has_json_object_function\", \"supports_json_field\") class JSONArrayObjectTests(TestCase): ... [\"000lW00w\" full 59L | code 59L]\n  - @classmethod def setUpTestData(cls): ... [\"000lW00p\" full 3L | code 3L]\n  - def test_nested_json_array_object(self): ... [\"000lW00r\" full 26L | code 26L]\n  - def test_nested_json_object_array(self): ... [\"000lW00t\" full 20L | code 20L]\n  - def test_order_by_nested_key(self): ... [\"000lW00v\" full 5L | code 5L]\n\n# tests/db_functions/json/test_json_object.py (115L)\nfile scope: [\"000lX00l\" full 115L | imports 11L]\n\n- @skipUnlessDBFeature(\"has_json_object_function\") class JSONObjectTests(TestCase): ... [\"000lX00h\" full 96L | code 96L]\n  - @classmethod def setUpTestData(cls): ... [\"000lX000\" full 8L | code 8L]\n  - def test_empty(self): ... [\"000lX002\" full 3L | code 3L]\n  - def test_basic(self): ... [\"000lX004\" full 3L | code 3L]\n  - def test_expressions(self): ... [\"000lX006\" full 20L | code 20L]\n  - def test_nested_json_object(self): ... [\"000lX008\" full 20L | code 20L]\n  - def test_nested_empty_json_object(self): ... [\"000lX00a\" full 14L | code 14L]\n  - def test_textfield(self): ... [\"000lX00c\" full 8L | code 8L]\n  - def test_order_by_key(self): ... [\"000lX00e\" full 5L | code 5L]\n  - def test_order_by_nested_key(self): ... [\"000lX00g\" full 5L | code 5L]\n\n- @skipIfDBFeature(\"has_json_object_function\") class JSONObjectNotSupportedTests(TestCase): ... [\"000lX00k\" full 6L | code 6L]\n  - def test_not_supported(self): ... [\"000lX00j\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

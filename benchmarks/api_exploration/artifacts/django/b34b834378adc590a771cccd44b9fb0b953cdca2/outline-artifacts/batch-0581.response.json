@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migration_test_data_persistence/migrations/0001_initial.py",
+        "tests/migration_test_data_persistence/migrations/0002_add_book.py",
+        "tests/migration_test_data_persistence/migrations/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migration_test_data_persistence/migrations/0001_initial.py (26L)\nfile scope: [\"000uY003\" full 26L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000uY002\" full 22L | code 22L]\n\n# tests/migration_test_data_persistence/migrations/0002_add_book.py (45L)\nfile scope: [\"000uZ006\" full 45L | imports 4L]\n\n- def add_book(apps, schema_editor): ... [\"000uZ002\" full 6L | code 6L]\n\n- class Migration(migrations.Migration): ... [\"000uZ005\" full 33L | code 33L]\n\n# tests/migration_test_data_persistence/migrations/__init__.py (1L)\nfile scope: [\"000v0000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

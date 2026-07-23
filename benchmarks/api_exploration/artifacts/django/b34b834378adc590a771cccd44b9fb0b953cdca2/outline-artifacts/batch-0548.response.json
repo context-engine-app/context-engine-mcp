@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/i18n/urls.py",
+        "tests/i18n/urls_default_unprefixed.py",
+        "tests/i18n/utils.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 3.2 KB -> 1.0 KB (67% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/i18n/urls.py (10L)\nfile scope: [\"000t3001\" full 10L | imports 6L]\n\n\n# tests/i18n/urls_default_unprefixed.py (13L)\nfile scope: [\"000t4001\" full 13L | imports 6L]\n\n\n# tests/i18n/utils.py (65L)\nfile scope: [\"000t500n\" full 65L | imports 10L]\n\n- def copytree(src, dst): ... [\"000t5003\" full 2L | code 2L]\n\n- class POFileAssertionMixin: ... [\"000t500f\" full 16L | code 16L]\n  - def _assertPoKeyword(self, keyword, expected_value, haystack, use_quotes=True): ... [\"000t500a\" full 12L | code 12L]\n  - def assertMsgId(self, msgid, haystack, use_quotes=True): ... [\"000t500e\" full 2L | code 2L]\n\n- class RunInTmpDirMixin: ... [\"000t500m\" full 34L | code 34L]\n  - def setUp(self): ... [\"000t500g\" full 12L | code 12L]\n  - def _rmrf(self, dname): ... [\"000t500l\" full 7L | code 7L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

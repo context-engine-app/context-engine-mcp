@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/composite_pk/models/__init__.py",
+        "tests/composite_pk/models/tenant.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.2 KB -> 1.0 KB (52% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/composite_pk/models/__init__.py (12L)\nfile scope: [\"000kz001\" full 12L | imports 3L]\n\n\n# tests/composite_pk/models/tenant.py (69L)\nfile scope: [\"000kA00A\" full 69L | imports 6L]\n\n- class Tenant(models.Model): ... [\"000kA001\" full 2L | code 2L]\n\n- class Token(models.Model): ... [\"000kA006\" full 5L | code 5L]\n\n- class AbstractUser(models.Model): ... [\"000kA00d\" full 8L | code 8L]\n  - class Meta: ... [\"000kA00c\" full 2L | code 2L]\n\n- class User(AbstractUser): ... [\"000kA00e\" full 2L | code 2L]\n\n- class Comment(models.Model): ... [\"000kA00m\" full 19L | code 19L]\n\n- class Post(models.Model): ... [\"000kA00q\" full 4L | code 4L]\n\n- class PostDbDefault(models.Model): ... [\"000kA00u\" full 4L | code 4L]\n\n- class TimeStamped(models.Model): ... [\"000kA00z\" full 5L | code 5L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

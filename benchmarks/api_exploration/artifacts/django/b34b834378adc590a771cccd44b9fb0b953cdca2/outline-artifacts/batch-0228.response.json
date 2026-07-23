@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/db/backends/postgresql/psycopg_any.py",
+        "django/db/backends/postgresql/schema.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 18.4 KB -> 3.4 KB (81% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/db/backends/postgresql/psycopg_any.py (121L)\nfile scope: [\"000aT00N\" full 121L | imports 66L]\n\n- RANGE_TYPES [\"000aT005\" full 1L | code 1L]\n\n- TSRANGE_OID [\"000aT006\" full 1L | code 1L]\n\n- TSTZRANGE_OID [\"000aT007\" full 1L | code 1L]\n\n- class BaseTzLoader(adapt.Loader): ... [\"000aT00g\" full 14L | code 14L]\n  - def __init__(self, oid, context): ... [\"000aT00c\" full 3L | code 3L]\n  - def load(self, data): ... [\"000aT00f\" full 2L | code 2L]\n\n- def register_tzloader(tz, context): ... [\"000aT00l\" full 5L | code 5L]\n  - class SpecificTzLoader(BaseTzLoader): ... [\"000aT00k\" full 2L | code 2L]\n\n- class DjangoRangeDumper(RangeDumper): ... [\"000aT00q\" full 10L | code 10L]\n  - def upgrade(self, obj, format): ... [\"000aT00p\" full 7L | code 7L]\n\n- @lru_cache def get_adapters_template(use_tz, timezone): ... [\"000aT00u\" full 17L | code 17L]\n\n- class IsolationLevel(IntEnum): ... [\"000aT00A\" full 5L | code 5L]\n\n- def _quote(value, connection=None): ... [\"000aT00E\" full 6L | code 6L]\n\n- def mogrify(sql, params, connection): ... [\"000aT00J\" full 3L | code 3L]\n\n- class Jsonb(Json): ... [\"000aT00M\" full 4L | code 4L]\n  - def getquoted(self): ... [\"000aT00L\" full 3L | code 3L]\n\n# django/db/backends/postgresql/schema.py (381L)\nfile scope: [\"000aU01T\" full 381L | imports 7L]\n\n- class DatabaseSchemaEditor(BaseDatabaseSchemaEditor): ... [\"000aU01S\" full 374L | code 374L]\n  - def execute(self, sql, params=()): ... [\"000aU00c\" full 7L | code 7L]\n  - def quote_value(self, value): ... [\"000aU00g\" full 2L | code 2L]\n  - def _field_indexes_sql(self, model, field): ... [\"000aU00l\" full 6L | code 6L]\n  - def _field_data_type(self, field): ... [\"000aU00n\" full 7L | code 7L]\n  - def _field_base_data_types(self, field): ... [\"000aU00p\" full 6L | code 6L]\n  - def _create_like_index_sql(self, model, field): ... [\"000aU00u\" full 38L | code 38L]\n  - def _using_sql(self, new_field, old_field): ... [\"000aU00A\" full 15L | code 15L]\n  - def _get_sequence_name(self, table, column): ... [\"000aU00F\" full 6L | code 6L]\n  - def _is_changing_type_of_indexed_text_column(self, old_field, old_type, new_type): ... [\"000aU00J\" full 6L | code 6L]\n  - def _alter_column_type_sql( self, model, old_field, new_field, new_type, old_collation, new_collation ): ... [\"000aU015\" full 110L | code 110L]\n  - def _alter_field( self, model, old_field, new_field, old_type, new_type, old_db_params, new_db_params, strict=False, ): ... [\"000aU01h\" full 41L | code 41L]\n  - def _index_columns(self, table, columns, col_suffixes, opclasses): ... [\"000aU01m\" full 10L | code 10L]\n  - def add_index(self, model, index, concurrently=False): ... [\"000aU01q\" full 4L | code 4L]\n  - def remove_index(self, model, index, concurrently=False): ... [\"000aU01u\" full 2L | code 2L]\n  - def _delete_index_sql(self, model, name, sql=None, concurrently=False): ... [\"000aU01z\" full 7L | code 7L]\n  - def _create_index_sql( self, model, *, fields=None, name=None, suffix=\"\", using=\"\", db_tablespace=None, col_suffixes=(), sql=None, opclasses=(), condition=None, concurrently=False, include=None, expressions=None, ): ... [\"000aU01N\" full 36L | code 36L]\n  - def _is_collation_deterministic(self, collation_name): ... [\"000aU01R\" full 12L | code 12L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/core/files/__init__.py",
+        "django/core/files/base.py",
+        "django/core/files/images.py",
+        "django/core/files/locks.py",
+        "django/core/files/move.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/core/files/__init__.py (4L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.core.files.base import File\n2|\n3|__all__ = [\"File\"]\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/core/files/base.py (162L)\nfile scope: [\"0008U00Q\" full 162L | imports 8L]\n\n- class File(FileProxyMixin): ... [\"0008U00x\" full 114L | code 114L]\n  - def __init__(self, file, name=None): ... [\"0008U003\" full 7L | code 7L]\n  - def __str__(self): ... [\"0008U007\" full 2L | code 2L]\n  - def __repr__(self): ... [\"0008U008\" full 2L | code 2L]\n  - def __bool__(self): ... [\"0008U009\" full 2L | code 2L]\n  - def __len__(self): ... [\"0008U00a\" full 2L | code 2L]\n  - @cached_property def size(self): ... [\"0008U00d\" full 16L | code 16L]\n  - def chunks(self, chunk_size=None): ... [\"0008U00g\" full 16L | code 16L]\n  - def multiple_chunks(self, chunk_size=None): ... [\"0008U00i\" full 9L | code 9L]\n  - def __iter__(self): ... [\"0008U00m\" full 29L | code 29L]\n  - def __enter__(self): ... [\"0008U00n\" full 2L | code 2L]\n  - def __exit__(self, exc_type, exc_value, tb): ... [\"0008U00r\" full 2L | code 2L]\n  - def open(self, mode=None, *args, **kwargs): ... [\"0008U00v\" full 8L | code 8L]\n  - def close(self): ... [\"0008U00w\" full 2L | code 2L]\n\n- class ContentFile(File): ... [\"0008U00J\" full 23L | code 23L]\n  - def __init__(self, content, name=None): ... [\"0008U00B\" full 4L | code 4L]\n  - def __str__(self): ... [\"0008U00D\" full 2L | code 2L]\n  - def open(self, mode=None): ... [\"0008U00F\" full 3L | code 3L]\n  - def close(self): ... [\"0008U00G\" full 2L | code 2L]\n  - def write(self, data): ... [\"0008U00I\" full 3L | code 3L]\n\n- def endswith_cr(line): ... [\"0008U00L\" full 3L | code 3L]\n\n- def endswith_lf(line): ... [\"0008U00N\" full 3L | code 3L]\n\n- def equals_lf(line): ... [\"0008U00P\" full 3L | code 3L]\n\n# django/core/files/images.py (90L)\nfile scope: [\"0008V00f\" full 90L | imports 13L]\n\n- class ImageFile(File): ... [\"0008V005\" full 20L | code 20L]\n  - @property def width(self): ... [\"0008V000\" full 3L | code 3L]\n  - @property def height(self): ... [\"0008V001\" full 3L | code 3L]\n  - def _get_image_dimensions(self): ... [\"0008V003\" full 6L | code 6L]\n\n- def get_image_dimensions(file_or_path, close=False): ... [\"0008V00e\" full 55L | code 55L]\n\n# django/core/files/locks.py (129L)\nfile scope: [\"0008W00p\" full 129L | imports 102L]\n\n- def _fd(f): ... [\"0008W002\" full 3L | code 3L]\n\n- LOCK_SH [\"0008W003\" full 1L | code 1L]\n\n- LOCK_NB [\"0008W004\" full 1L | code 1L]\n\n- LOCK_EX [\"0008W005\" full 1L | code 1L]\n\n- ULONG_PTR [\"0008W006\" full 1L | code 1L]\n\n- PVOID [\"0008W007\" full 1L | code 1L]\n\n- class _OFFSET(Structure): ... [\"0008W009\" full 2L | code 2L]\n\n- class _OFFSET_UNION(Union): ... [\"0008W00c\" full 3L | code 3L]\n\n- class OVERLAPPED(Structure): ... [\"0008W00f\" full 8L | code 8L]\n\n- LPOVERLAPPED [\"0008W00g\" full 1L | code 1L]\n\n- def lock(f, flags): ... [\"0008W00m\" full 3L | code 3L]\n\n- def unlock(f): ... [\"0008W00o\" full 3L | code 3L]\n\n# django/core/files/move.py (93L)\nfile scope: [\"0008X00a\" full 93L | imports 17L]\n\n- def file_move_safe( old_file_name, new_file_name, chunk_size=1024 * 64, allow_overwrite=False ): ... [\"0008X009\" full 77L | code 77L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

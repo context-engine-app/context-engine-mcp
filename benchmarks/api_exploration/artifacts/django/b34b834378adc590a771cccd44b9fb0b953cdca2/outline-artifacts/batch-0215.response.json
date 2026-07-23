@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/core/servers/__init__.py",
+        "django/core/servers/basehttp.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/core/servers/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/core/servers/basehttp.py (278L)\nfile scope: [\"000a601c\" full 278L | imports 31L]\n\n- def get_internal_wsgi_application(): ... [\"000a6004\" full 26L | code 26L]\n\n- def is_broken_pipe_error(): ... [\"000a6006\" full 10L | code 10L]\n\n- class WSGIServer(simple_server.WSGIServer): ... [\"000a600i\" full 16L | code 16L]\n  - def __init__(self, *args, ipv6=False, allow_reuse_address=True, **kwargs): ... [\"000a600c\" full 5L | code 5L]\n  - def handle_error(self, request, client_address): ... [\"000a600h\" full 5L | code 5L]\n\n- class ThreadedWSGIServer(socketserver.ThreadingMixIn, WSGIServer): ... [\"000a600x\" full 26L | code 26L]\n  - def __init__(self, *args, connections_override=None, **kwargs): ... [\"000a600n\" full 3L | code 3L]\n  - def process_request_thread(self, request, client_address): ... [\"000a600t\" full 7L | code 7L]\n  - def _close_connections(self): ... [\"000a600u\" full 3L | code 3L]\n  - def close_request(self, request): ... [\"000a600w\" full 3L | code 3L]\n\n- class ServerHandler(simple_server.ServerHandler): ... [\"000a600J\" full 61L | code 61L]\n  - def __init__(self, stdin, stdout, stderr, environ, **kwargs): ... [\"000a600F\" full 14L | code 14L]\n  - def cleanup_headers(self): ... [\"000a600G\" full 23L | code 23L]\n  - def close(self): ... [\"000a600H\" full 3L | code 3L]\n  - def finish_response(self): ... [\"000a600I\" full 15L | code 15L]\n\n- class WSGIRequestHandler(simple_server.WSGIRequestHandler): ... [\"000a6010\" full 71L | code 71L]\n  - def address_string(self): ... [\"000a600L\" full 3L | code 3L]\n  - def log_message(self, format, *args): ... [\"000a600P\" full 22L | code 22L]\n  - def get_environ(self): ... [\"000a600R\" full 10L | code 10L]\n  - def handle(self): ... [\"000a600S\" full 9L | code 9L]\n  - def handle_one_request(self): ... [\"000a600V\" full 20L | code 20L]\n\n- def run( addr, port, wsgi_handler, ipv6=False, threading=False, on_bind=None, server_cls=WSGIServer, ): ... [\"000a601b\" full 27L | code 27L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

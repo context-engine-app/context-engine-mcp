@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "internal/bytesconv/bytesconv.go",
+        "internal/bytesconv/bytesconv_test.go"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 3.4 KB -> 1.9 KB (46% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# internal/bytesconv/bytesconv.go (22L)\nfile scope: [\"0000V002\" full 22L | module-docs 3L | imports 16L]\n\n- func StringToBytes(s string) []byte { ... } [\"0000V000\" full 3L | code 3L]\n\n- func BytesToString(b []byte) string { ... } [\"0000V001\" full 3L | code 3L]\n\n# internal/bytesconv/bytesconv_test.go (125L)\nfile scope: [\"0000W00i\" full 125L | module-docs 3L | imports 43L]\n\n- func rawBytesToStr(b []byte) string { ... } [\"0000W002\" full 3L | code 3L]\n\n- func rawStrToBytes(s string) []byte { ... } [\"0000W003\" full 3L | code 3L]\n\n- func TestBytesToString(t *testing.T) { ... } [\"0000W004\" full 12L | code 12L]\n\n- func TestBytesToStringEmpty(t *testing.T) { ... } [\"0000W005\" full 8L | code 8L]\n\n- letterBytes = \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\" [\"0000W006\" full 1L | code 1L]\n\n- letterIdxBits = 6 [\"0000W007\" full 1L | code 1L]\n\n- letterIdxMask = 1<<letterIdxBits - 1 [\"0000W008\" full 1L | code 1L]\n\n- letterIdxMax = 63 / letterIdxBits [\"0000W009\" full 1L | code 1L]\n\n- func RandStringBytesMaskImprSrcSB(n int) string { ... } [\"0000W00b\" full 18L | code 18L]\n\n- func TestStringToBytes(t *testing.T) { ... } [\"0000W00c\" full 8L | code 8L]\n\n- func TestStringToBytesEmpty(t *testing.T) { ... } [\"0000W00d\" full 9L | code 9L]\n\n- func BenchmarkBytesConvBytesToStrRaw(b *testing.B) { ... } [\"0000W00e\" full 5L | code 5L]\n\n- func BenchmarkBytesConvBytesToStr(b *testing.B) { ... } [\"0000W00f\" full 5L | code 5L]\n\n- func BenchmarkBytesConvStrToBytesRaw(b *testing.B) { ... } [\"0000W00g\" full 5L | code 5L]\n\n- func BenchmarkBytesConvStrToBytes(b *testing.B) { ... } [\"0000W00h\" full 5L | code 5L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/gis/gdal/srs.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 12.1 KB -> 3.1 KB (74% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/gis/gdal/srs.py (369L)\nfile scope: [\"0005V01h\" full 369L | imports 40L]\n\n- class AxisOrder(IntEnum): ... [\"0005V002\" full 3L | code 3L]\n\n- class SpatialReference(GDALBase): ... [\"0005V017\" full 305L | code 305L]\n  - def __init__(self, srs_input=\"\", srs_type=\"user\", axis_order=None): ... [\"0005V00a\" full 58L | code 58L]\n  - def __getitem__(self, target): ... [\"0005V00e\" full 32L | code 32L]\n  - def __str__(self): ... [\"0005V00f\" full 3L | code 3L]\n  - def attr_value(self, target, index=0): ... [\"0005V00i\" full 8L | code 8L]\n  - def auth_name(self, target): ... [\"0005V00k\" full 5L | code 5L]\n  - def auth_code(self, target): ... [\"0005V00m\" full 5L | code 5L]\n  - def clone(self): ... [\"0005V00n\" full 3L | code 3L]\n  - def from_esri(self): ... [\"0005V00o\" full 3L | code 3L]\n  - def identify_epsg(self): ... [\"0005V00p\" full 6L | code 6L]\n  - def to_esri(self): ... [\"0005V00q\" full 3L | code 3L]\n  - def validate(self): ... [\"0005V00r\" full 3L | code 3L]\n  - @property def name(self): ... [\"0005V00s\" full 11L | code 11L]\n  - @property def srid(self): ... [\"0005V00t\" full 7L | code 7L]\n  - @property def linear_name(self): ... [\"0005V00w\" full 5L | code 5L]\n  - @property def linear_units(self): ... [\"0005V00z\" full 5L | code 5L]\n  - @property def angular_name(self): ... [\"0005V00C\" full 5L | code 5L]\n  - @property def angular_units(self): ... [\"0005V00F\" full 5L | code 5L]\n  - @property def units(self): ... [\"0005V00I\" full 14L | code 14L]\n  - @property def ellipsoid(self): ... [\"0005V00J\" full 7L | code 7L]\n  - @property def semi_major(self): ... [\"0005V00K\" full 4L | code 4L]\n  - @property def semi_minor(self): ... [\"0005V00L\" full 4L | code 4L]\n  - @property def inverse_flattening(self): ... [\"0005V00M\" full 4L | code 4L]\n  - @property def geographic(self): ... [\"0005V00N\" full 7L | code 7L]\n  - @property def local(self): ... [\"0005V00O\" full 6L | code 6L]\n  - @property def projected(self): ... [\"0005V00P\" full 7L | code 7L]\n  - def import_epsg(self, epsg): ... [\"0005V00R\" full 3L | code 3L]\n  - def import_proj(self, proj): ... [\"0005V00T\" full 3L | code 3L]\n  - def import_user_input(self, user_input): ... [\"0005V00V\" full 3L | code 3L]\n  - def import_wkt(self, wkt): ... [\"0005V00X\" full 3L | code 3L]\n  - def import_xml(self, xml): ... [\"0005V00Z\" full 3L | code 3L]\n  - @property def wkt(self): ... [\"0005V010\" full 4L | code 4L]\n  - @property def pretty_wkt(self, simplify=0): ... [\"0005V012\" full 4L | code 4L]\n  - @property def proj(self): ... [\"0005V013\" full 4L | code 4L]\n  - @property def proj4(self): ... [\"0005V014\" full 4L | code 4L]\n  - @property def xml(self, dialect=\"\"): ... [\"0005V016\" full 4L | code 4L]\n\n- class CoordTransform(GDALBase): ... [\"0005V01g\" full 17L | code 17L]\n  - def __init__(self, source, target): ... [\"0005V01b\" full 9L | code 9L]\n  - def __str__(self): ... [\"0005V01f\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

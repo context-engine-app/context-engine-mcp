@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "docs/conf.py",
+        "docs/lint.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 21.4 KB -> 1.5 KB (93% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# docs/conf.py (460L)\nfile scope: [\"000eG00R\" full 460L | module-docs 12L | imports 483L]\n\n- def django_release(): ... [\"000eG00f\" full 5L | code 5L]\n\n- def version_github_linkcode_resolve(domain, info): ... [\"000eG00P\" full 4L | code 4L]\n\n# docs/lint.py (189L)\nfile scope: [\"000eH00K\" full 189L | imports 57L]\n\n- def django_check_file(filename, checkers, options=None): ... [\"000eH009\" full 20L | code 20L]\n\n- _TOCTREE_DIRECTIVE_RE [\"000eH00a\" full 1L | code 1L]\n\n- _PARSED_LITERAL_DIRECTIVE_RE [\"000eH00b\" full 1L | code 1L]\n\n- _IS_METHOD_RE [\"000eH00c\" full 1L | code 1L]\n\n- _HYPERLINK_DANGLING_RE [\"000eH00d\" full 1L | code 1L]\n\n- @sphinxlint_checker(\".rst\", enabled=False, rst_only=True) def check_line_too_long_django(file, lines, options=None): ... [\"000eH00p\" full 65L | code 65L]\n  - def is_multiline_block_to_exclude(line): ... [\"000eH00i\" full 4L | code 4L]\n\n- _PYTHON_DOMAIN [\"000eH00q\" full 1L | code 1L]\n\n- @sphinxlint_checker(\".rst\", enabled=False, rst_only=True) def check_python_domain_in_roles(file, lines, options=None): ... [\"000eH00x\" full 13L | code 13L]\n\n- _DOC_CAPTURE_TARGET_RE [\"000eH00y\" full 1L | code 1L]\n\n- @sphinxlint_checker(\".rst\", rst_only=True) def check_absolute_targets_doc_role(file, lines, options=None): ... [\"000eH00H\" full 11L | code 11L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_squashed_loop/1_auto.py",
+        "tests/migrations/test_migrations_squashed_loop/2_auto.py",
+        "tests/migrations/test_migrations_squashed_loop/2_squashed.py",
+        "tests/migrations/test_migrations_squashed_loop/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/migrations/test_migrations_squashed_loop/1_auto.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import migrations\n2|\n3|\n4|class Migration(migrations.Migration):\n5|    operations = [migrations.RunPython(migrations.RunPython.noop)]\nnote: EOF\n\n# tests/migrations/test_migrations_squashed_loop/2_auto.py (8L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import migrations\n2|\n3|\n4|class Migration(migrations.Migration):\n5|    replaces = [(\"migrations\", \"2_squashed\")]\n6|    dependencies = [(\"migrations\", \"1_auto\")]\n7|    operations = [migrations.RunPython(migrations.RunPython.noop)]\nnote: EOF\n\n# tests/migrations/test_migrations_squashed_loop/2_squashed.py (8L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import migrations\n2|\n3|\n4|class Migration(migrations.Migration):\n5|    replaces = [(\"migrations\", \"2_auto\")]\n6|    dependencies = [(\"migrations\", \"1_auto\")]\n7|    operations = [migrations.RunPython(migrations.RunPython.noop)]\nnote: EOF\n\n# tests/migrations/test_migrations_squashed_loop/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

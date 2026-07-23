@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/model_indexes/__init__.py",
+        "tests/model_indexes/models.py",
+        "tests/model_indexes/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/model_indexes/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/model_indexes/models.py (40L)\nfile scope: [\"000zQ00h\" full 40L | imports 4L]\n\n- class Book(models.Model): ... [\"000zQ008\" full 16L | code 16L]\n  - class Meta: ... [\"000zQ007\" full 8L | code 8L]\n\n- class AbstractModel(models.Model): ... [\"000zQ00e\" full 10L | code 10L]\n  - class Meta: ... [\"000zQ00d\" full 6L | code 6L]\n\n- class ChildModel1(AbstractModel): ... [\"000zQ00f\" full 2L | code 2L]\n\n- class ChildModel2(AbstractModel): ... [\"000zQ00g\" full 2L | code 2L]\n\n# tests/model_indexes/tests.py (373L)\nfile scope: [\"000zR01s\" full 373L | imports 12L]\n\n- class SimpleIndexesTests(SimpleTestCase): ... [\"000zR01i\" full 294L | code 294L]\n  - def test_suffix(self): ... [\"000zR000\" full 2L | code 2L]\n  - def test_repr(self): ... [\"000zR009\" full 54L | code 54L]\n  - def test_eq(self): ... [\"000zR00d\" full 10L | code 10L]\n  - def test_eq_func(self): ... [\"000zR00h\" full 7L | code 7L]\n  - def test_index_fields_type(self): ... [\"000zR00i\" full 5L | code 5L]\n  - def test_index_fields_strings(self): ... [\"000zR00k\" full 4L | code 4L]\n  - def test_fields_tuple(self): ... [\"000zR00l\" full 2L | code 2L]\n  - def test_requires_field_or_expression(self): ... [\"000zR00n\" full 4L | code 4L]\n  - def test_expressions_and_fields_mutually_exclusive(self): ... [\"000zR00p\" full 4L | code 4L]\n  - def test_opclasses_requires_index_name(self): ... [\"000zR00q\" full 5L | code 5L]\n  - def test_opclasses_requires_list_or_tuple(self): ... [\"000zR00r\" full 7L | code 7L]\n  - def test_opclasses_and_fields_same_length(self): ... [\"000zR00t\" full 8L | code 8L]\n  - def test_condition_requires_index_name(self): ... [\"000zR00u\" full 5L | code 5L]\n  - def test_expressions_requires_index_name(self): ... [\"000zR00w\" full 4L | code 4L]\n  - def test_expressions_with_opclasses(self): ... [\"000zR00y\" full 11L | code 11L]\n  - def test_condition_must_be_q(self): ... [\"000zR00z\" full 5L | code 5L]\n  - def test_include_requires_list_or_tuple(self): ... [\"000zR00B\" full 4L | code 4L]\n  - def test_include_requires_index_name(self): ... [\"000zR00D\" full 4L | code 4L]\n  - def test_name_auto_generation(self): ... [\"000zR00H\" full 23L | code 23L]\n  - @isolate_apps(\"model_indexes\") def test_name_auto_generation_with_quoted_db_table(self): ... [\"000zR00N\" full 11L | code 11L]\n    - class QuotedDbTable(models.Model): ... [\"000zR00L\" full 5L | code 5L]\n      - class Meta: ... [\"000zR00K\" full 2L | code 2L]\n  - def test_deconstruction(self): ... [\"000zR00S\" full 14L | code 14L]\n  - def test_deconstruct_with_condition(self): ... [\"000zR00X\" full 18L | code 18L]\n  - def test_deconstruct_with_include(self): ... [\"000zR012\" full 18L | code 18L]\n  - def test_deconstruct_with_expressions(self): ... [\"000zR017\" full 6L | code 6L]\n  - def test_clone(self): ... [\"000zR01a\" full 5L | code 5L]\n  - def test_clone_with_expressions(self): ... [\"000zR01d\" full 5L | code 5L]\n  - def test_name_set(self): ... [\"000zR01f\" full 10L | code 10L]\n  - def test_abstract_children(self): ... [\"000zR01h\" full 11L | code 11L]\n\n- @override_settings(DEFAULT_TABLESPACE=None) class IndexesTests(TestCase): ... [\"000zR01r\" full 65L | code 65L]\n  - @skipUnlessDBFeature(\"supports_tablespaces\") def test_db_tablespace(self): ... [\"000zR01m\" full 37L | code 37L]\n  - @skipUnlessDBFeature(\"supports_tablespaces\") def test_func_with_tablespace(self): ... [\"000zR01q\" full 25L | code 25L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

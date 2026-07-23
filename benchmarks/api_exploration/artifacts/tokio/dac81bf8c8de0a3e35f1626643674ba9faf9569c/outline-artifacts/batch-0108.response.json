@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/scheduler/defer.rs",
+        "tokio/src/runtime/scheduler/inject.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.8 KB -> 2.0 KB (28% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/scheduler/defer.rs (44L)\nfile scope: [\"00077008\" full 44L | imports 4L]\n\n- pub(crate) struct Defer { ... } [\"00077001\" full 3L | code 3L]\n  - deferred: RefCell<Vec<Waker>> [\"00077000\" full 1L | code 1L]\n\n- impl Defer { ... } [\"00077007\" full 36L | code 36L]\n  - pub(crate) fn new() -> Defer { ... } [\"00077002\" full 5L | code 5L]\n  - pub(crate) fn defer(&self, waker: &Waker) { ... } [\"00077003\" full 12L | code 12L]\n  - pub(crate) fn is_empty(&self) -> bool { ... } [\"00077004\" full 3L | code 3L]\n  - pub(crate) fn wake(&self) { ... } [\"00077005\" full 5L | code 5L]\n  - #[cfg(feature = \"taskdump\")] pub(crate) fn take_deferred(&self) -> Vec<Waker> { ... } [\"00077006\" full 5L | code 5L]\n\n# tokio/src/runtime/scheduler/inject.rs (71L)\nfile scope: [\"0007800d\" full 71L | module-docs 1L | imports 22L]\n\n- mod pop; [\"00078000\" full 1L | code 1L]\n\n- mod shared; [\"00078001\" full 1L | code 1L]\n\n- mod synced; [\"00078002\" full 1L | code 1L]\n\n- mod metrics; [\"00078003\" full 1L | code 1L]\n\n- pub(crate) struct Inject<T: 'static> { ... } [\"00078006\" full 6L | code 4L | docs 2L]\n  - shared: Shared<T> [\"00078004\" full 1L | code 1L]\n  - synced: Mutex<Synced> [\"00078005\" full 1L | code 1L]\n\n- impl<T: 'static> Inject<T> { ... } [\"0007800c\" full 43L | code 43L]\n  - pub(crate) fn new() -> Inject<T> { ... } [\"00078007\" full 8L | code 8L]\n  - #[cfg(feature = \"taskdump\")] pub(crate) fn is_closed(&self) -> bool { ... } [\"00078008\" full 6L | code 5L | docs 1L]\n  - pub(crate) fn close(&self) -> bool { ... } [\"00078009\" full 6L | code 4L | docs 2L]\n  - pub(crate) fn push(&self, task: task::Notified<T>) { ... } [\"0007800a\" full 8L | code 5L | docs 3L]\n  - pub(crate) fn pop(&self) -> Option<task::Notified<T>> { ... } [\"0007800b\" full 9L | code 9L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

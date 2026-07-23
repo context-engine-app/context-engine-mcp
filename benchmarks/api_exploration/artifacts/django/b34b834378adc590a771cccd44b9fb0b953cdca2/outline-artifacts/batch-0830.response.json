@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/test_runner_apps/tagged/__init__.py",
+        "tests/test_runner_apps/tagged/tests.py",
+        "tests/test_runner_apps/tagged/tests_inheritance.py",
+        "tests/test_runner_apps/tagged/tests_syntax_error.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/test_runner_apps/tagged/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/test_runner_apps/tagged/tests.py (15L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from unittest import TestCase\n 2|\n 3|from django.test import tag\n 4|\n 5|\n 6|@tag(\"slow\")\n 7|class TaggedTestCase(TestCase):\n 8|    @tag(\"fast\")\n 9|    def test_single_tag(self):\n10|        self.assertEqual(1, 1)\n11|\n12|    @tag(\"fast\", \"core\")\n13|    def test_multiple_tags(self):\n14|        self.assertEqual(1, 1)\nnote: EOF\n\n# tests/test_runner_apps/tagged/tests_inheritance.py (28L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from unittest import TestCase\n 2|\n 3|from django.test import tag\n 4|\n 5|\n 6|@tag(\"foo\")\n 7|class FooBase(TestCase):\n 8|    pass\n 9|\n10|\n11|class Foo(FooBase):\n12|    def test_no_new_tags(self):\n13|        pass\n14|\n15|    @tag(\"baz\")\n16|    def test_new_func_tag(self):\n17|        pass\n18|\n19|\n20|@tag(\"bar\")\n21|class FooBar(FooBase):\n22|    def test_new_class_tag_only(self):\n23|        pass\n24|\n25|    @tag(\"baz\")\n26|    def test_new_class_and_func_tags(self):\n27|        pass\nnote: EOF\n\n# tests/test_runner_apps/tagged/tests_syntax_error.py (12L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from unittest import TestCase\n 2|\n 3|from django.test import tag\n 4|\n 5|\n 6|@tag('syntax_error')\n 7|class SyntaxErrorTestCase(TestCase):\n 8|    pass\n 9|\n10|\n11|1syntax_error  # NOQA\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

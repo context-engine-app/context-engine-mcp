@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/field_defaults/__init__.py",
+        "tests/field_defaults/models.py",
+        "tests/field_defaults/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/field_defaults/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/field_defaults/models.py (71L)\nfile scope: [\"000nX00p\" full 71L | imports 20L]\n\n- class Article(models.Model): ... [\"000nX003\" full 6L | code 6L]\n  - def __str__(self): ... [\"000nX002\" full 2L | code 2L]\n\n- class DBArticle(models.Model): ... [\"000nX009\" full 15L | code 15L]\n  - class Meta: ... [\"000nX008\" full 2L | code 2L]\n\n- class DBDefaults(models.Model): ... [\"000nX00c\" full 3L | code 3L]\n\n- class DBDefaultsFunction(models.Model): ... [\"000nX00k\" full 11L | code 11L]\n  - class Meta: ... [\"000nX00j\" full 2L | code 2L]\n\n- class DBDefaultsPK(models.Model): ... [\"000nX00m\" full 2L | code 2L]\n\n- class DBDefaultsFK(models.Model): ... [\"000nX00o\" full 4L | code 4L]\n\n# tests/field_defaults/tests.py (248L)\nfile scope: [\"000nY012\" full 248L | imports 30L]\n\n- class DefaultTests(TestCase): ... [\"000nY00Q\" full 181L | code 181L]\n  - def test_field_defaults(self): ... [\"000nY002\" full 8L | code 8L]\n  - @skipUnlessDBFeature(\"supports_expression_defaults\") def test_field_db_defaults_returning(self): ... [\"000nY005\" full 12L | code 12L]\n  - @skipUnlessDBFeature(\"supports_expression_defaults\") def test_field_db_defaults_refresh(self): ... [\"000nY008\" full 12L | code 12L]\n  - def test_null_db_default(self): ... [\"000nY00c\" full 11L | code 11L]\n  - @skipUnlessDBFeature(\"supports_expression_defaults\") def test_db_default_function(self): ... [\"000nY00f\" full 11L | code 11L]\n  - @skipUnlessDBFeature(\"insert_test_table_with_defaults\") def test_both_default(self): ... [\"000nY00k\" full 10L | code 10L]\n  - def test_db_default_blind_overwrite(self): ... [\"000nY00n\" full 10L | code 10L]\n  - def test_pk_db_default(self): ... [\"000nY00q\" full 12L | code 12L]\n  - def test_foreign_key_db_default(self): ... [\"000nY00v\" full 14L | code 14L]\n  - @skipUnlessDBFeature(\"supports_expression_defaults\") def test_case_when_db_default_returning(self): ... [\"000nY00y\" full 8L | code 8L]\n  - @skipUnlessDBFeature(\"supports_expression_defaults\") def test_case_when_db_default_no_returning(self): ... [\"000nY00A\" full 5L | code 5L]\n  - @skipUnlessDBFeature(\"supports_expression_defaults\") def test_bulk_create_all_db_defaults(self): ... [\"000nY00D\" full 7L | code 7L]\n  - @skipUnlessDBFeature(\"supports_expression_defaults\") def test_bulk_create_all_db_defaults_one_field(self): ... [\"000nY00H\" full 14L | code 14L]\n  - @skipUnlessDBFeature(\"supports_expression_defaults\") def test_bulk_create_mixed_db_defaults(self): ... [\"000nY00K\" full 7L | code 7L]\n  - @skipUnlessDBFeature(\"supports_expression_defaults\") def test_bulk_create_mixed_db_defaults_function(self): ... [\"000nY00N\" full 7L | code 7L]\n  - @skipUnlessDBFeature(\"supports_expression_defaults\") def test_full_clean(self): ... [\"000nY00P\" full 17L | code 17L]\n\n- class AllowedDefaultTests(SimpleTestCase): ... [\"000nY011\" full 35L | code 35L]\n  - def test_allowed(self): ... [\"000nY00V\" full 16L | code 16L]\n    - class Max(Func): ... [\"000nY00S\" full 2L | code 2L]\n  - def test_disallowed(self): ... [\"000nY010\" full 17L | code 17L]\n    - class Max(Func): ... [\"000nY00X\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

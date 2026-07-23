@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/forms_tests/field_tests/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n1|from django import forms\n2|\n3|\n4|class FormFieldAssertionsMixin:\n5|    def assertWidgetRendersTo(self, field, to):\n6|        class Form(forms.Form):\n7|            f = field\n8|\n9|        self.assertHTMLEqual(str(Form()[\"f\"]), to)\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

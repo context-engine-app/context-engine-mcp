@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_squashed_replaced_order/app2/0001_initial.py",
+        "tests/migrations/test_migrations_squashed_replaced_order/app2/0001_squashed_initial.py",
+        "tests/migrations/test_migrations_squashed_replaced_order/app2/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/migrations/test_migrations_squashed_replaced_order/app2/0001_initial.py (12L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from django.db import migrations\n 2|\n 3|\n 4|class Migration(migrations.Migration):\n 5|    initial = True\n 6|\n 7|    dependencies = [\n 8|        (\"app1\", \"0001_initial\"),\n 9|    ]\n10|\n11|    operations = []\nnote: EOF\n\n# tests/migrations/test_migrations_squashed_replaced_order/app2/0001_squashed_initial.py (14L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from django.db import migrations\n 2|\n 3|\n 4|class Migration(migrations.Migration):\n 5|    initial = True\n 6|\n 7|    replaces = [\n 8|        (\"app2\", \"0001_initial\"),\n 9|    ]\n10|\n11|    dependencies = []\n12|\n13|    operations = []\nnote: EOF\n\n# tests/migrations/test_migrations_squashed_replaced_order/app2/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

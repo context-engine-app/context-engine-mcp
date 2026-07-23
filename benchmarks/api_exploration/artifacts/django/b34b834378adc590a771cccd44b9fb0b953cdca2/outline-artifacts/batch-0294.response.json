@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/admin_ordering/__init__.py",
+        "tests/admin_ordering/models.py",
+        "tests/admin_ordering/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/admin_ordering/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/admin_ordering/models.py (39L)\nfile scope: [\"000fz00l\" full 39L | imports 5L]\n\n- class Band(models.Model): ... [\"000fz005\" full 7L | code 7L]\n  - class Meta: ... [\"000fz004\" full 2L | code 2L]\n\n- class Song(models.Model): ... [\"000fz00c\" full 8L | code 8L]\n  - class Meta: ... [\"000fz00b\" full 2L | code 2L]\n\n- class SongInlineDefaultOrdering(admin.StackedInline): ... [\"000fz00e\" full 2L | code 2L]\n\n- class SongInlineNewOrdering(admin.StackedInline): ... [\"000fz00h\" full 3L | code 3L]\n\n- class DynOrderingBandAdmin(admin.ModelAdmin): ... [\"000fz00k\" full 6L | code 6L]\n  - def get_ordering(self, request): ... [\"000fz00j\" full 5L | code 5L]\n\n# tests/admin_ordering/tests.py (209L)\nfile scope: [\"000fA017\" full 209L | imports 24L]\n\n- class MockRequest: ... [\"000fA000\" full 2L | code 2L]\n\n- class MockSuperUser: ... [\"000fA006\" full 6L | code 6L]\n  - def has_perm(self, perm, obj=None): ... [\"000fA003\" full 2L | code 2L]\n  - def has_module_perms(self, module): ... [\"000fA005\" full 2L | code 2L]\n\n- class TestAdminOrdering(TestCase): ... [\"000fA00u\" full 63L | code 63L]\n  - @classmethod def setUpTestData(cls): ... [\"000fA00a\" full 9L | code 9L]\n  - def test_default_ordering(self): ... [\"000fA00d\" full 8L | code 8L]\n  - def test_specified_ordering(self): ... [\"000fA00i\" full 12L | code 12L]\n    - class BandAdmin( ... ): ordering = (\"rank\",) [\"000fA00f\" full 2L | code 2L]\n  - def test_specified_ordering_by_f_expression(self): ... [\"000fA00n\" full 7L | code 7L]\n    - class BandAdmin(ModelAdmin): ... [\"000fA00k\" full 2L | code 2L]\n  - def test_dynamic_ordering(self): ... [\"000fA00t\" full 14L | code 14L]\n\n- class TestInlineModelAdminOrdering(TestCase): ... [\"000fA00D\" full 33L | code 33L]\n  - @classmethod def setUpTestData(cls): ... [\"000fA00v\" full 10L | code 10L]\n  - def test_default_ordering(self): ... [\"000fA00z\" full 8L | code 8L]\n  - def test_specified_ordering(self): ... [\"000fA00C\" full 7L | code 7L]\n\n- class TestRelatedFieldsAdminOrdering(TestCase): ... [\"000fA016\" full 75L | code 75L]\n  - @classmethod def setUpTestData(cls): ... [\"000fA00E\" full 4L | code 4L]\n  - def setUp(self): ... [\"000fA00I\" full 8L | code 8L]\n    - class SongAdmin(admin.ModelAdmin): ... [\"000fA00H\" full 2L | code 2L]\n  - def tearDown(self): ... [\"000fA00J\" full 4L | code 4L]\n  - def check_ordering_of_field_choices(self, correct_ordering): ... [\"000fA00N\" full 9L | code 9L]\n  - def test_no_admin_fallback_to_model_ordering(self): ... [\"000fA00O\" full 3L | code 3L]\n  - def test_admin_with_no_ordering_fallback_to_model_ordering(self): ... [\"000fA00Q\" full 8L | code 8L]\n    - class NoOrderingBandAdmin(admin.ModelAdmin): ... [\"000fA00P\" full 2L | code 2L]\n  - def test_admin_ordering_beats_model_ordering(self): ... [\"000fA00T\" full 8L | code 8L]\n    - class StaticOrderingBandAdmin(admin.ModelAdmin): ... [\"000fA00S\" full 2L | code 2L]\n  - def test_custom_queryset_still_wins(self): ... [\"000fA015\" full 23L | code 23L]\n    - class SongAdmin(admin.ModelAdmin): ... [\"000fA012\" full 11L | code 11L]\n      - def formfield_for_foreignkey(self, db_field, request, **kwargs): ... [\"000fA00X\" full 4L | code 4L]\n      - def formfield_for_manytomany(self, db_field, request, **kwargs): ... [\"000fA011\" full 4L | code 4L]\n    - class StaticOrderingBandAdmin(admin.ModelAdmin): ... [\"000fA014\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

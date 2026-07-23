@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/postgres_tests/test_trigram.py",
+        "tests/postgres_tests/test_unaccent.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 8.4 KB -> 2.0 KB (76% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/postgres_tests/test_trigram.py (177L)\nfile scope: [\"000Bv00l\" full 177L | imports 20L]\n\n- class TrigramTest(PostgreSQLTestCase): ... [\"000Bv00i\" full 149L | code 149L]\n  - @classmethod def setUpTestData(cls): ... [\"000Bv001\" full 9L | code 9L]\n  - def test_trigram_search(self): ... [\"000Bv002\" full 6L | code 6L]\n  - def test_trigram_word_search(self): ... [\"000Bv004\" full 12L | code 12L]\n  - def test_trigram_strict_word_search_matched(self): ... [\"000Bv006\" full 14L | code 14L]\n  - def test_trigram_similarity(self): ... [\"000Bv008\" full 13L | code 13L]\n  - def test_trigram_word_similarity(self): ... [\"000Bv00a\" full 16L | code 16L]\n  - def test_trigram_strict_word_similarity(self): ... [\"000Bv00c\" full 12L | code 12L]\n  - def test_trigram_similarity_alternate(self): ... [\"000Bv00d\" full 12L | code 12L]\n  - def test_trigram_word_similarity_alternate(self): ... [\"000Bv00e\" full 15L | code 15L]\n  - def test_trigram_strict_word_distance(self): ... [\"000Bv00f\" full 13L | code 13L]\n  - def test_trigram_concat_precedence(self): ... [\"000Bv00h\" full 14L | code 14L]\n\n- class TrigramTextFieldTest(TrigramTest): ... [\"000Bv00k\" full 6L | code 6L]\n\n# tests/postgres_tests/test_unaccent.py (80L)\nfile scope: [\"000Bw00b\" full 80L | imports 7L]\n\n- class UnaccentTest(PostgreSQLTestCase): ... [\"000Bw008\" full 64L | code 64L]\n  - @classmethod def setUpTestData(cls): ... [\"000Bw001\" full 9L | code 9L]\n  - def test_unaccent(self): ... [\"000Bw002\" full 7L | code 7L]\n  - def test_unaccent_chained(self): ... [\"000Bw003\" full 17L | code 17L]\n  - def test_unaccent_with_conforming_strings_off(self): ... [\"000Bw006\" full 17L | code 17L]\n  - def test_unaccent_accentuated_needle(self): ... [\"000Bw007\" full 7L | code 7L]\n\n- class UnaccentTextFieldTest(UnaccentTest): ... [\"000Bw00a\" full 7L | code 7L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

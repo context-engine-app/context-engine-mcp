@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tasks/setup_node.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.8 KB -> 2.0 KB (27% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tasks/setup_node.ts (112L)\nfile scope: [\"0005H00B\" full 112L | imports 69L]\n\n- projects.map() callback [\"0005H006\" full 17L | code 17L]\n  - \".\": exports [\"0005H003\" full 1L | code 1L]\n\n- compilerOptions: { allowJs: true, esModuleInterop: true, experimentalDecorators: false, inlineSourceMap: true, isolatedModules: true, module: \"esnext\", moduleDetection: \"force\", strict: true, target: \"esnext\", useDefineForClassFields: true, paths, } [\"0005H00i\" full 13L | code 13L]\n  - allowJs: true [\"0005H007\" full 1L | code 1L]\n  - esModuleInterop: true [\"0005H008\" full 1L | code 1L]\n  - experimentalDecorators: false [\"0005H009\" full 1L | code 1L]\n  - inlineSourceMap: true [\"0005H00a\" full 1L | code 1L]\n  - isolatedModules: true [\"0005H00b\" full 1L | code 1L]\n  - module: \"esnext\" [\"0005H00c\" full 1L | code 1L]\n  - moduleDetection: \"force\" [\"0005H00d\" full 1L | code 1L]\n  - strict: true [\"0005H00e\" full 1L | code 1L]\n  - target: \"esnext\" [\"0005H00f\" full 1L | code 1L]\n  - useDefineForClassFields: true [\"0005H00g\" full 1L | code 1L]\n  - paths [\"0005H00h\" full 1L | code 1L]\n\n- type: \"module\" [\"0005H00m\" full 1L | code 1L]\n\n- packageManager: \"pnpm@9.7.1\" [\"0005H00n\" full 1L | code 1L]\n\n- dependencies: { ...dependencies, tsx: \"4.17.0\", } [\"0005H00q\" full 4L | code 4L]\n  - ...dependencies [\"0005H00o\" full 1L | code 1L]\n  - tsx: \"4.17.0\" [\"0005H00p\" full 1L | code 1L]\n\n- args: [\"fmt\", \"tsconfig.json\", \"package.json\"] [\"0005H00r\" full 1L | code 1L]\n\n- args: [\"install\"] [\"0005H00s\" full 2L | code 2L]\n\n- async function getProjects(): Promise<Array<string>> { ... } [\"0005H00A\" full 25L | code 25L]\n  - includeDirs: true [\"0005H00v\" full 1L | code 1L]\n  - followSymlinks: false [\"0005H00w\" full 1L | code 1L]\n  - every() callback [\"0005H00x\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

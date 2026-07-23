@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "scripts/archive_eol_stable_branches.py",
+        "scripts/check_migrations.py",
+        "scripts/do_django_release.py",
+        "scripts/manage_translations.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 26.2 KB -> 3.1 KB (88% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# scripts/archive_eol_stable_branches.py (152L)\nfile scope: [\"000eI00J\" full 152L | module-docs 1L | imports 8L]\n\n- def run(cmd, *, cwd=None, env=None, dry_run=True): ... [\"000eI007\" full 20L | code 20L]\n\n- def validate_env(checkout_dir): ... [\"000eI009\" full 7L | code 7L]\n\n- def get_remote_branches(checkout_dir, include_fn): ... [\"000eI00e\" full 9L | code 9L]\n\n- def get_branch_info(checkout_dir, branch): ... [\"000eI00j\" full 9L | code 9L]\n\n- def create_tag(checkout_dir, branch, commit_hash, last_update, *, dry_run=True): ... [\"000eI00r\" full 11L | code 11L]\n\n- def delete_remote_and_local_branch(checkout_dir, branch, *, dry_run=True): ... [\"000eI00v\" full 16L | code 16L]\n\n- def main(): ... [\"000eI00I\" full 56L | code 56L]\n\n# scripts/check_migrations.py (32L)\nfile scope: [\"000eJ005\" full 32L | imports 5L]\n\n- def main(): ... [\"000eJ004\" full 23L | code 23L]\n\n# scripts/do_django_release.py (265L)\nfile scope: [\"000eK00N\" full 265L | module-docs 1L | imports 70L]\n\n- def build_artifacts(): ... [\"000eK001\" full 4L | code 4L]\n\n- def do_checksum(checksum_algo, release_file, dist_path): ... [\"000eK006\" full 3L | code 3L]\n\n- def get_commit_hash(): ... [\"000eK007\" full 2L | code 2L]\n\n- def parse_major_version(django_version): ... [\"000eK00b\" full 6L | code 6L]\n\n- def find_release_artifacts(dist_path): ... [\"000eK00g\" full 9L | code 9L]\n\n- def create_checksum_file( *, django_version, release_date, checksum_file_path, tarball_name, wheel_name, commit_hash, dist_path, pgp_key_id, pgp_key_url, ): ... [\"000eK00u\" full 35L | code 35L]\n\n- def main(): ... [\"000eK00M\" full 121L | code 121L]\n\n# scripts/manage_translations.py (404L)\nfile scope: [\"000eL01y\" full 404L | module-docs 21L | imports 75L]\n\n- HAVE_JS [\"000eL000\" full 1L | code 1L]\n\n- LANG_OVERRIDES [\"000eL001\" full 1L | code 1L]\n\n- def run(*args, verbosity=0, **kwargs): ... [\"000eL005\" full 4L | code 4L]\n\n- def get_api_token(): ... [\"000eL008\" full 10L | code 10L]\n\n- def get_api_response(endpoint, api_token=None, params=None, verbosity=0): ... [\"000eL00g\" full 17L | code 17L]\n\n- def list_resources_with_updates( date_since, resources=None, languages=None, verbosity=0 ): ... [\"000eL00w\" full 61L | code 61L]\n\n- def _get_locale_dirs(resources, include_core=True): ... [\"000eL00E\" full 31L | code 31L]\n\n- def _tx_resource_slug_for_name(name): ... [\"000eL00G\" full 5L | code 5L]\n\n- def _tx_resource_for_name(name): ... [\"000eL00I\" full 3L | code 3L]\n\n- def _check_diff(cat_name, base_path): ... [\"000eL00O\" full 15L | code 15L]\n\n- def update_catalogs(resources=None, languages=None, verbosity=0): ... [\"000eL00V\" full 21L | code 21L]\n\n- def lang_stats(resources=None, languages=None, verbosity=0): ... [\"000eL016\" full 34L | code 34L]\n\n- def fetch(resources=None, languages=None, date_since=None, verbosity=0): ... [\"000eL01n\" full 71L | code 71L]\n\n- def add_common_arguments(parser): ... [\"000eL01p\" full 24L | code 24L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

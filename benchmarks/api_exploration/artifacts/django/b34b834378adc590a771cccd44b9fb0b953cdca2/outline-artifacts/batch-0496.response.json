@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/gis_tests/data/rasters/__init__.py",
+        "tests/gis_tests/data/rasters/textrasters.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/gis_tests/data/rasters/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/gis_tests/data/rasters/textrasters.py (17L)\nfile scope: [\"000qV001\" full 17L | imports 5L]\n\n- JSON_RASTER [\"000qV000\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

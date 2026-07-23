@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_run_before/0001_initial.py",
+        "tests/migrations/test_migrations_run_before/0002_second.py",
+        "tests/migrations/test_migrations_run_before/0003_third.py",
+        "tests/migrations/test_migrations_run_before/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/test_migrations_run_before/0001_initial.py (15L)\nfile scope: [\"000xE002\" full 15L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000xE001\" full 11L | code 11L]\n\n# tests/migrations/test_migrations_run_before/0002_second.py (21L)\nfile scope: [\"000xF003\" full 21L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000xF002\" full 17L | code 17L]\n\n# tests/migrations/test_migrations_run_before/0003_third.py (28L)\nfile scope: [\"000xG004\" full 28L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000xG003\" full 24L | code 24L]\n\n# tests/migrations/test_migrations_run_before/__init__.py (1L)\nfile scope: [\"000xH000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

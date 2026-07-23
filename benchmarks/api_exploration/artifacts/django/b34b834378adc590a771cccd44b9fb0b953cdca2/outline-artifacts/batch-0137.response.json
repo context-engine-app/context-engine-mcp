@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/gis/db/models/sql/__init__.py",
+        "django/contrib/gis/db/models/sql/conversion.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/gis/db/models/sql/__init__.py (7L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.contrib.gis.db.models.sql.conversion import AreaField, DistanceField\n2|\n3|__all__ = [\n4|    \"AreaField\",\n5|    \"DistanceField\",\n6|]\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/gis/db/models/sql/conversion.py (75L)\nfile scope: [\"0005s00y\" full 75L | imports 12L]\n\n- class AreaField(models.FloatField): ... [\"0005s00g\" full 31L | code 31L]\n  - def __init__(self, geo_field): ... [\"0005s001\" full 3L | code 3L]\n  - def get_prep_value(self, value): ... [\"0005s004\" full 4L | code 4L]\n  - def get_db_prep_value(self, value, connection, prepared=False): ... [\"0005s009\" full 5L | code 5L]\n  - def from_db_value(self, value, expression, connection): ... [\"0005s00e\" full 10L | code 10L]\n  - def get_internal_type(self): ... [\"0005s00f\" full 2L | code 2L]\n\n- class DistanceField(models.FloatField): ... [\"0005s00x\" full 30L | code 30L]\n  - def __init__(self, geo_field): ... [\"0005s00i\" full 3L | code 3L]\n  - def get_prep_value(self, value): ... [\"0005s00l\" full 4L | code 4L]\n  - def get_db_prep_value(self, value, connection, prepared=False): ... [\"0005s00q\" full 9L | code 9L]\n  - def from_db_value(self, value, expression, connection): ... [\"0005s00v\" full 5L | code 5L]\n  - def get_internal_type(self): ... [\"0005s00w\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

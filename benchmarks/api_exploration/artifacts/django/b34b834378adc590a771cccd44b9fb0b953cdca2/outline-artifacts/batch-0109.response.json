@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/auth/migrations/0009_alter_user_last_name_max_length.py",
+        "django/contrib/auth/migrations/0010_alter_group_name_max_length.py",
+        "django/contrib/auth/migrations/0011_update_proxy_permissions.py",
+        "django/contrib/auth/migrations/0012_alter_user_first_name_max_length.py",
+        "django/contrib/auth/migrations/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/auth/migrations/0009_alter_user_last_name_max_length.py (18L)\nfile scope: [\"0003V003\" full 18L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"0003V002\" full 14L | code 14L]\n\n# django/contrib/auth/migrations/0010_alter_group_name_max_length.py (16L)\nfile scope: [\"0003W003\" full 16L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"0003W002\" full 12L | code 12L]\n\n# django/contrib/auth/migrations/0011_update_proxy_permissions.py (77L)\nfile scope: [\"0003X00s\" full 77L | imports 18L]\n\n- WARNING [\"0003X000\" full 1L | code 1L]\n\n- def update_proxy_model_permissions(apps, schema_editor, reverse=False): ... [\"0003X00l\" full 40L | code 40L]\n\n- def revert_proxy_model_permissions(apps, schema_editor): ... [\"0003X00o\" full 6L | code 6L]\n\n- class Migration(migrations.Migration): ... [\"0003X00r\" full 10L | code 10L]\n\n# django/contrib/auth/migrations/0012_alter_user_first_name_max_length.py (18L)\nfile scope: [\"0003Y003\" full 18L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"0003Y002\" full 14L | code 14L]\n\n# django/contrib/auth/migrations/__init__.py (1L)\nfile scope: [\"0003Z000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

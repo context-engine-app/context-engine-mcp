@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/m2o_recursive/__init__.py",
+        "tests/m2o_recursive/models.py",
+        "tests/m2o_recursive/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/m2o_recursive/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/m2o_recursive/models.py (37L)\nfile scope: [\"000u5009\" full 37L | imports 16L]\n\n- class Category(models.Model): ... [\"000u5003\" full 8L | code 8L]\n  - def __str__(self): ... [\"000u5002\" full 2L | code 2L]\n\n- class Person(models.Model): ... [\"000u5008\" full 11L | code 11L]\n  - def __str__(self): ... [\"000u5007\" full 2L | code 2L]\n\n# tests/m2o_recursive/tests.py (40L)\nfile scope: [\"000u600b\" full 40L | imports 6L]\n\n- class ManyToOneRecursiveTests(TestCase): ... [\"000u6004\" full 12L | code 12L]\n  - @classmethod def setUpTestData(cls): ... [\"000u6000\" full 4L | code 4L]\n  - def test_m2o_recursive(self): ... [\"000u6003\" full 6L | code 6L]\n\n- class MultipleManyToOneRecursiveTests(TestCase): ... [\"000u600a\" full 20L | code 20L]\n  - @classmethod def setUpTestData(cls): ... [\"000u6005\" full 11L | code 11L]\n  - def test_m2o_recursive2(self): ... [\"000u6009\" full 7L | code 7L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests-build/tests/fail/macros_core_no_default.rs",
+        "tests-build/tests/fail/macros_dead_code.rs",
+        "tests-build/tests/fail/macros_invalid_input.rs",
+        "tests-build/tests/fail/macros_join.rs",
+        "tests-build/tests/fail/macros_try_join.rs",
+        "tests-build/tests/fail/macros_type_mismatch.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests-build/tests/fail/macros_core_no_default.rs (7L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|use tests_build::tokio;\n2|\n3|#[tokio::main]\n4|async fn my_fn() {}\n5|\n6|fn main() {}\nnote: EOF\n\n# tests-build/tests/fail/macros_dead_code.rs (9L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|#![deny(dead_code)]\n2|\n3|use tests_build::tokio;\n4|\n5|#[tokio::main]\n6|async fn f() {}\n7|\n8|fn main() {}\nnote: EOF\n\n# tests-build/tests/fail/macros_invalid_input.rs (75L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|#![deny(duplicate_macro_attributes)]\n 2|\n 3|use tests_build::tokio;\n 4|\n 5|#[tokio::main]\n 6|fn main_is_not_async() {}\n 7|\n 8|#[tokio::main(foo)]\n 9|async fn main_attr_has_unknown_args() {}\n10|\n11|#[tokio::main(threadpool::bar)]\n12|async fn main_attr_has_path_args() {}\n13|\n14|#[tokio::test]\n15|fn test_is_not_async() {}\n16|\n17|#[tokio::test(foo)]\n18|async fn test_attr_has_args() {}\n19|\n20|#[tokio::test(foo = 123)]\n21|async fn test_unexpected_attr() {}\n22|\n23|#[tokio::test(flavor = 123)]\n24|async fn test_flavor_not_string() {}\n25|\n26|#[tokio::test(flavor = \"foo\")]\n27|async fn test_unknown_flavor() {}\n28|\n29|#[tokio::test(flavor = \"multi_thread\", start_paused = false)]\n30|async fn test_multi_thread_with_start_paused() {}\n31|\n32|#[tokio::test(flavor = \"multi_thread\", worker_threads = \"foo\")]\n33|async fn test_worker_threads_not_int() {}\n34|\n35|#[tokio::test(flavor = \"current_thread\", worker_threads = 4)]\n36|async fn test_worker_threads_and_current_thread() {}\n37|\n38|#[tokio::test(crate = 456)]\n39|async fn test_crate_not_path_int() {}\n40|\n41|#[tokio::test(crate = \"456\")]\n42|async fn test_crate_not_path_invalid() {}\n43|\n44|#[tokio::test(flavor = \"multi_thread\", unhandled_panic = \"shutdown_runtime\")]\n45|async fn test_multi_thread_with_unhandled_panic() {}\n46|\n47|#[tokio::test]\n48|#[test]\n49|async fn test_has_second_test_attr() {}\n50|\n51|#[tokio::test]\n52|#[::core::prelude::v1::test]\n53|async fn test_has_second_test_attr_v1() {}\n54|\n55|#[tokio::test]\n56|#[core::prelude::rust_2015::test]\n57|async fn test_has_second_test_attr_rust_2015() {}\n58|\n59|#[tokio::test]\n60|#[::std::prelude::rust_2018::test]\n61|async fn test_has_second_test_attr_rust_2018() {}\n62|\n63|#[tokio::test]\n64|#[std::prelude::rust_2021::test]\n65|async fn test_has_second_test_attr_rust_2021() {}\n66|\n67|#[tokio::test]\n68|#[tokio::test]\n69|async fn test_has_generated_second_test_attr() {}\n70|\n71|#[tokio::test(name = 123)]\n72|async fn test_name_not_string() {}\n73|\n74|fn main() {}\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests-build/tests/fail/macros_join.rs (43L)\nfile scope: [\"0000G001\" full 43L | imports 3L]\n\n- #[tokio::main] async fn main() { ... } [\"0000G000\" full 40L | code 40L]\n\n# tests-build/tests/fail/macros_try_join.rs (43L)\nfile scope: [\"0000H001\" full 43L | imports 3L]\n\n- #[tokio::main] async fn main() { ... } [\"0000H000\" full 40L | code 40L]\n\n# tests-build/tests/fail/macros_type_mismatch.rs (70L)\nfile scope: [\"0000I007\" full 70L | imports 3L]\n\n- #[tokio::main] async fn missing_semicolon_or_return_type() { ... } [\"0000I000\" full 4L | code 4L]\n\n- #[tokio::main] async fn missing_return_type() { ... } [\"0000I001\" full 4L | code 4L]\n\n- #[tokio::main] async fn extra_semicolon() -> Result<(), ()> { ... } [\"0000I002\" full 12L | code 12L]\n\n- #[tokio::main] async fn question_mark_operator_with_invalid_option() -> Option<()> { ... } [\"0000I003\" full 16L | code 4L | docs 12L]\n\n- #[tokio::main] async fn question_mark_operator_with_invalid_result() -> Result<(), ()> { ... } [\"0000I004\" full 16L | code 4L | docs 12L]\n\n- #[allow(redundant_semicolons)] #[rustfmt::skip] #[tokio::main] async fn issue_4635() { ... } [\"0000I005\" full 8L | code 7L | docs 1L]\n\n- fn main() { ... } [\"0000I006\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

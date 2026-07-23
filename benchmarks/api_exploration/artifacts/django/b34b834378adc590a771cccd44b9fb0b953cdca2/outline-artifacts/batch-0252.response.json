@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/shortcuts.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 6.7 KB -> 1.1 KB (83% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/shortcuts.py (212L)\nfile scope: [\"000cA00M\" full 212L | imports 20L]\n\n- def render( request, template_name, context=None, content_type=None, status=None, using=None ): ... [\"000cA007\" full 9L | code 9L]\n\n- def redirect( to, *args, permanent=False, preserve_request=False, max_length=MAX_URL_REDIRECT_LENGTH, **kwargs, ): ... [\"000cA00f\" full 33L | code 33L]\n\n- def _get_queryset(klass): ... [\"000cA00h\" full 11L | code 11L]\n\n- def get_object_or_404(klass, *args, **kwargs): ... [\"000cA00n\" full 29L | code 29L]\n\n- async def aget_object_or_404(klass, *args, **kwargs): ... [\"000cA00t\" full 17L | code 17L]\n\n- def get_list_or_404(klass, *args, **kwargs): ... [\"000cA00A\" full 23L | code 23L]\n\n- async def aget_list_or_404(klass, *args, **kwargs): ... [\"000cA00H\" full 17L | code 17L]\n\n- def resolve_url(to, *args, **kwargs): ... [\"000cA00L\" full 39L | code 39L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

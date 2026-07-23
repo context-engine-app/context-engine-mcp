@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/core/exceptions.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 6.6 KB -> 2.9 KB (56% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/core/exceptions.py (266L)\nfile scope: [\"0008S00S\" full 266L | imports 14L]\n\n- class FieldDoesNotExist(Exception): ... [\"0008S000\" full 4L | code 4L]\n\n- class AppRegistryNotReady(Exception): ... [\"0008S001\" full 4L | code 4L]\n\n- class ObjectDoesNotExist(Exception): ... [\"0008S003\" full 4L | code 4L]\n\n- class ObjectNotUpdated(Exception): ... [\"0008S004\" full 2L | code 2L]\n\n- class MultipleObjectsReturned(Exception): ... [\"0008S005\" full 4L | code 4L]\n\n- class SuspiciousOperation(Exception): ... [\"0008S006\" full 2L | code 2L]\n\n- class SuspiciousMultipartForm(SuspiciousOperation): ... [\"0008S007\" full 4L | code 4L]\n\n- class SuspiciousFileOperation(SuspiciousOperation): ... [\"0008S008\" full 4L | code 4L]\n\n- class DisallowedHost(SuspiciousOperation): ... [\"0008S009\" full 4L | code 4L]\n\n- class DisallowedRedirect(SuspiciousOperation): ... [\"0008S00a\" full 4L | code 4L]\n\n- class TooManyFieldsSent(SuspiciousOperation): ... [\"0008S00b\" full 7L | code 7L]\n\n- class TooManyFilesSent(SuspiciousOperation): ... [\"0008S00c\" full 7L | code 7L]\n\n- class RequestDataTooBig(SuspiciousOperation): ... [\"0008S00d\" full 7L | code 7L]\n\n- class RequestAborted(Exception): ... [\"0008S00e\" full 4L | code 4L]\n\n- class BadRequest(Exception): ... [\"0008S00f\" full 4L | code 4L]\n\n- class PermissionDenied(Exception): ... [\"0008S00g\" full 4L | code 4L]\n\n- class ViewDoesNotExist(Exception): ... [\"0008S00h\" full 4L | code 4L]\n\n- class MiddlewareNotUsed(Exception): ... [\"0008S00i\" full 4L | code 4L]\n\n- class ImproperlyConfigured(Exception): ... [\"0008S00j\" full 4L | code 4L]\n\n- class FieldError(Exception): ... [\"0008S00k\" full 4L | code 4L]\n\n- class FieldFetchBlocked(FieldError): ... [\"0008S00l\" full 4L | code 4L]\n\n- NON_FIELD_ERRORS [\"0008S00m\" full 1L | code 1L]\n\n- class ValidationError(Exception): ... [\"0008S00O\" full 104L | code 104L]\n  - def __init__(self, message, code=None, params=None): ... [\"0008S00s\" full 42L | code 42L]\n  - @property def message_dict(self): ... [\"0008S00y\" full 7L | code 7L]\n  - @property def messages(self): ... [\"0008S00z\" full 5L | code 5L]\n  - def update_error_dict(self, error_dict): ... [\"0008S00D\" full 7L | code 7L]\n  - def __iter__(self): ... [\"0008S00I\" full 10L | code 10L]\n  - def __str__(self): ... [\"0008S00J\" full 4L | code 4L]\n  - def __repr__(self): ... [\"0008S00K\" full 2L | code 2L]\n  - def __eq__(self, other): ... [\"0008S00M\" full 4L | code 4L]\n  - def __hash__(self): ... [\"0008S00N\" full 12L | code 12L]\n\n- class EmptyResultSet(Exception): ... [\"0008S00P\" full 4L | code 4L]\n\n- class FullResultSet(Exception): ... [\"0008S00Q\" full 4L | code 4L]\n\n- class SynchronousOnlyOperation(Exception): ... [\"0008S00R\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

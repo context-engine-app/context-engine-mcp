@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/postgres/apps.py",
+        "django/contrib/postgres/constraints.py",
+        "django/contrib/postgres/expressions.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 14.4 KB -> 2.2 KB (85% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/postgres/apps.py (90L)\nfile scope: [\"0007100a\" full 90L | imports 24L]\n\n- def uninstall_if_needed(setting, value, enter, **kwargs): ... [\"00071004\" full 26L | code 26L]\n\n- class PostgresConfig(AppConfig): ... [\"00071009\" full 38L | code 38L]\n  - def ready(self): ... [\"00071008\" full 34L | code 34L]\n\n# django/contrib/postgres/constraints.py (243L)\nfile scope: [\"0007201d\" full 243L | imports 19L]\n\n- class ExclusionConstraintExpression(IndexExpression): ... [\"00072002\" full 2L | code 2L]\n\n- class ExclusionConstraint(CheckPostgresInstalledMixin, BaseConstraint): ... [\"0007201c\" full 221L | code 221L]\n  - def __init__( self, *, name, expressions, index_type=None, condition=None, deferrable=None, include=None, violation_error_code=None, violation_error_message=None, ): ... [\"0007200c\" full 61L | code 61L]\n  - def _get_expressions(self, schema_editor, query): ... [\"0007200o\" full 9L | code 9L]\n  - def check(self, model, connection): ... [\"0007200u\" full 9L | code 9L]\n  - def _get_condition_sql(self, compiler, schema_editor, query): ... [\"0007200B\" full 6L | code 6L]\n  - def constraint_sql(self, model, schema_editor): ... [\"0007200K\" full 21L | code 21L]\n  - def create_sql(self, model, schema_editor): ... [\"0007200N\" full 6L | code 6L]\n  - def remove_sql(self, model, schema_editor): ... [\"0007200Q\" full 6L | code 6L]\n  - def deconstruct(self): ... [\"0007200U\" full 12L | code 12L]\n  - def __eq__(self, other): ... [\"0007200W\" full 13L | code 13L]\n  - def __repr__(self): ... [\"0007200X\" full 21L | code 21L]\n  - def validate(self, model, instance, exclude=None, using=DEFAULT_DB_ALIAS): ... [\"0007201b\" full 41L | code 41L]\n\n# django/contrib/postgres/expressions.py (15L)\nfile scope: [\"00073006\" full 15L | imports 6L]\n\n- class ArraySubquery(Subquery): ... [\"00073005\" full 9L | code 9L]\n  - def __init__(self, queryset, **kwargs): ... [\"00073003\" full 2L | code 2L]\n  - @cached_property def output_field(self): ... [\"00073004\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

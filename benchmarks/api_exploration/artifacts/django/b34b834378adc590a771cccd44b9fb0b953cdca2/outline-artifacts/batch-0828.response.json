@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/test_runner_apps/sample/tests_sample.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n 1|import doctest\n 2|from unittest import TestCase\n 3|\n 4|from django.test import SimpleTestCase\n 5|from django.test import TestCase as DjangoTestCase\n 6|\n 7|from . import doctests\n 8|\n 9|\n10|class TestVanillaUnittest(TestCase):\n11|    def test_sample(self):\n12|        self.assertEqual(1, 1)\n13|\n14|\n15|class TestDjangoTestCase(DjangoTestCase):\n16|    def test_sample(self):\n17|        self.assertEqual(1, 1)\n18|\n19|\n20|class TestZimpleTestCase(SimpleTestCase):\n21|    # Z is used to trick this test case to appear after Vanilla in default\n22|    # suite\n23|\n24|    def test_sample(self):\n25|        self.assertEqual(1, 1)\n26|\n27|\n28|class EmptyTestCase(TestCase):\n29|    pass\n30|\n31|\n32|def load_tests(loader, tests, ignore):\n33|    tests.addTests(doctest.DocTestSuite(doctests))\n34|    return tests\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

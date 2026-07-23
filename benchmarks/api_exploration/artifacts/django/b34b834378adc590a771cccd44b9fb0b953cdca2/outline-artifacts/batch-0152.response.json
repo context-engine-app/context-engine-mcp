@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/gis/measure.py",
+        "django/contrib/gis/ptr.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 13.6 KB -> 3.3 KB (76% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/gis/measure.py (376L)\nfile scope: [\"0006q01c\" full 376L | module-docs 29L | imports 31L]\n\n- NUMERIC_TYPES [\"0006q001\" full 1L | code 1L]\n\n- AREA_PREFIX [\"0006q002\" full 1L | code 1L]\n\n- def pretty_name(obj): ... [\"0006q004\" full 2L | code 2L]\n\n- @total_ordering class MeasureBase: ... [\"0006q00V\" full 195L | code 195L]\n  - def __init__(self, default_unit=None, **kwargs): ... [\"0006q00c\" full 5L | code 5L]\n  - def _get_standard(self): ... [\"0006q00e\" full 2L | code 2L]\n  - def _set_standard(self, value): ... [\"0006q00g\" full 2L | code 2L]\n  - def __getattr__(self, name): ... [\"0006q00j\" full 5L | code 5L]\n  - def __repr__(self): ... [\"0006q00k\" full 6L | code 6L]\n  - def __str__(self): ... [\"0006q00l\" full 2L | code 2L]\n  - def __eq__(self, other): ... [\"0006q00n\" full 5L | code 5L]\n  - def __hash__(self): ... [\"0006q00o\" full 2L | code 2L]\n  - def __lt__(self, other): ... [\"0006q00q\" full 5L | code 5L]\n  - def __add__(self, other): ... [\"0006q00s\" full 10L | code 10L]\n  - def __iadd__(self, other): ... [\"0006q00u\" full 8L | code 8L]\n  - def __sub__(self, other): ... [\"0006q00w\" full 11L | code 11L]\n  - def __isub__(self, other): ... [\"0006q00y\" full 9L | code 9L]\n  - def __mul__(self, other): ... [\"0006q00A\" full 11L | code 11L]\n  - def __imul__(self, other): ... [\"0006q00C\" full 9L | code 9L]\n  - def __rmul__(self, other): ... [\"0006q00E\" full 2L | code 2L]\n  - def __truediv__(self, other): ... [\"0006q00G\" full 13L | code 13L]\n  - def __itruediv__(self, other): ... [\"0006q00I\" full 8L | code 8L]\n  - def __bool__(self): ... [\"0006q00J\" full 2L | code 2L]\n  - def default_units(self, kwargs): ... [\"0006q00R\" full 29L | code 29L]\n  - @classmethod def unit_attname(cls, unit_str): ... [\"0006q00U\" full 16L | code 16L]\n\n- class Distance(MeasureBase): ... [\"0006q012\" full 97L | code 97L]\n  - def __mul__(self, other): ... [\"0006q011\" full 18L | code 18L]\n\n- class Area(MeasureBase): ... [\"0006q019\" full 22L | code 22L]\n  - def __truediv__(self, other): ... [\"0006q018\" full 10L | code 10L]\n\n- D [\"0006q01a\" full 1L | code 1L]\n\n- A [\"0006q01b\" full 1L | code 1L]\n\n# django/contrib/gis/ptr.py (42L)\nfile scope: [\"0006r008\" full 42L | imports 4L]\n\n- class CPointerBase: \"\"\" Base class for objects that have a pointer access property that controls access to the underlying C pointer. \"\"\" _ptr = None ptr_type = c_void_p destructor = None null_ptr_exception_class = AttributeError @property def ptr(self): if self._ptr: return self._ptr raise self.null_ptr_exception_class( \"NULL %s pointer encountered.\" % self.__class__.__name__ ) @ptr.setter def ptr(self, ptr): if not (ptr is None or isinstance(ptr, self.ptr_type)): raise TypeError(\"Incompatible pointer type: %s.\" % type(ptr)) self._ptr = ptr def __del__(self): \"\"\" Free the memory used by the C++ object. \"\"\" if self.destructor and self._ptr: try: self.destructor(self.ptr) except (AttributeError, ImportError, TypeError): pass [\"0006r007\" full 38L | code 38L]\n  - @ptr.setter def ptr(self, ptr): ... [\"0006r005\" full 7L | code 7L]\n  - def __del__(self): ... [\"0006r006\" full 9L | code 9L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

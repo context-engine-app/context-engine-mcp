@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/null_fk_ordering/__init__.py",
+        "tests/null_fk_ordering/models.py",
+        "tests/null_fk_ordering/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/null_fk_ordering/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/null_fk_ordering/models.py (46L)\nfile scope: [\"000AI00k\" full 46L | imports 18L]\n\n- class Author(models.Model): ... [\"000AI001\" full 2L | code 2L]\n\n- class Article(models.Model): ... [\"000AI006\" full 6L | code 6L]\n  - class Meta: ... [\"000AI005\" full 2L | code 2L]\n\n- class SystemInfo(models.Model): ... [\"000AI008\" full 2L | code 2L]\n\n- class Forum(models.Model): ... [\"000AI00b\" full 3L | code 3L]\n\n- class Post(models.Model): ... [\"000AI00e\" full 3L | code 3L]\n\n- class Comment(models.Model): ... [\"000AI00j\" full 6L | code 6L]\n  - class Meta: ... [\"000AI00i\" full 2L | code 2L]\n\n# tests/null_fk_ordering/tests.py (44L)\nfile scope: [\"000AJ00a\" full 44L | imports 6L]\n\n- class NullFkOrderingTests(TestCase): ... [\"000AJ009\" full 38L | code 38L]\n  - def test_ordering_across_null_fk(self): ... [\"000AJ008\" full 37L | code 37L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

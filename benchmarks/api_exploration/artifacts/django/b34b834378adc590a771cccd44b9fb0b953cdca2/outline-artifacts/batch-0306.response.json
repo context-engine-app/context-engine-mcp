@@ -1,0 +1,25 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/admin_scripts/app_with_urls/__init__.py",
+        "tests/admin_scripts/app_with_urls/root_urls.py",
+        "tests/admin_scripts/app_with_urls/urls_cbv.py",
+        "tests/admin_scripts/app_with_urls/urls_namespaced.py",
+        "tests/admin_scripts/app_with_urls/urls_nons.py",
+        "tests/admin_scripts/app_with_urls/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/admin_scripts/app_with_urls/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/admin_scripts/app_with_urls/root_urls.py (26L)\nfile scope: [\"000fU003\" full 26L | imports 4L]\n\n- def dummy_view(request): ... [\"000fU001\" full 1L | code 1L]\n\n# tests/admin_scripts/app_with_urls/urls_cbv.py (18L)\nfile scope: [\"000fV002\" full 18L | imports 8L]\n\n\n# tests/admin_scripts/app_with_urls/urls_namespaced.py (18L)\nfile scope: [\"000fW002\" full 18L | imports 8L]\n\n\n# tests/admin_scripts/app_with_urls/urls_nons.py (18L)\nfile scope: [\"000fX002\" full 18L | imports 8L]\n\n\n# tests/admin_scripts/app_with_urls/views.py (22L)\nfile scope: [\"000fY009\" full 22L | imports 4L]\n\n- def view_func_namespaced_unnamed(request): ... [\"000fY001\" full 2L | code 2L]\n\n- def view_func_namespaced_named(request): ... [\"000fY003\" full 2L | code 2L]\n\n- def view_func_nons_unnamed(request): ... [\"000fY005\" full 2L | code 2L]\n\n- def view_func_nons_named(request): ... [\"000fY007\" full 2L | code 2L]\n\n- class CBV(ListView): ... [\"000fY008\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

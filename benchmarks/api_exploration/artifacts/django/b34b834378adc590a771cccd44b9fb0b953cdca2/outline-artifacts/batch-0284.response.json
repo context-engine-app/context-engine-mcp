@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/absolute_url_overrides/__init__.py",
+        "tests/absolute_url_overrides/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/absolute_url_overrides/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/absolute_url_overrides/tests.py (63L)\nfile scope: [\"000eU00i\" full 63L | imports 6L]\n\n- @isolate_apps(\"absolute_url_overrides\") class AbsoluteUrlOverrideTests(SimpleTestCase): ... [\"000eU00h\" full 57L | code 57L]\n  - def test_get_absolute_url(self): ... [\"000eU004\" full 13L | code 13L]\n    - def get_absolute_url(o): ... [\"000eU001\" full 2L | code 2L]\n  - def test_override_get_absolute_url(self): ... [\"000eU009\" full 17L | code 17L]\n    - def get_absolute_url(o): ... [\"000eU006\" full 2L | code 2L]\n  - def test_insert_get_absolute_url(self): ... [\"000eU00c\" full 13L | code 13L]\n  - def _create_model_class(self, class_name, get_absolute_url_method=None): ... [\"000eU00g\" full 9L | code 9L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

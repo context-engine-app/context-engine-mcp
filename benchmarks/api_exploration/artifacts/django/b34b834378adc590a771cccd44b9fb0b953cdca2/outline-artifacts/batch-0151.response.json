@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/gis/management/commands/__init__.py",
+        "django/contrib/gis/management/commands/inspectdb.py",
+        "django/contrib/gis/management/commands/ogrinspect.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/gis/management/commands/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/gis/management/commands/inspectdb.py (19L)\nfile scope: [\"0006o00a\" full 19L | imports 4L]\n\n- class Command(InspectDBCommand): ... [\"0006o009\" full 15L | code 15L]\n  - def get_field_type(self, connection, table_name, row): ... [\"0006o008\" full 12L | code 12L]\n\n# django/contrib/gis/management/commands/ogrinspect.py (165L)\nfile scope: [\"0006p00t\" full 165L | imports 8L]\n\n- class LayerOptionAction(argparse.Action): ... [\"0006p005\" full 11L | code 11L]\n  - def __call__(self, parser, namespace, value, option_string=None): ... [\"0006p004\" full 5L | code 5L]\n\n- class ListOptionAction(argparse.Action): ... [\"0006p00b\" full 12L | code 12L]\n  - def __call__(self, parser, namespace, value, option_string=None): ... [\"0006p00a\" full 5L | code 5L]\n\n- class Command(BaseCommand): ... [\"0006p00s\" full 130L | code 130L]\n  - def add_arguments(self, parser): ... [\"0006p00f\" full 66L | code 66L]\n  - def handle(self, *args, **options): ... [\"0006p00r\" full 54L | code 54L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

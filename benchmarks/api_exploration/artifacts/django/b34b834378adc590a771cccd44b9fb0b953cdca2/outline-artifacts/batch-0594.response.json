@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/migrations_test_apps/conflicting_app_with_dependencies/migrations/0001_initial.py",
+        "tests/migrations/migrations_test_apps/conflicting_app_with_dependencies/migrations/0002_conflicting_second.py",
+        "tests/migrations/migrations_test_apps/conflicting_app_with_dependencies/migrations/0002_second.py",
+        "tests/migrations/migrations_test_apps/conflicting_app_with_dependencies/migrations/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/migrations_test_apps/conflicting_app_with_dependencies/migrations/0001_initial.py (24L)\nfile scope: [\"000vl002\" full 24L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000vl001\" full 20L | code 20L]\n\n# tests/migrations/migrations_test_apps/conflicting_app_with_dependencies/migrations/0002_conflicting_second.py (17L)\nfile scope: [\"000vm003\" full 17L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000vm002\" full 13L | code 13L]\n\n# tests/migrations/migrations_test_apps/conflicting_app_with_dependencies/migrations/0002_second.py (21L)\nfile scope: [\"000vn003\" full 21L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000vn002\" full 17L | code 17L]\n\n# tests/migrations/migrations_test_apps/conflicting_app_with_dependencies/migrations/__init__.py (1L)\nfile scope: [\"000vo000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

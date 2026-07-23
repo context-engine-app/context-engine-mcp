@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/db_typecasts/__init__.py",
+        "tests/db_typecasts/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/db_typecasts/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/db_typecasts/tests.py (86L)\nfile scope: [\"000mR008\" full 86L | module-docs 1L | imports 75L]\n\n- TEST_CASES [\"000mR000\" full 1L | code 1L]\n\n- class DBTypeCasts(unittest.TestCase): ... [\"000mR007\" full 12L | code 12L]\n  - def test_typeCasts(self): ... [\"000mR006\" full 11L | code 11L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

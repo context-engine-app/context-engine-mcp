@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/gis/feeds.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 5.9 KB -> 1.8 KB (69% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/gis/feeds.py (152L)\nfile scope: [\"0005t00K\" full 152L | imports 15L]\n\n- class GeoFeedMixin: ... [\"0005t00f\" full 83L | code 83L]\n  - def georss_coords(self, coords): ... [\"0005t001\" full 7L | code 7L]\n  - def add_georss_point(self, handler, coords, w3c_geo=False): ... [\"0005t007\" full 12L | code 12L]\n  - def add_georss_element(self, handler, item, w3c_geo=False): ... [\"0005t00e\" full 56L | code 56L]\n\n- class GeoRSSFeed(Rss201rev2Feed, GeoFeedMixin): ... [\"0005t00n\" full 13L | code 13L]\n  - def rss_attributes(self): ... [\"0005t00h\" full 4L | code 4L]\n  - def add_item_elements(self, handler, item): ... [\"0005t00k\" full 3L | code 3L]\n  - def add_root_elements(self, handler): ... [\"0005t00m\" full 3L | code 3L]\n\n- class GeoAtom1Feed(Atom1Feed, GeoFeedMixin): ... [\"0005t00v\" full 13L | code 13L]\n  - def root_attributes(self): ... [\"0005t00p\" full 4L | code 4L]\n  - def add_item_elements(self, handler, item): ... [\"0005t00s\" full 3L | code 3L]\n  - def add_root_elements(self, handler): ... [\"0005t00u\" full 3L | code 3L]\n\n- class W3CGeoFeed(Rss201rev2Feed, GeoFeedMixin): ... [\"0005t00D\" full 13L | code 13L]\n  - def rss_attributes(self): ... [\"0005t00x\" full 4L | code 4L]\n  - def add_item_elements(self, handler, item): ... [\"0005t00A\" full 3L | code 3L]\n  - def add_root_elements(self, handler): ... [\"0005t00C\" full 3L | code 3L]\n\n- class Feed(BaseFeed): ... [\"0005t00J\" full 15L | code 15L]\n  - def feed_extra_kwargs(self, obj): ... [\"0005t00G\" full 2L | code 2L]\n  - def item_extra_kwargs(self, item): ... [\"0005t00I\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

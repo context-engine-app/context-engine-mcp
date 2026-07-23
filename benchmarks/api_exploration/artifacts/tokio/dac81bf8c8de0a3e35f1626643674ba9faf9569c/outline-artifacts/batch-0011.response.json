@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests-build/tests/pass/forward_args_and_output.rs",
+        "tests-build/tests/pass/impl_trait.rs",
+        "tests-build/tests/pass/macros_main_loop.rs",
+        "tests-build/tests/pass/macros_main_return.rs",
+        "tests-build/tests/pass/use_builder_outer.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests-build/tests/pass/forward_args_and_output.rs (14L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|use tests_build::tokio;\n 2|\n 3|fn main() {}\n 4|\n 5|// arguments and output type is forwarded so other macros can access them\n 6|\n 7|#[tokio::test]\n 8|async fn test_fn_has_args(_x: u8) {}\n 9|\n10|#[tokio::test]\n11|async fn test_has_output() -> Result<(), Box<dyn std::error::Error>> {\n12|    Ok(())\n13|}\nnote: EOF\n\n# tests-build/tests/pass/impl_trait.rs (24L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|use tests_build::tokio;\n 2|\n 3|#[tokio::main]\n 4|async fn never() -> ! {\n 5|    loop {}\n 6|}\n 7|\n 8|#[tokio::main]\n 9|async fn impl_trait() -> impl Iterator<Item = impl core::fmt::Debug> {\n10|    [()].into_iter()\n11|}\n12|\n13|#[tokio::main]\n14|async fn impl_trait2() -> Result<(), impl core::fmt::Debug> {\n15|    Err(())\n16|}\n17|\n18|fn main() {\n19|    if impl_trait().count() == 10 {\n20|        never();\n21|    }\n22|    let _ = impl_trait2();\n23|}\nnote: EOF\n\n# tests-build/tests/pass/macros_main_loop.rs (15L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|use tests_build::tokio;\n 2|\n 3|#[tokio::main]\n 4|async fn main() -> Result<(), ()> {\n 5|    loop {\n 6|        if !never() {\n 7|            return Ok(());\n 8|        }\n 9|    }\n10|}\n11|\n12|fn never() -> bool {\n13|    std::time::Instant::now() > std::time::Instant::now()\n14|}\nnote: EOF\n\n# tests-build/tests/pass/macros_main_return.rs (7L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|use tests_build::tokio;\n2|\n3|#[tokio::main]\n4|async fn main() -> Result<(), ()> {\n5|    return Ok(());\n6|}\nnote: EOF\n\n# tests-build/tests/pass/use_builder_outer.rs (10L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|#![deny(unused_qualifications)]\n2|\n3|use tests_build::tokio;\n4|pub use tokio::runtime;\n5|\n6|#[tokio::main]\n7|async fn main() {\n8|    if true {}\n9|}\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "internal/testing/test/test_options.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n 1|import type { RuntimeName } from \"../../runtime/runtime_name.ts\";\n 2|\n 3|export interface TestOptions {\n 4|  name: string;\n 5|  fn: TestFn;\n 6|  ignore?: boolean | Array<RuntimeName>;\n 7|  only?: boolean;\n 8|}\n 9|\n10|export interface TestFn {\n11|  (t: TestContext): void | Promise<void>;\n12|}\n13|\n14|export interface TestContext {\n15|  name: string;\n16|  origin: string;\n17|  step(options: TestOptions): Promise<boolean>;\n18|  step(name: string, fn: TestFn): Promise<boolean>;\n19|  step(fn: TestFn): Promise<boolean>;\n20|}\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

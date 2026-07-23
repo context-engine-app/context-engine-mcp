@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/urlpatterns_reverse/urlconf_inner.py",
+        "tests/urlpatterns_reverse/urlconf_outer.py",
+        "tests/urlpatterns_reverse/urls.py",
+        "tests/urlpatterns_reverse/urls_error_handlers.py",
+        "tests/urlpatterns_reverse/urls_error_handlers_callables.py",
+        "tests/urlpatterns_reverse/urls_without_handlers.py",
+        "tests/urlpatterns_reverse/utils.py",
+        "tests/urlpatterns_reverse/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 9.2 KB -> 2.5 KB (73% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/urlpatterns_reverse/urlconf_inner.py (17L)\nfile scope: [\"000J6004\" full 17L | imports 6L]\n\n- def inner_view(request): ... [\"000J6002\" full 6L | code 6L]\n\n# tests/urlpatterns_reverse/urlconf_outer.py (9L)\nfile scope: [\"000J7001\" full 9L | imports 5L]\n\n\n# tests/urlpatterns_reverse/urls.py (143L)\nfile scope: [\"000J8002\" full 143L | imports 20L]\n\n\n# tests/urlpatterns_reverse/urls_error_handlers.py (9L)\nfile scope: [\"000J9005\" full 9L | module-docs 1L | imports 9L]\n\n\n# tests/urlpatterns_reverse/urls_error_handlers_callables.py (11L)\nfile scope: [\"000Ja005\" full 11L | module-docs 1L | imports 14L]\n\n\n# tests/urlpatterns_reverse/urls_without_handlers.py (10L)\nfile scope: [\"000Jb001\" full 10L | module-docs 1L | imports 6L]\n\n\n# tests/urlpatterns_reverse/utils.py (28L)\nfile scope: [\"000Jc009\" full 28L | imports 6L]\n\n- class URLObject: ... [\"000Jc008\" full 22L | code 22L]\n  - def __init__(self, app_name, namespace=None): ... [\"000Jc003\" full 3L | code 3L]\n  - @property def urls(self): ... [\"000Jc006\" full 3L | code 3L]\n  - @property def app_urls(self): ... [\"000Jc007\" full 3L | code 3L]\n\n# tests/urlpatterns_reverse/views.py (76L)\nfile scope: [\"000Jd00J\" full 76L | imports 30L]\n\n- def empty_view(request, *args, **kwargs): ... [\"000Jd003\" full 2L | code 2L]\n\n- def absolute_kwargs_view(request, arg1=1, arg2=2): ... [\"000Jd007\" full 2L | code 2L]\n\n- def defaults_view(request, arg1, arg2): ... [\"000Jd00b\" full 2L | code 2L]\n\n- def nested_view(request): ... [\"000Jd00d\" full 2L | code 2L]\n\n- def erroneous_view(request): ... [\"000Jd00f\" full 2L | code 2L]\n\n- def pass_resolver_match_view(request, *args, **kwargs): ... [\"000Jd00k\" full 4L | code 4L]\n\n- class ViewClass: ... [\"000Jd00q\" full 3L | code 3L]\n  - def __call__(self, request, *args, **kwargs): ... [\"000Jd00p\" full 2L | code 2L]\n\n- class LazyRedirectView(RedirectView): ... [\"000Jd00t\" full 2L | code 2L]\n\n- @user_passes_test( lambda u: u.is_authenticated, login_url=reverse_lazy(\"some-login-page\") ) def login_required_view(request): ... [\"000Jd00v\" full 5L | code 5L]\n\n- def bad_view(request, *args, **kwargs): ... [\"000Jd00z\" full 2L | code 2L]\n\n- class HelloView(View): ... [\"000Jd00E\" full 3L | code 3L]\n  - def get(self, request, *args, **kwargs): ... [\"000Jd00D\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

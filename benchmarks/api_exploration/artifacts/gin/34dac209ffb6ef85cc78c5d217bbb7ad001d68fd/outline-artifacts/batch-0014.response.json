@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "recovery_test.go"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 11.7 KB -> 1.5 KB (88% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# recovery_test.go (414L)\nfile scope: [\"0001700d\" full 414L | module-docs 3L | imports 38L]\n\n- func TestPanicClean(t *testing.T) { ... } [\"00017000\" full 30L | code 30L]\n\n- func TestPanicInHandler(t *testing.T) { ... } [\"00017001\" full 26L | code 26L]\n\n- func TestPanicWithAbort(t *testing.T) { ... } [\"00017002\" full 12L | code 12L]\n\n- func TestFunction(t *testing.T) { ... } [\"00017003\" full 4L | code 4L]\n\n- func TestPanicWithBrokenPipe(t *testing.T) { ... } [\"00017004\" full 32L | code 32L]\n\n- func TestPanicWithAbortHandler(t *testing.T) { ... } [\"00017005\" full 22L | code 22L]\n\n- func TestPanicInHandlerRecordsError(t *testing.T) { ... } [\"00017006\" full 42L | code 42L]\n\n- func TestCustomRecoveryWithWriter(t *testing.T) { ... } [\"00017007\" full 33L | code 33L]\n\n- func TestCustomRecovery(t *testing.T) { ... } [\"00017008\" full 34L | code 34L]\n\n- func TestRecoveryWithWriterWithCustomRecovery(t *testing.T) { ... } [\"00017009\" full 34L | code 34L]\n\n- func TestSecureRequestDump(t *testing.T) { ... } [\"0001700a\" full 61L | code 61L]\n\n- func TestReadNthLine(t *testing.T) { ... } [\"0001700b\" full 41L | code 41L]\n\n- func BenchmarkStack(b *testing.B) { ... } [\"0001700c\" full 6L | code 6L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

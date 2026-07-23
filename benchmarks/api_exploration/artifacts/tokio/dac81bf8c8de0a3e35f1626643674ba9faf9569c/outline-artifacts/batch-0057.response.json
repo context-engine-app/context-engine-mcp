@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/doc/mod.rs",
+        "tokio/src/doc/os.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 5.2 KB -> 2.9 KB (44% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/doc/mod.rs (48L)\nfile scope: [\"0003O006\" full 48L | module-docs 19L]\n\n- #[derive(Debug)] pub enum NotDefinedHere { ... } [\"0003O000\" full 15L | code 2L | docs 13L]\n\n- #[cfg(feature = \"net\")] impl mio::event::Source for NotDefinedHere { ... } [\"0003O004\" full 22L | code 22L]\n  - fn register( &mut self, _registry: &mio::Registry, _token: mio::Token, _interests: mio::Interest, ) -> std::io::Result<()> { ... } [\"0003O001\" full 8L | code 8L]\n  - fn reregister( &mut self, _registry: &mio::Registry, _token: mio::Token, _interests: mio::Interest, ) -> std::io::Result<()> { ... } [\"0003O002\" full 8L | code 8L]\n  - fn deregister(&mut self, _registry: &mio::Registry) -> std::io::Result<()> { ... } [\"0003O003\" full 3L | code 3L]\n\n- #[cfg(any(feature = \"net\", feature = \"fs\"))] pub mod os; [\"0003O005\" full 2L | code 2L]\n\n# tokio/src/doc/os.rs (69L)\nfile scope: [\"0003P00l\" full 69L | module-docs 5L]\n\n- pub mod windows { ... } [\"0003P00k\" full 66L | code 63L | docs 3L]\n  - pub mod io { ... } [\"0003P00j\" full 61L | code 58L | docs 3L]\n    - pub type RawHandle = crate::doc::NotDefinedHere; [\"0003P000\" full 2L | code 1L | docs 1L]\n    - pub type OwnedHandle = crate::doc::NotDefinedHere; [\"0003P001\" full 2L | code 1L | docs 1L]\n    - pub trait AsRawHandle { ... } [\"0003P003\" full 5L | code 4L | docs 1L]\n      - fn as_raw_handle(&self) -> RawHandle; [\"0003P002\" full 2L | code 1L | docs 1L]\n    - pub trait FromRawHandle { ... } [\"0003P005\" full 5L | code 4L | docs 1L]\n      - unsafe fn from_raw_handle(handle: RawHandle) -> Self; [\"0003P004\" full 2L | code 1L | docs 1L]\n    - pub type RawSocket = crate::doc::NotDefinedHere; [\"0003P006\" full 2L | code 1L | docs 1L]\n    - pub trait AsRawSocket { ... } [\"0003P008\" full 5L | code 4L | docs 1L]\n      - fn as_raw_socket(&self) -> RawSocket; [\"0003P007\" full 2L | code 1L | docs 1L]\n    - pub trait FromRawSocket { ... } [\"0003P00a\" full 5L | code 4L | docs 1L]\n      - unsafe fn from_raw_socket(sock: RawSocket) -> Self; [\"0003P009\" full 2L | code 1L | docs 1L]\n    - pub trait IntoRawSocket { ... } [\"0003P00c\" full 5L | code 4L | docs 1L]\n      - fn into_raw_socket(self) -> RawSocket; [\"0003P00b\" full 2L | code 1L | docs 1L]\n    - pub type BorrowedHandle<'handle> = crate::doc::NotDefinedHere; [\"0003P00d\" full 2L | code 1L | docs 1L]\n    - pub trait AsHandle { ... } [\"0003P00f\" full 5L | code 4L | docs 1L]\n      - fn as_handle(&self) -> ... ; [\"0003P00e\" full 2L | code 1L | docs 1L]\n    - pub type BorrowedSocket<'socket> = crate::doc::NotDefinedHere; [\"0003P00g\" full 2L | code 1L | docs 1L]\n    - pub trait AsSocket { ... } [\"0003P00i\" full 5L | code 4L | docs 1L]\n      - fn as_socket(&self) -> ... ; [\"0003P00h\" full 2L | code 1L | docs 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

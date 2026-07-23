@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/db/models/fetch_modes.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.2 KB -> 1.2 KB (0% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/db/models/fetch_modes.py (62L)\nfile scope: [\"000bx00w\" full 62L | imports 12L]\n\n- class FetchMode: ... [\"000bx005\" full 7L | code 7L]\n  - def fetch(self, fetcher, instance): ... [\"000bx004\" full 2L | code 2L]\n\n- class FetchOne(FetchMode): ... [\"000bx00b\" full 8L | code 8L]\n  - def fetch(self, fetcher, instance): ... [\"000bx009\" full 2L | code 2L]\n  - def __reduce__(self): ... [\"000bx00a\" full 2L | code 2L]\n\n- FETCH_ONE [\"000bx00c\" full 1L | code 1L]\n\n- class FetchPeers(FetchMode): ... [\"000bx00l\" full 18L | code 18L]\n  - def fetch(self, fetcher, instance): ... [\"000bx00j\" full 10L | code 10L]\n  - def __reduce__(self): ... [\"000bx00k\" full 2L | code 2L]\n\n- FETCH_PEERS [\"000bx00m\" full 1L | code 1L]\n\n- class Raise(FetchMode): ... [\"000bx00u\" full 10L | code 10L]\n  - def fetch(self, fetcher, instance): ... [\"000bx00s\" full 4L | code 4L]\n  - def __reduce__(self): ... [\"000bx00t\" full 2L | code 2L]\n\n- RAISE [\"000bx00v\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

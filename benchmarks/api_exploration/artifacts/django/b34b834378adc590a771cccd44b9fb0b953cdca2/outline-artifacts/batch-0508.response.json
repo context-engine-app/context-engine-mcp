@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/gis_tests/inspectapp/__init__.py",
+        "tests/gis_tests/inspectapp/models.py",
+        "tests/gis_tests/inspectapp/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/gis_tests/inspectapp/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/gis_tests/inspectapp/models.py (24L)\nfile scope: [\"000rI00h\" full 24L | imports 4L]\n\n- class AllOGRFields(models.Model): ... [\"000rI009\" full 10L | code 10L]\n\n- class Fields3D(models.Model): ... [\"000rI00g\" full 8L | code 8L]\n  - class Meta: ... [\"000rI00f\" full 2L | code 2L]\n\n# tests/gis_tests/inspectapp/tests.py (256L)\nfile scope: [\"000rJ00I\" full 256L | imports 17L]\n\n- @skipUnlessDBFeature(\"supports_inspectdb\") class InspectDbTests(TestCase): ... [\"000rJ006\" full 44L | code 44L]\n  - def test_geom_columns(self): ... [\"000rJ002\" full 17L | code 17L]\n  - @skipUnlessDBFeature(\"supports_3d_storage\") def test_3d_columns(self): ... [\"000rJ005\" full 24L | code 24L]\n\n- @modify_settings( INSTALLED_APPS={\"append\": \"django.contrib.gis\"}, ) class OGRInspectTest(SimpleTestCase): ... [\"000rJ00v\" full 138L | code 138L]\n  - def test_poly(self): ... [\"000rJ00b\" full 17L | code 17L]\n  - def test_poly_multi(self): ... [\"000rJ00e\" full 8L | code 8L]\n  - def test_date_field(self): ... [\"000rJ00i\" full 18L | code 18L]\n  - def test_time_field(self): ... [\"000rJ00m\" full 60L | code 60L]\n  - def test_management_command(self): ... [\"000rJ00q\" full 6L | code 6L]\n  - def test_mapping_option(self): ... [\"000rJ00u\" full 18L | code 18L]\n\n- def get_ogr_db_string(): ... [\"000rJ00H\" full 53L | code 53L]\n  - def add(key, template): ... [\"000rJ00G\" full 5L | code 5L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

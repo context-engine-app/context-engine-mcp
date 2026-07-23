@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/contenttypes/management/commands/__init__.py",
+        "django/contrib/contenttypes/management/commands/remove_stale_contenttypes.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/contenttypes/management/commands/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/contenttypes/management/commands/remove_stale_contenttypes.py (108L)\nfile scope: [\"0004i00m\" full 108L | imports 10L]\n\n- class Command(BaseCommand): ... [\"0004i00l\" full 98L | code 98L]\n  - def add_arguments(self, parser): ... [\"0004i002\" full 23L | code 23L]\n  - def handle(self, **options): ... [\"0004i00k\" full 71L | code 71L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

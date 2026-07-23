@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/gis_tests/rasterapp/models.py",
+        "tests/gis_tests/rasterapp/test_rasterfield.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 19.5 KB -> 2.9 KB (85% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/gis_tests/rasterapp/models.py (26L)\nfile scope: [\"000rS00c\" full 26L | imports 4L]\n\n- class RasterModel(models.Model): ... [\"000rS006\" full 12L | code 12L]\n  - class Meta: ... [\"000rS004\" full 2L | code 2L]\n  - def __str__(self): ... [\"000rS005\" full 2L | code 2L]\n\n- class RasterRelatedModel(models.Model): ... [\"000rS00b\" full 8L | code 8L]\n  - class Meta: ... [\"000rS009\" full 2L | code 2L]\n  - def __str__(self): ... [\"000rS00a\" full 2L | code 2L]\n\n# tests/gis_tests/rasterapp/test_rasterfield.py (502L)\nfile scope: [\"000rT01s\" full 502L | imports 23L]\n\n- @skipUnlessDBFeature(\"supports_raster\") class RasterFieldTest(TransactionTestCase): ... [\"000rT01r\" full 479L | code 479L]\n  - def setUp(self): ... [\"000rT003\" full 19L | code 19L]\n  - def test_field_null_value(self): ... [\"000rT005\" full 7L | code 7L]\n  - def test_access_band_data_directly_from_queryset(self): ... [\"000rT007\" full 4L | code 4L]\n  - def test_deserialize_with_pixeltype_flags(self): ... [\"000rT00c\" full 24L | code 24L]\n  - def test_model_creation(self): ... [\"000rT00f\" full 50L | code 50L]\n  - def test_implicit_raster_transformation(self): ... [\"000rT00l\" full 25L | code 25L]\n  - def test_verbose_name_arg(self): ... [\"000rT00m\" full 7L | code 7L]\n  - def test_all_gis_lookups_with_rasters(self): ... [\"000rT00x\" full 109L | code 109L]\n  - def test_dwithin_gis_lookup_output_with_rasters(self): ... [\"000rT00B\" full 69L | code 69L]\n  - def test_lookup_input_tuple_too_long(self): ... [\"000rT00E\" full 5L | code 5L]\n  - def test_lookup_input_band_not_allowed(self): ... [\"000rT00I\" full 6L | code 6L]\n  - def test_lookup_invalid_band_rhs(self): ... [\"000rT00M\" full 6L | code 6L]\n  - def test_lookup_invalid_band_lhs(self): ... [\"000rT016\" full 33L | code 33L]\n    - class MyRasterBandTransform(RasterBandTransform): ... [\"000rT00U\" full 6L | code 6L]\n      - def process_band_indices(self, *args, **kwargs): ... [\"000rT00Q\" full 3L | code 3L]\n    - class MyContainsLookup(ContainsLookup): ... [\"000rT012\" full 4L | code 4L]\n      - def process_band_indices(self, *args, **kwargs): ... [\"000rT00Y\" full 3L | code 3L]\n  - def test_isvalid_lookup_with_raster_error(self): ... [\"000rT019\" full 7L | code 7L]\n  - def test_result_of_gis_lookup_with_rasters(self): ... [\"000rT01b\" full 19L | code 19L]\n  - def test_lookup_with_raster_bbox(self): ... [\"000rT01e\" full 12L | code 12L]\n  - def test_lookup_with_polygonized_raster(self): ... [\"000rT01h\" full 15L | code 15L]\n  - def test_lookup_value_error(self): ... [\"000rT01k\" full 11L | code 11L]\n  - def test_db_function_errors(self): ... [\"000rT01o\" full 20L | code 20L]\n  - def test_lhs_with_index_rhs_without_index(self): ... [\"000rT01q\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

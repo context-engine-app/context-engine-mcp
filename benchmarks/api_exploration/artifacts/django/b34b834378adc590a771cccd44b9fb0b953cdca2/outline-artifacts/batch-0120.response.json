@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/flatpages/models.py",
+        "django/contrib/flatpages/sitemaps.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.3 KB -> 847 B (64% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/flatpages/models.py (50L)\nfile scope: [\"0004w00g\" full 50L | imports 8L]\n\n- class FlatPage(models.Model): ... [\"0004w00f\" full 42L | code 42L]\n  - class Meta: ... [\"0004w00b\" full 5L | code 5L]\n  - def __str__(self): ... [\"0004w00c\" full 2L | code 2L]\n  - def get_absolute_url(self): ... [\"0004w00e\" full 10L | code 10L]\n\n# django/contrib/flatpages/sitemaps.py (15L)\nfile scope: [\"0004x004\" full 15L | imports 6L]\n\n- class FlatPageSitemap(Sitemap): ... [\"0004x003\" full 9L | code 9L]\n  - def items(self): ... [\"0004x002\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

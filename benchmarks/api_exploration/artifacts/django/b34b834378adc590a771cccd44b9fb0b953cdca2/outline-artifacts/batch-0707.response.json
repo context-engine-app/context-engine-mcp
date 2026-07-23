@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/mutually_referential/__init__.py",
+        "tests/mutually_referential/models.py",
+        "tests/mutually_referential/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/mutually_referential/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/mutually_referential/models.py (24L)\nfile scope: [\"000Ax006\" full 24L | imports 10L]\n\n- class Parent(models.Model): ... [\"000Ax002\" full 7L | code 7L]\n\n- class Child(models.Model): ... [\"000Ax005\" full 5L | code 5L]\n\n# tests/mutually_referential/tests.py (22L)\nfile scope: [\"000Ay004\" full 22L | imports 6L]\n\n- class MutuallyReferentialTests(TestCase): ... [\"000Ay003\" full 16L | code 16L]\n  - def test_mutually_referential(self): ... [\"000Ay002\" full 15L | code 15L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

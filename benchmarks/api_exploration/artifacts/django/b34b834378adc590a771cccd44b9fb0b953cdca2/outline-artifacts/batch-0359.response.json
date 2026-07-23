@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/backends/base/app_unmigrated/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import models\n2|\n3|\n4|class Foo(models.Model):\n5|    name = models.CharField(max_length=255)\n6|\n7|    class Meta:\n8|        app_label = \"app_unmigrated\"\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

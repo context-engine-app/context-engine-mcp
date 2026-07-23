@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests-integration/src/bin/test-cat.rs",
+        "tests-integration/src/bin/test-mem.rs",
+        "tests-integration/src/bin/test-process-signal.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.2 KB -> 775 B (37% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests-integration/src/bin/test-cat.rs (21L)\nfile scope: [\"0000Q001\" full 21L | module-docs 2L | imports 6L]\n\n- fn main() { ... } [\"0000Q000\" full 14L | code 14L]\n\n# tests-integration/src/bin/test-mem.rs (22L)\nfile scope: [\"0000R001\" full 22L | imports 3L]\n\n- fn main() { ... } [\"0000R000\" full 19L | code 19L]\n\n# tests-integration/src/bin/test-process-signal.rs (12L)\nfile scope: [\"0000S001\" full 12L | module-docs 1L]\n\n- fn main() { ... } [\"0000S000\" full 11L | code 10L | docs 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

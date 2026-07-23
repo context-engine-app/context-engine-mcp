@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "scripts/prepare_commit_msg.py",
+        "scripts/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 12.7 KB -> 3.4 KB (73% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# scripts/prepare_commit_msg.py (116L)\nfile scope: [\"000eR00n\" full 116L | module-docs 1L | imports 53L]\n\n- def run(cmd): ... [\"000eR001\" full 2L | code 2L]\n\n- def process_commit_message(lines, branch, cherry_sha=None): ... [\"000eR00e\" full 64L | code 64L]\n\n# scripts/tests.py (234L)\nfile scope: [\"000eS01A\" full 234L | module-docs 1L | imports 28L]\n\n- class ParseMajorVersionTests(unittest.TestCase): ... [\"000eS006\" full 18L | code 18L]\n  - def test_final_patch_release(self): ... [\"000eS000\" full 2L | code 2L]\n  - def test_final_dot_zero_release(self): ... [\"000eS001\" full 2L | code 2L]\n  - def test_alpha(self): ... [\"000eS002\" full 2L | code 2L]\n  - def test_beta(self): ... [\"000eS003\" full 2L | code 2L]\n  - def test_release_candidate(self): ... [\"000eS004\" full 2L | code 2L]\n  - def test_two_digit_minor(self): ... [\"000eS005\" full 2L | code 2L]\n\n- class CreateChecksumFileTests(unittest.TestCase): ... [\"000eS00o\" full 55L | code 55L]\n  - def generate_checksum_file(self, **overrides): ... [\"000eS00g\" full 30L | code 30L]\n  - def test_release_metadata(self): ... [\"000eS00i\" full 12L | code 12L]\n  - def test_artifact_checksums(self): ... [\"000eS00n\" full 7L | code 7L]\n\n- class FindReleaseArtifactsTests(unittest.TestCase): ... [\"000eS00x\" full 16L | code 16L]\n  - def test_finds_wheel_and_tarball(self): ... [\"000eS00s\" full 9L | code 9L]\n  - def test_empty_directory_returns_none(self): ... [\"000eS00w\" full 5L | code 5L]\n\n- class ProcessCommitMessageTests(unittest.TestCase): ... [\"000eS01z\" full 111L | code 111L]\n  - def test_non_stable_branch_no_prefix_added(self): ... [\"000eS00A\" full 4L | code 4L]\n  - def test_non_stable_branch_period_added(self): ... [\"000eS00D\" full 4L | code 4L]\n  - def test_non_stable_branch_with_period_unchanged(self): ... [\"000eS00G\" full 4L | code 4L]\n  - def test_empty_body_unchanged(self): ... [\"000eS00J\" full 4L | code 4L]\n  - def test_only_blank_lines_unchanged(self): ... [\"000eS00M\" full 4L | code 4L]\n  - def test_adds_stable_prefix(self): ... [\"000eS00P\" full 4L | code 4L]\n  - def test_does_not_double_add_prefix(self): ... [\"000eS00S\" full 4L | code 4L]\n  - def test_summary_leading_whitespace_no_double_space_before_prefix(self): ... [\"000eS00V\" full 4L | code 4L]\n  - def test_capitalizes_first_letter(self): ... [\"000eS00Y\" full 4L | code 4L]\n  - def test_capitalizes_first_letter_after_existing_prefix(self): ... [\"000eS011\" full 4L | code 4L]\n  - def test_adds_trailing_period(self): ... [\"000eS014\" full 4L | code 4L]\n  - def test_does_not_double_add_trailing_period(self): ... [\"000eS017\" full 4L | code 4L]\n  - def test_adds_backport_note(self): ... [\"000eS01b\" full 5L | code 5L]\n  - def test_does_not_double_add_backport_note(self): ... [\"000eS01f\" full 9L | code 9L]\n  - def test_backport_note_separated_by_blank_line(self): ... [\"000eS01k\" full 6L | code 6L]\n  - def test_git_comments_preserved_at_end(self): ... [\"000eS01o\" full 10L | code 10L]\n  - def test_prefix_and_period_and_backport_combined(self): ... [\"000eS01s\" full 6L | code 6L]\n  - def test_no_cherry_sha_no_backport_note(self): ... [\"000eS01v\" full 4L | code 4L]\n  - def test_leading_blank_lines_stripped(self): ... [\"000eS01y\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

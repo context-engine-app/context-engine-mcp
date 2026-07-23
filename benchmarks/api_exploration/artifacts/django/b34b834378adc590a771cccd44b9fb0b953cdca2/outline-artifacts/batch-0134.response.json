@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/gis/db/backends/spatialite/schema.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 7.2 KB -> 1.2 KB (83% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/gis/db/backends/spatialite/schema.py (196L)\nfile scope: [\"0005j00H\" full 196L | imports 5L]\n\n- class SpatialiteSchemaEditor(DatabaseSchemaEditor): ... [\"0005j00G\" full 191L | code 191L]\n  - def __init__(self, *args, **kwargs): ... [\"0005j00a\" full 3L | code 3L]\n  - def geo_quote_name(self, name): ... [\"0005j00d\" full 2L | code 2L]\n  - def column_sql(self, model, field, include_default=False): ... [\"0005j00h\" full 28L | code 28L]\n  - def remove_geometry_metadata(self, model, field): ... [\"0005j00k\" full 15L | code 15L]\n  - def create_model(self, model): ... [\"0005j00n\" full 6L | code 6L]\n  - def delete_model(self, model, **kwargs): ... [\"0005j00s\" full 21L | code 21L]\n  - def add_field(self, model, field): ... [\"0005j00w\" full 11L | code 11L]\n  - def remove_field(self, model, field): ... [\"0005j00z\" full 12L | code 12L]\n  - def alter_db_table(self, model, old_db_table, new_db_table): ... [\"0005j00F\" full 58L | code 58L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/redirects/__init__.py",
+        "django/contrib/redirects/admin.py",
+        "django/contrib/redirects/apps.py",
+        "django/contrib/redirects/middleware.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/redirects/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# django/contrib/redirects/admin.py (10L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.contrib import admin\n2|from django.contrib.redirects.models import Redirect\n3|\n4|\n5|@admin.register(Redirect)\n6|class RedirectAdmin(admin.ModelAdmin):\n7|    list_display = (\"old_path\", \"new_path\")\n8|    list_filter = (\"site\",)\n9|    search_fields = (\"old_path\", \"new_path\")\nnote: EOF\n\n# django/contrib/redirects/apps.py (9L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.apps import AppConfig\n2|from django.utils.translation import gettext_lazy as _\n3|\n4|\n5|class RedirectsConfig(AppConfig):\n6|    default_auto_field = \"django.db.models.AutoField\"\n7|    name = \"django.contrib.redirects\"\n8|    verbose_name = _(\"Redirects\")\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/redirects/middleware.py (51L)\nfile scope: [\"0007r00b\" full 51L | imports 10L]\n\n- class RedirectFallbackMiddleware(MiddlewareMixin): ... [\"0007r00a\" full 41L | code 41L]\n  - def __init__(self, get_response): ... [\"0007r003\" full 7L | code 7L]\n  - def process_response(self, request, response): ... [\"0007r009\" full 28L | code 28L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

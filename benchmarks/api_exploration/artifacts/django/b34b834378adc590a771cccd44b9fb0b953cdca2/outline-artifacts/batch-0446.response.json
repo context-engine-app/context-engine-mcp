@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/field_deconstruction/__init__.py",
+        "tests/field_deconstruction/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/field_deconstruction/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/field_deconstruction/tests.py (699L)\nfile scope: [\"000nV03J\" full 699L | imports 8L]\n\n- class FieldDeconstructionTests(SimpleTestCase): ... [\"000nV03I\" full 691L | code 691L]\n  - def test_name(self): ... [\"000nV005\" full 18L | code 18L]\n  - def test_db_tablespace(self): ... [\"000nV009\" full 20L | code 20L]\n  - def test_auto_field(self): ... [\"000nV00f\" full 7L | code 7L]\n  - def test_big_integer_field(self): ... [\"000nV00l\" full 6L | code 6L]\n  - def test_boolean_field(self): ... [\"000nV00r\" full 11L | code 11L]\n  - def test_char_field(self): ... [\"000nV00x\" full 11L | code 11L]\n  - def test_char_field_choices(self): ... [\"000nV00D\" full 8L | code 8L]\n  - def test_choices_iterator(self): ... [\"000nV00J\" full 6L | code 6L]\n  - def test_choices_iterable(self): ... [\"000nV00P\" full 7L | code 7L]\n  - def test_choices_callable(self): ... [\"000nV00W\" full 9L | code 9L]\n    - def get_choices(): ... [\"000nV00Q\" full 2L | code 2L]\n  - def test_csi_field(self): ... [\"000nV012\" full 6L | code 6L]\n  - def test_date_field(self): ... [\"000nV018\" full 11L | code 11L]\n  - def test_datetime_field(self): ... [\"000nV01e\" full 17L | code 17L]\n  - def test_decimal_field(self): ... [\"000nV01k\" full 6L | code 6L]\n  - def test_decimal_field_0_decimal_places(self): ... [\"000nV01q\" full 9L | code 9L]\n  - def test_email_field(self): ... [\"000nV01w\" full 11L | code 11L]\n  - def test_file_field(self): ... [\"000nV01C\" full 12L | code 12L]\n  - def test_file_path_field(self): ... [\"000nV01I\" full 13L | code 13L]\n  - def test_float_field(self): ... [\"000nV01O\" full 6L | code 6L]\n  - def test_foreign_key(self): ... [\"000nV01U\" full 105L | code 105L]\n  - @override_settings(AUTH_USER_MODEL=\"auth.Permission\") def test_foreign_key_swapped(self): ... [\"000nV020\" full 26L | code 26L]\n  - def test_one_to_one(self): ... [\"000nV026\" full 97L | code 97L]\n  - def test_image_field(self): ... [\"000nV02c\" full 15L | code 15L]\n  - def test_integer_field(self): ... [\"000nV02i\" full 6L | code 6L]\n  - def test_ip_address_field(self): ... [\"000nV02o\" full 6L | code 6L]\n  - def test_generic_ip_address_field(self): ... [\"000nV02u\" full 11L | code 11L]\n  - def test_many_to_many_field(self): ... [\"000nV02A\" full 70L | code 70L]\n  - @override_settings(AUTH_USER_MODEL=\"auth.Permission\") def test_many_to_many_field_swapped(self): ... [\"000nV02G\" full 13L | code 13L]\n  - def test_many_to_many_field_related_name(self): ... [\"000nV02P\" full 28L | code 28L]\n    - class MyModel(models.Model): ... [\"000nV02K\" full 8L | code 8L]\n  - def test_positive_integer_field(self): ... [\"000nV02V\" full 6L | code 6L]\n  - def test_positive_small_integer_field(self): ... [\"000nV031\" full 6L | code 6L]\n  - def test_positive_big_integer_field(self): ... [\"000nV037\" full 6L | code 6L]\n  - def test_slug_field(self): ... [\"000nV03d\" full 11L | code 11L]\n  - def test_small_integer_field(self): ... [\"000nV03j\" full 6L | code 6L]\n  - def test_text_field(self): ... [\"000nV03p\" full 6L | code 6L]\n  - def test_time_field(self): ... [\"000nV03v\" full 16L | code 16L]\n  - def test_url_field(self): ... [\"000nV03B\" full 11L | code 11L]\n  - def test_binary_field(self): ... [\"000nV03H\" full 10L | code 10L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

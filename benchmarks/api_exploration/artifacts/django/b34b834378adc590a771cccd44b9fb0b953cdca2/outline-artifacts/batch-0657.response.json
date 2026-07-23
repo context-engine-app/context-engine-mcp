@@ -1,0 +1,25 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_plan/0001_initial.py",
+        "tests/migrations/test_migrations_plan/0002_second.py",
+        "tests/migrations/test_migrations_plan/0003_third.py",
+        "tests/migrations/test_migrations_plan/0004_fourth.py",
+        "tests/migrations/test_migrations_plan/0005_fifth.py",
+        "tests/migrations/test_migrations_plan/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/test_migrations_plan/0001_initial.py (28L)\nfile scope: [\"000xt009\" full 28L | imports 4L]\n\n- def grow_tail(x, y): ... [\"000xt002\" full 3L | code 3L]\n\n- def shrink_tail(x, y): ... [\"000xt005\" full 3L | code 3L]\n\n- class Migration(migrations.Migration): ... [\"000xt008\" full 14L | code 14L]\n\n# tests/migrations/test_migrations_plan/0002_second.py (20L)\nfile scope: [\"000xu003\" full 20L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000xu002\" full 16L | code 16L]\n\n# tests/migrations/test_migrations_plan/0003_third.py (20L)\nfile scope: [\"000xv003\" full 20L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000xv002\" full 16L | code 16L]\n\n# tests/migrations/test_migrations_plan/0004_fourth.py (10L)\nfile scope: [\"000xw003\" full 10L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000xw002\" full 6L | code 6L]\n\n# tests/migrations/test_migrations_plan/0005_fifth.py (23L)\nfile scope: [\"000xx009\" full 23L | imports 4L]\n\n- def grow_tail(x, y): ... [\"000xx002\" full 2L | code 2L]\n\n- def feed(x, y): ... [\"000xx005\" full 3L | code 3L]\n\n- class Migration(migrations.Migration): ... [\"000xx008\" full 10L | code 10L]\n\n# tests/migrations/test_migrations_plan/__init__.py (1L)\nfile scope: [\"000xy000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

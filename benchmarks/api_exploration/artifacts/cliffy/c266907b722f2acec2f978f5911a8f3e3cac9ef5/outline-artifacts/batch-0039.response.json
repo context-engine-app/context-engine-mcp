@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/keycode.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 506 B -> 366 B (28% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/keycode.ts (26L)\nfile scope: [\"00030004\" full 26L | imports 21L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

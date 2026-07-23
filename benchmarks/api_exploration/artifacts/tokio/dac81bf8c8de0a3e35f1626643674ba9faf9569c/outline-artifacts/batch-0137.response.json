@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/time_alt/wake_queue/tests.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.5 KB -> 876 B (45% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/time_alt/wake_queue/tests.rs (71L)\nfile scope: [\"0008m006\" full 71L | imports 7L]\n\n- #[cfg(loom)] const NUM_ITEMS: usize = 16; [\"0008m000\" full 2L | code 2L]\n\n- #[cfg(not(loom))] const NUM_ITEMS: usize = 64; [\"0008m001\" full 2L | code 2L]\n\n- fn new_handle() -> (EntryHandle, AwokenCount) { ... } [\"0008m002\" full 6L | code 6L]\n\n- fn model<F: Fn() + Send + Sync + 'static>(f: F) { ... } [\"0008m003\" full 7L | code 7L]\n\n- #[test] fn sanity() { ... } [\"0008m004\" full 18L | code 18L]\n\n- #[test] fn drop_should_not_leak_memory() { ... } [\"0008m005\" full 24L | code 24L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

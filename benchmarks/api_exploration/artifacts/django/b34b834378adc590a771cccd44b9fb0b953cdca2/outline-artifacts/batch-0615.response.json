@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/migrations_test_apps/unmigrated_app/__init__.py",
+        "tests/migrations/migrations_test_apps/unmigrated_app/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/migrations/migrations_test_apps/unmigrated_app/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/migrations/migrations_test_apps/unmigrated_app/models.py (8L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import models\n2|\n3|\n4|class SillyModel(models.Model):\n5|    silly_field = models.BooleanField(default=False)\n6|    silly_tribble = models.ForeignKey(\"migrations.Tribble\", models.CASCADE)\n7|    is_trouble = models.BooleanField(default=True)\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

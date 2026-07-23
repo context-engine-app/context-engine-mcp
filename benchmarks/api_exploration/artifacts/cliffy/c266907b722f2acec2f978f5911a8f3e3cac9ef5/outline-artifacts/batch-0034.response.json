@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/command/lazy_loading/bar_command.ts",
+        "examples/command/lazy_loading/baz_command.ts",
+        "examples/command/lazy_loading/cli.ts",
+        "examples/command/lazy_loading/foo_command.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.4 KB -> 689 B (52% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/command/lazy_loading/bar_command.ts (15L)\nfile scope: [\"0002y004\" full 15L | imports 7L]\n\n\n# examples/command/lazy_loading/baz_command.ts (14L)\nfile scope: [\"0002z002\" full 14L | imports 7L]\n\n\n# examples/command/lazy_loading/cli.ts (21L)\nfile scope: [\"0002A006\" full 21L | imports 7L]\n\n\n# examples/command/lazy_loading/foo_command.ts (11L)\nfile scope: [\"0002B002\" full 11L | imports 7L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

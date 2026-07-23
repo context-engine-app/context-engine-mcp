@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/core/cache/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.9 KB -> 656 B (66% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/core/cache/__init__.py (68L)\nfile scope: [\"0008p00g\" full 68L | imports 48L]\n\n- DEFAULT_CACHE_ALIAS [\"0008p001\" full 1L | code 1L]\n\n- class CacheHandler(BaseConnectionHandler): ... [\"0008p00b\" full 15L | code 15L]\n  - def create_connection(self, alias): ... [\"0008p00a\" full 11L | code 11L]\n\n- def close_caches(**kwargs): ... [\"0008p00f\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

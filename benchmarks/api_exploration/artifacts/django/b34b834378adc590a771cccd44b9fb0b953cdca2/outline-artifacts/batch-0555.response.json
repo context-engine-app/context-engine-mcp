@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/known_related_objects/__init__.py",
+        "tests/known_related_objects/models.py",
+        "tests/known_related_objects/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/known_related_objects/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/known_related_objects/models.py (30L)\nfile scope: [\"000tr00c\" full 30L | imports 10L]\n\n- class Tournament(models.Model): ... [\"000tr001\" full 2L | code 2L]\n\n- class Organiser(models.Model): ... [\"000tr003\" full 2L | code 2L]\n\n- class Pool(models.Model): ... [\"000tr007\" full 4L | code 4L]\n\n- class PoolStyle(models.Model): ... [\"000tr00b\" full 6L | code 6L]\n\n# tests/known_related_objects/tests.py (187L)\nfile scope: [\"000ts01c\" full 187L | imports 7L]\n\n- class ExistingRelatedInstancesTests(TestCase): ... [\"000ts01b\" full 180L | code 180L]\n  - @classmethod def setUpTestData(cls): ... [\"000ts000\" full 22L | code 22L]\n  - def test_foreign_key(self): ... [\"000ts00d\" full 5L | code 5L]\n  - def test_foreign_key_prefetch_related(self): ... [\"000ts00g\" full 7L | code 7L]\n  - def test_foreign_key_multiple_prefetch(self): ... [\"000ts00k\" full 9L | code 9L]\n  - def test_queryset_or(self): ... [\"000ts00p\" full 7L | code 7L]\n  - def test_queryset_or_different_cached_items(self): ... [\"000ts00u\" full 8L | code 8L]\n  - def test_queryset_or_only_one_with_precache(self): ... [\"000ts00z\" full 13L | code 13L]\n  - def test_queryset_and(self): ... [\"000ts00E\" full 8L | code 8L]\n  - def test_one_to_one(self): ... [\"000ts00H\" full 5L | code 5L]\n  - def test_one_to_one_select_related(self): ... [\"000ts00K\" full 5L | code 5L]\n  - def test_one_to_one_multi_select_related(self): ... [\"000ts00M\" full 5L | code 5L]\n  - def test_one_to_one_prefetch_related(self): ... [\"000ts00P\" full 5L | code 5L]\n  - def test_one_to_one_multi_prefetch_related(self): ... [\"000ts00R\" full 5L | code 5L]\n  - def test_reverse_one_to_one(self): ... [\"000ts00U\" full 5L | code 5L]\n  - def test_reverse_one_to_one_select_related(self): ... [\"000ts00X\" full 5L | code 5L]\n  - def test_reverse_one_to_one_prefetch_related(self): ... [\"000ts010\" full 5L | code 5L]\n  - def test_reverse_one_to_one_multi_select_related(self): ... [\"000ts012\" full 5L | code 5L]\n  - def test_reverse_one_to_one_multi_prefetch_related(self): ... [\"000ts014\" full 5L | code 5L]\n  - def test_reverse_fk_select_related_multiple(self): ... [\"000ts016\" full 12L | code 12L]\n  - def test_multilevel_reverse_fk_cyclic_select_related(self): ... [\"000ts018\" full 8L | code 8L]\n  - def test_multilevel_reverse_fk_select_related(self): ... [\"000ts01a\" full 10L | code 10L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

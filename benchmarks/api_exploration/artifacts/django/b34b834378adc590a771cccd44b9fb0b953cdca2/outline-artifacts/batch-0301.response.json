@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/admin_scripts/app_raising_warning/__init__.py",
+        "tests/admin_scripts/app_raising_warning/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/admin_scripts/app_raising_warning/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/admin_scripts/app_raising_warning/models.py (9L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.core import checks\n2|from django.db import models\n3|\n4|\n5|class ModelRaisingMessages(models.Model):\n6|    @classmethod\n7|    def check(self, **kwargs):\n8|        return [checks.Warning(\"A warning\")]\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

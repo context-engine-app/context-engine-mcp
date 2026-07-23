@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/fs/file/tests.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 23.0 KB -> 2.8 KB (88% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/fs/file/tests.rs (979L)\nfile scope: [\"0003W00u\" full 979L | imports 9L]\n\n- const HELLO: &[u8] = b\"hello world...\"; [\"0003W000\" full 1L | code 1L]\n\n- const FOO: &[u8] = b\"foo bar baz...\"; [\"0003W001\" full 1L | code 1L]\n\n- #[test] fn open_read() { ... } [\"0003W002\" full 25L | code 25L]\n\n- #[test] fn read_twice_before_dispatch() { ... } [\"0003W003\" full 23L | code 23L]\n\n- #[test] fn read_with_smaller_buf() { ... } [\"0003W004\" full 35L | code 35L]\n\n- #[test] fn read_with_bigger_buf() { ... } [\"0003W005\" full 54L | code 54L]\n\n- #[test] fn read_err_then_read_success() { ... } [\"0003W006\" full 41L | code 41L]\n\n- #[test] fn open_write() { ... } [\"0003W007\" full 24L | code 24L]\n\n- #[test] fn flush_while_idle() { ... } [\"0003W008\" full 9L | code 9L]\n\n- #[test] #[cfg_attr(miri, ignore)] fn read_with_buffer_larger_than_max() { ... } [\"0003W009\" full 71L | code 71L]\n\n- #[test] #[cfg_attr(miri, ignore)] fn write_with_buffer_larger_than_max() { ... } [\"0003W00a\" full 68L | code 68L]\n\n- #[test] fn write_twice_before_dispatch() { ... } [\"0003W00b\" full 39L | code 39L]\n\n- #[test] fn incomplete_read_followed_by_write() { ... } [\"0003W00c\" full 39L | code 39L]\n\n- #[test] fn incomplete_partial_read_followed_by_write() { ... } [\"0003W00d\" full 43L | code 43L]\n\n- #[test] fn incomplete_read_followed_by_flush() { ... } [\"0003W00e\" full 39L | code 39L]\n\n- #[test] fn incomplete_flush_followed_by_write() { ... } [\"0003W00f\" full 35L | code 35L]\n\n- #[test] fn read_err() { ... } [\"0003W00g\" full 19L | code 19L]\n\n- #[test] fn write_write_err() { ... } [\"0003W00h\" full 17L | code 17L]\n\n- #[test] fn write_read_write_err() { ... } [\"0003W00i\" full 33L | code 33L]\n\n- #[test] fn write_read_flush_err() { ... } [\"0003W00j\" full 33L | code 33L]\n\n- #[test] fn write_seek_write_err() { ... } [\"0003W00k\" full 31L | code 31L]\n\n- #[test] fn write_seek_flush_err() { ... } [\"0003W00l\" full 31L | code 31L]\n\n- #[test] fn sync_all_ordered_after_write() { ... } [\"0003W00m\" full 30L | code 30L]\n\n- #[test] fn sync_all_err_ordered_after_write() { ... } [\"0003W00n\" full 32L | code 32L]\n\n- #[test] fn sync_data_ordered_after_write() { ... } [\"0003W00o\" full 30L | code 30L]\n\n- #[test] fn sync_data_err_ordered_after_write() { ... } [\"0003W00p\" full 32L | code 32L]\n\n- #[test] fn open_set_len_ok() { ... } [\"0003W00q\" full 15L | code 15L]\n\n- #[test] fn open_set_len_err() { ... } [\"0003W00r\" full 17L | code 17L]\n\n- #[test] fn partial_read_set_len_ok() { ... } [\"0003W00s\" full 55L | code 55L]\n\n- #[test] fn busy_file_seek_error() { ... } [\"0003W00t\" full 20L | code 20L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

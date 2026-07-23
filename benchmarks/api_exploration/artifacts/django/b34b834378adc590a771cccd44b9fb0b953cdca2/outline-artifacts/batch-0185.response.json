@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/staticfiles/__init__.py",
+        "django/contrib/staticfiles/apps.py",
+        "django/contrib/staticfiles/checks.py",
+        "django/contrib/staticfiles/finders.py",
+        "django/contrib/staticfiles/handlers.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/staticfiles/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/staticfiles/apps.py (15L)\nfile scope: [\"00086005\" full 15L | imports 7L]\n\n- class StaticFilesConfig(AppConfig): ... [\"00086004\" full 8L | code 8L]\n  - def ready(self): ... [\"00086003\" full 3L | code 3L]\n\n# django/contrib/staticfiles/checks.py (30L)\nfile scope: [\"0008700b\" full 30L | imports 12L]\n\n- E005 [\"00087000\" full 1L | code 1L]\n\n- def check_finders(app_configs, **kwargs): ... [\"00087006\" full 11L | code 11L]\n\n- def check_storages(app_configs, **kwargs): ... [\"0008700a\" full 6L | code 6L]\n\n# django/contrib/staticfiles/finders.py (316L)\nfile scope: [\"0008801y\" full 316L | imports 19L]\n\n- class BaseFinder: ... [\"00088005\" full 19L | code 19L]\n  - def check(self, **kwargs): ... [\"00088002\" full 5L | code 5L]\n  - def list(self, ignore_patterns): ... [\"00088004\" full 8L | code 8L]\n\n- class FileSystemFinder(BaseFinder): ... [\"0008800B\" full 105L | code 105L]\n  - def __init__(self, app_names=None, *args, **kwargs): ... [\"0008800c\" full 17L | code 17L]\n  - def check(self, **kwargs): ... [\"0008800j\" full 41L | code 41L]\n  - def find(self, path, find_all=False): ... [\"0008800q\" full 14L | code 14L]\n  - def find_location(self, root, path, prefix=None): ... [\"0008800u\" full 13L | code 13L]\n  - def list(self, ignore_patterns): ... [\"0008800A\" full 10L | code 10L]\n\n- class AppDirectoriesFinder(BaseFinder): ... [\"00088013\" full 63L | code 63L]\n  - def __init__(self, app_names=None, *args, **kwargs): ... [\"0008800K\" full 18L | code 18L]\n  - def list(self, ignore_patterns): ... [\"0008800Q\" full 8L | code 8L]\n  - def find(self, path, find_all=False): ... [\"0008800X\" full 15L | code 15L]\n  - def find_in_app(self, app, path): ... [\"00088012\" full 10L | code 10L]\n\n- class BaseStorageFinder(BaseFinder): ... [\"0008801g\" full 46L | code 46L]\n  - def __init__(self, storage=None, *args, **kwargs): ... [\"00088018\" full 13L | code 13L]\n  - def find(self, path, find_all=False): ... [\"0008801c\" full 17L | code 17L]\n  - def list(self, ignore_patterns): ... [\"0008801f\" full 6L | code 6L]\n\n- class DefaultStorageFinder(BaseStorageFinder): ... [\"0008801m\" full 16L | code 16L]\n  - def __init__(self, *args, **kwargs): ... [\"0008801l\" full 9L | code 9L]\n\n- def find(path, find_all=False): ... [\"0008801s\" full 20L | code 20L]\n\n- def get_finders(): ... [\"0008801u\" full 3L | code 3L]\n\n- @functools.cache def get_finder(import_path): ... [\"0008801x\" full 12L | code 12L]\n\n# django/contrib/staticfiles/handlers.py (116L)\nfile scope: [\"0008900E\" full 116L | imports 15L]\n\n- class StaticFilesHandlerMixin: ... [\"0008900g\" full 50L | code 50L]\n  - def load_middleware(self): ... [\"00089001\" full 4L | code 4L]\n  - def get_base_url(self): ... [\"00089002\" full 3L | code 3L]\n  - def _should_handle(self, path): ... [\"00089004\" full 7L | code 7L]\n  - def file_path(self, url): ... [\"00089007\" full 6L | code 6L]\n  - def serve(self, request): ... [\"00089009\" full 3L | code 3L]\n  - def get_response(self, request): ... [\"0008900c\" full 5L | code 5L]\n  - async def get_response_async(self, request): ... [\"0008900f\" full 7L | code 7L]\n\n- class StaticFilesHandler(StaticFilesHandlerMixin, WSGIHandler): ... [\"0008900o\" full 15L | code 15L]\n  - def __init__(self, application): ... [\"0008900i\" full 4L | code 4L]\n  - def __call__(self, environ, start_response): ... [\"0008900n\" full 4L | code 4L]\n\n- class ASGIStaticFilesHandler(StaticFilesHandlerMixin, ASGIHandler): ... [\"0008900D\" full 32L | code 32L]\n  - def __init__(self, application): ... [\"0008900q\" full 3L | code 3L]\n  - async def __call__(self, scope, receive, send): ... [\"0008900w\" full 8L | code 8L]\n  - async def get_response_async(self, request): ... [\"0008900C\" full 13L | code 13L]\n    - async def awrapper(): ... [\"0008900B\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

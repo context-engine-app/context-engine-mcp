@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/utils_tests/test_module/__init__.py",
+        "tests/utils_tests/test_module/__main__.py",
+        "tests/utils_tests/test_module/another_bad_module.py",
+        "tests/utils_tests/test_module/another_good_module.py",
+        "tests/utils_tests/test_module/bad_module.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/utils_tests/test_module/__init__.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|class SiteMock:\n2|    _registry = {}\n3|\n4|\n5|site = SiteMock()\nnote: EOF\n\n# tests/utils_tests/test_module/__main__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/utils_tests/test_module/another_bad_module.py (12L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from . import site\n 2|\n 3|content = \"Another Bad Module\"\n 4|\n 5|site._registry.update(\n 6|    {\n 7|        \"foo\": \"bar\",\n 8|    }\n 9|)\n10|\n11|raise Exception(\"Some random exception.\")\nnote: EOF\n\n# tests/utils_tests/test_module/another_good_module.py (10L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from . import site\n2|\n3|content = \"Another Good Module\"\n4|\n5|site._registry.update(\n6|    {\n7|        \"lorem\": \"ipsum\",\n8|    }\n9|)\nnote: EOF\n\n# tests/utils_tests/test_module/bad_module.py (4L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|import a_package_name_that_does_not_exist  # NOQA\n2|\n3|content = \"Bad Module\"\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

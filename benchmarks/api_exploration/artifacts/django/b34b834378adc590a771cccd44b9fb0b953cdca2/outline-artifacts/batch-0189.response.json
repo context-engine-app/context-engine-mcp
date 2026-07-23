@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/syndication/__init__.py",
+        "django/contrib/syndication/apps.py",
+        "django/contrib/syndication/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/syndication/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# django/contrib/syndication/apps.py (8L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.apps import AppConfig\n2|from django.utils.translation import gettext_lazy as _\n3|\n4|\n5|class SyndicationConfig(AppConfig):\n6|    name = \"django.contrib.syndication\"\n7|    verbose_name = _(\"Syndication\")\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/syndication/views.py (236L)\nfile scope: [\"0008m012\" full 236L | imports 15L]\n\n- def add_domain(domain, url, secure=False): ... [\"0008m004\" full 8L | code 8L]\n\n- class FeedDoesNotExist(ObjectDoesNotExist): ... [\"0008m005\" full 2L | code 2L]\n\n- class Feed: ... [\"0008m011\" full 207L | code 207L]\n  - def __call__(self, request, *args, **kwargs): ... [\"0008m00g\" full 15L | code 15L]\n  - def item_title(self, item): ... [\"0008m00i\" full 3L | code 3L]\n  - def item_description(self, item): ... [\"0008m00k\" full 2L | code 2L]\n  - def item_link(self, item): ... [\"0008m00m\" full 8L | code 8L]\n  - def item_enclosures(self, item): ... [\"0008m00q\" full 10L | code 10L]\n  - def _get_dynamic_attr(self, attname, obj, default=None): ... [\"0008m00x\" full 29L | code 29L]\n  - def feed_extra_kwargs(self, obj): ... [\"0008m00z\" full 6L | code 6L]\n  - def item_extra_kwargs(self, item): ... [\"0008m00B\" full 6L | code 6L]\n  - def get_object(self, request, *args, **kwargs): ... [\"0008m00F\" full 2L | code 2L]\n  - def get_context_data(self, **kwargs): ... [\"0008m00H\" full 9L | code 9L]\n  - def get_feed(self, obj, request): ... [\"0008m010\" full 101L | code 101L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

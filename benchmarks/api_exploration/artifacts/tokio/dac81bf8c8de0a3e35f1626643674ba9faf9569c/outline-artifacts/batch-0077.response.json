@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/loom/mocked.rs",
+        "tokio/src/loom/mod.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.0 KB -> 2.2 KB (-8% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/loom/mocked.rs (79L)\nfile scope: [\"0005s00i\" full 79L | imports 3L]\n\n- pub(crate) mod sync { ... } [\"0005s00c\" full 59L | code 59L]\n  - #[derive(Debug)] pub(crate) struct Mutex<T>( ... ); [\"0005s000\" full 2L | code 2L]\n  - #[allow(dead_code)] impl<T> Mutex<T> { ... } [\"0005s004\" full 18L | code 18L]\n    - #[inline] pub(crate) fn new(t: T) -> Mutex<T> { ... } [\"0005s001\" full 4L | code 4L]\n    - #[inline] #[track_caller] pub(crate) fn lock(&self) -> MutexGuard<'_, T> { ... } [\"0005s002\" full 5L | code 5L]\n    - #[inline] pub(crate) fn try_lock(&self) -> Option<MutexGuard<'_, T>> { ... } [\"0005s003\" full 4L | code 4L]\n  - #[derive(Debug)] pub(crate) struct RwLock<T>( ... ); [\"0005s005\" full 2L | code 2L]\n  - #[allow(dead_code)] impl<T> RwLock<T> { ... } [\"0005s00b\" full 27L | code 27L]\n    - #[inline] pub(crate) fn new(t: T) -> Self { ... } [\"0005s006\" full 4L | code 4L]\n    - #[inline] pub(crate) fn read(&self) -> RwLockReadGuard<'_, T> { ... } [\"0005s007\" full 4L | code 4L]\n    - #[inline] pub(crate) fn try_read(&self) -> Option<RwLockReadGuard<'_, T>> { ... } [\"0005s008\" full 4L | code 4L]\n    - #[inline] pub(crate) fn write(&self) -> RwLockWriteGuard<'_, T> { ... } [\"0005s009\" full 4L | code 4L]\n    - #[inline] pub(crate) fn try_write(&self) -> Option<RwLockWriteGuard<'_, T>> { ... } [\"0005s00a\" full 4L | code 4L]\n\n- pub(crate) mod rand { ... } [\"0005s00e\" full 5L | code 5L]\n  - pub(crate) fn seed() -> u64 { ... } [\"0005s00d\" full 3L | code 3L]\n\n- pub(crate) mod sys { ... } [\"0005s00g\" full 5L | code 5L]\n  - pub(crate) fn num_cpus() -> usize { ... } [\"0005s00f\" full 3L | code 3L]\n\n- pub(crate) mod thread { ... } [\"0005s00h\" full 4L | code 4L]\n\n# tokio/src/loom/mod.rs (15L)\nfile scope: [\"0005t002\" full 15L | module-docs 2L | imports 10L]\n\n- #[cfg(not(all(test, loom)))] mod std; [\"0005t000\" full 2L | code 2L]\n\n- #[cfg(all(test, loom))] mod mocked; [\"0005t001\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

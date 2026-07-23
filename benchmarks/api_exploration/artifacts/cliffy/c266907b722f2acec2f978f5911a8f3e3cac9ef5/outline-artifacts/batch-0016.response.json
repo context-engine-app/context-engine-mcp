@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "command/test/type/string_test.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.2 KB -> 970 B (18% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# command/test/type/string_test.ts (39L)\nfile scope: [\"0001j00f\" full 39L | imports 14L]\n\n- test(\"command - type - string - with no value\") callback [\"0001j007\" full 7L | code 7L]\n  - flag: true [\"0001j005\" full 1L | code 1L]\n  - default: \"DEFAULT\" [\"0001j006\" full 1L | code 1L]\n\n- test(\"command - type - string - with valid value\") callback [\"0001j00c\" full 7L | code 7L]\n  - flag: \"value\" [\"0001j00a\" full 1L | code 1L]\n  - default: \"DEFAULT\" [\"0001j00b\" full 1L | code 1L]\n\n- test(\"command - type - string - no arguments allowed\") callback [\"0001j00e\" full 9L | code 9L]\n  - assertRejects(`No arguments allowed for command \"COMMAND\".`) callback [\"0001j00d\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

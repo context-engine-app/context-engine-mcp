@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/auth_tests/models/proxy.py",
+        "tests/auth_tests/models/uuid_pk.py",
+        "tests/auth_tests/models/with_custom_email_field.py",
+        "tests/auth_tests/models/with_foreign_key.py",
+        "tests/auth_tests/models/with_integer_username.py",
+        "tests/auth_tests/models/with_last_login_attr.py",
+        "tests/auth_tests/models/with_many_to_many.py",
+        "tests/auth_tests/models/with_unique_constraint.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/auth_tests/models/proxy.py (19L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from django.contrib.auth.models import User\n 2|from django.db import models\n 3|\n 4|\n 5|class Concrete(models.Model):\n 6|    pass\n 7|\n 8|\n 9|class Proxy(Concrete):\n10|    class Meta:\n11|        proxy = True\n12|        permissions = ((\"display_proxys\", \"May display proxys information\"),)\n13|\n14|\n15|class UserProxy(User):\n16|    class Meta:\n17|        proxy = True\n18|        permissions = ((\"use_different_app_label\", \"May use a different app label\"),)\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/auth_tests/models/uuid_pk.py (14L)\nfile scope: [\"000hZ002\" full 14L | imports 10L]\n\n- class UUIDUser(AbstractUser): ... [\"000hZ001\" full 4L | code 4L]\n\n# tests/auth_tests/models/with_custom_email_field.py (25L)\nfile scope: [\"000i000e\" full 25L | imports 6L]\n\n- class CustomEmailFieldUserManager(BaseUserManager): ... [\"000i0005\" full 7L | code 7L]\n  - def create_user(self, username, password, email): ... [\"000i0004\" full 6L | code 6L]\n\n- class CustomEmailField(AbstractBaseUser): ... [\"000i000d\" full 10L | code 10L]\n\n# tests/auth_tests/models/with_foreign_key.py (28L)\nfile scope: [\"000i100g\" full 28L | imports 5L]\n\n- class Email(models.Model): ... [\"000i1001\" full 2L | code 2L]\n\n- class CustomUserWithFKManager(BaseUserManager): ... [\"000i1008\" full 6L | code 6L]\n  - def create_superuser(self, username, email, group, password): ... [\"000i1007\" full 5L | code 5L]\n\n- class CustomUserWithFK(AbstractBaseUser): ... [\"000i100f\" full 11L | code 11L]\n\n# tests/auth_tests/models/with_integer_username.py (24L)\nfile scope: [\"000i200d\" full 24L | imports 5L]\n\n- class IntegerUsernameUserManager(BaseUserManager): ... [\"000i2006\" full 9L | code 9L]\n  - def create_user(self, username, password): ... [\"000i2003\" full 5L | code 5L]\n  - def get_by_natural_key(self, username): ... [\"000i2005\" full 2L | code 2L]\n\n- class IntegerUsernameUser(AbstractBaseUser): ... [\"000i200c\" full 8L | code 8L]\n\n# tests/auth_tests/models/with_last_login_attr.py (6L)\nfile scope: [\"000i3002\" full 6L | imports 4L]\n\n- class UserWithDisabledLastLoginField(AbstractBaseUser): ... [\"000i3001\" full 2L | code 2L]\n\n# tests/auth_tests/models/with_many_to_many.py (41L)\nfile scope: [\"000i400n\" full 41L | imports 5L]\n\n- class Organization(models.Model): ... [\"000i4001\" full 2L | code 2L]\n\n- class CustomUserWithM2MManager(BaseUserManager): ... [\"000i4007\" full 7L | code 7L]\n  - def create_superuser(self, username, orgs, password): ... [\"000i4006\" full 6L | code 6L]\n\n- class CustomUserWithM2M(AbstractBaseUser): ... [\"000i400d\" full 8L | code 8L]\n\n- class CustomUserWithM2MThrough(AbstractBaseUser): ... [\"000i400j\" full 8L | code 8L]\n\n- class Membership(models.Model): ... [\"000i400m\" full 3L | code 3L]\n\n# tests/auth_tests/models/with_unique_constraint.py (23L)\nfile scope: [\"000i500b\" full 23L | imports 5L]\n\n- class CustomUserWithUniqueConstraintManager(BaseUserManager): ... [\"000i5004\" full 6L | code 6L]\n  - def create_superuser(self, username, password): ... [\"000i5003\" full 5L | code 5L]\n\n- class CustomUserWithUniqueConstraint(AbstractBaseUser): ... [\"000i500a\" full 10L | code 10L]\n  - class Meta: ... [\"000i5009\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

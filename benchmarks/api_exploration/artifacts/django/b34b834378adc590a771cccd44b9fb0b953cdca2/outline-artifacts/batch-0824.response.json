@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/test_runner_apps/databases/__init__.py",
+        "tests/test_runner_apps/databases/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/test_runner_apps/databases/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/test_runner_apps/databases/tests.py (24L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|import unittest\n 2|\n 3|\n 4|class NoDatabaseTests(unittest.TestCase):\n 5|    def test_nothing(self):\n 6|        pass\n 7|\n 8|\n 9|class DefaultDatabaseTests(NoDatabaseTests):\n10|    databases = {\"default\"}\n11|\n12|\n13|class DefaultDatabaseSerializedTests(NoDatabaseTests):\n14|    databases = {\"default\"}\n15|    serialized_rollback = True\n16|\n17|\n18|class OtherDatabaseTests(NoDatabaseTests):\n19|    databases = {\"other\"}\n20|\n21|\n22|class AllDatabasesTests(NoDatabaseTests):\n23|    databases = \"__all__\"\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/db_functions/math/__init__.py",
+        "tests/db_functions/math/test_abs.py",
+        "tests/db_functions/math/test_acos.py",
+        "tests/db_functions/math/test_asin.py",
+        "tests/db_functions/math/test_atan.py",
+        "tests/db_functions/math/test_atan2.py",
+        "tests/db_functions/math/test_ceil.py",
+        "tests/db_functions/math/test_cos.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/db_functions/math/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/db_functions/math/test_abs.py (53L)\nfile scope: [\"000lZ00b\" full 53L | imports 11L]\n\n- class AbsTests(TestCase): ... [\"000lZ00a\" full 42L | code 42L]\n  - def test_null(self): ... [\"000lZ001\" full 4L | code 4L]\n  - def test_decimal(self): ... [\"000lZ003\" full 7L | code 7L]\n  - def test_float(self): ... [\"000lZ005\" full 7L | code 7L]\n  - def test_integer(self): ... [\"000lZ007\" full 13L | code 13L]\n  - def test_transform(self): ... [\"000lZ009\" full 6L | code 6L]\n\n# tests/db_functions/math/test_acos.py (58L)\nfile scope: [\"000m000b\" full 58L | imports 12L]\n\n- class ACosTests(TestCase): ... [\"000m000a\" full 46L | code 46L]\n  - def test_null(self): ... [\"000m0001\" full 4L | code 4L]\n  - def test_decimal(self): ... [\"000m0003\" full 9L | code 9L]\n  - def test_float(self): ... [\"000m0005\" full 9L | code 9L]\n  - def test_integer(self): ... [\"000m0007\" full 13L | code 13L]\n  - def test_transform(self): ... [\"000m0009\" full 6L | code 6L]\n\n# tests/db_functions/math/test_asin.py (58L)\nfile scope: [\"000m100b\" full 58L | imports 12L]\n\n- class ASinTests(TestCase): ... [\"000m100a\" full 46L | code 46L]\n  - def test_null(self): ... [\"000m1001\" full 4L | code 4L]\n  - def test_decimal(self): ... [\"000m1003\" full 9L | code 9L]\n  - def test_float(self): ... [\"000m1005\" full 9L | code 9L]\n  - def test_integer(self): ... [\"000m1007\" full 13L | code 13L]\n  - def test_transform(self): ... [\"000m1009\" full 6L | code 6L]\n\n# tests/db_functions/math/test_atan.py (58L)\nfile scope: [\"000m200b\" full 58L | imports 12L]\n\n- class ATanTests(TestCase): ... [\"000m200a\" full 46L | code 46L]\n  - def test_null(self): ... [\"000m2001\" full 4L | code 4L]\n  - def test_decimal(self): ... [\"000m2003\" full 9L | code 9L]\n  - def test_float(self): ... [\"000m2005\" full 9L | code 9L]\n  - def test_integer(self): ... [\"000m2007\" full 13L | code 13L]\n  - def test_transform(self): ... [\"000m2009\" full 6L | code 6L]\n\n# tests/db_functions/math/test_atan2.py (44L)\nfile scope: [\"000m3009\" full 44L | imports 10L]\n\n- class ATan2Tests(TestCase): ... [\"000m3008\" full 34L | code 34L]\n  - def test_null(self): ... [\"000m3001\" full 10L | code 10L]\n  - def test_decimal(self): ... [\"000m3003\" full 5L | code 5L]\n  - def test_float(self): ... [\"000m3005\" full 5L | code 5L]\n  - def test_integer(self): ... [\"000m3007\" full 10L | code 10L]\n\n# tests/db_functions/math/test_ceil.py (58L)\nfile scope: [\"000m400b\" full 58L | imports 12L]\n\n- class CeilTests(TestCase): ... [\"000m400a\" full 46L | code 46L]\n  - def test_null(self): ... [\"000m4001\" full 4L | code 4L]\n  - def test_decimal(self): ... [\"000m4003\" full 9L | code 9L]\n  - def test_float(self): ... [\"000m4005\" full 9L | code 9L]\n  - def test_integer(self): ... [\"000m4007\" full 13L | code 13L]\n  - def test_transform(self): ... [\"000m4009\" full 6L | code 6L]\n\n# tests/db_functions/math/test_cos.py (54L)\nfile scope: [\"000m500b\" full 54L | imports 12L]\n\n- class CosTests(TestCase): ... [\"000m500a\" full 42L | code 42L]\n  - def test_null(self): ... [\"000m5001\" full 4L | code 4L]\n  - def test_decimal(self): ... [\"000m5003\" full 7L | code 7L]\n  - def test_float(self): ... [\"000m5005\" full 7L | code 7L]\n  - def test_integer(self): ... [\"000m5007\" full 13L | code 13L]\n  - def test_transform(self): ... [\"000m5009\" full 6L | code 6L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

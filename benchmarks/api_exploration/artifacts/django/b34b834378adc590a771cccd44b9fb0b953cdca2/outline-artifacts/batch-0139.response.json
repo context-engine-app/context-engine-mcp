@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/gis/forms/__init__.py",
+        "django/contrib/gis/forms/fields.py",
+        "django/contrib/gis/forms/widgets.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 8.2 KB -> 2.2 KB (73% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/gis/forms/__init__.py (14L)\nfile scope: [\"0005u000\" full 14L]\n\n\n# django/contrib/gis/forms/fields.py (141L)\nfile scope: [\"0005v00v\" full 141L | imports 9L]\n\n- class GeometryField(forms.Field): ... [\"0005v00g\" full 104L | code 104L]\n  - def __init__(self, *, srid=None, geom_type=None, **kwargs): ... [\"0005v006\" full 6L | code 6L]\n  - def to_python(self, value): ... [\"0005v009\" full 26L | code 26L]\n  - def clean(self, value): ... [\"0005v00c\" full 30L | code 30L]\n  - def has_changed(self, initial, data): ... [\"0005v00f\" full 19L | code 19L]\n\n- class GeometryCollectionField(GeometryField): ... [\"0005v00i\" full 2L | code 2L]\n\n- class PointField(GeometryField): ... [\"0005v00k\" full 2L | code 2L]\n\n- class MultiPointField(GeometryField): ... [\"0005v00m\" full 2L | code 2L]\n\n- class LineStringField(GeometryField): ... [\"0005v00o\" full 2L | code 2L]\n\n- class MultiLineStringField(GeometryField): ... [\"0005v00q\" full 2L | code 2L]\n\n- class PolygonField(GeometryField): ... [\"0005v00s\" full 2L | code 2L]\n\n- class MultiPolygonField(GeometryField): ... [\"0005v00u\" full 2L | code 2L]\n\n# django/contrib/gis/forms/widgets.py (118L)\nfile scope: [\"0005w00H\" full 118L | imports 13L]\n\n- class BaseGeometryWidget(Widget): ... [\"0005w00n\" full 59L | code 59L]\n  - def __init__(self, attrs=None): ... [\"0005w008\" full 7L | code 7L]\n  - def serialize(self, value): ... [\"0005w00b\" full 2L | code 2L]\n  - def deserialize(self, value): ... [\"0005w00e\" full 6L | code 6L]\n  - def get_context(self, name, value, attrs): ... [\"0005w00m\" full 27L | code 27L]\n\n- class OpenLayersWidget(BaseGeometryWidget): ... [\"0005w00z\" full 26L | code 26L]\n  - class Media: ... [\"0005w00t\" full 11L | code 11L]\n  - def serialize(self, value): ... [\"0005w00v\" full 2L | code 2L]\n  - def deserialize(self, value): ... [\"0005w00y\" full 6L | code 6L]\n\n- class OSMWidget(OpenLayersWidget): ... [\"0005w00G\" full 17L | code 17L]\n  - def __init__(self, attrs=None): ... [\"0005w00F\" full 7L | code 7L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

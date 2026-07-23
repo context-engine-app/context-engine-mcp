@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/gis_tests/tests.py",
+        "tests/gis_tests/utils.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 6.6 KB -> 2.4 KB (64% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/gis_tests/tests.py (113L)\nfile scope: [\"000s500F\" full 113L | imports 23L]\n\n- HAS_POSTGRES [\"000s5000\" full 1L | code 1L]\n\n- class BaseSpatialFeaturesTests(TestCase): ... [\"000s5003\" full 8L | code 8L]\n  - def test_invalid_has_func_function(self): ... [\"000s5002\" full 7L | code 7L]\n\n- class FakeConnection: ... [\"000s5006\" full 5L | code 5L]\n  - def __init__(self): ... [\"000s5004\" full 4L | code 4L]\n\n- class FakePostGISOperations(PostGISOperations): ... [\"000s500d\" full 15L | code 15L]\n  - def __init__(self, version=None): ... [\"000s5008\" full 3L | code 3L]\n  - def _get_postgis_func(self, func): ... [\"000s500c\" full 10L | code 10L]\n\n- @unittest.skipUnless(HAS_POSTGRES, \"The psycopg driver is needed for these tests\") class TestPostGISVersionCheck(unittest.TestCase): ... [\"000s500B\" full 47L | code 47L]\n  - def test_get_version(self): ... [\"000s500h\" full 5L | code 5L]\n  - def test_version_classic_tuple(self): ... [\"000s500l\" full 5L | code 5L]\n  - def test_version_dev_tuple(self): ... [\"000s500p\" full 5L | code 5L]\n  - def test_version_loose_tuple(self): ... [\"000s500t\" full 5L | code 5L]\n  - def test_valid_version_numbers(self): ... [\"000s500y\" full 12L | code 12L]\n  - def test_no_version_number(self): ... [\"000s500A\" full 4L | code 4L]\n\n- @unittest.skipUnless(HAS_POSTGRES, \"PostGIS-specific tests.\") class TestPostGISBackend(unittest.TestCase): ... [\"000s500E\" full 13L | code 13L]\n  - def test_non_db_connection_classes(self): ... [\"000s500D\" full 11L | code 11L]\n\n# tests/gis_tests/utils.py (78L)\nfile scope: [\"000s600s\" full 78L | imports 27L]\n\n- def skipUnlessGISLookup(*gis_lookups): ... [\"000s6006\" full 18L | code 18L]\n  - def decorator(test_func): ... [\"000s6005\" full 11L | code 11L]\n    - @wraps(test_func) def skip_wrapper(*args, **kwargs): ... [\"000s6004\" full 8L | code 8L]\n\n- class FuncTestMixin: ... [\"000s600r\" full 35L | code 35L]\n  - def setUp(self): ... [\"000s600q\" full 32L | code 32L]\n    - def as_sql_wrapper(original_as_sql): ... [\"000s600j\" full 15L | code 15L]\n      - def inner(*args, **kwargs): ... [\"000s600i\" full 12L | code 12L]\n    - def __getattribute__(self, name): ... [\"000s600m\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

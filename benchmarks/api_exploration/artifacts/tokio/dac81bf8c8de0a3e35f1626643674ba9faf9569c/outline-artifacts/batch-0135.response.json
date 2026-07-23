@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/time_alt/registration_queue/tests.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.0 KB -> 869 B (17% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/time_alt/registration_queue/tests.rs (52L)\nfile scope: [\"0008i006\" full 52L | imports 3L]\n\n- #[cfg(loom)] const NUM_ITEMS: usize = 16; [\"0008i000\" full 2L | code 2L]\n\n- #[cfg(not(loom))] const NUM_ITEMS: usize = 64; [\"0008i001\" full 2L | code 2L]\n\n- fn new_handle() -> EntryHandle { ... } [\"0008i002\" full 3L | code 3L]\n\n- fn model<F: Fn() + Send + Sync + 'static>(f: F) { ... } [\"0008i003\" full 7L | code 7L]\n\n- #[test] fn sanity() { ... } [\"0008i004\" full 15L | code 15L]\n\n- #[test] fn drop_should_not_leak_memory() { ... } [\"0008i005\" full 15L | code 15L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

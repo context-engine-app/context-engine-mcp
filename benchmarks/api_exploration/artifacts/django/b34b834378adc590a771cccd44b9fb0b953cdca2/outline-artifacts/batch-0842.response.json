@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/urlpatterns_reverse/__init__.py",
+        "tests/urlpatterns_reverse/erroneous_urls.py",
+        "tests/urlpatterns_reverse/extra_urls.py",
+        "tests/urlpatterns_reverse/included_app_urls.py",
+        "tests/urlpatterns_reverse/included_named_urls.py",
+        "tests/urlpatterns_reverse/included_named_urls2.py",
+        "tests/urlpatterns_reverse/included_namespace_urls.py",
+        "tests/urlpatterns_reverse/included_no_kwargs_urls.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/urlpatterns_reverse/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/urlpatterns_reverse/erroneous_urls.py (8L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.urls import re_path\n2|\n3|from . import views\n4|\n5|urlpatterns = [\n6|    re_path(r\"(regex_error/$\", views.empty_view),\n7|]\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/urlpatterns_reverse/extra_urls.py (15L)\nfile scope: [\"000IJ001\" full 15L | imports 9L]\n\n\n# tests/urlpatterns_reverse/included_app_urls.py (26L)\nfile scope: [\"000IK002\" full 26L | imports 7L]\n\n\n# tests/urlpatterns_reverse/included_named_urls.py (11L)\nfile scope: [\"000IL001\" full 11L | imports 5L]\n\n\n# tests/urlpatterns_reverse/included_named_urls2.py (10L)\nfile scope: [\"000IM001\" full 10L | imports 5L]\n\n\n# tests/urlpatterns_reverse/included_namespace_urls.py (40L)\nfile scope: [\"000IN004\" full 40L | imports 13L]\n\n\n# tests/urlpatterns_reverse/included_no_kwargs_urls.py (8L)\nfile scope: [\"000IO001\" full 8L | imports 5L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/gis_tests/__init__.py",
+        "tests/gis_tests/admin.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/gis_tests/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/gis_tests/admin.py (7L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|try:\n2|    from django.contrib.gis import admin\n3|except ImportError:\n4|    from django.contrib import admin\n5|\n6|    admin.GISModelAdmin = admin.ModelAdmin\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

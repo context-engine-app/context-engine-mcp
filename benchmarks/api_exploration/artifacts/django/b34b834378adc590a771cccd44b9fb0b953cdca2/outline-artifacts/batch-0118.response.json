@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/flatpages/__init__.py",
+        "django/contrib/flatpages/admin.py",
+        "django/contrib/flatpages/apps.py",
+        "django/contrib/flatpages/forms.py",
+        "django/contrib/flatpages/middleware.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/flatpages/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/flatpages/admin.py (23L)\nfile scope: [\"0004q006\" full 23L | imports 7L]\n\n- @admin.register(FlatPage) class FlatPageAdmin(admin.ModelAdmin): ... [\"0004q005\" full 16L | code 16L]\n\n# django/contrib/flatpages/apps.py (9L)\nfile scope: [\"0004r004\" full 9L | imports 5L]\n\n- class FlatPagesConfig(AppConfig): ... [\"0004r003\" full 4L | code 4L]\n\n# django/contrib/flatpages/forms.py (75L)\nfile scope: [\"0004s00g\" full 75L | imports 9L]\n\n- class FlatpageForm(forms.ModelForm): ... [\"0004s00f\" full 66L | code 66L]\n  - class Meta: ... [\"0004s003\" full 3L | code 3L]\n  - def __init__(self, *args, **kwargs): ... [\"0004s006\" full 6L | code 6L]\n  - def _trailing_slash_required(self): ... [\"0004s007\" full 5L | code 5L]\n  - def clean_url(self): ... [\"0004s009\" full 13L | code 13L]\n  - def clean(self): ... [\"0004s00e\" full 18L | code 18L]\n\n# django/contrib/flatpages/middleware.py (21L)\nfile scope: [\"0004t004\" full 21L | imports 7L]\n\n- class FlatpageFallbackMiddleware(MiddlewareMixin): ... [\"0004t003\" full 14L | code 14L]\n  - def process_response(self, request, response): ... [\"0004t002\" full 13L | code 13L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

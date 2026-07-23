@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/driver.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 10.8 KB -> 2.9 KB (73% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/driver.rs (377L)\nfile scope: [\"0006A00l\" full 377L | module-docs 4L | imports 12L]\n\n- #[derive(Debug)] pub(crate) struct Driver { ... } [\"0006A001\" full 4L | code 4L]\n  - inner: TimeDriver [\"0006A000\" full 1L | code 1L]\n\n- #[derive(Debug)] pub(crate) struct Handle { ... } [\"0006A006\" full 16L | code 16L]\n  - pub(crate) io: IoHandle [\"0006A002\" full 2L | code 1L | docs 1L]\n  - #[cfg_attr(any(not(unix), loom), allow(dead_code))] pub(crate) signal: SignalHandle [\"0006A003\" full 3L | code 2L | docs 1L]\n  - pub(crate) time: TimeHandle [\"0006A004\" full 2L | code 1L | docs 1L]\n  - #[cfg_attr(not(all(feature = \"time\", feature = \"test-util\")), allow(dead_code))] pub(crate) clock: Clock [\"0006A005\" full 3L | code 2L | docs 1L]\n\n- pub(crate) struct Cfg { ... } [\"0006A00d\" full 8L | code 8L]\n  - pub(crate) enable_io: bool [\"0006A007\" full 1L | code 1L]\n  - pub(crate) enable_time: bool [\"0006A008\" full 1L | code 1L]\n  - pub(crate) enable_pause_time: bool [\"0006A009\" full 1L | code 1L]\n  - pub(crate) start_paused: bool [\"0006A00a\" full 1L | code 1L]\n  - pub(crate) nevents: usize [\"0006A00b\" full 1L | code 1L]\n  - pub(crate) timer_flavor: crate::runtime::TimerFlavor [\"0006A00c\" full 1L | code 1L]\n\n- impl Driver { ... } [\"0006A00i\" full 32L | code 32L]\n  - pub(crate) fn new(cfg: Cfg) -> io::Result<(Self, Handle)> { ... } [\"0006A00e\" full 18L | code 18L]\n  - pub(crate) fn park(&mut self, handle: &Handle) { ... } [\"0006A00f\" full 3L | code 3L]\n  - pub(crate) fn park_timeout(&mut self, handle: &Handle, duration: Duration) { ... } [\"0006A00g\" full 3L | code 3L]\n  - pub(crate) fn shutdown(&mut self, handle: &Handle) { ... } [\"0006A00h\" full 3L | code 3L]\n\n- impl Handle { ... cfg_io_driver! { #[track_caller] pub(crate) fn io(&self) -> &crate::runtime::io::Handle { self.io .as_ref() .expect(\"A Tokio 1.x context was found, but IO is disabled. Call `enable_io` on the runtime builder to enable IO.\") } } cfg_signal_internal_and_unix! { #[track_caller] pub(crate) fn signal(&self) -> &crate::runtime::signal::Handle { self.signal .as_ref() .expect(\"there is no signal driver running, must be called from the context of Tokio runtime\") } } cfg_time! { #[track_caller] pub(crate) fn time(&self) -> &crate::runtime::time::Handle { self.time .as_ref() .expect(\"A Tokio 1.x context was found, but timers are disabled. Call `enable_time` on the runtime builder to enable timers.\") } #[cfg(tokio_unstable)] pub(crate) fn with_time<F, R>(&self, f: F) -> R where F: FnOnce(Option<&crate::runtime::time::Handle>) -> R, { f(self.time.as_ref()) } pub(crate) fn clock(&self) -> &Clock { &self.clock } } } [\"0006A00k\" full 52L | code 52L]\n  - pub(crate) fn unpark(&self) { ... } [\"0006A00j\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

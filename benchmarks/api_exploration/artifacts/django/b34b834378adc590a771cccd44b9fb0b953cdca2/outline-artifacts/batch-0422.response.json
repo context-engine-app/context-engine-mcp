@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/db_functions/text/__init__.py",
+        "tests/db_functions/text/test_chr.py",
+        "tests/db_functions/text/test_concat.py",
+        "tests/db_functions/text/test_left.py",
+        "tests/db_functions/text/test_length.py",
+        "tests/db_functions/text/test_lower.py",
+        "tests/db_functions/text/test_md5.py",
+        "tests/db_functions/text/test_ord.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/db_functions/text/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/db_functions/text/test_chr.py (50L)\nfile scope: [\"000mt00d\" full 50L | imports 9L]\n\n- class ChrTests(TestCase): ... [\"000mt00c\" full 41L | code 41L]\n  - @classmethod def setUpTestData(cls): ... [\"000mt000\" full 5L | code 5L]\n  - def test_basic(self): ... [\"000mt005\" full 6L | code 6L]\n  - def test_non_ascii(self): ... [\"000mt007\" full 6L | code 6L]\n  - def test_transform(self): ... [\"000mt009\" full 10L | code 10L]\n  - def test_annotate(self): ... [\"000mt00b\" full 9L | code 9L]\n\n# tests/db_functions/text/test_concat.py (124L)\nfile scope: [\"000mu00i\" full 124L | imports 18L]\n\n- class ConcatTests(TestCase): ... [\"000mu00h\" full 107L | code 107L]\n  - def test_basic(self): ... [\"000mu002\" full 16L | code 16L]\n  - def test_gt_two_expressions(self): ... [\"000mu003\" full 5L | code 5L]\n  - def test_many(self): ... [\"000mu005\" full 18L | code 18L]\n  - def test_mixed_char_text(self): ... [\"000mu008\" full 17L | code 17L]\n  - @skipUnless( connection.vendor in (\"sqlite\", \"postgresql\"), \"SQLite and PostgreSQL specific implementation detail.\", ) def test_coalesce_idempotent(self): ... [\"000mu00a\" full 12L | code 12L]\n  - def test_sql_generation_idempotency(self): ... [\"000mu00c\" full 4L | code 4L]\n  - def test_concat_non_str(self): ... [\"000mu00f\" full 14L | code 14L]\n  - def test_equal(self): ... [\"000mu00g\" full 13L | code 13L]\n\n# tests/db_functions/text/test_left.py (36L)\nfile scope: [\"000mv007\" full 36L | imports 8L]\n\n- class LeftTests(TestCase): ... [\"000mv006\" full 28L | code 28L]\n  - @classmethod def setUpTestData(cls): ... [\"000mv000\" full 4L | code 4L]\n  - def test_basic(self): ... [\"000mv002\" full 10L | code 10L]\n  - def test_invalid_length(self): ... [\"000mv003\" full 3L | code 3L]\n  - def test_expressions(self): ... [\"000mv005\" full 7L | code 7L]\n\n# tests/db_functions/text/test_length.py (47L)\nfile scope: [\"000mw007\" full 47L | imports 9L]\n\n- class LengthTests(TestCase): ... [\"000mw006\" full 38L | code 38L]\n  - def test_basic(self): ... [\"000mw001\" full 13L | code 13L]\n  - def test_ordering(self): ... [\"000mw003\" full 14L | code 14L]\n  - def test_transform(self): ... [\"000mw005\" full 8L | code 8L]\n\n# tests/db_functions/text/test_lower.py (41L)\nfile scope: [\"000mx006\" full 41L | imports 9L]\n\n- class LowerTests(TestCase): ... [\"000mx005\" full 32L | code 32L]\n  - def test_basic(self): ... [\"000mx001\" full 16L | code 16L]\n  - def test_num_args(self): ... [\"000mx002\" full 5L | code 5L]\n  - def test_transform(self): ... [\"000mx004\" full 8L | code 8L]\n\n# tests/db_functions/text/test_md5.py (52L)\nfile scope: [\"000my006\" full 52L | imports 10L]\n\n- class MD5Tests(TestCase): ... [\"000my005\" full 42L | code 42L]\n  - @classmethod def setUpTestData(cls): ... [\"000my000\" full 11L | code 11L]\n  - def test_basic(self): ... [\"000my002\" full 22L | code 22L]\n  - def test_transform(self): ... [\"000my004\" full 6L | code 6L]\n\n# tests/db_functions/text/test_ord.py (34L)\nfile scope: [\"000mz009\" full 34L | imports 9L]\n\n- class OrdTests(TestCase): ... [\"000mz008\" full 25L | code 25L]\n  - @classmethod def setUpTestData(cls): ... [\"000mz000\" full 5L | code 5L]\n  - def test_basic(self): ... [\"000mz005\" full 8L | code 8L]\n  - def test_transform(self): ... [\"000mz007\" full 9L | code 9L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

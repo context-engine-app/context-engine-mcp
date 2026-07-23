@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/urlpatterns_reverse/included_urls.py",
+        "tests/urlpatterns_reverse/included_urls2.py",
+        "tests/urlpatterns_reverse/method_view_urls.py",
+        "tests/urlpatterns_reverse/middleware.py",
+        "tests/urlpatterns_reverse/named_urls.py",
+        "tests/urlpatterns_reverse/named_urls_conflict.py",
+        "tests/urlpatterns_reverse/namespace_urls.py",
+        "tests/urlpatterns_reverse/nested_urls.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 6.8 KB -> 2.5 KB (62% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/urlpatterns_reverse/included_urls.py (10L)\nfile scope: [\"000IP001\" full 10L | imports 5L]\n\n\n# tests/urlpatterns_reverse/included_urls2.py (16L)\nfile scope: [\"000IQ001\" full 16L | imports 12L]\n\n\n# tests/urlpatterns_reverse/method_view_urls.py (20L)\nfile scope: [\"000IR007\" full 20L | imports 8L]\n\n- class ViewContainer: ... [\"000IR004\" full 7L | code 7L]\n  - def method_view(self, request): ... [\"000IR001\" full 2L | code 2L]\n  - @classmethod def classmethod_view(cls, request): ... [\"000IR003\" full 3L | code 3L]\n\n# tests/urlpatterns_reverse/middleware.py (42L)\nfile scope: [\"000IS00o\" full 42L | imports 8L]\n\n- class ChangeURLconfMiddleware(MiddlewareMixin): ... [\"000IS002\" full 3L | code 3L]\n  - def process_request(self, request): ... [\"000IS001\" full 2L | code 2L]\n\n- class NullChangeURLconfMiddleware(MiddlewareMixin): ... [\"000IS005\" full 3L | code 3L]\n  - def process_request(self, request): ... [\"000IS004\" full 2L | code 2L]\n\n- class ReverseInnerInResponseMiddleware(MiddlewareMixin): ... [\"000IS009\" full 3L | code 3L]\n  - def process_response(self, *args, **kwargs): ... [\"000IS008\" full 2L | code 2L]\n\n- class ReverseOuterInResponseMiddleware(MiddlewareMixin): ... [\"000IS00d\" full 3L | code 3L]\n  - def process_response(self, *args, **kwargs): ... [\"000IS00c\" full 2L | code 2L]\n\n- class ReverseInnerInStreaming(MiddlewareMixin): ... [\"000IS00i\" full 6L | code 6L]\n  - def process_view(self, *args, **kwargs): ... [\"000IS00h\" full 5L | code 5L]\n    - def stream(): ... [\"000IS00g\" full 2L | code 2L]\n\n- class ReverseOuterInStreaming(MiddlewareMixin): ... [\"000IS00n\" full 6L | code 6L]\n  - def process_view(self, *args, **kwargs): ... [\"000IS00m\" full 5L | code 5L]\n    - def stream(): ... [\"000IS00l\" full 2L | code 2L]\n\n# tests/urlpatterns_reverse/named_urls.py (11L)\nfile scope: [\"000IT001\" full 11L | imports 5L]\n\n\n# tests/urlpatterns_reverse/named_urls_conflict.py (26L)\nfile scope: [\"000IU001\" full 26L | imports 5L]\n\n\n# tests/urlpatterns_reverse/namespace_urls.py (88L)\nfile scope: [\"000IV008\" full 88L | imports 23L]\n\n\n# tests/urlpatterns_reverse/nested_urls.py (29L)\nfile scope: [\"000IW007\" full 29L | imports 14L]\n\n- def view1(request): ... [\"000IW001\" full 2L | code 2L]\n\n- def view2(request): ... [\"000IW003\" full 2L | code 2L]\n\n- class View3(View): ... [\"000IW004\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

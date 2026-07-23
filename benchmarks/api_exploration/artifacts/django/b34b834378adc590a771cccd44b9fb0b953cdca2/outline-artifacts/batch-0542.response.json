@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/i18n/sampleproject/manage.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 322 B -> 385 B (-20% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/i18n/sampleproject/manage.py (13L)\nfile scope: [\"000sS000\" full 13L | module-docs 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

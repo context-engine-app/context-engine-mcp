@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/shortcuts/__init__.py",
+        "tests/shortcuts/tests.py",
+        "tests/shortcuts/urls.py",
+        "tests/shortcuts/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/shortcuts/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/shortcuts/tests.py (77L)\nfile scope: [\"000Dq00q\" full 77L | imports 9L]\n\n- @override_settings(ROOT_URLCONF=\"shortcuts.urls\") class RenderTests(SimpleTestCase): ... [\"000Dq00a\" full 33L | code 33L]\n  - def test_render(self): ... [\"000Dq001\" full 6L | code 6L]\n  - def test_render_with_multiple_templates(self): ... [\"000Dq003\" full 4L | code 4L]\n  - def test_render_with_content_type(self): ... [\"000Dq005\" full 5L | code 5L]\n  - def test_render_with_status(self): ... [\"000Dq007\" full 4L | code 4L]\n  - @require_jinja2 def test_render_with_using(self): ... [\"000Dq009\" full 8L | code 8L]\n\n- class RedirectTests(SimpleTestCase): ... [\"000Dq00p\" full 33L | code 33L]\n  - def test_redirect_response_status_code(self): ... [\"000Dq00g\" full 16L | code 16L]\n  - def test_redirect_max_length_default_raises(self): ... [\"000Dq00j\" full 5L | code 5L]\n  - def test_redirect_max_length_override_passes(self): ... [\"000Dq00m\" full 4L | code 4L]\n  - def test_redirect_custom_strict_limit_raises(self): ... [\"000Dq00o\" full 4L | code 4L]\n\n# tests/shortcuts/urls.py (12L)\nfile scope: [\"000Dr001\" full 12L | imports 5L]\n\n\n# tests/shortcuts/views.py (56L)\nfile scope: [\"000Ds00b\" full 56L | imports 4L]\n\n- def render_view(request): ... [\"000Ds001\" full 9L | code 9L]\n\n- def render_view_with_multiple_templates(request): ... [\"000Ds003\" full 12L | code 12L]\n\n- def render_view_with_content_type(request): ... [\"000Ds005\" full 10L | code 10L]\n\n- def render_view_with_status(request): ... [\"000Ds007\" full 10L | code 10L]\n\n- def render_view_with_using(request): ... [\"000Ds00a\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

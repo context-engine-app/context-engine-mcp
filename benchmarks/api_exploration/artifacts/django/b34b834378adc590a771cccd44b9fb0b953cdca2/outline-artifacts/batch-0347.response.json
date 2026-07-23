@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/auth_tests/__init__.py",
+        "tests/auth_tests/backend_alias.py",
+        "tests/auth_tests/client.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/auth_tests/__init__.py (2L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|# The password for the fixture data users is 'password'\nnote: EOF\n\n# tests/auth_tests/backend_alias.py (5L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|# For testing that auth backends can be referenced using a convenience import\n2|from .test_auth_backends import ImportedModelBackend\n3|\n4|__all__ = [\"ImportedModelBackend\"]\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/auth_tests/client.py (46L)\nfile scope: [\"000hP00j\" full 46L | imports 10L]\n\n- def extract_token_from_url(url): ... [\"000hP002\" full 4L | code 4L]\n\n- class PasswordResetConfirmClient(Client): ... [\"000hP00i\" full 30L | code 30L]\n  - def _get_password_reset_confirm_redirect_url(self, url): ... [\"000hP007\" full 9L | code 9L]\n  - def get(self, path, *args, **kwargs): ... [\"000hP00c\" full 3L | code 3L]\n  - def post(self, path, *args, **kwargs): ... [\"000hP00h\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/swappable_models/__init__.py",
+        "tests/swappable_models/models.py",
+        "tests/swappable_models/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/swappable_models/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/swappable_models/models.py (16L)\nfile scope: [\"000Er009\" full 16L | imports 4L]\n\n- class Article(models.Model): ... [\"000Er004\" full 6L | code 6L]\n  - class Meta: ... [\"000Er003\" full 2L | code 2L]\n\n- class AlternateArticle(models.Model): ... [\"000Er008\" full 4L | code 4L]\n\n# tests/swappable_models/tests.py (46L)\nfile scope: [\"000Es005\" full 46L | imports 9L]\n\n- class SwappableModelTests(TestCase): ... [\"000Es004\" full 37L | code 37L]\n  - @override_settings(TEST_ARTICLE_MODEL=\"swappable_models.AlternateArticle\") def test_generated_data(self): ... [\"000Es002\" full 23L | code 23L]\n  - @override_settings(TEST_ARTICLE_MODEL=\"swappable_models.article\") def test_case_insensitive(self): ... [\"000Es003\" full 5L | code 5L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

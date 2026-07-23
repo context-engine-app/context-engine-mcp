@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/admin_scripts/custom_templates/app_template/__init__.py",
+        "tests/admin_scripts/custom_templates/app_template/api.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/admin_scripts/custom_templates/app_template/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/admin_scripts/custom_templates/app_template/api.py (2L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|# your API code\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

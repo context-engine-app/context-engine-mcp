@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/fs/rename.rs",
+        "tokio/src/fs/set_permissions.rs",
+        "tokio/src/fs/symlink.rs",
+        "tokio/src/fs/symlink_dir.rs",
+        "tokio/src/fs/symlink_file.rs",
+        "tokio/src/fs/symlink_metadata.rs",
+        "tokio/src/fs/try_exists.rs",
+        "tokio/src/fs/write.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 9.4 KB -> 2.6 KB (72% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/fs/rename.rs (47L)\nfile scope: [\"0004c003\" full 47L | imports 6L]\n\n- pub async fn rename(from: impl AsRef<Path>, to: impl AsRef<Path>) -> io::Result<()> { ... } [\"0004c001\" full 36L | code 30L | docs 6L]\n  - type RenameOp = Op<Rename>; [\"0004c000\" full 1L | code 1L]\n\n- async fn rename_blocking(from: &Path, to: &Path) -> io::Result<()> { ... } [\"0004c002\" full 4L | code 4L]\n\n# tokio/src/fs/set_permissions.rs (16L)\nfile scope: [\"0004d001\" full 16L | imports 7L]\n\n- pub async fn set_permissions(path: impl AsRef<Path>, perm: Permissions) -> io::Result<()> { ... } [\"0004d000\" full 9L | code 4L | docs 5L]\n\n# tokio/src/fs/symlink.rs (17L)\nfile scope: [\"0004e001\" full 17L | imports 6L]\n\n- pub async fn symlink(original: impl AsRef<Path>, link: impl AsRef<Path>) -> io::Result<()> { ... } [\"0004e000\" full 11L | code 6L | docs 5L]\n\n# tokio/src/fs/symlink_dir.rs (20L)\nfile scope: [\"0004f001\" full 20L | imports 6L]\n\n- pub async fn symlink_dir(original: impl AsRef<Path>, link: impl AsRef<Path>) -> io::Result<()> { ... } [\"0004f000\" full 14L | code 6L | docs 8L]\n\n# tokio/src/fs/symlink_file.rs (20L)\nfile scope: [\"0004g001\" full 20L | imports 6L]\n\n- pub async fn symlink_file(original: impl AsRef<Path>, link: impl AsRef<Path>) -> io::Result<()> { ... } [\"0004g000\" full 14L | code 6L | docs 8L]\n\n# tokio/src/fs/symlink_metadata.rs (16L)\nfile scope: [\"0004h001\" full 16L | imports 7L]\n\n- pub async fn symlink_metadata(path: impl AsRef<Path>) -> io::Result<Metadata> { ... } [\"0004h000\" full 9L | code 4L | docs 5L]\n\n# tokio/src/fs/try_exists.rs (90L)\nfile scope: [\"0004i002\" full 90L | imports 34L]\n\n- pub async fn try_exists(path: impl AsRef<Path>) -> io::Result<bool> { ... } [\"0004i000\" full 51L | code 32L | docs 19L]\n\n- async fn try_exists_spawn_blocking(path: &Path) -> io::Result<bool> { ... } [\"0004i001\" full 7L | code 7L]\n\n# tokio/src/fs/write.rs (100L)\nfile scope: [\"0004j003\" full 100L | imports 5L]\n\n- pub async fn write(path: impl AsRef<Path>, contents: impl AsRef<[u8]>) -> io::Result<()> { ... } [\"0004j000\" full 45L | code 24L | docs 21L]\n\n- #[cfg(all( tokio_unstable, feature = \"io-uring\", feature = \"rt\", feature = \"fs\", target_os = \"linux\" ))] async fn write_uring(path: &Path, mut buf: OwnedBuf) -> io::Result<()> { ... } [\"0004j001\" full 44L | code 44L]\n\n- async fn write_spawn_blocking(path: &Path, contents: OwnedBuf) -> io::Result<()> { ... } [\"0004j002\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

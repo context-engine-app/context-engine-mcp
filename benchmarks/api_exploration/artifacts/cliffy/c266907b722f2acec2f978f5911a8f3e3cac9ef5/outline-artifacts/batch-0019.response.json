@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "command/types/secret.ts",
+        "command/types/string.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# command/types/secret.ts (9L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|import { StringType } from \"./string.ts\";\n2|\n3|/** Secret type. Allows any value, and does not show values in help text. */\n4|export class SecretType extends StringType {\n5|  public override defaultText(): string {\n6|    return \"******\";\n7|  }\n8|}\nnote: EOF\n\n# command/types/string.ts (12L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|import { string } from \"@cliffy/flags\";\n 2|import { Type } from \"../type.ts\";\n 3|import type { ArgumentValue } from \"../types.ts\";\n 4|\n 5|/** String type. Allows any value. */\n 6|export class StringType extends Type<string> {\n 7|  /** Complete string type. */\n 8|  public parse(type: ArgumentValue): string {\n 9|    return string(type);\n10|  }\n11|}\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

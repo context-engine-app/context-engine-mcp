@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/time/tests/mod.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 7.0 KB -> 1.3 KB (81% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/time/tests/mod.rs (270L)\nfile scope: [\"0008900b\" full 270L | imports 14L]\n\n- fn block_on<T>(f: impl std::future::Future<Output = T>) -> T { ... } [\"00089000\" full 12L | code 12L]\n\n- fn model(f: impl Fn() + Send + Sync + 'static) { ... } [\"00089001\" full 7L | code 7L]\n\n- fn rt(start_paused: bool) -> crate::runtime::Runtime { ... } [\"00089002\" full 7L | code 7L]\n\n- #[test] fn single_timer() { ... } [\"00089003\" full 28L | code 28L]\n\n- #[test] fn drop_timer() { ... } [\"00089004\" full 33L | code 33L]\n\n- #[test] fn change_waker() { ... } [\"00089005\" full 32L | code 32L]\n\n- #[test] fn reset_future() { ... } [\"00089006\" full 52L | code 52L]\n\n- #[cfg(not(loom))] fn normal_or_miri<T>(normal: T, miri: T) -> T { ... } [\"00089007\" full 8L | code 8L]\n\n- #[test] #[cfg(not(loom))] fn poll_process_levels() { ... } [\"00089008\" full 34L | code 34L]\n\n- #[test] #[cfg(not(loom))] fn poll_process_levels_targeted() { ... } [\"00089009\" full 20L | code 20L]\n\n- #[test] #[cfg(not(loom))] fn instant_to_tick_max() { ... } [\"0008900a\" full 13L | code 13L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/db_functions/models.py",
+        "tests/db_functions/test_uuid.py",
+        "tests/db_functions/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 8.5 KB -> 2.5 KB (71% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/db_functions/models.py (63L)\nfile scope: [\"000mp00F\" full 63L | imports 8L]\n\n- class Author(models.Model): ... [\"000mp004\" full 5L | code 5L]\n\n- class Article(models.Model): ... [\"000mp00d\" full 9L | code 9L]\n\n- class Fan(models.Model): ... [\"000mp00i\" full 5L | code 5L]\n\n- class DTModel(models.Model): ... [\"000mp00r\" full 9L | code 9L]\n\n- class DecimalModel(models.Model): ... [\"000mp00u\" full 3L | code 3L]\n\n- class IntegerModel(models.Model): ... [\"000mp00y\" full 4L | code 4L]\n\n- class FloatModel(models.Model): ... [\"000mp00B\" full 3L | code 3L]\n\n- class UUIDModel(models.Model): ... [\"000mp00E\" full 3L | code 3L]\n\n# tests/db_functions/test_uuid.py (98L)\nfile scope: [\"000mq00p\" full 98L | imports 12L]\n\n- class TestUUID(TestCase): ... [\"000mq00o\" full 86L | code 86L]\n  - @skipUnlessDBFeature(\"supports_uuid4_function\") def test_uuid4(self): ... [\"000mq002\" full 10L | code 10L]\n  - @skipUnlessDBFeature(\"supports_uuid7_function\") def test_uuid7(self): ... [\"000mq005\" full 10L | code 10L]\n  - @skipUnlessDBFeature(\"supports_uuid7_function_shift\") def test_uuid7_shift(self): ... [\"000mq00b\" full 10L | code 10L]\n  - @skipUnlessDBFeature(\"supports_uuid7_function_shift\") def test_uuid7_shift_duration_field(self): ... [\"000mq00h\" full 12L | code 12L]\n  - @skipIfDBFeature(\"supports_uuid4_function\") def test_uuid4_unsupported(self): ... [\"000mq00j\" full 14L | code 14L]\n  - @skipIfDBFeature(\"supports_uuid7_function\") def test_uuid7_unsupported(self): ... [\"000mq00l\" full 16L | code 16L]\n  - @skipUnlessDBFeature(\"supports_uuid7_function\") @skipIfDBFeature(\"supports_uuid7_function_shift\") def test_uuid7_shift_unsupported(self): ... [\"000mq00n\" full 7L | code 7L]\n\n# tests/db_functions/tests.py (79L)\nfile scope: [\"000mr00a\" full 79L | imports 10L]\n\n- class UpperBilateral(Upper): ... [\"000mr001\" full 2L | code 2L]\n\n- class FunctionTests(TestCase): ... [\"000mr009\" full 65L | code 65L]\n  - def test_nested_function_ordering(self): ... [\"000mr003\" full 23L | code 23L]\n  - def test_func_transform_bilateral(self): ... [\"000mr005\" full 12L | code 12L]\n  - def test_func_transform_bilateral_multivalue(self): ... [\"000mr007\" full 13L | code 13L]\n  - def test_function_as_filter(self): ... [\"000mr008\" full 13L | code 13L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

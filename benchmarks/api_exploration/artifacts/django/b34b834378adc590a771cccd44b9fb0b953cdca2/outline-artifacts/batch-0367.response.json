@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/base/__init__.py",
+        "tests/base/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/base/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/base/models.py (14L)\nfile scope: [\"000ji002\" full 14L | imports 8L]\n\n- class CustomBaseModel(models.base.ModelBase): ... [\"000ji000\" full 2L | code 2L]\n\n- class MyModel(models.Model, metaclass=CustomBaseModel): ... [\"000ji001\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/string_lookup/__init__.py",
+        "tests/string_lookup/models.py",
+        "tests/string_lookup/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/string_lookup/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/string_lookup/models.py (33L)\nfile scope: [\"000Eo00j\" full 33L | imports 4L]\n\n- class Foo(models.Model): ... [\"000Eo002\" full 3L | code 3L]\n\n- class Bar(models.Model): ... [\"000Eo007\" full 5L | code 5L]\n\n- class Whiz(models.Model): ... [\"000Eo009\" full 2L | code 2L]\n\n- class Child(models.Model): ... [\"000Eo00c\" full 3L | code 3L]\n\n- class Base(models.Model): ... [\"000Eo00e\" full 2L | code 2L]\n\n- class Article(models.Model): ... [\"000Eo00i\" full 4L | code 4L]\n\n# tests/string_lookup/tests.py (87L)\nfile scope: [\"000Ep00e\" full 87L | imports 6L]\n\n- class StringLookupTests(TestCase): ... [\"000Ep00d\" full 81L | code 81L]\n  - def test_string_form_referencing(self): ... [\"000Ep006\" full 32L | code 32L]\n  - def test_unicode_chars_in_queries(self): ... [\"000Ep008\" full 12L | code 12L]\n  - def test_queries_on_textfields(self): ... [\"000Ep00a\" full 17L | code 17L]\n  - def test_ipaddress_on_postgresql(self): ... [\"000Ep00c\" full 16L | code 16L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/gis/db/backends/mysql/__init__.py",
+        "django/contrib/gis/db/backends/mysql/base.py",
+        "django/contrib/gis/db/backends/mysql/features.py",
+        "django/contrib/gis/db/backends/mysql/introspection.py",
+        "django/contrib/gis/db/backends/mysql/operations.py",
+        "django/contrib/gis/db/backends/mysql/schema.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/gis/db/backends/mysql/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/gis/db/backends/mysql/base.py (15L)\nfile scope: [\"0004O005\" full 15L | imports 9L]\n\n- class DatabaseWrapper(MySQLDatabaseWrapper): ... [\"0004O004\" full 6L | code 6L]\n\n# django/contrib/gis/db/backends/mysql/features.py (23L)\nfile scope: [\"0004P00c\" full 23L | imports 6L]\n\n- class DatabaseFeatures(BaseSpatialFeatures, MySQLDatabaseFeatures): ... [\"0004P00b\" full 17L | code 17L]\n  - @cached_property def supports_geometry_field_unique_index(self): ... [\"0004P00a\" full 5L | code 5L]\n\n# django/contrib/gis/db/backends/mysql/introspection.py (34L)\nfile scope: [\"0004Q00i\" full 34L | imports 7L]\n\n- class MySQLIntrospection(DatabaseIntrospection): ... [\"0004Q00h\" full 27L | code 27L]\n  - def get_geometry_type(self, table_name, description): ... [\"0004Q00c\" full 16L | code 16L]\n  - def supports_spatial_index(self, cursor, table_name): ... [\"0004Q00g\" full 4L | code 4L]\n\n# django/contrib/gis/db/backends/mysql/operations.py (153L)\nfile scope: [\"0004R00A\" full 153L | imports 12L]\n\n- class MySQLOperations(BaseSpatialOperations, DatabaseOperations): ... [\"0004R00z\" full 141L | code 141L]\n  - @cached_property def mariadb(self): ... [\"0004R003\" full 3L | code 3L]\n  - @cached_property def mysql(self): ... [\"0004R004\" full 3L | code 3L]\n  - @cached_property def select(self): ... [\"0004R005\" full 3L | code 3L]\n  - @cached_property def from_text(self): ... [\"0004R006\" full 3L | code 3L]\n  - @cached_property def collect(self): ... [\"0004R007\" full 4L | code 4L]\n  - @cached_property def gis_operators(self): ... [\"0004R009\" full 27L | code 27L]\n  - @cached_property def disallowed_aggregates(self): ... [\"0004R00c\" full 13L | code 13L]\n  - @cached_property def unsupported_functions(self): ... [\"0004R00f\" full 30L | code 30L]\n  - def geo_db_type(self, f): ... [\"0004R00h\" full 2L | code 2L]\n  - def get_distance(self, f, value, lookup_type): ... [\"0004R00m\" full 14L | code 14L]\n  - def get_geometry_converter(self, expression): ... [\"0004R00w\" full 15L | code 15L]\n    - def converter(value, expression, connection): ... [\"0004R00v\" full 6L | code 6L]\n  - def spatial_aggregate_name(self, agg_name): ... [\"0004R00y\" full 2L | code 2L]\n\n# django/contrib/gis/db/backends/mysql/schema.py (103L)\nfile scope: [\"0004S00C\" full 103L | imports 11L]\n\n- class MySQLGISSchemaEditor(DatabaseSchemaEditor): ... [\"0004S00B\" full 93L | code 93L]\n  - def quote_value(self, value): ... [\"0004S003\" full 4L | code 4L]\n  - def _field_indexes_sql(self, model, field): ... [\"0004S009\" full 18L | code 18L]\n  - def remove_field(self, model, field): ... [\"0004S00d\" full 13L | code 13L]\n  - def _alter_field( self, model, old_field, new_field, old_type, new_type, old_db_params, new_db_params, strict=False, ): ... [\"0004S00o\" full 36L | code 36L]\n  - def _create_spatial_index_name(self, model, field): ... [\"0004S00r\" full 2L | code 2L]\n  - def _create_spatial_index_sql(self, model, field): ... [\"0004S00w\" full 8L | code 8L]\n  - def _delete_spatial_index_sql(self, model, field): ... [\"0004S00A\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

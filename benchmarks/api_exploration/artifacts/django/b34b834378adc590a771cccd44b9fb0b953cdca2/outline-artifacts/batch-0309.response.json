@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/admin_scripts/complex_app/admin/__init__.py",
+        "tests/admin_scripts/complex_app/admin/foo.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/admin_scripts/complex_app/admin/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/admin_scripts/complex_app/admin/foo.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.contrib import admin\n2|\n3|from ..models.foo import Foo\n4|\n5|admin.site.register(Foo)\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

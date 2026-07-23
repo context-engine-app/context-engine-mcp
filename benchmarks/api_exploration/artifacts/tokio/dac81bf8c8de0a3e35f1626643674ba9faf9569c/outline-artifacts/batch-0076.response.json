@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/lib.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 24.5 KB -> 1.4 KB (94% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/lib.rs (710L)\nfile scope: [\"0005r00e\" full 710L | imports 627L]\n\n- #[macro_use] #[doc(hidden)] pub mod macros; [\"0005r000\" full 7L | code 3L | docs 4L]\n\n- mod future; [\"0005r001\" full 1L | code 1L]\n\n- pub mod io; [\"0005r002\" full 1L | code 1L]\n\n- pub mod net; [\"0005r003\" full 1L | code 1L]\n\n- mod loom; [\"0005r004\" full 1L | code 1L]\n\n- #[cfg(any( feature = \"fs\", feature = \"io-std\", feature = \"net\", all(windows, feature = \"process\"), ))] mod blocking; [\"0005r005\" full 7L | code 7L]\n\n- #[cfg_attr(docsrs, doc(cfg(feature = \"rt\")))] pub mod task; [\"0005r006\" full 6L | code 2L | docs 4L]\n\n- mod trace { ... } [\"0005r008\" full 18L | code 18L]\n  - #[cfg_attr(not(feature = \"sync\"), allow(dead_code))] pub(crate) async fn async_trace_leaf() { ... } [\"0005r007\" full 4L | code 4L]\n\n- mod util; [\"0005r009\" full 1L | code 1L]\n\n- pub mod stream { ... } [\"0005r00a\" full 38L | code 1L | docs 37L]\n\n- #[cfg(all(docsrs, unix))] pub mod doc; [\"0005r00b\" full 2L | code 2L]\n\n- #[cfg(feature = \"io-util\")] #[cfg(test)] fn is_unpin<T: Unpin>() { ... } [\"0005r00c\" full 4L | code 3L | docs 1L]\n\n- #[cfg(fuzzing)] pub mod fuzz; [\"0005r00d\" full 3L | code 2L | docs 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

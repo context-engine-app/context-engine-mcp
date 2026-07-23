@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/test_exceptions/__init__.py",
+        "tests/test_exceptions/test_validation_error.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/test_exceptions/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/test_exceptions/test_validation_error.py (370L)\nfile scope: [\"000Hx00q\" full 370L | imports 7L]\n\n- class TestValidationError(unittest.TestCase): ... [\"000Hx00p\" full 363L | code 363L]\n  - def test_messages_concatenates_error_dict_values(self): ... [\"000Hx002\" full 10L | code 10L]\n  - def test_eq(self): ... [\"000Hx00a\" full 117L | code 117L]\n  - def test_eq_nested(self): ... [\"000Hx00d\" full 43L | code 43L]\n  - def test_hash(self): ... [\"000Hx00l\" full 139L | code 139L]\n  - def test_hash_nested(self): ... [\"000Hx00o\" full 49L | code 49L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

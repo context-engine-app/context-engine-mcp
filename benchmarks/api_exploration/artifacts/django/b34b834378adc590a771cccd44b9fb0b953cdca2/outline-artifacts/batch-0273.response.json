@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/views/decorators/__init__.py",
+        "django/views/decorators/cache.py",
+        "django/views/decorators/clickjacking.py",
+        "django/views/decorators/common.py",
+        "django/views/decorators/csp.py",
+        "django/views/decorators/csrf.py",
+        "django/views/decorators/debug.py",
+        "django/views/decorators/gzip.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/views/decorators/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/views/decorators/cache.py (84L)\nfile scope: [\"000em00n\" full 84L | imports 9L]\n\n- def cache_page(timeout, *, cache=None, key_prefix=None): ... [\"000em003\" full 19L | code 19L]\n\n- def _check_request(request, decorator_name): ... [\"000em006\" full 7L | code 7L]\n\n- def cache_control(**kwargs): ... [\"000em00f\" full 21L | code 21L]\n  - def _cache_controller(viewfunc): ... [\"000em00e\" full 18L | code 18L]\n    - def _view_wrapper(request, *args, **kw): ... [\"000em00d\" full 5L | code 5L]\n\n- def never_cache(view_func): ... [\"000em00m\" full 22L | code 22L]\n  - def _view_wrapper(request, *args, **kwargs): ... [\"000em00l\" full 5L | code 5L]\n\n# django/views/decorators/clickjacking.py (90L)\nfile scope: [\"000en00i\" full 90L | imports 5L]\n\n- def xframe_options_deny(view_func): ... [\"000en005\" full 28L | code 28L]\n  - def _view_wrapper(*args, **kwargs): ... [\"000en004\" full 5L | code 5L]\n\n- def xframe_options_sameorigin(view_func): ... [\"000en00b\" full 28L | code 28L]\n  - def _view_wrapper(*args, **kwargs): ... [\"000en00a\" full 5L | code 5L]\n\n- def xframe_options_exempt(view_func): ... [\"000en00h\" full 25L | code 25L]\n  - def _view_wrapper(*args, **kwargs): ... [\"000en00g\" full 4L | code 4L]\n\n# django/views/decorators/common.py (27L)\nfile scope: [\"000eo006\" full 27L | imports 5L]\n\n- def no_append_slash(view_func): ... [\"000eo005\" full 22L | code 22L]\n  - def _view_wrapper(request, *args, **kwargs): ... [\"000eo004\" full 2L | code 2L]\n\n# django/views/decorators/csp.py (41L)\nfile scope: [\"000ep00j\" full 41L | imports 5L]\n\n- def _make_csp_decorator(config_attr_name, config_attr_value): ... [\"000ep00e\" full 26L | code 26L]\n  - def decorator(view_func): ... [\"000ep00d\" full 18L | code 18L]\n    - @wraps(view_func) async def _wrapped_async_view(request, *args, **kwargs): ... [\"000ep007\" full 5L | code 5L]\n    - @wraps(view_func) def _wrapped_sync_view(request, *args, **kwargs): ... [\"000ep00c\" full 5L | code 5L]\n\n- def csp_override(config): ... [\"000ep00g\" full 3L | code 3L]\n\n- def csp_report_only_override(config): ... [\"000ep00i\" full 3L | code 3L]\n\n# django/views/decorators/csrf.py (69L)\nfile scope: [\"000eq00n\" full 69L | imports 36L]\n\n- class _EnsureCsrfToken(CsrfViewMiddleware): ... [\"000eq004\" full 4L | code 4L]\n  - def _reject(self, request, reason): ... [\"000eq003\" full 2L | code 2L]\n\n- class _EnsureCsrfCookie(CsrfViewMiddleware): ... [\"000eq00f\" full 9L | code 9L]\n  - def _reject(self, request, reason): ... [\"000eq008\" full 2L | code 2L]\n  - def process_view(self, request, callback, callback_args, callback_kwargs): ... [\"000eq00e\" full 5L | code 5L]\n\n- def csrf_exempt(view_func): ... [\"000eq00m\" full 19L | code 19L]\n  - def _view_wrapper(request, *args, **kwargs): ... [\"000eq00l\" full 2L | code 2L]\n\n# django/views/decorators/debug.py (147L)\nfile scope: [\"000er00k\" full 147L | imports 11L]\n\n- def sensitive_variables(*variables): ... [\"000er00b\" full 69L | code 69L]\n  - def decorator(func): ... [\"000er00a\" full 38L | code 38L]\n    - @wraps(func) def sensitive_variables_wrapper(*func_args, **func_kwargs): ... [\"000er009\" full 7L | code 7L]\n\n- def sensitive_post_parameters(*parameters): ... [\"000er00j\" full 66L | code 66L]\n  - def decorator(view): ... [\"000er00i\" full 34L | code 34L]\n    - @wraps(view) def sensitive_post_parameters_wrapper(request, *args, **kwargs): ... [\"000er00h\" full 13L | code 13L]\n\n# django/views/decorators/gzip.py (6L)\nfile scope: [\"000es001\" full 6L | imports 4L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

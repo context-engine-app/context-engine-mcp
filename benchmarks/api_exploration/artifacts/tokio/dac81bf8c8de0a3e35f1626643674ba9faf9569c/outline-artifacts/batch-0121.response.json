@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/task/waker.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 4.0 KB -> 1.5 KB (62% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/task/waker.rs (125L)\nfile scope: [\"0007N00d\" full 125L | imports 38L]\n\n- pub(crate) struct WakerRef<'a, S: 'static> { ... } [\"0007N002\" full 4L | code 4L]\n  - waker: ManuallyDrop<Waker> [\"0007N000\" full 1L | code 1L]\n  - _p: PhantomData<(&'a Header, S)> [\"0007N001\" full 1L | code 1L]\n\n- pub(super) fn waker_ref<S>(header: &NonNull<Header>) -> WakerRef<'_, S> where S: Schedule, { ... } [\"0007N003\" full 21L | code 19L | docs 2L]\n\n- impl<S> ops::Deref for WakerRef<'_, S> { ... } [\"0007N006\" full 7L | code 7L]\n  - type Target = Waker; [\"0007N004\" full 1L | code 1L]\n  - fn deref(&self) -> &Waker { ... } [\"0007N005\" full 3L | code 3L]\n\n- unsafe fn clone_waker(ptr: *const ()) -> RawWaker { ... } [\"0007N007\" full 10L | code 10L]\n\n- unsafe fn drop_waker(ptr: *const ()) { ... } [\"0007N008\" full 11L | code 11L]\n\n- unsafe fn wake_by_val(ptr: *const ()) { ... } [\"0007N009\" full 11L | code 11L]\n\n- unsafe fn wake_by_ref(ptr: *const ()) { ... } [\"0007N00a\" full 12L | code 11L | docs 1L]\n\n- static WAKER_VTABLE: RawWakerVTable = RawWakerVTable::new(clone_waker, wake_by_val, wake_by_ref, drop_waker); [\"0007N00b\" full 2L | code 2L]\n\n- fn raw_waker(header: NonNull<Header>) -> RawWaker { ... } [\"0007N00c\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

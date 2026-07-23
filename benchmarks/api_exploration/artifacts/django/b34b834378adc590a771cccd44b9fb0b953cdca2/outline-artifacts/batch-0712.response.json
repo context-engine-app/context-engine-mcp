@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/null_queries/__init__.py",
+        "tests/null_queries/models.py",
+        "tests/null_queries/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/null_queries/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/null_queries/models.py (28L)\nfile scope: [\"000AL00b\" full 28L | imports 11L]\n\n- class Poll(models.Model): ... [\"000AL001\" full 2L | code 2L]\n\n- class Choice(models.Model): ... [\"000AL004\" full 3L | code 3L]\n\n- class OuterA(models.Model): ... [\"000AL005\" full 2L | code 2L]\n\n- class OuterB(models.Model): ... [\"000AL007\" full 2L | code 2L]\n\n- class Inner(models.Model): ... [\"000AL00a\" full 4L | code 4L]\n\n# tests/null_queries/tests.py (88L)\nfile scope: [\"000AM00j\" full 88L | imports 7L]\n\n- class NullQueriesTests(TestCase): ... [\"000AM00i\" full 81L | code 81L]\n  - def test_none_as_null(self): ... [\"000AM004\" full 38L | code 38L]\n  - @skipUnlessDBFeature(\"interprets_empty_strings_as_nulls\") def test_empty_string_is_null(self): ... [\"000AM00a\" full 11L | code 11L]\n  - def test_unsaved(self): ... [\"000AM00d\" full 8L | code 8L]\n  - def test_reverse_relations(self): ... [\"000AM00h\" full 20L | code 20L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

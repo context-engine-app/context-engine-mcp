@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/time_alt/tests.rs",
+        "tokio/src/runtime/time_alt/timer.rs",
+        "tokio/src/runtime/time_alt/wake_queue.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 9.6 KB -> 3.2 KB (67% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/time_alt/tests.rs (173L)\nfile scope: [\"0008j008\" full 173L | imports 8L]\n\n- #[cfg(loom)] const NUM_ITEMS: usize = 16; [\"0008j000\" full 2L | code 2L]\n\n- #[cfg(not(loom))] const NUM_ITEMS: usize = 64; [\"0008j001\" full 2L | code 2L]\n\n- fn new_handle() -> (EntryHandle, AwokenCount) { ... } [\"0008j002\" full 6L | code 6L]\n\n- fn model<F: Fn() + Send + Sync + 'static>(f: F) { ... } [\"0008j003\" full 7L | code 7L]\n\n- #[test] fn wake_up_in_the_same_thread() { ... } [\"0008j004\" full 29L | code 29L]\n\n- #[test] fn cancel_in_the_same_thread() { ... } [\"0008j005\" full 34L | code 34L]\n\n- #[test] fn wake_up_in_the_different_thread() { ... } [\"0008j006\" full 35L | code 35L]\n\n- #[test] fn cancel_in_the_different_thread() { ... } [\"0008j007\" full 43L | code 43L]\n\n# tokio/src/runtime/time_alt/timer.rs (130L)\nfile scope: [\"0008k00d\" full 130L | imports 11L]\n\n- pub(crate) struct Timer { ... } [\"0008k001\" full 4L | code 4L]\n  - entry: EntryHandle [\"0008k000\" full 2L | code 1L | docs 1L]\n\n- impl std::fmt::Debug for Timer { ... } [\"0008k003\" full 5L | code 5L]\n  - fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result { ... } [\"0008k002\" full 3L | code 3L]\n\n- impl Drop for Timer { ... } [\"0008k005\" full 5L | code 5L]\n  - fn drop(&mut self) { ... } [\"0008k004\" full 3L | code 3L]\n\n- impl Timer { ... } [\"0008k009\" full 31L | code 31L]\n  - #[track_caller] pub(crate) fn new(handle: scheduler::Handle, deadline: Instant) -> Self { ... } [\"0008k006\" full 21L | code 21L]\n  - pub(crate) fn is_elapsed(&self) -> bool { ... } [\"0008k007\" full 3L | code 3L]\n  - pub(crate) fn poll_elapsed(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<()> { ... } [\"0008k008\" full 3L | code 3L]\n\n- fn with_current_temp_local_context<F, R>(sched_hdl: &scheduler::Handle, f: F) -> R where F: FnOnce(Option<TempLocalContext<'_>>) -> R, { ... } [\"0008k00a\" full 51L | code 51L]\n\n- fn push_from_remote(sched_hdl: &scheduler::Handle, entry_hdl: EntryHandle) { ... } [\"0008k00b\" full 13L | code 13L]\n\n- fn deadline_to_tick(sched_hdl: &scheduler::Handle, deadline: Instant) -> u64 { ... } [\"0008k00c\" full 4L | code 4L]\n\n# tokio/src/runtime/time_alt/wake_queue.rs (49L)\nfile scope: [\"0008l00a\" full 49L | imports 4L]\n\n- #[derive(Debug)] pub(crate) struct WakeQueue { ... } [\"0008l001\" full 5L | code 4L | docs 1L]\n  - list: LinkedList<WakeQueueEntry> [\"0008l000\" full 1L | code 1L]\n\n- impl Drop for WakeQueue { ... } [\"0008l003\" full 8L | code 8L]\n  - fn drop(&mut self) { ... } [\"0008l002\" full 6L | code 6L]\n\n- impl WakeQueue { ... } [\"0008l008\" full 27L | code 27L]\n  - pub(crate) fn new() -> Self { ... } [\"0008l004\" full 5L | code 5L]\n  - pub(crate) fn is_empty(&self) -> bool { ... } [\"0008l005\" full 3L | code 3L]\n  - pub(crate) unsafe fn push_front(&mut self, hdl: EntryHandle) { ... } [\"0008l006\" full 8L | code 3L | docs 5L]\n  - pub(crate) fn wake_all(mut self) { ... } [\"0008l007\" full 6L | code 5L | docs 1L]\n\n- #[cfg(test)] mod tests; [\"0008l009\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/__init__.py",
+        "django/__main__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1011 B -> 538 B (47% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/__init__.py (25L)\nfile scope: [\"00000004\" full 25L | imports 10L]\n\n- VERSION [\"00000000\" full 1L | code 1L]\n\n- def setup(set_prefix=True): ... [\"00000003\" full 17L | code 17L]\n\n# django/__main__.py (11L)\nfile scope: [\"00001000\" full 11L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

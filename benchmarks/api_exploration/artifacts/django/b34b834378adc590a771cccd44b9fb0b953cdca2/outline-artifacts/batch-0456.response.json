@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/fixtures_model_package/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.1 KB -> 666 B (69% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/fixtures_model_package/tests.py (66L)\nfile scope: [\"000op005\" full 66L | imports 8L]\n\n- class SampleTestCase(TestCase): ... [\"000op002\" full 14L | code 14L]\n  - def test_class_fixtures(self): ... [\"000op001\" full 11L | code 11L]\n\n- class FixtureTestCase(TestCase): ... [\"000op004\" full 42L | code 42L]\n  - def test_loaddata(self): ... [\"000op003\" full 41L | code 41L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

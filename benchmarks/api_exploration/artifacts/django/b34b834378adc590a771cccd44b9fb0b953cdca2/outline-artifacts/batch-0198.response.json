@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/core/checks/templates.py",
+        "django/core/checks/translation.py",
+        "django/core/checks/urls.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 7.0 KB -> 2.0 KB (71% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/core/checks/templates.py (13L)\nfile scope: [\"0008P005\" full 13L | imports 4L]\n\n- @register(Tags.templates) def check_templates(app_configs, **kwargs): ... [\"0008P004\" full 9L | code 9L]\n\n# django/core/checks/translation.py (67L)\nfile scope: [\"0008Q00h\" full 67L | imports 33L]\n\n- E001 [\"0008Q000\" full 1L | code 1L]\n\n- E002 [\"0008Q001\" full 1L | code 1L]\n\n- E003 [\"0008Q002\" full 1L | code 1L]\n\n- E004 [\"0008Q003\" full 1L | code 1L]\n\n- @register(Tags.translation) def check_setting_language_code(app_configs, **kwargs): ... [\"0008Q007\" full 7L | code 7L]\n\n- @register(Tags.translation) def check_setting_languages(app_configs, **kwargs): ... [\"0008Q00a\" full 8L | code 8L]\n\n- @register(Tags.translation) def check_setting_languages_bidi(app_configs, **kwargs): ... [\"0008Q00d\" full 8L | code 8L]\n\n- @register(Tags.translation) def check_language_settings_consistent(app_configs, **kwargs): ... [\"0008Q00g\" full 9L | code 9L]\n\n# django/core/checks/urls.py (159L)\nfile scope: [\"0008R00L\" full 159L | imports 10L]\n\n- @register(Tags.urls) def check_url_config(app_configs, **kwargs): ... [\"0008R003\" full 8L | code 8L]\n\n- def check_resolver(resolver): ... [\"0008R006\" full 11L | code 11L]\n\n- @register(Tags.urls) def check_url_namespaces_unique(app_configs, **kwargs): ... [\"0008R00f\" full 24L | code 24L]\n\n- def _load_all_namespaces(resolver, parents=()): ... [\"0008R00n\" full 17L | code 17L]\n\n- def get_warning_for_invalid_pattern(pattern): ... [\"0008R00q\" full 25L | code 25L]\n\n- @register(Tags.urls) def check_url_settings(app_configs, **kwargs): ... [\"0008R00w\" full 8L | code 8L]\n\n- def E006(name): ... [\"0008R00y\" full 5L | code 5L]\n\n- @register(Tags.urls) def check_custom_error_handlers(app_configs, **kwargs): ... [\"0008R00K\" full 37L | code 37L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

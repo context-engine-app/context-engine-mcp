@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.5 KB -> 1.5 KB (2% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/models.py (71L)\nfile scope: [\"000wi00s\" full 71L | imports 5L]\n\n- class CustomModelBase(models.base.ModelBase): ... [\"000wi000\" full 2L | code 2L]\n\n- class ModelWithCustomBase(models.Model, metaclass=CustomModelBase): ... [\"000wi001\" full 2L | code 2L]\n\n- class UnicodeModel(models.Model): ... [\"000wi008\" full 11L | code 11L]\n  - class Meta: ... [\"000wi006\" full 5L | code 5L]\n  - def __str__(self): ... [\"000wi007\" full 2L | code 2L]\n\n- class Unserializable: ... [\"000wi009\" full 6L | code 6L]\n\n- class UnserializableModel(models.Model): ... [\"000wi00d\" full 6L | code 6L]\n  - class Meta: ... [\"000wi00c\" full 3L | code 3L]\n\n- class UnmigratedModel(models.Model): ... [\"000wi00e\" full 7L | code 7L]\n\n- class EmptyManager(models.Manager): ... [\"000wi00g\" full 2L | code 2L]\n\n- class FoodQuerySet(models.query.QuerySet): ... [\"000wi00h\" full 2L | code 2L]\n\n- class BaseFoodManager(models.Manager): ... [\"000wi00o\" full 4L | code 4L]\n  - def __init__(self, a, b, c=1, d=2): ... [\"000wi00m\" full 3L | code 3L]\n\n- class FoodManager(BaseFoodManager.from_queryset(FoodQuerySet)): ... [\"000wi00q\" full 2L | code 2L]\n\n- class NoMigrationFoodManager(BaseFoodManager.from_queryset(FoodQuerySet)): ... [\"000wi00r\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

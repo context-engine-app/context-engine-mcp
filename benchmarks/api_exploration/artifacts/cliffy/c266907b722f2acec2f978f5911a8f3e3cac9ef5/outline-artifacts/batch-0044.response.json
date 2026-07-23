@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/prompt/checkbox.ts",
+        "examples/prompt/confirm.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.8 KB -> 538 B (71% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/prompt/checkbox.ts (70L)\nfile scope: [\"0003a00k\" full 70L | imports 8L]\n\n- title [\"0003a00j\" full 1L | code 1L]\n\n# examples/prompt/confirm.ts (8L)\nfile scope: [\"0003b002\" full 8L | imports 8L]\n\n- confirmed [\"0003b001\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

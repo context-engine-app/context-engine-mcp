@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/app_loading/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 3.0 KB -> 1.1 KB (63% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/app_loading/tests.py (82L)\nfile scope: [\"000hl00m\" full 82L | imports 8L]\n\n- class EggLoadingTest(SimpleTestCase): ... [\"000hl00g\" full 60L | code 60L]\n  - def setUp(self): ... [\"000hl000\" full 3L | code 3L]\n  - def test_egg1(self): ... [\"000hl004\" full 8L | code 8L]\n  - def test_egg2(self): ... [\"000hl007\" full 11L | code 11L]\n  - def test_egg3(self): ... [\"000hl00a\" full 11L | code 11L]\n  - def test_egg4(self): ... [\"000hl00d\" full 11L | code 11L]\n  - def test_egg5(self): ... [\"000hl00f\" full 10L | code 10L]\n\n- class GetModelsTest(SimpleTestCase): ... [\"000hl00l\" full 12L | code 12L]\n  - def setUp(self): ... [\"000hl00h\" full 4L | code 4L]\n  - def test_get_model_only_returns_installed_models(self): ... [\"000hl00j\" full 3L | code 3L]\n  - def test_get_models_only_returns_installed_models(self): ... [\"000hl00k\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

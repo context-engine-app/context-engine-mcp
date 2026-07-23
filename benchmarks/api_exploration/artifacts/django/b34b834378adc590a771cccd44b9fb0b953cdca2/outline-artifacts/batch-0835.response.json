@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/transaction_hooks/__init__.py",
+        "tests/transaction_hooks/models.py",
+        "tests/transaction_hooks/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/transaction_hooks/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/transaction_hooks/models.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import models\n2|\n3|\n4|class Thing(models.Model):\n5|    num = models.IntegerField()\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/transaction_hooks/tests.py (334L)\nfile scope: [\"000Ih011\" full 334L | imports 9L]\n\n- class ForcedError(Exception): ... [\"000Ih000\" full 2L | code 2L]\n\n- @skipUnlessDBFeature(\"supports_transactions\") class TestConnectionOnCommit(TransactionTestCase): ... [\"000Ih010\" full 321L | code 321L]\n  - def setUp(self): ... [\"000Ih002\" full 2L | code 2L]\n  - def notify(self, id_): ... [\"000Ih005\" full 4L | code 4L]\n  - def do(self, num): ... [\"000Ih007\" full 4L | code 4L]\n  - def assertDone(self, nums): ... [\"000Ih009\" full 3L | code 3L]\n  - def assertNotified(self, nums): ... [\"000Ih00b\" full 2L | code 2L]\n  - def test_executes_immediately_if_no_transaction(self): ... [\"000Ih00c\" full 3L | code 3L]\n  - def test_robust_if_no_transaction(self): ... [\"000Ih00h\" full 19L | code 19L]\n    - def robust_callback(): ... [\"000Ih00d\" full 2L | code 2L]\n  - def test_robust_if_no_transaction_with_callback_as_partial(self): ... [\"000Ih00n\" full 21L | code 21L]\n    - def robust_callback(): ... [\"000Ih00i\" full 2L | code 2L]\n  - def test_robust_transaction(self): ... [\"000Ih00s\" full 20L | code 20L]\n    - def robust_callback(): ... [\"000Ih00o\" full 2L | code 2L]\n  - def test_robust_transaction_with_callback_as_partial(self): ... [\"000Ih00y\" full 22L | code 22L]\n    - def robust_callback(): ... [\"000Ih00t\" full 2L | code 2L]\n  - def test_delays_execution_until_after_transaction_commit(self): ... [\"000Ih00z\" full 5L | code 5L]\n  - def test_does_not_execute_if_transaction_rolled_back(self): ... [\"000Ih00A\" full 9L | code 9L]\n  - def test_executes_only_after_final_transaction_committed(self): ... [\"000Ih00B\" full 7L | code 7L]\n  - @skipUnlessDBFeature(\"uses_savepoints\") def test_discards_hooks_from_rolled_back_savepoint(self): ... [\"000Ih00C\" full 19L | code 19L]\n  - def test_no_hooks_run_from_failed_transaction(self): ... [\"000Ih00D\" full 11L | code 11L]\n  - @skipUnlessDBFeature(\"uses_savepoints\") def test_inner_savepoint_rolled_back_with_outer(self): ... [\"000Ih00E\" full 13L | code 13L]\n  - def test_no_savepoints_atomic_merged_with_outer(self): ... [\"000Ih00F\" full 11L | code 11L]\n  - @skipUnlessDBFeature(\"uses_savepoints\") def test_inner_savepoint_does_not_affect_outer(self): ... [\"000Ih00G\" full 12L | code 12L]\n  - def test_runs_hooks_in_order_registered(self): ... [\"000Ih00H\" full 8L | code 8L]\n  - def test_hooks_cleared_after_successful_commit(self): ... [\"000Ih00I\" full 7L | code 7L]\n  - def test_hooks_cleared_after_rollback(self): ... [\"000Ih00J\" full 12L | code 12L]\n  - @skipUnlessDBFeature(\"test_db_allows_multiple_connections\") def test_hooks_cleared_on_reconnect(self): ... [\"000Ih00K\" full 12L | code 12L]\n  - def test_error_in_hook_doesnt_prevent_clearing_hooks(self): ... [\"000Ih00L\" full 11L | code 11L]\n  - def test_db_query_in_hook(self): ... [\"000Ih00M\" full 8L | code 8L]\n  - def test_transaction_in_hook(self): ... [\"000Ih00P\" full 10L | code 10L]\n    - def on_commit(): ... [\"000Ih00O\" full 4L | code 4L]\n  - def test_hook_in_hook(self): ... [\"000Ih00U\" full 13L | code 13L]\n    - def on_commit(i, add_hook): ... [\"000Ih00T\" full 6L | code 6L]\n  - def test_raises_exception_non_autocommit_mode(self): ... [\"000Ih00X\" full 11L | code 11L]\n    - def should_never_be_called(): ... [\"000Ih00V\" full 2L | code 2L]\n  - def test_raises_exception_non_callable(self): ... [\"000Ih00Z\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

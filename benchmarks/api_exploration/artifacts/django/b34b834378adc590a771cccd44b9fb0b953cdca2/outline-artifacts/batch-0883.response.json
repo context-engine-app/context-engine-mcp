@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/xor_lookups/__init__.py",
+        "tests/xor_lookups/models.py",
+        "tests/xor_lookups/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/xor_lookups/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/xor_lookups/models.py (9L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import models\n2|\n3|\n4|class Number(models.Model):\n5|    num = models.IntegerField()\n6|\n7|    def __str__(self):\n8|        return str(self.num)\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/xor_lookups/tests.py (89L)\nfile scope: [\"000L900c\" full 89L | imports 7L]\n\n- class XorLookupsTests(TestCase): ... [\"000L900b\" full 82L | code 82L]\n  - @classmethod def setUpTestData(cls): ... [\"000L9000\" full 3L | code 3L]\n  - def test_filter(self): ... [\"000L9002\" full 9L | code 9L]\n  - def test_filter_multiple(self): ... [\"000L9004\" full 20L | code 20L]\n  - def test_filter_negated(self): ... [\"000L9005\" full 17L | code 17L]\n  - def test_exclude(self): ... [\"000L9006\" full 5L | code 5L]\n  - def test_stages(self): ... [\"000L9008\" full 10L | code 10L]\n  - def test_pk_q(self): ... [\"000L9009\" full 5L | code 5L]\n  - def test_empty_in(self): ... [\"000L900a\" full 5L | code 5L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

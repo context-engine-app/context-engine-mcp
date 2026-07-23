@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/core/checks/compatibility/__init__.py",
+        "django/core/checks/compatibility/django_4_0.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/core/checks/compatibility/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/core/checks/compatibility/django_4_0.py (20L)\nfile scope: [\"0008E005\" full 20L | imports 5L]\n\n- @register(Tags.compatibility) def check_csrf_trusted_origins(app_configs, **kwargs): ... [\"0008E004\" full 15L | code 15L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

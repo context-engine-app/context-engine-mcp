@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/sites/migrations/0001_initial.py",
+        "django/contrib/sites/migrations/0002_alter_domain_unique.py",
+        "django/contrib/sites/migrations/__init__.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "Use symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/sites/migrations/0001_initial.py (44L)\nfile scope: [\"0007Z003\" full 44L | imports 6L]\n\n- class Migration(migrations.Migration): ... [\"0007Z002\" full 38L | code 38L]\n\n# django/contrib/sites/migrations/0002_alter_domain_unique.py (22L)\nfile scope: [\"00080003\" full 22L | imports 5L]\n\n- class Migration(migrations.Migration): ... [\"00080002\" full 17L | code 17L]\n\n# django/contrib/sites/migrations/__init__.py (1L)\nfile scope: [\"00081000\" full 1L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

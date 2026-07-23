@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "table/unicode_width.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 7.1 KB -> 890 B (88% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# table/unicode_width.ts (116L)\nfile scope: [\"0005G00u\" full 116L | imports 53L]\n\n- function lookupWidth(cp: number) { ... } [\"0005G00e\" full 12L | code 12L]\n\n- function charWidth(char: string): number | null { ... } [\"0005G00j\" full 23L | code 23L]\n\n- export function unicodeWidth(str: string): number { ... } [\"0005G00m\" full 3L | code 3L]\n  - map() callback [\"0005G00k\" full 1L | code 1L]\n  - reduce() callback [\"0005G00l\" full 1L | code 1L]\n\n- function runLengthDecode({ d, r }: { d: string; r: string }) { ... } [\"0005G00t\" full 11L | code 11L]\n  - map() callback [\"0005G00s\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

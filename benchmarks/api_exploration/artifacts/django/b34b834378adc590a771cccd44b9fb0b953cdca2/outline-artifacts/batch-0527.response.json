@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/i18n/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 541 B -> 552 B (-2% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/i18n/models.py (19L)\nfile scope: [\"000sq009\" full 19L | imports 7L]\n\n- class TestModel(models.Model): ... [\"000sq001\" full 2L | code 2L]\n\n- class Company(models.Model): ... [\"000sq008\" full 8L | code 8L]\n  - class Meta: ... [\"000sq007\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

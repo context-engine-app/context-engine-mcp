@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/gis_tests/geoadmin/__init__.py",
+        "tests/gis_tests/geoadmin/models.py",
+        "tests/gis_tests/geoadmin/tests.py",
+        "tests/gis_tests/geoadmin/urls.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/gis_tests/geoadmin/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/gis_tests/geoadmin/models.py (34L)\nfile scope: [\"000rc00b\" full 34L | imports 14L]\n\n- class City(models.Model): ... [\"000rc005\" full 9L | code 9L]\n  - class Meta: ... [\"000rc003\" full 2L | code 2L]\n  - def __str__(self): ... [\"000rc004\" full 2L | code 2L]\n\n- class CityAdminCustomWidgetKwargs(admin.GISModelAdmin): ... [\"000rc007\" full 7L | code 7L]\n\n# tests/gis_tests/geoadmin/tests.py (76L)\nfile scope: [\"000rd00t\" full 76L | imports 7L]\n\n- @override_settings(ROOT_URLCONF=\"django.contrib.gis.tests.geoadmin.urls\") class GeoAdminTest(SimpleTestCase): ... [\"000rd00i\" full 49L | code 49L]\n  - def test_widget_empty_string(self): ... [\"000rd004\" full 11L | code 11L]\n  - def test_widget_invalid_string(self): ... [\"000rd009\" full 16L | code 16L]\n  - def test_widget_has_changed(self): ... [\"000rd00h\" full 16L | code 16L]\n\n- class GISAdminTests(GeoAdminTest): ... [\"000rd00s\" full 18L | code 18L]\n  - def test_default_gis_widget_kwargs(self): ... [\"000rd00n\" full 7L | code 7L]\n  - def test_custom_gis_widget_kwargs(self): ... [\"000rd00r\" full 7L | code 7L]\n\n# tests/gis_tests/geoadmin/urls.py (7L)\nfile scope: [\"000re001\" full 7L | imports 4L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

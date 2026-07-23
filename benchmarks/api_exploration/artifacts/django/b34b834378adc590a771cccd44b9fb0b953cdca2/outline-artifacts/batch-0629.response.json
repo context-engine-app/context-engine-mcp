@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/routers.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n 1|class DefaultOtherRouter:\n 2|    def allow_migrate(self, db, app_label, model_name=None, **hints):\n 3|        return db in {\"default\", \"other\"}\n 4|\n 5|\n 6|class TestRouter:\n 7|    def allow_migrate(self, db, app_label, model_name=None, **hints):\n 8|        \"\"\"\n 9|        The Tribble model should be the only one to appear in the 'other' db.\n10|        \"\"\"\n11|        if model_name == \"tribble\":\n12|            return db == \"other\"\n13|        elif db != \"default\":\n14|            return False\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

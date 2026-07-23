@@ -1,0 +1,26 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/gis/gdal/prototypes/__init__.py",
+        "django/contrib/gis/gdal/prototypes/ds.py",
+        "django/contrib/gis/gdal/prototypes/errcheck.py",
+        "django/contrib/gis/gdal/prototypes/generation.py",
+        "django/contrib/gis/gdal/prototypes/geom.py",
+        "django/contrib/gis/gdal/prototypes/raster.py",
+        "django/contrib/gis/gdal/prototypes/srs.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/gis/gdal/prototypes/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/gis/gdal/prototypes/ds.py (111L)\nfile scope: [\"0005K00S\" full 111L | imports 163L]\n\n- GDAL_OF_READONLY [\"0005K001\" full 1L | code 1L]\n\n- GDAL_OF_UPDATE [\"0005K002\" full 1L | code 1L]\n\n- GDAL_OF_ALL [\"0005K003\" full 1L | code 1L]\n\n- GDAL_OF_RASTER [\"0005K004\" full 1L | code 1L]\n\n- GDAL_OF_VECTOR [\"0005K005\" full 1L | code 1L]\n\n# django/contrib/gis/gdal/prototypes/errcheck.py (143L)\nfile scope: [\"0005L00Y\" full 143L | imports 42L]\n\n- def arg_byref(args, offset=-1): ... [\"0005L002\" full 3L | code 3L]\n\n- def ptr_byref(args, offset=-1): ... [\"0005L005\" full 3L | code 3L]\n\n- def check_const_string(result, func, cargs, offset=None, cpl=False): ... [\"0005L00c\" full 10L | code 10L]\n\n- def check_string(result, func, cargs, offset=-1, str_result=False): ... [\"0005L00k\" full 27L | code 27L]\n\n- def check_envelope(result, func, cargs, offset=-1): ... [\"0005L00p\" full 3L | code 3L]\n\n- def check_geom(result, func, cargs): ... [\"0005L00t\" full 11L | code 11L]\n\n- def check_geom_offset(result, func, cargs, offset=-1): ... [\"0005L00z\" full 5L | code 5L]\n\n- def check_srs(result, func, cargs): ... [\"0005L00D\" full 8L | code 8L]\n\n- def check_arg_errcode(result, func, cargs, cpl=False): ... [\"0005L00I\" full 7L | code 7L]\n\n- def check_errcode(result, func, cargs, cpl=False): ... [\"0005L00N\" full 5L | code 5L]\n\n- def check_pointer(result, func, cargs): ... [\"0005L00R\" full 8L | code 8L]\n\n- def check_str_arg(result, func, cargs): ... [\"0005L00X\" full 9L | code 9L]\n\n# django/contrib/gis/gdal/prototypes/generation.py (179L)\nfile scope: [\"0005M012\" full 179L | imports 22L]\n\n- class gdal_char_p(c_char_p): ... [\"0005M000\" full 2L | code 2L]\n\n- def bool_output(func, argtypes, errcheck=None): ... [\"0005M004\" full 7L | code 7L]\n\n- def double_output(func, argtypes, errcheck=False, strarg=False, cpl=False): ... [\"0005M00a\" full 9L | code 9L]\n\n- def geom_output(func, argtypes, offset=None): ... [\"0005M00i\" full 22L | code 22L]\n  - def geomerrcheck(result, func, cargs): ... [\"0005M00h\" full 2L | code 2L]\n\n- def int_output(func, argtypes, errcheck=None): ... [\"0005M00m\" full 7L | code 7L]\n\n- def int64_output(func, argtypes): ... [\"0005M00p\" full 5L | code 5L]\n\n- def srs_output(func, argtypes): ... [\"0005M00s\" full 10L | code 10L]\n\n- def const_string_output(func, argtypes, offset=None, decoding=None, cpl=False): ... [\"0005M00D\" full 16L | code 16L]\n  - def _check_const(result, func, cargs): ... [\"0005M00C\" full 5L | code 5L]\n\n- def string_output(func, argtypes, offset=-1, str_result=False, decoding=None): ... [\"0005M00O\" full 27L | code 27L]\n  - def _check_str(result, func, cargs): ... [\"0005M00N\" full 5L | code 5L]\n\n- def void_output(func, argtypes, errcheck=True, cpl=False): ... [\"0005M00T\" full 16L | code 16L]\n\n- def voidptr_output(func, argtypes, errcheck=True): ... [\"0005M00X\" full 7L | code 7L]\n\n- def chararray_output(func, argtypes, errcheck=True): ... [\"0005M011\" full 7L | code 7L]\n\n# django/contrib/gis/gdal/prototypes/geom.py (166L)\nfile scope: [\"0005N015\" full 166L | imports 208L]\n\n- def env_func(f, argtypes): ... [\"0005N002\" full 6L | code 6L]\n\n- def pnt_func(f): ... [\"0005N004\" full 3L | code 3L]\n\n- def topology_func(f): ... [\"0005N006\" full 5L | code 5L]\n\n# django/contrib/gis/gdal/prototypes/raster.py (170L)\nfile scope: [\"0005O00F\" full 170L | imports 209L]\n\n\n# django/contrib/gis/gdal/prototypes/srs.py (108L)\nfile scope: [\"0005P00z\" full 108L | imports 123L]\n\n- def srs_double(f): ... [\"0005P001\" full 6L | code 6L]\n\n- def units_func(f): ... [\"0005P003\" full 6L | code 6L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

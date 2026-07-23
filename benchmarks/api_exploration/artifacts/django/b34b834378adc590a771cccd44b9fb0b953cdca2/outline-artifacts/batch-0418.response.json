@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/db_functions/math/test_cot.py",
+        "tests/db_functions/math/test_degrees.py",
+        "tests/db_functions/math/test_exp.py",
+        "tests/db_functions/math/test_floor.py",
+        "tests/db_functions/math/test_ln.py",
+        "tests/db_functions/math/test_log.py",
+        "tests/db_functions/math/test_mod.py",
+        "tests/db_functions/math/test_pi.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 15.2 KB -> 3.6 KB (76% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/db_functions/math/test_cot.py (54L)\nfile scope: [\"000m600b\" full 54L | imports 12L]\n\n- class CotTests(TestCase): ... [\"000m600a\" full 42L | code 42L]\n  - def test_null(self): ... [\"000m6001\" full 4L | code 4L]\n  - def test_decimal(self): ... [\"000m6003\" full 7L | code 7L]\n  - def test_float(self): ... [\"000m6005\" full 7L | code 7L]\n  - def test_integer(self): ... [\"000m6007\" full 13L | code 13L]\n  - def test_transform(self): ... [\"000m6009\" full 6L | code 6L]\n\n# tests/db_functions/math/test_degrees.py (58L)\nfile scope: [\"000m700b\" full 58L | imports 12L]\n\n- class DegreesTests(TestCase): ... [\"000m700a\" full 46L | code 46L]\n  - def test_null(self): ... [\"000m7001\" full 4L | code 4L]\n  - def test_decimal(self): ... [\"000m7003\" full 9L | code 9L]\n  - def test_float(self): ... [\"000m7005\" full 9L | code 9L]\n  - def test_integer(self): ... [\"000m7007\" full 13L | code 13L]\n  - def test_transform(self): ... [\"000m7009\" full 6L | code 6L]\n\n# tests/db_functions/math/test_exp.py (54L)\nfile scope: [\"000m800b\" full 54L | imports 12L]\n\n- class ExpTests(TestCase): ... [\"000m800a\" full 42L | code 42L]\n  - def test_null(self): ... [\"000m8001\" full 4L | code 4L]\n  - def test_decimal(self): ... [\"000m8003\" full 7L | code 7L]\n  - def test_float(self): ... [\"000m8005\" full 7L | code 7L]\n  - def test_integer(self): ... [\"000m8007\" full 13L | code 13L]\n  - def test_transform(self): ... [\"000m8009\" full 6L | code 6L]\n\n# tests/db_functions/math/test_floor.py (58L)\nfile scope: [\"000m900b\" full 58L | imports 12L]\n\n- class FloorTests(TestCase): ... [\"000m900a\" full 46L | code 46L]\n  - def test_null(self): ... [\"000m9001\" full 4L | code 4L]\n  - def test_decimal(self): ... [\"000m9003\" full 9L | code 9L]\n  - def test_float(self): ... [\"000m9005\" full 9L | code 9L]\n  - def test_integer(self): ... [\"000m9007\" full 13L | code 13L]\n  - def test_transform(self): ... [\"000m9009\" full 6L | code 6L]\n\n# tests/db_functions/math/test_ln.py (54L)\nfile scope: [\"000ma00b\" full 54L | imports 12L]\n\n- class LnTests(TestCase): ... [\"000ma00a\" full 42L | code 42L]\n  - def test_null(self): ... [\"000ma001\" full 4L | code 4L]\n  - def test_decimal(self): ... [\"000ma003\" full 7L | code 7L]\n  - def test_float(self): ... [\"000ma005\" full 7L | code 7L]\n  - def test_integer(self): ... [\"000ma007\" full 13L | code 13L]\n  - def test_transform(self): ... [\"000ma009\" full 6L | code 6L]\n\n# tests/db_functions/math/test_log.py (47L)\nfile scope: [\"000mb009\" full 47L | imports 10L]\n\n- class LogTests(TestCase): ... [\"000mb008\" full 37L | code 37L]\n  - def test_null(self): ... [\"000mb001\" full 10L | code 10L]\n  - def test_decimal(self): ... [\"000mb003\" full 5L | code 5L]\n  - def test_float(self): ... [\"000mb005\" full 5L | code 5L]\n  - def test_integer(self): ... [\"000mb007\" full 13L | code 13L]\n\n# tests/db_functions/math/test_mod.py (45L)\nfile scope: [\"000mc009\" full 45L | imports 10L]\n\n- class ModTests(TestCase): ... [\"000mc008\" full 35L | code 35L]\n  - def test_null(self): ... [\"000mc001\" full 8L | code 8L]\n  - def test_decimal(self): ... [\"000mc003\" full 5L | code 5L]\n  - def test_float(self): ... [\"000mc005\" full 5L | code 5L]\n  - def test_integer(self): ... [\"000mc007\" full 13L | code 13L]\n\n# tests/db_functions/math/test_pi.py (15L)\nfile scope: [\"000md003\" full 15L | imports 9L]\n\n- class PiTests(TestCase): ... [\"000md002\" full 6L | code 6L]\n  - def test(self): ... [\"000md001\" full 5L | code 5L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/command.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 912 B -> 836 B (8% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/command.ts (35L)\nfile scope: [\"0002200a\" full 35L | imports 18L]\n\n- default: 8080 [\"00022000\" full 1L | code 1L]\n\n- default: \"localhost\" [\"00022001\" full 1L | code 1L]\n\n- action() callback [\"00022009\" full 18L | code 18L]\n  - hostname: host [\"00022002\" full 1L | code 1L]\n  - port [\"00022003\" full 1L | code 1L]\n  - Deno.serve() callback [\"00022008\" full 13L | code 13L]\n    - headers: req.headers [\"00022005\" full 1L | code 1L]\n    - method: req.method [\"00022006\" full 1L | code 1L]\n    - body: req.body [\"00022007\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio-util/src/net/unix/mod.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n 1|//! Unix domain socket helpers.\n 2|\n 3|use super::Listener;\n 4|use std::io::Result;\n 5|use std::task::{Context, Poll};\n 6|\n 7|impl Listener for tokio::net::UnixListener {\n 8|    type Io = tokio::net::UnixStream;\n 9|    type Addr = tokio::net::unix::SocketAddr;\n10|\n11|    fn poll_accept(&mut self, cx: &mut Context<'_>) -> Poll<Result<(Self::Io, Self::Addr)>> {\n12|        Self::poll_accept(self, cx)\n13|    }\n14|\n15|    fn local_addr(&self) -> Result<Self::Addr> {\n16|        self.local_addr()\n17|    }\n18|}\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

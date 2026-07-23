@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/command/custom_option_type.ts",
+        "examples/command/custom_option_type_class.ts",
+        "examples/command/custom_option_type_class_completion.ts",
+        "examples/command/custom_option_type_completion.ts",
+        "examples/command/default_option_value.ts",
+        "examples/command/demo.ts",
+        "examples/command/depending_options.ts",
+        "examples/command/dotted_options.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 3.7 KB -> 1.9 KB (50% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/command/custom_option_type.ts (27L)\nfile scope: [\"0002b003\" full 27L | imports 11L]\n\n- function colorType({ label, name, value }: ArgumentValue): string { ... } [\"0002b001\" full 11L | code 11L]\n\n# examples/command/custom_option_type_class.ts (34L)\nfile scope: [\"0002c004\" full 34L | imports 13L]\n\n- class ColorType extends Type<string> { ... } [\"0002c002\" full 15L | code 15L]\n  - private readonly colors = [\"red\", \"blue\", \"yellow\"]; [\"0002c000\" full 1L | code 1L]\n  - public parse({ label, name, value }: ArgumentValue): string { ... } [\"0002c001\" full 11L | code 11L]\n\n# examples/command/custom_option_type_class_completion.ts (15L)\nfile scope: [\"0002d002\" full 15L | imports 5L]\n\n- class EmailType extends StringType { ... } [\"0002d001\" full 5L | code 5L]\n  - override complete(): string[] { ... } [\"0002d000\" full 3L | code 3L]\n\n# examples/command/custom_option_type_completion.ts (12L)\nfile scope: [\"0002e001\" full 12L | imports 9L]\n\n- complete(\"email\") callback [\"0002e000\" full 1L | code 1L]\n\n# examples/command/default_option_value.ts (13L)\nfile scope: [\"0002f001\" full 13L | imports 5L]\n\n\n# examples/command/demo.ts (28L)\nfile scope: [\"0002g005\" full 28L | imports 27L]\n\n- default: true [\"0002g000\" full 1L | code 1L]\n\n- default: \"foo\" [\"0002g001\" full 1L | code 1L]\n\n- default: 89 [\"0002g002\" full 1L | code 1L]\n\n- depends: [\"foo\"] [\"0002g003\" full 1L | code 1L]\n\n- conflicts: [\"beep\"] [\"0002g004\" full 1L | code 1L]\n\n# examples/command/depending_options.ts (13L)\nfile scope: [\"0002h001\" full 13L | imports 5L]\n\n\n# examples/command/dotted_options.ts (17L)\nfile scope: [\"0002i001\" full 17L | imports 5L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

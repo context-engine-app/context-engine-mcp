@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/admin/views/__init__.py",
+        "django/contrib/admin/views/autocomplete.py",
+        "django/contrib/admin/views/decorators.py",
+        "django/contrib/admin/views/main.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/admin/views/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/admin/views/autocomplete.py (124L)\nfile scope: [\"0003m00B\" full 124L | imports 8L]\n\n- class AutocompleteJsonView(BaseListView): ... [\"0003m00A\" full 116L | code 116L]\n  - def get(self, request, *args, **kwargs): ... [\"0003m007\" full 30L | code 30L]\n  - def serialize_result(self, obj, to_field_name): ... [\"0003m00e\" full 6L | code 6L]\n  - def get_paginator(self, *args, **kwargs): ... [\"0003m00h\" full 3L | code 3L]\n  - def get_queryset(self): ... [\"0003m00k\" full 10L | code 10L]\n  - def process_request(self, request): ... [\"0003m00w\" full 53L | code 53L]\n  - def has_perm(self, request, obj=None): ... [\"0003m00z\" full 3L | code 3L]\n\n# django/contrib/admin/views/decorators.py (20L)\nfile scope: [\"0003n005\" full 20L | imports 5L]\n\n- def staff_member_required( view_func=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url=\"admin:login\" ): ... [\"0003n004\" full 15L | code 15L]\n\n# django/contrib/admin/views/main.py (562L)\nfile scope: [\"0003o02I\" full 562L | imports 64L]\n\n- ALL_VAR [\"0003o000\" full 1L | code 1L]\n\n- ORDER_VAR [\"0003o001\" full 1L | code 1L]\n\n- PAGE_VAR [\"0003o002\" full 1L | code 1L]\n\n- SEARCH_VAR [\"0003o003\" full 1L | code 1L]\n\n- ERROR_FLAG [\"0003o004\" full 1L | code 1L]\n\n- IGNORED_PARAMS [\"0003o005\" full 1L | code 1L]\n\n- class ChangeListSearchForm(forms.Form): ... [\"0003o00a\" full 7L | code 7L]\n  - def __init__(self, *args, **kwargs): ... [\"0003o008\" full 6L | code 6L]\n\n- class ChangeList: ... [\"0003o02H\" full 495L | code 495L]\n  - def __init__( self, request, model, list_display, list_display_links, list_filter, date_hierarchy, search_fields, list_select_related, list_per_page, list_max_show_all, list_editable, model_admin, sortable_by, search_help_text, ): ... [\"0003o00u\" full 84L | code 84L]\n  - def __repr__(self): ... [\"0003o014\" full 6L | code 6L]\n  - def get_filters_params(self, params=None): ... [\"0003o018\" full 12L | code 12L]\n  - def get_filters(self, request): ... [\"0003o01t\" full 103L | code 103L]\n  - def get_query_string(self, new_params=None, remove=None): ... [\"0003o01A\" full 17L | code 17L]\n  - def get_results(self, request): ... [\"0003o01I\" full 40L | code 40L]\n  - def _get_default_ordering(self): ... [\"0003o01S\" full 7L | code 7L]\n  - def get_ordering_field(self, field_name): ... [\"0003o01W\" full 28L | code 28L]\n  - def get_ordering(self, request, queryset): ... [\"0003o028\" full 48L | code 48L]\n  - def get_ordering_field_columns(self): ... [\"0003o02j\" full 39L | code 39L]\n  - def get_queryset(self, request, exclude_parameters=None): ... [\"0003o02v\" full 62L | code 62L]\n  - def apply_select_related(self, qs): ... [\"0003o02z\" full 11L | code 11L]\n  - def get_select_related_fields(self): ... [\"0003o02D\" full 15L | code 15L]\n  - def url_for_result(self, result): ... [\"0003o02G\" full 7L | code 7L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/migrations/test_migrations_namespace_package/0001_initial.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 341 B -> 491 B (-44% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/migrations/test_migrations_namespace_package/0001_initial.py (16L)\nfile scope: [\"000xa003\" full 16L | imports 4L]\n\n- class Migration(migrations.Migration): ... [\"000xa002\" full 12L | code 12L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "examples/command/throw.ts",
+        "examples/command/upgrade_command.ts",
+        "examples/command/usage.ts",
+        "examples/command/use_raw_args.ts",
+        "examples/command/validation_error_handling.ts",
+        "examples/command/variadic_arguments.ts",
+        "examples/command/variadic_options.ts",
+        "examples/command/version_options.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 3.2 KB -> 1.4 KB (57% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# examples/command/throw.ts (23L)\nfile scope: [\"0002K002\" full 23L | imports 6L]\n\n\n# examples/command/upgrade_command.ts (27L)\nfile scope: [\"0002L004\" full 27L | imports 20L]\n\n- main: \"codeview.ts\" [\"0002L000\" full 1L | code 1L]\n\n- args: [\"--allow-all\", \"--unstable\"] [\"0002L001\" full 1L | code 1L]\n\n- provider: [ new DenoLandProvider(), new NestLandProvider(), new GithubProvider({ repository: \"c4spar/deno-codeview\" }), ] [\"0002L003\" full 5L | code 5L]\n  - repository: \"c4spar/deno-codeview\" [\"0002L002\" full 1L | code 1L]\n\n# examples/command/usage.ts (10L)\nfile scope: [\"0002M000\" full 10L]\n\n\n# examples/command/use_raw_args.ts (12L)\nfile scope: [\"0002N001\" full 12L | imports 7L]\n\n- action() callback [\"0002N000\" full 4L | code 4L]\n\n# examples/command/validation_error_handling.ts (22L)\nfile scope: [\"0002O003\" full 22L | imports 8L]\n\n\n# examples/command/variadic_arguments.ts (13L)\nfile scope: [\"0002P002\" full 13L | imports 11L]\n\n\n# examples/command/variadic_options.ts (11L)\nfile scope: [\"0002Q001\" full 11L | imports 5L]\n\n\n# examples/command/version_options.ts (8L)\nfile scope: [\"0002R000\" full 8L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

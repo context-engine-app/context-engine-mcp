@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/dispatch/__init__.py",
+        "tests/dispatch/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/dispatch/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/dispatch/tests.py (286L)\nfile scope: [\"000nw01z\" full 286L | imports 21L]\n\n- def receiver_1_arg(val, **kwargs): ... [\"000nw002\" full 2L | code 2L]\n\n- class Callable: ... [\"000nw009\" full 6L | code 6L]\n  - def __call__(self, val, **kwargs): ... [\"000nw005\" full 2L | code 2L]\n  - def a(self, val, **kwargs): ... [\"000nw008\" full 2L | code 2L]\n\n- class DispatcherTests(SimpleTestCase): ... [\"000nw01o\" full 233L | code 233L]\n  - def assertTestIsClean(self, signal): ... [\"000nw00f\" full 7L | code 7L]\n  - @override_settings(DEBUG=True) def test_cannot_connect_no_kwargs(self): ... [\"000nw00j\" full 9L | code 9L]\n    - def receiver_no_kwargs(sender): ... [\"000nw00h\" full 2L | code 2L]\n  - @override_settings(DEBUG=True) def test_cannot_connect_non_callable(self): ... [\"000nw00l\" full 6L | code 6L]\n  - def test_send(self): ... [\"000nw00n\" full 6L | code 6L]\n  - def test_send_no_receivers(self): ... [\"000nw00p\" full 3L | code 3L]\n  - def test_send_connected_no_sender(self): ... [\"000nw00r\" full 6L | code 6L]\n  - def test_send_different_no_sender(self): ... [\"000nw00t\" full 6L | code 6L]\n  - def test_unweakrefable_sender(self): ... [\"000nw00w\" full 7L | code 7L]\n  - def test_garbage_collected_receiver(self): ... [\"000nw00z\" full 8L | code 8L]\n  - def test_garbage_collected_sender(self): ... [\"000nw00M\" full 34L | code 34L]\n    - class Sender: ... [\"000nw00B\" full 2L | code 2L]\n    - def make_id(target): ... [\"000nw00D\" full 8L | code 8L]\n    - def first_receiver(attempt, **kwargs): ... [\"000nw00G\" full 2L | code 2L]\n    - def second_receiver(attempt, **kwargs): ... [\"000nw00J\" full 2L | code 2L]\n  - def test_cached_garbaged_collected(self): ... [\"000nw00P\" full 20L | code 20L]\n    - class sender: ... [\"000nw00N\" full 2L | code 2L]\n  - def test_multiple_registration(self): ... [\"000nw00S\" full 15L | code 15L]\n  - def test_uid_registration(self): ... [\"000nw00X\" full 12L | code 12L]\n    - def uid_based_receiver_1(**kwargs): ... [\"000nw00U\" full 2L | code 2L]\n    - def uid_based_receiver_2(**kwargs): ... [\"000nw00W\" full 2L | code 2L]\n  - def test_send_robust_success(self): ... [\"000nw00Z\" full 6L | code 6L]\n  - def test_send_robust_no_receivers(self): ... [\"000nw011\" full 3L | code 3L]\n  - def test_send_robust_ignored_sender(self): ... [\"000nw013\" full 6L | code 6L]\n  - def test_send_robust_fail(self): ... [\"000nw01c\" full 28L | code 28L]\n    - def fails(val, **kwargs): ... [\"000nw016\" full 2L | code 2L]\n  - def test_disconnection(self): ... [\"000nw01g\" full 12L | code 12L]\n  - def test_values_returned_by_disconnection(self): ... [\"000nw01l\" full 9L | code 9L]\n  - def test_has_listeners(self): ... [\"000nw01n\" full 10L | code 10L]\n\n- class ReceiverTestCase(SimpleTestCase): ... [\"000nw01y\" full 22L | code 22L]\n  - def test_receiver_single_signal(self): ... [\"000nw01s\" full 8L | code 8L]\n    - @receiver(a_signal) def f(val, **kwargs): ... [\"000nw01r\" full 3L | code 3L]\n  - def test_receiver_signal_list(self): ... [\"000nw01x\" full 12L | code 12L]\n    - @receiver([a_signal, b_signal, c_signal]) def f(val, **kwargs): ... [\"000nw01w\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

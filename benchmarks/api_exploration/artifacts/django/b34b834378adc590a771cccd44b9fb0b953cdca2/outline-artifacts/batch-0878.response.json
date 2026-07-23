@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/view_tests/default_urls.py",
+        "tests/view_tests/generic_urls.py",
+        "tests/view_tests/models.py",
+        "tests/view_tests/regression_21530_urls.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/view_tests/default_urls.py (8L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.contrib import admin\n2|from django.urls import path\n3|\n4|urlpatterns = [\n5|    # This is the same as in the default project template\n6|    path(\"admin/\", admin.site.urls),\n7|]\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/view_tests/generic_urls.py (51L)\nfile scope: [\"000KO006\" full 51L | imports 34L]\n\n\n# tests/view_tests/models.py (53L)\nfile scope: [\"000KP00g\" full 53L | imports 8L]\n\n- class Author(models.Model): ... [\"000KP002\" full 5L | code 5L]\n  - def get_absolute_url(self): ... [\"000KP001\" full 2L | code 2L]\n\n- class BaseArticle(models.Model): ... [\"000KP008\" full 12L | code 12L]\n  - class Meta: ... [\"000KP007\" full 2L | code 2L]\n\n- class Article(BaseArticle): ... [\"000KP00a\" full 2L | code 2L]\n\n- class UrlArticle(BaseArticle): ... [\"000KP00d\" full 11L | code 11L]\n  - def get_absolute_url(self): ... [\"000KP00c\" full 2L | code 2L]\n\n- class DateArticle(BaseArticle): ... [\"000KP00f\" full 7L | code 7L]\n\n# tests/view_tests/regression_21530_urls.py (8L)\nfile scope: [\"000KQ001\" full 8L | imports 5L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

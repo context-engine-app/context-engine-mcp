@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/reverse_lookup/__init__.py",
+        "tests/reverse_lookup/models.py",
+        "tests/reverse_lookup/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/reverse_lookup/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/reverse_lookup/models.py (25L)\nfile scope: [\"000Cx009\" full 25L | imports 10L]\n\n- class User(models.Model): ... [\"000Cx001\" full 2L | code 2L]\n\n- class Poll(models.Model): ... [\"000Cx004\" full 3L | code 3L]\n\n- class Choice(models.Model): ... [\"000Cx008\" full 6L | code 6L]\n\n# tests/reverse_lookup/tests.py (46L)\nfile scope: [\"000Cy00e\" full 46L | imports 7L]\n\n- class ReverseLookupTests(TestCase): ... [\"000Cy00d\" full 39L | code 39L]\n  - @classmethod def setUpTestData(cls): ... [\"000Cy004\" full 13L | code 13L]\n  - def test_reverse_by_field(self): ... [\"000Cy007\" full 6L | code 6L]\n  - def test_reverse_by_related_name(self): ... [\"000Cy00a\" full 6L | code 6L]\n  - def test_reverse_field_name_disallowed(self): ... [\"000Cy00c\" full 10L | code 10L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

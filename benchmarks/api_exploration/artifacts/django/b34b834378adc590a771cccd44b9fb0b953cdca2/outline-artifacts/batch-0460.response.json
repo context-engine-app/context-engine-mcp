@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/force_insert_update/__init__.py",
+        "tests/force_insert_update/models.py",
+        "tests/force_insert_update/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/force_insert_update/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/force_insert_update/models.py (44L)\nfile scope: [\"000oG00g\" full 44L | imports 9L]\n\n- class Counter(models.Model): ... [\"000oG002\" full 3L | code 3L]\n\n- class InheritedCounter(Counter): ... [\"000oG004\" full 2L | code 2L]\n\n- class ProxyCounter(Counter): ... [\"000oG007\" full 3L | code 3L]\n  - class Meta: ... [\"000oG006\" full 2L | code 2L]\n\n- class SubCounter(Counter): ... [\"000oG008\" full 2L | code 2L]\n\n- class SubSubCounter(SubCounter): ... [\"000oG009\" full 2L | code 2L]\n\n- class WithCustomPK(models.Model): ... [\"000oG00c\" full 3L | code 3L]\n\n- class OtherSubCounter(Counter): ... [\"000oG00e\" full 4L | code 4L]\n\n- class DiamondSubSubCounter(SubCounter, OtherSubCounter): ... [\"000oG00f\" full 2L | code 2L]\n\n# tests/force_insert_update/tests.py (191L)\nfile scope: [\"000oH00x\" full 191L | imports 17L]\n\n- class ForceTests(TestCase): ... [\"000oH007\" full 46L | code 46L]\n  - def test_force_update(self): ... [\"000oH006\" full 45L | code 45L]\n\n- class InheritanceTests(TestCase): ... [\"000oH00e\" full 20L | code 20L]\n  - def test_force_update_on_inherited_model(self): ... [\"000oH009\" full 4L | code 4L]\n  - def test_force_update_on_proxy_model(self): ... [\"000oH00b\" full 4L | code 4L]\n  - def test_force_update_on_inherited_model_without_fields(self): ... [\"000oH00d\" full 9L | code 9L]\n\n- class ForceInsertInheritanceTests(TestCase): ... [\"000oH00w\" full 104L | code 104L]\n  - def test_force_insert_not_bool_or_tuple(self): ... [\"000oH00g\" full 8L | code 8L]\n  - def test_force_insert_not_model(self): ... [\"000oH00j\" full 8L | code 8L]\n  - def test_force_insert_not_base(self): ... [\"000oH00l\" full 4L | code 4L]\n  - def test_force_insert_false(self): ... [\"000oH00n\" full 15L | code 15L]\n  - def test_force_insert_false_with_existing_parent(self): ... [\"000oH00p\" full 4L | code 4L]\n  - def test_force_insert_parent(self): ... [\"000oH00q\" full 8L | code 8L]\n  - def test_force_insert_with_grandparent(self): ... [\"000oH00r\" full 11L | code 11L]\n  - def test_force_insert_with_existing_grandparent(self): ... [\"000oH00t\" full 13L | code 13L]\n  - def test_force_insert_diamond_mti(self): ... [\"000oH00v\" full 24L | code 24L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

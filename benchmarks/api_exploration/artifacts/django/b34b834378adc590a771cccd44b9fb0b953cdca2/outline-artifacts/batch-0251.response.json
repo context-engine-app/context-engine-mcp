@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/middleware/locale.py",
+        "django/middleware/security.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 5.9 KB -> 1.0 KB (83% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/middleware/locale.py (81L)\nfile scope: [\"000cy00n\" full 81L | imports 10L]\n\n- class LocaleMiddleware(MiddlewareMixin): ... [\"000cy00m\" full 71L | code 71L]\n  - def process_request(self, request): ... [\"000cy007\" full 18L | code 18L]\n  - def process_response(self, request, response): ... [\"000cy00l\" full 43L | code 43L]\n\n# django/middleware/security.py (67L)\nfile scope: [\"000cz00k\" full 67L | imports 8L]\n\n- class SecurityMiddleware(MiddlewareMixin): ... [\"000cz00j\" full 59L | code 59L]\n  - def __init__(self, get_response): ... [\"000cz001\" full 11L | code 11L]\n  - def process_request(self, request): ... [\"000cz00e\" full 11L | code 11L]\n  - def process_response(self, request, response): ... [\"000cz00i\" full 34L | code 34L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

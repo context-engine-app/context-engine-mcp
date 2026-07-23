@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/sessions/management/commands/__init__.py",
+        "django/contrib/sessions/management/commands/clearsessions.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/sessions/management/commands/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/sessions/management/commands/clearsessions.py (22L)\nfile scope: [\"0007J005\" full 22L | imports 7L]\n\n- class Command(BaseCommand): ... [\"0007J004\" full 15L | code 15L]\n  - def handle(self, **options): ... [\"0007J003\" full 9L | code 9L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

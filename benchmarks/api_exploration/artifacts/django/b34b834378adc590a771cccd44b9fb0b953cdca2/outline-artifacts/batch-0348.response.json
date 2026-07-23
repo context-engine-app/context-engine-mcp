@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/auth_tests/models/__init__.py",
+        "tests/auth_tests/models/custom_permissions.py",
+        "tests/auth_tests/models/custom_user.py",
+        "tests/auth_tests/models/invalid_models.py",
+        "tests/auth_tests/models/is_active.py",
+        "tests/auth_tests/models/minimal.py",
+        "tests/auth_tests/models/no_natural_key.py",
+        "tests/auth_tests/models/no_password.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 9.9 KB -> 4.2 KB (58% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/auth_tests/models/__init__.py (46L)\nfile scope: [\"000hQ001\" full 46L | imports 22L]\n\n\n# tests/auth_tests/models/custom_permissions.py (36L)\nfile scope: [\"000hR00d\" full 36L | imports 19L]\n\n- class CustomPermissionsUserManager(CustomUserManager): ... [\"000hR005\" full 6L | code 6L]\n  - def create_superuser(self, email, password, date_of_birth): ... [\"000hR004\" full 5L | code 5L]\n\n- class CustomPermissionsUser(AbstractBaseUser, PermissionsMixin): ... [\"000hR00c\" full 13L | code 13L]\n  - def __str__(self): ... [\"000hR00b\" full 2L | code 2L]\n\n# tests/auth_tests/models/custom_user.py (160L)\nfile scope: [\"000hS01d\" full 160L | imports 31L]\n\n- class CustomUserManager(BaseUserManager): ... [\"000hS00i\" full 36L | code 36L]\n  - def create_user(self, email, date_of_birth, password=None, **fields): ... [\"000hS005\" full 14L | code 14L]\n  - async def acreate_user(self, email, date_of_birth, password=None, **fields): ... [\"000hS00b\" full 12L | code 12L]\n  - def create_superuser(self, email, password, date_of_birth, **fields): ... [\"000hS00h\" full 7L | code 7L]\n\n- class CustomUser(AbstractBaseUser): ... [\"000hS00F\" full 35L | code 35L]\n  - def __str__(self): ... [\"000hS00r\" full 2L | code 2L]\n  - def get_group_permissions(self, obj=None): ... [\"000hS00t\" full 2L | code 2L]\n  - def get_all_permissions(self, obj=None): ... [\"000hS00v\" full 2L | code 2L]\n  - def has_perm(self, perm, obj=None): ... [\"000hS00y\" full 2L | code 2L]\n  - def has_perms(self, perm_list, obj=None): ... [\"000hS00B\" full 2L | code 2L]\n  - def has_module_perms(self, app_label): ... [\"000hS00D\" full 2L | code 2L]\n  - @property def is_staff(self): ... [\"000hS00E\" full 3L | code 3L]\n\n- class RemoveGroupsAndPermissions: ... [\"000hS00P\" full 20L | code 20L]\n  - def __enter__(self): ... [\"000hS00I\" full 9L | code 9L]\n  - def __exit__(self, exc_type, exc_value, traceback): ... [\"000hS00O\" full 3L | code 3L]\n\n- class CustomUserWithoutIsActiveField(AbstractBaseUser): ... [\"000hS00U\" full 7L | code 7L]\n\n- class CustomUserCompositePrimaryKey(AbstractBaseUser): ... [\"000hS013\" full 11L | code 11L]\n\n- class ExtensionUser(AbstractUser): ... [\"000hS017\" full 6L | code 6L]\n\n- class ErrorUserManager(BaseUserManager): ... [\"000hS01a\" full 6L | code 6L]\n  - def get_by_natural_key(self, _): ... [\"000hS018\" full 2L | code 2L]\n  - async def aget_by_natural_key(self, _): ... [\"000hS019\" full 2L | code 2L]\n\n- class ErrorAdminUser(AbstractUser): ... [\"000hS01c\" full 2L | code 2L]\n\n# tests/auth_tests/models/invalid_models.py (22L)\nfile scope: [\"000hT008\" full 22L | imports 5L]\n\n- class CustomUserNonUniqueUsername(AbstractBaseUser): ... [\"000hT007\" full 17L | code 17L]\n\n# tests/auth_tests/models/is_active.py (17L)\nfile scope: [\"000hU004\" full 17L | imports 5L]\n\n- class IsActiveTestUser1( ... ): \"\"\" This test user class and derivatives test the default is_active behavior \"\"\" username = models.CharField(max_length=30, unique=True) custom_objects = BaseUserManager() USERNAME_FIELD = \"username\" [\"000hU003\" full 10L | code 10L]\n\n# tests/auth_tests/models/minimal.py (7L)\nfile scope: [\"000hV003\" full 7L | imports 4L]\n\n- class MinimalUser(models.Model): ... [\"000hV002\" full 3L | code 3L]\n\n# tests/auth_tests/models/no_natural_key.py (23L)\nfile scope: [\"000hW00e\" full 23L | imports 5L]\n\n- class CustomUserNoNaturalKeyManager(models.Manager): ... [\"000hW005\" full 6L | code 6L]\n  - def create_superuser(self, email, password=None, **extra_fields): ... [\"000hW004\" full 5L | code 5L]\n\n- class CustomUserNoNaturalKey(models.Model): ... [\"000hW00d\" full 10L | code 10L]\n\n# tests/auth_tests/models/no_password.py (22L)\nfile scope: [\"000hX00e\" full 22L | imports 5L]\n\n- class UserManager(BaseUserManager): ... [\"000hX007\" full 8L | code 8L]\n  - def _create_user(self, username, **extra_fields): ... [\"000hX003\" full 4L | code 4L]\n  - def create_superuser(self, username=None, **extra_fields): ... [\"000hX006\" full 2L | code 2L]\n\n- class NoPasswordUser(AbstractBaseUser): ... [\"000hX00d\" full 7L | code 7L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

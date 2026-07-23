@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio-util/src/sync/tests/loom_cancellation_token.rs",
+        "tokio-util/src/sync/tests/mod.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 4.2 KB -> 1.1 KB (74% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio-util/src/sync/tests/loom_cancellation_token.rs (186L)\nfile scope: [\"0002Z007\" full 186L | imports 6L]\n\n- #[test] fn cancel_token() { ... } [\"0002Z000\" full 20L | code 20L]\n\n- #[test] fn cancel_token_owned() { ... } [\"0002Z001\" full 20L | code 20L]\n\n- #[test] fn cancel_with_child() { ... } [\"0002Z002\" full 29L | code 29L]\n\n- #[test] fn drop_token_no_child() { ... } [\"0002Z003\" full 24L | code 24L]\n\n- #[ignore] #[test] fn drop_token_with_children() { ... } [\"0002Z004\" full 27L | code 25L | docs 2L]\n\n- #[ignore] #[test] fn drop_and_cancel_token() { ... } [\"0002Z005\" full 27L | code 25L | docs 2L]\n\n- #[ignore] #[test] fn cancel_parent_and_child() { ... } [\"0002Z006\" full 27L | code 25L | docs 2L]\n\n# tokio-util/src/sync/tests/mod.rs (3L)\nfile scope: [\"00030001\" full 3L]\n\n- #[cfg(loom)] mod loom_cancellation_token; [\"00030000\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/test_runner_apps/simple/__init__.py",
+        "tests/test_runner_apps/simple/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/test_runner_apps/simple/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/test_runner_apps/simple/tests.py (56L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n 1|from unittest import TestCase\n 2|\n 3|from django.test import SimpleTestCase\n 4|from django.test import TestCase as DjangoTestCase\n 5|\n 6|\n 7|class DjangoCase1(DjangoTestCase):\n 8|    def test_1(self):\n 9|        pass\n10|\n11|    def test_2(self):\n12|        pass\n13|\n14|\n15|class DjangoCase2(DjangoTestCase):\n16|    def test_1(self):\n17|        pass\n18|\n19|    def test_2(self):\n20|        pass\n21|\n22|\n23|class SimpleCase1(SimpleTestCase):\n24|    def test_1(self):\n25|        pass\n26|\n27|    def test_2(self):\n28|        pass\n29|\n30|\n31|class SimpleCase2(SimpleTestCase):\n32|    def test_1(self):\n33|        pass\n34|\n35|    def test_2(self):\n36|        pass\n37|\n38|\n39|class UnittestCase1(TestCase):\n40|    def test_1(self):\n41|        pass\n42|\n43|    def test_2(self):\n44|        pass\n45|\n46|\n47|class UnittestCase2(TestCase):\n48|    def test_1(self):\n49|        pass\n50|\n51|    def test_2(self):\n52|        pass\n53|\n54|    def test_3_test(self):\n55|        pass\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

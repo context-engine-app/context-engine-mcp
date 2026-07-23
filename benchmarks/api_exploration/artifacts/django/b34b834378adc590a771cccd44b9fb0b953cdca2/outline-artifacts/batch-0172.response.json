@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/redirects/models.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.1 KB -> 559 B (48% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/redirects/models.py (36L)\nfile scope: [\"0007v00b\" full 36L | imports 6L]\n\n- class Redirect(models.Model): ... [\"0007v00a\" full 30L | code 30L]\n  - class Meta: ... [\"0007v008\" full 6L | code 6L]\n  - def __str__(self): ... [\"0007v009\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

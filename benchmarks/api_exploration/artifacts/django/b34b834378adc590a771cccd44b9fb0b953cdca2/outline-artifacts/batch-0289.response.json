@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/admin_default_site/__init__.py",
+        "tests/admin_default_site/apps.py",
+        "tests/admin_default_site/sites.py",
+        "tests/admin_default_site/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/admin_default_site/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/admin_default_site/apps.py (7L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.contrib.admin.apps import SimpleAdminConfig\n2|\n3|\n4|class MyCustomAdminConfig(SimpleAdminConfig):\n5|    verbose_name = \"My custom default admin site.\"\n6|    default_site = \"admin_default_site.sites.CustomAdminSite\"\nnote: EOF\n\n# tests/admin_default_site/sites.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.contrib import admin\n2|\n3|\n4|class CustomAdminSite(admin.AdminSite):\n5|    pass\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/admin_default_site/tests.py (45L)\nfile scope: [\"000ff00b\" full 45L | imports 8L]\n\n- @override_settings( INSTALLED_APPS=[ \"admin_default_site.apps.MyCustomAdminConfig\", \"django.contrib.auth\", \"django.contrib.contenttypes\", \"django.contrib.sessions\", \"django.contrib.messages\", \"django.contrib.staticfiles\", ] ) class CustomAdminSiteTests(SimpleTestCase): ... [\"000ff004\" full 22L | code 22L]\n  - def setUp(self): ... [\"000ff000\" full 5L | code 5L]\n  - def tearDown(self): ... [\"000ff002\" full 2L | code 2L]\n  - def test_use_custom_admin_site(self): ... [\"000ff003\" full 2L | code 2L]\n\n- class DefaultAdminSiteTests(SimpleTestCase): ... [\"000ff007\" full 7L | code 7L]\n  - def test_use_default_admin_site(self): ... [\"000ff005\" full 2L | code 2L]\n  - def test_repr(self): ... [\"000ff006\" full 3L | code 3L]\n\n- class AdminSiteTests(SimpleTestCase): ... [\"000ff00a\" full 4L | code 4L]\n  - def test_repr(self): ... [\"000ff009\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

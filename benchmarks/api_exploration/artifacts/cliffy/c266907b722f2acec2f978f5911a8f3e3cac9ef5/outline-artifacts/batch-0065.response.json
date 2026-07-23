@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "keycode/_key_codes.ts",
+        "keycode/key_code.ts",
+        "keycode/mod.ts"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 10.2 KB -> 1.2 KB (88% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# keycode/_key_codes.ts (123L)\nfile scope: [\"0004D01n\" full 123L | module-docs 1L | imports 14L]\n\n\n# keycode/key_code.ts (291L)\nfile scope: [\"0004E00z\" full 291L | imports 38L]\n\n- export interface KeyCode { ... } [\"0004E009\" full 16L | code 16L]\n  - name?: string; [\"0004E002\" full 1L | code 1L]\n  - sequence?: string; [\"0004E003\" full 1L | code 1L]\n  - code?: string; [\"0004E004\" full 1L | code 1L]\n  - ctrl?: boolean; [\"0004E005\" full 1L | code 1L]\n  - meta?: boolean; [\"0004E006\" full 1L | code 1L]\n  - shift?: boolean; [\"0004E007\" full 1L | code 1L]\n  - char?: string; [\"0004E008\" full 1L | code 1L]\n\n- export function parse(data: Uint8Array | string): KeyCode[] { ... } [\"0004E00w\" full 231L | code 231L]\n  - function parseNext() { ... } [\"0004E00v\" full 189L | code 189L]\n\n- function charLengthAt(str: string, i: number): number { ... } [\"0004E00y\" full 9L | code 9L]\n\n# keycode/mod.ts (38L)\nfile scope: [\"0004F000\" full 38L | module-docs 36L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

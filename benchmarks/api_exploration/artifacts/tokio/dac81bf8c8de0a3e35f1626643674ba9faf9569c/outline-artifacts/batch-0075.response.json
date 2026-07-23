@@ -1,0 +1,24 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/io/util/write_all.rs",
+        "tokio/src/io/util/write_all_buf.rs",
+        "tokio/src/io/util/write_buf.rs",
+        "tokio/src/io/util/write_int.rs",
+        "tokio/src/io/util/write_vectored.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 10.4 KB -> 2.9 KB (72% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/io/util/write_all.rs (56L)\nfile scope: [\"0005m004\" full 56L | imports 23L]\n\n- pub(crate) fn write_all<'a, W>(writer: &'a mut W, buf: &'a [u8]) -> WriteAll<'a, W> where W: AsyncWrite + Unpin + ?Sized, { ... } [\"0005m000\" full 10L | code 10L]\n\n- impl<W> Future for WriteAll<'_, W> where W: AsyncWrite + Unpin + ?Sized, { ... } [\"0005m003\" full 22L | code 22L]\n  - type Output = io::Result<()>; [\"0005m001\" full 1L | code 1L]\n  - fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<io::Result<()>> { ... } [\"0005m002\" full 15L | code 15L]\n\n# tokio/src/io/util/write_all_buf.rs (65L)\nfile scope: [\"0005n005\" full 65L | imports 23L]\n\n- pub(crate) fn write_all_buf<'a, W, B>(writer: &'a mut W, buf: &'a mut B) -> WriteAllBuf<'a, W, B> where W: AsyncWrite + Unpin, B: Buf, { ... } [\"0005n000\" full 13L | code 11L | docs 2L]\n\n- impl<W, B> Future for WriteAllBuf<'_, W, B> where W: AsyncWrite + Unpin, B: Buf, { ... } [\"0005n004\" full 28L | code 28L]\n  - type Output = io::Result<()>; [\"0005n001\" full 1L | code 1L]\n  - fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<io::Result<()>> { ... } [\"0005n003\" full 20L | code 20L]\n\n# tokio/src/io/util/write_buf.rs (65L)\nfile scope: [\"0005o005\" full 65L | imports 23L]\n\n- pub(crate) fn write_buf<'a, W, B>(writer: &'a mut W, buf: &'a mut B) -> WriteBuf<'a, W, B> where W: AsyncWrite + Unpin, B: Buf, { ... } [\"0005o000\" full 13L | code 11L | docs 2L]\n\n- impl<W, B> Future for WriteBuf<'_, W, B> where W: AsyncWrite + Unpin, B: Buf, { ... } [\"0005o004\" full 28L | code 28L]\n  - type Output = io::Result<usize>; [\"0005o001\" full 1L | code 1L]\n  - fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<io::Result<usize>> { ... } [\"0005o003\" full 20L | code 20L]\n\n# tokio/src/io/util/write_int.rs (152L)\nfile scope: [\"0005p002\" full 152L | imports 11L]\n\n- macro_rules! writer { ($name:ident, $ty:ty, $writer:ident) => { writer!($name, $ty, $writer, std::mem::size_of::<$ty>()); }; ... ; } [\"0005p000\" full 64L | code 64L]\n\n- macro_rules! writer8 { ... ; } [\"0005p001\" full 47L | code 47L]\n\n# tokio/src/io/util/write_vectored.rs (48L)\nfile scope: [\"0005q004\" full 48L | imports 23L]\n\n- pub(crate) fn write_vectored<'a, 'b, W>( writer: &'a mut W, bufs: &'a [IoSlice<'b>], ) -> WriteVectored<'a, 'b, W> where W: AsyncWrite + Unpin + ?Sized, { ... } [\"0005q000\" full 13L | code 13L]\n\n- impl<W> Future for WriteVectored<'_, '_, W> where W: AsyncWrite + Unpin + ?Sized, { ... } [\"0005q003\" full 11L | code 11L]\n  - type Output = io::Result<usize>; [\"0005q001\" full 1L | code 1L]\n  - fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<io::Result<usize>> { ... } [\"0005q002\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

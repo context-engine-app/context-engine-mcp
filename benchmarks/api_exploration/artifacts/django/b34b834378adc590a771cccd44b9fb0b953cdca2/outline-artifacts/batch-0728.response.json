@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/properties/__init__.py",
+        "tests/properties/models.py",
+        "tests/properties/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/properties/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/properties/models.py (23L)\nfile scope: [\"000BH008\" full 23L | imports 10L]\n\n- class Person(models.Model): ... [\"000BH007\" full 13L | code 13L]\n  - def _get_full_name(self): ... [\"000BH002\" full 2L | code 2L]\n  - def _set_full_name(self, combined_name): ... [\"000BH004\" full 2L | code 2L]\n\n# tests/properties/tests.py (27L)\nfile scope: [\"000BI006\" full 27L | imports 6L]\n\n- class PropertyTests(TestCase): ... [\"000BI005\" full 21L | code 21L]\n  - @classmethod def setUpTestData(cls): ... [\"000BI000\" full 3L | code 3L]\n  - def test_getter(self): ... [\"000BI002\" full 2L | code 2L]\n  - def test_setter(self): ... [\"000BI004\" full 13L | code 13L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

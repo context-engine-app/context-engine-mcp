@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/model_options/__init__.py",
+        "tests/model_options/apps.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/model_options/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/model_options/apps.py (26L)\nfile scope: [\"000A400e\" full 26L | imports 4L]\n\n- class ModelDefaultPKConfig(AppConfig): ... [\"000A4001\" full 2L | code 2L]\n\n- class ModelPKConfig(AppConfig): ... [\"000A4004\" full 3L | code 3L]\n\n- class ModelPKNonAutoConfig(AppConfig): ... [\"000A4007\" full 3L | code 3L]\n\n- class ModelPKNoneConfig(AppConfig): ... [\"000A400a\" full 3L | code 3L]\n\n- class ModelPKNonexistentConfig(AppConfig): ... [\"000A400d\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

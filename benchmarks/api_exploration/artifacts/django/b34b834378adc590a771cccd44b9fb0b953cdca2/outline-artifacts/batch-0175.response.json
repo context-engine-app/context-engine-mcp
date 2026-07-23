@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/sessions/base_session.py",
+        "django/contrib/sessions/exceptions.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 1.8 KB -> 1.3 KB (29% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/sessions/base_session.py (49L)\nfile scope: [\"0007F00m\" full 49L | imports 10L]\n\n- class BaseSessionManager(models.Manager): ... [\"0007F008\" full 15L | code 15L]\n  - def encode(self, session_dict): ... [\"0007F002\" full 6L | code 6L]\n  - def save(self, session_key, session_dict, expire_date): ... [\"0007F007\" full 7L | code 7L]\n\n- class AbstractBaseSession(models.Model): ... [\"0007F00l\" full 22L | code 22L]\n  - class Meta: ... [\"0007F00g\" full 4L | code 4L]\n  - def __str__(self): ... [\"0007F00h\" full 2L | code 2L]\n  - @classmethod def get_session_store_class(cls): ... [\"0007F00i\" full 3L | code 3L]\n  - def get_decoded(self): ... [\"0007F00k\" full 3L | code 3L]\n\n# django/contrib/sessions/exceptions.py (20L)\nfile scope: [\"0007G003\" full 20L | imports 4L]\n\n- class InvalidSessionKey(SuspiciousOperation): ... [\"0007G000\" full 4L | code 4L]\n\n- class SuspiciousSession(SuspiciousOperation): ... [\"0007G001\" full 4L | code 4L]\n\n- class SessionInterrupted(BadRequest): ... [\"0007G002\" full 4L | code 4L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

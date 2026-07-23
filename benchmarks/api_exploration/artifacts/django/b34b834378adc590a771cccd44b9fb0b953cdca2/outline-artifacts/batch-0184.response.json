@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/sites/models.py",
+        "django/contrib/sites/requests.py",
+        "django/contrib/sites/shortcuts.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 4.8 KB -> 1.8 KB (62% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/sites/models.py (121L)\nfile scope: [\"0008200A\" full 121L | imports 13L]\n\n- SITE_CACHE [\"00082000\" full 1L | code 1L]\n\n- def _simple_domain_name_validator(value): ... [\"00082003\" full 11L | code 11L]\n\n- class SiteManager(models.Manager): ... [\"0008200j\" full 52L | code 52L]\n  - def _get_site_by_id(self, site_id): ... [\"00082007\" full 5L | code 5L]\n  - def _get_site_by_request(self, request): ... [\"0008200c\" full 13L | code 13L]\n  - def get_current(self, request=None): ... [\"0008200f\" full 21L | code 21L]\n  - def clear_cache(self): ... [\"0008200g\" full 4L | code 4L]\n  - def get_by_natural_key(self, domain): ... [\"0008200i\" full 2L | code 2L]\n\n- class Site(models.Model): ... [\"0008200u\" full 22L | code 22L]\n  - class Meta: ... [\"0008200r\" full 5L | code 5L]\n  - def __str__(self): ... [\"0008200s\" full 2L | code 2L]\n  - def natural_key(self): ... [\"0008200t\" full 2L | code 2L]\n\n- def clear_site_cache(sender, **kwargs): ... [\"0008200z\" full 14L | code 14L]\n\n# django/contrib/sites/requests.py (21L)\nfile scope: [\"0008300a\" full 21L]\n\n- class RequestSite: ... [\"00083009\" full 20L | code 20L]\n  - def __init__(self, request): ... [\"00083001\" full 2L | code 2L]\n  - def __str__(self): ... [\"00083004\" full 2L | code 2L]\n  - def save(self, force_insert=False, force_update=False): ... [\"00083007\" full 2L | code 2L]\n  - def delete(self): ... [\"00083008\" full 2L | code 2L]\n\n# django/contrib/sites/shortcuts.py (19L)\nfile scope: [\"00084002\" full 19L | imports 6L]\n\n- def get_current_site(request): ... [\"00084001\" full 13L | code 13L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

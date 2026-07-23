@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/no_models/__init__.py",
+        "tests/no_models/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/no_models/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/no_models/tests.py (10L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.apps import apps\n2|from django.test import SimpleTestCase\n3|\n4|\n5|class NoModelTests(SimpleTestCase):\n6|    def test_no_models(self):\n7|        \"\"\"It's possible to load an app with no models.py file.\"\"\"\n8|        app_config = apps.get_app_config(\"no_models\")\n9|        self.assertIsNone(app_config.models_module)\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

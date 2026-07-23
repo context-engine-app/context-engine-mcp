@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/dispatch/__init__.py",
+        "django/dispatch/dispatcher.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 19.4 KB -> 2.4 KB (88% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/dispatch/__init__.py (11L)\nfile scope: [\"000ca000\" full 11L]\n\n\n# django/dispatch/dispatcher.py (559L)\nfile scope: [\"000cb01T\" full 559L | imports 24L]\n\n- def _make_id(target): ... [\"000cb002\" full 4L | code 4L]\n\n- NONE_ID [\"000cb003\" full 1L | code 1L]\n\n- NO_RECEIVERS [\"000cb004\" full 1L | code 1L]\n\n- def _restore_context(context): ... [\"000cb008\" full 12L | code 12L]\n\n- async def _run_parallel(*coros): ... [\"000cb00j\" full 25L | code 25L]\n  - async def run(i, coro): ... [\"000cb00d\" full 2L | code 2L]\n\n- class Signal: ... [\"000cb01M\" full 466L | code 466L]\n  - def __init__(self, use_caching=False): ... [\"000cb00l\" full 14L | code 14L]\n  - def connect(self, receiver, sender=None, weak=True, dispatch_uid=None): ... [\"000cb00z\" full 76L | code 76L]\n  - def disconnect(self, receiver=None, sender=None, dispatch_uid=None): ... [\"000cb00H\" full 35L | code 35L]\n  - def has_listeners(self, sender=None): ... [\"000cb00L\" full 3L | code 3L]\n  - def send(self, sender, **named): ... [\"000cb00V\" full 45L | code 45L]\n    - async def asend(): ... [\"000cb00U\" full 8L | code 8L]\n  - async def asend(self, sender, **named): ... [\"000cb013\" full 56L | code 56L]\n    - async def sync_send(): ... [\"000cb010\" full 2L | code 2L]\n  - def _log_robust_failure(self, receiver, err): ... [\"000cb016\" full 7L | code 7L]\n  - def send_robust(self, sender, **named): ... [\"000cb01l\" full 62L | code 62L]\n    - async def asend_and_wrap_exception(receiver): ... [\"000cb01i\" full 7L | code 7L]\n    - async def asend(): ... [\"000cb01k\" full 8L | code 8L]\n  - async def asend_robust(self, sender, **named): ... [\"000cb01x\" full 69L | code 69L]\n    - async def sync_send(): ... [\"000cb01q\" full 2L | code 2L]\n    - async def asend_and_wrap_exception(receiver): ... [\"000cb01u\" full 7L | code 7L]\n  - def _clear_dead_receivers(self): ... [\"000cb01y\" full 12L | code 12L]\n  - def _live_receivers(self, sender): ... [\"000cb01J\" full 49L | code 49L]\n  - def _flag_dead_receivers(self, reference=None): ... [\"000cb01L\" full 8L | code 8L]\n\n- def receiver(signal, **kwargs): ... [\"000cb01S\" full 23L | code 23L]\n  - def _decorator(func): ... [\"000cb01R\" full 7L | code 7L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

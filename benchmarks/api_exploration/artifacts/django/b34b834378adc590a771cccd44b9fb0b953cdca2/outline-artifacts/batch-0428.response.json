@@ -1,0 +1,26 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/dbshell/__init__.py",
+        "tests/dbshell/fake_client.py",
+        "tests/dbshell/test_mysql.py",
+        "tests/dbshell/test_oracle.py",
+        "tests/dbshell/test_postgresql.py",
+        "tests/dbshell/test_sqlite.py",
+        "tests/dbshell/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/dbshell/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/dbshell/fake_client.py (4L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|import sys\n2|\n3|sys.exit(1)\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/dbshell/test_mysql.py (240L)\nfile scope: [\"000mW00E\" full 240L | imports 13L]\n\n- class MySqlDbshellCommandTestCase(SimpleTestCase): ... [\"000mW00D\" full 227L | code 227L]\n  - def settings_to_cmd_args_env(self, settings_dict, parameters=None): ... [\"000mW002\" full 4L | code 4L]\n  - def test_fails_with_keyerror_on_incomplete_config(self): ... [\"000mW003\" full 3L | code 3L]\n  - def test_basic_params_specified_in_settings(self): ... [\"000mW006\" full 22L | code 22L]\n  - def test_options_override_settings_proper_values(self): ... [\"000mW00e\" full 34L | code 34L]\n  - def test_options_non_deprecated_keys_preferred(self): ... [\"000mW00h\" full 27L | code 27L]\n  - def test_options_charset(self): ... [\"000mW00k\" full 23L | code 23L]\n  - def test_can_connect_using_sockets(self): ... [\"000mW00n\" full 21L | code 21L]\n  - def test_ssl_certificate_is_added(self): ... [\"000mW00q\" full 31L | code 31L]\n  - def test_parameters(self): ... [\"000mW00r\" full 15L | code 15L]\n  - def test_crash_password_does_not_leak(self): ... [\"000mW00w\" full 21L | code 21L]\n  - @skipUnless(connection.vendor == \"mysql\", \"Requires a MySQL connection\") def test_sigint_handler(self): ... [\"000mW00C\" full 15L | code 15L]\n    - def _mock_subprocess_run(*args, **kwargs): ... [\"000mW00A\" full 3L | code 3L]\n\n# tests/dbshell/test_oracle.py (55L)\nfile scope: [\"000mX00b\" full 55L | imports 8L]\n\n- @skipUnless(connection.vendor == \"oracle\", \"Requires oracledb to be installed\") class OracleDbshellTests(SimpleTestCase): ... [\"000mX00a\" full 47L | code 47L]\n  - def settings_to_cmd_args_env(self, settings_dict, parameters=None, rlwrap=False): ... [\"000mX003\" full 7L | code 7L]\n  - def test_without_rlwrap(self): ... [\"000mX005\" full 10L | code 10L]\n  - def test_with_rlwrap(self): ... [\"000mX007\" full 11L | code 11L]\n  - def test_parameters(self): ... [\"000mX009\" full 14L | code 14L]\n\n# tests/dbshell/test_postgresql.py (188L)\nfile scope: [\"000mY00p\" full 188L | imports 13L]\n\n- class PostgreSqlDbshellCommandTestCase(SimpleTestCase): ... [\"000mY00o\" full 175L | code 175L]\n  - def settings_to_cmd_args_env(self, settings_dict, parameters=None): ... [\"000mY002\" full 5L | code 5L]\n  - def test_basic(self): ... [\"000mY003\" full 16L | code 16L]\n  - def test_nopass(self): ... [\"000mY004\" full 15L | code 15L]\n  - def test_ssl_certificate(self): ... [\"000mY005\" full 26L | code 26L]\n  - def test_service(self): ... [\"000mY006\" full 5L | code 5L]\n  - def test_passfile(self): ... [\"000mY007\" full 32L | code 32L]\n  - def test_column(self): ... [\"000mY008\" full 16L | code 16L]\n  - def test_accent(self): ... [\"000mY00b\" full 18L | code 18L]\n  - def test_parameters(self): ... [\"000mY00c\" full 5L | code 5L]\n  - @skipUnless(connection.vendor == \"postgresql\", \"Requires a PostgreSQL connection\") def test_sigint_handler(self): ... [\"000mY00i\" full 15L | code 15L]\n    - def _mock_subprocess_run(*args, **kwargs): ... [\"000mY00g\" full 3L | code 3L]\n  - def test_crash_password_does_not_leak(self): ... [\"000mY00n\" full 11L | code 11L]\n\n# tests/dbshell/test_sqlite.py (46L)\nfile scope: [\"000mZ00a\" full 46L | imports 11L]\n\n- class SqliteDbshellCommandTestCase(SimpleTestCase): ... [\"000mZ009\" full 35L | code 35L]\n  - def settings_to_cmd_args_env(self, settings_dict, parameters=None): ... [\"000mZ002\" full 4L | code 4L]\n  - def test_path_name(self): ... [\"000mZ003\" full 5L | code 5L]\n  - def test_parameters(self): ... [\"000mZ004\" full 5L | code 5L]\n  - @skipUnless(connection.vendor == \"sqlite\", \"SQLite test\") def test_non_zero_exit_status_when_path_to_db_is_path(self): ... [\"000mZ008\" full 17L | code 17L]\n\n# tests/dbshell/tests.py (18L)\nfile scope: [\"000n0003\" full 18L | imports 9L]\n\n- class DbshellCommandTestCase(SimpleTestCase): ... [\"000n0002\" full 9L | code 9L]\n  - def test_command_missing(self): ... [\"000n0001\" full 8L | code 8L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

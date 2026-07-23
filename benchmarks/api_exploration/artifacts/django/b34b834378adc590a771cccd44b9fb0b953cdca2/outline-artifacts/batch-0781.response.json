@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/str/__init__.py",
+        "tests/str/models.py",
+        "tests/str/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/str/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/str/models.py (20L)\nfile scope: [\"000El004\" full 20L | imports 14L]\n\n- class InternationalArticle(models.Model): ... [\"000El003\" full 6L | code 6L]\n  - def __str__(self): ... [\"000El002\" full 2L | code 2L]\n\n# tests/str/tests.py (38L)\nfile scope: [\"000Em007\" full 38L | imports 10L]\n\n- class SimpleTests(TestCase): ... [\"000Em006\" full 28L | code 28L]\n  - def test_international(self): ... [\"000Em001\" full 6L | code 6L]\n  - @isolate_apps(\"str\") def test_defaults(self): ... [\"000Em005\" full 20L | code 20L]\n    - class Default(models.Model): ... [\"000Em002\" full 2L | code 2L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

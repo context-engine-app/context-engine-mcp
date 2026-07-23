@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/admin_scripts/complex_app/models/__init__.py",
+        "tests/admin_scripts/complex_app/models/bar.py",
+        "tests/admin_scripts/complex_app/models/foo.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/admin_scripts/complex_app/models/__init__.py (5L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from .bar import Bar\n2|from .foo import Foo\n3|\n4|__all__ = [\"Foo\", \"Bar\"]\nnote: EOF\n\n# tests/admin_scripts/complex_app/models/bar.py (9L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import models\n2|\n3|\n4|class Bar(models.Model):\n5|    name = models.CharField(max_length=5)\n6|\n7|    class Meta:\n8|        app_label = \"complex_app\"\nnote: EOF\n\n# tests/admin_scripts/complex_app/models/foo.py (9L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.db import models\n2|\n3|\n4|class Foo(models.Model):\n5|    name = models.CharField(max_length=5)\n6|\n7|    class Meta:\n8|        app_label = \"complex_app\"\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

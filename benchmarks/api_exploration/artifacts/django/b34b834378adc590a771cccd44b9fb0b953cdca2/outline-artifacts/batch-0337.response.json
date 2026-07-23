@@ -1,0 +1,20 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/apps/namespace_package_base/nsapp/apps.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "The outline is larger than the file content, so the full file is shown instead.\n\n1|import os\n2|\n3|from django.apps import AppConfig\n4|\n5|\n6|class NSAppConfig(AppConfig):\n7|    default = False\n8|    name = \"nsapp\"\n9|    path = os.path.dirname(__file__)\nnote: EOF\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

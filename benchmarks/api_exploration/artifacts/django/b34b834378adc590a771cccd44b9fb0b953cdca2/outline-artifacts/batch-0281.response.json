@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "scripts/pr_quality/__init__.py",
+        "scripts/pr_quality/check_pr.py",
+        "scripts/pr_quality/errors.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# scripts/pr_quality/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# scripts/pr_quality/check_pr.py (595L)\nfile scope: [\"000eN02o\" full 595L | module-docs 1L | imports 76L]\n\n- GITHUB_PER_PAGE [\"000eN000\" full 1L | code 1L]\n\n- LARGE_PR_THRESHOLD [\"000eN001\" full 1L | code 1L]\n\n- MIN_WORDS [\"000eN002\" full 1L | code 1L]\n\n- SKIPPED [\"000eN003\" full 1L | code 1L]\n\n- TICKET_NOT_FOUND [\"000eN004\" full 1L | code 1L]\n\n- URLOPEN_TIMEOUT_SECONDS [\"000eN005\" full 1L | code 1L]\n\n- PR_TEMPLATE_DATE [\"000eN006\" full 1L | code 1L]\n\n- AI_DISCLOSURE_DATE [\"000eN007\" full 1L | code 1L]\n\n- ALLOWED_STAGES [\"000eN008\" full 1L | code 1L]\n\n- def setup_logging(logger, gha_formatter=True): ... [\"000eN00j\" full 21L | code 21L]\n  - class GHAFormatter(logging.Formatter): ... [\"000eN00h\" full 12L | code 12L]\n    - def format(self, record): ... [\"000eN00g\" full 4L | code 4L]\n\n- def github_request(method, path, token, repo, data=None, params=None): ... [\"000eN00w\" full 19L | code 19L]\n\n- def get_recent_commit_count(pr_author, repo, token, since_days, max_count): ... [\"000eN00E\" full 16L | code 16L]\n\n- def get_pr_total_changes(pr_number, repo, token): ... [\"000eN00L\" full 19L | code 19L]\n\n- def get_comment_ids_to_delete(pr_number, repo, token): ... [\"000eN00T\" full 18L | code 18L]\n\n- def strip_html_comments(text): ... [\"000eN00V\" full 3L | code 3L]\n\n- def extract_ticket_id(pr_body): ... [\"000eN00Y\" full 4L | code 4L]\n\n- def fetch_trac_ticket(ticket_id): ... [\"000eN014\" full 29L | code 29L]\n\n- def check_trac_ticket(pr_body, total_changes, threshold=LARGE_PR_THRESHOLD): ... [\"000eN01a\" full 28L | code 28L]\n\n- def check_trac_status(ticket_id, ticket_data): ... [\"000eN01h\" full 31L | code 31L]\n\n- def check_trac_has_patch(ticket_id, initial_data, poll_interval=1, poll_timeout=10): ... [\"000eN01s\" full 45L | code 45L]\n\n- def check_pr_title_has_ticket(pr_title, ticket_id): ... [\"000eN01v\" full 9L | code 9L]\n\n- def check_branch_description(pr_body): ... [\"000eN01A\" full 26L | code 26L]\n\n- def check_ai_disclosure(pr_body): ... [\"000eN01H\" full 38L | code 38L]\n\n- def check_checklist(pr_body): ... [\"000eN01L\" full 14L | code 14L]\n\n- def write_job_summary(pr_number, results, summary_file=None): ... [\"000eN01W\" full 21L | code 21L]\n\n- def main( repo, token, pr_author, pr_body, pr_number, pr_title=\"\", pr_created_at=None, autoclose=True, summary_file=None, gha_formatter=False, ): ... [\"000eN02n\" full 139L | code 139L]\n\n# scripts/pr_quality/errors.py (161L)\nfile scope: [\"000eO00u\" full 161L | imports 147L]\n\n- LEVEL_ERROR [\"000eO000\" full 1L | code 1L]\n\n- LEVEL_WARNING [\"000eO001\" full 1L | code 1L]\n\n- class Message: ... [\"000eO00e\" full 15L | code 15L]\n  - def __init__(self, title, body, **kwargs): ... [\"000eO005\" full 4L | code 4L]\n  - def as_details(self, level=LEVEL_ERROR): ... [\"000eO00d\" full 7L | code 7L]\n\n- CONTRIBUTING_URL [\"000eO00f\" full 1L | code 1L]\n\n- SUBMITTING_URL [\"000eO00g\" full 1L | code 1L]\n\n- TRIAGING_URL [\"000eO00h\" full 1L | code 1L]\n\n- FORUM_URL [\"000eO00i\" full 1L | code 1L]\n\n- TRAC_URL [\"000eO00j\" full 1L | code 1L]\n\n- CHECKS_HEADER [\"000eO00k\" full 1L | code 1L]\n\n- CHECKS_FOOTER [\"000eO00l\" full 1L | code 1L]\n\n- INCOMPLETE_CHECKLIST [\"000eO00m\" full 1L | code 1L]\n\n- INVALID_TRAC_STATUS [\"000eO00n\" full 1L | code 1L]\n\n- MISSING_AI_DESCRIPTION [\"000eO00o\" full 1L | code 1L]\n\n- MISSING_AI_DISCLOSURE [\"000eO00p\" full 1L | code 1L]\n\n- MISSING_DESCRIPTION [\"000eO00q\" full 1L | code 1L]\n\n- MISSING_HAS_PATCH_FLAG [\"000eO00r\" full 1L | code 1L]\n\n- MISSING_TICKET_IN_PR_TITLE [\"000eO00s\" full 1L | code 1L]\n\n- MISSING_TRAC_TICKET [\"000eO00t\" full 1L | code 1L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

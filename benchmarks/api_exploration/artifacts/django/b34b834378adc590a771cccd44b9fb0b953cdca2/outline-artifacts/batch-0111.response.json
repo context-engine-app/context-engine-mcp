@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "django/contrib/auth/templatetags/__init__.py",
+        "django/contrib/auth/templatetags/auth.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# django/contrib/auth/templatetags/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# django/contrib/auth/templatetags/auth.py (26L)\nfile scope: [\"00045006\" full 26L | imports 10L]\n\n- @register.simple_tag def render_password_as_hash(value): ... [\"00045005\" full 17L | code 17L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

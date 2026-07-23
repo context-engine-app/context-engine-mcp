@@ -1,0 +1,25 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/check_framework/urls/path_compatibility/__init__.py",
+        "tests/check_framework/urls/path_compatibility/beginning_with_caret.py",
+        "tests/check_framework/urls/path_compatibility/contains_re_named_group.py",
+        "tests/check_framework/urls/path_compatibility/ending_with_dollar.py",
+        "tests/check_framework/urls/path_compatibility/matched_angle_brackets.py",
+        "tests/check_framework/urls/path_compatibility/unmatched_angle_brackets.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/check_framework/urls/path_compatibility/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\n# tests/check_framework/urls/path_compatibility/beginning_with_caret.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.urls import path\n2|\n3|urlpatterns = [\n4|    path(\"^beginning-with-caret\", lambda x: x),\n5|]\nnote: EOF\n\n# tests/check_framework/urls/path_compatibility/contains_re_named_group.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.urls import path\n2|\n3|urlpatterns = [\n4|    path(r\"(?P<named_group>\\d+)\", lambda x: x),\n5|]\nnote: EOF\n\n# tests/check_framework/urls/path_compatibility/ending_with_dollar.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.urls import path\n2|\n3|urlpatterns = [\n4|    path(\"ending-with-dollar$\", lambda x: x),\n5|]\nnote: EOF\n\n# tests/check_framework/urls/path_compatibility/matched_angle_brackets.py (6L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|from django.urls import path\n2|\n3|urlpatterns = [\n4|    path(\"<int:angle_bracket>\", lambda x: x),\n5|]\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/check_framework/urls/path_compatibility/unmatched_angle_brackets.py (9L)\nfile scope: [\"000kv001\" full 9L | imports 3L]\n\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

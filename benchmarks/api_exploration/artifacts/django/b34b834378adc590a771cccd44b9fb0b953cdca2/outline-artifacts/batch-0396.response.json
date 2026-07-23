@@ -1,0 +1,23 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/conditional_processing/__init__.py",
+        "tests/conditional_processing/tests.py",
+        "tests/conditional_processing/urls.py",
+        "tests/conditional_processing/views.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/conditional_processing/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/conditional_processing/tests.py (276L)\nfile scope: [\"000kO013\" full 276L | imports 25L]\n\n- FULL_RESPONSE [\"000kO000\" full 1L | code 1L]\n\n- LAST_MODIFIED [\"000kO001\" full 1L | code 1L]\n\n- LAST_MODIFIED_STR [\"000kO002\" full 1L | code 1L]\n\n- LAST_MODIFIED_NEWER_STR [\"000kO003\" full 1L | code 1L]\n\n- LAST_MODIFIED_INVALID_STR [\"000kO004\" full 1L | code 1L]\n\n- EXPIRED_LAST_MODIFIED_STR [\"000kO005\" full 1L | code 1L]\n\n- ETAG [\"000kO006\" full 1L | code 1L]\n\n- WEAK_ETAG [\"000kO007\" full 1L | code 1L]\n\n- EXPIRED_ETAG [\"000kO008\" full 1L | code 1L]\n\n- @override_settings(ROOT_URLCONF=\"conditional_processing.urls\") class ConditionalGet(SimpleTestCase): ... [\"000kO012\" full 260L | code 260L]\n  - def assertFullResponse(self, response, check_last_modified=True, check_etag=True): ... [\"000kO00c\" full 11L | code 11L]\n  - def assertNotModified(self, response): ... [\"000kO00e\" full 3L | code 3L]\n  - def test_without_conditions(self): ... [\"000kO00g\" full 3L | code 3L]\n  - def test_if_modified_since(self): ... [\"000kO00i\" full 17L | code 17L]\n  - def test_if_unmodified_since(self): ... [\"000kO00k\" full 13L | code 13L]\n  - def test_if_none_match(self): ... [\"000kO00m\" full 14L | code 14L]\n  - def test_weak_if_none_match(self): ... [\"000kO00o\" full 20L | code 20L]\n  - def test_all_if_none_match(self): ... [\"000kO00q\" full 8L | code 8L]\n  - def test_if_match(self): ... [\"000kO00s\" full 7L | code 7L]\n  - def test_weak_if_match(self): ... [\"000kO00u\" full 14L | code 14L]\n  - def test_all_if_match(self): ... [\"000kO00w\" full 6L | code 6L]\n  - def test_both_headers(self): ... [\"000kO00y\" full 21L | code 21L]\n  - def test_both_headers_2(self): ... [\"000kO00A\" full 20L | code 20L]\n  - def test_single_condition_1(self): ... [\"000kO00C\" full 6L | code 6L]\n  - def test_single_condition_2(self): ... [\"000kO00E\" full 6L | code 6L]\n  - def test_single_condition_3(self): ... [\"000kO00G\" full 4L | code 4L]\n  - def test_single_condition_4(self): ... [\"000kO00I\" full 4L | code 4L]\n  - def test_single_condition_5(self): ... [\"000kO00K\" full 6L | code 6L]\n  - def test_single_condition_6(self): ... [\"000kO00M\" full 6L | code 6L]\n  - def test_single_condition_7(self): ... [\"000kO00O\" full 6L | code 6L]\n  - def test_single_condition_8(self): ... [\"000kO00Q\" full 4L | code 4L]\n  - def test_single_condition_9(self): ... [\"000kO00S\" full 6L | code 6L]\n  - def test_single_condition_head(self): ... [\"000kO00U\" full 4L | code 4L]\n  - def test_unquoted(self): ... [\"000kO00X\" full 8L | code 8L]\n  - def test_unquoted_if_none_match(self): ... [\"000kO00Z\" full 9L | code 9L]\n  - def test_invalid_etag(self): ... [\"000kO011\" full 4L | code 4L]\n\n# tests/conditional_processing/urls.py (15L)\nfile scope: [\"000kP001\" full 15L | imports 5L]\n\n\n# tests/conditional_processing/views.py (54L)\nfile scope: [\"000kQ00g\" full 54L | imports 7L]\n\n- @condition(lambda r: ETAG, lambda r: LAST_MODIFIED) def index(request): ... [\"000kQ001\" full 3L | code 3L]\n\n- @condition(last_modified_func=lambda r: LAST_MODIFIED) def last_modified_view1(request): ... [\"000kQ003\" full 3L | code 3L]\n\n- @last_modified(lambda r: LAST_MODIFIED) def last_modified_view2(request): ... [\"000kQ005\" full 3L | code 3L]\n\n- @condition(etag_func=lambda r: ETAG) def etag_view1(request): ... [\"000kQ007\" full 3L | code 3L]\n\n- @etag(lambda r: ETAG) def etag_view2(request): ... [\"000kQ009\" full 3L | code 3L]\n\n- @condition(etag_func=lambda r: ETAG.strip('\"')) def etag_view_unquoted(request): ... [\"000kQ00b\" full 6L | code 6L]\n\n- @condition(etag_func=lambda r: WEAK_ETAG) def etag_view_weak(request): ... [\"000kQ00d\" full 6L | code 6L]\n\n- @condition(etag_func=lambda r: None) def etag_view_none(request): ... [\"000kQ00f\" full 6L | code 6L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

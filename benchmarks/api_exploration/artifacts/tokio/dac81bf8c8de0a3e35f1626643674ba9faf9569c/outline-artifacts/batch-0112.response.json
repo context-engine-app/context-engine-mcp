@@ -1,0 +1,21 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/src/runtime/scheduler/multi_thread/handle/metrics.rs",
+        "tokio/src/runtime/scheduler/multi_thread/handle/taskdump.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 2.2 KB -> 1.7 KB (20% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/src/runtime/scheduler/multi_thread/handle/metrics.rs (56L)\nfile scope: [\"0007i005\" full 56L | imports 8L]\n\n- impl Handle { ... cfg_unstable_metrics! { cfg_64bit_metrics! { pub(crate) fn spawned_tasks_count(&self) -> u64 { self.shared.owned.spawned_tasks_count() } } pub(crate) fn num_blocking_threads(&self) -> usize { self.blocking_spawner .num_threads() .saturating_sub(self.num_workers()) } pub(crate) fn num_idle_blocking_threads(&self) -> usize { self.blocking_spawner.num_idle_threads() } pub(crate) fn scheduler_metrics(&self) -> &SchedulerMetrics { &self.shared.scheduler_metrics } pub(crate) fn worker_local_queue_depth(&self, worker: usize) -> usize { self.shared.worker_local_queue_depth(worker) } pub(crate) fn blocking_queue_depth(&self) -> usize { self.blocking_spawner.queue_depth() } } } [\"0007i004\" full 48L | code 48L]\n  - pub(crate) fn num_workers(&self) -> usize { ... } [\"0007i000\" full 3L | code 3L]\n  - pub(crate) fn num_alive_tasks(&self) -> usize { ... } [\"0007i001\" full 3L | code 3L]\n  - pub(crate) fn injection_queue_depth(&self) -> usize { ... } [\"0007i002\" full 3L | code 3L]\n  - pub(crate) fn worker_metrics(&self, worker: usize) -> &WorkerMetrics { ... } [\"0007i003\" full 3L | code 3L]\n\n# tokio/src/runtime/scheduler/multi_thread/handle/taskdump.rs (27L)\nfile scope: [\"0007j002\" full 27L | imports 5L]\n\n- impl Handle { ... } [\"0007j001\" full 22L | code 22L]\n  - pub(crate) async fn dump(&self) -> Dump { ... } [\"0007j000\" full 20L | code 20L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

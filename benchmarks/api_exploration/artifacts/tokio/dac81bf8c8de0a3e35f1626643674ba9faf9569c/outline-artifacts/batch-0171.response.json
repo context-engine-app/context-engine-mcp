@@ -1,0 +1,27 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tokio/tests/signal_drop_rt.rs",
+        "tokio/tests/signal_drop_signal.rs",
+        "tokio/tests/signal_info.rs",
+        "tokio/tests/signal_multi_rt.rs",
+        "tokio/tests/signal_no_rt.rs",
+        "tokio/tests/signal_notify_both.rs",
+        "tokio/tests/signal_panic.rs",
+        "tokio/tests/signal_realtime.rs"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "saved: 8.9 KB -> 2.8 KB (69% fewer bytes)\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tokio/tests/signal_drop_rt.rs (46L)\nfile scope: [\"000by004\" full 46L | imports 13L]\n\n- mod support { ... } [\"000by001\" full 3L | code 3L]\n  - pub mod signal; [\"000by000\" full 1L | code 1L]\n\n- #[test] fn dropping_loops_does_not_cause_starvation() { ... } [\"000by002\" full 25L | code 25L]\n\n- fn rt() -> Runtime { ... } [\"000by003\" full 6L | code 6L]\n\n# tokio/tests/signal_drop_signal.rs (28L)\nfile scope: [\"000bz003\" full 28L | imports 12L]\n\n- mod support { ... } [\"000bz001\" full 3L | code 3L]\n  - pub mod signal; [\"000bz000\" full 1L | code 1L]\n\n- #[tokio::test] async fn dropping_signal_does_not_deregister_any_other_instances() { ... } [\"000bz002\" full 15L | code 15L]\n\n# tokio/tests/signal_info.rs (36L)\nfile scope: [\"000bA003\" full 36L | imports 21L]\n\n- mod support { ... } [\"000bA001\" full 3L | code 3L]\n  - pub mod signal; [\"000bA000\" full 1L | code 1L]\n\n- #[tokio::test] async fn siginfo() { ... } [\"000bA002\" full 14L | code 14L]\n\n# tokio/tests/signal_multi_rt.rs (56L)\nfile scope: [\"000bB004\" full 56L | imports 16L]\n\n- mod support { ... } [\"000bB001\" full 3L | code 3L]\n  - pub mod signal; [\"000bB000\" full 1L | code 1L]\n\n- #[test] fn multi_loop() { ... } [\"000bB002\" full 32L | code 32L]\n\n- fn rt() -> Runtime { ... } [\"000bB003\" full 6L | code 6L]\n\n# tokio/tests/signal_no_rt.rs (14L)\nfile scope: [\"000bC001\" full 14L | imports 8L]\n\n- #[cfg_attr(target_os = \"wasi\", ignore = \"Wasi does not support panic recovery\")] #[test] #[should_panic] fn no_runtime_panics_creating_signals() { ... } [\"000bC000\" full 6L | code 6L]\n\n# tokio/tests/signal_notify_both.rs (25L)\nfile scope: [\"000bD003\" full 25L | imports 12L]\n\n- mod support { ... } [\"000bD001\" full 3L | code 3L]\n  - pub mod signal; [\"000bD000\" full 1L | code 1L]\n\n- #[tokio::test] async fn notify_both() { ... } [\"000bD002\" full 12L | code 12L]\n\n# tokio/tests/signal_panic.rs (32L)\nfile scope: [\"000bE003\" full 32L | imports 15L]\n\n- mod support { ... } [\"000bE001\" full 3L | code 3L]\n  - pub mod panic; [\"000bE000\" full 1L | code 1L]\n\n- #[test] fn signal_panic_caller() -> Result<(), Box<dyn Error>> { ... } [\"000bE002\" full 16L | code 16L]\n\n# tokio/tests/signal_realtime.rs (106L)\nfile scope: [\"000bF005\" full 106L | imports 18L]\n\n- mod support { ... } [\"000bF001\" full 3L | code 3L]\n  - pub mod signal; [\"000bF000\" full 1L | code 1L]\n\n- #[tokio::test] async fn signal_realtime() { ... } [\"000bF002\" full 71L | code 71L]\n\n- fn sigrt_max() -> c_int { ... } [\"000bF003\" full 11L | code 11L]\n\n- fn sigrtnum_to_string(signum: i32) -> String { ... } [\"000bF004\" full 3L | code 3L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

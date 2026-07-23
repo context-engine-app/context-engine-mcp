@@ -1,0 +1,22 @@
+{
+  "request": {
+    "args": {
+      "files": [
+        "tests/datatypes/__init__.py",
+        "tests/datatypes/models.py",
+        "tests/datatypes/tests.py"
+      ],
+      "workspace_root": "<repository-root>"
+    },
+    "tool": "outline"
+  },
+  "response": {
+    "content": [
+      {
+        "text": "# tests/datatypes/__init__.py (1L)\nThe outline is larger than the file content, so the full file is shown instead.\n\n1|\nnote: EOF\n\nUse symbol handles to surgically read necessary ranges only; pass them to extract(handles=[...])\nLegend: full=docs+code, code=code only, docs=symbol docs, module-docs=file/module docs, imports=imports/directives/context; L means source line count\n\n# tests/datatypes/models.py (25L)\nfile scope: [\"000lC00d\" full 25L | imports 9L]\n\n- class Donut(models.Model): ... [\"000lC009\" full 11L | code 11L]\n  - class Meta: ... [\"000lC008\" full 2L | code 2L]\n\n- class RumBaba(models.Model): ... [\"000lC00c\" full 3L | code 3L]\n\n# tests/datatypes/tests.py (113L)\nfile scope: [\"000lD00j\" full 113L | imports 8L]\n\n- class DataTypesTestCase(TestCase): ... [\"000lD00i\" full 105L | code 105L]\n  - def test_boolean_type(self): ... [\"000lD002\" full 12L | code 12L]\n  - def test_date_type(self): ... [\"000lD005\" full 13L | code 13L]\n  - def test_time_field(self): ... [\"000lD008\" full 11L | code 11L]\n  - def test_year_boundaries(self): ... [\"000lD009\" full 38L | code 38L]\n  - def test_textfields_str(self): ... [\"000lD00c\" full 5L | code 5L]\n  - @skipIfDBFeature(\"supports_timezones\") def test_error_on_timezone(self): ... [\"000lD00f\" full 9L | code 9L]\n  - def test_datefield_auto_now_add(self): ... [\"000lD00h\" full 10L | code 10L]\n",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}
