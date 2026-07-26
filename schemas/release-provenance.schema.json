@@ -39,7 +39,12 @@
     "release_descriptor": { "$ref": "#/$defs/descriptorRef" },
     "manifest": { "$ref": "#/$defs/fileRef" },
     "assembly_facts": { "$ref": "#/$defs/fileRef" },
-    "authorized_stages": { "type": "array", "const": ["source-release", "public-draft"] },
+    "authorized_stages": {
+      "oneOf": [
+        { "const": ["source-release", "public-draft"] },
+        { "const": ["source-release", "public-draft", "public-publish", "package-channels"] }
+      ]
+    },
     "decisions": {
       "type": "object",
       "additionalProperties": false,
@@ -54,11 +59,24 @@
     "workflows": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["source-release", "public-draft"],
       "properties": {
         "source-release": { "$ref": "#/$defs/workflowRef" },
-        "public-draft": { "$ref": "#/$defs/workflowRef" }
-      }
+        "public-draft": { "$ref": "#/$defs/workflowRef" },
+        "public-publish": { "$ref": "#/$defs/workflowRef" },
+        "package-channels": { "$ref": "#/$defs/workflowRef" }
+      },
+      "oneOf": [
+        {
+          "required": ["source-release", "public-draft"],
+          "minProperties": 2,
+          "maxProperties": 2
+        },
+        {
+          "required": ["source-release", "public-draft", "public-publish", "package-channels"],
+          "minProperties": 4,
+          "maxProperties": 4
+        }
+      ]
     },
     "runner_selections": {
       "type": "object",
@@ -338,7 +356,7 @@
       "additionalProperties": false,
       "required": ["stage", "path", "commit", "sha256"],
       "properties": {
-        "stage": { "enum": ["source-release", "public-draft"] },
+        "stage": { "enum": ["source-release", "public-draft", "public-publish", "package-channels"] },
         "path": { "type": "string", "pattern": "^(?:\\.github/workflows|\\.github/actions)/[A-Za-z0-9._/-]+\\.ya?ml$" },
         "commit": { "$ref": "#/$defs/commit" },
         "sha256": { "$ref": "#/$defs/sha256" }

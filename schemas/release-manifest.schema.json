@@ -55,12 +55,28 @@
       "required": ["release"],
       "properties": { "release": { "$ref": "#/$defs/workflowRef" } }
     },
-    "authorized_stages": { "type": "array", "const": ["source-release", "public-draft"] },
+    "authorized_stages": {
+      "oneOf": [
+        { "const": ["source-release", "public-draft"] },
+        { "const": ["source-release", "public-draft", "public-publish", "package-channels"] }
+      ]
+    },
     "workflow_bindings": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["draft"],
-      "properties": { "draft": { "$ref": "#/$defs/workflowRef" } }
+      "properties": {
+        "draft": { "$ref": "#/$defs/workflowRef" },
+        "publish": { "$ref": "#/$defs/workflowRef" },
+        "channels": { "$ref": "#/$defs/workflowRef" }
+      },
+      "oneOf": [
+        { "required": ["draft"], "minProperties": 1, "maxProperties": 1 },
+        {
+          "required": ["draft", "publish", "channels"],
+          "minProperties": 3,
+          "maxProperties": 3
+        }
+      ]
     },
     "build_mode": { "enum": ["license-enforced", "not-applicable"] },
     "package_binding": { "$ref": "#/$defs/packageBinding" },

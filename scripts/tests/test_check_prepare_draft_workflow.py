@@ -33,6 +33,16 @@ class PrepareDraftWorkflowCheckerTests(unittest.TestCase):
         )
         self.assertTrue(any("workflow_dispatch" in error for error in errors))
 
+    def test_concurrency_serializes_draft_and_publication_for_the_tag(self) -> None:
+        errors = self._check_mutation(
+            lambda source: source.replace(
+                "group: release-draft-${{ inputs.tag }}",
+                "group: prepare-draft-${{ inputs.tag }}",
+                1,
+            )
+        )
+        self.assertTrue(any("release-draft" in error for error in errors))
+
     def test_unpinned_remote_action_is_rejected(self) -> None:
         errors = self._check_mutation(
             lambda source: source.replace(

@@ -148,9 +148,11 @@ def _check_concurrency(workflow: Json, errors: list[str]) -> None:
     concurrency = cast(Mapping[object, object], value)
     if concurrency.get("cancel-in-progress") is not False:
         errors.append("concurrency must set cancel-in-progress: false")
-    group = concurrency.get("group")
-    if not isinstance(group, str) or "inputs.tag" not in group:
-        errors.append("concurrency group must bind inputs.tag")
+    if concurrency.get("group") != "release-draft-${{ inputs.tag }}":
+        errors.append(
+            "concurrency group must be release-draft-${{ inputs.tag }} "
+            + "to serialize draft preparation and publication"
+        )
 
 
 def _with_map(step: Json) -> Mapping[object, object] | None:

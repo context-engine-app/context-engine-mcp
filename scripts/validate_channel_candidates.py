@@ -30,7 +30,7 @@ CHANNEL_SCHEMA_SHA256 = (
     "7ce660193dc346c70fd0c8db57bd1d91d1743d3b6059959b96f76443d037d57a"
 )
 MANIFEST_SCHEMA_SHA256 = (
-    "b1516b5472ce1b5a50b855f9db58be8fa6e519bcff4d5878432b499482eb9a0a"
+    "055a20ee520fbffc27dc3527c548eb50a76e1aa247072132d0f685ed40fdf395"
 )
 CHANNEL_SCHEMA_NAME = "channel-candidates.schema.json"
 MANIFEST_SCHEMA_NAME = "release-manifest.schema.json"

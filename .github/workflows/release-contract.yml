@@ -8,8 +8,13 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: release-contract-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   contract:
+    name: Verify release contract
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -33,6 +38,7 @@ jobs:
       - name: Check protected draft workflow
         run: |
           .venv/bin/python scripts/check_prepare_draft_workflow.py .github/workflows/prepare-draft-release.yml
+          .venv/bin/python scripts/check_publish_draft_workflow.py .github/workflows/publish-draft-release.yml
 
       - name: Run all public Python unit tests
         run: |
@@ -45,12 +51,15 @@ jobs:
           from pathlib import Path
 
           expected = {
-              "schemas/release-manifest.schema.json": "b1516b5472ce1b5a50b855f9db58be8fa6e519bcff4d5878432b499482eb9a0a",
-              "schemas/release-provenance.schema.json": "2a875915958bb8ed401e948fc98fbea901015a6f77a57db9c2d36e798be048c7",
+              ".github/workflows/publish-draft-release.yml": "08aeadd481793a37f1f9223aaabf514cf996bbeb3758d2c8103acad54db244bb",
+              "schemas/release-manifest.schema.json": "055a20ee520fbffc27dc3527c548eb50a76e1aa247072132d0f685ed40fdf395",
+              "schemas/release-provenance.schema.json": "2cae7a72248fd279f4ba06e905daf7c5693393b74b3b0e24d7b9c0092fbed051",
               "schemas/channel-candidates.schema.json": "7ce660193dc346c70fd0c8db57bd1d91d1743d3b6059959b96f76443d037d57a",
-              "schemas/staging-attestation.schema.json": "3b617b71f891dccaee0a7fc9c80a1da0b275b6eaf67f60fd073692e6d99cfecf",
-              "scripts/validate_release_provenance.py": "5b45a4d1ca46eb90bed93ac82108b90d022ccf48233b6edc5f964c6a3a6c6da9",
-              "scripts/validate_channel_candidates.py": "f7aaa4214bc4ad2ea37df1951e7a561e619dd5decdbfb813e44be11ac5bcaa7a",
+              "schemas/staging-attestation.schema.json": "b8f1017ce278f762772e236eb08bf18a3c52b65f0e1e30c1d27cace51d305a6d",
+              "scripts/validate_release_provenance.py": "34fe42956abea7df4cce5677e1d2678c5ee7f738e02c953f8970a8c62786d008",
+              "scripts/validate_channel_candidates.py": "75c90fae9862ae40e4400d459488fdb6c6b5718e0d1ba677db94c48e8ca312d4",
+              "scripts/publish_draft_release.py": "a03e5f3954ae70714b5522f078c9f25f581fb8aafdbe656d3962427d50350dc4",
+              "scripts/check_publish_draft_workflow.py": "e4e4291f9b064719484d332be54688fe669646ec38b3ad9db555f299e8941938",
           }
           for filename, expected_sha256 in expected.items():
               path = Path(filename)
@@ -63,6 +72,7 @@ jobs:
         run: |
           .venv/bin/python scripts/validate_release_provenance.py --help
           .venv/bin/python scripts/validate_channel_candidates.py --help
+          .venv/bin/python scripts/publish_draft_release.py --help
 
       - name: Run BasedPyright for all public Python
         run: |

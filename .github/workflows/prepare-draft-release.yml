@@ -15,15 +15,16 @@ on:
         type: string
 
 permissions:
-  contents: read
-  actions: read
+  contents: read # Check out the public workflow tools and inspect draft releases.
+  actions: read # Revalidate the exact private release workflow run and artifact.
 
 concurrency:
-  group: prepare-draft-${{ inputs.tag }}
+  group: release-draft-${{ inputs.tag }}
   cancel-in-progress: false
 
 jobs:
   release-draft:
+    name: Prepare and verify public draft
     environment: release-draft
     runs-on: ubuntu-24.04
     timeout-minutes: 45
@@ -409,6 +410,9 @@ jobs:
         id: draft-prepare
         if: ${{ steps.preflight.outputs.skip_source != 'true' }}
         env:
+          ARTIFACT_DIGEST: ${{ steps.source-artifact.outputs.artifact_digest }}
+          ARTIFACT_EXPIRES_AT: ${{ steps.source-artifact.outputs.artifact_expires_at }}
+          ARTIFACT_ID: ${{ steps.source-artifact.outputs.artifact_id }}
           GH_TOKEN: ${{ steps.release-writer.outputs.token }}
           PUBLIC_RELEASE_REPOSITORY: context-engine-app/context-engine-mcp
           TAG_NAME: ${{ inputs.tag }}
@@ -417,9 +421,9 @@ jobs:
           .venv/bin/python scripts/prepare_draft_release.py prepare \
             --plan validated-plan.json \
             --staged-assets staged-release \
-            --artifact-id "${{ steps.source-artifact.outputs.artifact_id }}" \
-            --artifact-digest "${{ steps.source-artifact.outputs.artifact_digest }}" \
-            --artifact-expires-at "${{ steps.source-artifact.outputs.artifact_expires_at }}" \
+            --artifact-id "$ARTIFACT_ID" \
+            --artifact-digest "$ARTIFACT_DIGEST" \
+            --artifact-expires-at "$ARTIFACT_EXPIRES_AT" \
             --public-run-id "$GITHUB_RUN_ID" \
             --public-run-attempt "$GITHUB_RUN_ATTEMPT" \
             --repository "$PUBLIC_RELEASE_REPOSITORY" \

@@ -23,13 +23,13 @@ from typing import NoReturn, Protocol, TypeAlias, cast
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST_SCHEMA_SHA256 = (
-    "b1516b5472ce1b5a50b855f9db58be8fa6e519bcff4d5878432b499482eb9a0a"
+    "055a20ee520fbffc27dc3527c548eb50a76e1aa247072132d0f685ed40fdf395"
 )
 PROVENANCE_SCHEMA_SHA256 = (
-    "2a875915958bb8ed401e948fc98fbea901015a6f77a57db9c2d36e798be048c7"
+    "2cae7a72248fd279f4ba06e905daf7c5693393b74b3b0e24d7b9c0092fbed051"
 )
 STAGING_SCHEMA_SHA256 = (
-    "3b617b71f891dccaee0a7fc9c80a1da0b275b6eaf67f60fd073692e6d99cfecf"
+    "b8f1017ce278f762772e236eb08bf18a3c52b65f0e1e30c1d27cace51d305a6d"
 )
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 COMMIT_RE = re.compile(r"^[0-9a-fA-F]{40}$")
@@ -41,6 +41,15 @@ SOURCE_REPOSITORY = "context-engine-app/context-engine"
 DISTRIBUTION_REPOSITORY = "context-engine-app/context-engine-mcp"
 SOURCE_WORKFLOW_PATH = ".github/workflows/release.yml"
 PUBLIC_WORKFLOW_PATH = ".github/workflows/prepare-draft-release.yml"
+PUBLISH_WORKFLOW_PATH = ".github/workflows/publish-draft-release.yml"
+CHANNEL_WORKFLOW_PATH = ".github/workflows/prepare-package-channels.yml"
+FOUNDATION_STAGES = ("source-release", "public-draft")
+ORCHESTRATION_STAGES = FOUNDATION_STAGES + ("public-publish", "package-channels")
+PUBLIC_WORKFLOW_PATHS = {
+    "draft": PUBLIC_WORKFLOW_PATH,
+    "publish": PUBLISH_WORKFLOW_PATH,
+    "channels": CHANNEL_WORKFLOW_PATH,
+}
 DESKTOP_TARGETS = {
     "x86_64-apple-darwin",
     "aarch64-apple-darwin",
@@ -352,6 +361,39 @@ def _workflow(value: object, label: str, expected_path: str) -> dict[str, str]:
     }
 
 
+def _public_workflows(
+    manifest: Mapping[str, object], distribution_commit: str
+) -> dict[str, dict[str, str]]:
+    stages = _array(manifest.get("authorized_stages"), "manifest.authorized_stages")
+    stage_names = tuple(_string(item, "manifest authorized stage") for item in stages)
+    if stage_names == FOUNDATION_STAGES:
+        expected_names = ("draft",)
+    elif stage_names == ORCHESTRATION_STAGES:
+        expected_names = ("draft", "publish", "channels")
+    else:
+        raise ReleaseProvenanceValidationError(
+            "manifest authorized stages are incomplete or reordered"
+        )
+    bindings = _object(manifest.get("workflow_bindings"), "manifest.workflow_bindings")
+    _require(
+        set(bindings) == set(expected_names),
+        "manifest workflow bindings do not match authorized stages",
+    )
+    workflows: dict[str, dict[str, str]] = {}
+    for name in expected_names:
+        workflow = _workflow(
+            bindings.get(name),
+            f"manifest public workflow {name}",
+            PUBLIC_WORKFLOW_PATHS[name],
+        )
+        _require(
+            workflow["commit"] == distribution_commit,
+            f"manifest public workflow {name} commit differs from distribution commit",
+        )
+        workflows[name] = workflow
+    return workflows
+
+
 def _binding(value: object, label: str) -> dict[str, object]:
     item = _object(value, label)
     return item
@@ -425,24 +467,15 @@ def _validate_manifest(
     source_workflows = _object(
         manifest.get("source_workflows"), "manifest.source_workflows"
     )
-    workflow_bindings = _object(
-        manifest.get("workflow_bindings"), "manifest.workflow_bindings"
-    )
     source_workflow = _workflow(
         source_workflows.get("release"),
         "manifest source workflow",
         SOURCE_WORKFLOW_PATH,
     )
-    public_workflow = _workflow(
-        workflow_bindings.get("draft"), "manifest public workflow", PUBLIC_WORKFLOW_PATH
-    )
+    public_workflows = _public_workflows(manifest, distribution_commit)
     _require(
         source_workflow["commit"] == source_commit,
         "manifest source workflow commit differs from source commit",
-    )
-    _require(
-        public_workflow["commit"] == distribution_commit,
-        "manifest public workflow commit differs from distribution commit",
     )
     artifacts = [
         _object(item, f"manifest.artifacts[{index}]")
@@ -493,7 +526,8 @@ def _validate_manifest(
         "source_commit": source_commit,
         "distribution_commit": distribution_commit,
         "source_workflow": source_workflow,
-        "public_workflow": public_workflow,
+        "public_workflow": public_workflows["draft"],
+        "public_workflows": public_workflows,
         "descriptor": descriptor,
         "artifacts": artifacts,
         "package_binding_sha256": _sha(
@@ -545,17 +579,32 @@ def _validate_provenance(
     )
     workflows = _object(provenance.get("workflows"), "provenance.workflows")
     source = _object(workflows.get("source-release"), "provenance source workflow")
-    public = _object(workflows.get("public-draft"), "provenance public workflow")
     _require(
         {key: source.get(key) for key in ("path", "commit", "sha256")}
         == expected["source_workflow"],
         "provenance source workflow differs from manifest",
     )
-    _require(
-        {key: public.get(key) for key in ("path", "commit", "sha256")}
-        == expected["public_workflow"],
-        "provenance public workflow differs from manifest",
+    public_workflows = cast(
+        Mapping[str, Mapping[str, str]], expected["public_workflows"]
     )
+    stage_names = {
+        "draft": "public-draft",
+        "publish": "public-publish",
+        "channels": "package-channels",
+    }
+    _require(
+        set(workflows)
+        == {"source-release"} | {stage_names[name] for name in public_workflows},
+        "provenance workflows do not match the manifest",
+    )
+    for name, expected_workflow in public_workflows.items():
+        stage = stage_names[name]
+        public = _object(workflows.get(stage), f"provenance {stage} workflow")
+        _require(
+            {key: public.get(key) for key in ("path", "commit", "sha256")}
+            == expected_workflow,
+            f"provenance {stage} workflow differs from manifest",
+        )
     artifacts = [
         _object(item, "provenance artifact")
         for item in _array(provenance.get("artifacts"), "provenance.artifacts")
@@ -809,7 +858,9 @@ def _validate_attestation(
         "staging package binding digest differs from manifest",
     )
     workflows = _object(manifest.get("source_workflows"), "manifest.source_workflows")
-    draft = _object(manifest.get("workflow_bindings"), "manifest.workflow_bindings")
+    public_bindings = _object(
+        manifest.get("workflow_bindings"), "manifest.workflow_bindings"
+    )
     attestation_workflows = _object(
         attestation.get("workflow_bindings"), "staging workflow bindings"
     )
@@ -818,11 +869,27 @@ def _validate_attestation(
         == _object(workflows.get("release"), "manifest source workflow"),
         "staging source workflow differs from manifest",
     )
+    stage_names = {
+        "draft": "public-draft",
+        "publish": "public-publish",
+        "channels": "package-channels",
+    }
     _require(
-        _object(attestation_workflows.get("public-draft"), "staging public workflow")
-        == _object(draft.get("draft"), "manifest public workflow"),
-        "staging public workflow differs from manifest",
+        set(attestation_workflows)
+        == {"source-release"} | {stage_names[name] for name in public_bindings},
+        "staging workflow bindings do not match the manifest",
     )
+    for name, expected_binding in public_bindings.items():
+        stage = stage_names.get(name)
+        if stage is None:
+            raise ReleaseProvenanceValidationError(
+                f"manifest public workflow is unsupported: {name}"
+            )
+        _require(
+            _object(attestation_workflows.get(stage), f"staging {stage} workflow")
+            == _object(expected_binding, f"manifest {name} workflow"),
+            f"staging {stage} workflow differs from manifest",
+        )
     smoke = _object(attestation.get("license_smoke"), "staging license smoke")
     identity = _object(manifest.get("license_identity"), "manifest license identity")
     _require(
@@ -1074,6 +1141,46 @@ def _plan(
     return plan
 
 
+def build_publication_plan(
+    plan: Mapping[str, object],
+    manifest: Mapping[str, object],
+    marker_info: Mapping[str, object],
+) -> dict[str, object]:
+    """Bind the verified draft plan to the complete public orchestration."""
+
+    stages = tuple(
+        _string(item, "manifest authorized stage")
+        for item in _array(
+            manifest.get("authorized_stages"), "manifest.authorized_stages"
+        )
+    )
+    _require(
+        stages == ORCHESTRATION_STAGES,
+        "public publication requires complete ordered orchestration stages",
+    )
+    distribution_commit = _commit(
+        plan.get("distribution_commit"), "plan.distribution_commit"
+    )
+    workflows = _public_workflows(manifest, distribution_commit)
+    _require(
+        workflows.get("draft") == plan.get("public_workflow"),
+        "publication draft workflow differs from the public plan",
+    )
+    run_id = _integer(marker_info.get("verified_run_id"), "marker.verified_run_id")
+    run_attempt = _integer(
+        marker_info.get("verified_run_attempt"), "marker.verified_run_attempt"
+    )
+    _require(
+        run_id >= 1 and run_attempt >= 1,
+        "verified draft run facts must be positive",
+    )
+    result = dict(plan)
+    result["authorized_stages"] = list(stages)
+    result["public_workflows"] = workflows
+    result["draft_run"] = {"id": run_id, "attempt": run_attempt}
+    return result
+
+
 def _validate_common(
     root: Path, schemas: Path
 ) -> tuple[dict[str, object], bytes, dict[str, tuple[str, int]], str]:
@@ -1150,6 +1257,21 @@ def validate_public_draft(root: Path, schemas: Path, marker: Path) -> dict[str, 
     )
 
 
+def validate_public_publish(
+    root: Path, schemas: Path, marker: Path
+) -> dict[str, object]:
+    """Validate a draft and emit the atomic publication workflow plan."""
+
+    plan = validate_public_draft(root, schemas, marker)
+    resolved_root = root.resolve(strict=True)
+    resolved_marker = marker.resolve(strict=True)
+    manifest, _ = _read_json(
+        resolved_root / "release-manifest.json", "release manifest"
+    )
+    marker_document, _ = _read_json(resolved_marker, "draft marker")
+    return build_publication_plan(plan, manifest, marker_document)
+
+
 def _write_plan(path: Path, plan: Mapping[str, object]) -> None:
     encoded = (
         json.dumps(plan, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
@@ -1187,6 +1309,14 @@ def parse_arguments(argv: Iterable[str] | None = None) -> argparse.Namespace:
     _ = public.add_argument("--schemas", type=Path, required=True)
     _ = public.add_argument("--marker", type=Path, required=True)
     _ = public.add_argument("--output-plan", type=Path, required=True)
+    publication = subparsers.add_parser(
+        "public-publish",
+        help="validate the exact public draft and atomic publication bindings",
+    )
+    _ = publication.add_argument("--root", type=Path, required=True)
+    _ = publication.add_argument("--schemas", type=Path, required=True)
+    _ = publication.add_argument("--marker", type=Path, required=True)
+    _ = publication.add_argument("--output-plan", type=Path, required=True)
     return parser.parse_args(argv)
 
 
@@ -1210,11 +1340,10 @@ def main(argv: Iterable[str] | None = None) -> int:
         else:
             if not isinstance(marker, Path):
                 return 2
-            plan = validate_public_draft(
-                root,
-                schemas,
-                marker,
-            )
+            if mode == "public-draft":
+                plan = validate_public_draft(root, schemas, marker)
+            else:
+                plan = validate_public_publish(root, schemas, marker)
         _write_plan(output_plan, plan)
     except (
         ReleaseProvenanceValidationError,

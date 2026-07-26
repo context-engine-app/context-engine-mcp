@@ -21,6 +21,74 @@ ReadCandidateArchive = Callable[
 
 
 class PortableValidatorLayoutTests(unittest.TestCase):
+    def test_public_publish_plan_requires_atomic_orchestration_bindings(self) -> None:
+        draft = {
+            "path": ".github/workflows/prepare-draft-release.yml",
+            "commit": "a" * 40,
+            "sha256": "b" * 64,
+        }
+        publish = {
+            "path": ".github/workflows/publish-draft-release.yml",
+            "commit": "a" * 40,
+            "sha256": "c" * 64,
+        }
+        channels = {
+            "path": ".github/workflows/prepare-package-channels.yml",
+            "commit": "a" * 40,
+            "sha256": "d" * 64,
+        }
+        authorized_stages: list[object] = [
+            "source-release",
+            "public-draft",
+            "public-publish",
+            "package-channels",
+        ]
+        workflow_bindings: dict[str, object] = {
+            "draft": draft,
+            "publish": publish,
+            "channels": channels,
+        }
+        manifest: dict[str, object] = {
+            "authorized_stages": authorized_stages,
+            "workflow_bindings": workflow_bindings,
+        }
+        marker = {"verified_run_id": 55, "verified_run_attempt": 2}
+
+        plan = validate_release_provenance.build_publication_plan(
+            {"distribution_commit": "a" * 40, "public_workflow": draft},
+            manifest,
+            marker,
+        )
+
+        self.assertEqual(
+            plan["public_workflows"],
+            {"draft": draft, "publish": publish, "channels": channels},
+        )
+        self.assertEqual(plan["draft_run"], {"id": 55, "attempt": 2})
+        for mutation in ("missing", "reordered"):
+            with self.subTest(mutation=mutation):
+                invalid_bindings = workflow_bindings.copy()
+                invalid_stages = authorized_stages.copy()
+                invalid: dict[str, object] = {
+                    "workflow_bindings": invalid_bindings,
+                    "authorized_stages": invalid_stages,
+                }
+                if mutation == "missing":
+                    del invalid_bindings["channels"]
+                else:
+                    invalid_stages[2:4] = [
+                        "package-channels",
+                        "public-publish",
+                    ]
+                with self.assertRaises(
+                    validate_release_provenance.ReleaseProvenanceValidationError
+                ):
+                    _ = validate_release_provenance.build_publication_plan(
+                        {"distribution_commit": "a" * 40, "public_workflow": draft},
+                        invalid,
+                        marker,
+                    )
+
     def test_public_layout_imports_both_validators(self) -> None:
         self.assertTrue(callable(validate_release_provenance.validate_staging))
         self.assertTrue(callable(validate_release_provenance.validate_public_draft))
@@ -31,15 +99,15 @@ class PortableValidatorLayoutTests(unittest.TestCase):
     def test_validators_pin_the_canonical_schema_bytes(self) -> None:
         self.assertEqual(
             validate_release_provenance.MANIFEST_SCHEMA_SHA256,
-            "b1516b5472ce1b5a50b855f9db58be8fa6e519bcff4d5878432b499482eb9a0a",
+            "055a20ee520fbffc27dc3527c548eb50a76e1aa247072132d0f685ed40fdf395",
         )
         self.assertEqual(
             validate_release_provenance.PROVENANCE_SCHEMA_SHA256,
-            "2a875915958bb8ed401e948fc98fbea901015a6f77a57db9c2d36e798be048c7",
+            "2cae7a72248fd279f4ba06e905daf7c5693393b74b3b0e24d7b9c0092fbed051",
         )
         self.assertEqual(
             validate_release_provenance.STAGING_SCHEMA_SHA256,
-            "3b617b71f891dccaee0a7fc9c80a1da0b275b6eaf67f60fd073692e6d99cfecf",
+            "b8f1017ce278f762772e236eb08bf18a3c52b65f0e1e30c1d27cace51d305a6d",
         )
         self.assertEqual(
             validate_channel_candidates.CHANNEL_SCHEMA_SHA256,
@@ -47,7 +115,7 @@ class PortableValidatorLayoutTests(unittest.TestCase):
         )
         self.assertEqual(
             validate_channel_candidates.MANIFEST_SCHEMA_SHA256,
-            "b1516b5472ce1b5a50b855f9db58be8fa6e519bcff4d5878432b499482eb9a0a",
+            "055a20ee520fbffc27dc3527c548eb50a76e1aa247072132d0f685ed40fdf395",
         )
 
     def test_gnu_archive_without_extensions_is_rejected(self) -> None:
