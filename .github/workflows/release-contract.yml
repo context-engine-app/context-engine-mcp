@@ -1,0 +1,77 @@
+name: Release contract
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out public contract
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Set up pinned uv and Python
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.11.32"
+          python-version: "3.11.13"
+
+      - name: Create isolated Python environment
+        run: |
+          uv python install 3.11.13
+          uv venv .venv --python 3.11.13
+          uv pip install --python .venv/bin/python --requirement scripts/requirements-dev.txt
+
+      - name: Check protected draft workflow
+        run: |
+          .venv/bin/python scripts/check_prepare_draft_workflow.py .github/workflows/prepare-draft-release.yml
+
+      - name: Run all public Python unit tests
+        run: |
+          .venv/bin/python -m unittest discover -s scripts/tests -p 'test*.py' -v
+
+      - name: Verify portable contract bytes
+        run: |
+          .venv/bin/python - <<'PY'
+          import hashlib
+          from pathlib import Path
+
+          expected = {
+              "schemas/release-manifest.schema.json": "b1516b5472ce1b5a50b855f9db58be8fa6e519bcff4d5878432b499482eb9a0a",
+              "schemas/release-provenance.schema.json": "2a875915958bb8ed401e948fc98fbea901015a6f77a57db9c2d36e798be048c7",
+              "schemas/channel-candidates.schema.json": "7ce660193dc346c70fd0c8db57bd1d91d1743d3b6059959b96f76443d037d57a",
+              "schemas/staging-attestation.schema.json": "3b617b71f891dccaee0a7fc9c80a1da0b275b6eaf67f60fd073692e6d99cfecf",
+              "scripts/validate_release_provenance.py": "5b45a4d1ca46eb90bed93ac82108b90d022ccf48233b6edc5f964c6a3a6c6da9",
+              "scripts/validate_channel_candidates.py": "f7aaa4214bc4ad2ea37df1951e7a561e619dd5decdbfb813e44be11ac5bcaa7a",
+          }
+          for filename, expected_sha256 in expected.items():
+              path = Path(filename)
+              actual_sha256 = hashlib.sha256(path.read_bytes()).hexdigest()
+              if actual_sha256 != expected_sha256:
+                  raise SystemExit(f"{filename}: expected {expected_sha256}, got {actual_sha256}")
+          PY
+
+      - name: Check portable validator interfaces
+        run: |
+          .venv/bin/python scripts/validate_release_provenance.py --help
+          .venv/bin/python scripts/validate_channel_candidates.py --help
+
+      - name: Run BasedPyright for all public Python
+        run: |
+          .venv/bin/basedpyright scripts
+
+      - name: Run Ruff checks for all public Python
+        run: |
+          .venv/bin/ruff check scripts
+
+      - name: Check Ruff formatting for all public Python
+        run: |
+          .venv/bin/ruff format --check scripts
