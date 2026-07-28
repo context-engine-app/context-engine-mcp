@@ -45,6 +45,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     outputs:
+      profile: ${{ steps.release-plan.outputs.profile }}
       preflight_plan_b64: ${{ steps.anonymous-preflight.outputs.plan_b64 }}
     steps:
       - name: Check out public workflow tools
@@ -63,6 +64,7 @@ jobs:
           uv venv .venv --python 3.11.13
           uv pip install --python .venv/bin/python --requirement scripts/requirements.txt
       - name: Validate immutable release and workflow binding
+        id: release-plan
         env:
           GH_TOKEN: ${{ github.token }}
           TAG_NAME: ${{ inputs.tag }}
@@ -70,7 +72,7 @@ jobs:
           set -euo pipefail
           test "$GITHUB_REPOSITORY" = "context-engine-app/context-engine-mcp"
           echo "workflow binding exact"
-          [[ "$TAG_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          [[ "$TAG_NAME" =~ ^(v|repository-bootstrap-v)(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
           test "$GITHUB_SHA" = "$(git rev-parse HEAD)"
           canonical_workflow_ref="$GITHUB_REPOSITORY/.github/workflows/prepare-package-channels.yml@refs/tags/$TAG_NAME"
           runtime_commit="$GITHUB_SHA"
@@ -136,8 +138,25 @@ jobs:
           jq -e --arg commit "$binding_commit" --arg sha "$binding_sha256" \
             '.public_workflow.commit == $commit and .public_workflow.sha256 == $sha' \
             "$RUNNER_TEMP/package-plan.json" > /dev/null
-          .venv/bin/python scripts/validate_channel_candidates.py --root "$RUNNER_TEMP/release" --schemas schemas
+          profile=$(jq -er '.profile' "$RUNNER_TEMP/package-plan.json")
+          case "$profile" in
+            desktop|desktop-linux)
+              .venv/bin/python scripts/validate_channel_candidates.py --root "$RUNNER_TEMP/release" --schemas schemas
+              ;;
+            repository-bootstrap)
+              test ! -e "$RUNNER_TEMP/release/channel-candidates.json"
+              test ! -e "$RUNNER_TEMP/release/channel-candidates.tar.gz"
+              test ! -e "$RUNNER_TEMP/release/Formula/context-engine.rb"
+              test ! -e "$RUNNER_TEMP/release/bucket/context-engine.json"
+              ;;
+            *)
+              echo "::error::unsupported release profile: $profile"
+              exit 1
+              ;;
+          esac
+          echo "profile=$profile" >> "$GITHUB_OUTPUT"
       - name: Validate optional repair provenance
+        if: ${{ steps.release-plan.outputs.profile == 'desktop' || steps.release-plan.outputs.profile == 'desktop-linux' }}
         env:
           TAG_NAME: ${{ inputs.tag }}
           HOMEBREW_REPAIR_RUN_ID: ${{ inputs.homebrew_repair_run_id }}
@@ -150,7 +169,21 @@ jobs:
             --candidate-root "$RUNNER_TEMP/release" \
             --homebrew-repair-run-id "$HOMEBREW_REPAIR_RUN_ID" --homebrew-repair-attempt "$HOMEBREW_REPAIR_ATTEMPT" \
             --scoop-repair-run-id "$SCOOP_REPAIR_RUN_ID" --scoop-repair-attempt "$SCOOP_REPAIR_ATTEMPT"
+      - name: Validate repository-bootstrap inputs
+        if: ${{ steps.release-plan.outputs.profile == 'repository-bootstrap' }}
+        env:
+          HOMEBREW_REPAIR_RUN_ID: ${{ inputs.homebrew_repair_run_id }}
+          HOMEBREW_REPAIR_ATTEMPT: ${{ inputs.homebrew_repair_attempt }}
+          SCOOP_REPAIR_RUN_ID: ${{ inputs.scoop_repair_run_id }}
+          SCOOP_REPAIR_ATTEMPT: ${{ inputs.scoop_repair_attempt }}
+        run: |
+          set -euo pipefail
+          test -z "$HOMEBREW_REPAIR_RUN_ID"
+          test -z "$HOMEBREW_REPAIR_ATTEMPT"
+          test -z "$SCOOP_REPAIR_RUN_ID"
+          test -z "$SCOOP_REPAIR_ATTEMPT"
       - name: Anonymous destination preflight and plan
+        if: ${{ steps.release-plan.outputs.profile == 'desktop' || steps.release-plan.outputs.profile == 'desktop-linux' }}
         id: anonymous-preflight
         env:
           TAG_NAME: ${{ inputs.tag }}
@@ -165,6 +198,7 @@ jobs:
 
   publish:
     name: Create inert package-channel pull requests
+    if: ${{ needs.preflight.outputs.profile == 'desktop' || needs.preflight.outputs.profile == 'desktop-linux' }}
     needs: preflight
     environment: release-channel
     runs-on: ubuntu-24.04
@@ -245,6 +279,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           TAG_NAME: ${{ inputs.tag }}
+          EXPECTED_PROFILE: ${{ needs.preflight.outputs.profile }}
         run: |
           set -euo pipefail
           release_metadata=$(gh release view "$TAG_NAME" --repo "$GITHUB_REPOSITORY" --json isDraft,isImmutable)
@@ -263,7 +298,17 @@ jobs:
           jq -e --arg commit "$binding_commit" --arg sha "$binding_sha256" \
             '.public_workflow.commit == $commit and .public_workflow.sha256 == $sha' \
             "$RUNNER_TEMP/package-plan.json" > /dev/null
-          .venv/bin/python scripts/validate_channel_candidates.py --root "$RUNNER_TEMP/release" --schemas schemas
+          profile=$(jq -er '.profile' "$RUNNER_TEMP/package-plan.json")
+          test "$profile" = "$EXPECTED_PROFILE"
+          case "$profile" in
+            desktop|desktop-linux)
+              .venv/bin/python scripts/validate_channel_candidates.py --root "$RUNNER_TEMP/release" --schemas schemas
+              ;;
+            *)
+              echo "::error::package-channel publish requires a CLI release profile: $profile"
+              exit 1
+              ;;
+          esac
       - name: Restore anonymous preflight plan
         env:
           GH_TOKEN: ${{ github.token }}

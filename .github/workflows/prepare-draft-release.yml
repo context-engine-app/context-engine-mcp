@@ -41,8 +41,8 @@ jobs:
           SOURCE_RUN_ID: ${{ inputs.source_run_id }}
         run: |
           set -euo pipefail
-          if [[ ! "$TAG_NAME" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
-            echo "::error::release tag must be exactly vMAJOR.MINOR.PATCH"
+          if [[ ! "$TAG_NAME" =~ ^(v|repository-bootstrap-v)(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+            echo "::error::release tag must be a stable or repository-bootstrap version"
             exit 1
           fi
           if [[ ! "$SOURCE_RUN_ID" =~ ^[1-9][0-9]*$ ]]; then
@@ -117,7 +117,20 @@ jobs:
                  .distribution_commit == $runtime_commit and
                  .distribution_tag_target == $runtime_commit' \
                 "$RUNNER_TEMP/preflight-plan.json" > /dev/null
-              .venv/bin/python scripts/validate_channel_candidates.py --root "$assets_dir" --schemas schemas
+              profile=$(jq -er '.profile' "$RUNNER_TEMP/preflight-plan.json")
+              case "$profile" in
+                desktop|desktop-linux)
+                  .venv/bin/python scripts/validate_channel_candidates.py --root "$assets_dir" --schemas schemas
+                  ;;
+                repository-bootstrap)
+                  test ! -e "$assets_dir/channel-candidates.json"
+                  test ! -e "$assets_dir/channel-candidates.tar.gz"
+                  ;;
+                *)
+                  echo "::error::unsupported release profile: $profile"
+                  exit 1
+                  ;;
+              esac
               certificate_identity="https://github.com/${SOURCE_REPOSITORY}/.github/workflows/release.yml@refs/tags/${TAG_NAME}"
               cosign verify-blob \
                 --certificate-identity "$certificate_identity" \
@@ -267,7 +280,22 @@ jobs:
 
       - name: Validate portable channel candidates
         if: ${{ steps.preflight.outputs.skip_source != 'true' }}
-        run: .venv/bin/python scripts/validate_channel_candidates.py --root staged-release --schemas schemas
+        run: |
+          set -euo pipefail
+          profile=$(jq -er '.profile' validated-plan.json)
+          case "$profile" in
+            desktop|desktop-linux)
+              .venv/bin/python scripts/validate_channel_candidates.py --root staged-release --schemas schemas
+              ;;
+            repository-bootstrap)
+              test ! -e staged-release/channel-candidates.json
+              test ! -e staged-release/channel-candidates.tar.gz
+              ;;
+            *)
+              echo "::error::unsupported release profile: $profile"
+              exit 1
+              ;;
+          esac
 
       - name: Verify signed staging checksums
         if: ${{ steps.preflight.outputs.skip_source != 'true' }}
@@ -428,7 +456,8 @@ jobs:
             --public-run-attempt "$GITHUB_RUN_ATTEMPT" \
             --repository "$PUBLIC_RELEASE_REPOSITORY" \
             | tee "$RUNNER_TEMP/draft-prepare.json"
-          jq -e --arg tag "$TAG_NAME" '.tag == $tag and .state == "verified" and .asset_count == 15 and .read_only == false' "$RUNNER_TEMP/draft-prepare.json" > /dev/null
+          expected_asset_count=$(jq -er '.assets | length' validated-plan.json)
+          jq -e --arg tag "$TAG_NAME" --argjson expected_asset_count "$expected_asset_count" '.tag == $tag and .state == "verified" and .asset_count == $expected_asset_count and .read_only == false' "$RUNNER_TEMP/draft-prepare.json" > /dev/null
 
       - name: Re-download and verify draft release
         id: draft-inspect
@@ -440,7 +469,7 @@ jobs:
         run: |
           set -euo pipefail
           .venv/bin/python scripts/prepare_draft_release.py inspect --tag "$TAG_NAME" --repository "$PUBLIC_RELEASE_REPOSITORY" --output-dir "$RUNNER_TEMP/draft-assets" > "$RUNNER_TEMP/draft-inspect.json"
-          jq -e --arg tag "$TAG_NAME" '.tag == $tag and .status == "verified" and .state == "verified" and .read_only == true and .asset_count == 15' "$RUNNER_TEMP/draft-inspect.json" > /dev/null
+          jq -e --arg tag "$TAG_NAME" '.tag == $tag and .status == "verified" and .state == "verified" and .read_only == true and (.asset_count | type == "number" and . > 0)' "$RUNNER_TEMP/draft-inspect.json" > /dev/null
 
       - name: Validate and verify re-downloaded draft assets
         if: ${{ always() && steps.preflight.outputs.skip_source != 'true' && steps.release-writer.outputs.token != '' }}
@@ -453,7 +482,22 @@ jobs:
           jq -e '.marker | type == "object"' "$RUNNER_TEMP/draft-inspect.json" > /dev/null
           jq -e '.marker' "$RUNNER_TEMP/draft-inspect.json" > "$RUNNER_TEMP/draft-marker.json"
           .venv/bin/python scripts/validate_release_provenance.py public-draft --root "$RUNNER_TEMP/draft-assets" --schemas schemas --marker "$RUNNER_TEMP/draft-marker.json" --output-plan "$RUNNER_TEMP/draft-plan.json"
-          .venv/bin/python scripts/validate_channel_candidates.py --root "$RUNNER_TEMP/draft-assets" --schemas schemas
+          profile=$(jq -er '.profile' "$RUNNER_TEMP/draft-plan.json")
+          expected_asset_count=$(jq -er '.assets | length' "$RUNNER_TEMP/draft-plan.json")
+          jq -e --argjson expected_asset_count "$expected_asset_count" '.asset_count == $expected_asset_count' "$RUNNER_TEMP/draft-inspect.json" > /dev/null
+          case "$profile" in
+            desktop|desktop-linux)
+              .venv/bin/python scripts/validate_channel_candidates.py --root "$RUNNER_TEMP/draft-assets" --schemas schemas
+              ;;
+            repository-bootstrap)
+              test ! -e "$RUNNER_TEMP/draft-assets/channel-candidates.json"
+              test ! -e "$RUNNER_TEMP/draft-assets/channel-candidates.tar.gz"
+              ;;
+            *)
+              echo "::error::unsupported release profile: $profile"
+              exit 1
+              ;;
+          esac
           certificate_identity="https://github.com/${SOURCE_REPOSITORY}/.github/workflows/release.yml@refs/tags/${TAG_NAME}"
           cosign verify-blob \
             --certificate-identity "$certificate_identity" \

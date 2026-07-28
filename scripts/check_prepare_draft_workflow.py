@@ -17,7 +17,9 @@ TOKEN_USES = "actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da40
 DOWNLOAD_USES = "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093"
 SETUP_UV_USES = "astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9"
 COSIGN_USES = "sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6"
-STABLE_TAG_TEXT = r"^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$"
+STABLE_TAG_TEXT = (
+    r"^(v|repository-bootstrap-v)(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$"
+)
 READER_TOKEN = "steps.artifact-reader.outputs.token"
 WRITER_TOKEN = "steps.release-writer.outputs.token"
 INSTALLATION_TOKEN_REVOCATION = "DELETE /installation/token"
@@ -495,6 +497,20 @@ def _check_command_requirements(steps: Sequence[Json], errors: list[str]) -> Non
         errors.append(
             "workflow must run the portable channel-candidate validator exactly once"
         )
+    candidate_validation_commands = [
+        command
+        for command in commands
+        if "scripts/validate_channel_candidates.py" in command
+    ]
+    if any(
+        "profile" not in command
+        or "repository-bootstrap" not in command
+        or ('if [[ "$profile"' not in command and 'case "$profile"' not in command)
+        for command in candidate_validation_commands
+    ):
+        errors.append(
+            "channel-candidate validation must be conditional on the release profile"
+        )
     staging_validator_index = (
         staging_validator_indices[0] if staging_validator_indices else -1
     )
@@ -575,7 +591,8 @@ def _check_command_requirements(steps: Sequence[Json], errors: list[str]) -> Non
                 "--repository",
                 "draft-prepare.json",
                 'state == "verified"',
-                "asset_count == 15",
+                "assets | length",
+                "asset_count == $expected_asset_count",
             ),
         )
     ]
@@ -591,7 +608,7 @@ def _check_command_requirements(steps: Sequence[Json], errors: list[str]) -> Non
                 "--output-dir",
                 "draft-inspect.json",
                 '.status == "verified"',
-                "asset_count == 15",
+                'asset_count | type == "number"',
             ),
         )
     ]

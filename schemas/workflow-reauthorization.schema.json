@@ -18,12 +18,12 @@
     "schema_version": { "const": 1 },
     "tag": {
       "type": "string",
-      "pattern": "^v(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)$"
+      "pattern": "^(?:v|repository-bootstrap-v)(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)$"
     },
     "stage": { "enum": ["public-publish", "package-channels"] },
     "execution_ref": {
       "type": "string",
-      "pattern": "^refs/tags/release-reauthorization/v[0-9]+\\.[0-9]+\\.[0-9]+/(?:public-publish|package-channels)/[0-9a-f]{40}$"
+      "pattern": "^refs/tags/release-reauthorization/(?:v|repository-bootstrap-v)(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)/(?:public-publish|package-channels)/[0-9a-f]{40}$"
     },
     "original": { "$ref": "#/$defs/workflow" },
     "replacement": { "$ref": "#/$defs/workflow" },

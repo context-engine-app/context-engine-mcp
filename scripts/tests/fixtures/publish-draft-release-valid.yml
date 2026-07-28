@@ -97,7 +97,7 @@ jobs:
             --repository "$GITHUB_REPOSITORY" \
             --output-dir "$assets_dir" > "$inspect_file"
           jq -e --arg tag "$TAG_NAME" \
-            '.tag == $tag and .status == "verified" and .state == "verified" and .read_only == true and .asset_count == 15' \
+            '.tag == $tag and .status == "verified" and .state == "verified" and .read_only == true and (.asset_count | type == "number")' \
             "$inspect_file" > /dev/null
           jq -e '.marker' "$inspect_file" > "$marker_file"
           .venv/bin/python scripts/validate_release_provenance.py public-publish \
@@ -105,9 +105,17 @@ jobs:
             --schemas schemas \
             --marker "$marker_file" \
             --output-plan "$plan_file"
-          .venv/bin/python scripts/validate_channel_candidates.py \
-            --root "$assets_dir" \
-            --schemas schemas
+          expected_asset_count=$(jq -er '.assets | length' "$plan_file")
+          jq -e --argjson expected_asset_count "$expected_asset_count" '.asset_count == $expected_asset_count' "$inspect_file" > /dev/null
+          profile=$(jq -er '.profile' "$plan_file")
+          if [[ "$profile" != "repository-bootstrap" ]]; then
+            .venv/bin/python scripts/validate_channel_candidates.py \
+              --root "$assets_dir" \
+              --schemas schemas
+          else
+            test ! -e "$assets_dir/channel-candidates.json"
+            test ! -e "$assets_dir/channel-candidates.tar.gz"
+          fi
 
           publish_sha256=$(cat "$RUNNER_TEMP/publish-workflow.sha256")
           channels_sha256=$(cat "$RUNNER_TEMP/channels-workflow.sha256")
@@ -232,7 +240,7 @@ jobs:
             --repository "$GITHUB_REPOSITORY" \
             --output-dir "$assets_dir" > "$inspect_file"
           jq -e --arg tag "$TAG_NAME" \
-            '.tag == $tag and .status == "verified" and .state == "verified" and .read_only == true and .asset_count == 15' \
+            '.tag == $tag and .status == "verified" and .state == "verified" and .read_only == true and (.asset_count | type == "number")' \
             "$inspect_file" > /dev/null
           jq -e '.marker' "$inspect_file" > "$marker_file"
           .venv/bin/python scripts/validate_release_provenance.py public-publish \
@@ -240,9 +248,17 @@ jobs:
             --schemas schemas \
             --marker "$marker_file" \
             --output-plan "$plan_file"
-          .venv/bin/python scripts/validate_channel_candidates.py \
-            --root "$assets_dir" \
-            --schemas schemas
+          expected_asset_count=$(jq -er '.assets | length' "$plan_file")
+          jq -e --argjson expected_asset_count "$expected_asset_count" '.asset_count == $expected_asset_count' "$inspect_file" > /dev/null
+          profile=$(jq -er '.profile' "$plan_file")
+          if [[ "$profile" != "repository-bootstrap" ]]; then
+            .venv/bin/python scripts/validate_channel_candidates.py \
+              --root "$assets_dir" \
+              --schemas schemas
+          else
+            test ! -e "$assets_dir/channel-candidates.json"
+            test ! -e "$assets_dir/channel-candidates.tar.gz"
+          fi
           publish_sha256=$(cat "$RUNNER_TEMP/publish-workflow.sha256")
           channels_sha256=$(cat "$RUNNER_TEMP/channels-workflow.sha256")
           jq -e \
@@ -456,9 +472,15 @@ jobs:
             --schemas schemas \
             --marker "$RUNNER_TEMP/publish-marker.json" \
             --output-plan "$RUNNER_TEMP/published-plan.json"
-          .venv/bin/python scripts/validate_channel_candidates.py \
-            --root "$published_dir" \
-            --schemas schemas
+          profile=$(jq -er '.profile' "$RUNNER_TEMP/published-plan.json")
+          if [[ "$profile" != "repository-bootstrap" ]]; then
+            .venv/bin/python scripts/validate_channel_candidates.py \
+              --root "$published_dir" \
+              --schemas schemas
+          else
+            test ! -e "$published_dir/channel-candidates.json"
+            test ! -e "$published_dir/channel-candidates.tar.gz"
+          fi
           source_repository=$(jq -er '.source_repository' "$RUNNER_TEMP/published-plan.json")
           source_commit=$(jq -er '.source_commit' "$RUNNER_TEMP/published-plan.json")
           certificate_identity="https://github.com/${source_repository}/.github/workflows/release.yml@refs/tags/${TAG_NAME}"

@@ -324,7 +324,7 @@ class TestableChannelCoordinator(channels.ChannelCoordinator):
         return self._request(destination, method, path, body=body)
 
 
-def _candidate_root(directory: Path) -> Path:
+def _candidate_root(directory: Path, *, profile: str = "desktop") -> Path:
     homebrew = b"class Formula\n"
     scoop = b'{"version":"1.2.3"}\n'
     files = {
@@ -348,7 +348,7 @@ def _candidate_root(directory: Path) -> Path:
     candidates: dict[str, object] = {
         "release_tag": "v1.2.3",
         "version": "1.2.3",
-        "profile": "desktop",
+        "profile": profile,
         "source_manifest_sha256": "d" * 64,
         "candidates": [
             {
@@ -381,6 +381,12 @@ def _candidate_root(directory: Path) -> Path:
 
 
 class PackageChannelTests(unittest.TestCase):
+    def test_desktop_linux_candidates_are_supported(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = _candidate_root(Path(temporary), profile="desktop-linux")
+            candidates = channels.load_baseline_candidates(root, expected_tag="v1.2.3")
+            self.assertEqual(candidates.profile, "desktop-linux")
+
     def test_repair_schema_is_canonical_private_contract(self) -> None:
         self.assertEqual(
             channels.CHANNEL_REPAIR_SCHEMA_SHA256,

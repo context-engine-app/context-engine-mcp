@@ -158,6 +158,17 @@ class PrepareDraftWorkflowCheckerTests(unittest.TestCase):
         )
         self.assertTrue(any("inspect and validate" in error for error in errors))
 
+    def test_channel_candidates_must_be_profile_gated(self) -> None:
+        errors = self._check_mutation(
+            lambda source: source.replace(
+                'if [[ "$profile" != "repository-bootstrap" ]]; then',
+                "if true; then",
+            )
+        )
+        self.assertTrue(
+            any("profile" in error and "candidate" in error for error in errors)
+        )
+
 
 if __name__ == "__main__":
     _ = unittest.main()

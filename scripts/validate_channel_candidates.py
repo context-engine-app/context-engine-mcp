@@ -57,6 +57,18 @@ EXPECTED_CANDIDATES = {
         "ContextEngine.ContextEngine.locale.en-US.yaml"
     ),
 }
+CLI_ARCHIVE_IDS: frozenset[str] = frozenset(
+    {
+        "context-engine-x86_64-apple-darwin",
+        "context-engine-aarch64-apple-darwin",
+        "context-engine-x86_64-pc-windows-msvc",
+    }
+)
+PROFILE_ARCHIVE_IDS: dict[str, frozenset[str]] = {
+    "desktop": CLI_ARCHIVE_IDS,
+    "desktop-linux": CLI_ARCHIVE_IDS
+    | frozenset({"context-engine-x86_64-unknown-linux-gnu"}),
+}
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 COMMIT_RE = re.compile(r"^[0-9a-fA-F]{40}$")
 URL_RE: re.Pattern[str] = re.compile(r"https?://[^\s\"'<>]+")
@@ -266,6 +278,12 @@ def _validate_schema(
 def _manifest_inputs(
     manifest: Mapping[str, object],
 ) -> tuple[list[dict[str, str]], list[dict[str, str]], dict[str, str]]:
+    profile = _string(manifest.get("profile"), "manifest.profile")
+    if profile not in PROFILE_ARCHIVE_IDS:
+        raise CandidateValidationError(
+            f"manifest profile does not define an archive set: {profile}"
+        )
+    expected_archive_ids = PROFILE_ARCHIVE_IDS[profile]
     payloads: list[dict[str, str]] = []
     for index, value in enumerate(
         _array(manifest.get("payloads"), "manifest.payloads")
@@ -302,7 +320,15 @@ def _manifest_inputs(
         archives.append({"id": artifact_id, "filename": filename, "sha256": digest})
         archive_urls[filename] = artifact_url
     archives.sort(key=lambda item: item["id"])
-    _require(len(archives) == 3, "manifest must contain exactly three archive records")
+    archive_count_message = (
+        "manifest must contain exactly three archive records"
+        if profile == "desktop"
+        else f"manifest {profile} must contain exactly {len(expected_archive_ids)} archive records"
+    )
+    _require(
+        len(archives) == len(expected_archive_ids),
+        archive_count_message,
+    )
     _require(
         len({item["id"] for item in archives}) == len(archives),
         "manifest archive payload IDs must be unique",
@@ -310,6 +336,12 @@ def _manifest_inputs(
     _require(
         len({item["filename"] for item in archives}) == len(archives),
         "manifest archive filenames must be unique",
+    )
+    _require(
+        {item["id"] for item in archives} == set(expected_archive_ids),
+        "manifest archive inputs are not the exact desktop set"
+        if profile == "desktop"
+        else f"manifest archive inputs are not the exact {profile} archive set",
     )
     return payloads, archives, archive_urls
 
@@ -567,6 +599,10 @@ def validate_channel_candidates(root: Path, schemas: Path) -> None:
     manifest, manifest_raw = _read_json(
         root / "release-manifest.json", "release manifest"
     )
+    manifest_schema = _load_schema(
+        schemas, MANIFEST_SCHEMA_NAME, MANIFEST_SCHEMA_SHA256
+    )
+    _validate_schema(manifest, manifest_schema, "release manifest")
     if manifest.get("profile") == "repository-bootstrap":
         for candidate_name in (
             "channel-candidates.json",
@@ -575,27 +611,24 @@ def validate_channel_candidates(root: Path, schemas: Path) -> None:
             "bucket/context-engine.json",
         ):
             candidate_path = root / candidate_name
-            if candidate_path.exists():
+            if candidate_path.exists() or candidate_path.is_symlink():
                 raise CandidateValidationError(
                     "repository-bootstrap release must not contain channel candidates"
                 )
         return
     candidates, _ = _read_json(root / "channel-candidates.json", "channel candidates")
     channel_schema = _load_schema(schemas, CHANNEL_SCHEMA_NAME, CHANNEL_SCHEMA_SHA256)
-    manifest_schema = _load_schema(
-        schemas, MANIFEST_SCHEMA_NAME, MANIFEST_SCHEMA_SHA256
-    )
-    _validate_schema(manifest, manifest_schema, "release manifest")
     _validate_schema(candidates, channel_schema, "channel candidates")
+    profile = _string(manifest.get("profile"), "manifest.profile")
     _require(
-        _string(manifest.get("profile"), "manifest.profile") == "desktop",
-        "portable channel validation supports only the desktop profile",
+        profile in {"desktop", "desktop-linux"},
+        "portable channel validation supports only CLI profiles",
     )
     version = _string(manifest.get("version"), "manifest.version")
     tag = _string(manifest.get("tag"), "manifest.tag")
     _require(
-        _string(candidates.get("profile"), "candidates.profile") == "desktop",
-        "channel candidates profile must be desktop",
+        _string(candidates.get("profile"), "candidates.profile") == profile,
+        "channel candidates profile must match the manifest CLI profile",
     )
     _require(
         _string(candidates.get("version"), "candidates.version") == version
@@ -615,16 +648,6 @@ def validate_channel_candidates(root: Path, schemas: Path) -> None:
     archive_by_id = {
         item["id"]: archive_urls[item["filename"]] for item in archive_inputs
     }
-    required_archive_ids = {
-        "context-engine-x86_64-apple-darwin",
-        "context-engine-aarch64-apple-darwin",
-        "context-engine-x86_64-pc-windows-msvc",
-    }
-    _require(
-        set(archive_by_id) == required_archive_ids
-        and len(archive_by_id) == len(required_archive_ids),
-        "manifest archive inputs are not the exact desktop set",
-    )
     inputs = _object(candidates.get("inputs"), "candidates.inputs")
     actual_payload_inputs = [
         _object(item, "candidate payload input")

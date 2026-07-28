@@ -421,6 +421,27 @@ def _check_publish(job: Mapping[str, object], errors: list[str]) -> None:
                 else marker
             )
             errors.append(f"publish job is missing {label}")
+    candidate_commands = [
+        _step_run(step)
+        for step in steps
+        if "validate_channel_candidates.py" in _step_run(step)
+    ]
+    if any(
+        "profile" not in command
+        or "repository-bootstrap" not in command
+        or ('if [[ "$profile"' not in command and 'case "$profile"' not in command)
+        for command in candidate_commands
+    ):
+        errors.append(
+            "channel-candidate validation must be conditional on the release profile"
+        )
+    if (
+        commands.count(".assets | length") < 1
+        or commands.count("asset_count == $expected_asset_count") < 1
+    ):
+        errors.append(
+            "workflow must derive every inspected asset count from the validated plan"
+        )
     for marker, count in (
         ('"repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG_NAME"', 2),
         ('"repos/$GITHUB_REPOSITORY/git/tags/$tag_object_sha"', 2),

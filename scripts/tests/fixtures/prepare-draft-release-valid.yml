@@ -28,7 +28,7 @@ jobs:
       - name: Runtime preflight
         id: runtime
         run: |
-          [[ "$TAG_NAME" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
+          [[ "$TAG_NAME" =~ ^(v|repository-bootstrap-v)(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
           test "$GITHUB_REPOSITORY" = context-engine-app/context-engine-mcp
           test "$GITHUB_REF" = "refs/tags/$TAG_NAME"
           test "$GITHUB_SHA" = "$(git rev-parse HEAD)"
@@ -67,7 +67,13 @@ jobs:
               jq -e '.marker | type == "object"' <<< "$result" > "$RUNNER_TEMP/preflight-marker.json"
               .venv/bin/python scripts/validate_release_provenance.py public-draft --root "$RUNNER_TEMP/preflight-assets" --schemas schemas --marker "$RUNNER_TEMP/preflight-marker.json" --output-plan "$RUNNER_TEMP/preflight-plan.json"
               jq -e '.source_run.id and .public_workflow.path and .public_workflow.commit == $GITHUB_SHA and .public_workflow.sha256 == $RUNTIME_WORKFLOW_SHA256 and .distribution_commit == $GITHUB_SHA and .distribution_tag_target == $GITHUB_SHA' "$RUNNER_TEMP/preflight-plan.json"
-              .venv/bin/python scripts/validate_channel_candidates.py --root "$RUNNER_TEMP/preflight-assets" --schemas schemas
+              profile=$(jq -er '.profile' "$RUNNER_TEMP/preflight-plan.json")
+              if [[ "$profile" != "repository-bootstrap" ]]; then
+                .venv/bin/python scripts/validate_channel_candidates.py --root "$RUNNER_TEMP/preflight-assets" --schemas schemas
+              else
+                test ! -e "$RUNNER_TEMP/preflight-assets/channel-candidates.json"
+                test ! -e "$RUNNER_TEMP/preflight-assets/channel-candidates.tar.gz"
+              fi
               cosign verify-blob --certificate-identity "$CERTIFICATE_IDENTITY" --certificate-oidc-issuer https://token.actions.githubusercontent.com --certificate-github-workflow-repository "$SOURCE_REPOSITORY" --certificate-github-workflow-ref "refs/tags/$TAG_NAME" --certificate-github-workflow-sha "$SOURCE_COMMIT" --certificate-github-workflow-name Release --certificate-github-workflow-trigger push --bundle "$RUNNER_TEMP/preflight-assets/SHA256SUMS.sigstore.json" "$RUNNER_TEMP/preflight-assets/SHA256SUMS"
               printf 'skip_source=true\n' >> "$GITHUB_OUTPUT"
               ;;
@@ -126,7 +132,14 @@ jobs:
 
       - name: Candidate validator
         if: ${{ steps.preflight.outputs.skip_source != 'true' }}
-        run: .venv/bin/python scripts/validate_channel_candidates.py --root staged-release --schemas schemas
+        run: |
+          profile=$(jq -er '.profile' validated-plan.json)
+          if [[ "$profile" != "repository-bootstrap" ]]; then
+            .venv/bin/python scripts/validate_channel_candidates.py --root staged-release --schemas schemas
+          else
+            test ! -e staged-release/channel-candidates.json
+            test ! -e staged-release/channel-candidates.tar.gz
+          fi
 
       - name: Staging Cosign
         if: ${{ steps.preflight.outputs.skip_source != 'true' }}
@@ -170,7 +183,8 @@ jobs:
           GH_TOKEN: ${{ steps.release-writer.outputs.token }}
         run: |
           .venv/bin/python scripts/prepare_draft_release.py prepare --plan validated-plan.json --staged-assets staged-release --artifact-id 1 --artifact-digest sha256:$(printf '%064d' 0) --artifact-expires-at 2030-01-01T00:00:00Z --public-run-id "$GITHUB_RUN_ID" --public-run-attempt "$GITHUB_RUN_ATTEMPT" --repository context-engine-app/context-engine-mcp | tee "$RUNNER_TEMP/draft-prepare.json"
-          jq -e '.state == "verified" and .asset_count == 15' "$RUNNER_TEMP/draft-prepare.json"
+          expected_asset_count=$(jq -er '.assets | length' validated-plan.json)
+          jq -e --argjson expected_asset_count "$expected_asset_count" '.state == "verified" and .asset_count == $expected_asset_count' "$RUNNER_TEMP/draft-prepare.json"
 
       - name: Inspect
         id: draft-inspect
@@ -179,14 +193,20 @@ jobs:
           GH_TOKEN: ${{ steps.release-writer.outputs.token }}
         run: |
           .venv/bin/python scripts/prepare_draft_release.py inspect --tag "$TAG_NAME" --repository context-engine-app/context-engine-mcp --output-dir "$RUNNER_TEMP/draft-assets" > "$RUNNER_TEMP/draft-inspect.json"
-          jq -e '.status == "verified" and .asset_count == 15' "$RUNNER_TEMP/draft-inspect.json"
+          jq -e '.status == "verified" and (.asset_count | type == "number")' "$RUNNER_TEMP/draft-inspect.json"
 
       - name: Public draft validation
         if: ${{ always() && steps.preflight.outputs.skip_source != 'true' && steps.release-writer.outputs.token != '' }}
         run: |
           jq -e '.marker' "$RUNNER_TEMP/draft-inspect.json" > "$RUNNER_TEMP/draft-marker.json"
           .venv/bin/python scripts/validate_release_provenance.py public-draft --root "$RUNNER_TEMP/draft-assets" --schemas schemas --marker "$RUNNER_TEMP/draft-marker.json" --output-plan "$RUNNER_TEMP/draft-plan.json"
-          .venv/bin/python scripts/validate_channel_candidates.py --root "$RUNNER_TEMP/draft-assets" --schemas schemas
+          profile=$(jq -er '.profile' "$RUNNER_TEMP/draft-plan.json")
+          if [[ "$profile" != "repository-bootstrap" ]]; then
+            .venv/bin/python scripts/validate_channel_candidates.py --root "$RUNNER_TEMP/draft-assets" --schemas schemas
+          else
+            test ! -e "$RUNNER_TEMP/draft-assets/channel-candidates.json"
+            test ! -e "$RUNNER_TEMP/draft-assets/channel-candidates.tar.gz"
+          fi
           cosign verify-blob --certificate-identity "$CERTIFICATE_IDENTITY" --certificate-oidc-issuer https://token.actions.githubusercontent.com --certificate-github-workflow-repository "$SOURCE_REPOSITORY" --certificate-github-workflow-ref "refs/tags/$TAG_NAME" --certificate-github-workflow-sha "$SOURCE_COMMIT" --certificate-github-workflow-name Release --certificate-github-workflow-trigger push --bundle "$RUNNER_TEMP/draft-assets/SHA256SUMS.sigstore.json" "$RUNNER_TEMP/draft-assets/SHA256SUMS"
 
       - name: Revoke writer

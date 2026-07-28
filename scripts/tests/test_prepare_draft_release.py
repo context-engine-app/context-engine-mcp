@@ -4,7 +4,7 @@ import hashlib
 import json
 import tempfile
 import unittest
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from copy import deepcopy
 from datetime import datetime
 from pathlib import Path
@@ -13,7 +13,27 @@ from typing import cast
 from scripts import prepare_draft_release as MODULE
 
 
-NAMES = tuple(sorted(MODULE.EXPECTED_ASSET_NAMES))
+NAMES = tuple(
+    sorted(
+        (
+            "LICENSE",
+            "THIRD_PARTY_NOTICES.md",
+            "channel-candidates.json",
+            "channel-candidates.tar.gz",
+            "context-engine-aarch64-apple-darwin.cdx.json",
+            "context-engine-aarch64-apple-darwin.tar.gz",
+            "context-engine-release.cdx.json",
+            "context-engine-x86_64-apple-darwin.cdx.json",
+            "context-engine-x86_64-apple-darwin.tar.gz",
+            "context-engine-x86_64-pc-windows-msvc.cdx.json",
+            "context-engine-x86_64-pc-windows-msvc.zip",
+            "release-manifest.json",
+            "release-provenance.json",
+            "SHA256SUMS",
+            "SHA256SUMS.sigstore.json",
+        )
+    )
+)
 
 
 def _sha(value: bytes) -> str:
@@ -65,6 +85,42 @@ def _plan() -> dict[str, object]:
     }
 
 
+def _plan_for_profile(profile: str) -> dict[str, object]:
+    plan = _plan()
+    plan["profile"] = profile
+    plan["tag"] = (
+        "repository-bootstrap-v1.2.3" if profile == "repository-bootstrap" else "v1.2.3"
+    )
+    if profile == "repository-bootstrap":
+        asset_values: list[object] = [
+            asset
+            for asset in cast(list[object], plan["assets"])
+            if cast(Mapping[str, object], asset)["name"]
+            not in {"channel-candidates.json", "channel-candidates.tar.gz"}
+        ]
+    elif profile == "desktop-linux":
+        asset_values = cast(list[object], plan["assets"]) + [
+            {
+                "name": "context-engine-x86_64-unknown-linux-gnu.tar.gz",
+                "sha256": _sha(b"asset:context-engine-x86_64-unknown-linux-gnu.tar.gz"),
+                "size": len(b"asset:context-engine-x86_64-unknown-linux-gnu.tar.gz"),
+            }
+        ]
+    else:
+        asset_values = cast(list[object], plan["assets"])
+    assets = sorted(
+        asset_values,
+        key=lambda item: cast(str, cast(Mapping[str, object], item)["name"]),
+    )
+    plan["assets"] = assets
+    plan["release_asset_set_sha256"] = _sha(
+        json.dumps(
+            assets, ensure_ascii=True, separators=(",", ":"), sort_keys=True
+        ).encode()
+    )
+    return plan
+
+
 def _staged(root: Path, plan: Mapping[str, object]) -> dict[str, bytes]:
     contents: dict[str, bytes] = {}
     raw_assets = cast(list[object], plan["assets"])
@@ -78,6 +134,25 @@ def _staged(root: Path, plan: Mapping[str, object]) -> dict[str, bytes]:
     _ = (root / "staging-attestation.json").write_bytes(attestation)
     _ = (root / "staging-attestation.sigstore.json").write_bytes(b"bundle")
     return contents
+
+
+def _manifest_bytes(plan: MODULE.ValidatedPlan) -> bytes:
+    artifact_names = sorted(
+        plan.asset_names()
+        - MODULE.RELEASE_DOCUMENT_NAMES
+        - MODULE.CHECKSUM_NAMES
+        - MODULE.CANDIDATE_NAMES
+    )
+    return json.dumps(
+        {
+            "profile": plan.profile,
+            "version": plan.version,
+            "tag": plan.tag,
+            "artifacts": [{"filename": name} for name in artifact_names],
+        },
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode()
 
 
 class FakeTransport:
@@ -231,7 +306,12 @@ def _verified_transport(
         "body": MODULE.render_body(marker, visible_prefix=visible_prefix),
     }
     for name in NAMES:
-        transport.assets[name] = (transport.next_id, f"asset:{name}".encode())
+        content = (
+            _manifest_bytes(plan)
+            if name == "release-manifest.json"
+            else f"asset:{name}".encode()
+        )
+        transport.assets[name] = (transport.next_id, content)
         transport.next_id += 1
     return transport
 
@@ -269,6 +349,125 @@ def _preparing_transport(
 
 
 class CoordinatorTests(unittest.TestCase):
+    def test_plan_accepts_all_profiles_and_rejects_cross_profile_tags(self) -> None:
+        for profile in ("desktop", "desktop-linux", "repository-bootstrap"):
+            with self.subTest(profile=profile):
+                plan = MODULE.ValidatedPlan.from_mapping(_plan_for_profile(profile))
+                self.assertEqual(plan.profile, profile)
+        for profile, tag in (
+            ("desktop", "repository-bootstrap-v1.2.3"),
+            ("desktop-linux", "repository-bootstrap-v1.2.3"),
+            ("repository-bootstrap", "v1.2.3"),
+            ("desktop", "v01.2.3"),
+        ):
+            with self.subTest(profile=profile, tag=tag):
+                invalid = _plan_for_profile(profile)
+                invalid["tag"] = tag
+                with self.assertRaises(MODULE.PlanError):
+                    _ = MODULE.ValidatedPlan.from_mapping(invalid)
+
+    def test_plan_rejects_profile_incompatible_candidate_closure(self) -> None:
+        bootstrap = _plan_for_profile("repository-bootstrap")
+        bootstrap["assets"] = cast(list[object], _plan()["assets"])
+        bootstrap["release_asset_set_sha256"] = _sha(
+            json.dumps(
+                bootstrap["assets"],
+                ensure_ascii=True,
+                separators=(",", ":"),
+                sort_keys=True,
+            ).encode()
+        )
+        with self.assertRaises(MODULE.PlanError):
+            _ = MODULE.ValidatedPlan.from_mapping(bootstrap)
+
+    def test_plan_requires_core_assets_and_safe_flat_names(self) -> None:
+        for mutation in ("missing-core", "traversal", "control"):
+            with self.subTest(mutation=mutation):
+                invalid = _plan_for_profile("desktop")
+                assets = cast(list[object], invalid["assets"])
+                if mutation == "missing-core":
+                    assets = [
+                        asset
+                        for asset in assets
+                        if cast(Mapping[str, object], asset)["name"]
+                        != "release-manifest.json"
+                    ]
+                else:
+                    replacement = (
+                        "../escape" if mutation == "traversal" else "bad\x7fname"
+                    )
+                    assets = [
+                        {
+                            **cast(Mapping[str, object], asset),
+                            "name": replacement,
+                        }
+                        if index == 0
+                        else asset
+                        for index, asset in enumerate(assets)
+                    ]
+                assets = sorted(
+                    assets,
+                    key=lambda item: cast(
+                        str, cast(Mapping[str, object], item)["name"]
+                    ),
+                )
+                invalid["assets"] = assets
+                invalid["release_asset_set_sha256"] = _sha(
+                    json.dumps(
+                        assets,
+                        ensure_ascii=True,
+                        separators=(",", ":"),
+                        sort_keys=True,
+                    ).encode()
+                )
+                with self.assertRaises(MODULE.PlanError):
+                    _ = MODULE.ValidatedPlan.from_mapping(invalid)
+
+    def test_manifest_asset_names_reject_traversal_and_control_bytes(self) -> None:
+        coordinator = MODULE.DraftReleaseCoordinator(
+            FakeTransport(), repository=MODULE.PUBLIC_RELEASE_REPOSITORY
+        )
+        manifest_asset_names = cast(
+            Callable[[bytes, str], tuple[str, set[str]]],
+            getattr(coordinator, "_manifest_asset_names"),
+        )
+        for name in ("../escape", "bad\nname", "bad\x7fname", ""):
+            with self.subTest(name=repr(name)):
+                raw = json.dumps(
+                    {
+                        "profile": "desktop",
+                        "version": "1.2.3",
+                        "tag": "v1.2.3",
+                        "artifacts": [{"filename": name}],
+                    }
+                ).encode()
+                with self.assertRaises(MODULE.ReleaseMismatchError):
+                    _ = manifest_asset_names(raw, "v1.2.3")
+        for artifacts in (
+            [{"filename": "artifact.bin"}, {"filename": "artifact.bin"}],
+            [{"filename": "release-manifest.json"}],
+        ):
+            with self.subTest(artifacts=artifacts):
+                raw = json.dumps(
+                    {
+                        "profile": "desktop",
+                        "version": "1.2.3",
+                        "tag": "v1.2.3",
+                        "artifacts": artifacts,
+                    }
+                ).encode()
+                with self.assertRaises(MODULE.ReleaseMismatchError):
+                    _ = manifest_asset_names(raw, "v1.2.3")
+        raw = _manifest_bytes(MODULE.ValidatedPlan.from_mapping(_plan()))
+        for tag in ("v01.2.3", "not-a-release-tag"):
+            with self.subTest(tag=tag):
+                with self.assertRaises(MODULE.ReleaseMismatchError):
+                    _ = manifest_asset_names(raw, tag)
+        mismatched_manifest = cast(dict[str, object], json.loads(raw))
+        mismatched_manifest["tag"] = "v9.9.9"
+        with self.assertRaises(MODULE.ReleaseMismatchError):
+            _ = manifest_asset_names(json.dumps(mismatched_manifest).encode(), "v1.2.3")
+
     def test_plan_and_marker_are_canonical(self) -> None:
         plan = MODULE.ValidatedPlan.from_mapping(_plan())
         marker = MODULE.marker_metadata(
@@ -359,11 +558,11 @@ class CoordinatorTests(unittest.TestCase):
                 call[0] == "POST" and call[1].endswith("/assets")
                 for call in transport.calls
             ),
-            15,
+            len(NAMES),
         )
         self.assertNotIn("DELETE", {call[0] for call in transport.calls})
         self.assertNotIn("?clobber=true", {call[1] for call in transport.calls})
-        self.assertEqual(len(contents), 15)
+        self.assertEqual(len(contents), len(NAMES))
 
     def test_staged_symlink_is_rejected_before_mutation(self) -> None:
         plan_data = _plan()

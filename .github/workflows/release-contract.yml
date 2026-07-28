@@ -45,27 +45,27 @@ jobs:
         run: |
           .venv/bin/python -m unittest discover -s scripts/tests -p 'test*.py' -v
 
-      - name: Verify portable contract bytes
+      - name: Verify pinned local contract bytes
         run: |
           .venv/bin/python - <<'PY'
           import hashlib
           from pathlib import Path
 
           expected = {
-              ".github/workflows/publish-draft-release.yml": "57cdeddea07a121702ec022b120ad753c6efb6f2e45087b2ab8dcc7b5c0e8451",
+              ".github/workflows/publish-draft-release.yml": "ca36579cdbf3440bc4339486d31901c2f46fbd9089c858964b9c8ea20db0e0ed",
               "schemas/release-manifest.schema.json": "1b793cdebab9c3741eccd3aa280c4bb32ec0555fa1aa43c0f09210842a82d76c",
               "schemas/release-provenance.schema.json": "341d27e2074aebfdc539ef157d9d8fa449bff5504f7fb55014b74983c1506130",
               "schemas/channel-candidates.schema.json": "7ce660193dc346c70fd0c8db57bd1d91d1743d3b6059959b96f76443d037d57a",
               "schemas/staging-attestation.schema.json": "b8f1017ce278f762772e236eb08bf18a3c52b65f0e1e30c1d27cace51d305a6d",
-              "scripts/validate_release_provenance.py": "f5f47d2dab9c0707425414a50e5cd57cc7d20b45d67769dbccf7c047545ab74c",
-              "scripts/validate_channel_candidates.py": "1414ed65d2b256f2dea276a2a856ed0b9d7d75aa489da0da3a41fde805c0614e",
-              "scripts/publish_draft_release.py": "a03e5f3954ae70714b5522f078c9f25f581fb8aafdbe656d3962427d50350dc4",
-              "scripts/check_publish_draft_workflow.py": "663f382f73d4678df374ba5ff36532ebaaee675880c378c760776d7638669d24",
-              ".github/workflows/prepare-package-channels.yml": "529d842ec02b5a15b30e5e43e1023dbc61207a87dd6a45433f9d6704f2e2345d",
+              "scripts/validate_release_provenance.py": "0412743f4d3bb726182838ce65be3d37ede1547e5ea8655089470394e6f0ead5",
+              "scripts/validate_channel_candidates.py": "fbd41cc96db27295ce99e9959d70ac4e3068eee3c4b0ac1ba41a2b481fbd0e28",
+              "scripts/publish_draft_release.py": "ff15dab16e604b54349f8806d826a8d0e087af35e40a96ef5ed2ee73896e7d8e",
+              "scripts/check_publish_draft_workflow.py": "ea152045a07eb2606aac716258a98ab5cd2128cd6997056d2c58a276d3b8f3af",
+              ".github/workflows/prepare-package-channels.yml": "84dafac501ee8aef70816ac879c2de6ed7afbc8e1cafa547ee7aadb072b3681e",
               "schemas/channel-repair.schema.json": "5afe8a86eb580553d40158c9fa910cf6ad8f0cd88625673ecc3c3cb592201b26",
-              "schemas/workflow-reauthorization.schema.json": "e0fce8d962bef3f4f3a60fb39ed521676d252bf3309157fbd5afe5e5cba797d8",
-              "scripts/prepare_package_channels.py": "17c9d60bf60e8d0ebbf4980c6151864082c97d4c0baa076c331b6a57115c4ac5",
-              "scripts/check_prepare_package_channels_workflow.py": "2a53e1975af2561711c7475e7e719bc29960ecc80174075aa79ab309cae7bd35",
+              "schemas/workflow-reauthorization.schema.json": "e3d0f0799be46b5ba74f863b7f65328c6659734cfe23f34fae08e0fc1d690809",
+              "scripts/prepare_package_channels.py": "5fdfc0b8834431cff44ebab601a7c66b66e3819593d4591c6cd4030fb445f2e9",
+              "scripts/check_prepare_package_channels_workflow.py": "7d468d94ce0060b64d7190d355896a75859f190386037f55fdc591786c621adc",
           }
           for filename, expected_sha256 in expected.items():
               path = Path(filename)

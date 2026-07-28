@@ -22,6 +22,46 @@ class PackageWorkflowCheckerTests(unittest.TestCase):
     def test_valid_workflow_passes(self) -> None:
         self.assertEqual(checker.check_workflow(FIXTURE), [])
 
+    def test_profile_guards_are_exactly_the_two_cli_profiles(self) -> None:
+        source = FIXTURE.read_text(encoding="utf-8")
+        self.assertIn("profile == 'desktop'", source)
+        self.assertIn("profile == 'desktop-linux'", source)
+        self.assertNotIn("profile != 'repository-bootstrap'", source)
+
+    def test_broad_publish_profile_guard_is_rejected(self) -> None:
+        errors = self._mutate(
+            lambda value: value.replace(
+                "needs.preflight.outputs.profile == 'desktop' || needs.preflight.outputs.profile == 'desktop-linux'",
+                "needs.preflight.outputs.profile != 'repository-bootstrap'",
+            )
+        )
+        self.assertTrue(any("profile guard" in error for error in errors))
+
+    def test_candidate_validation_outside_cli_case_is_rejected(self) -> None:
+        errors = self._mutate(
+            lambda value: value.replace(
+                '              .venv/bin/python scripts/validate_channel_candidates.py --root "$RUNNER_TEMP/release" --schemas schemas\n              ;;',
+                '              ;;\n          .venv/bin/python scripts/validate_channel_candidates.py --root "$RUNNER_TEMP/release" --schemas schemas',
+                1,
+            )
+        )
+        self.assertTrue(
+            any("inside the CLI profile branch" in error for error in errors)
+        )
+
+    def test_bootstrap_validation_cannot_use_github_or_channel_tools(self) -> None:
+        errors = self._mutate(
+            lambda value: value.replace(
+                '          test -z "$SCOOP_REPAIR_ATTEMPT"\n',
+                (
+                    "          gh api repos/context-engine-app/homebrew-tap\n"
+                    '          test -z "$SCOOP_REPAIR_ATTEMPT"\n'
+                ),
+                1,
+            )
+        )
+        self.assertTrue(any("repository-bootstrap" in error for error in errors))
+
     def test_package_channels_uses_package_provenance_mode(self) -> None:
         source = FIXTURE.read_text(encoding="utf-8")
         self.assertIn("validate_release_provenance.py package-channels", source)

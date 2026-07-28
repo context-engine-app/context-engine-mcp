@@ -406,8 +406,10 @@ def load_baseline_candidates(
             )
     if expected_tag is not None and tag != expected_tag:
         raise ChannelPlanError("candidate release tag differs from requested tag")
-    if profile != "desktop":
-        raise ChannelPlanError("package channels require desktop candidates")
+    if profile not in {"desktop", "desktop-linux"}:
+        raise ChannelPlanError(
+            "package channels require desktop or desktop-linux candidates"
+        )
     raw_records = metadata.get("candidates")
     if not isinstance(raw_records, list):
         raise ChannelPlanError("channel candidates.candidates must be an array")

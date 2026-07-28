@@ -28,25 +28,6 @@ from pathlib import Path
 from typing import Protocol, cast
 
 
-EXPECTED_ASSET_NAMES = frozenset(
-    {
-        "LICENSE",
-        "THIRD_PARTY_NOTICES.md",
-        "release-manifest.json",
-        "release-provenance.json",
-        "context-engine-release.cdx.json",
-        "channel-candidates.tar.gz",
-        "channel-candidates.json",
-        "SHA256SUMS",
-        "SHA256SUMS.sigstore.json",
-        "context-engine-x86_64-apple-darwin.tar.gz",
-        "context-engine-aarch64-apple-darwin.tar.gz",
-        "context-engine-x86_64-pc-windows-msvc.zip",
-        "context-engine-x86_64-apple-darwin.cdx.json",
-        "context-engine-aarch64-apple-darwin.cdx.json",
-        "context-engine-x86_64-pc-windows-msvc.cdx.json",
-    }
-)
 PUBLIC_RELEASE_REPOSITORY = "context-engine-app/context-engine-mcp"
 SOURCE_RELEASE_REPOSITORY = "context-engine-app/context-engine"
 SOURCE_WORKFLOW_PATH = ".github/workflows/release.yml"
@@ -54,6 +35,10 @@ PUBLIC_WORKFLOW_PATH = ".github/workflows/prepare-draft-release.yml"
 STAGING_ONLY_NAMES = frozenset(
     {"staging-attestation.json", "staging-attestation.sigstore.json"}
 )
+RELEASE_DOCUMENT_NAMES = frozenset({"release-manifest.json", "release-provenance.json"})
+CHECKSUM_NAMES = frozenset({"SHA256SUMS", "SHA256SUMS.sigstore.json"})
+CANDIDATE_NAMES = frozenset({"channel-candidates.json", "channel-candidates.tar.gz"})
+PROFILES = frozenset({"desktop", "desktop-linux", "repository-bootstrap"})
 MARKER_KEYS = (
     "distribution_commit",
     "marker_version",
@@ -80,13 +65,25 @@ MARKER_SUFFIX = "\n-->"
 VISIBLE_RELEASE_LINE = "Release notes will be added manually before publication."
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
-TAG_RE = re.compile(r"^v([0-9]+\.[0-9]+\.[0-9]+)$")
+TAG_RE = re.compile(
+    r"^(?:v|repository-bootstrap-v)((?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*))$"
+)
 ARTIFACT_DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
 ASSET_DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
 MIN_MUTATION_LEAD_SECONDS = 3600
 MAX_JSON_RESPONSE_BYTES = 4 * 1024 * 1024
 MAX_WIRE_RESPONSE_BYTES = 256 * 1024 * 1024
 JsonObject = dict[str, object]
+
+
+def _is_safe_flat_asset_name(name: str) -> bool:
+    return (
+        bool(name)
+        and name not in {".", ".."}
+        and "/" not in name
+        and "\\" not in name
+        and all(ord(character) >= 0x20 and ord(character) != 0x7F for character in name)
+    )
 
 
 class _UrlResponse(Protocol):
@@ -481,15 +478,24 @@ class ValidatedPlan:
         if raw["schema_version"] != 1:
             raise PlanError("validated plan schema_version must be 1")
         profile = _require_string(raw["profile"], "profile")
-        if profile != "desktop":
-            raise PlanError("public draft coordinator only accepts profile=desktop")
+        if profile not in PROFILES:
+            raise PlanError("validated plan profile is unsupported")
         tag = _require_string(raw["tag"], "tag")
         tag_match = TAG_RE.fullmatch(tag)
         if tag_match is None:
-            raise PlanError("tag must be vMAJOR.MINOR.PATCH")
+            raise PlanError(
+                "tag must be vMAJOR.MINOR.PATCH or repository-bootstrap-vMAJOR.MINOR.PATCH"
+            )
         version = _require_string(raw["version"], "version")
         if version != tag_match.group(1):
             raise PlanError("version does not match tag")
+        expected_tag = (
+            f"repository-bootstrap-v{version}"
+            if profile == "repository-bootstrap"
+            else f"v{version}"
+        )
+        if tag != expected_tag:
+            raise PlanError("tag does not match profile")
         source_repository = _require_string(
             raw["source_repository"], "source_repository"
         )
@@ -571,12 +577,8 @@ class ValidatedPlan:
         }
 
         raw_assets = raw["assets"]
-        if not isinstance(raw_assets, list) or len(
-            cast(list[object], raw_assets)
-        ) != len(EXPECTED_ASSET_NAMES):
-            raise PlanError(
-                f"assets must contain exactly {len(EXPECTED_ASSET_NAMES)} entries"
-            )
+        if not isinstance(raw_assets, list) or not cast(list[object], raw_assets):
+            raise PlanError("assets must contain at least one entry")
         raw_asset_list = cast(list[object], raw_assets)
         assets: list[AssetFact] = []
         for index, raw_asset_value in enumerate(raw_asset_list):
@@ -585,12 +587,7 @@ class ValidatedPlan:
                 raw_asset, {"name", "sha256", "size"}, f"assets[{index}]"
             )
             name = _require_string(raw_asset["name"], f"assets[{index}].name")
-            if (
-                name not in EXPECTED_ASSET_NAMES
-                or "/" in name
-                or "\\" in name
-                or name in {".", ".."}
-            ):
+            if not _is_safe_flat_asset_name(name):
                 raise PlanError(f"assets[{index}].name is not an allowed public asset")
             assets.append(
                 AssetFact(
@@ -600,10 +597,24 @@ class ValidatedPlan:
                 )
             )
         names = [asset.name for asset in assets]
-        if len(set(names)) != len(names) or set(names) != set(EXPECTED_ASSET_NAMES):
-            raise PlanError("assets must contain each public asset exactly once")
+        if len(set(names)) != len(names):
+            raise PlanError("assets must contain each validated asset exactly once")
         if names != sorted(names):
             raise PlanError("assets must be sorted by name")
+        name_set = set(names)
+        if not (RELEASE_DOCUMENT_NAMES | CHECKSUM_NAMES).issubset(name_set):
+            raise PlanError(
+                "validated plans must contain release documents and checksum assets"
+            )
+        if profile == "repository-bootstrap":
+            if name_set & CANDIDATE_NAMES:
+                raise PlanError(
+                    "repository-bootstrap plans must not contain channel candidates"
+                )
+        elif not CANDIDATE_NAMES.issubset(name_set):
+            raise PlanError(
+                "CLI release plans must contain both channel candidate assets"
+            )
         if (
             canonical_sha256([asset.as_dict() for asset in assets])
             != release_asset_set_sha256
@@ -639,6 +650,11 @@ class ValidatedPlan:
 
     def asset_facts(self) -> dict[str, AssetFact]:
         return {asset.name: asset for asset in self.assets}
+
+    def asset_names(self) -> frozenset[str]:
+        """Return the exact release asset closure emitted by the validator."""
+
+        return frozenset(asset.name for asset in self.assets)
 
 
 def marker_metadata(
@@ -841,7 +857,12 @@ class DraftReleaseCoordinator:
             )
             if marker["state"] == "verified":
                 self._verify_assets(release, local_assets, normalized_plan)
-                return self._result(release, state="verified", read_only=True)
+                return self._result(
+                    release,
+                    state="verified",
+                    read_only=True,
+                    asset_count=len(local_assets),
+                )
             read_only = False
 
         existing_assets = self._list_assets(release, normalized_plan)
@@ -870,7 +891,12 @@ class DraftReleaseCoordinator:
         )
         verified_body = render_body(verified_marker)
         self._mark_verified(release, normalized_plan, verified_body, expiry)
-        return self._result(release, state="verified", read_only=read_only)
+        return self._result(
+            release,
+            state="verified",
+            read_only=read_only,
+            asset_count=len(local_assets),
+        )
 
     def inspect(
         self,
@@ -909,21 +935,36 @@ class DraftReleaseCoordinator:
             raise ReleaseMismatchError(
                 "release target does not match the marker distribution commit"
             )
-        expected_names = set(EXPECTED_ASSET_NAMES)
+        assets = self._list_assets(release)
+        names = {asset.name for asset in assets}
+        if len(assets) != len(names):
+            raise ReleaseMismatchError("release contains duplicate asset names")
+        manifest_asset = next(
+            (asset for asset in assets if asset.name == "release-manifest.json"),
+            None,
+        )
+        if manifest_asset is None:
+            raise ReleaseMismatchError("release is missing release-manifest.json")
+        manifest_raw = self._download_asset(manifest_asset)
+        manifest_profile, expected_names = self._manifest_asset_names(manifest_raw, tag)
+        if marker.get("profile") != manifest_profile:
+            raise ReleaseMismatchError("release marker profile does not match manifest")
+        if names != expected_names:
+            raise ReleaseMismatchError(
+                "release contains an asset set that differs from its manifest"
+            )
         if expected_assets is not None and set(expected_assets) != expected_names:
             raise ReleaseMismatchError(
                 "expected assets do not contain exact public asset set"
             )
-        assets = self._list_assets(release)
         if output_dir is not None:
             self._prepare_output_dir(output_dir)
-        names = {asset.name for asset in assets}
-        if len(assets) != len(names) or not names.issubset(expected_names):
-            raise ReleaseMismatchError(
-                "release contains duplicate or unexpected assets"
-            )
         for asset in assets:
-            content = self._download_asset(asset)
+            content = (
+                manifest_raw
+                if asset.name == "release-manifest.json"
+                else self._download_asset(asset)
+            )
             if expected_assets is not None and content != expected_assets.get(
                 asset.name
             ):
@@ -946,6 +987,56 @@ class DraftReleaseCoordinator:
             "read_only": True,
         }
 
+    def _manifest_asset_names(self, raw: bytes, tag: str) -> tuple[str, set[str]]:
+        try:
+            decoded = parse_json(raw, "release manifest")
+            manifest = _json_mapping(decoded, "release manifest")
+        except CoordinatorError as error:
+            raise ReleaseMismatchError("release manifest is not valid JSON") from error
+        profile = manifest.get("profile")
+        version = manifest.get("version")
+        if not isinstance(profile, str) or profile not in PROFILES:
+            raise ReleaseMismatchError("release manifest profile is unsupported")
+        if not isinstance(version, str):
+            raise ReleaseMismatchError("release manifest version is not text")
+        tag_match = TAG_RE.fullmatch(tag)
+        if tag_match is None or version != tag_match.group(1):
+            raise ReleaseMismatchError("release tag is not a stable semantic version")
+        manifest_tag = manifest.get("tag")
+        if not isinstance(manifest_tag, str) or manifest_tag != tag:
+            raise ReleaseMismatchError("release manifest tag differs from release tag")
+        expected_tag = (
+            f"repository-bootstrap-v{version}"
+            if profile == "repository-bootstrap"
+            else f"v{version}"
+        )
+        if tag != expected_tag:
+            raise ReleaseMismatchError(
+                "release manifest tag does not match release tag"
+            )
+        artifacts = manifest.get("artifacts")
+        if not isinstance(artifacts, list) or not artifacts:
+            raise ReleaseMismatchError("release manifest artifacts are not an array")
+        reserved_names = RELEASE_DOCUMENT_NAMES | CHECKSUM_NAMES | CANDIDATE_NAMES
+        artifact_names: set[str] = set()
+        for index, value in enumerate(cast(list[object], artifacts)):
+            artifact = _json_mapping(value, f"release manifest artifact {index}")
+            name = artifact.get("filename")
+            if not isinstance(name, str) or not _is_safe_flat_asset_name(name):
+                raise ReleaseMismatchError(
+                    "release manifest contains an unsafe asset filename"
+                )
+            if name in reserved_names or name in artifact_names:
+                raise ReleaseMismatchError(
+                    "release manifest artifact filenames are not unique"
+                )
+            artifact_names.add(name)
+        names: set[str] = set(RELEASE_DOCUMENT_NAMES | CHECKSUM_NAMES)
+        names.update(artifact_names)
+        if profile != "repository-bootstrap":
+            names.update(CANDIDATE_NAMES)
+        return profile, names
+
     def _prepare_output_dir(self, output_dir: Path) -> None:
         if output_dir.exists():
             if output_dir.is_symlink() or not output_dir.is_dir():
@@ -958,13 +1049,18 @@ class DraftReleaseCoordinator:
         output_dir.mkdir(parents=True)
 
     def _result(
-        self, release: Mapping[str, object], *, state: str, read_only: bool
+        self,
+        release: Mapping[str, object],
+        *,
+        state: str,
+        read_only: bool,
+        asset_count: int,
     ) -> dict[str, object]:
         return {
             "tag": release.get("tag_name"),
             "release_id": self._release_id(release),
             "state": state,
-            "asset_count": len(EXPECTED_ASSET_NAMES),
+            "asset_count": asset_count,
             "read_only": read_only,
         }
 
@@ -972,7 +1068,8 @@ class DraftReleaseCoordinator:
         if not root.is_dir():
             raise PlanError(f"staged assets directory does not exist: {root}")
         entries = list(root.iterdir())
-        allowed = EXPECTED_ASSET_NAMES | STAGING_ONLY_NAMES
+        expected_names = plan.asset_names()
+        allowed = expected_names | STAGING_ONLY_NAMES
         unexpected = sorted(
             entry.name for entry in entries if entry.name not in allowed
         )
@@ -983,7 +1080,7 @@ class DraftReleaseCoordinator:
                 raise PlanError(
                     f"staged assets entry is not a regular file: {entry.name}"
                 )
-        missing = sorted(EXPECTED_ASSET_NAMES - {entry.name for entry in entries})
+        missing = sorted(expected_names - {entry.name for entry in entries})
         if missing:
             raise PlanError(f"staged assets are missing: {missing}")
         attestation = root / "staging-attestation.json"
@@ -1003,7 +1100,7 @@ class DraftReleaseCoordinator:
             raise PlanError("staging attestation bytes do not match the validated plan")
         expected = plan.asset_facts()
         contents: dict[str, Path] = {}
-        for name in sorted(EXPECTED_ASSET_NAMES):
+        for name in sorted(expected_names):
             path = root / name
             content = path.read_bytes()
             fact = expected[name]
@@ -1180,7 +1277,7 @@ class DraftReleaseCoordinator:
     ) -> None:
         assets = self._list_assets(release, plan)
         names = {asset.name for asset in assets}
-        expected_names = set(EXPECTED_ASSET_NAMES)
+        expected_names = set(plan.asset_names())
         if len(assets) != len(names) or names != expected_names:
             missing = sorted(expected_names - names)
             unexpected = sorted(names - expected_names)
@@ -1199,7 +1296,7 @@ class DraftReleaseCoordinator:
         names = [asset.name for asset in assets]
         if len(names) != len(set(names)):
             raise ReleaseMismatchError("release contains duplicate asset names")
-        unexpected = sorted(set(names) - EXPECTED_ASSET_NAMES)
+        unexpected = sorted(set(names) - set(local_assets))
         if unexpected:
             raise ReleaseMismatchError(
                 f"release contains unexpected assets: {unexpected}"

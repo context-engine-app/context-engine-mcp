@@ -60,7 +60,7 @@ RELEASE_ASSETS_PATH_RE = re.compile(
     r"^/repos/context-engine-app/context-engine-mcp/releases/[1-9][0-9]*/assets$"
 )
 RELEASE_TAG_PATH_RE = re.compile(
-    r"^/repos/context-engine-app/context-engine-mcp/releases/tags/v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$"
+    r"^/repos/context-engine-app/context-engine-mcp/releases/tags/(?:v|repository-bootstrap-v)(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$"
 )
 MAX_RESPONSE_BYTES = 2 * 1024 * 1024
 RECONCILIATION_DELAYS_SECONDS = (0.0, 1.0, 2.0)

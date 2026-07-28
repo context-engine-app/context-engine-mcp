@@ -51,6 +51,29 @@ def _sha(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
 
 
+NAMES = tuple(
+    sorted(
+        (
+            "LICENSE",
+            "THIRD_PARTY_NOTICES.md",
+            "channel-candidates.json",
+            "channel-candidates.tar.gz",
+            "context-engine-aarch64-apple-darwin.cdx.json",
+            "context-engine-aarch64-apple-darwin.tar.gz",
+            "context-engine-release.cdx.json",
+            "context-engine-x86_64-apple-darwin.cdx.json",
+            "context-engine-x86_64-apple-darwin.tar.gz",
+            "context-engine-x86_64-pc-windows-msvc.cdx.json",
+            "context-engine-x86_64-pc-windows-msvc.zip",
+            "release-manifest.json",
+            "release-provenance.json",
+            "SHA256SUMS",
+            "SHA256SUMS.sigstore.json",
+        )
+    )
+)
+
+
 def _publication_plan() -> dict[str, object]:
     assets = [
         {
@@ -58,7 +81,7 @@ def _publication_plan() -> dict[str, object]:
             "sha256": _sha(f"asset:{name}".encode()),
             "size": len(f"asset:{name}".encode()),
         }
-        for name in sorted(draft.EXPECTED_ASSET_NAMES)
+        for name in NAMES
     ]
     workflow = {
         "path": ".github/workflows/prepare-draft-release.yml",

@@ -25,6 +25,7 @@ EXPECTED_PREFLIGHT_STEPS = (
     "Create pinned Python environment",
     "Validate immutable release and workflow binding",
     "Validate optional repair provenance",
+    "Validate repository-bootstrap inputs",
     "Anonymous destination preflight and plan",
 )
 EXPECTED_PUBLISH_STEPS = (
@@ -73,6 +74,17 @@ REVOCATION_RUN = (
 )
 MUTATION_RE = re.compile(
     r"(?:git\s+push\s+--force|gh\s+pr\s+merge|gh\s+release\s+(?:create|delete|edit|upload)|gh\s+run\s+rerun|gh\s+workflow\s+run|git\s+push\s+:\s|curl\s+|wget\s+)"
+)
+CLI_PROFILE_STEP_GUARD = (
+    "${{ steps.release-plan.outputs.profile == 'desktop' || "
+    "steps.release-plan.outputs.profile == 'desktop-linux' }}"
+)
+BOOTSTRAP_PROFILE_STEP_GUARD = (
+    "${{ steps.release-plan.outputs.profile == 'repository-bootstrap' }}"
+)
+CLI_PROFILE_JOB_GUARD = (
+    "${{ needs.preflight.outputs.profile == 'desktop' || "
+    "needs.preflight.outputs.profile == 'desktop-linux' }}"
 )
 
 
@@ -180,6 +192,55 @@ def _check_repair_api_version(commands: str, errors: list[str]) -> None:
             errors.append(f"repair API call is missing pinned version: {target}")
 
 
+def _check_profile_guard(
+    value: object, expected: str, label: str, errors: list[str]
+) -> None:
+    if value != expected:
+        errors.append(
+            f"{label} profile guard must name exactly desktop and desktop-linux"
+            if expected == CLI_PROFILE_STEP_GUARD
+            else f"{label} profile guard is not exact"
+        )
+
+
+def _check_profile_case(
+    commands: str, label: str, errors: list[str], *, require_bootstrap: bool
+) -> None:
+    case_index = commands.find('case "$profile" in')
+    cli_index = commands.find("desktop|desktop-linux)", case_index + 1)
+    if case_index < 0 or cli_index < 0:
+        errors.append(f"{label} must branch explicitly on the two CLI profiles")
+        return
+    cli_end = commands.find(";;", cli_index)
+    candidate_index = commands.find("validate_channel_candidates.py", case_index + 1)
+    if cli_end < 0 or not cli_index < candidate_index < cli_end:
+        errors.append(
+            f"{label} candidate validation must be inside the CLI profile branch"
+        )
+    if require_bootstrap:
+        bootstrap_index = commands.find("repository-bootstrap)", cli_end + 1)
+        if bootstrap_index < 0:
+            errors.append(f"{label} must handle repository-bootstrap explicitly")
+            return
+        bootstrap_end = commands.find(";;", bootstrap_index)
+        if bootstrap_end < 0:
+            errors.append(f"{label} repository-bootstrap branch is incomplete")
+            return
+        bootstrap_commands = commands[bootstrap_index:bootstrap_end]
+        if "validate_channel_candidates.py" in bootstrap_commands:
+            errors.append(f"{label} bootstrap branch must not validate candidate files")
+        if "prepare_package_channels.py preflight" in bootstrap_commands:
+            errors.append(f"{label} bootstrap branch must not read destination state")
+    default_index = commands.find("*)", cli_end + 1)
+    default_end = commands.find(";;", default_index) if default_index >= 0 else -1
+    if (
+        default_index < 0
+        or default_end < 0
+        or "exit 1" not in commands[default_index:default_end]
+    ):
+        errors.append(f"{label} must reject unsupported release profiles")
+
+
 def _check_trigger(workflow: Mapping[str, object], errors: list[str]) -> None:
     generic = cast(Mapping[object, object], workflow)
     trigger = generic.get("on", generic.get(True))
@@ -221,9 +282,144 @@ def _check_preflight(job: Mapping[str, object], errors: list[str]) -> None:
     if "environment" in job or "env" in job or "secrets." in str(job):
         errors.append("preflight must be credential-free and environment-free")
     steps = _steps(job, "jobs.preflight")
+    if any(
+        isinstance(step.get("uses"), str)
+        and "create-github-app-token" in cast(str, step.get("uses"))
+        for step in steps
+    ):
+        errors.append("preflight must not create an installation token")
     if _names(steps, "jobs.preflight", errors) != EXPECTED_PREFLIGHT_STEPS:
         errors.append("preflight steps must match the exact approved sequence")
     commands = "\n".join(_run(step) for step in steps)
+    outputs = _mapping(job.get("outputs"), "jobs.preflight.outputs")
+    if dict(outputs) != {
+        "profile": "${{ steps.release-plan.outputs.profile }}",
+        "preflight_plan_b64": "${{ steps.anonymous-preflight.outputs.plan_b64 }}",
+    }:
+        errors.append("preflight outputs must expose the validated profile and plan")
+    release_plan = next(
+        (
+            step
+            for step in steps
+            if step.get("name") == "Validate immutable release and workflow binding"
+        ),
+        None,
+    )
+    if release_plan is None or release_plan.get("id") != "release-plan":
+        errors.append("immutable release step must publish the validated profile")
+    else:
+        release_commands = _run(release_plan)
+        for marker in (
+            '[[ "$TAG_NAME" =~ ^(v|repository-bootstrap-v)(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$ ]]',
+            "profile=$(jq -er '.profile' \"$RUNNER_TEMP/package-plan.json\")",
+            "desktop|desktop-linux)",
+            "repository-bootstrap)",
+            'test ! -e "$RUNNER_TEMP/release/channel-candidates.json"',
+            'test ! -e "$RUNNER_TEMP/release/channel-candidates.tar.gz"',
+            'test ! -e "$RUNNER_TEMP/release/Formula/context-engine.rb"',
+            'test ! -e "$RUNNER_TEMP/release/bucket/context-engine.json"',
+            'echo "profile=$profile" >> "$GITHUB_OUTPUT"',
+        ):
+            if marker not in release_commands:
+                errors.append(
+                    f"immutable release step is missing profile guard: {marker}"
+                )
+        _check_profile_case(
+            release_commands,
+            "immutable release profile",
+            errors,
+            require_bootstrap=True,
+        )
+    repair = next(
+        (
+            step
+            for step in steps
+            if step.get("name") == "Validate optional repair provenance"
+        ),
+        None,
+    )
+    if repair is None:
+        errors.append("optional repair validation step is missing")
+    else:
+        _check_profile_guard(
+            repair.get("if"), CLI_PROFILE_STEP_GUARD, "repair validation", errors
+        )
+    bootstrap = next(
+        (
+            step
+            for step in steps
+            if step.get("name") == "Validate repository-bootstrap inputs"
+        ),
+        None,
+    )
+    if bootstrap is None:
+        errors.append("repository-bootstrap input validation step is missing")
+    else:
+        _check_profile_guard(
+            bootstrap.get("if"),
+            BOOTSTRAP_PROFILE_STEP_GUARD,
+            "repository-bootstrap validation",
+            errors,
+        )
+        bootstrap_commands = _run(bootstrap)
+        for selector in (
+            "HOMEBREW_REPAIR_RUN_ID",
+            "HOMEBREW_REPAIR_ATTEMPT",
+            "SCOOP_REPAIR_RUN_ID",
+            "SCOOP_REPAIR_ATTEMPT",
+        ):
+            if f'test -z "${selector}"' not in bootstrap_commands:
+                errors.append(
+                    f"repository-bootstrap validation must require an empty {selector}"
+                )
+        for forbidden in (
+            "gh ",
+            "GH_TOKEN",
+            "create-github-app-token",
+            "prepare_package_channels.py",
+            "context-engine-app/homebrew-tap",
+            "context-engine-app/scoop-bucket",
+        ):
+            if forbidden in bootstrap_commands:
+                errors.append(
+                    f"repository-bootstrap validation must not reach {forbidden.strip()}"
+                )
+        if TOKEN_ACTION in str(bootstrap) or "GH_TOKEN" in str(bootstrap):
+            errors.append(
+                "repository-bootstrap validation must not create or expose a token"
+            )
+    anonymous = next(
+        (
+            step
+            for step in steps
+            if step.get("name") == "Anonymous destination preflight and plan"
+        ),
+        None,
+    )
+    if anonymous is None:
+        errors.append("anonymous destination preflight step is missing")
+    else:
+        _check_profile_guard(
+            anonymous.get("if"), CLI_PROFILE_STEP_GUARD, "destination preflight", errors
+        )
+    for step in steps:
+        if step is anonymous:
+            continue
+        run = _run(step)
+        if "prepare_package_channels.py preflight" in run:
+            errors.append(
+                "destination preflight must be isolated behind its CLI profile guard"
+            )
+        if any(
+            destination in run
+            for destination in (
+                "context-engine-app/homebrew-tap",
+                "context-engine-app/scoop-bucket",
+            )
+        ):
+            errors.append(
+                "preflight must not read destination state outside its guarded step"
+            )
     _check_release_verification(commands, "preflight", errors)
     _check_reauthorization_refs(commands, errors)
     for marker in (
@@ -294,6 +490,7 @@ def _check_token(
 
 
 def _check_publish(job: Mapping[str, object], errors: list[str]) -> None:
+    _check_profile_guard(job.get("if"), CLI_PROFILE_JOB_GUARD, "publish job", errors)
     if job.get("environment") != "release-channel":
         errors.append("publish job must use release-channel environment")
     if "env" in job:
@@ -376,6 +573,7 @@ def _check_publish(job: Mapping[str, object], errors: list[str]) -> None:
             "private artifact-reader token must be revoked before destination writes"
         )
     commands = "\n".join(_run(step) for step in steps)
+    _check_profile_case(commands, "publish profile", errors, require_bootstrap=False)
     retrieval = next(
         (
             step
@@ -398,6 +596,9 @@ def _check_publish(job: Mapping[str, object], errors: list[str]) -> None:
         "--preflight-plan",
         "verify-preflight",
         "prepare-channel-repair.yml@",
+        "desktop|desktop-linux)",
+        'test "$profile" = "$EXPECTED_PROFILE"',
+        "package-channel publish requires a CLI release profile",
     ):
         if marker not in commands:
             errors.append(f"publish job is missing repair/preflight marker: {marker}")
@@ -465,6 +666,8 @@ def check_workflow(path: Path) -> list[str]:
         except yaml.YAMLError as error:
             return [f"invalid YAML: {error}"]
         workflow = _mapping(document, "workflow")
+        if re.search(r"profile\s*!=\s*['\"]repository-bootstrap['\"]", source):
+            return ["profile guard must name exactly desktop and desktop-linux"]
         jobs = _mapping(workflow.get("jobs"), "jobs")
         if set(jobs) != {"preflight", "publish"}:
             return ["workflow jobs must be exactly preflight and publish"]

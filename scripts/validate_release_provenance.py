@@ -32,13 +32,13 @@ STAGING_SCHEMA_SHA256 = (
     "b8f1017ce278f762772e236eb08bf18a3c52b65f0e1e30c1d27cace51d305a6d"
 )
 WORKFLOW_REAUTH_SCHEMA_SHA256 = (
-    "e0fce8d962bef3f4f3a60fb39ed521676d252bf3309157fbd5afe5e5cba797d8"
+    "e3d0f0799be46b5ba74f863b7f65328c6659734cfe23f34fae08e0fc1d690809"
 )
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 COMMIT_RE = re.compile(r"^[0-9a-fA-F]{40}$")
 VERSION_RE = re.compile(r"^(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)$")
 REAUTH_REF_RE = re.compile(
-    r"^refs/tags/release-reauthorization/(v(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*))/(public-publish|package-channels)/([0-9a-fA-F]{40})$"
+    r"^refs/tags/release-reauthorization/((?:v|repository-bootstrap-v)(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*))/(public-publish|package-channels)/([0-9a-fA-F]{40})$"
 )
 RUN_ID_RE = re.compile(r"^[0-9]+$")
 CHECKSUM_RE = re.compile(r"^([0-9a-f]{64})  ([^\x00\r\n\t /\\]+)$")
@@ -56,11 +56,6 @@ PUBLIC_WORKFLOW_PATHS = {
     "publish": PUBLISH_WORKFLOW_PATH,
     "channels": CHANNEL_WORKFLOW_PATH,
 }
-DESKTOP_TARGETS = {
-    "x86_64-apple-darwin",
-    "aarch64-apple-darwin",
-    "x86_64-pc-windows-msvc",
-}
 CHECKSUM_ASSETS = {"SHA256SUMS", "SHA256SUMS.sigstore.json"}
 RELEASE_DOCUMENTS = {
     "release-manifest.json",
@@ -69,6 +64,69 @@ RELEASE_DOCUMENTS = {
 CANDIDATE_ASSETS = {
     "channel-candidates.json",
     "channel-candidates.tar.gz",
+}
+PROFILE_TARGETS: dict[str, frozenset[str]] = {
+    "desktop": frozenset(
+        {
+            "x86_64-apple-darwin",
+            "aarch64-apple-darwin",
+            "x86_64-pc-windows-msvc",
+        }
+    ),
+    "desktop-linux": frozenset(
+        {
+            "x86_64-apple-darwin",
+            "aarch64-apple-darwin",
+            "x86_64-pc-windows-msvc",
+            "x86_64-unknown-linux-gnu",
+        }
+    ),
+    "repository-bootstrap": frozenset(),
+}
+TARGET_BUILD_SCRIPTS: dict[str, str] = {
+    "x86_64-apple-darwin": "scripts/build_mac.sh",
+    "aarch64-apple-darwin": "scripts/build_mac.sh",
+    "x86_64-pc-windows-msvc": "scripts/build_win.sh",
+    "x86_64-unknown-linux-gnu": "scripts/build_linux.sh",
+}
+TARGET_PAYLOAD_DETAILS: dict[str, dict[str, str]] = {
+    "x86_64-apple-darwin": {
+        "filename": "context-engine",
+        "platform": "macos",
+        "architecture": "x86_64",
+        "archive_filename": "context-engine-x86_64-apple-darwin.tar.gz",
+        "sbom_filename": "context-engine-x86_64-apple-darwin.cdx.json",
+    },
+    "aarch64-apple-darwin": {
+        "filename": "context-engine",
+        "platform": "macos",
+        "architecture": "arm64",
+        "archive_filename": "context-engine-aarch64-apple-darwin.tar.gz",
+        "sbom_filename": "context-engine-aarch64-apple-darwin.cdx.json",
+    },
+    "x86_64-pc-windows-msvc": {
+        "filename": "context-engine.exe",
+        "platform": "windows",
+        "architecture": "x86_64",
+        "archive_filename": "context-engine-x86_64-pc-windows-msvc.zip",
+        "sbom_filename": "context-engine-x86_64-pc-windows-msvc.cdx.json",
+    },
+    "x86_64-unknown-linux-gnu": {
+        "filename": "context-engine",
+        "platform": "linux",
+        "architecture": "x86_64",
+        "archive_filename": "context-engine-x86_64-unknown-linux-gnu.tar.gz",
+        "sbom_filename": "context-engine-x86_64-unknown-linux-gnu.cdx.json",
+    },
+}
+PROFILE_COMMON_FILENAMES: dict[str, frozenset[str]] = {
+    "desktop": frozenset(
+        {"LICENSE", "THIRD_PARTY_NOTICES.md", "context-engine-release.cdx.json"}
+    ),
+    "desktop-linux": frozenset(
+        {"LICENSE", "THIRD_PARTY_NOTICES.md", "context-engine-release.cdx.json"}
+    ),
+    "repository-bootstrap": frozenset({"LICENSE", "THIRD_PARTY_NOTICES.md"}),
 }
 STAGING_ONLY_NAMES = {"staging-attestation.json", "staging-attestation.sigstore.json"}
 MARKER_KEYS = {
@@ -383,7 +441,8 @@ def validate_workflow_reauthorization(
     _require(
         bool(
             re.fullmatch(
-                r"v(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)", tag
+                r"(?:v|repository-bootstrap-v)(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)",
+                tag,
             )
         ),
         "workflow reauthorization tag is invalid",
@@ -551,6 +610,373 @@ def _binding(value: object, label: str) -> dict[str, object]:
     return item
 
 
+def _package_coordinate(
+    value: Mapping[str, object], label: str, *, artifact: bool, kind: str
+) -> tuple[str, ...]:
+    fields = (
+        ("package_id", "id"),
+        ("package_version", "version"),
+        ("filename", "filename"),
+        ("package_suite", "suite"),
+        ("package_format", "package_format"),
+    )
+    coordinate = tuple(
+        _string(
+            value.get(artifact_field if artifact else binding_field),
+            f"{label}.{artifact_field if artifact else binding_field}",
+        )
+        for artifact_field, binding_field in fields
+    )
+    architecture = _string(value.get("architecture"), f"{label}.architecture")
+    if kind == "native-package":
+        if artifact:
+            _require(
+                architecture in {"x86_64", "arm64"},
+                f"{label}.architecture is not valid for native-package",
+            )
+        else:
+            _require(
+                architecture in {"amd64", "x86_64", "arm64"},
+                f"{label}.architecture is not valid for native-package",
+            )
+        architecture = "x86_64" if architecture in {"amd64", "x86_64"} else "arm64"
+    elif kind == "bootstrap-package":
+        _require(
+            architecture in {"all", "noarch"},
+            f"{label}.architecture is not valid for bootstrap-package",
+        )
+    source_format = value.get("repository_source_format")
+    return (
+        *coordinate,
+        architecture,
+        "<missing>"
+        if source_format is None
+        else _string(source_format, f"{label}.repository_source_format"),
+    )
+
+
+def _validate_package_bindings(
+    profile: str,
+    version: str,
+    artifacts: Iterable[Mapping[str, object]],
+    package_binding: Mapping[str, object],
+    bootstrap: Mapping[str, object],
+) -> None:
+    if profile == "desktop-linux":
+        _require(
+            _string(package_binding.get("mode"), "manifest.package_binding.mode")
+            == "embedded",
+            "desktop-linux package binding must be embedded",
+        )
+        packages = _array(
+            package_binding.get("packages"), "manifest.package_binding.packages"
+        )
+        expected_architectures = {"deb": "amd64", "rpm": "x86_64"}
+        for index, package in enumerate(packages):
+            package_mapping = _object(
+                package, f"manifest.package_binding.packages[{index}]"
+            )
+            package_format = _string(
+                package_mapping.get("package_format"),
+                f"manifest.package_binding.packages[{index}].package_format",
+            )
+            if package_format not in expected_architectures:
+                raise ReleaseProvenanceValidationError(
+                    "desktop-linux package binding format is unsupported"
+                )
+            _require(
+                _string(
+                    package_mapping.get("architecture"),
+                    f"manifest.package_binding.packages[{index}].architecture",
+                )
+                == expected_architectures[package_format],
+                "desktop-linux package binding architecture does not match its format",
+            )
+        actual_binding = [
+            _package_coordinate(
+                _object(package, f"manifest.package_binding.packages[{index}]"),
+                f"manifest.package_binding.packages[{index}]",
+                artifact=False,
+                kind="native-package",
+            )
+            for index, package in enumerate(packages)
+        ]
+        expected_binding = {
+            (
+                "context-engine",
+                version,
+                f"context-engine_{version}-1_amd64.deb",
+                "stable",
+                "deb",
+                "x86_64",
+                "<missing>",
+            ),
+            (
+                "context-engine",
+                version,
+                f"context-engine-{version}-1.x86_64.rpm",
+                "stable",
+                "rpm",
+                "x86_64",
+                "<missing>",
+            ),
+        }
+        _require(
+            len(actual_binding) == len(expected_binding)
+            and len(actual_binding) == len(set(actual_binding))
+            and set(actual_binding) == expected_binding,
+            "desktop-linux package binding must contain the canonical Debian and RPM pair",
+        )
+
+    actual: dict[str, list[tuple[str, ...]]] = {
+        "native-package": [],
+        "bootstrap-package": [],
+    }
+    for index, artifact in enumerate(artifacts):
+        kind = artifact.get("kind")
+        if isinstance(kind, str) and kind in actual:
+            actual[kind].append(
+                _package_coordinate(
+                    artifact,
+                    f"manifest.artifacts[{index}]",
+                    artifact=True,
+                    kind=kind,
+                )
+            )
+
+    expected: dict[str, list[tuple[str, ...]]] = {
+        "native-package": [],
+        "bootstrap-package": [],
+    }
+    binding_specs = (
+        (
+            package_binding,
+            "manifest.package_binding",
+            {"embedded": "native-package"}
+            if profile == "desktop-linux"
+            else {"bootstrap": "bootstrap-package"}
+            if profile == "repository-bootstrap"
+            else {},
+        ),
+        (bootstrap, "manifest.bootstrap", {"embedded": "bootstrap-package"}),
+    )
+    for binding, label, local_kinds in binding_specs:
+        mode = _string(binding.get("mode"), f"{label}.mode")
+        kind = local_kinds.get(mode)
+        if kind is None:
+            continue
+        packages = _array(binding.get("packages"), f"{label}.packages")
+        expected[kind].extend(
+            _package_coordinate(
+                _object(package, f"{label}.packages[{index}]"),
+                f"{label}.packages[{index}]",
+                artifact=False,
+                kind=kind,
+            )
+            for index, package in enumerate(packages)
+        )
+
+    for kind in actual:
+        actual_coordinates = actual[kind]
+        expected_coordinates = expected[kind]
+        _require(
+            len(actual_coordinates) == len(set(actual_coordinates)),
+            f"manifest {kind} artifacts contain duplicate package coordinates",
+        )
+        _require(
+            len(expected_coordinates) == len(set(expected_coordinates)),
+            f"manifest binding for {kind} contains duplicate package coordinates",
+        )
+        _require(
+            set(actual_coordinates) == set(expected_coordinates),
+            f"manifest {kind} artifacts do not match their binding packages",
+        )
+
+
+def _validate_profile_payloads(
+    profile: str, manifest: Mapping[str, object]
+) -> dict[str, str]:
+    expected_targets = PROFILE_TARGETS[profile]
+    builds = [
+        _object(item, f"manifest.builds[{index}]")
+        for index, item in enumerate(_array(manifest.get("builds"), "manifest.builds"))
+    ]
+    payloads = [
+        _object(item, f"manifest.payloads[{index}]")
+        for index, item in enumerate(
+            _array(manifest.get("payloads"), "manifest.payloads")
+        )
+    ]
+    expected_payload_ids = {f"context-engine-{target}" for target in expected_targets}
+    build_ids = [
+        _string(item.get("payload_id"), "manifest build payload_id") for item in builds
+    ]
+    _require(
+        set(build_ids) == expected_payload_ids
+        and len(build_ids) == len(expected_payload_ids),
+        "manifest builds do not match the profile payload set",
+    )
+    expected_scripts = {
+        f"context-engine-{target}": TARGET_BUILD_SCRIPTS[target]
+        for target in expected_targets
+    }
+    build_scripts = {
+        _string(item.get("payload_id"), "manifest build payload_id"): _string(
+            item.get("script"), "manifest build script"
+        )
+        for item in builds
+    }
+    _require(
+        build_scripts == expected_scripts,
+        "manifest build scripts do not match the profile payload set",
+    )
+    payload_ids = [_string(item.get("id"), "manifest payload id") for item in payloads]
+    _require(
+        set(payload_ids) == expected_payload_ids
+        and len(payload_ids) == len(expected_payload_ids),
+        "manifest payloads do not match the profile payload set",
+    )
+    payload_targets: dict[str, str] = {}
+    for payload in payloads:
+        payload_id = _string(payload.get("id"), "manifest payload id")
+        target = _string(payload.get("target"), "manifest payload target")
+        _require(
+            payload_id == f"context-engine-{target}",
+            "manifest payload id does not match its target",
+        )
+        details = TARGET_PAYLOAD_DETAILS.get(target)
+        if details is None:
+            raise ReleaseProvenanceValidationError(
+                "manifest payload target is not supported by the profile payload contract"
+            )
+        for field in ("filename", "platform", "architecture"):
+            _require(
+                _string(payload.get(field), f"manifest payload {field}")
+                == details[field],
+                f"manifest payload {field} does not match target",
+            )
+        _require(
+            _string(payload.get("executable_mode"), "manifest payload executable_mode")
+            == "0755",
+            "manifest payload executable_mode must be 0755",
+        )
+        _require(
+            _string(payload.get("version_output"), "manifest payload version_output")
+            == f"context-engine {_string(manifest.get('version'), 'manifest.version')}",
+            "manifest payload version_output does not match manifest version",
+        )
+        payload_targets[payload_id] = target
+    _require(
+        frozenset(payload_targets.values()) == expected_targets
+        and len(payload_targets) == len(expected_targets),
+        "manifest payload targets do not match the profile target set",
+    )
+    return payload_targets
+
+
+def _validate_profile_artifact_kinds(
+    profile: str,
+    artifacts: list[dict[str, object]],
+    manifest: Mapping[str, object],
+) -> None:
+    allowed_kinds = {"archive", "sbom", "common"}
+    if profile == "repository-bootstrap":
+        allowed_kinds = {"bootstrap-package", "common"}
+    elif profile == "desktop-linux":
+        package_binding = _object(
+            manifest.get("package_binding"), "manifest.package_binding"
+        )
+        if (
+            _string(package_binding.get("mode"), "manifest.package_binding.mode")
+            == "embedded"
+        ):
+            allowed_kinds.add("native-package")
+        bootstrap = _object(manifest.get("bootstrap"), "manifest.bootstrap")
+        if _string(bootstrap.get("mode"), "manifest.bootstrap.mode") == "embedded":
+            allowed_kinds.add("bootstrap-package")
+    for artifact in artifacts:
+        _require(
+            _string(artifact.get("kind"), "manifest artifact kind") in allowed_kinds,
+            "manifest artifact kind is not authorized by the profile bindings",
+        )
+
+
+def _validate_profile_common_artifacts(
+    profile: str, artifacts: Iterable[Mapping[str, object]]
+) -> None:
+    common_filenames = [
+        _string(artifact.get("filename"), "manifest common artifact filename")
+        for artifact in artifacts
+        if artifact.get("kind") == "common"
+    ]
+    expected_filenames = set(PROFILE_COMMON_FILENAMES[profile])
+    _require(
+        len(common_filenames) == len(expected_filenames)
+        and set(common_filenames) == expected_filenames,
+        "manifest common artifacts do not match the profile contract",
+    )
+
+
+def _validate_cli_artifact_pairing(
+    profile: str,
+    artifacts: list[dict[str, object]],
+    payload_targets: Mapping[str, str],
+) -> None:
+    if profile == "repository-bootstrap":
+        return
+    pairs: list[tuple[str, str]] = []
+    for artifact in artifacts:
+        kind = _string(artifact.get("kind"), "manifest artifact kind")
+        if kind not in {"archive", "sbom", "native-package"}:
+            continue
+        payload_id = _string(artifact.get("payload_id"), "manifest artifact payload_id")
+        expected_target = payload_targets.get(payload_id)
+        if expected_target is None:
+            raise ReleaseProvenanceValidationError(
+                "manifest artifact payload does not match the profile payload set"
+            )
+        _require(
+            _string(artifact.get("target"), "manifest artifact target")
+            == expected_target,
+            "manifest artifact target does not match its payload",
+        )
+        details = TARGET_PAYLOAD_DETAILS[expected_target]
+        _require(
+            _string(artifact.get("platform"), "manifest artifact platform")
+            == details["platform"],
+            "manifest artifact platform does not match its payload target",
+        )
+        _require(
+            _string(artifact.get("architecture"), "manifest artifact architecture")
+            == details["architecture"],
+            "manifest artifact architecture does not match its payload target",
+        )
+        if kind == "native-package":
+            _require(
+                expected_target == "x86_64-unknown-linux-gnu",
+                "native-package artifacts must bind the Linux payload",
+            )
+            continue
+        expected_filename = details[
+            "archive_filename" if kind == "archive" else "sbom_filename"
+        ]
+        _require(
+            _string(artifact.get("filename"), "manifest artifact filename")
+            == expected_filename,
+            "manifest artifact filename does not match its payload target",
+        )
+        pairs.append((kind, payload_id))
+    expected_pairs = {
+        (kind, payload_id)
+        for payload_id in payload_targets
+        for kind in ("archive", "sbom")
+    }
+    _require(
+        set(pairs) == expected_pairs and len(pairs) == len(expected_pairs),
+        "manifest artifacts must contain one archive and one SBOM per payload",
+    )
+
+
 def _validate_manifest(
     manifest: Mapping[str, object], manifest_schema: dict[str, object]
 ) -> dict[str, object]:
@@ -648,6 +1074,7 @@ def _validate_manifest(
     _require(
         len(names) == len(set(names)), "manifest artifact filenames must be unique"
     )
+    payload_targets = _validate_profile_payloads(profile, manifest)
     for index, artifact in enumerate(artifacts):
         filename = _string(
             artifact.get("filename"), f"manifest.artifacts[{index}].filename"
@@ -663,10 +1090,14 @@ def _validate_manifest(
             _integer(artifact.get("size"), f"manifest.artifacts[{index}].size") >= 1,
             f"manifest artifact size is not positive: {filename}",
         )
+    _validate_profile_artifact_kinds(profile, artifacts, manifest)
+    _validate_profile_common_artifacts(profile, artifacts)
+    _validate_cli_artifact_pairing(profile, artifacts, payload_targets)
     package_binding = _binding(
         manifest.get("package_binding"), "manifest.package_binding"
     )
     bootstrap = _binding(manifest.get("bootstrap"), "manifest.bootstrap")
+    _validate_package_bindings(profile, version, artifacts, package_binding, bootstrap)
     _require(
         _canonical_sha({"package_binding": package_binding, "bootstrap": bootstrap})
         == _sha(
@@ -786,7 +1217,7 @@ def _validate_provenance(
     else:
         _require(
             "status" not in candidates,
-            "desktop provenance candidates must be concrete",
+            "CLI release provenance candidates must be concrete",
         )
     return {"candidates": candidates, "expected": expected}
 
@@ -934,8 +1365,9 @@ def _validate_checksums(root: Path, asset_facts: Mapping[str, tuple[str, int]]) 
             continue
         entries.append((match.group(2), match.group(1)))
     _require(
-        len(entries) == 13 and {name for name, _ in entries} == expected_names,
-        "SHA256SUMS must contain exactly the 13 release assets",
+        len(entries) == len(expected_names)
+        and {name for name, _ in entries} == expected_names,
+        "SHA256SUMS must contain exactly the non-checksum release assets",
     )
     names = [name for name, _ in entries]
     _require(
@@ -1056,12 +1488,19 @@ def _validate_attestation(
         )
     smoke = _object(attestation.get("license_smoke"), "staging license smoke")
     identity = _object(manifest.get("license_identity"), "manifest license identity")
-    _require(
-        smoke.get("status") == "passed"
-        and smoke.get("key_id") == identity.get("key_id")
-        and smoke.get("public_key_sha256") == identity.get("public_key_sha256"),
-        "staging license smoke does not match manifest identity",
-    )
+    if manifest.get("profile") == "repository-bootstrap":
+        _require(
+            identity == {"mode": "not-applicable"}
+            and smoke == {"status": "not-applicable"},
+            "repository-bootstrap license smoke must be not-applicable",
+        )
+    else:
+        _require(
+            smoke.get("status") == "passed"
+            and smoke.get("key_id") == identity.get("key_id")
+            and smoke.get("public_key_sha256") == identity.get("public_key_sha256"),
+            "staging license smoke does not match manifest identity",
+        )
     record_ids = [
         _string(
             _object(item, "staging build record").get("payload_id"),
@@ -1078,15 +1517,21 @@ def _validate_attestation(
             attestation.get("payload_verifications"), "staging payload verifications"
         )
     ]
-    expected_ids = {f"context-engine-{target}" for target in DESKTOP_TARGETS}
+    payloads = [
+        _object(item, "manifest payload")
+        for item in _array(manifest.get("payloads"), "manifest.payloads")
+    ]
+    expected_ids = {
+        _string(payload.get("id"), "manifest payload id") for payload in payloads
+    }
     _require(
         set(record_ids) == expected_ids and len(record_ids) == len(expected_ids),
-        "staging build records do not cover exact desktop targets",
+        "staging build records do not cover exact manifest payloads",
     )
     _require(
         set(verification_ids) == expected_ids
         and len(verification_ids) == len(expected_ids),
-        "staging payload verifications do not cover exact desktop targets",
+        "staging payload verifications do not cover exact manifest payloads",
     )
     run = _object(attestation.get("run"), "staging run")
     run_id = _string(run.get("id"), "staging run id")
@@ -1132,8 +1577,9 @@ def _validate_marker(
         "marker_version must be 1",
     )
     _require(
-        _string(marker.get("profile"), "marker.profile") == "desktop",
-        "marker profile must be desktop",
+        _string(marker.get("profile"), "marker.profile")
+        == _string(manifest.get("profile"), "manifest.profile"),
+        "marker profile differs from manifest",
     )
     _require(
         _string(marker.get("tag"), "marker.tag")
@@ -1482,13 +1928,13 @@ def parse_arguments(argv: Iterable[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="mode", required=True)
     staging = subparsers.add_parser(
-        "staging", help="validate the exact 17-file Stage A envelope"
+        "staging", help="validate the complete Stage A release envelope"
     )
     _ = staging.add_argument("--root", type=Path, required=True)
     _ = staging.add_argument("--schemas", type=Path, required=True)
     _ = staging.add_argument("--output-plan", type=Path, required=True)
     public = subparsers.add_parser(
-        "public-draft", help="validate the exact 15-file public draft"
+        "public-draft", help="validate the complete public draft release"
     )
     _ = public.add_argument("--root", type=Path, required=True)
     _ = public.add_argument("--schemas", type=Path, required=True)
