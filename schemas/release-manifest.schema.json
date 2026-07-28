@@ -1,0 +1,557 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://context-engine.app/schemas/release-manifest.schema.json",
+  "title": "Context Engine immutable release manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "profile",
+    "version",
+    "tag",
+    "source_repository",
+    "source_commit",
+    "distribution_repository",
+    "distribution_commit",
+    "distribution_tag_target",
+    "release_descriptor",
+    "assembly_facts",
+    "license_identity",
+    "schemas",
+    "source_workflows",
+    "authorized_stages",
+    "workflow_bindings",
+    "build_mode",
+    "package_binding",
+    "bootstrap",
+    "builds",
+    "payloads",
+    "grammar_inventory",
+    "artifacts"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "minLength": 1 },
+    "schema_version": { "const": 1 },
+    "profile": { "type": "string", "enum": ["desktop", "desktop-linux", "repository-bootstrap"] },
+    "version": { "type": "string", "pattern": "^(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)$" },
+    "tag": { "type": "string", "pattern": "^(?:v(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)|repository-bootstrap-v(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*))$" },
+    "source_repository": { "const": "context-engine-app/context-engine" },
+    "source_commit": { "$ref": "#/$defs/commit" },
+    "distribution_repository": { "const": "context-engine-app/context-engine-mcp" },
+    "distribution_commit": { "$ref": "#/$defs/commit" },
+    "distribution_tag_target": { "$ref": "#/$defs/commit" },
+    "release_descriptor": { "$ref": "#/$defs/descriptorRef" },
+    "assembly_facts": { "$ref": "#/$defs/fileRef" },
+    "license_identity": { "$ref": "#/$defs/licenseIdentity" },
+    "schemas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["release_provenance"],
+      "properties": { "release_provenance": { "$ref": "#/$defs/fileRef" } }
+    },
+    "source_workflows": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["release"],
+      "properties": { "release": { "$ref": "#/$defs/workflowRef" } }
+    },
+    "authorized_stages": {
+      "oneOf": [
+        { "const": ["source-release", "public-draft"] },
+        { "const": ["source-release", "public-draft", "public-publish", "package-channels"] }
+      ]
+    },
+    "workflow_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "draft": { "$ref": "#/$defs/workflowRef" },
+        "publish": { "$ref": "#/$defs/workflowRef" },
+        "channels": { "$ref": "#/$defs/workflowRef" }
+      },
+      "oneOf": [
+        { "required": ["draft"], "minProperties": 1, "maxProperties": 1 },
+        {
+          "required": ["draft", "publish", "channels"],
+          "minProperties": 3,
+          "maxProperties": 3
+        }
+      ]
+    },
+    "build_mode": { "enum": ["license-enforced", "not-applicable"] },
+    "package_binding": { "$ref": "#/$defs/packageBinding" },
+    "bootstrap": { "$ref": "#/$defs/bootstrapBinding" },
+    "builds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/buildRef" }
+    },
+    "payloads": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/payload" }
+    },
+    "grammar_inventory": { "$ref": "#/$defs/grammarInventory" },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/artifact" }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "profile": { "const": "desktop" } } },
+      "then": {
+        "properties": {
+          "build_mode": { "const": "license-enforced" },
+          "package_binding": { "properties": { "mode": { "const": "none" } } },
+          "bootstrap": { "properties": { "mode": { "const": "none" } } },
+          "license_identity": { "required": ["key_id", "public_key_sha256"] },
+          "grammar_inventory": { "$ref": "#/$defs/fileRef" },
+          "builds": { "minItems": 3 },
+          "payloads": { "minItems": 3 }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "profile": { "const": "desktop-linux" } } },
+      "then": {
+        "properties": {
+          "build_mode": { "const": "license-enforced" },
+          "package_binding": { "not": { "properties": { "mode": { "const": "none" } } } },
+          "bootstrap": { "not": { "properties": { "mode": { "const": "none" } } } },
+          "license_identity": { "required": ["key_id", "public_key_sha256"] },
+          "grammar_inventory": { "$ref": "#/$defs/fileRef" },
+          "builds": { "minItems": 4 },
+          "payloads": { "minItems": 4 }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "profile": { "const": "repository-bootstrap" } } },
+      "then": {
+        "properties": {
+          "build_mode": { "const": "not-applicable" },
+          "package_binding": { "properties": { "mode": { "const": "bootstrap" } } },
+          "bootstrap": { "properties": { "mode": { "const": "none" } } },
+          "license_identity": { "const": { "mode": "not-applicable" } },
+          "grammar_inventory": { "const": { "status": "not-applicable" } },
+          "builds": { "const": [] },
+          "payloads": { "const": [] }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "commit": { "type": "string", "pattern": "^[0-9a-fA-F]{40}$" },
+    "target": {
+      "type": "string",
+      "enum": [
+        "x86_64-apple-darwin",
+        "aarch64-apple-darwin",
+        "x86_64-pc-windows-msvc",
+        "x86_64-unknown-linux-gnu"
+      ]
+    },
+    "licenseIdentity": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["key_id", "public_key_sha256"],
+          "properties": {
+            "key_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$" },
+            "public_key_sha256": { "$ref": "#/$defs/sha256" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode"],
+          "properties": { "mode": { "const": "not-applicable" } }
+        }
+      ]
+    },
+    "fileRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": "string", "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.?/)[^\\x00]+$" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "descriptorRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "package_binding_sha256"],
+      "properties": {
+        "path": { "type": "string", "pattern": "^packaging/releases/(?:v[0-9]+\\.[0-9]+\\.[0-9]+|repository-bootstrap-v[0-9]+\\.[0-9]+\\.[0-9]+)\\.json$" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "package_binding_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "workflowRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "commit", "sha256"],
+      "properties": {
+        "path": { "type": "string", "pattern": "^(?:\\.github/workflows|\\.github/actions)/[A-Za-z0-9._/-]+\\.ya?ml$" },
+        "commit": { "$ref": "#/$defs/commit" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "filename", "suite", "package_format", "architecture"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._+-]*$" },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "filename": { "type": "string", "pattern": "^[^/\\\\]+$" },
+        "suite": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+        "package_format": { "type": "string", "enum": ["deb", "rpm"] },
+        "repository_source_format": { "type": "string", "enum": ["list", "sources", "repo"] },
+        "architecture": { "type": "string", "enum": ["all", "noarch", "amd64", "x86_64", "arm64"] }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "id": { "pattern": "^context-engine-repository-config-" } } },
+          "then": {
+            "required": ["repository_source_format"],
+            "properties": {
+              "package_format": { "const": "deb" },
+              "architecture": { "const": "all" },
+              "repository_source_format": { "enum": ["list", "sources"] }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "id": { "const": "context-engine-release" } } },
+          "then": {
+            "required": ["repository_source_format"],
+            "properties": {
+              "package_format": { "const": "rpm" },
+              "architecture": { "const": "noarch" },
+              "repository_source_format": { "const": "repo" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "id": { "const": "context-engine-archive-keyring" } } },
+          "then": { "not": { "required": ["repository_source_format"] } }
+        },
+        {
+          "if": { "properties": { "id": { "const": "context-engine" } } },
+          "then": { "not": { "required": ["repository_source_format"] } }
+        },
+        {
+          "if": {
+            "not": {
+              "anyOf": [
+                { "properties": { "id": { "pattern": "^context-engine-repository-config-" } } },
+                { "properties": { "id": { "const": "context-engine-release" } } }
+              ]
+            }
+          },
+          "then": { "not": { "required": ["repository_source_format"] } }
+        }
+      ]
+    },
+    "packageBinding": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode"],
+          "properties": { "mode": { "const": "none" } }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "packages"],
+          "properties": {
+            "mode": { "enum": ["embedded", "bootstrap"] },
+            "packages": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/package" } }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "release_tag", "manifest_sha256", "packages"],
+          "properties": {
+            "mode": { "const": "referenced" },
+            "release_tag": { "type": "string", "pattern": "^repository-bootstrap-v[0-9]+\\.[0-9]+\\.[0-9]+$" },
+            "manifest_sha256": { "$ref": "#/$defs/sha256" },
+            "packages": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/referencedPackage" } }
+          }
+        }
+      ]
+    },
+    "bootstrapBinding": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode"],
+          "properties": { "mode": { "const": "none" } }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "packages"],
+          "properties": {
+            "mode": { "const": "embedded" },
+            "packages": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/package" } }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "release_tag", "url", "manifest_sha256", "packages"],
+          "properties": {
+            "mode": { "const": "referenced" },
+            "release_tag": { "type": "string", "pattern": "^repository-bootstrap-v[0-9]+\\.[0-9]+\\.[0-9]+$" },
+            "url": { "type": "string", "pattern": "^https://github\\.com/context-engine-app/context-engine-mcp/releases/download/repository-bootstrap-v[0-9]+\\.[0-9]+\\.[0-9]+/release-manifest\\.json$" },
+            "manifest_sha256": { "$ref": "#/$defs/sha256" },
+            "packages": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/referencedPackage" } }
+          }
+        }
+      ]
+    },
+    "referencedPackage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "filename", "sha256", "suite", "package_format", "architecture"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._+-]*$" },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "filename": { "type": "string", "pattern": "^[^/\\\\]+$" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "suite": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+        "package_format": { "type": "string", "enum": ["deb", "rpm"] },
+        "repository_source_format": { "type": "string", "enum": ["list", "sources", "repo"] },
+        "architecture": { "type": "string", "enum": ["all", "noarch", "amd64", "x86_64", "arm64"] }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "id": { "pattern": "^context-engine-repository-config-" } } },
+          "then": {
+            "required": ["repository_source_format"],
+            "properties": {
+              "package_format": { "const": "deb" },
+              "architecture": { "const": "all" },
+              "repository_source_format": { "enum": ["list", "sources"] }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "id": { "const": "context-engine-release" } } },
+          "then": {
+            "required": ["repository_source_format"],
+            "properties": {
+              "package_format": { "const": "rpm" },
+              "architecture": { "const": "noarch" },
+              "repository_source_format": { "const": "repo" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "id": { "const": "context-engine-archive-keyring" } } },
+          "then": { "not": { "required": ["repository_source_format"] } }
+        },
+        {
+          "if": { "properties": { "id": { "const": "context-engine" } } },
+          "then": { "not": { "required": ["repository_source_format"] } }
+        },
+        {
+          "if": {
+            "not": {
+              "anyOf": [
+                { "properties": { "id": { "pattern": "^context-engine-repository-config-" } } },
+                { "properties": { "id": { "const": "context-engine-release" } } }
+              ]
+            }
+          },
+          "then": { "not": { "required": ["repository_source_format"] } }
+        }
+      ]
+    },
+    "buildRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["payload_id", "script", "script_sha256", "build_record_sha256", "payload_verification_sha256"],
+      "properties": {
+        "payload_id": { "type": "string", "pattern": "^context-engine-[A-Za-z0-9._-]+$" },
+        "script": { "type": "string", "enum": ["scripts/build_mac.sh", "scripts/build_win.sh", "scripts/build_linux.sh"] },
+        "script_sha256": { "$ref": "#/$defs/sha256" },
+        "build_record_sha256": { "$ref": "#/$defs/sha256" },
+        "payload_verification_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "filename", "target", "platform", "architecture", "sha256", "size", "executable_mode", "license_mode", "version_output"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^context-engine-[A-Za-z0-9._-]+$" },
+        "filename": { "type": "string", "enum": ["context-engine", "context-engine.exe"] },
+        "target": { "$ref": "#/$defs/target" },
+        "platform": { "type": "string", "enum": ["macos", "windows", "linux"] },
+        "architecture": { "type": "string", "enum": ["x86_64", "arm64"] },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "size": { "type": "integer", "minimum": 1 },
+        "executable_mode": { "type": "string", "pattern": "^0[0-7]{3}$" },
+        "license_mode": { "const": "enforced" },
+        "version_output": { "type": "string", "pattern": "^context-engine [0-9]+\\.[0-9]+\\.[0-9]+$" }
+      }
+    },
+    "grammarInventory": {
+      "oneOf": [
+        { "$ref": "#/$defs/fileRef" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status"],
+          "properties": { "status": { "const": "not-applicable" } }
+        }
+      ]
+    },
+    "artifact": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "payload_id", "platform", "architecture", "target", "filename", "url", "sha256", "size"],
+          "properties": {
+            "kind": { "type": "string", "enum": ["archive", "native-package", "sbom"] },
+            "payload_id": { "type": "string", "pattern": "^context-engine-[A-Za-z0-9._-]+$" },
+            "platform": { "type": "string", "enum": ["macos", "windows", "linux"] },
+            "architecture": { "type": "string", "enum": ["x86_64", "arm64"] },
+            "target": { "$ref": "#/$defs/target" },
+            "package_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._+-]*$" },
+            "package_format": { "type": "string", "enum": ["deb", "rpm"] },
+            "repository_source_format": { "type": "string", "enum": ["list", "sources", "repo"] },
+            "package_suite": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+            "package_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+            "package_manifest_sha256": { "$ref": "#/$defs/sha256" },
+            "package_verification_sha256": { "$ref": "#/$defs/sha256" },
+            "filename": { "type": "string", "pattern": "^[^/\\\\]+$" },
+            "url": { "type": "string", "pattern": "^https://github\\.com/context-engine-app/context-engine-mcp/releases/download/(?:v[0-9]+\\.[0-9]+\\.[0-9]+|repository-bootstrap-v[0-9]+\\.[0-9]+\\.[0-9]+)/[^/]+$" },
+            "sha256": { "$ref": "#/$defs/sha256" },
+            "size": { "type": "integer", "minimum": 1 }
+          },
+          "allOf": [
+            {
+              "if": { "properties": { "kind": { "const": "native-package" } } },
+              "then": {
+                "required": ["package_id", "package_format", "package_suite", "package_version", "package_manifest_sha256", "package_verification_sha256"],
+                "not": { "required": ["repository_source_format"] }
+              }
+            },
+            {
+              "if": { "properties": { "package_id": { "const": "context-engine" } } },
+              "then": { "not": { "required": ["repository_source_format"] } }
+            },
+            {
+              "if": { "properties": { "kind": { "enum": ["archive", "sbom"] } } },
+              "then": {
+                "not": {
+                  "anyOf": [
+                    { "required": ["package_id"] },
+                    { "required": ["package_format"] },
+                    { "required": ["repository_source_format"] },
+                    { "required": ["package_suite"] },
+                    { "required": ["package_version"] },
+                    { "required": ["package_manifest_sha256"] },
+                    { "required": ["package_verification_sha256"] }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "package_id", "package_format", "package_suite", "package_version", "platform", "architecture", "filename", "url", "sha256", "size", "package_manifest_sha256", "package_verification_sha256"],
+          "properties": {
+            "kind": { "const": "bootstrap-package" },
+            "package_id": {
+              "type": "string",
+              "anyOf": [
+                { "const": "context-engine-archive-keyring" },
+                { "pattern": "^context-engine-repository-config-" },
+                { "const": "context-engine-release" }
+              ]
+            },
+            "package_format": { "type": "string", "enum": ["deb", "rpm"] },
+            "repository_source_format": { "type": "string", "enum": ["list", "sources", "repo"] },
+            "package_suite": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+            "package_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+            "package_manifest_sha256": { "$ref": "#/$defs/sha256" },
+            "package_verification_sha256": { "$ref": "#/$defs/sha256" },
+            "platform": { "const": "repository" },
+            "architecture": { "enum": ["all", "noarch"] },
+            "filename": { "type": "string", "pattern": "^[^/\\\\]+$" },
+            "url": { "type": "string", "pattern": "^https://github\\.com/context-engine-app/context-engine-mcp/releases/download/(?:v[0-9]+\\.[0-9]+\\.[0-9]+|repository-bootstrap-v[0-9]+\\.[0-9]+\\.[0-9]+)/[^/]+$" },
+            "sha256": { "$ref": "#/$defs/sha256" },
+            "size": { "type": "integer", "minimum": 1 }
+          },
+          "allOf": [
+            {
+              "if": { "properties": { "package_id": { "const": "context-engine-archive-keyring" } } },
+              "then": {
+                "properties": { "package_format": { "const": "deb" }, "architecture": { "const": "all" } },
+                "not": { "required": ["repository_source_format"] }
+              }
+            },
+            {
+              "if": { "properties": { "package_id": { "pattern": "^context-engine-repository-config-" } } },
+              "then": {
+                "required": ["repository_source_format"],
+                "properties": {
+                  "package_format": { "const": "deb" },
+                  "architecture": { "const": "all" },
+                  "repository_source_format": { "enum": ["list", "sources"] }
+                }
+              }
+            },
+            {
+              "if": { "properties": { "package_id": { "const": "context-engine-release" } } },
+              "then": {
+                "required": ["repository_source_format"],
+                "properties": {
+                  "package_format": { "const": "rpm" },
+                  "architecture": { "const": "noarch" },
+                  "repository_source_format": { "const": "repo" }
+                }
+              }
+            },
+            {
+              "if": { "properties": { "package_id": { "const": "context-engine" } } },
+              "then": {
+                "properties": { "package_format": { "enum": ["deb", "rpm"] } },
+                "not": { "required": ["repository_source_format"] }
+              }
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "filename", "url", "sha256", "size"],
+          "properties": {
+            "kind": { "const": "common" },
+            "filename": { "enum": ["LICENSE", "THIRD_PARTY_NOTICES.md", "context-engine-release.cdx.json"] },
+            "url": { "type": "string", "pattern": "^https://github\\.com/context-engine-app/context-engine-mcp/releases/download/(?:v[0-9]+\\.[0-9]+\\.[0-9]+|repository-bootstrap-v[0-9]+\\.[0-9]+\\.[0-9]+)/[^/]+$" },
+            "sha256": { "$ref": "#/$defs/sha256" },
+            "size": { "type": "integer", "minimum": 1 }
+          }
+        }
+      ]
+    }
+  }
+}
