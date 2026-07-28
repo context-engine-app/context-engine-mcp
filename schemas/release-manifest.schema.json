@@ -214,7 +214,7 @@
         "suite": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
         "package_format": { "type": "string", "enum": ["deb", "rpm"] },
         "repository_source_format": { "type": "string", "enum": ["list", "sources", "repo"] },
-        "architecture": { "type": "string", "enum": ["all", "noarch", "x86_64", "arm64"] }
+        "architecture": { "type": "string", "enum": ["all", "noarch", "amd64", "x86_64", "arm64"] }
       },
       "allOf": [
         {
@@ -333,7 +333,7 @@
         "suite": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
         "package_format": { "type": "string", "enum": ["deb", "rpm"] },
         "repository_source_format": { "type": "string", "enum": ["list", "sources", "repo"] },
-        "architecture": { "type": "string", "enum": ["all", "noarch", "x86_64", "arm64"] }
+        "architecture": { "type": "string", "enum": ["all", "noarch", "amd64", "x86_64", "arm64"] }
       },
       "allOf": [
         {
@@ -436,6 +436,8 @@
             "repository_source_format": { "type": "string", "enum": ["list", "sources", "repo"] },
             "package_suite": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
             "package_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+            "package_manifest_sha256": { "$ref": "#/$defs/sha256" },
+            "package_verification_sha256": { "$ref": "#/$defs/sha256" },
             "filename": { "type": "string", "pattern": "^[^/\\\\]+$" },
             "url": { "type": "string", "pattern": "^https://github\\.com/context-engine-app/context-engine-mcp/releases/download/(?:v[0-9]+\\.[0-9]+\\.[0-9]+|repository-bootstrap-v[0-9]+\\.[0-9]+\\.[0-9]+)/[^/]+$" },
             "sha256": { "$ref": "#/$defs/sha256" },
@@ -445,7 +447,7 @@
             {
               "if": { "properties": { "kind": { "const": "native-package" } } },
               "then": {
-                "required": ["package_id", "package_format", "package_suite", "package_version"],
+                "required": ["package_id", "package_format", "package_suite", "package_version", "package_manifest_sha256", "package_verification_sha256"],
                 "not": { "required": ["repository_source_format"] }
               }
             },
@@ -462,7 +464,9 @@
                     { "required": ["package_format"] },
                     { "required": ["repository_source_format"] },
                     { "required": ["package_suite"] },
-                    { "required": ["package_version"] }
+                    { "required": ["package_version"] },
+                    { "required": ["package_manifest_sha256"] },
+                    { "required": ["package_verification_sha256"] }
                   ]
                 }
               }
@@ -472,7 +476,7 @@
         {
           "type": "object",
           "additionalProperties": false,
-          "required": ["kind", "package_id", "package_format", "package_suite", "package_version", "platform", "architecture", "filename", "url", "sha256", "size"],
+          "required": ["kind", "package_id", "package_format", "package_suite", "package_version", "platform", "architecture", "filename", "url", "sha256", "size", "package_manifest_sha256", "package_verification_sha256"],
           "properties": {
             "kind": { "const": "bootstrap-package" },
             "package_id": {
@@ -487,6 +491,8 @@
             "repository_source_format": { "type": "string", "enum": ["list", "sources", "repo"] },
             "package_suite": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
             "package_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+            "package_manifest_sha256": { "$ref": "#/$defs/sha256" },
+            "package_verification_sha256": { "$ref": "#/$defs/sha256" },
             "platform": { "const": "repository" },
             "architecture": { "enum": ["all", "noarch"] },
             "filename": { "type": "string", "pattern": "^[^/\\\\]+$" },

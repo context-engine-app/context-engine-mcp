@@ -37,6 +37,7 @@ jobs:
       - name: Validate inputs and runtime binding
         id: runtime
         env:
+          GH_TOKEN: ${{ github.token }}
           TAG_NAME: ${{ inputs.tag }}
           DRAFT_RUN_ID: ${{ inputs.draft_run_id }}
         run: |
@@ -50,11 +51,53 @@ jobs:
             exit 1
           fi
           test "$GITHUB_REPOSITORY" = "context-engine-app/context-engine-mcp"
-          test "$GITHUB_REF" = "refs/tags/$TAG_NAME"
-          test "$GITHUB_WORKFLOW_REF" = "$GITHUB_REPOSITORY/.github/workflows/publish-draft-release.yml@refs/tags/$TAG_NAME"
+          runtime_commit="$GITHUB_SHA"
+          canonical_workflow_ref="$GITHUB_REPOSITORY/.github/workflows/publish-draft-release.yml@refs/tags/$TAG_NAME"
           test "$GITHUB_SHA" = "$(git rev-parse HEAD)"
-          sha256sum .github/workflows/publish-draft-release.yml | cut -d' ' -f1 > "$RUNNER_TEMP/publish-workflow.sha256"
-          sha256sum .github/workflows/prepare-package-channels.yml | cut -d' ' -f1 > "$RUNNER_TEMP/channels-workflow.sha256"
+          if test "$GITHUB_WORKFLOW_REF" = "$canonical_workflow_ref"; then
+            test "$GITHUB_REF" = "refs/tags/$TAG_NAME"
+            binding_commit="$GITHUB_SHA"
+            sha256sum .github/workflows/publish-draft-release.yml | cut -d' ' -f1 > "$RUNNER_TEMP/publish-workflow.sha256"
+            sha256sum .github/workflows/prepare-package-channels.yml | cut -d' ' -f1 > "$RUNNER_TEMP/channels-workflow.sha256"
+          else
+            if [[ ! "$GITHUB_REF" =~ ^refs/tags/release-reauthorization/$TAG_NAME/public-publish/[0-9a-fA-F]{40}$ ]]; then
+              echo "::error::release-reauthorization ref is required"
+              exit 1
+            fi
+            test "$GITHUB_REF" = "refs/tags/release-reauthorization/$TAG_NAME/public-publish/$runtime_commit"
+            test "$GITHUB_WORKFLOW_REF" = "$GITHUB_REPOSITORY/.github/workflows/publish-draft-release.yml@$GITHUB_REF"
+            reauth_ref=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/release-reauthorization/$TAG_NAME/public-publish/$runtime_commit")
+            reauth_type=$(jq -er '.object.type' <<<"$reauth_ref")
+            reauth_object=$(jq -er '.object.sha' <<<"$reauth_ref")
+            if test "$reauth_type" = "tag"; then
+              reauth_target=$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$reauth_object" | jq -er '.object | select(.type == "commit") | .sha')
+            else
+              reauth_target="$reauth_object"
+            fi
+            test "$reauth_target" = "$runtime_commit"
+            original_ref=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG_NAME")
+            original_type=$(jq -er '.object.type' <<<"$original_ref")
+            original_object=$(jq -er '.object.sha' <<<"$original_ref")
+            if test "$original_type" = "tag"; then
+              original_commit=$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$original_object" | jq -er '.object | select(.type == "commit") | .sha')
+            else
+              original_commit="$original_object"
+            fi
+            authorization="authorizations/$TAG_NAME/public-publish/$runtime_commit.json"
+            [[ -r "$authorization" ]]
+            [[ -r schemas/workflow-reauthorization.schema.json ]]
+            original_sha256=$(gh api "repos/$GITHUB_REPOSITORY/contents/.github/workflows/publish-draft-release.yml?ref=$original_commit" | jq -er '.content' | tr -d '\n' | base64 --decode | sha256sum | cut -d' ' -f1)
+            channels_sha256=$(gh api "repos/$GITHUB_REPOSITORY/contents/.github/workflows/prepare-package-channels.yml?ref=$original_commit" | jq -er '.content' | tr -d '\n' | base64 --decode | sha256sum | cut -d' ' -f1)
+            replacement_sha256=$(sha256sum .github/workflows/publish-draft-release.yml | cut -d' ' -f1)
+            binding_commit="$original_commit"
+            printf '%s\n' "$original_commit" > "$RUNNER_TEMP/reauth-original-commit"
+            printf '%s\n' "$original_sha256" > "$RUNNER_TEMP/reauth-original-sha256"
+            printf '%s\n' "$original_sha256" > "$RUNNER_TEMP/publish-workflow.sha256"
+            printf '%s\n' "$replacement_sha256" > "$RUNNER_TEMP/reauth-replacement-sha256"
+            printf '%s\n' "$channels_sha256" > "$RUNNER_TEMP/channels-workflow.sha256"
+            touch "$RUNNER_TEMP/reauth-required"
+          fi
+          printf '%s\n' "$binding_commit" > "$RUNNER_TEMP/binding-commit"
 
       - name: Set up pinned uv and Python
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
@@ -81,6 +124,19 @@ jobs:
           DRAFT_RUN_ID: ${{ inputs.draft_run_id }}
         run: |
           set -euo pipefail
+          if [[ -e "$RUNNER_TEMP/reauth-required" ]]; then
+            original_commit=$(cat "$RUNNER_TEMP/reauth-original-commit")
+            original_sha256=$(cat "$RUNNER_TEMP/reauth-original-sha256")
+            replacement_sha256=$(cat "$RUNNER_TEMP/reauth-replacement-sha256")
+            .venv/bin/python scripts/validate_release_provenance.py reauthorization \
+              --record "authorizations/$TAG_NAME/public-publish/$GITHUB_SHA.json" \
+              --schemas schemas --tag "$TAG_NAME" --stage public-publish \
+              --runtime-commit "$GITHUB_SHA" \
+              --original-path .github/workflows/publish-draft-release.yml \
+              --original-commit "$original_commit" --original-sha256 "$original_sha256" \
+              --replacement-path .github/workflows/publish-draft-release.yml \
+              --replacement-commit "$GITHUB_SHA" --replacement-sha256 "$replacement_sha256"
+          fi
           assets_dir="$RUNNER_TEMP/preflight-assets"
           inspect_file="$RUNNER_TEMP/preflight-inspect.json"
           marker_file="$RUNNER_TEMP/preflight-marker.json"
@@ -101,12 +157,20 @@ jobs:
           .venv/bin/python scripts/validate_channel_candidates.py \
             --root "$assets_dir" \
             --schemas schemas
+          if [[ -e "$RUNNER_TEMP/reauth-required" ]]; then
+            original_commit=$(cat "$RUNNER_TEMP/reauth-original-commit")
+            original_sha256=$(cat "$RUNNER_TEMP/reauth-original-sha256")
+            jq -e --arg commit "$original_commit" --arg sha "$original_sha256" \
+              '.public_workflows.publish.commit == $commit and .public_workflows.publish.sha256 == $sha' \
+              "$plan_file" > /dev/null
+          fi
 
           publish_sha256=$(cat "$RUNNER_TEMP/publish-workflow.sha256")
           channels_sha256=$(cat "$RUNNER_TEMP/channels-workflow.sha256")
+          binding_commit=$(cat "$RUNNER_TEMP/binding-commit")
           jq -e \
             --arg tag "$TAG_NAME" \
-            --arg commit "$GITHUB_SHA" \
+            --arg commit "$binding_commit" \
             --arg publish_sha256 "$publish_sha256" \
             --arg channels_sha256 "$channels_sha256" \
             --argjson draft_run_id "$DRAFT_RUN_ID" \
@@ -128,7 +192,7 @@ jobs:
           draft_run_attempt=$(jq -er '.draft_run.attempt' "$plan_file")
           jq -e \
             --arg tag "$TAG_NAME" \
-            --arg commit "$GITHUB_SHA" \
+            --arg commit "$binding_commit" \
             --arg repository "$GITHUB_REPOSITORY" \
             --argjson run_id "$DRAFT_RUN_ID" \
             --argjson run_attempt "$draft_run_attempt" \
@@ -172,17 +236,60 @@ jobs:
 
       - name: Revalidate protected runtime binding
         env:
+          GH_TOKEN: ${{ github.token }}
           TAG_NAME: ${{ inputs.tag }}
           DRAFT_RUN_ID: ${{ inputs.draft_run_id }}
         run: |
           set -euo pipefail
           test "$GITHUB_REPOSITORY" = "context-engine-app/context-engine-mcp"
-          test "$GITHUB_REF" = "refs/tags/$TAG_NAME"
-          test "$GITHUB_WORKFLOW_REF" = "$GITHUB_REPOSITORY/.github/workflows/publish-draft-release.yml@refs/tags/$TAG_NAME"
+          runtime_commit="$GITHUB_SHA"
+          canonical_workflow_ref="$GITHUB_REPOSITORY/.github/workflows/publish-draft-release.yml@refs/tags/$TAG_NAME"
           test "$GITHUB_SHA" = "$(git rev-parse HEAD)"
+          if test "$GITHUB_WORKFLOW_REF" = "$canonical_workflow_ref"; then
+            test "$GITHUB_REF" = "refs/tags/$TAG_NAME"
+            binding_commit="$GITHUB_SHA"
+            sha256sum .github/workflows/publish-draft-release.yml | cut -d' ' -f1 > "$RUNNER_TEMP/publish-workflow.sha256"
+            sha256sum .github/workflows/prepare-package-channels.yml | cut -d' ' -f1 > "$RUNNER_TEMP/channels-workflow.sha256"
+          else
+            if [[ ! "$GITHUB_REF" =~ ^refs/tags/release-reauthorization/$TAG_NAME/public-publish/[0-9a-fA-F]{40}$ ]]; then
+              echo "::error::release-reauthorization ref is required"
+              exit 1
+            fi
+            test "$GITHUB_REF" = "refs/tags/release-reauthorization/$TAG_NAME/public-publish/$runtime_commit"
+            test "$GITHUB_WORKFLOW_REF" = "$GITHUB_REPOSITORY/.github/workflows/publish-draft-release.yml@$GITHUB_REF"
+            reauth_ref=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/release-reauthorization/$TAG_NAME/public-publish/$runtime_commit")
+            reauth_type=$(jq -er '.object.type' <<<"$reauth_ref")
+            reauth_object=$(jq -er '.object.sha' <<<"$reauth_ref")
+            if test "$reauth_type" = "tag"; then
+              reauth_target=$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$reauth_object" | jq -er '.object | select(.type == "commit") | .sha')
+            else
+              reauth_target="$reauth_object"
+            fi
+            test "$reauth_target" = "$runtime_commit"
+            original_ref=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG_NAME")
+            original_type=$(jq -er '.object.type' <<<"$original_ref")
+            original_object=$(jq -er '.object.sha' <<<"$original_ref")
+            if test "$original_type" = "tag"; then
+              original_commit=$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$original_object" | jq -er '.object | select(.type == "commit") | .sha')
+            else
+              original_commit="$original_object"
+            fi
+            authorization="authorizations/$TAG_NAME/public-publish/$runtime_commit.json"
+            [[ -r "$authorization" ]]
+            [[ -r schemas/workflow-reauthorization.schema.json ]]
+            original_sha256=$(gh api "repos/$GITHUB_REPOSITORY/contents/.github/workflows/publish-draft-release.yml?ref=$original_commit" | jq -er '.content' | tr -d '\n' | base64 --decode | sha256sum | cut -d' ' -f1)
+            channels_sha256=$(gh api "repos/$GITHUB_REPOSITORY/contents/.github/workflows/prepare-package-channels.yml?ref=$original_commit" | jq -er '.content' | tr -d '\n' | base64 --decode | sha256sum | cut -d' ' -f1)
+            replacement_sha256=$(sha256sum .github/workflows/publish-draft-release.yml | cut -d' ' -f1)
+            binding_commit="$original_commit"
+            printf '%s\n' "$original_commit" > "$RUNNER_TEMP/reauth-original-commit"
+            printf '%s\n' "$original_sha256" > "$RUNNER_TEMP/reauth-original-sha256"
+            printf '%s\n' "$original_sha256" > "$RUNNER_TEMP/publish-workflow.sha256"
+            printf '%s\n' "$replacement_sha256" > "$RUNNER_TEMP/reauth-replacement-sha256"
+            printf '%s\n' "$channels_sha256" > "$RUNNER_TEMP/channels-workflow.sha256"
+            touch "$RUNNER_TEMP/reauth-required"
+          fi
           test "$DRAFT_RUN_ID" -ge 1
-          sha256sum .github/workflows/publish-draft-release.yml | cut -d' ' -f1 > "$RUNNER_TEMP/publish-workflow.sha256"
-          sha256sum .github/workflows/prepare-package-channels.yml | cut -d' ' -f1 > "$RUNNER_TEMP/channels-workflow.sha256"
+          printf '%s\n' "$binding_commit" > "$RUNNER_TEMP/binding-commit"
 
       - name: Set up pinned uv and Python
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
@@ -209,6 +316,19 @@ jobs:
           DRAFT_RUN_ID: ${{ inputs.draft_run_id }}
         run: |
           set -euo pipefail
+          if [[ -e "$RUNNER_TEMP/reauth-required" ]]; then
+            original_commit=$(cat "$RUNNER_TEMP/reauth-original-commit")
+            original_sha256=$(cat "$RUNNER_TEMP/reauth-original-sha256")
+            replacement_sha256=$(cat "$RUNNER_TEMP/reauth-replacement-sha256")
+            .venv/bin/python scripts/validate_release_provenance.py reauthorization \
+              --record "authorizations/$TAG_NAME/public-publish/$GITHUB_SHA.json" \
+              --schemas schemas --tag "$TAG_NAME" --stage public-publish \
+              --runtime-commit "$GITHUB_SHA" \
+              --original-path .github/workflows/publish-draft-release.yml \
+              --original-commit "$original_commit" --original-sha256 "$original_sha256" \
+              --replacement-path .github/workflows/publish-draft-release.yml \
+              --replacement-commit "$GITHUB_SHA" --replacement-sha256 "$replacement_sha256"
+          fi
           assets_dir="$RUNNER_TEMP/publish-assets"
           inspect_file="$RUNNER_TEMP/publish-inspect.json"
           marker_file="$RUNNER_TEMP/publish-marker.json"
@@ -229,11 +349,19 @@ jobs:
           .venv/bin/python scripts/validate_channel_candidates.py \
             --root "$assets_dir" \
             --schemas schemas
+          if [[ -e "$RUNNER_TEMP/reauth-required" ]]; then
+            original_commit=$(cat "$RUNNER_TEMP/reauth-original-commit")
+            original_sha256=$(cat "$RUNNER_TEMP/reauth-original-sha256")
+            jq -e --arg commit "$original_commit" --arg sha "$original_sha256" \
+              '.public_workflows.publish.commit == $commit and .public_workflows.publish.sha256 == $sha' \
+              "$plan_file" > /dev/null
+          fi
           publish_sha256=$(cat "$RUNNER_TEMP/publish-workflow.sha256")
           channels_sha256=$(cat "$RUNNER_TEMP/channels-workflow.sha256")
+          binding_commit=$(cat "$RUNNER_TEMP/binding-commit")
           jq -e \
             --arg tag "$TAG_NAME" \
-            --arg commit "$GITHUB_SHA" \
+            --arg commit "$binding_commit" \
             --arg publish_sha256 "$publish_sha256" \
             --arg channels_sha256 "$channels_sha256" \
             --argjson draft_run_id "$DRAFT_RUN_ID" \
@@ -252,7 +380,7 @@ jobs:
           draft_run_attempt=$(jq -er '.draft_run.attempt' "$plan_file")
           jq -e \
             --arg tag "$TAG_NAME" \
-            --arg commit "$GITHUB_SHA" \
+            --arg commit "$binding_commit" \
             --argjson run_id "$DRAFT_RUN_ID" \
             --argjson run_attempt "$draft_run_attempt" \
             '.id == $run_id and .run_attempt == $run_attempt and
@@ -386,7 +514,7 @@ jobs:
           DRAFT_RUN_ID: ${{ inputs.draft_run_id }}
         run: |
           set -euo pipefail
-          .venv/bin/python scripts/publish_draft_release.py \
+          .venv/bin/python -m scripts.publish_draft_release \
             --plan "$RUNNER_TEMP/publication-plan.json" \
             --repository "$GITHUB_REPOSITORY" \
             --draft-run-id "$DRAFT_RUN_ID" \

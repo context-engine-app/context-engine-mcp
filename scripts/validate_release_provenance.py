@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Validate the portable Stage A envelope or the public draft checkpoint.
+"""Validate portable release envelopes and public release checkpoints.
 
 This validator is deliberately independent from the private raw-evidence
 validator.  It consumes only the public release documents and their files,
 validates the byte-identical local schemas, and emits a deterministic
-15-asset plan for the public coordinator.
+manifest-derived asset plan for the public coordinator.
 """
 
 from __future__ import annotations
@@ -23,17 +23,23 @@ from typing import NoReturn, Protocol, TypeAlias, cast
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST_SCHEMA_SHA256 = (
-    "055a20ee520fbffc27dc3527c548eb50a76e1aa247072132d0f685ed40fdf395"
+    "1b793cdebab9c3741eccd3aa280c4bb32ec0555fa1aa43c0f09210842a82d76c"
 )
 PROVENANCE_SCHEMA_SHA256 = (
-    "2cae7a72248fd279f4ba06e905daf7c5693393b74b3b0e24d7b9c0092fbed051"
+    "341d27e2074aebfdc539ef157d9d8fa449bff5504f7fb55014b74983c1506130"
 )
 STAGING_SCHEMA_SHA256 = (
     "b8f1017ce278f762772e236eb08bf18a3c52b65f0e1e30c1d27cace51d305a6d"
 )
+WORKFLOW_REAUTH_SCHEMA_SHA256 = (
+    "e0fce8d962bef3f4f3a60fb39ed521676d252bf3309157fbd5afe5e5cba797d8"
+)
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 COMMIT_RE = re.compile(r"^[0-9a-fA-F]{40}$")
 VERSION_RE = re.compile(r"^(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)$")
+REAUTH_REF_RE = re.compile(
+    r"^refs/tags/release-reauthorization/(v(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*))/(public-publish|package-channels)/([0-9a-fA-F]{40})$"
+)
 RUN_ID_RE = re.compile(r"^[0-9]+$")
 CHECKSUM_RE = re.compile(r"^([0-9a-f]{64})  ([^\x00\r\n\t /\\]+)$")
 ARTIFACT_DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
@@ -55,33 +61,16 @@ DESKTOP_TARGETS = {
     "aarch64-apple-darwin",
     "x86_64-pc-windows-msvc",
 }
-DESKTOP_ARCHIVES = {
-    "context-engine-x86_64-apple-darwin.tar.gz",
-    "context-engine-aarch64-apple-darwin.tar.gz",
-    "context-engine-x86_64-pc-windows-msvc.zip",
-}
-DESKTOP_SBOMS = {
-    "context-engine-x86_64-apple-darwin.cdx.json",
-    "context-engine-aarch64-apple-darwin.cdx.json",
-    "context-engine-x86_64-pc-windows-msvc.cdx.json",
-}
-COMMON_ASSETS = {"LICENSE", "THIRD_PARTY_NOTICES.md", "context-engine-release.cdx.json"}
 CHECKSUM_ASSETS = {"SHA256SUMS", "SHA256SUMS.sigstore.json"}
 RELEASE_DOCUMENTS = {
     "release-manifest.json",
     "release-provenance.json",
+}
+CANDIDATE_ASSETS = {
     "channel-candidates.json",
     "channel-candidates.tar.gz",
 }
-PUBLIC_ASSET_NAMES = (
-    DESKTOP_ARCHIVES
-    | DESKTOP_SBOMS
-    | COMMON_ASSETS
-    | RELEASE_DOCUMENTS
-    | CHECKSUM_ASSETS
-)
 STAGING_ONLY_NAMES = {"staging-attestation.json", "staging-attestation.sigstore.json"}
-STAGING_ASSET_NAMES = PUBLIC_ASSET_NAMES | STAGING_ONLY_NAMES
 MARKER_KEYS = {
     "distribution_commit",
     "marker_version",
@@ -361,6 +350,169 @@ def _workflow(value: object, label: str, expected_path: str) -> dict[str, str]:
     }
 
 
+def validate_workflow_reauthorization(
+    record: Mapping[str, object],
+    *,
+    expected_tag: str | None = None,
+    expected_stage: str | None = None,
+    original: Mapping[str, str] | None = None,
+    replacement: Mapping[str, str] | None = None,
+    runtime_commit: str | None = None,
+) -> dict[str, object]:
+    """Validate one protected replacement workflow execution record."""
+
+    _require(
+        set(record)
+        == {
+            "schema_version",
+            "tag",
+            "stage",
+            "execution_ref",
+            "original",
+            "replacement",
+            "reason",
+            "approval_evidence",
+        },
+        "workflow reauthorization record keys are not exact",
+    )
+    _require(
+        record.get("schema_version") == 1,
+        "workflow reauthorization schema version is not 1",
+    )
+    tag = _string(record.get("tag"), "workflow reauthorization tag")
+    _require(
+        bool(
+            re.fullmatch(
+                r"v(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)", tag
+            )
+        ),
+        "workflow reauthorization tag is invalid",
+    )
+    stage = _string(record.get("stage"), "workflow reauthorization stage")
+    _require(
+        stage in {"public-publish", "package-channels"},
+        "workflow reauthorization stage is unsupported",
+    )
+    execution_ref = _string(
+        record.get("execution_ref"), "workflow reauthorization execution ref"
+    )
+    ref_match = REAUTH_REF_RE.fullmatch(execution_ref)
+    _require(
+        ref_match is not None, "workflow reauthorization execution ref is not canonical"
+    )
+    if ref_match is not None:
+        _require(
+            ref_match.group(1) == tag and ref_match.group(2) == stage,
+            "workflow reauthorization ref does not bind tag and stage",
+        )
+        replacement_commit = ref_match.group(3)
+    else:
+        replacement_commit = ""
+    if expected_tag is not None:
+        _require(
+            tag == expected_tag,
+            "workflow reauthorization tag differs from expected tag",
+        )
+    if expected_stage is not None:
+        _require(
+            stage == expected_stage,
+            "workflow reauthorization stage differs from expected stage",
+        )
+    expected_path = (
+        PUBLISH_WORKFLOW_PATH if stage == "public-publish" else CHANNEL_WORKFLOW_PATH
+    )
+    original_binding = _workflow(
+        record.get("original"), "workflow reauthorization original", expected_path
+    )
+    replacement_binding = _workflow(
+        record.get("replacement"), "workflow reauthorization replacement", expected_path
+    )
+    _require(
+        replacement_binding["commit"].lower() == replacement_commit.lower(),
+        "workflow reauthorization replacement commit differs from execution ref",
+    )
+    if runtime_commit is not None:
+        _require(
+            replacement_binding["commit"].lower() == runtime_commit.lower(),
+            "workflow reauthorization replacement commit differs from runtime commit",
+        )
+    if original is not None:
+        _require(
+            original_binding == dict(original),
+            "workflow reauthorization original differs from expected binding",
+        )
+    if replacement is not None:
+        _require(
+            replacement_binding == dict(replacement),
+            "workflow reauthorization replacement differs from expected binding",
+        )
+    reason = _string(record.get("reason"), "workflow reauthorization reason")
+    _require(bool(reason.strip()), "workflow reauthorization reason is empty")
+    evidence = _object(
+        record.get("approval_evidence"), "workflow reauthorization approval evidence"
+    )
+    _require(bool(evidence), "workflow reauthorization approval evidence is empty")
+    return {
+        "tag": tag,
+        "stage": stage,
+        "execution_ref": execution_ref,
+        "original": original_binding,
+        "replacement": replacement_binding,
+        "reason": reason,
+        "approval_evidence": evidence,
+    }
+
+
+def validate_reauthorization_execution(
+    record: Mapping[str, object],
+    *,
+    expected_tag: str | None = None,
+    expected_stage: str | None = None,
+    original: Mapping[str, str] | None = None,
+    replacement: Mapping[str, str] | None = None,
+    runtime_commit: str | None = None,
+) -> dict[str, object]:
+    """Alias retained for workflow callers that name the execution boundary."""
+
+    return validate_workflow_reauthorization(
+        record,
+        expected_tag=expected_tag,
+        expected_stage=expected_stage,
+        original=original,
+        replacement=replacement,
+        runtime_commit=runtime_commit,
+    )
+
+
+def validate_workflow_reauthorization_file(
+    record_path: Path,
+    schemas: Path,
+    *,
+    expected_tag: str | None = None,
+    expected_stage: str | None = None,
+    original: Mapping[str, str] | None = None,
+    replacement: Mapping[str, str] | None = None,
+    runtime_commit: str | None = None,
+) -> dict[str, object]:
+    """Load, schema-check, and bind one checked-in reauthorization record."""
+
+    record, _ = _read_json(record_path, "workflow reauthorization record")
+    schema = _load_schema(
+        schemas,
+        "workflow-reauthorization.schema.json",
+        WORKFLOW_REAUTH_SCHEMA_SHA256,
+    )
+    _validate_schema(record, schema, "workflow reauthorization")
+    return validate_workflow_reauthorization(
+        record,
+        expected_tag=expected_tag,
+        expected_stage=expected_stage,
+        original=original,
+        replacement=replacement,
+        runtime_commit=runtime_commit,
+    )
+
+
 def _public_workflows(
     manifest: Mapping[str, object], distribution_commit: str
 ) -> dict[str, dict[str, str]]:
@@ -403,9 +555,10 @@ def _validate_manifest(
     manifest: Mapping[str, object], manifest_schema: dict[str, object]
 ) -> dict[str, object]:
     _validate_schema(manifest, manifest_schema, "release manifest")
+    profile = _string(manifest.get("profile"), "manifest.profile")
     _require(
-        _string(manifest.get("profile"), "manifest.profile") == "desktop",
-        "portable provenance validation supports only the desktop profile",
+        profile in {"desktop", "desktop-linux", "repository-bootstrap"},
+        "manifest profile is unsupported",
     )
     version = _string(manifest.get("version"), "manifest.version")
     _require(
@@ -413,7 +566,12 @@ def _validate_manifest(
         "manifest.version is not a stable semantic version",
     )
     tag = _string(manifest.get("tag"), "manifest.tag")
-    _require(tag == f"v{version}", "manifest tag/version mismatch")
+    expected_tag = (
+        f"repository-bootstrap-v{version}"
+        if profile == "repository-bootstrap"
+        else f"v{version}"
+    )
+    _require(tag == expected_tag, "manifest tag/version mismatch")
     _require(
         _string(manifest.get("source_repository"), "manifest.source_repository")
         == SOURCE_REPOSITORY,
@@ -490,10 +648,6 @@ def _validate_manifest(
     _require(
         len(names) == len(set(names)), "manifest artifact filenames must be unique"
     )
-    _require(
-        set(names) == DESKTOP_ARCHIVES | DESKTOP_SBOMS | COMMON_ASSETS,
-        "manifest artifacts are not the exact desktop release set",
-    )
     for index, artifact in enumerate(artifacts):
         filename = _string(
             artifact.get("filename"), f"manifest.artifacts[{index}].filename"
@@ -521,6 +675,7 @@ def _validate_manifest(
         "manifest package binding digest is not canonical",
     )
     return {
+        "profile": profile,
         "version": version,
         "tag": tag,
         "source_commit": source_commit,
@@ -623,9 +778,16 @@ def _validate_provenance(
         "provenance artifact facts differ from manifest",
     )
     candidates = _object(provenance.get("candidates"), "provenance.candidates")
-    _require(
-        "status" not in candidates, "desktop provenance candidates must be concrete"
-    )
+    if manifest.get("profile") == "repository-bootstrap":
+        _require(
+            candidates == {"status": "not-applicable"},
+            "repository-bootstrap provenance candidates must be not-applicable",
+        )
+    else:
+        _require(
+            "status" not in candidates,
+            "desktop provenance candidates must be concrete",
+        )
     return {"candidates": candidates, "expected": expected}
 
 
@@ -729,6 +891,8 @@ def _expected_asset_names(manifest: Mapping[str, object]) -> set[str]:
     }
     names.update(RELEASE_DOCUMENTS)
     names.update(CHECKSUM_ASSETS)
+    if manifest.get("profile") != "repository-bootstrap":
+        names.update(CANDIDATE_ASSETS)
     return names
 
 
@@ -1089,6 +1253,7 @@ def _plan(
     asset_set_sha: str,
     staging_attestation_sha: str,
     source_run: Mapping[str, object],
+    public_workflow_name: str = "draft",
 ) -> dict[str, object]:
     source = _object(
         _object(manifest.get("source_workflows"), "manifest.source_workflows").get(
@@ -1098,7 +1263,7 @@ def _plan(
     )
     public = _object(
         _object(manifest.get("workflow_bindings"), "manifest.workflow_bindings").get(
-            "draft"
+            public_workflow_name
         ),
         "manifest public workflow",
     )
@@ -1108,7 +1273,7 @@ def _plan(
     ]
     plan: dict[str, object] = {
         "schema_version": 1,
-        "profile": "desktop",
+        "profile": _string(manifest.get("profile"), "manifest.profile"),
         "tag": _string(manifest.get("tag"), "manifest.tag"),
         "version": _string(manifest.get("version"), "manifest.version"),
         "source_repository": SOURCE_REPOSITORY,
@@ -1187,12 +1352,9 @@ def _validate_common(
     manifest, manifest_raw, provenance, _, _ = _validate_manifest_and_provenance(
         root, schemas
     )
-    _ = _validate_candidates(root, manifest, manifest_raw, provenance)
+    if manifest.get("profile") != "repository-bootstrap":
+        _ = _validate_candidates(root, manifest, manifest_raw, provenance)
     expected_names = _expected_asset_names(manifest)
-    _require(
-        expected_names == PUBLIC_ASSET_NAMES,
-        "manifest public asset names are not canonical",
-    )
     facts, by_name = _asset_facts(root, expected_names)
     _validate_asset_facts(manifest, by_name)
     _validate_checksums(root, by_name)
@@ -1201,7 +1363,7 @@ def _validate_common(
 
 
 def validate_staging(root: Path, schemas: Path) -> dict[str, object]:
-    """Validate an exact 17-file staging envelope and return a public plan."""
+    """Validate the complete staging envelope and return a public plan."""
     try:
         root = root.resolve(strict=True)
         schemas = schemas.resolve(strict=True)
@@ -1210,11 +1372,11 @@ def validate_staging(root: Path, schemas: Path) -> dict[str, object]:
             f"cannot resolve staging paths: {exc}"
         ) from exc
     _require(root.is_dir() and schemas.is_dir(), "root and schemas must be directories")
-    _validate_root_closure(root, STAGING_ASSET_NAMES)
     staging_schema = _load_schema(
         schemas, "staging-attestation.schema.json", STAGING_SCHEMA_SHA256
     )
     manifest, manifest_raw, by_name, asset_set_sha = _validate_common(root, schemas)
+    _validate_root_closure(root, set(by_name) | STAGING_ONLY_NAMES)
     attestation, _ = _read_json(
         root / "staging-attestation.json", "staging attestation"
     )
@@ -1232,7 +1394,7 @@ def validate_staging(root: Path, schemas: Path) -> dict[str, object]:
 
 
 def validate_public_draft(root: Path, schemas: Path, marker: Path) -> dict[str, object]:
-    """Validate an exact 15-file public draft and its trusted marker."""
+    """Validate the complete public draft and its trusted marker."""
     try:
         root = root.resolve(strict=True)
         schemas = schemas.resolve(strict=True)
@@ -1242,8 +1404,8 @@ def validate_public_draft(root: Path, schemas: Path, marker: Path) -> dict[str, 
             f"cannot resolve public draft paths: {exc}"
         ) from exc
     _require(root.is_dir() and schemas.is_dir(), "root and schemas must be directories")
-    _validate_root_closure(root, PUBLIC_ASSET_NAMES)
     manifest, _, by_name, asset_set_sha = _validate_common(root, schemas)
+    _validate_root_closure(root, set(by_name))
     marker_document, _ = _read_json(marker, "draft marker")
     marker_info = _validate_marker(
         marker_document, manifest, asset_set_sha, require_verified=True
@@ -1254,6 +1416,29 @@ def validate_public_draft(root: Path, schemas: Path, marker: Path) -> dict[str, 
         asset_set_sha,
         _string(marker_info["sha256"], "marker staging attestation digest"),
         cast(Mapping[str, object], marker_info["source_run"]),
+    )
+
+
+def validate_package_channels(root: Path, schemas: Path) -> dict[str, object]:
+    """Validate immutable public release inputs without a publication marker."""
+
+    try:
+        root = root.resolve(strict=True)
+        schemas = schemas.resolve(strict=True)
+    except OSError as exc:
+        raise ReleaseProvenanceValidationError(
+            f"cannot resolve package-channel paths: {exc}"
+        ) from exc
+    _require(root.is_dir() and schemas.is_dir(), "root and schemas must be directories")
+    manifest, _, by_name, asset_set_sha = _validate_common(root, schemas)
+    _validate_root_closure(root, set(by_name))
+    return _plan(
+        manifest=manifest,
+        asset_facts=by_name,
+        asset_set_sha=asset_set_sha,
+        staging_attestation_sha="",
+        source_run={},
+        public_workflow_name="channels",
     )
 
 
@@ -1309,6 +1494,26 @@ def parse_arguments(argv: Iterable[str] | None = None) -> argparse.Namespace:
     _ = public.add_argument("--schemas", type=Path, required=True)
     _ = public.add_argument("--marker", type=Path, required=True)
     _ = public.add_argument("--output-plan", type=Path, required=True)
+    package_channels = subparsers.add_parser(
+        "package-channels",
+        help="validate immutable release inputs for package-channel preparation",
+    )
+    _ = package_channels.add_argument("--root", type=Path, required=True)
+    _ = package_channels.add_argument("--schemas", type=Path, required=True)
+    _ = package_channels.add_argument("--output-plan", type=Path, required=True)
+    reauthorization = subparsers.add_parser(
+        "reauthorization",
+        help="validate one checked-in release workflow reauthorization record",
+    )
+    _ = reauthorization.add_argument("--record", type=Path, required=True)
+    _ = reauthorization.add_argument("--schemas", type=Path, required=True)
+    _ = reauthorization.add_argument("--tag", required=True)
+    _ = reauthorization.add_argument("--stage", required=True)
+    _ = reauthorization.add_argument("--runtime-commit", required=True)
+    for prefix in ("original", "replacement"):
+        _ = reauthorization.add_argument(f"--{prefix}-path", required=True)
+        _ = reauthorization.add_argument(f"--{prefix}-commit", required=True)
+        _ = reauthorization.add_argument(f"--{prefix}-sha256", required=True)
     publication = subparsers.add_parser(
         "public-publish",
         help="validate the exact public draft and atomic publication bindings",
@@ -1324,6 +1529,35 @@ def main(argv: Iterable[str] | None = None) -> int:
     args = parse_arguments(argv)
     values = cast(Mapping[str, object], vars(args))
     mode = _string(values.get("mode"), "mode")
+    if mode == "reauthorization":
+        record = values.get("record")
+        schemas = values.get("schemas")
+        if not isinstance(record, Path) or not isinstance(schemas, Path):
+            return 2
+        original = {
+            "path": _string(values.get("original_path"), "original path"),
+            "commit": _string(values.get("original_commit"), "original commit"),
+            "sha256": _string(values.get("original_sha256"), "original SHA-256"),
+        }
+        replacement = {
+            "path": _string(values.get("replacement_path"), "replacement path"),
+            "commit": _string(values.get("replacement_commit"), "replacement commit"),
+            "sha256": _string(values.get("replacement_sha256"), "replacement SHA-256"),
+        }
+        try:
+            _ = validate_workflow_reauthorization_file(
+                record,
+                schemas,
+                expected_tag=_string(values.get("tag"), "tag"),
+                expected_stage=_string(values.get("stage"), "stage"),
+                original=original,
+                replacement=replacement,
+                runtime_commit=_string(values.get("runtime_commit"), "runtime commit"),
+            )
+        except (ReleaseProvenanceValidationError, DependencyError) as exc:
+            print(f"error: {exc}", file=sys.stderr)
+            return 2
+        return 0
     root = values.get("root")
     schemas = values.get("schemas")
     marker = values.get("marker")
@@ -1337,6 +1571,8 @@ def main(argv: Iterable[str] | None = None) -> int:
     try:
         if mode == "staging":
             plan = validate_staging(root, schemas)
+        elif mode == "package-channels":
+            plan = validate_package_channels(root, schemas)
         else:
             if not isinstance(marker, Path):
                 return 2

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Validate the public, data-only channel-candidate bundle.
+"""Validate the public, data-only channel-candidate contract.
 
 The validator intentionally has no dependency on the private release
-contract validator.  It consumes only the three public release files in a
-directory: ``release-manifest.json``, ``channel-candidates.json``, and
-``channel-candidates.tar.gz``.  Archive members are inspected from memory and
-are never extracted or executed.
+contract validator. Desktop profiles consume ``release-manifest.json``,
+``channel-candidates.json``, and ``channel-candidates.tar.gz``. Repository
+bootstrap profiles require the candidate files to be absent. Archive members
+are inspected from memory and are never extracted or executed.
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ CHANNEL_SCHEMA_SHA256 = (
     "7ce660193dc346c70fd0c8db57bd1d91d1743d3b6059959b96f76443d037d57a"
 )
 MANIFEST_SCHEMA_SHA256 = (
-    "055a20ee520fbffc27dc3527c548eb50a76e1aa247072132d0f685ed40fdf395"
+    "1b793cdebab9c3741eccd3aa280c4bb32ec0555fa1aa43c0f09210842a82d76c"
 )
 CHANNEL_SCHEMA_NAME = "channel-candidates.schema.json"
 MANIFEST_SCHEMA_NAME = "release-manifest.schema.json"
@@ -567,6 +567,19 @@ def validate_channel_candidates(root: Path, schemas: Path) -> None:
     manifest, manifest_raw = _read_json(
         root / "release-manifest.json", "release manifest"
     )
+    if manifest.get("profile") == "repository-bootstrap":
+        for candidate_name in (
+            "channel-candidates.json",
+            "channel-candidates.tar.gz",
+            "Formula/context-engine.rb",
+            "bucket/context-engine.json",
+        ):
+            candidate_path = root / candidate_name
+            if candidate_path.exists():
+                raise CandidateValidationError(
+                    "repository-bootstrap release must not contain channel candidates"
+                )
+        return
     candidates, _ = _read_json(root / "channel-candidates.json", "channel candidates")
     channel_schema = _load_schema(schemas, CHANNEL_SCHEMA_NAME, CHANNEL_SCHEMA_SHA256)
     manifest_schema = _load_schema(

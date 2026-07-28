@@ -39,6 +39,7 @@ jobs:
         run: |
           .venv/bin/python scripts/check_prepare_draft_workflow.py .github/workflows/prepare-draft-release.yml
           .venv/bin/python scripts/check_publish_draft_workflow.py .github/workflows/publish-draft-release.yml
+          .venv/bin/python scripts/check_prepare_package_channels_workflow.py .github/workflows/prepare-package-channels.yml
 
       - name: Run all public Python unit tests
         run: |
@@ -51,15 +52,20 @@ jobs:
           from pathlib import Path
 
           expected = {
-              ".github/workflows/publish-draft-release.yml": "08aeadd481793a37f1f9223aaabf514cf996bbeb3758d2c8103acad54db244bb",
-              "schemas/release-manifest.schema.json": "055a20ee520fbffc27dc3527c548eb50a76e1aa247072132d0f685ed40fdf395",
-              "schemas/release-provenance.schema.json": "2cae7a72248fd279f4ba06e905daf7c5693393b74b3b0e24d7b9c0092fbed051",
+              ".github/workflows/publish-draft-release.yml": "57cdeddea07a121702ec022b120ad753c6efb6f2e45087b2ab8dcc7b5c0e8451",
+              "schemas/release-manifest.schema.json": "1b793cdebab9c3741eccd3aa280c4bb32ec0555fa1aa43c0f09210842a82d76c",
+              "schemas/release-provenance.schema.json": "341d27e2074aebfdc539ef157d9d8fa449bff5504f7fb55014b74983c1506130",
               "schemas/channel-candidates.schema.json": "7ce660193dc346c70fd0c8db57bd1d91d1743d3b6059959b96f76443d037d57a",
               "schemas/staging-attestation.schema.json": "b8f1017ce278f762772e236eb08bf18a3c52b65f0e1e30c1d27cace51d305a6d",
-              "scripts/validate_release_provenance.py": "34fe42956abea7df4cce5677e1d2678c5ee7f738e02c953f8970a8c62786d008",
-              "scripts/validate_channel_candidates.py": "75c90fae9862ae40e4400d459488fdb6c6b5718e0d1ba677db94c48e8ca312d4",
+              "scripts/validate_release_provenance.py": "f5f47d2dab9c0707425414a50e5cd57cc7d20b45d67769dbccf7c047545ab74c",
+              "scripts/validate_channel_candidates.py": "1414ed65d2b256f2dea276a2a856ed0b9d7d75aa489da0da3a41fde805c0614e",
               "scripts/publish_draft_release.py": "a03e5f3954ae70714b5522f078c9f25f581fb8aafdbe656d3962427d50350dc4",
-              "scripts/check_publish_draft_workflow.py": "e4e4291f9b064719484d332be54688fe669646ec38b3ad9db555f299e8941938",
+              "scripts/check_publish_draft_workflow.py": "663f382f73d4678df374ba5ff36532ebaaee675880c378c760776d7638669d24",
+              ".github/workflows/prepare-package-channels.yml": "529d842ec02b5a15b30e5e43e1023dbc61207a87dd6a45433f9d6704f2e2345d",
+              "schemas/channel-repair.schema.json": "5afe8a86eb580553d40158c9fa910cf6ad8f0cd88625673ecc3c3cb592201b26",
+              "schemas/workflow-reauthorization.schema.json": "e0fce8d962bef3f4f3a60fb39ed521676d252bf3309157fbd5afe5e5cba797d8",
+              "scripts/prepare_package_channels.py": "17c9d60bf60e8d0ebbf4980c6151864082c97d4c0baa076c331b6a57115c4ac5",
+              "scripts/check_prepare_package_channels_workflow.py": "2a53e1975af2561711c7475e7e719bc29960ecc80174075aa79ab309cae7bd35",
           }
           for filename, expected_sha256 in expected.items():
               path = Path(filename)
@@ -72,7 +78,7 @@ jobs:
         run: |
           .venv/bin/python scripts/validate_release_provenance.py --help
           .venv/bin/python scripts/validate_channel_candidates.py --help
-          .venv/bin/python scripts/publish_draft_release.py --help
+          .venv/bin/python -m scripts.publish_draft_release --help
 
       - name: Run BasedPyright for all public Python
         run: |

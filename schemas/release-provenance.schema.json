@@ -133,6 +133,8 @@
           "repository_source_format": { "type": "string", "enum": ["list", "sources", "repo"] },
           "package_suite": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
           "package_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+          "package_manifest_sha256": { "$ref": "#/$defs/sha256" },
+          "package_verification_sha256": { "$ref": "#/$defs/sha256" },
           "filename": { "type": "string", "pattern": "^[^/\\\\]+$" },
           "sha256": { "$ref": "#/$defs/sha256" },
           "size": { "type": "integer", "minimum": 1 }
@@ -147,7 +149,9 @@
                   { "required": ["package_format"] },
                   { "required": ["repository_source_format"] },
                   { "required": ["package_suite"] },
-                  { "required": ["package_version"] }
+                  { "required": ["package_version"] },
+                  { "required": ["package_manifest_sha256"] },
+                  { "required": ["package_verification_sha256"] }
                 ]
               }
             }
@@ -155,14 +159,14 @@
           {
             "if": { "properties": { "kind": { "const": "native-package" } } },
             "then": {
-              "required": ["package_id", "package_format", "package_suite", "package_version"],
+              "required": ["package_id", "package_format", "package_suite", "package_version", "package_manifest_sha256", "package_verification_sha256"],
               "not": { "required": ["repository_source_format"] }
             }
           },
           {
             "if": { "properties": { "kind": { "const": "bootstrap-package" } } },
             "then": {
-              "required": ["package_id", "package_format", "package_suite", "package_version"],
+              "required": ["package_id", "package_format", "package_suite", "package_version", "package_manifest_sha256", "package_verification_sha256"],
               "properties": {
                 "package_id": {
                   "anyOf": [

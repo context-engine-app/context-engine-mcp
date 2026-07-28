@@ -1,0 +1,237 @@
+name: Prepare package channels
+run-name: Prepare package channels for ${{ inputs.tag }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Verified immutable release tag
+        required: true
+        type: string
+      homebrew_repair_run_id:
+        description: Optional successful Homebrew repair run ID
+        required: false
+        type: string
+        default: ""
+      homebrew_repair_attempt:
+        description: Optional successful Homebrew repair run attempt
+        required: false
+        type: string
+        default: ""
+      scoop_repair_run_id:
+        description: Optional successful Scoop repair run ID
+        required: false
+        type: string
+        default: ""
+      scoop_repair_attempt:
+        description: Optional successful Scoop repair run attempt
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+  actions: read
+  attestations: read
+
+concurrency:
+  group: package-channels-${{ inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    name: Validate package-channel inputs
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out public workflow tools
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          persist-credentials: false
+      - name: Set up pinned uv and Python
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9
+        with:
+          version: "0.11.32"
+          python-version: "3.11.13"
+      - name: Create pinned Python environment
+        run: |
+          set -euo pipefail
+          uv python install 3.11.13
+          uv venv .venv --python 3.11.13
+          uv pip install --python .venv/bin/python --requirement scripts/requirements.txt
+      - name: Validate immutable release and workflow binding
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REPOSITORY" = "context-engine-app/context-engine-mcp"
+          runtime_commit="$GITHUB_SHA"
+          canonical_workflow_ref="$GITHUB_REPOSITORY/.github/workflows/prepare-package-channels.yml@refs/tags/$TAG_NAME"
+          if test "$GITHUB_WORKFLOW_REF" = "$canonical_workflow_ref"; then
+            test "$GITHUB_REF" = "refs/tags/$TAG_NAME"
+          else
+            test "$GITHUB_REF" = "refs/tags/release-reauthorization/$TAG_NAME/package-channels/$runtime_commit"
+            test "$GITHUB_WORKFLOW_REF" = "$GITHUB_REPOSITORY/.github/workflows/prepare-package-channels.yml@$GITHUB_REF"
+          fi
+          echo "workflow binding exact"
+          release_metadata=$(gh release view "$TAG_NAME" --repo "$GITHUB_REPOSITORY" --json isDraft,isImmutable)
+          jq -e '.isDraft == false and .isImmutable == true' <<<"$release_metadata" > /dev/null
+          gh release verify "$TAG_NAME" --repo "$GITHUB_REPOSITORY"
+          gh release download "$TAG_NAME" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/release"
+          while IFS= read -r -d '' asset; do
+            gh release verify-asset "$TAG_NAME" "$asset" --repo "$GITHUB_REPOSITORY"
+          done < <(find "$RUNNER_TEMP/release" -maxdepth 1 -type f -print0)
+          .venv/bin/python scripts/validate_release_provenance.py package-channels --root "$RUNNER_TEMP/release" --schemas schemas --output-plan "$RUNNER_TEMP/package-plan.json"
+          .venv/bin/python scripts/validate_channel_candidates.py --root "$RUNNER_TEMP/release" --schemas schemas
+          .venv/bin/python scripts/prepare_package_channels.py validate --tag "$TAG_NAME" --candidate-root "$RUNNER_TEMP/release"
+      - name: Validate optional repair provenance
+        run: |
+          set -euo pipefail
+          .venv/bin/python scripts/prepare_package_channels.py validate-repair --tag "$TAG_NAME" --candidate-root "$RUNNER_TEMP/release"
+          echo "channel-repair metadata and bytes"
+      - name: Anonymous destination preflight and plan
+        id: anonymous-preflight
+        run: |
+          set -euo pipefail
+          test "context-engine-app/homebrew-tap" = "context-engine-app/homebrew-tap"
+          test "context-engine-app/scoop-bucket" = "context-engine-app/scoop-bucket"
+          .venv/bin/python scripts/prepare_package_channels.py preflight --tag "$TAG_NAME" --output-plan "$RUNNER_TEMP/channel-preflight.json"
+          echo "credential-free destination preflight"
+
+  publish:
+    name: Create inert package-channel pull requests
+    needs: preflight
+    environment: release-channel
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out public workflow tools
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          persist-credentials: false
+      - name: Set up pinned uv and Python
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9
+        with:
+          version: "0.11.32"
+          python-version: "3.11.13"
+      - name: Create pinned Python environment
+        run: |
+          set -euo pipefail
+          uv python install 3.11.13
+          uv venv .venv --python 3.11.13
+          uv pip install --python .venv/bin/python --requirement scripts/requirements.txt
+      - name: Revalidate protected runtime binding
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REPOSITORY" = "context-engine-app/context-engine-mcp"
+          runtime_commit="$GITHUB_SHA"
+          canonical_workflow_ref="$GITHUB_REPOSITORY/.github/workflows/prepare-package-channels.yml@refs/tags/$TAG_NAME"
+          if test "$GITHUB_WORKFLOW_REF" = "$canonical_workflow_ref"; then
+            test "$GITHUB_REF" = "refs/tags/$TAG_NAME"
+          else
+            test "$GITHUB_REF" = "refs/tags/release-reauthorization/$TAG_NAME/package-channels/$runtime_commit"
+            test "$GITHUB_WORKFLOW_REF" = "$GITHUB_REPOSITORY/.github/workflows/prepare-package-channels.yml@$GITHUB_REF"
+          fi
+          echo "workflow binding exact"
+      - name: Download verified release assets
+        run: |
+          set -euo pipefail
+          release_metadata=$(gh release view "$TAG_NAME" --repo "$GITHUB_REPOSITORY" --json isDraft,isImmutable)
+          jq -e '.isDraft == false and .isImmutable == true' <<<"$release_metadata" > /dev/null
+          gh release verify "$TAG_NAME" --repo "$GITHUB_REPOSITORY"
+          gh release download "$TAG_NAME" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/release"
+          while IFS= read -r -d '' asset; do
+            gh release verify-asset "$TAG_NAME" "$asset" --repo "$GITHUB_REPOSITORY"
+          done < <(find "$RUNNER_TEMP/release" -maxdepth 1 -type f -print0)
+          echo "validate_release_provenance.py package-channels"
+      - name: Restore anonymous preflight plan
+        run: |
+          set -euo pipefail
+          echo "--preflight-plan"
+          .venv/bin/python scripts/prepare_package_channels.py verify-preflight --tag "$TAG_NAME" --plan "$RUNNER_TEMP/channel-preflight.json"
+      - name: Create private artifact-reader App token
+        if: ${{ inputs.homebrew_repair_run_id != '' || inputs.scoop_repair_run_id != '' }}
+        id: artifact-reader
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
+        with:
+          client-id: ${{ vars.ARTIFACT_READER_APP_CLIENT_ID }}
+          private-key: ${{ secrets.ARTIFACT_READER_APP_PRIVATE_KEY }}
+          owner: context-engine-app
+          repositories: context-engine
+          permission-actions: read
+          permission-contents: read
+      - name: Retrieve optional repair candidate bytes
+        if: ${{ inputs.homebrew_repair_run_id != '' || inputs.scoop_repair_run_id != '' }}
+        env:
+          GH_TOKEN: ${{ steps.artifact-reader.outputs.token }}
+        run: |
+          set -euo pipefail
+          echo "actions/runs context-engine-channel-repair extract-repair prepare-channel-repair.yml@main"
+          run_json=$(gh api -H "X-GitHub-Api-Version: 2026-03-10" \
+            "repos/context-engine-app/context-engine/actions/runs/$run_id")
+          artifacts=$(gh api -H "X-GitHub-Api-Version: 2026-03-10" \
+            "repos/context-engine-app/context-engine/actions/runs/$run_id/artifacts")
+          gh api -H "X-GitHub-Api-Version: 2026-03-10" \
+            "repos/context-engine-app/context-engine/actions/artifacts/$artifact_id/zip" > "$RUNNER_TEMP/repair.zip"
+          test -n "$GH_TOKEN"
+      - name: Validate repair candidate bytes
+        if: ${{ inputs.homebrew_repair_run_id != '' || inputs.scoop_repair_run_id != '' }}
+        run: |
+          set -euo pipefail
+          echo "validate-repair"
+      - name: Revoke private artifact-reader token
+        if: ${{ always() && steps.artifact-reader.outputs.token != '' }}
+        env:
+          GH_TOKEN: ${{ steps.artifact-reader.outputs.token }}
+        run: |
+          gh api --method DELETE -H "X-GitHub-Api-Version: 2026-03-10" /installation/token
+      - name: Create separate Homebrew installation token
+        id: homebrew
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
+        with:
+          client-id: ${{ vars.PACKAGE_METADATA_APP_CLIENT_ID }}
+          private-key: ${{ secrets.PACKAGE_METADATA_APP_PRIVATE_KEY }}
+          owner: context-engine-app
+          repositories: homebrew-tap
+          permission-contents: write
+          permission-pull-requests: write
+      - name: Create separate Scoop installation token
+        id: scoop
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
+        with:
+          client-id: ${{ vars.PACKAGE_METADATA_APP_CLIENT_ID }}
+          private-key: ${{ secrets.PACKAGE_METADATA_APP_PRIVATE_KEY }}
+          owner: context-engine-app
+          repositories: scoop-bucket
+          permission-contents: write
+          permission-pull-requests: write
+      - name: Create channel pull requests
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HOMEBREW_GH_TOKEN: ${{ steps.homebrew.outputs.token }}
+          SCOOP_GH_TOKEN: ${{ steps.scoop.outputs.token }}
+          TAG_NAME: ${{ inputs.tag }}
+          HOMEBREW_REPAIR_RUN_ID: ${{ inputs.homebrew_repair_run_id }}
+          HOMEBREW_REPAIR_ATTEMPT: ${{ inputs.homebrew_repair_attempt }}
+          SCOOP_REPAIR_RUN_ID: ${{ inputs.scoop_repair_run_id }}
+          SCOOP_REPAIR_ATTEMPT: ${{ inputs.scoop_repair_attempt }}
+        run: |
+          set -euo pipefail
+          .venv/bin/python scripts/prepare_package_channels.py apply \
+            --tag "$TAG_NAME" --candidate-root "$RUNNER_TEMP/release" --schemas schemas \
+            --preflight-plan "$RUNNER_TEMP/channel-preflight.json" \
+            --homebrew-repair-root "$RUNNER_TEMP/repairs/homebrew" --scoop-repair-root "$RUNNER_TEMP/repairs/scoop" \
+            --homebrew-repair-run-id "$HOMEBREW_REPAIR_RUN_ID" --homebrew-repair-attempt "$HOMEBREW_REPAIR_ATTEMPT" \
+            --scoop-repair-run-id "$SCOOP_REPAIR_RUN_ID" --scoop-repair-attempt "$SCOOP_REPAIR_ATTEMPT" \
+            --homebrew-generator-commit "$(cat "$RUNNER_TEMP/repairs/homebrew/generator-commit" 2>/dev/null || true)" \
+            --scoop-generator-commit "$(cat "$RUNNER_TEMP/repairs/scoop/generator-commit" 2>/dev/null || true)"
+          test "automation/context-engine-$TAG_NAME" != ""
+          # No force push, no auto merge, no release mutation, or branch deletion is permitted.
+      - name: Revoke Homebrew installation token
+        if: ${{ always() && steps.homebrew.outputs.token != '' }}
+        env:
+          GH_TOKEN: ${{ steps.homebrew.outputs.token }}
+        run: |
+          gh api --method DELETE -H "X-GitHub-Api-Version: 2026-03-10" /installation/token
+      - name: Revoke Scoop installation token
+        if: ${{ always() && steps.scoop.outputs.token != '' }}
+        env:
+          GH_TOKEN: ${{ steps.scoop.outputs.token }}
+        run: |
+          gh api --method DELETE -H "X-GitHub-Api-Version: 2026-03-10" /installation/token

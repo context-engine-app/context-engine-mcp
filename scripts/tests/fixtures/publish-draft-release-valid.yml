@@ -50,8 +50,15 @@ jobs:
             exit 1
           fi
           test "$GITHUB_REPOSITORY" = "context-engine-app/context-engine-mcp"
-          test "$GITHUB_REF" = "refs/tags/$TAG_NAME"
-          test "$GITHUB_WORKFLOW_REF" = "$GITHUB_REPOSITORY/.github/workflows/publish-draft-release.yml@refs/tags/$TAG_NAME"
+          runtime_commit="$GITHUB_SHA"
+          canonical_workflow_ref="$GITHUB_REPOSITORY/.github/workflows/publish-draft-release.yml@refs/tags/$TAG_NAME"
+          if test "$GITHUB_WORKFLOW_REF" = "$canonical_workflow_ref"; then
+            test "$GITHUB_REF" = "refs/tags/$TAG_NAME"
+          else
+            test "$GITHUB_REF" = "refs/tags/release-reauthorization/$TAG_NAME/public-publish/$runtime_commit"
+            test "$GITHUB_WORKFLOW_REF" = "$GITHUB_REPOSITORY/.github/workflows/publish-draft-release.yml@$GITHUB_REF"
+            test -f schemas/workflow-reauthorization.schema.json
+          fi
           test "$GITHUB_SHA" = "$(git rev-parse HEAD)"
           sha256sum .github/workflows/publish-draft-release.yml | cut -d' ' -f1 > "$RUNNER_TEMP/publish-workflow.sha256"
           sha256sum .github/workflows/prepare-package-channels.yml | cut -d' ' -f1 > "$RUNNER_TEMP/channels-workflow.sha256"
@@ -177,8 +184,15 @@ jobs:
         run: |
           set -euo pipefail
           test "$GITHUB_REPOSITORY" = "context-engine-app/context-engine-mcp"
-          test "$GITHUB_REF" = "refs/tags/$TAG_NAME"
-          test "$GITHUB_WORKFLOW_REF" = "$GITHUB_REPOSITORY/.github/workflows/publish-draft-release.yml@refs/tags/$TAG_NAME"
+          runtime_commit="$GITHUB_SHA"
+          canonical_workflow_ref="$GITHUB_REPOSITORY/.github/workflows/publish-draft-release.yml@refs/tags/$TAG_NAME"
+          if test "$GITHUB_WORKFLOW_REF" = "$canonical_workflow_ref"; then
+            test "$GITHUB_REF" = "refs/tags/$TAG_NAME"
+          else
+            test "$GITHUB_REF" = "refs/tags/release-reauthorization/$TAG_NAME/public-publish/$runtime_commit"
+            test "$GITHUB_WORKFLOW_REF" = "$GITHUB_REPOSITORY/.github/workflows/publish-draft-release.yml@$GITHUB_REF"
+            test -f schemas/workflow-reauthorization.schema.json
+          fi
           test "$GITHUB_SHA" = "$(git rev-parse HEAD)"
           test "$DRAFT_RUN_ID" -ge 1
           sha256sum .github/workflows/publish-draft-release.yml | cut -d' ' -f1 > "$RUNNER_TEMP/publish-workflow.sha256"
@@ -386,7 +400,7 @@ jobs:
           DRAFT_RUN_ID: ${{ inputs.draft_run_id }}
         run: |
           set -euo pipefail
-          .venv/bin/python scripts/publish_draft_release.py \
+          .venv/bin/python -m scripts.publish_draft_release \
             --plan "$RUNNER_TEMP/publication-plan.json" \
             --repository "$GITHUB_REPOSITORY" \
             --draft-run-id "$DRAFT_RUN_ID" \

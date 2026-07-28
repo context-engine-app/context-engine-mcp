@@ -3,10 +3,13 @@ from __future__ import annotations
 import hashlib
 import io
 import json
+import subprocess
+import sys
 import unittest
 from collections.abc import Mapping
 from email.message import Message
 from http import client as http_client
+from pathlib import Path
 from typing import cast, final
 from unittest.mock import patch
 from urllib import error as urllib_error
@@ -211,6 +214,19 @@ class PublisherTests(unittest.TestCase):
             self.transport,
             repository="context-engine-app/context-engine-mcp",
         )
+
+    def test_module_help_matches_release_contract_invocation(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        result = subprocess.run(
+            [sys.executable, "-m", "scripts.publish_draft_release", "--help"],
+            cwd=root,
+            capture_output=True,
+            check=False,
+            text=True,
+        )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("usage: publish_draft_release.py", result.stdout)
 
     def test_publishes_with_the_only_permitted_patch(self) -> None:
         result = self.coordinator.publish(self.plan, draft_run_id=55)

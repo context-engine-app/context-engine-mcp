@@ -2,3 +2,4 @@
 basedpyright==1.39.9
 ruff==0.15.7
 types-PyYAML==6.0.12.20260518
+typing-extensions==4.16.0

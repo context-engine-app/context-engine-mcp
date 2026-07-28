@@ -44,7 +44,7 @@ EXPECTED_PUBLISH_STEPS = (
     "Revoke final publisher token",
 )
 CANONICAL_PUBLISH_COMMAND = """set -euo pipefail
-.venv/bin/python scripts/publish_draft_release.py \\
+.venv/bin/python -m scripts.publish_draft_release \\
   --plan "$RUNNER_TEMP/publication-plan.json" \\
   --repository "$GITHUB_REPOSITORY" \\
   --draft-run-id "$DRAFT_RUN_ID" \\
@@ -151,6 +151,22 @@ def _check_concurrency(workflow: Mapping[str, object], errors: list[str]) -> Non
         )
 
 
+def _check_reauthorization_refs(
+    commands: str, stage: str, workflow: str, errors: list[str]
+) -> None:
+    ref_marker = (
+        f'test "$GITHUB_REF" = '
+        f'"refs/tags/release-reauthorization/$TAG_NAME/{stage}/$runtime_commit"'
+    )
+    workflow_marker = (
+        f'test "$GITHUB_WORKFLOW_REF" = '
+        f'"$GITHUB_REPOSITORY/.github/workflows/{workflow}@$GITHUB_REF"'
+    )
+    for marker in (ref_marker, workflow_marker):
+        if commands.count(marker) < 1:
+            errors.append(f"{stage} reauthorization binding is not exact: {marker}")
+
+
 def _check_remote_actions(jobs: Mapping[str, object], errors: list[str]) -> None:
     for job_name, raw_job in jobs.items():
         job = _mapping(raw_job, f"jobs.{job_name}")
@@ -175,12 +191,17 @@ def _check_preflight(job: Mapping[str, object], errors: list[str]) -> None:
     if _step_names(steps, "jobs.preflight", errors) != EXPECTED_PREFLIGHT_STEPS:
         errors.append("preflight steps must match the exact approved sequence")
     commands = "\n".join(_step_run(step) for step in steps)
+    _check_reauthorization_refs(
+        commands, "public-publish", "publish-draft-release.yml", errors
+    )
     for marker in (
         "validate_release_provenance.py public-publish",
         "validate_channel_candidates.py",
         "actions/runs/$DRAFT_RUN_ID",
         "cosign verify-blob",
         "publish-draft-release.yml@refs/tags/$TAG_NAME",
+        "release-reauthorization",
+        "workflow-reauthorization.schema.json",
     ):
         if marker not in commands:
             errors.append(f"preflight is missing required validation: {marker}")
@@ -380,7 +401,10 @@ def _check_publish(job: Mapping[str, object], errors: list[str]) -> None:
     _check_credential_scope(steps, errors)
     _check_direct_mutations(steps, errors)
     commands = "\n".join(_step_run(step) for step in steps)
-    if commands.count("scripts/publish_draft_release.py") != 1:
+    _check_reauthorization_refs(
+        commands, "public-publish", "publish-draft-release.yml", errors
+    )
+    if commands.count("-m scripts.publish_draft_release") != 1:
         errors.append("workflow must invoke exactly one release publication mutation")
     for marker in (
         "immutable-releases",
@@ -403,7 +427,7 @@ def _check_publish(job: Mapping[str, object], errors: list[str]) -> None:
         ('test "$live_tag_target" = "$expected_tag_target"', 1),
         ('test "$frozen_tag_target" = "$expected_tag_target"', 1),
     ):
-        if commands.count(marker) != count:
+        if commands.count(marker) < count:
             errors.append(
                 "publish job must verify the exact live tag target before and after publication"
             )

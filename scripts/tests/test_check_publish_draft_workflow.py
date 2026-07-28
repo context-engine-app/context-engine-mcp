@@ -131,6 +131,40 @@ class PublishDraftWorkflowCheckerTests(unittest.TestCase):
         )
         self.assertTrue(any("live tag target" in error for error in errors))
 
+    def test_reauthorization_binds_original_publish_workflow_digest(self) -> None:
+        source = (
+            Path(__file__).parents[2]
+            / ".github"
+            / "workflows"
+            / "publish-draft-release.yml"
+        ).read_text(encoding="utf-8")
+        self.assertGreaterEqual(
+            source.count(
+                'printf \'%s\\n\' "$original_sha256" > "$RUNNER_TEMP/publish-workflow.sha256"'
+            ),
+            2,
+        )
+
+    def test_reauthorization_ref_and_workflow_ref_are_exact_in_both_jobs(self) -> None:
+        source = (
+            Path(__file__).parents[2]
+            / ".github"
+            / "workflows"
+            / "publish-draft-release.yml"
+        ).read_text(encoding="utf-8")
+        self.assertGreaterEqual(
+            source.count(
+                'test "$GITHUB_REF" = "refs/tags/release-reauthorization/$TAG_NAME/public-publish/$runtime_commit"'
+            ),
+            2,
+        )
+        self.assertGreaterEqual(
+            source.count(
+                'test "$GITHUB_WORKFLOW_REF" = "$GITHUB_REPOSITORY/.github/workflows/publish-draft-release.yml@$GITHUB_REF"'
+            ),
+            2,
+        )
+
     def test_publisher_token_cannot_be_used_by_an_added_mutation_step(self) -> None:
         errors = self._check_mutation(
             lambda value: value.replace(
@@ -242,7 +276,9 @@ class PublishDraftWorkflowCheckerTests(unittest.TestCase):
             '".github/workflows/publish-draft-release.yml":',
             '"scripts/publish_draft_release.py":',
             '"scripts/check_publish_draft_workflow.py":',
-            "scripts/publish_draft_release.py --help",
+            "scripts/check_prepare_package_channels_workflow.py .github/workflows/prepare-package-channels.yml",
+            '".github/workflows/prepare-package-channels.yml":',
+            "-m scripts.publish_draft_release --help",
         ):
             with self.subTest(marker=marker):
                 self.assertIn(marker, contract)
