@@ -126,6 +126,15 @@ class PrepareDraftWorkflowCheckerTests(unittest.TestCase):
         )
         self.assertTrue(any("artifact" in error or "id" in error for error in errors))
 
+    def test_download_must_flatten_exact_artifact_into_expected_root(self) -> None:
+        errors = self._check_mutation(
+            lambda source: source.replace(
+                "merge-multiple: true",
+                "merge-multiple: false",
+            )
+        )
+        self.assertTrue(any("flatten" in error for error in errors))
+
     def test_tag_ref_peel_is_required(self) -> None:
         errors = self._check_mutation(
             lambda source: source.replace(

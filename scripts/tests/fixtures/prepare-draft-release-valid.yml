@@ -114,6 +114,7 @@ jobs:
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           artifact-ids: ${{ steps.source-artifact.outputs.artifact_id }}
+          merge-multiple: true
           path: staged-release
           github-token: ${{ steps.artifact-reader.outputs.token }}
           repository: context-engine-app/context-engine

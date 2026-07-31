@@ -246,12 +246,23 @@ def _check_token_action(
 
 def _check_download(step: Json, errors: list[str]) -> None:
     values = _with_map(step)
-    expected_keys = {"artifact-ids", "path", "github-token", "repository", "run-id"}
+    expected_keys = {
+        "artifact-ids",
+        "merge-multiple",
+        "path",
+        "github-token",
+        "repository",
+        "run-id",
+    }
     if values is None or set(values) != expected_keys:
         errors.append("artifact download must use the exact artifact ID and source run")
         return
     if values.get("artifact-ids") != "${{ steps.source-artifact.outputs.artifact_id }}":
         errors.append("artifact download must use source-artifact.outputs.artifact_id")
+    if values.get("merge-multiple") is not True:
+        errors.append(
+            "artifact download must flatten the exact artifact into staged-release"
+        )
     if values.get("path") != "staged-release":
         errors.append("artifact download path must be staged-release")
     if values.get("github-token") != "${{ steps.artifact-reader.outputs.token }}":

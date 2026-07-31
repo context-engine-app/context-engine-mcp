@@ -250,18 +250,21 @@ jobs:
           jq -r '.content' <<< "$workflow_response" | tr -d '\n' | base64 --decode > "$RUNNER_TEMP/source-release.yml"
           source_workflow_sha256=$(sha256sum "$RUNNER_TEMP/source-release.yml" | cut -d' ' -f1)
 
-          printf 'artifact_id=%s\n' "$artifact_id" >> "$GITHUB_OUTPUT"
-          printf 'artifact_digest=%s\n' "$artifact_digest" >> "$GITHUB_OUTPUT"
-          printf 'artifact_expires_at=%s\n' "$artifact_expires_at" >> "$GITHUB_OUTPUT"
-          printf 'source_commit=%s\n' "$expected_head_sha" >> "$GITHUB_OUTPUT"
-          printf 'source_run_attempt=%s\n' "$source_run_attempt" >> "$GITHUB_OUTPUT"
-          printf 'source_workflow_sha256=%s\n' "$source_workflow_sha256" >> "$GITHUB_OUTPUT"
+          {
+            printf 'artifact_id=%s\n' "$artifact_id"
+            printf 'artifact_digest=%s\n' "$artifact_digest"
+            printf 'artifact_expires_at=%s\n' "$artifact_expires_at"
+            printf 'source_commit=%s\n' "$expected_head_sha"
+            printf 'source_run_attempt=%s\n' "$source_run_attempt"
+            printf 'source_workflow_sha256=%s\n' "$source_workflow_sha256"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Download exact private staging artifact
         if: ${{ steps.preflight.outputs.skip_source != 'true' }}
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           artifact-ids: ${{ steps.source-artifact.outputs.artifact_id }}
+          merge-multiple: true
           path: staged-release
           github-token: ${{ steps.artifact-reader.outputs.token }}
           repository: context-engine-app/context-engine
