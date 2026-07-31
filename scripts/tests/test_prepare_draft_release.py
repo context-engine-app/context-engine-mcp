@@ -194,6 +194,8 @@ class FakeTransport:
         self.patch_attempts: int = 0
         self.asset_states: dict[str, str] = {}
         self.asset_digest_overrides: dict[str, str] = {}
+        self.placeholder_tag_after_patch: bool = False
+        self.release_pages: list[list[dict[str, object]]] | None = None
 
     def request(
         self,
@@ -212,9 +214,22 @@ class FakeTransport:
             failure = failures.pop(0)
             raise failure
         if method == "GET" and "/releases/tags/" in path:
-            if self.release is None:
+            if self.release is None or not path.endswith(
+                f"/tags/{self.release['tag_name']}"
+            ):
                 return MODULE.Response(404, {}, b"{}")
             return MODULE.Response(200, {}, json.dumps(self.release).encode())
+        if method == "GET" and path.endswith("/releases"):
+            if self.release_pages is None:
+                releases = [] if self.release is None else [self.release]
+            else:
+                page = int((query or {}).get("page", "1"))
+                releases = (
+                    self.release_pages[page - 1]
+                    if 0 < page <= len(self.release_pages)
+                    else []
+                )
+            return MODULE.Response(200, {}, json.dumps(releases).encode())
         if (
             method == "GET"
             and "/releases/" in path
@@ -296,6 +311,8 @@ class FakeTransport:
             )
             self.patch_attempts += 1
             self.release.update(data)
+            if self.placeholder_tag_after_patch:
+                self.release["tag_name"] = "untagged-1ad7e85bf1f24b041841"
             response = MODULE.Response(200, {}, json.dumps(self.release).encode())
             if self.fail_after_patch and self.patch_attempts == 1:
                 raise MODULE.TransportError(
@@ -587,6 +604,106 @@ class CoordinatorTests(unittest.TestCase):
         self.assertNotIn("DELETE", {call[0] for call in transport.calls})
         self.assertNotIn("?clobber=true", {call[1] for call in transport.calls})
         self.assertEqual(len(contents), len(NAMES))
+
+    def test_prepare_and_inspect_accept_immutable_draft_placeholder_tag(self) -> None:
+        plan_data = _plan()
+        plan = MODULE.ValidatedPlan.from_mapping(plan_data)
+        with tempfile.TemporaryDirectory() as directory:
+            staged = Path(directory)
+            _ = _staged(staged, plan_data)
+            transport = FakeTransport()
+            transport.placeholder_tag_after_patch = True
+            coordinator = MODULE.DraftReleaseCoordinator(
+                transport,
+                repository=plan.distribution_repository,
+                now=lambda: MODULE.parse_timestamp("2025-01-01T00:00:00Z"),
+                sleep=lambda _: None,
+            )
+            prepared = coordinator.prepare(
+                plan,
+                staged,
+                artifact_id=7,
+                artifact_digest="sha256:" + "e" * 64,
+                artifact_expires_at="2099-01-01T00:00:00Z",
+                public_run_id=88,
+                public_run_attempt=1,
+            )
+
+        inspect_transport = _verified_transport(plan)
+        assert inspect_transport.release is not None
+        inspect_transport.release["tag_name"] = "untagged-1ad7e85bf1f24b041841"
+        inspected = MODULE.DraftReleaseCoordinator(
+            inspect_transport,
+            repository=plan.distribution_repository,
+            now=lambda: MODULE.parse_timestamp("2025-01-01T00:00:00Z"),
+            sleep=lambda _: None,
+        ).inspect(plan.tag)
+
+        self.assertEqual(prepared["state"], "verified")
+        self.assertEqual(inspected["status"], "verified")
+
+    def test_placeholder_draft_discovery_reads_later_pages(self) -> None:
+        plan = MODULE.ValidatedPlan.from_mapping(_plan())
+        transport = _verified_transport(plan)
+        assert transport.release is not None
+        transport.release["tag_name"] = "untagged-1ad7e85bf1f24b041841"
+        transport.release_pages = [
+            [{"draft": False} for _ in range(100)],
+            [transport.release],
+        ]
+
+        inspected = MODULE.DraftReleaseCoordinator(
+            transport, repository=plan.distribution_repository
+        ).inspect(plan.tag)
+
+        self.assertEqual(inspected["status"], "verified")
+        release_list_calls = [
+            call
+            for call in transport.calls
+            if call[0] == "GET" and call[1].endswith("/releases")
+        ]
+        self.assertEqual(
+            [call[2] for call in release_list_calls],
+            [
+                {"per_page": "100", "page": "1"},
+                {"per_page": "100", "page": "2"},
+            ],
+        )
+
+    def test_placeholder_draft_discovery_rejects_cross_page_duplicates(self) -> None:
+        plan_data = _plan()
+        plan = MODULE.ValidatedPlan.from_mapping(plan_data)
+        with tempfile.TemporaryDirectory() as directory:
+            staged = Path(directory)
+            _ = _staged(staged, plan_data)
+            transport = _verified_transport(plan)
+            assert transport.release is not None
+            transport.release["tag_name"] = "untagged-1ad7e85bf1f24b041841"
+            duplicate = dict(transport.release)
+            duplicate["id"] = 2
+            duplicate["tag_name"] = "untagged-2ad7e85bf1f24b041842"
+            transport.release_pages = [
+                [transport.release, *({"draft": False} for _ in range(99))],
+                [duplicate],
+            ]
+            coordinator = MODULE.DraftReleaseCoordinator(
+                transport, repository=plan.distribution_repository
+            )
+
+            with self.assertRaisesRegex(
+                MODULE.ReleaseMismatchError, "multiple placeholder drafts"
+            ):
+                _ = coordinator.prepare(
+                    plan,
+                    staged,
+                    artifact_id=7,
+                    artifact_digest="sha256:" + "e" * 64,
+                    artifact_expires_at="2099-01-01T00:00:00Z",
+                    public_run_id=88,
+                    public_run_attempt=1,
+                )
+
+        self.assertFalse(any(call[0] == "POST" for call in transport.calls))
 
     def test_staged_symlink_is_rejected_before_mutation(self) -> None:
         plan_data = _plan()

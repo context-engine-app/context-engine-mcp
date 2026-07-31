@@ -182,6 +182,8 @@ class FakeTransport:
         self.stale_reconciliation_reads = 0
         self.reconciliation_release_bodies: list[bytes] = []
         self.reconciliation_asset_bodies: list[bytes] = []
+        self.release_pages: list[list[dict[str, object]]] | None = None
+        self.list_pages_requested: list[int] = []
 
     def request(
         self,
@@ -192,10 +194,25 @@ class FakeTransport:
         headers: Mapping[str, str] | None = None,
         body: bytes | None = None,
     ) -> draft.Response:
-        del query, headers
+        del headers
         self.calls.append((method, path, body))
         if method == "GET" and "/releases/tags/" in path:
+            if not path.endswith(f"/tags/{self.release['tag_name']}"):
+                return draft.Response(404, {}, b"{}")
             return draft.Response(200, {}, json.dumps(self.release).encode())
+        if method == "GET" and path.endswith("/releases"):
+            page = int((query or {}).get("page", "1"))
+            self.list_pages_requested.append(page)
+            releases = (
+                [self.release]
+                if self.release_pages is None
+                else (
+                    self.release_pages[page - 1]
+                    if 0 < page <= len(self.release_pages)
+                    else []
+                )
+            )
+            return draft.Response(200, {}, json.dumps(releases).encode())
         if method == "GET" and path.endswith("/assets"):
             if self.release["draft"] is False and self.reconciliation_asset_bodies:
                 return draft.Response(
@@ -222,6 +239,10 @@ class FakeTransport:
                 return draft.Response(200, {}, json.dumps(stale).encode())
             return draft.Response(200, {}, json.dumps(self.release).encode())
         if method == "PATCH" and path.endswith("/releases/9"):
+            patch = cast(
+                dict[str, object], draft.parse_json(body or b"{}", "publish patch")
+            )
+            self.release["tag_name"] = patch["tag_name"]
             self.release["draft"] = False
             self.release["immutable"] = True
             self.release["published_at"] = "2026-07-26T12:00:00Z"
@@ -265,7 +286,46 @@ class PublisherTests(unittest.TestCase):
         self.assertEqual(result["status"], "published")
         patches = [call for call in self.transport.calls if call[0] == "PATCH"]
         self.assertEqual(len(patches), 1)
-        self.assertEqual(patches[0][2], b'{"draft":false}')
+        self.assertEqual(patches[0][2], b'{"draft":false,"tag_name":"v1.2.3"}')
+
+    def test_publishes_immutable_placeholder_draft_with_final_tag(self) -> None:
+        self.transport.release["tag_name"] = "untagged-1ad7e85bf1f24b041841"
+
+        result = self.coordinator.publish(self.plan, draft_run_id=55)
+
+        self.assertEqual(result["status"], "published")
+        self.assertEqual(self.transport.release["tag_name"], self.plan.release.tag)
+        self.assertIn(
+            ("GET", "/repos/context-engine-app/context-engine-mcp/releases", None),
+            self.transport.calls,
+        )
+
+    def test_placeholder_publication_reads_later_release_pages(self) -> None:
+        self.transport.release["tag_name"] = "untagged-1ad7e85bf1f24b041841"
+        self.transport.release_pages = [
+            [{"draft": False} for _ in range(100)],
+            [self.transport.release],
+        ]
+
+        result = self.coordinator.publish(self.plan, draft_run_id=55)
+
+        self.assertEqual(result["status"], "published")
+        self.assertEqual(self.transport.list_pages_requested, [1, 2])
+
+    def test_placeholder_publication_rejects_cross_page_duplicates(self) -> None:
+        self.transport.release["tag_name"] = "untagged-1ad7e85bf1f24b041841"
+        duplicate = dict(self.transport.release)
+        duplicate["id"] = 10
+        duplicate["tag_name"] = "untagged-2ad7e85bf1f24b041842"
+        self.transport.release_pages = [
+            [self.transport.release, *({"draft": False} for _ in range(99))],
+            [duplicate],
+        ]
+
+        with self.assertRaises(publisher.ReleaseMismatchError):
+            _ = self.coordinator.publish(self.plan, draft_run_id=55)
+
+        self.assertFalse(any(call[0] == "PATCH" for call in self.transport.calls))
 
     def test_fresh_invocation_rejects_an_existing_published_release(self) -> None:
         self.transport.release.update(

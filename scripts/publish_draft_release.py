@@ -62,6 +62,9 @@ RELEASE_ASSETS_PATH_RE = re.compile(
 RELEASE_TAG_PATH_RE = re.compile(
     r"^/repos/context-engine-app/context-engine-mcp/releases/tags/(?:v|repository-bootstrap-v)(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$"
 )
+RELEASES_PATH_RE = re.compile(
+    r"^/repos/context-engine-app/context-engine-mcp/releases$"
+)
 MAX_RESPONSE_BYTES = 2 * 1024 * 1024
 RECONCILIATION_DELAYS_SECONDS = (0.0, 1.0, 2.0)
 
@@ -241,7 +244,8 @@ def assert_allowed_endpoint(method: str, path: str) -> None:
     allowed = (
         method == "GET"
         and (
-            RELEASE_TAG_PATH_RE.fullmatch(path) is not None
+            RELEASES_PATH_RE.fullmatch(path) is not None
+            or RELEASE_TAG_PATH_RE.fullmatch(path) is not None
             or RELEASE_PATH_RE.fullmatch(path) is not None
             or RELEASE_ASSETS_PATH_RE.fullmatch(path) is not None
         )
@@ -365,7 +369,11 @@ class Publisher:
         release = self._get_release_by_tag(plan.release.tag)
         snapshot = self._validate_draft(release, plan)
         path = self._release_path(snapshot.release_id)
-        body = b'{"draft":false}'
+        body = json.dumps(
+            {"draft": False, "tag_name": plan.release.tag},
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode()
         assert_allowed_endpoint("PATCH", path)
         try:
             response = self._transport.request(
@@ -441,7 +449,10 @@ class Publisher:
         target = self._text(release.get("target_commitish"), "release target")
         body = self._text(release.get("body"), "release body")
         if (
-            tag != plan.release.tag
+            (
+                tag != plan.release.tag
+                and draft.DRAFT_PLACEHOLDER_TAG_RE.fullmatch(tag) is None
+            )
             or name != plan.release.tag
             or target != plan.release.distribution_commit
         ):
@@ -468,7 +479,7 @@ class Publisher:
                 raise ReleaseMismatchError(f"draft marker differs for {key}")
         return _ReleaseSnapshot(
             release_id=release_id,
-            tag=tag,
+            tag=plan.release.tag,
             name=name,
             target=target,
             body=body,
@@ -553,12 +564,54 @@ class Publisher:
     def _get_release_by_tag(self, tag: str) -> Mapping[str, object]:
         encoded = urllib_parse.quote(tag, safe="")
         response = self._request("GET", f"{self._releases_path()}/tags/{encoded}")
+        if response.status == 404:
+            return self._get_placeholder_draft(tag)
         if response.status != 200:
             raise TransportError(
                 f"GitHub release request returned HTTP {response.status}",
                 ambiguous=False,
             )
         return self._response_object(response, "release response")
+
+    def _get_placeholder_draft(self, tag: str) -> Mapping[str, object]:
+        matches: list[Mapping[str, object]] = []
+        page = 1
+        while True:
+            response = self._request(
+                "GET",
+                self._releases_path(),
+                query={"per_page": "100", "page": str(page)},
+            )
+            if response.status != 200:
+                raise TransportError(
+                    f"GitHub releases request returned HTTP {response.status}",
+                    ambiguous=False,
+                )
+            decoded = draft.parse_json(response.body, "releases response")
+            if not isinstance(decoded, list):
+                raise ReleaseMismatchError("releases response is not an array")
+            releases = cast(list[object], decoded)
+            for index, value in enumerate(releases):
+                release = _mapping(value, f"release response entry {index}")
+                draft_tag = release.get("tag_name")
+                if (
+                    release.get("draft") is True
+                    and release.get("name") == tag
+                    and isinstance(draft_tag, str)
+                    and draft.DRAFT_PLACEHOLDER_TAG_RE.fullmatch(draft_tag) is not None
+                ):
+                    matches.append(release)
+            if len(releases) < 100:
+                break
+            page += 1
+        if len(matches) != 1:
+            raise ReleaseMismatchError(
+                "expected exactly one placeholder draft for the release title"
+            )
+        match = next(iter(matches), None)
+        if match is None:
+            raise ReleaseMismatchError("placeholder draft is missing")
+        return match
 
     def _get_release_by_id(self, release_id: int) -> Mapping[str, object]:
         response = self._request("GET", self._release_path(release_id))
@@ -569,9 +622,15 @@ class Publisher:
             )
         return self._response_object(response, "release reconciliation response")
 
-    def _request(self, method: str, path: str) -> draft.Response:
+    def _request(
+        self,
+        method: str,
+        path: str,
+        *,
+        query: Mapping[str, str] | None = None,
+    ) -> draft.Response:
         assert_allowed_endpoint(method, path)
-        return self._transport.request(method, path, query={"per_page": "100"})
+        return self._transport.request(method, path, query=query or {"per_page": "100"})
 
     @staticmethod
     def _response_object(response: draft.Response, label: str) -> Mapping[str, object]:

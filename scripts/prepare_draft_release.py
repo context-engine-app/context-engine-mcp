@@ -68,6 +68,7 @@ COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
 TAG_RE = re.compile(
     r"^(?:v|repository-bootstrap-v)((?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*))$"
 )
+DRAFT_PLACEHOLDER_TAG_RE = re.compile(r"^untagged-[0-9a-f]+$")
 ARTIFACT_DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
 ASSET_DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
 MIN_MUTATION_LEAD_SECONDS = 3600
@@ -83,6 +84,12 @@ def _is_safe_flat_asset_name(name: str) -> bool:
         and "/" not in name
         and "\\" not in name
         and all(ord(character) >= 0x20 and ord(character) != 0x7F for character in name)
+    )
+
+
+def _is_expected_draft_tag(value: object, expected: str) -> bool:
+    return value == expected or (
+        isinstance(value, str) and DRAFT_PLACEHOLDER_TAG_RE.fullmatch(value) is not None
     )
 
 
@@ -234,6 +241,7 @@ def _path_allowed(method: str, path: str) -> bool:
     escaped_id = r"[0-9]+"
     route_patterns = (
         ("GET", r"^/repos/[^/]+/[^/]+/releases/tags/[^/]+$"),
+        ("GET", r"^/repos/[^/]+/[^/]+/releases$"),
         ("POST", r"^/repos/[^/]+/[^/]+/releases$"),
         ("GET", rf"^/repos/[^/]+/[^/]+/releases/{escaped_id}$"),
         ("PATCH", rf"^/repos/[^/]+/[^/]+/releases/{escaped_id}$"),
@@ -918,7 +926,10 @@ class DraftReleaseCoordinator:
             raise PublishedReleaseError("release has a publication timestamp")
         if release.get("prerelease") is not False:
             raise ReleaseMismatchError("release must not be a prerelease")
-        if release.get("tag_name") != tag or release.get("name") != tag:
+        if (
+            not _is_expected_draft_tag(release.get("tag_name"), tag)
+            or release.get("name") != tag
+        ):
             raise ReleaseMismatchError(
                 "release tag and title must equal the requested tag"
             )
@@ -1125,15 +1136,56 @@ class DraftReleaseCoordinator:
             response = self._read_request("GET", path)
         except HttpError as error:
             if error.status == 404:
-                return None
+                return self._get_placeholder_draft(tag)
             raise
         if response.status == 404:
-            return None
+            return self._get_placeholder_draft(tag)
         if response.status != 200:
             raise HttpError(
                 response.status, headers=response.headers, body=response.body
             )
         return self._object_response(response, "release")
+
+    def _get_placeholder_draft(self, tag: str) -> dict[str, object] | None:
+        matches: list[dict[str, object]] = []
+        page = 1
+        while True:
+            response = self._read_request(
+                "GET",
+                self._releases_path(),
+                query={"per_page": "100", "page": str(page)},
+            )
+            if response.status != 200:
+                raise HttpError(
+                    response.status, headers=response.headers, body=response.body
+                )
+            try:
+                decoded = parse_json(response.body, "GitHub releases response")
+            except CoordinatorError as error:
+                raise ReleaseMismatchError(
+                    "GitHub releases response is not JSON"
+                ) from error
+            if not isinstance(decoded, list):
+                raise ReleaseMismatchError("GitHub releases response is not an array")
+            releases = cast(list[object], decoded)
+            for index, value in enumerate(releases):
+                release = dict(_json_mapping(value, f"release response entry {index}"))
+                draft_tag = release.get("tag_name")
+                if (
+                    release.get("draft") is True
+                    and release.get("name") == tag
+                    and isinstance(draft_tag, str)
+                    and DRAFT_PLACEHOLDER_TAG_RE.fullmatch(draft_tag) is not None
+                ):
+                    matches.append(release)
+            if len(releases) < 100:
+                break
+            page += 1
+        if len(matches) > 1:
+            raise ReleaseMismatchError(
+                "multiple placeholder drafts have the requested release title"
+            )
+        return next(iter(matches), None)
 
     def _create_release(
         self, plan: ValidatedPlan, body: str, expiry: datetime
@@ -1426,7 +1478,7 @@ class DraftReleaseCoordinator:
             raise PublishedReleaseError("release has a publication timestamp")
         if release.get("prerelease") is not False:
             raise ReleaseMismatchError("release must not be a prerelease")
-        if release.get("tag_name") != plan.tag:
+        if not _is_expected_draft_tag(release.get("tag_name"), plan.tag):
             raise ReleaseMismatchError("release tag does not match validated plan")
         if release.get("name") != plan.tag:
             raise ReleaseMismatchError("release title does not equal the exact tag")
