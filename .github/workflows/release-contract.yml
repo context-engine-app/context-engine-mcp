@@ -54,10 +54,10 @@ jobs:
           expected = {
               ".github/workflows/publish-draft-release.yml": "ca36579cdbf3440bc4339486d31901c2f46fbd9089c858964b9c8ea20db0e0ed",
               "schemas/release-manifest.schema.json": "2e398c70916e86ab58734cc77622bdf7e04e756c1ebdef73e9cc903ffb62baa8",
-              "schemas/release-provenance.schema.json": "c13bf530c6fe4befc00b398c2274b3ffeb7e6cbcfb78c38bc1a5da0b8bf4db60",
+              "schemas/release-provenance.schema.json": "5238550f5abd2d36dbb06eb0f50bf2a069791e69bffcafda3cb4f09f17015d8b",
               "schemas/channel-candidates.schema.json": "7ce660193dc346c70fd0c8db57bd1d91d1743d3b6059959b96f76443d037d57a",
               "schemas/staging-attestation.schema.json": "b8f1017ce278f762772e236eb08bf18a3c52b65f0e1e30c1d27cace51d305a6d",
-              "scripts/validate_release_provenance.py": "5e20c349dcfa67a1febef81f1e358b2b079f835c90c9e8e3b1119da6ad436816",
+              "scripts/validate_release_provenance.py": "445468f92c7e96b2f6ea13aa7e5e7d548365d2a9f9f45d82f66f762966ebc51f",
               "scripts/validate_channel_candidates.py": "db9bdeb24d84f5f3c6c61302966d6e1f1cfadcae23afa5669a836bc71b68bbd9",
               "scripts/publish_draft_release.py": "ff15dab16e604b54349f8806d826a8d0e087af35e40a96ef5ed2ee73896e7d8e",
               "scripts/check_publish_draft_workflow.py": "ea152045a07eb2606aac716258a98ab5cd2128cd6997056d2c58a276d3b8f3af",

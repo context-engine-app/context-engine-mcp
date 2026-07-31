@@ -10,10 +10,12 @@ import tarfile
 import tempfile
 import unittest
 from copy import deepcopy
-from collections.abc import Callable, Mapping
+from collections.abc import Callable, Iterable, Mapping
 from pathlib import Path
-from typing import cast
+from typing import Protocol, cast
 from unittest.mock import patch
+
+import jsonschema
 
 from scripts import validate_channel_candidates
 from scripts import validate_release_provenance
@@ -50,6 +52,16 @@ ValidateCommon = Callable[
     tuple[dict[str, object], bytes, dict[str, tuple[str, int]], str],
 ]
 ExpectedAssetNames = Callable[[Mapping[str, object]], set[str]]
+
+
+class _SchemaError(Protocol):
+    message: str
+
+
+class _SchemaValidator(Protocol):
+    def __init__(self, schema: Mapping[str, object]) -> None: ...
+
+    def iter_errors(self, instance: object) -> Iterable[_SchemaError]: ...
 
 
 def _canonical_sha256(value: object) -> str:
@@ -122,7 +134,7 @@ def _repository_bootstrap_manifest() -> dict[str, object]:
         "schemas": {
             "release_provenance": {
                 "path": "packaging/release-provenance.schema.json",
-                "sha256": "c13bf530c6fe4befc00b398c2274b3ffeb7e6cbcfb78c38bc1a5da0b8bf4db60",
+                "sha256": "5238550f5abd2d36dbb06eb0f50bf2a069791e69bffcafda3cb4f09f17015d8b",
             },
         },
         "source_workflows": {"release": source_workflow},
@@ -1696,7 +1708,7 @@ class PortableValidatorLayoutTests(unittest.TestCase):
         )
         self.assertEqual(
             validate_release_provenance.PROVENANCE_SCHEMA_SHA256,
-            "c13bf530c6fe4befc00b398c2274b3ffeb7e6cbcfb78c38bc1a5da0b8bf4db60",
+            "5238550f5abd2d36dbb06eb0f50bf2a069791e69bffcafda3cb4f09f17015d8b",
         )
         self.assertEqual(
             validate_release_provenance.STAGING_SCHEMA_SHA256,
@@ -1710,6 +1722,37 @@ class PortableValidatorLayoutTests(unittest.TestCase):
             validate_channel_candidates.MANIFEST_SCHEMA_SHA256,
             "2e398c70916e86ab58734cc77622bdf7e04e756c1ebdef73e9cc903ffb62baa8",
         )
+
+    def test_provenance_schema_accepts_descriptive_tool_versions(self) -> None:
+        raw_schema = cast(
+            object,
+            json.loads(
+                (
+                    Path(__file__).resolve().parents[2]
+                    / "schemas"
+                    / "release-provenance.schema.json"
+                ).read_text(encoding="utf-8")
+            ),
+        )
+        schema = cast(dict[str, object], raw_schema)
+        definitions = cast(dict[str, object], schema["$defs"])
+        tool_version = cast(dict[str, object], definitions["toolVersion"])
+        validator_type = cast(type[_SchemaValidator], jsonschema.Draft202012Validator)
+        validator = validator_type(tool_version)
+
+        valid = "3.11.13 (main, Oct 7 2025, 15:34:32) [Clang 20.1.4 ]"
+        self.assertEqual(list(validator.iter_errors(valid)), [])
+        for invalid in (
+            "",
+            " 3.11.13",
+            "3.11.13 ",
+            "3.11.13\tCPython",
+            "3.11.13\n",
+            "3.11.13\x00CPython",
+            "3.11.13\x7fCPython",
+            "3.11.13\x85CPython",
+        ):
+            self.assertNotEqual(list(validator.iter_errors(invalid)), [])
 
     def test_gnu_archive_without_extensions_is_rejected(self) -> None:
         member_name = "formula/context-engine.rb"

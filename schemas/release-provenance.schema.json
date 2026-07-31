@@ -233,7 +233,7 @@
             "required": ["name", "version", "sha256"],
             "properties": {
               "name": { "type": "string", "pattern": "^[A-Za-z0-9._+-]+$" },
-              "version": { "type": "string", "pattern": "^[^\\s]+$" },
+              "version": { "$ref": "#/$defs/toolVersion" },
               "sha256": { "$ref": "#/$defs/sha256" }
             }
           }
@@ -307,6 +307,10 @@
   ],
   "$defs": {
     "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "toolVersion": {
+      "type": "string",
+      "pattern": "^[^\\s\\u0000-\\u001F\\u007F-\\u009F]+(?: +[^\\s\\u0000-\\u001F\\u007F-\\u009F]+)*(?![\\s\\S])"
+    },
     "commit": { "type": "string", "pattern": "^[0-9a-fA-F]{40}$" },
     "target": {
       "type": "string",
@@ -423,7 +427,7 @@
             "required": ["name", "version", "sha256"],
             "properties": {
               "name": { "type": "string", "pattern": "^[A-Za-z0-9._+-]+$" },
-              "version": { "type": "string", "pattern": "^[^\\s]+$" },
+              "version": { "$ref": "#/$defs/toolVersion" },
               "sha256": { "$ref": "#/$defs/sha256" }
             }
           }
