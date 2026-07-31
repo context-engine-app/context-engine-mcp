@@ -575,6 +575,10 @@ def _check_command_requirements(steps: Sequence[Json], errors: list[str]) -> Non
             "workflow must bind plan, manifest, provenance, attestation, and runtime workflow identity"
         )
     binding_index = binding_indices[0] if binding_indices else -1
+    if binding_index >= 0:
+        attestation_binding = commands[binding_index].rsplit("jq -e", maxsplit=1)[-1]
+        if ".distribution_tag_target" in attestation_binding:
+            errors.append("staging attestation does not define distribution_tag_target")
     expiry_indices = [
         index
         for index, command in enumerate(commands)

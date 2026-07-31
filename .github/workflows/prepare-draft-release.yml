@@ -406,7 +406,6 @@ jobs:
             --argjson source_run_attempt "$EXPECTED_SOURCE_RUN_ATTEMPT" \
             '.source_commit == $source_commit and
              .distribution_commit == $runtime_commit and
-             .distribution_tag_target == $runtime_commit and
              .workflow_bindings["source-release"].path == ".github/workflows/release.yml" and
              .workflow_bindings["source-release"].commit == $source_commit and
              .workflow_bindings["source-release"].sha256 == $source_workflow_sha256 and

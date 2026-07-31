@@ -135,6 +135,23 @@ class PrepareDraftWorkflowCheckerTests(unittest.TestCase):
         )
         self.assertTrue(any("flatten" in error for error in errors))
 
+    def test_staging_attestation_must_not_require_unmodeled_tag_target(self) -> None:
+        errors = self._check_mutation(
+            lambda source: source.replace(
+                ".source_commit and .distribution_commit' "
+                + "staged-release/staging-attestation.json",
+                ".source_commit and .distribution_commit and "
+                + ".distribution_tag_target' "
+                + "staged-release/staging-attestation.json",
+            )
+        )
+        self.assertTrue(
+            any(
+                "staging attestation" in error and "distribution_tag_target" in error
+                for error in errors
+            )
+        )
+
     def test_tag_ref_peel_is_required(self) -> None:
         errors = self._check_mutation(
             lambda source: source.replace(

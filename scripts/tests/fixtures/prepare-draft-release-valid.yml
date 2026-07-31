@@ -156,7 +156,7 @@ jobs:
           jq -e '.source_workflow and .public_workflow and .distribution_commit and .distribution_tag_target' validated-plan.json
           jq -e '.source_workflows.release and .workflow_bindings.draft and .distribution_commit and .distribution_tag_target' staged-release/release-manifest.json
           jq -e '.workflows["source-release"] and .workflows["public-draft"] and .source_commit and .distribution_commit and .distribution_tag_target' staged-release/release-provenance.json
-          jq -e '.workflow_bindings["source-release"] and .workflow_bindings["public-draft"] and .run.id and .attempt and .source_commit and .distribution_commit and .distribution_tag_target' staged-release/staging-attestation.json
+          jq -e '.workflow_bindings["source-release"] and .workflow_bindings["public-draft"] and .run.id and .attempt and .source_commit and .distribution_commit' staged-release/staging-attestation.json
           printf 'validated-plan.json release-provenance.json staging-attestation.json source_workflow source_commit workflow_bindings.draft distribution_commit distribution_tag_target GITHUB_SHA RUNTIME_WORKFLOW_SHA256 run.id attempt SOURCE_RUN_ID\n'
 
       - name: Expiry recheck
