@@ -301,8 +301,14 @@ class GitHubClient:
         query: Mapping[str, str] | None = None,
         body: bytes | None = None,
         content_type: str = "application/vnd.github+json",
+        base_url: str = "https://api.github.com",
     ) -> tuple[int, Mapping[str, str], bytes]:
-        url = f"https://api.github.com{path}"
+        if base_url not in (
+            "https://api.github.com",
+            "https://uploads.github.com",
+        ):
+            raise PublishError("unsupported GitHub API origin")
+        url = f"{base_url}{path}"
         if query:
             url += "?" + urllib.parse.urlencode(query)
         headers = {
@@ -444,6 +450,7 @@ class GitHubClient:
             query={"name": name},
             body=content,
             content_type="application/octet-stream",
+            base_url="https://uploads.github.com",
         )
         if status not in {200, 201}:
             raise PublishError(f"GitHub asset upload failed with HTTP {status}")

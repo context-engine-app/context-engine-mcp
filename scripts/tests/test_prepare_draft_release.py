@@ -189,6 +189,34 @@ class PublisherTests(unittest.TestCase):
         self.assertIsInstance(body, dict)
         self.assertNotIn("target_commitish", cast(dict[str, object], body))
 
+    def test_asset_upload_uses_github_upload_origin(self) -> None:
+        client = publisher.GitHubClient(token="test")
+        with mock.patch.object(
+            client,
+            "request",
+            return_value=(201, {}, b'{"name":"asset","state":"uploaded"}'),
+        ) as request:
+            _ = client.upload(7, "asset", b"payload")
+        request.assert_called_once_with(
+            "POST",
+            "/repos/context-engine-app/context-engine-mcp/releases/7/assets",
+            query={"name": "asset"},
+            body=b"payload",
+            content_type="application/octet-stream",
+            base_url="https://uploads.github.com",
+        )
+
+    def test_request_rejects_an_unknown_authenticated_origin(self) -> None:
+        client = publisher.GitHubClient(token="test")
+        with mock.patch("urllib.request.urlopen") as urlopen:
+            with self.assertRaisesRegex(
+                publisher.PublishError, "unsupported GitHub API origin"
+            ):
+                _ = client.request(
+                    "GET", "/repos/example", base_url="https://example.com"
+                )
+        urlopen.assert_not_called()
+
     def test_publish_uses_the_prevalidated_tag_as_release_identity(self) -> None:
         root, raw_plan = _fixture()
         plan_path = root.parent / "plan.json"
