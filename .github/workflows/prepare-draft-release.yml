@@ -1,12 +1,12 @@
-name: Prepare draft release
+name: Publish release
 
-run-name: Prepare ${{ inputs.tag }} from source run ${{ inputs.source_run_id }}
+run-name: Publish ${{ inputs.tag }} from source run ${{ inputs.source_run_id }}
 
 on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Validated source release tag
+        description: Stable release tag to publish
         required: true
         type: string
       source_run_id:
@@ -15,34 +15,34 @@ on:
         type: string
 
 permissions:
-  contents: read # Check out the public workflow tools and inspect draft releases.
-  actions: read # Revalidate the exact private release workflow run and artifact.
+  contents: read
+  actions: read
+  attestations: read
 
 concurrency:
-  group: release-draft-${{ inputs.tag }}
+  group: release-publish-${{ inputs.tag }}
   cancel-in-progress: false
 
 jobs:
-  release-draft:
-    name: Prepare and verify public draft
-    environment: release-draft
+  release-publish:
+    name: Validate and publish release
+    environment: release-publish
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
       - name: Check out public workflow tools
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v4.2.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
 
-      - name: Validate protected inputs and runtime binding
-        id: runtime
+      - name: Validate protected inputs
         env:
           TAG_NAME: ${{ inputs.tag }}
           SOURCE_RUN_ID: ${{ inputs.source_run_id }}
         run: |
           set -euo pipefail
           if [[ ! "$TAG_NAME" =~ ^(v|repository-bootstrap-v)(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
-            echo "::error::release tag must be a stable or repository-bootstrap version"
+            echo "::error::release tag must be stable"
             exit 1
           fi
           if [[ ! "$SOURCE_RUN_ID" =~ ^[1-9][0-9]*$ ]]; then
@@ -50,11 +50,8 @@ jobs:
             exit 1
           fi
           test "$GITHUB_REPOSITORY" = "context-engine-app/context-engine-mcp"
-          test "$GITHUB_REF" = "refs/tags/$TAG_NAME"
-          test "$GITHUB_WORKFLOW_REF" = "$GITHUB_REPOSITORY/.github/workflows/prepare-draft-release.yml@refs/tags/$TAG_NAME"
           test "$GITHUB_SHA" = "$(git rev-parse HEAD)"
-          workflow_sha256=$(sha256sum .github/workflows/prepare-draft-release.yml | cut -d' ' -f1)
-          printf 'workflow_sha256=%s\n' "$workflow_sha256" >> "$GITHUB_OUTPUT"
+          test "$GITHUB_REF" = "refs/heads/main"
 
       - name: Set up pinned uv and Python
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
@@ -74,86 +71,9 @@ jobs:
         with:
           cosign-release: v3.0.6
 
-      - name: Inspect and validate existing draft read-only
-        id: preflight
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TAG_NAME: ${{ inputs.tag }}
-          SOURCE_REPOSITORY: context-engine-app/context-engine
-          RUNTIME_WORKFLOW_SHA256: ${{ steps.runtime.outputs.workflow_sha256 }}
-          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
-        run: |
-          set -euo pipefail
-          inspect_file="$RUNNER_TEMP/preflight-draft.json"
-          assets_dir="$RUNNER_TEMP/preflight-assets"
-          marker_file="$RUNNER_TEMP/preflight-marker.json"
-          result=$(.venv/bin/python scripts/prepare_draft_release.py inspect --tag "$TAG_NAME" --repository "$GITHUB_REPOSITORY" --output-dir "$assets_dir")
-          printf '%s\n' "$result" > "$inspect_file"
-          status=$(jq -er '.status' "$inspect_file")
-          case "$status" in
-            missing)
-              printf 'skip_source=false\nstatus=missing\n' >> "$GITHUB_OUTPUT"
-              ;;
-            partial)
-              jq -e --arg tag "$TAG_NAME" '.tag == $tag and (.marker | type) == "object" and (.asset_count | type) == "number"' "$inspect_file" > /dev/null
-              jq -e '.marker' "$inspect_file" > "$marker_file"
-              printf 'skip_source=false\nstatus=partial\n' >> "$GITHUB_OUTPUT"
-              ;;
-            verified)
-              jq -e --arg tag "$TAG_NAME" '.tag == $tag and (.marker | type) == "object" and (.asset_count | type) == "number"' "$inspect_file" > /dev/null
-              jq -e '.marker' "$inspect_file" > "$marker_file"
-              source_commit=$(jq -er '.source_commit' "$marker_file")
-              .venv/bin/python scripts/validate_release_provenance.py public-draft --root "$assets_dir" --schemas schemas --marker "$marker_file" --output-plan "$RUNNER_TEMP/preflight-plan.json"
-              jq -e \
-                --arg tag "$TAG_NAME" \
-                --arg runtime_commit "$GITHUB_SHA" \
-                --arg runtime_workflow_sha256 "$RUNTIME_WORKFLOW_SHA256" \
-                --argjson source_run_id "$SOURCE_RUN_ID" \
-                '.tag == $tag and
-                 .source_run.id == $source_run_id and
-                 .public_workflow.path == ".github/workflows/prepare-draft-release.yml" and
-                 .public_workflow.commit == $runtime_commit and
-                 .public_workflow.sha256 == $runtime_workflow_sha256 and
-                 .distribution_commit == $runtime_commit and
-                 .distribution_tag_target == $runtime_commit' \
-                "$RUNNER_TEMP/preflight-plan.json" > /dev/null
-              profile=$(jq -er '.profile' "$RUNNER_TEMP/preflight-plan.json")
-              case "$profile" in
-                desktop|desktop-linux)
-                  .venv/bin/python scripts/validate_channel_candidates.py --root "$assets_dir" --schemas schemas
-                  ;;
-                repository-bootstrap)
-                  test ! -e "$assets_dir/channel-candidates.json"
-                  test ! -e "$assets_dir/channel-candidates.tar.gz"
-                  ;;
-                *)
-                  echo "::error::unsupported release profile: $profile"
-                  exit 1
-                  ;;
-              esac
-              certificate_identity="https://github.com/${SOURCE_REPOSITORY}/.github/workflows/release.yml@refs/tags/${TAG_NAME}"
-              cosign verify-blob \
-                --certificate-identity "$certificate_identity" \
-                --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-                --certificate-github-workflow-repository "$SOURCE_REPOSITORY" \
-                --certificate-github-workflow-ref "refs/tags/${TAG_NAME}" \
-                --certificate-github-workflow-sha "$source_commit" \
-                --certificate-github-workflow-name Release \
-                --certificate-github-workflow-trigger push \
-                --bundle "$assets_dir/SHA256SUMS.sigstore.json" \
-                "$assets_dir/SHA256SUMS"
-              printf 'skip_source=true\nstatus=verified\n' >> "$GITHUB_OUTPUT"
-              ;;
-            *)
-              echo "::error::unexpected coordinator inspect status: $status"
-              exit 1
-              ;;
-          esac
-
       - name: Create private reader App token
         id: artifact-reader
-        if: ${{ steps.preflight.outputs.skip_source != 'true' }}
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v2.2.0
         with:
           client-id: ${{ vars.ARTIFACT_READER_APP_CLIENT_ID }}
           private-key: ${{ secrets.ARTIFACT_READER_APP_PRIVATE_KEY }}
@@ -164,7 +84,6 @@ jobs:
 
       - name: Verify source run and staging artifact
         id: source-artifact
-        if: ${{ steps.preflight.outputs.skip_source != 'true' }}
         env:
           GH_TOKEN: ${{ steps.artifact-reader.outputs.token }}
           SOURCE_REPOSITORY: context-engine-app/context-engine
@@ -181,34 +100,11 @@ jobs:
           gh api -H "X-GitHub-Api-Version: 2026-03-10" "repos/$SOURCE_REPOSITORY/actions/runs/$SOURCE_RUN_ID" > "$run_json"
           gh api -H "X-GitHub-Api-Version: 2026-03-10" "repos/$SOURCE_REPOSITORY/actions/runs/$SOURCE_RUN_ID/artifacts" > "$artifacts_json"
           gh api -H "X-GitHub-Api-Version: 2026-03-10" "repos/$SOURCE_REPOSITORY/git/ref/tags/$TAG_NAME" > "$tag_ref_json"
-
           source_repository_id=$(jq -er '.id | select(type == "number" and . > 0)' "$repository_json")
-          expected_head_sha=$(jq -er '.head_sha | select(type == "string" and test("^[0-9a-f]{40}$"))' "$run_json")
-          jq -e \
-            --arg tag "$TAG_NAME" \
-            --arg repository "$SOURCE_REPOSITORY" \
-            --argjson source_run_id "$SOURCE_RUN_ID" \
-            --argjson source_repository_id "$source_repository_id" \
-            '.id == $source_run_id and
-             (.head_sha | type) == "string" and
-             .name == "Release" and
-             .path == ".github/workflows/release.yml" and
-             .event == "push" and
-             .status == "completed" and
-             .conclusion == "success" and
-             .head_branch == $tag and
-             .head_repository.full_name == $repository and
-             .repository.full_name == $repository and
-             .head_repository.id == $source_repository_id and
-             .repository.id == $source_repository_id' \
-            "$run_json" > /dev/null
-
-          jq -e \
-            --arg expected_ref "refs/tags/$TAG_NAME" \
-            '.ref == $expected_ref and
-             (.object.sha | type) == "string" and
-             (.object.type == "commit" or .object.type == "tag")' \
-            "$tag_ref_json" > /dev/null
+          source_commit=$(jq -er '.head_sha | select(type == "string" and test("^[0-9a-f]{40}$"))' "$run_json")
+          jq -e --arg tag "$TAG_NAME" --arg repository "$SOURCE_REPOSITORY" --argjson run_id "$SOURCE_RUN_ID" --argjson repository_id "$source_repository_id" \
+            '.id == $run_id and .name == "Release" and .path == ".github/workflows/release.yml" and .event == "push" and .status == "completed" and .conclusion == "success" and .head_branch == $tag and .head_repository.full_name == $repository and .repository.full_name == $repository and .head_repository.id == $repository_id and .repository.id == $repository_id' "$run_json" > /dev/null
+          jq -e --arg expected_ref "refs/tags/$TAG_NAME" '.ref == $expected_ref and (.object.sha | type) == "string" and (.object.type == "commit" or .object.type == "tag")' "$tag_ref_json" > /dev/null
           tag_object_type=$(jq -er '.object.type' "$tag_ref_json")
           tag_object_sha=$(jq -er '.object.sha | select(test("^[0-9a-f]{40}$"))' "$tag_ref_json")
           if [[ "$tag_object_type" == "tag" ]]; then
@@ -217,51 +113,19 @@ jobs:
           else
             tag_commit_sha="$tag_object_sha"
           fi
-          test "$tag_commit_sha" = "$expected_head_sha"
-
-          now=$(date -u +%s)
-          artifact=$(jq -e \
-            --argjson source_run_id "$SOURCE_RUN_ID" \
-            --arg expected_head_sha "$expected_head_sha" \
-            --arg tag "$TAG_NAME" \
-            --argjson source_repository_id "$source_repository_id" \
-            --argjson now "$now" \
-            '[ .artifacts[] |
-               select(.name == "staging-envelope" and
-                      (.id | type) == "number" and .id > 0 and
-                      (.size_in_bytes | type) == "number" and .size_in_bytes > 0 and
-                      (.digest | type) == "string" and (.digest | test("^sha256:[0-9a-f]{64}$")) and
-                      .expired == false and
-                      (.expires_at | fromdateiso8601) >= ($now + 3600) and
-                      .workflow_run.id == $source_run_id and
-                      .workflow_run.head_sha == $expected_head_sha and
-                      .workflow_run.head_branch == $tag and
-                      .workflow_run.repository_id == $source_repository_id and
-                      .workflow_run.head_repository_id == $source_repository_id) ] |
-             if length == 1 then .[0] else error("staging artifact identity or expiry mismatch") end' \
-            "$artifacts_json")
-          artifact_id=$(jq -er '.id | select(type == "number" and . > 0)' <<< "$artifact")
-          artifact_digest=$(jq -er '.digest | select(test("^sha256:[0-9a-f]{64}$"))' <<< "$artifact")
-          artifact_expires_at=$(jq -er '.expires_at | strings' <<< "$artifact")
-          source_run_attempt=$(jq -er '.run_attempt | select(type == "number" and . > 0)' "$run_json")
-
-          workflow_response=$(gh api -H "X-GitHub-Api-Version: 2026-03-10" "repos/$SOURCE_REPOSITORY/contents/.github/workflows/release.yml?ref=$expected_head_sha")
-          jq -e '.path == ".github/workflows/release.yml" and .encoding == "base64" and (.content | type) == "string"' <<< "$workflow_response" > /dev/null
-          jq -r '.content' <<< "$workflow_response" | tr -d '\n' | base64 --decode > "$RUNNER_TEMP/source-release.yml"
-          source_workflow_sha256=$(sha256sum "$RUNNER_TEMP/source-release.yml" | cut -d' ' -f1)
-
+          test "$tag_commit_sha" = "$source_commit"
+          artifact=$(jq -e --argjson run_id "$SOURCE_RUN_ID" --arg source_commit "$source_commit" --arg tag "$TAG_NAME" --argjson repository_id "$source_repository_id" \
+            '[.artifacts[] | select(.name == "staging-envelope" and (.id | type) == "number" and .id > 0 and (.size_in_bytes | type) == "number" and .size_in_bytes > 0 and (.digest | type) == "string" and (.digest | test("^sha256:[0-9a-f]{64}$")) and .expired == false and .workflow_run.id == $run_id and .workflow_run.head_sha == $source_commit and .workflow_run.head_branch == $tag and .workflow_run.repository_id == $repository_id and .workflow_run.head_repository_id == $repository_id)] | if length == 1 then .[0] else error("staging artifact identity mismatch") end' "$artifacts_json")
           {
-            printf 'artifact_id=%s\n' "$artifact_id"
-            printf 'artifact_digest=%s\n' "$artifact_digest"
-            printf 'artifact_expires_at=%s\n' "$artifact_expires_at"
-            printf 'source_commit=%s\n' "$expected_head_sha"
-            printf 'source_run_attempt=%s\n' "$source_run_attempt"
-            printf 'source_workflow_sha256=%s\n' "$source_workflow_sha256"
+            printf 'artifact_id=%s\n' "$(jq -er '.id' <<<"$artifact")"
+            printf 'artifact_digest=%s\n' "$(jq -er '.digest' <<<"$artifact")"
+            printf 'artifact_expires_at=%s\n' "$(jq -er '.expires_at' <<<"$artifact")"
+            printf 'source_commit=%s\n' "$source_commit"
+            printf 'source_run_attempt=%s\n' "$(jq -er '.run_attempt' "$run_json")"
           } >> "$GITHUB_OUTPUT"
 
       - name: Download exact private staging artifact
-        if: ${{ steps.preflight.outputs.skip_source != 'true' }}
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v7.0.0
         with:
           artifact-ids: ${{ steps.source-artifact.outputs.artifact_id }}
           merge-multiple: true
@@ -271,250 +135,69 @@ jobs:
           run-id: ${{ inputs.source_run_id }}
 
       - name: Revoke private reader token
-        if: ${{ always() && steps.preflight.outputs.skip_source != 'true' && steps.artifact-reader.outputs.token != '' }}
+        if: ${{ always() && steps.artifact-reader.outputs.token != '' }}
         env:
           GH_TOKEN: ${{ steps.artifact-reader.outputs.token }}
         run: |
           gh api --method DELETE -H "X-GitHub-Api-Version: 2026-03-10" /installation/token
 
-      - name: Validate portable staging provenance
-        if: ${{ steps.preflight.outputs.skip_source != 'true' }}
-        run: .venv/bin/python scripts/validate_release_provenance.py staging --root staged-release --schemas schemas --output-plan validated-plan.json
-
-      - name: Validate portable channel candidates
-        if: ${{ steps.preflight.outputs.skip_source != 'true' }}
+      - name: Validate staging and candidate assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG_NAME: ${{ inputs.tag }}
+          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+          SOURCE_COMMIT: ${{ steps.source-artifact.outputs.source_commit }}
         run: |
           set -euo pipefail
+          .venv/bin/python scripts/validate_release_provenance.py staging --root staged-release --schemas schemas --output-plan validated-plan.json
           profile=$(jq -er '.profile' validated-plan.json)
           case "$profile" in
-            desktop|desktop-linux)
-              .venv/bin/python scripts/validate_channel_candidates.py --root staged-release --schemas schemas
-              ;;
-            repository-bootstrap)
-              test ! -e staged-release/channel-candidates.json
-              test ! -e staged-release/channel-candidates.tar.gz
-              ;;
-            *)
-              echo "::error::unsupported release profile: $profile"
-              exit 1
-              ;;
+            desktop|desktop-linux) .venv/bin/python scripts/validate_channel_candidates.py --root staged-release --schemas schemas ;;
+            repository-bootstrap) test ! -e staged-release/channel-candidates.json && test ! -e staged-release/channel-candidates.tar.gz ;;
+            *) echo "::error::unsupported profile: $profile"; exit 1 ;;
           esac
+          jq -e --arg tag "$TAG_NAME" --arg source_commit "$SOURCE_COMMIT" --argjson source_run_id "$SOURCE_RUN_ID" \
+            '.tag == $tag and .source_commit == $source_commit and .source_run.id == $source_run_id and .source_repository == "context-engine-app/context-engine" and .distribution_repository == "context-engine-app/context-engine-mcp" and .public_workflow.path == ".github/workflows/prepare-draft-release.yml"' validated-plan.json > /dev/null
+          distribution_commit=$(jq -er '.distribution_commit' validated-plan.json)
+          public_ref=$(gh api -H "X-GitHub-Api-Version: 2026-03-10" "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG_NAME")
+          public_type=$(jq -er '.object.type' <<<"$public_ref")
+          public_sha=$(jq -er '.object.sha' <<<"$public_ref")
+          if [[ "$public_type" == "tag" ]]; then
+            public_sha=$(gh api -H "X-GitHub-Api-Version: 2026-03-10" "repos/$GITHUB_REPOSITORY/git/tags/$public_sha" | jq -er '.object.sha')
+          fi
+          test "$public_sha" = "$distribution_commit"
 
       - name: Verify signed staging checksums
-        if: ${{ steps.preflight.outputs.skip_source != 'true' }}
         env:
           SOURCE_COMMIT: ${{ steps.source-artifact.outputs.source_commit }}
-          SOURCE_REPOSITORY: context-engine-app/context-engine
-          TAG_NAME: ${{ inputs.tag }}
-        run: |
-          certificate_identity="https://github.com/${SOURCE_REPOSITORY}/.github/workflows/release.yml@refs/tags/${TAG_NAME}"
-          cosign verify-blob \
-            --certificate-identity "$certificate_identity" \
-            --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-            --certificate-github-workflow-repository "$SOURCE_REPOSITORY" \
-            --certificate-github-workflow-ref "refs/tags/${TAG_NAME}" \
-            --certificate-github-workflow-sha "$SOURCE_COMMIT" \
-            --certificate-github-workflow-name Release \
-            --certificate-github-workflow-trigger push \
-            --bundle staged-release/SHA256SUMS.sigstore.json \
-            staged-release/SHA256SUMS
-          cosign verify-blob \
-            --certificate-identity "$certificate_identity" \
-            --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-            --certificate-github-workflow-repository "$SOURCE_REPOSITORY" \
-            --certificate-github-workflow-ref "refs/tags/${TAG_NAME}" \
-            --certificate-github-workflow-sha "$SOURCE_COMMIT" \
-            --certificate-github-workflow-name Release \
-            --certificate-github-workflow-trigger push \
-            --bundle staged-release/staging-attestation.sigstore.json \
-            staged-release/staging-attestation.json
-
-      - name: Verify plan and runtime bindings
-        if: ${{ steps.preflight.outputs.skip_source != 'true' }}
-        env:
-          EXPECTED_SOURCE_COMMIT: ${{ steps.source-artifact.outputs.source_commit }}
-          EXPECTED_SOURCE_RUN_ATTEMPT: ${{ steps.source-artifact.outputs.source_run_attempt }}
-          EXPECTED_SOURCE_WORKFLOW_SHA256: ${{ steps.source-artifact.outputs.source_workflow_sha256 }}
-          RUNTIME_WORKFLOW_SHA256: ${{ steps.runtime.outputs.workflow_sha256 }}
-          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
           TAG_NAME: ${{ inputs.tag }}
         run: |
           set -euo pipefail
-          jq -e \
-            --arg tag "$TAG_NAME" \
-            --arg runtime_commit "$GITHUB_SHA" \
-            --arg runtime_workflow_sha256 "$RUNTIME_WORKFLOW_SHA256" \
-            --arg source_commit "$EXPECTED_SOURCE_COMMIT" \
-            --arg source_workflow_sha256 "$EXPECTED_SOURCE_WORKFLOW_SHA256" \
-            --argjson source_run_id "$SOURCE_RUN_ID" \
-            --argjson source_run_attempt "$EXPECTED_SOURCE_RUN_ATTEMPT" \
-            '.tag == $tag and
-             .source_run.id == $source_run_id and
-             .source_run.attempt == $source_run_attempt and
-             .source_workflow.path == ".github/workflows/release.yml" and
-             .source_workflow.commit == $source_commit and
-             .source_workflow.sha256 == $source_workflow_sha256 and
-             .public_workflow.path == ".github/workflows/prepare-draft-release.yml" and
-             .public_workflow.commit == $runtime_commit and
-             .public_workflow.sha256 == $runtime_workflow_sha256 and
-             .distribution_commit == $runtime_commit and
-             .distribution_tag_target == $runtime_commit' \
-            validated-plan.json > /dev/null
+          certificate_identity="https://github.com/context-engine-app/context-engine/.github/workflows/release.yml@refs/tags/$TAG_NAME"
+          for pair in "SHA256SUMS SHA256SUMS.sigstore.json" "staging-attestation.json staging-attestation.sigstore.json"; do
+            read -r payload bundle <<<"$pair"
+            cosign verify-blob --certificate-identity "$certificate_identity" --certificate-oidc-issuer https://token.actions.githubusercontent.com --certificate-github-workflow-repository context-engine-app/context-engine --certificate-github-workflow-ref "refs/tags/$TAG_NAME" --certificate-github-workflow-sha "$SOURCE_COMMIT" --certificate-github-workflow-name Release --certificate-github-workflow-trigger push --bundle "staged-release/$bundle" "staged-release/$payload"
+          done
 
-          jq -e \
-            --arg tag "$TAG_NAME" \
-            --arg runtime_commit "$GITHUB_SHA" \
-            --arg runtime_workflow_sha256 "$RUNTIME_WORKFLOW_SHA256" \
-            --arg source_commit "$EXPECTED_SOURCE_COMMIT" \
-            --arg source_workflow_sha256 "$EXPECTED_SOURCE_WORKFLOW_SHA256" \
-            --argjson source_run_id "$SOURCE_RUN_ID" \
-            --argjson source_run_attempt "$EXPECTED_SOURCE_RUN_ATTEMPT" \
-            '.tag == $tag and
-             .source_commit == $source_commit and
-             .source_workflows.release.path == ".github/workflows/release.yml" and
-             .source_workflows.release.commit == $source_commit and
-             .source_workflows.release.sha256 == $source_workflow_sha256 and
-             .workflow_bindings.draft.path == ".github/workflows/prepare-draft-release.yml" and
-             .workflow_bindings.draft.commit == $runtime_commit and
-             .workflow_bindings.draft.sha256 == $runtime_workflow_sha256 and
-             .distribution_commit == $runtime_commit and
-             .distribution_tag_target == $runtime_commit' \
-            staged-release/release-manifest.json > /dev/null
-
-          jq -e \
-            --arg source_commit "$EXPECTED_SOURCE_COMMIT" \
-            --arg source_workflow_sha256 "$EXPECTED_SOURCE_WORKFLOW_SHA256" \
-            --arg runtime_commit "$GITHUB_SHA" \
-            --arg runtime_workflow_sha256 "$RUNTIME_WORKFLOW_SHA256" \
-            '.source_commit == $source_commit and
-             .distribution_commit == $runtime_commit and
-             .distribution_tag_target == $runtime_commit and
-             .workflows["source-release"].path == ".github/workflows/release.yml" and
-             .workflows["source-release"].commit == $source_commit and
-             .workflows["source-release"].sha256 == $source_workflow_sha256 and
-             .workflows["public-draft"].path == ".github/workflows/prepare-draft-release.yml" and
-             .workflows["public-draft"].commit == $runtime_commit and
-             .workflows["public-draft"].sha256 == $runtime_workflow_sha256' \
-            staged-release/release-provenance.json > /dev/null
-
-          jq -e \
-            --arg source_commit "$EXPECTED_SOURCE_COMMIT" \
-            --arg source_workflow_sha256 "$EXPECTED_SOURCE_WORKFLOW_SHA256" \
-            --arg runtime_commit "$GITHUB_SHA" \
-            --arg runtime_workflow_sha256 "$RUNTIME_WORKFLOW_SHA256" \
-            --arg source_run_id "$SOURCE_RUN_ID" \
-            --argjson source_run_attempt "$EXPECTED_SOURCE_RUN_ATTEMPT" \
-            '.source_commit == $source_commit and
-             .distribution_commit == $runtime_commit and
-             .workflow_bindings["source-release"].path == ".github/workflows/release.yml" and
-             .workflow_bindings["source-release"].commit == $source_commit and
-             .workflow_bindings["source-release"].sha256 == $source_workflow_sha256 and
-             .workflow_bindings["public-draft"].path == ".github/workflows/prepare-draft-release.yml" and
-             .workflow_bindings["public-draft"].commit == $runtime_commit and
-             .workflow_bindings["public-draft"].sha256 == $runtime_workflow_sha256 and
-             .run.id == $source_run_id and
-             .attempt == $source_run_attempt' \
-            staged-release/staging-attestation.json > /dev/null
-
-      - name: Recheck staging artifact expiry window
-        if: ${{ steps.preflight.outputs.skip_source != 'true' }}
-        env:
-          ARTIFACT_EXPIRES_AT: ${{ steps.source-artifact.outputs.artifact_expires_at }}
-        run: |
-          now=$(date -u +%s)
-          expires=$(date -u -d "$ARTIFACT_EXPIRES_AT" +%s)
-          test "$expires" -ge "$((now + 3600))"
-
-      - name: Create scoped release-writer App token
-        id: release-writer
-        if: ${{ steps.preflight.outputs.skip_source != 'true' }}
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+      - name: Create public publisher App token
+        id: publisher
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v2.2.0
         with:
-          client-id: ${{ vars.RELEASE_APP_CLIENT_ID }}
-          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          client-id: ${{ vars.RELEASE_PUBLISHER_APP_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASE_PUBLISHER_APP_PRIVATE_KEY }}
           owner: context-engine-app
           repositories: context-engine-mcp
           permission-contents: write
 
-      - name: Prepare or resume draft release
-        id: draft-prepare
-        if: ${{ steps.preflight.outputs.skip_source != 'true' }}
+      - name: Publish exact immutable release
         env:
-          ARTIFACT_DIGEST: ${{ steps.source-artifact.outputs.artifact_digest }}
-          ARTIFACT_EXPIRES_AT: ${{ steps.source-artifact.outputs.artifact_expires_at }}
-          ARTIFACT_ID: ${{ steps.source-artifact.outputs.artifact_id }}
-          GH_TOKEN: ${{ steps.release-writer.outputs.token }}
-          PUBLIC_RELEASE_REPOSITORY: context-engine-app/context-engine-mcp
+          GH_TOKEN: ${{ steps.publisher.outputs.token }}
           TAG_NAME: ${{ inputs.tag }}
-        run: |
-          set -euo pipefail
-          .venv/bin/python scripts/prepare_draft_release.py prepare \
-            --plan validated-plan.json \
-            --staged-assets staged-release \
-            --artifact-id "$ARTIFACT_ID" \
-            --artifact-digest "$ARTIFACT_DIGEST" \
-            --artifact-expires-at "$ARTIFACT_EXPIRES_AT" \
-            --public-run-id "$GITHUB_RUN_ID" \
-            --public-run-attempt "$GITHUB_RUN_ATTEMPT" \
-            --repository "$PUBLIC_RELEASE_REPOSITORY" \
-            | tee "$RUNNER_TEMP/draft-prepare.json"
-          expected_asset_count=$(jq -er '.assets | length' validated-plan.json)
-          jq -e --arg tag "$TAG_NAME" --argjson expected_asset_count "$expected_asset_count" '.tag == $tag and .state == "verified" and .asset_count == $expected_asset_count and .read_only == false' "$RUNNER_TEMP/draft-prepare.json" > /dev/null
+        run: .venv/bin/python -m scripts.prepare_draft_release --plan validated-plan.json --staged-assets staged-release --tag "$TAG_NAME" --repository "$GITHUB_REPOSITORY"
 
-      - name: Re-download and verify draft release
-        id: draft-inspect
-        if: ${{ always() && steps.preflight.outputs.skip_source != 'true' && steps.release-writer.outputs.token != '' }}
+      - name: Revoke public publisher token
+        if: ${{ always() && steps.publisher.outputs.token != '' }}
         env:
-          GH_TOKEN: ${{ steps.release-writer.outputs.token }}
-          PUBLIC_RELEASE_REPOSITORY: context-engine-app/context-engine-mcp
-          TAG_NAME: ${{ inputs.tag }}
-        run: |
-          set -euo pipefail
-          .venv/bin/python scripts/prepare_draft_release.py inspect --tag "$TAG_NAME" --repository "$PUBLIC_RELEASE_REPOSITORY" --output-dir "$RUNNER_TEMP/draft-assets" > "$RUNNER_TEMP/draft-inspect.json"
-          jq -e --arg tag "$TAG_NAME" '.tag == $tag and .status == "verified" and .state == "verified" and .read_only == true and (.asset_count | type == "number" and . > 0)' "$RUNNER_TEMP/draft-inspect.json" > /dev/null
-
-      - name: Validate and verify re-downloaded draft assets
-        if: ${{ always() && steps.preflight.outputs.skip_source != 'true' && steps.release-writer.outputs.token != '' }}
-        env:
-          SOURCE_COMMIT: ${{ steps.source-artifact.outputs.source_commit }}
-          SOURCE_REPOSITORY: context-engine-app/context-engine
-          TAG_NAME: ${{ inputs.tag }}
-        run: |
-          set -euo pipefail
-          jq -e '.marker | type == "object"' "$RUNNER_TEMP/draft-inspect.json" > /dev/null
-          jq -e '.marker' "$RUNNER_TEMP/draft-inspect.json" > "$RUNNER_TEMP/draft-marker.json"
-          .venv/bin/python scripts/validate_release_provenance.py public-draft --root "$RUNNER_TEMP/draft-assets" --schemas schemas --marker "$RUNNER_TEMP/draft-marker.json" --output-plan "$RUNNER_TEMP/draft-plan.json"
-          profile=$(jq -er '.profile' "$RUNNER_TEMP/draft-plan.json")
-          expected_asset_count=$(jq -er '.assets | length' "$RUNNER_TEMP/draft-plan.json")
-          jq -e --argjson expected_asset_count "$expected_asset_count" '.asset_count == $expected_asset_count' "$RUNNER_TEMP/draft-inspect.json" > /dev/null
-          case "$profile" in
-            desktop|desktop-linux)
-              .venv/bin/python scripts/validate_channel_candidates.py --root "$RUNNER_TEMP/draft-assets" --schemas schemas
-              ;;
-            repository-bootstrap)
-              test ! -e "$RUNNER_TEMP/draft-assets/channel-candidates.json"
-              test ! -e "$RUNNER_TEMP/draft-assets/channel-candidates.tar.gz"
-              ;;
-            *)
-              echo "::error::unsupported release profile: $profile"
-              exit 1
-              ;;
-          esac
-          certificate_identity="https://github.com/${SOURCE_REPOSITORY}/.github/workflows/release.yml@refs/tags/${TAG_NAME}"
-          cosign verify-blob \
-            --certificate-identity "$certificate_identity" \
-            --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-            --certificate-github-workflow-repository "$SOURCE_REPOSITORY" \
-            --certificate-github-workflow-ref "refs/tags/${TAG_NAME}" \
-            --certificate-github-workflow-sha "$SOURCE_COMMIT" \
-            --certificate-github-workflow-name Release \
-            --certificate-github-workflow-trigger push \
-            --bundle "$RUNNER_TEMP/draft-assets/SHA256SUMS.sigstore.json" \
-            "$RUNNER_TEMP/draft-assets/SHA256SUMS"
-
-      - name: Revoke release-writer token
-        if: ${{ always() && steps.preflight.outputs.skip_source != 'true' && steps.release-writer.outputs.token != '' }}
-        env:
-          GH_TOKEN: ${{ steps.release-writer.outputs.token }}
+          GH_TOKEN: ${{ steps.publisher.outputs.token }}
         run: |
           gh api --method DELETE -H "X-GitHub-Api-Version: 2026-03-10" /installation/token

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate portable release envelopes and public release checkpoints.
+"""Validate portable Stage A release envelopes.
 
 This validator is deliberately independent from the private raw-evidence
 validator.  It consumes only the public release documents and their files,
@@ -10,7 +10,6 @@ manifest-derived asset plan for the public coordinator.
 from __future__ import annotations
 
 import argparse
-from datetime import datetime
 import hashlib
 import importlib
 import json
@@ -31,18 +30,11 @@ PROVENANCE_SCHEMA_SHA256 = (
 STAGING_SCHEMA_SHA256 = (
     "b8f1017ce278f762772e236eb08bf18a3c52b65f0e1e30c1d27cace51d305a6d"
 )
-WORKFLOW_REAUTH_SCHEMA_SHA256 = (
-    "e3d0f0799be46b5ba74f863b7f65328c6659734cfe23f34fae08e0fc1d690809"
-)
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 COMMIT_RE = re.compile(r"^[0-9a-fA-F]{40}$")
 VERSION_RE = re.compile(r"^(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)$")
-REAUTH_REF_RE = re.compile(
-    r"^refs/tags/release-reauthorization/((?:v|repository-bootstrap-v)(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*))/(public-publish|package-channels)/([0-9a-fA-F]{40})$"
-)
 RUN_ID_RE = re.compile(r"^[0-9]+$")
 CHECKSUM_RE = re.compile(r"^([0-9a-f]{64})  ([^\x00\r\n\t /\\]+)$")
-ARTIFACT_DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
 SOURCE_REPOSITORY = "context-engine-app/context-engine"
 DISTRIBUTION_REPOSITORY = "context-engine-app/context-engine-mcp"
 SOURCE_WORKFLOW_PATH = ".github/workflows/release.yml"
@@ -129,26 +121,6 @@ PROFILE_COMMON_FILENAMES: dict[str, frozenset[str]] = {
     "repository-bootstrap": frozenset({"LICENSE", "THIRD_PARTY_NOTICES.md"}),
 }
 STAGING_ONLY_NAMES = {"staging-attestation.json", "staging-attestation.sigstore.json"}
-MARKER_KEYS = {
-    "distribution_commit",
-    "marker_version",
-    "profile",
-    "public_workflow_sha256",
-    "release_asset_set_sha256",
-    "release_version",
-    "source_commit",
-    "source_run_attempt",
-    "source_run_id",
-    "source_workflow_sha256",
-    "staging_artifact_digest",
-    "staging_artifact_expires_at",
-    "staging_artifact_id",
-    "staging_attestation_sha256",
-    "state",
-    "tag",
-    "verified_run_attempt",
-    "verified_run_id",
-}
 PLAN_KEYS = {
     "schema_version",
     "profile",
@@ -406,170 +378,6 @@ def _workflow(value: object, label: str, expected_path: str) -> dict[str, str]:
         "commit": _commit(binding.get("commit"), f"{label}.commit"),
         "sha256": _sha(binding.get("sha256"), f"{label}.sha256"),
     }
-
-
-def validate_workflow_reauthorization(
-    record: Mapping[str, object],
-    *,
-    expected_tag: str | None = None,
-    expected_stage: str | None = None,
-    original: Mapping[str, str] | None = None,
-    replacement: Mapping[str, str] | None = None,
-    runtime_commit: str | None = None,
-) -> dict[str, object]:
-    """Validate one protected replacement workflow execution record."""
-
-    _require(
-        set(record)
-        == {
-            "schema_version",
-            "tag",
-            "stage",
-            "execution_ref",
-            "original",
-            "replacement",
-            "reason",
-            "approval_evidence",
-        },
-        "workflow reauthorization record keys are not exact",
-    )
-    _require(
-        record.get("schema_version") == 1,
-        "workflow reauthorization schema version is not 1",
-    )
-    tag = _string(record.get("tag"), "workflow reauthorization tag")
-    _require(
-        bool(
-            re.fullmatch(
-                r"(?:v|repository-bootstrap-v)(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)",
-                tag,
-            )
-        ),
-        "workflow reauthorization tag is invalid",
-    )
-    stage = _string(record.get("stage"), "workflow reauthorization stage")
-    _require(
-        stage in {"public-publish", "package-channels"},
-        "workflow reauthorization stage is unsupported",
-    )
-    execution_ref = _string(
-        record.get("execution_ref"), "workflow reauthorization execution ref"
-    )
-    ref_match = REAUTH_REF_RE.fullmatch(execution_ref)
-    _require(
-        ref_match is not None, "workflow reauthorization execution ref is not canonical"
-    )
-    if ref_match is not None:
-        _require(
-            ref_match.group(1) == tag and ref_match.group(2) == stage,
-            "workflow reauthorization ref does not bind tag and stage",
-        )
-        replacement_commit = ref_match.group(3)
-    else:
-        replacement_commit = ""
-    if expected_tag is not None:
-        _require(
-            tag == expected_tag,
-            "workflow reauthorization tag differs from expected tag",
-        )
-    if expected_stage is not None:
-        _require(
-            stage == expected_stage,
-            "workflow reauthorization stage differs from expected stage",
-        )
-    expected_path = (
-        PUBLISH_WORKFLOW_PATH if stage == "public-publish" else CHANNEL_WORKFLOW_PATH
-    )
-    original_binding = _workflow(
-        record.get("original"), "workflow reauthorization original", expected_path
-    )
-    replacement_binding = _workflow(
-        record.get("replacement"), "workflow reauthorization replacement", expected_path
-    )
-    _require(
-        replacement_binding["commit"].lower() == replacement_commit.lower(),
-        "workflow reauthorization replacement commit differs from execution ref",
-    )
-    if runtime_commit is not None:
-        _require(
-            replacement_binding["commit"].lower() == runtime_commit.lower(),
-            "workflow reauthorization replacement commit differs from runtime commit",
-        )
-    if original is not None:
-        _require(
-            original_binding == dict(original),
-            "workflow reauthorization original differs from expected binding",
-        )
-    if replacement is not None:
-        _require(
-            replacement_binding == dict(replacement),
-            "workflow reauthorization replacement differs from expected binding",
-        )
-    reason = _string(record.get("reason"), "workflow reauthorization reason")
-    _require(bool(reason.strip()), "workflow reauthorization reason is empty")
-    evidence = _object(
-        record.get("approval_evidence"), "workflow reauthorization approval evidence"
-    )
-    _require(bool(evidence), "workflow reauthorization approval evidence is empty")
-    return {
-        "tag": tag,
-        "stage": stage,
-        "execution_ref": execution_ref,
-        "original": original_binding,
-        "replacement": replacement_binding,
-        "reason": reason,
-        "approval_evidence": evidence,
-    }
-
-
-def validate_reauthorization_execution(
-    record: Mapping[str, object],
-    *,
-    expected_tag: str | None = None,
-    expected_stage: str | None = None,
-    original: Mapping[str, str] | None = None,
-    replacement: Mapping[str, str] | None = None,
-    runtime_commit: str | None = None,
-) -> dict[str, object]:
-    """Alias retained for workflow callers that name the execution boundary."""
-
-    return validate_workflow_reauthorization(
-        record,
-        expected_tag=expected_tag,
-        expected_stage=expected_stage,
-        original=original,
-        replacement=replacement,
-        runtime_commit=runtime_commit,
-    )
-
-
-def validate_workflow_reauthorization_file(
-    record_path: Path,
-    schemas: Path,
-    *,
-    expected_tag: str | None = None,
-    expected_stage: str | None = None,
-    original: Mapping[str, str] | None = None,
-    replacement: Mapping[str, str] | None = None,
-    runtime_commit: str | None = None,
-) -> dict[str, object]:
-    """Load, schema-check, and bind one checked-in reauthorization record."""
-
-    record, _ = _read_json(record_path, "workflow reauthorization record")
-    schema = _load_schema(
-        schemas,
-        "workflow-reauthorization.schema.json",
-        WORKFLOW_REAUTH_SCHEMA_SHA256,
-    )
-    _validate_schema(record, schema, "workflow reauthorization")
-    return validate_workflow_reauthorization(
-        record,
-        expected_tag=expected_tag,
-        expected_stage=expected_stage,
-        original=original,
-        replacement=replacement,
-        runtime_commit=runtime_commit,
-    )
 
 
 def _public_workflows(
@@ -1551,142 +1359,12 @@ def _validate_root_closure(root: Path, expected: set[str]) -> None:
         _regular_file(entry, f"release asset {entry.name}")
 
 
-def _validate_marker(
-    marker: Mapping[str, object],
-    manifest: Mapping[str, object],
-    asset_set_sha: str,
-    *,
-    require_verified: bool = False,
-) -> dict[str, object]:
-    _require(set(marker) == MARKER_KEYS, "draft marker keys are not exact")
-    _require(
-        _integer(marker.get("marker_version"), "marker_version") == 1,
-        "marker_version must be 1",
-    )
-    _require(
-        _string(marker.get("profile"), "marker.profile")
-        == _string(manifest.get("profile"), "manifest.profile"),
-        "marker profile differs from manifest",
-    )
-    _require(
-        _string(marker.get("tag"), "marker.tag")
-        == _string(manifest.get("tag"), "manifest.tag"),
-        "marker tag differs from manifest",
-    )
-    _require(
-        _string(marker.get("release_version"), "marker.release_version")
-        == _string(manifest.get("version"), "manifest.version"),
-        "marker version differs from manifest",
-    )
-    _require(
-        _commit(marker.get("source_commit"), "marker.source_commit")
-        == _commit(manifest.get("source_commit"), "manifest.source_commit"),
-        "marker source commit differs from manifest",
-    )
-    _require(
-        _commit(marker.get("distribution_commit"), "marker.distribution_commit")
-        == _commit(manifest.get("distribution_commit"), "manifest.distribution_commit"),
-        "marker distribution commit differs from manifest",
-    )
-    public = _object(
-        _object(manifest.get("workflow_bindings"), "manifest.workflow_bindings").get(
-            "draft"
-        ),
-        "manifest public workflow",
-    )
-    source = _object(
-        _object(manifest.get("source_workflows"), "manifest.source_workflows").get(
-            "release"
-        ),
-        "manifest source workflow",
-    )
-    _require(
-        _sha(marker.get("public_workflow_sha256"), "marker.public_workflow_sha256")
-        == _sha(public.get("sha256"), "manifest public workflow digest"),
-        "marker public workflow digest differs from manifest",
-    )
-    _require(
-        _sha(marker.get("source_workflow_sha256"), "marker.source_workflow_sha256")
-        == _sha(source.get("sha256"), "manifest source workflow digest"),
-        "marker source workflow digest differs from manifest",
-    )
-    _require(
-        _sha(marker.get("release_asset_set_sha256"), "marker.release_asset_set_sha256")
-        == asset_set_sha,
-        "marker release asset set digest differs from supplied assets",
-    )
-    staging_attestation_sha = _sha(
-        marker.get("staging_attestation_sha256"), "marker.staging_attestation_sha256"
-    )
-    source_run_id = _integer(marker.get("source_run_id"), "marker.source_run_id")
-    _require(source_run_id >= 1, "marker source_run_id must be positive")
-    source_attempt = _integer(
-        marker.get("source_run_attempt"), "marker.source_run_attempt"
-    )
-    _require(source_attempt >= 1, "marker source_run_attempt must be positive")
-    staging_artifact_id = _integer(
-        marker.get("staging_artifact_id"), "marker.staging_artifact_id"
-    )
-    _require(staging_artifact_id >= 1, "marker staging_artifact_id must be positive")
-    staging_artifact_digest = _string(
-        marker.get("staging_artifact_digest"), "marker.staging_artifact_digest"
-    )
-    _require(
-        bool(ARTIFACT_DIGEST_RE.fullmatch(staging_artifact_digest)),
-        "marker staging_artifact_digest must be sha256:<lowercase digest>",
-    )
-    staging_artifact_expires_at = _string(
-        marker.get("staging_artifact_expires_at"),
-        "marker.staging_artifact_expires_at",
-    )
-    try:
-        parsed_expiry = datetime.strptime(
-            staging_artifact_expires_at, "%Y-%m-%dT%H:%M:%SZ"
-        )
-    except ValueError as exc:
-        raise ReleaseProvenanceValidationError(
-            "marker staging_artifact_expires_at must be canonical UTC text"
-        ) from exc
-    _require(
-        parsed_expiry.strftime("%Y-%m-%dT%H:%M:%SZ") == staging_artifact_expires_at,
-        "marker staging_artifact_expires_at must be canonical UTC text",
-    )
-    state = _string(marker.get("state"), "marker.state")
-    _require(state in {"preparing", "verified"}, "marker state is not supported")
-    if require_verified:
-        _require(state == "verified", "public draft marker must be verified")
-    verified_id = marker.get("verified_run_id")
-    verified_attempt = marker.get("verified_run_attempt")
-    if state == "preparing":
-        _require(
-            verified_id is None and verified_attempt is None,
-            "preparing marker must not contain verified run facts",
-        )
-    else:
-        verified_integer = _integer(verified_id, "marker.verified_run_id")
-        _require(verified_integer >= 1, "verified run ID must be positive")
-        _require(
-            _integer(verified_attempt, "marker.verified_run_attempt") >= 1,
-            "verified run attempt must be positive",
-        )
-    return {
-        "sha256": staging_attestation_sha,
-        "state": state,
-        "source_run": {
-            "id": source_run_id,
-            "attempt": source_attempt,
-            "url": f"https://github.com/{SOURCE_REPOSITORY}/actions/runs/{source_run_id}",
-        },
-    }
-
-
 def _plan(
     manifest: Mapping[str, object],
     asset_facts: Mapping[str, tuple[str, int]],
     asset_set_sha: str,
     staging_attestation_sha: str,
     source_run: Mapping[str, object],
-    public_workflow_name: str = "draft",
 ) -> dict[str, object]:
     source = _object(
         _object(manifest.get("source_workflows"), "manifest.source_workflows").get(
@@ -1696,7 +1374,7 @@ def _plan(
     )
     public = _object(
         _object(manifest.get("workflow_bindings"), "manifest.workflow_bindings").get(
-            public_workflow_name
+            "draft"
         ),
         "manifest public workflow",
     )
@@ -1737,46 +1415,6 @@ def _plan(
     }
     _require(set(plan) == PLAN_KEYS, "validated plan keys are not exact")
     return plan
-
-
-def build_publication_plan(
-    plan: Mapping[str, object],
-    manifest: Mapping[str, object],
-    marker_info: Mapping[str, object],
-) -> dict[str, object]:
-    """Bind the verified draft plan to the complete public orchestration."""
-
-    stages = tuple(
-        _string(item, "manifest authorized stage")
-        for item in _array(
-            manifest.get("authorized_stages"), "manifest.authorized_stages"
-        )
-    )
-    _require(
-        stages == ORCHESTRATION_STAGES,
-        "public publication requires complete ordered orchestration stages",
-    )
-    distribution_commit = _commit(
-        plan.get("distribution_commit"), "plan.distribution_commit"
-    )
-    workflows = _public_workflows(manifest, distribution_commit)
-    _require(
-        workflows.get("draft") == plan.get("public_workflow"),
-        "publication draft workflow differs from the public plan",
-    )
-    run_id = _integer(marker_info.get("verified_run_id"), "marker.verified_run_id")
-    run_attempt = _integer(
-        marker_info.get("verified_run_attempt"), "marker.verified_run_attempt"
-    )
-    _require(
-        run_id >= 1 and run_attempt >= 1,
-        "verified draft run facts must be positive",
-    )
-    result = dict(plan)
-    result["authorized_stages"] = list(stages)
-    result["public_workflows"] = workflows
-    result["draft_run"] = {"id": run_id, "attempt": run_attempt}
-    return result
 
 
 def _validate_common(
@@ -1826,70 +1464,6 @@ def validate_staging(root: Path, schemas: Path) -> dict[str, object]:
     return _plan(manifest, by_name, asset_set_sha, staging_sha, source_run)
 
 
-def validate_public_draft(root: Path, schemas: Path, marker: Path) -> dict[str, object]:
-    """Validate the complete public draft and its trusted marker."""
-    try:
-        root = root.resolve(strict=True)
-        schemas = schemas.resolve(strict=True)
-        marker = marker.resolve(strict=True)
-    except OSError as exc:
-        raise ReleaseProvenanceValidationError(
-            f"cannot resolve public draft paths: {exc}"
-        ) from exc
-    _require(root.is_dir() and schemas.is_dir(), "root and schemas must be directories")
-    manifest, _, by_name, asset_set_sha = _validate_common(root, schemas)
-    _validate_root_closure(root, set(by_name))
-    marker_document, _ = _read_json(marker, "draft marker")
-    marker_info = _validate_marker(
-        marker_document, manifest, asset_set_sha, require_verified=True
-    )
-    return _plan(
-        manifest,
-        by_name,
-        asset_set_sha,
-        _string(marker_info["sha256"], "marker staging attestation digest"),
-        cast(Mapping[str, object], marker_info["source_run"]),
-    )
-
-
-def validate_package_channels(root: Path, schemas: Path) -> dict[str, object]:
-    """Validate immutable public release inputs without a publication marker."""
-
-    try:
-        root = root.resolve(strict=True)
-        schemas = schemas.resolve(strict=True)
-    except OSError as exc:
-        raise ReleaseProvenanceValidationError(
-            f"cannot resolve package-channel paths: {exc}"
-        ) from exc
-    _require(root.is_dir() and schemas.is_dir(), "root and schemas must be directories")
-    manifest, _, by_name, asset_set_sha = _validate_common(root, schemas)
-    _validate_root_closure(root, set(by_name))
-    return _plan(
-        manifest=manifest,
-        asset_facts=by_name,
-        asset_set_sha=asset_set_sha,
-        staging_attestation_sha="",
-        source_run={},
-        public_workflow_name="channels",
-    )
-
-
-def validate_public_publish(
-    root: Path, schemas: Path, marker: Path
-) -> dict[str, object]:
-    """Validate a draft and emit the atomic publication workflow plan."""
-
-    plan = validate_public_draft(root, schemas, marker)
-    resolved_root = root.resolve(strict=True)
-    resolved_marker = marker.resolve(strict=True)
-    manifest, _ = _read_json(
-        resolved_root / "release-manifest.json", "release manifest"
-    )
-    marker_document, _ = _read_json(resolved_marker, "draft marker")
-    return build_publication_plan(plan, manifest, marker_document)
-
-
 def _write_plan(path: Path, plan: Mapping[str, object]) -> None:
     encoded = (
         json.dumps(plan, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
@@ -1913,106 +1487,23 @@ def _write_plan(path: Path, plan: Mapping[str, object]) -> None:
 
 def parse_arguments(argv: Iterable[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    subparsers = parser.add_subparsers(dest="mode", required=True)
+    subparsers = parser.add_subparsers(required=True)
     staging = subparsers.add_parser(
         "staging", help="validate the complete Stage A release envelope"
     )
     _ = staging.add_argument("--root", type=Path, required=True)
     _ = staging.add_argument("--schemas", type=Path, required=True)
     _ = staging.add_argument("--output-plan", type=Path, required=True)
-    public = subparsers.add_parser(
-        "public-draft", help="validate the complete public draft release"
-    )
-    _ = public.add_argument("--root", type=Path, required=True)
-    _ = public.add_argument("--schemas", type=Path, required=True)
-    _ = public.add_argument("--marker", type=Path, required=True)
-    _ = public.add_argument("--output-plan", type=Path, required=True)
-    package_channels = subparsers.add_parser(
-        "package-channels",
-        help="validate immutable release inputs for package-channel preparation",
-    )
-    _ = package_channels.add_argument("--root", type=Path, required=True)
-    _ = package_channels.add_argument("--schemas", type=Path, required=True)
-    _ = package_channels.add_argument("--output-plan", type=Path, required=True)
-    reauthorization = subparsers.add_parser(
-        "reauthorization",
-        help="validate one checked-in release workflow reauthorization record",
-    )
-    _ = reauthorization.add_argument("--record", type=Path, required=True)
-    _ = reauthorization.add_argument("--schemas", type=Path, required=True)
-    _ = reauthorization.add_argument("--tag", required=True)
-    _ = reauthorization.add_argument("--stage", required=True)
-    _ = reauthorization.add_argument("--runtime-commit", required=True)
-    for prefix in ("original", "replacement"):
-        _ = reauthorization.add_argument(f"--{prefix}-path", required=True)
-        _ = reauthorization.add_argument(f"--{prefix}-commit", required=True)
-        _ = reauthorization.add_argument(f"--{prefix}-sha256", required=True)
-    publication = subparsers.add_parser(
-        "public-publish",
-        help="validate the exact public draft and atomic publication bindings",
-    )
-    _ = publication.add_argument("--root", type=Path, required=True)
-    _ = publication.add_argument("--schemas", type=Path, required=True)
-    _ = publication.add_argument("--marker", type=Path, required=True)
-    _ = publication.add_argument("--output-plan", type=Path, required=True)
     return parser.parse_args(argv)
 
 
 def main(argv: Iterable[str] | None = None) -> int:
     args = parse_arguments(argv)
-    values = cast(Mapping[str, object], vars(args))
-    mode = _string(values.get("mode"), "mode")
-    if mode == "reauthorization":
-        record = values.get("record")
-        schemas = values.get("schemas")
-        if not isinstance(record, Path) or not isinstance(schemas, Path):
-            return 2
-        original = {
-            "path": _string(values.get("original_path"), "original path"),
-            "commit": _string(values.get("original_commit"), "original commit"),
-            "sha256": _string(values.get("original_sha256"), "original SHA-256"),
-        }
-        replacement = {
-            "path": _string(values.get("replacement_path"), "replacement path"),
-            "commit": _string(values.get("replacement_commit"), "replacement commit"),
-            "sha256": _string(values.get("replacement_sha256"), "replacement SHA-256"),
-        }
-        try:
-            _ = validate_workflow_reauthorization_file(
-                record,
-                schemas,
-                expected_tag=_string(values.get("tag"), "tag"),
-                expected_stage=_string(values.get("stage"), "stage"),
-                original=original,
-                replacement=replacement,
-                runtime_commit=_string(values.get("runtime_commit"), "runtime commit"),
-            )
-        except (ReleaseProvenanceValidationError, DependencyError) as exc:
-            print(f"error: {exc}", file=sys.stderr)
-            return 2
-        return 0
-    root = values.get("root")
-    schemas = values.get("schemas")
-    marker = values.get("marker")
-    output_plan = values.get("output_plan")
-    if (
-        not isinstance(root, Path)
-        or not isinstance(schemas, Path)
-        or not isinstance(output_plan, Path)
-    ):
-        return 2
+    root = cast(Path, args.root)
+    schemas = cast(Path, args.schemas)
+    output_plan = cast(Path, args.output_plan)
     try:
-        if mode == "staging":
-            plan = validate_staging(root, schemas)
-        elif mode == "package-channels":
-            plan = validate_package_channels(root, schemas)
-        else:
-            if not isinstance(marker, Path):
-                return 2
-            if mode == "public-draft":
-                plan = validate_public_draft(root, schemas, marker)
-            else:
-                plan = validate_public_publish(root, schemas, marker)
+        plan = validate_staging(root, schemas)
         _write_plan(output_plan, plan)
     except (
         ReleaseProvenanceValidationError,

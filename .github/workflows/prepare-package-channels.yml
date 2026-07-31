@@ -6,398 +6,62 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Verified immutable release tag
+        description: Immutable public release tag
         required: true
         type: string
-      homebrew_repair_run_id:
-        description: Optional successful Homebrew repair run ID
-        required: false
-        type: string
-        default: ""
-      homebrew_repair_attempt:
-        description: Optional successful Homebrew repair run attempt
-        required: false
-        type: string
-        default: ""
-      scoop_repair_run_id:
-        description: Optional successful Scoop repair run ID
-        required: false
-        type: string
-        default: ""
-      scoop_repair_attempt:
-        description: Optional successful Scoop repair run attempt
-        required: false
-        type: string
-        default: ""
 
 permissions:
   contents: read
-  actions: read # Read repair-run metadata and named artifacts only.
-  attestations: read # Verify release attestations without issuing credentials.
 
 concurrency:
   group: package-channels-${{ inputs.tag }}
   cancel-in-progress: false
 
 jobs:
-  preflight:
-    name: Validate package-channel inputs
-    runs-on: ubuntu-24.04
-    timeout-minutes: 20
-    outputs:
-      profile: ${{ steps.release-plan.outputs.profile }}
-      preflight_plan_b64: ${{ steps.anonymous-preflight.outputs.plan_b64 }}
-    steps:
-      - name: Check out public workflow tools
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
-        with:
-          persist-credentials: false
-      - name: Set up pinned uv and Python
-        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9
-        with:
-          version: "0.11.32"
-          python-version: "3.11.13"
-      - name: Create pinned Python environment
-        run: |
-          set -euo pipefail
-          uv python install 3.11.13
-          uv venv .venv --python 3.11.13
-          uv pip install --python .venv/bin/python --requirement scripts/requirements.txt
-      - name: Validate immutable release and workflow binding
-        id: release-plan
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TAG_NAME: ${{ inputs.tag }}
-        run: |
-          set -euo pipefail
-          test "$GITHUB_REPOSITORY" = "context-engine-app/context-engine-mcp"
-          echo "workflow binding exact"
-          [[ "$TAG_NAME" =~ ^(v|repository-bootstrap-v)(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
-          test "$GITHUB_SHA" = "$(git rev-parse HEAD)"
-          canonical_workflow_ref="$GITHUB_REPOSITORY/.github/workflows/prepare-package-channels.yml@refs/tags/$TAG_NAME"
-          runtime_commit="$GITHUB_SHA"
-          if test "$GITHUB_WORKFLOW_REF" = "$canonical_workflow_ref"; then
-            test "$GITHUB_REF" = "refs/tags/$TAG_NAME"
-            original_commit="$runtime_commit"
-            binding_commit="$runtime_commit"
-            binding_sha256=$(sha256sum .github/workflows/prepare-package-channels.yml | cut -d' ' -f1)
-          else
-            if [[ ! "$GITHUB_REF" =~ ^refs/tags/release-reauthorization/$TAG_NAME/package-channels/[0-9a-fA-F]{40}$ ]]; then
-              echo "::error::workflow reauthorization ref is required"
-              exit 1
-            fi
-            test "$GITHUB_REF" = "refs/tags/release-reauthorization/$TAG_NAME/package-channels/$runtime_commit"
-            test "$GITHUB_WORKFLOW_REF" = "$GITHUB_REPOSITORY/.github/workflows/prepare-package-channels.yml@$GITHUB_REF"
-            reauth_ref=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/release-reauthorization/$TAG_NAME/package-channels/$runtime_commit")
-            reauth_type=$(jq -er '.object.type' <<<"$reauth_ref")
-            reauth_object=$(jq -er '.object.sha' <<<"$reauth_ref")
-            if test "$reauth_type" = "tag"; then
-              reauth_target=$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$reauth_object" | jq -er '.object | select(.type == "commit") | .sha')
-            else
-              reauth_target="$reauth_object"
-            fi
-            test "$reauth_target" = "$runtime_commit"
-            original_ref=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG_NAME")
-            original_type=$(jq -er '.object.type' <<<"$original_ref")
-            original_object=$(jq -er '.object.sha' <<<"$original_ref")
-            if test "$original_type" = "tag"; then
-              original_commit=$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$original_object" | jq -er '.object | select(.type == "commit") | .sha')
-            else
-              original_commit="$original_object"
-            fi
-            [[ "$original_commit" =~ ^[0-9a-fA-F]{40}$ ]]
-            authorization="authorizations/$TAG_NAME/package-channels/$runtime_commit.json"
-            test -f "$authorization"
-            original_sha256=$(gh api "repos/$GITHUB_REPOSITORY/contents/.github/workflows/prepare-package-channels.yml?ref=$original_commit" | jq -er '.content' | tr -d '\n' | base64 --decode | sha256sum | cut -d' ' -f1)
-            replacement_sha256=$(sha256sum .github/workflows/prepare-package-channels.yml | cut -d' ' -f1)
-            binding_commit="$original_commit"
-            binding_sha256="$original_sha256"
-            .venv/bin/python scripts/validate_release_provenance.py reauthorization \
-              --record "$authorization" --schemas schemas --tag "$TAG_NAME" \
-              --stage package-channels --runtime-commit "$runtime_commit" \
-              --original-path .github/workflows/prepare-package-channels.yml \
-              --original-commit "$original_commit" --original-sha256 "$original_sha256" \
-              --replacement-path .github/workflows/prepare-package-channels.yml \
-              --replacement-commit "$runtime_commit" --replacement-sha256 "$replacement_sha256"
-          fi
-          printf '%s\n' "$binding_commit" > "$RUNNER_TEMP/package-binding-commit"
-          printf '%s\n' "$binding_sha256" > "$RUNNER_TEMP/package-binding-sha256"
-          release_metadata=$(gh release view "$TAG_NAME" --repo "$GITHUB_REPOSITORY" --json isDraft,isImmutable)
-          jq -e '.isDraft == false and .isImmutable == true' <<<"$release_metadata" > /dev/null
-          gh release verify "$TAG_NAME" --repo "$GITHUB_REPOSITORY"
-          mkdir -p "$RUNNER_TEMP/release"
-          gh release download "$TAG_NAME" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/release"
-          while IFS= read -r -d '' asset; do
-            gh release verify-asset "$TAG_NAME" "$asset" --repo "$GITHUB_REPOSITORY"
-          done < <(find "$RUNNER_TEMP/release" -maxdepth 1 -type f -print0)
-          .venv/bin/python scripts/validate_release_provenance.py package-channels \
-            --root "$RUNNER_TEMP/release" --schemas schemas \
-            --output-plan "$RUNNER_TEMP/package-plan.json"
-          binding_commit=$(cat "$RUNNER_TEMP/package-binding-commit")
-          binding_sha256=$(cat "$RUNNER_TEMP/package-binding-sha256")
-          jq -e --arg commit "$binding_commit" --arg sha "$binding_sha256" \
-            '.public_workflow.commit == $commit and .public_workflow.sha256 == $sha' \
-            "$RUNNER_TEMP/package-plan.json" > /dev/null
-          profile=$(jq -er '.profile' "$RUNNER_TEMP/package-plan.json")
-          case "$profile" in
-            desktop|desktop-linux)
-              .venv/bin/python scripts/validate_channel_candidates.py --root "$RUNNER_TEMP/release" --schemas schemas
-              ;;
-            repository-bootstrap)
-              test ! -e "$RUNNER_TEMP/release/channel-candidates.json"
-              test ! -e "$RUNNER_TEMP/release/channel-candidates.tar.gz"
-              test ! -e "$RUNNER_TEMP/release/Formula/context-engine.rb"
-              test ! -e "$RUNNER_TEMP/release/bucket/context-engine.json"
-              ;;
-            *)
-              echo "::error::unsupported release profile: $profile"
-              exit 1
-              ;;
-          esac
-          echo "profile=$profile" >> "$GITHUB_OUTPUT"
-      - name: Validate optional repair provenance
-        if: ${{ steps.release-plan.outputs.profile == 'desktop' || steps.release-plan.outputs.profile == 'desktop-linux' }}
-        env:
-          TAG_NAME: ${{ inputs.tag }}
-          HOMEBREW_REPAIR_RUN_ID: ${{ inputs.homebrew_repair_run_id }}
-          HOMEBREW_REPAIR_ATTEMPT: ${{ inputs.homebrew_repair_attempt }}
-          SCOOP_REPAIR_RUN_ID: ${{ inputs.scoop_repair_run_id }}
-          SCOOP_REPAIR_ATTEMPT: ${{ inputs.scoop_repair_attempt }}
-        run: |
-          set -euo pipefail
-          .venv/bin/python scripts/prepare_package_channels.py validate --tag "$TAG_NAME" \
-            --candidate-root "$RUNNER_TEMP/release" \
-            --homebrew-repair-run-id "$HOMEBREW_REPAIR_RUN_ID" --homebrew-repair-attempt "$HOMEBREW_REPAIR_ATTEMPT" \
-            --scoop-repair-run-id "$SCOOP_REPAIR_RUN_ID" --scoop-repair-attempt "$SCOOP_REPAIR_ATTEMPT"
-      - name: Validate repository-bootstrap inputs
-        if: ${{ steps.release-plan.outputs.profile == 'repository-bootstrap' }}
-        env:
-          HOMEBREW_REPAIR_RUN_ID: ${{ inputs.homebrew_repair_run_id }}
-          HOMEBREW_REPAIR_ATTEMPT: ${{ inputs.homebrew_repair_attempt }}
-          SCOOP_REPAIR_RUN_ID: ${{ inputs.scoop_repair_run_id }}
-          SCOOP_REPAIR_ATTEMPT: ${{ inputs.scoop_repair_attempt }}
-        run: |
-          set -euo pipefail
-          test -z "$HOMEBREW_REPAIR_RUN_ID"
-          test -z "$HOMEBREW_REPAIR_ATTEMPT"
-          test -z "$SCOOP_REPAIR_RUN_ID"
-          test -z "$SCOOP_REPAIR_ATTEMPT"
-      - name: Anonymous destination preflight and plan
-        if: ${{ steps.release-plan.outputs.profile == 'desktop' || steps.release-plan.outputs.profile == 'desktop-linux' }}
-        id: anonymous-preflight
-        env:
-          TAG_NAME: ${{ inputs.tag }}
-        run: |
-          set -euo pipefail
-          test "context-engine-app/homebrew-tap" = "context-engine-app/homebrew-tap"
-          test "context-engine-app/scoop-bucket" = "context-engine-app/scoop-bucket"
-          .venv/bin/python scripts/prepare_package_channels.py preflight \
-            --tag "$TAG_NAME" --output-plan "$RUNNER_TEMP/channel-preflight.json"
-          plan_b64=$(base64 -w0 "$RUNNER_TEMP/channel-preflight.json")
-          echo "plan_b64=$plan_b64" >> "$GITHUB_OUTPUT"
-
   publish:
-    name: Create inert package-channel pull requests
-    if: ${{ needs.preflight.outputs.profile == 'desktop' || needs.preflight.outputs.profile == 'desktop-linux' }}
-    needs: preflight
+    name: Create package-channel pull requests
     environment: release-channel
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 20
     steps:
-      - name: Check out public workflow tools
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+      - name: Check out public package tools
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v4.2.2
         with:
           persist-credentials: false
+
       - name: Set up pinned uv and Python
-        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
           version: "0.11.32"
           python-version: "3.11.13"
-      - name: Create pinned Python environment
+
+      - name: Create isolated Python environment
         run: |
-          set -euo pipefail
           uv python install 3.11.13
           uv venv .venv --python 3.11.13
           uv pip install --python .venv/bin/python --requirement scripts/requirements.txt
-      - name: Revalidate protected runtime binding
+
+      - name: Validate immutable release and channel candidates
         env:
           GH_TOKEN: ${{ github.token }}
           TAG_NAME: ${{ inputs.tag }}
         run: |
           set -euo pipefail
-          test "$GITHUB_REPOSITORY" = "context-engine-app/context-engine-mcp"
-          test "$GITHUB_SHA" = "$(git rev-parse HEAD)"
-          runtime_commit="$GITHUB_SHA"
-          canonical_workflow_ref="$GITHUB_REPOSITORY/.github/workflows/prepare-package-channels.yml@refs/tags/$TAG_NAME"
-          if test "$GITHUB_WORKFLOW_REF" = "$canonical_workflow_ref"; then
-            test "$GITHUB_REF" = "refs/tags/$TAG_NAME"
-            binding_commit="$GITHUB_SHA"
-            binding_sha256=$(sha256sum .github/workflows/prepare-package-channels.yml | cut -d' ' -f1)
-          else
-            if [[ ! "$GITHUB_REF" =~ ^refs/tags/release-reauthorization/$TAG_NAME/package-channels/[0-9a-fA-F]{40}$ ]]; then
-              echo "::error::workflow reauthorization ref is required"
-              exit 1
-            fi
-            test "$GITHUB_REF" = "refs/tags/release-reauthorization/$TAG_NAME/package-channels/$runtime_commit"
-            test "$GITHUB_WORKFLOW_REF" = "$GITHUB_REPOSITORY/.github/workflows/prepare-package-channels.yml@$GITHUB_REF"
-            reauth_ref=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/release-reauthorization/$TAG_NAME/package-channels/$runtime_commit")
-            reauth_type=$(jq -er '.object.type' <<<"$reauth_ref")
-            reauth_object=$(jq -er '.object.sha' <<<"$reauth_ref")
-            if test "$reauth_type" = "tag"; then
-              reauth_target=$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$reauth_object" | jq -er '.object | select(.type == "commit") | .sha')
-            else
-              reauth_target="$reauth_object"
-            fi
-            test "$reauth_target" = "$runtime_commit"
-            original_ref=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG_NAME")
-            original_type=$(jq -er '.object.type' <<<"$original_ref")
-            original_object=$(jq -er '.object.sha' <<<"$original_ref")
-            if test "$original_type" = "tag"; then
-              original_commit=$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$original_object" | jq -er '.object | select(.type == "commit") | .sha')
-            else
-              original_commit="$original_object"
-            fi
-            authorization="authorizations/$TAG_NAME/package-channels/$runtime_commit.json"
-            test -f "$authorization"
-            original_sha256=$(gh api "repos/$GITHUB_REPOSITORY/contents/.github/workflows/prepare-package-channels.yml?ref=$original_commit" | jq -er '.content' | tr -d '\n' | base64 --decode | sha256sum | cut -d' ' -f1)
-            replacement_sha256=$(sha256sum .github/workflows/prepare-package-channels.yml | cut -d' ' -f1)
-            binding_commit="$original_commit"
-            binding_sha256="$original_sha256"
-            printf '%s\n' "$original_commit" > "$RUNNER_TEMP/reauth-original-commit"
-            printf '%s\n' "$original_sha256" > "$RUNNER_TEMP/reauth-original-sha256"
-            .venv/bin/python scripts/validate_release_provenance.py reauthorization \
-              --record "$authorization" --schemas schemas --tag "$TAG_NAME" \
-              --stage package-channels --runtime-commit "$runtime_commit" \
-              --original-path .github/workflows/prepare-package-channels.yml \
-              --original-commit "$original_commit" --original-sha256 "$original_sha256" \
-              --replacement-path .github/workflows/prepare-package-channels.yml \
-              --replacement-commit "$runtime_commit" --replacement-sha256 "$replacement_sha256"
-          fi
-          printf '%s\n' "$binding_commit" > "$RUNNER_TEMP/package-binding-commit"
-          printf '%s\n' "$binding_sha256" > "$RUNNER_TEMP/package-binding-sha256"
-      - name: Download verified release assets
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TAG_NAME: ${{ inputs.tag }}
-          EXPECTED_PROFILE: ${{ needs.preflight.outputs.profile }}
-        run: |
-          set -euo pipefail
-          release_metadata=$(gh release view "$TAG_NAME" --repo "$GITHUB_REPOSITORY" --json isDraft,isImmutable)
-          jq -e '.isDraft == false and .isImmutable == true' <<<"$release_metadata" > /dev/null
-          gh release verify "$TAG_NAME" --repo "$GITHUB_REPOSITORY"
+          [[ "$TAG_NAME" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
+          test "$GITHUB_REF" = "refs/heads/main"
+          release=$(gh release view "$TAG_NAME" --repo "$GITHUB_REPOSITORY" --json isDraft,isImmutable,tagName)
+          jq -e --arg tag "$TAG_NAME" '.tagName == $tag and .isDraft == false and .isImmutable == true' <<< "$release" > /dev/null
           mkdir -p "$RUNNER_TEMP/release"
-          gh release download "$TAG_NAME" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/release"
-          while IFS= read -r -d '' asset; do
-            gh release verify-asset "$TAG_NAME" "$asset" --repo "$GITHUB_REPOSITORY"
-          done < <(find "$RUNNER_TEMP/release" -maxdepth 1 -type f -print0)
-          .venv/bin/python scripts/validate_release_provenance.py package-channels \
-            --root "$RUNNER_TEMP/release" --schemas schemas \
-            --output-plan "$RUNNER_TEMP/package-plan.json"
-          binding_commit=$(cat "$RUNNER_TEMP/package-binding-commit")
-          binding_sha256=$(cat "$RUNNER_TEMP/package-binding-sha256")
-          jq -e --arg commit "$binding_commit" --arg sha "$binding_sha256" \
-            '.public_workflow.commit == $commit and .public_workflow.sha256 == $sha' \
-            "$RUNNER_TEMP/package-plan.json" > /dev/null
-          profile=$(jq -er '.profile' "$RUNNER_TEMP/package-plan.json")
-          test "$profile" = "$EXPECTED_PROFILE"
-          case "$profile" in
-            desktop|desktop-linux)
-              .venv/bin/python scripts/validate_channel_candidates.py --root "$RUNNER_TEMP/release" --schemas schemas
-              ;;
-            *)
-              echo "::error::package-channel publish requires a CLI release profile: $profile"
-              exit 1
-              ;;
-          esac
-      - name: Restore anonymous preflight plan
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TAG_NAME: ${{ inputs.tag }}
-          PLAN_B64: ${{ needs.preflight.outputs.preflight_plan_b64 }}
-        run: |
-          set -euo pipefail
-          test -n "$PLAN_B64"
-          printf '%s' "$PLAN_B64" | base64 --decode > "$RUNNER_TEMP/channel-preflight.json"
-          .venv/bin/python scripts/prepare_package_channels.py verify-preflight \
-            --tag "$TAG_NAME" --plan "$RUNNER_TEMP/channel-preflight.json"
-      - name: Create private artifact-reader App token
-        if: ${{ inputs.homebrew_repair_run_id != '' || inputs.scoop_repair_run_id != '' }}
-        id: artifact-reader
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
-        with:
-          client-id: ${{ vars.ARTIFACT_READER_APP_CLIENT_ID }}
-          private-key: ${{ secrets.ARTIFACT_READER_APP_PRIVATE_KEY }}
-          owner: context-engine-app
-          repositories: context-engine
-          permission-actions: read
-          permission-contents: read
-      - name: Retrieve optional repair candidate bytes
-        if: ${{ inputs.homebrew_repair_run_id != '' || inputs.scoop_repair_run_id != '' }}
-        env:
-          GH_TOKEN: ${{ steps.artifact-reader.outputs.token }}
-          TAG_NAME: ${{ inputs.tag }}
-          HOMEBREW_REPAIR_RUN_ID: ${{ inputs.homebrew_repair_run_id }}
-          HOMEBREW_REPAIR_ATTEMPT: ${{ inputs.homebrew_repair_attempt }}
-          SCOOP_REPAIR_RUN_ID: ${{ inputs.scoop_repair_run_id }}
-          SCOOP_REPAIR_ATTEMPT: ${{ inputs.scoop_repair_attempt }}
-        run: |
-          set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/repairs/homebrew" "$RUNNER_TEMP/repairs/scoop"
-          for destination in homebrew scoop; do
-            run_id_var="${destination^^}_REPAIR_RUN_ID"
-            attempt_var="${destination^^}_REPAIR_ATTEMPT"
-            run_id="${!run_id_var}"
-            attempt="${!attempt_var}"
-            if test -z "$run_id"; then
-              test -z "$attempt"
-              continue
-            fi
-            [[ "$run_id" =~ ^[1-9][0-9]*$ && "$attempt" =~ ^[1-9][0-9]*$ ]]
-            run_json=$(gh api -H "X-GitHub-Api-Version: 2026-03-10" \
-              "repos/context-engine-app/context-engine/actions/runs/$run_id")
-            # Official repair workflow path: .github/workflows/prepare-channel-repair.yml@<ref>.
-            jq -e --argjson id "$run_id" --argjson attempt "$attempt" \
-              '.id == $id and .run_attempt == $attempt and (.path | test("^\\.github/workflows/prepare-channel-repair\\.yml@[^[:space:]]+$")) and .event == "workflow_dispatch" and .status == "completed" and .conclusion == "success" and (.head_sha | test("^[0-9a-fA-F]{40}$")) and .repository.full_name == "context-engine-app/context-engine"' <<<"$run_json" > /dev/null
-            head_sha=$(jq -er '.head_sha' <<<"$run_json")
-            printf '%s' "$head_sha" > "$RUNNER_TEMP/repairs/$destination/generator-commit"
-            artifacts=$(gh api -H "X-GitHub-Api-Version: 2026-03-10" \
-              "repos/context-engine-app/context-engine/actions/runs/$run_id/artifacts")
-            count=$(jq '[.artifacts[] | select(.name == "context-engine-channel-repair" and .expired == false)] | length' <<<"$artifacts")
-            test "$count" -eq 1
-            artifact_id=$(jq -er '[.artifacts[] | select(.name == "context-engine-channel-repair" and .expired == false)][0].id' <<<"$artifacts")
-            archive="$RUNNER_TEMP/repair-$destination.zip"
-            gh api -H "X-GitHub-Api-Version: 2026-03-10" \
-              "repos/context-engine-app/context-engine/actions/artifacts/$artifact_id/zip" > "$archive"
-            .venv/bin/python scripts/prepare_package_channels.py extract-repair \
-              --archive "$archive" \
-              --output-root "$RUNNER_TEMP/repairs/$destination"
-          done
-      - name: Validate repair candidate bytes
-        if: ${{ inputs.homebrew_repair_run_id != '' || inputs.scoop_repair_run_id != '' }}
-        env:
-          TAG_NAME: ${{ inputs.tag }}
-          HOMEBREW_REPAIR_RUN_ID: ${{ inputs.homebrew_repair_run_id }}
-          HOMEBREW_REPAIR_ATTEMPT: ${{ inputs.homebrew_repair_attempt }}
-          SCOOP_REPAIR_RUN_ID: ${{ inputs.scoop_repair_run_id }}
-          SCOOP_REPAIR_ATTEMPT: ${{ inputs.scoop_repair_attempt }}
-        run: |
-          set -euo pipefail
-          .venv/bin/python scripts/prepare_package_channels.py validate-repair \
-            --tag "$TAG_NAME" --candidate-root "$RUNNER_TEMP/release" --schemas schemas \
-            --homebrew-repair-root "$RUNNER_TEMP/repairs/homebrew" --scoop-repair-root "$RUNNER_TEMP/repairs/scoop" \
-            --homebrew-repair-run-id "$HOMEBREW_REPAIR_RUN_ID" --homebrew-repair-attempt "$HOMEBREW_REPAIR_ATTEMPT" \
-            --scoop-repair-run-id "$SCOOP_REPAIR_RUN_ID" --scoop-repair-attempt "$SCOOP_REPAIR_ATTEMPT" \
-            --homebrew-generator-commit "$(cat "$RUNNER_TEMP/repairs/homebrew/generator-commit" 2>/dev/null || true)" \
-            --scoop-generator-commit "$(cat "$RUNNER_TEMP/repairs/scoop/generator-commit" 2>/dev/null || true)"
-      - name: Revoke private artifact-reader token
-        if: ${{ always() && (inputs.homebrew_repair_run_id != '' || inputs.scoop_repair_run_id != '') && steps.artifact-reader.outputs.token != '' }}
-        env:
-          GH_TOKEN: ${{ steps.artifact-reader.outputs.token }}
-        run: |
-          gh api --method DELETE -H "X-GitHub-Api-Version: 2026-03-10" /installation/token
-      - name: Create separate Homebrew installation token
+          gh release download "$TAG_NAME" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/release" \
+            --pattern release-manifest.json \
+            --pattern channel-candidates.json \
+            --pattern channel-candidates.tar.gz
+          .venv/bin/python scripts/validate_channel_candidates.py \
+            --root "$RUNNER_TEMP/release" --schemas schemas
+
+      - name: Create Homebrew installation token
         id: homebrew
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.0.0
         with:
           client-id: ${{ vars.PACKAGE_METADATA_APP_CLIENT_ID }}
           private-key: ${{ secrets.PACKAGE_METADATA_APP_PRIVATE_KEY }}
@@ -405,9 +69,10 @@ jobs:
           repositories: homebrew-tap
           permission-contents: write
           permission-pull-requests: write
-      - name: Create separate Scoop installation token
+
+      - name: Create Scoop installation token
         id: scoop
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.0.0
         with:
           client-id: ${{ vars.PACKAGE_METADATA_APP_CLIENT_ID }}
           private-key: ${{ secrets.PACKAGE_METADATA_APP_PRIVATE_KEY }}
@@ -415,34 +80,25 @@ jobs:
           repositories: scoop-bucket
           permission-contents: write
           permission-pull-requests: write
+
       - name: Create channel pull requests
         env:
-          GH_TOKEN: ${{ github.token }}
           HOMEBREW_GH_TOKEN: ${{ steps.homebrew.outputs.token }}
           SCOOP_GH_TOKEN: ${{ steps.scoop.outputs.token }}
           TAG_NAME: ${{ inputs.tag }}
-          HOMEBREW_REPAIR_RUN_ID: ${{ inputs.homebrew_repair_run_id }}
-          HOMEBREW_REPAIR_ATTEMPT: ${{ inputs.homebrew_repair_attempt }}
-          SCOOP_REPAIR_RUN_ID: ${{ inputs.scoop_repair_run_id }}
-          SCOOP_REPAIR_ATTEMPT: ${{ inputs.scoop_repair_attempt }}
         run: |
           set -euo pipefail
           .venv/bin/python scripts/prepare_package_channels.py apply \
-            --tag "$TAG_NAME" --candidate-root "$RUNNER_TEMP/release" --schemas schemas \
-            --preflight-plan "$RUNNER_TEMP/channel-preflight.json" \
-            --homebrew-repair-root "$RUNNER_TEMP/repairs/homebrew" --scoop-repair-root "$RUNNER_TEMP/repairs/scoop" \
-            --homebrew-repair-run-id "$HOMEBREW_REPAIR_RUN_ID" --homebrew-repair-attempt "$HOMEBREW_REPAIR_ATTEMPT" \
-            --scoop-repair-run-id "$SCOOP_REPAIR_RUN_ID" --scoop-repair-attempt "$SCOOP_REPAIR_ATTEMPT" \
-            --homebrew-generator-commit "$(cat "$RUNNER_TEMP/repairs/homebrew/generator-commit" 2>/dev/null || true)" \
-            --scoop-generator-commit "$(cat "$RUNNER_TEMP/repairs/scoop/generator-commit" 2>/dev/null || true)"
-          test "automation/context-engine-$TAG_NAME" != ""
-          # No force push, no auto merge, no release mutation, or branch deletion is permitted.
+            --tag "$TAG_NAME" \
+            --candidate-root "$RUNNER_TEMP/release"
+
       - name: Revoke Homebrew installation token
         if: ${{ always() && steps.homebrew.outputs.token != '' }}
         env:
           GH_TOKEN: ${{ steps.homebrew.outputs.token }}
         run: |
           gh api --method DELETE -H "X-GitHub-Api-Version: 2026-03-10" /installation/token
+
       - name: Revoke Scoop installation token
         if: ${{ always() && steps.scoop.outputs.token != '' }}
         env:

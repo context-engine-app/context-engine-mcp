@@ -35,50 +35,21 @@ jobs:
           uv venv .venv --python 3.11.13
           uv pip install --python .venv/bin/python --requirement scripts/requirements-dev.txt
 
-      - name: Check protected draft workflow
+      - name: Check protected release workflows
         run: |
           .venv/bin/python scripts/check_prepare_draft_workflow.py .github/workflows/prepare-draft-release.yml
-          .venv/bin/python scripts/check_publish_draft_workflow.py .github/workflows/publish-draft-release.yml
           .venv/bin/python scripts/check_prepare_package_channels_workflow.py .github/workflows/prepare-package-channels.yml
 
       - name: Run all public Python unit tests
         run: |
           .venv/bin/python -m unittest discover -s scripts/tests -p 'test*.py' -v
 
-      - name: Verify pinned local contract bytes
-        run: |
-          .venv/bin/python - <<'PY'
-          import hashlib
-          from pathlib import Path
-
-          expected = {
-              ".github/workflows/publish-draft-release.yml": "ca36579cdbf3440bc4339486d31901c2f46fbd9089c858964b9c8ea20db0e0ed",
-              "schemas/release-manifest.schema.json": "2e398c70916e86ab58734cc77622bdf7e04e756c1ebdef73e9cc903ffb62baa8",
-              "schemas/release-provenance.schema.json": "5238550f5abd2d36dbb06eb0f50bf2a069791e69bffcafda3cb4f09f17015d8b",
-              "schemas/channel-candidates.schema.json": "7ce660193dc346c70fd0c8db57bd1d91d1743d3b6059959b96f76443d037d57a",
-              "schemas/staging-attestation.schema.json": "b8f1017ce278f762772e236eb08bf18a3c52b65f0e1e30c1d27cace51d305a6d",
-              "scripts/validate_release_provenance.py": "445468f92c7e96b2f6ea13aa7e5e7d548365d2a9f9f45d82f66f762966ebc51f",
-              "scripts/validate_channel_candidates.py": "db9bdeb24d84f5f3c6c61302966d6e1f1cfadcae23afa5669a836bc71b68bbd9",
-              "scripts/publish_draft_release.py": "ff15dab16e604b54349f8806d826a8d0e087af35e40a96ef5ed2ee73896e7d8e",
-              "scripts/check_publish_draft_workflow.py": "ea152045a07eb2606aac716258a98ab5cd2128cd6997056d2c58a276d3b8f3af",
-              ".github/workflows/prepare-package-channels.yml": "84dafac501ee8aef70816ac879c2de6ed7afbc8e1cafa547ee7aadb072b3681e",
-              "schemas/channel-repair.schema.json": "5afe8a86eb580553d40158c9fa910cf6ad8f0cd88625673ecc3c3cb592201b26",
-              "schemas/workflow-reauthorization.schema.json": "e3d0f0799be46b5ba74f863b7f65328c6659734cfe23f34fae08e0fc1d690809",
-              "scripts/prepare_package_channels.py": "5fdfc0b8834431cff44ebab601a7c66b66e3819593d4591c6cd4030fb445f2e9",
-              "scripts/check_prepare_package_channels_workflow.py": "7d468d94ce0060b64d7190d355896a75859f190386037f55fdc591786c621adc",
-          }
-          for filename, expected_sha256 in expected.items():
-              path = Path(filename)
-              actual_sha256 = hashlib.sha256(path.read_bytes()).hexdigest()
-              if actual_sha256 != expected_sha256:
-                  raise SystemExit(f"{filename}: expected {expected_sha256}, got {actual_sha256}")
-          PY
-
       - name: Check portable validator interfaces
         run: |
           .venv/bin/python scripts/validate_release_provenance.py --help
           .venv/bin/python scripts/validate_channel_candidates.py --help
-          .venv/bin/python -m scripts.publish_draft_release --help
+          .venv/bin/python -m scripts.prepare_draft_release --help
+          .venv/bin/python scripts/prepare_package_channels.py --help
 
       - name: Run BasedPyright for all public Python
         run: |

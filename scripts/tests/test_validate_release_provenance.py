@@ -23,17 +23,6 @@ from scripts import validate_release_provenance
 ReadCandidateArchive = Callable[
     [Path, Mapping[str, Mapping[str, object]], str], dict[str, bytes]
 ]
-BuildPlan = Callable[
-    [
-        Mapping[str, object],
-        Mapping[str, tuple[str, int]],
-        str,
-        str,
-        Mapping[str, object],
-        str,
-    ],
-    dict[str, object],
-]
 ValidateManifest = Callable[
     [Mapping[str, object], dict[str, object]], dict[str, object]
 ]
@@ -407,50 +396,6 @@ class PortableValidatorLayoutTests(unittest.TestCase):
                 names,
             )
 
-    def test_marker_profile_must_match_manifest(self) -> None:
-        manifest: dict[str, object] = {
-            "profile": "repository-bootstrap",
-            "tag": "repository-bootstrap-v1.2.3",
-            "version": "1.2.3",
-            "source_commit": "a" * 40,
-            "distribution_commit": "b" * 40,
-            "source_workflows": {"release": {"sha256": "c" * 64}},
-            "workflow_bindings": {"draft": {"sha256": "d" * 64}},
-        }
-        marker: dict[str, object] = {
-            key: None for key in validate_release_provenance.MARKER_KEYS
-        }
-        marker.update(
-            {
-                "marker_version": 1,
-                "profile": "desktop",
-                "tag": manifest["tag"],
-                "release_version": manifest["version"],
-                "source_commit": manifest["source_commit"],
-                "distribution_commit": manifest["distribution_commit"],
-                "public_workflow_sha256": "d" * 64,
-                "source_workflow_sha256": "c" * 64,
-                "release_asset_set_sha256": "e" * 64,
-                "staging_attestation_sha256": "f" * 64,
-                "source_run_id": 1,
-                "source_run_attempt": 1,
-                "staging_artifact_id": 1,
-                "staging_artifact_digest": "sha256:" + "1" * 64,
-                "staging_artifact_expires_at": "2099-01-01T00:00:00Z",
-                "state": "preparing",
-            }
-        )
-        validate_marker = cast(
-            Callable[
-                [Mapping[str, object], Mapping[str, object], str], dict[str, object]
-            ],
-            getattr(validate_release_provenance, "_validate_marker"),
-        )
-        with self.assertRaises(
-            validate_release_provenance.ReleaseProvenanceValidationError
-        ):
-            _ = validate_marker(marker, manifest, "e" * 64)
-
     def test_checksums_follow_the_supplied_asset_closure(self) -> None:
         validate_checksums = cast(
             Callable[[Path, Mapping[str, tuple[str, int]]], None],
@@ -488,20 +433,6 @@ class PortableValidatorLayoutTests(unittest.TestCase):
                 return_value=({"bundle": True}, b"{}"),
             ):
                 validate_checksums(root, facts)
-
-    def test_package_channels_mode_does_not_require_a_public_marker(self) -> None:
-        arguments = validate_release_provenance.parse_arguments(
-            [
-                "package-channels",
-                "--root",
-                "/tmp/release",
-                "--schemas",
-                "/tmp/schemas",
-                "--output-plan",
-                "-",
-            ]
-        )
-        self.assertEqual(cast(str, arguments.mode), "package-channels")
 
     def test_repository_bootstrap_profile_requires_no_candidate_files(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -1522,184 +1453,18 @@ class PortableValidatorLayoutTests(unittest.TestCase):
             ):
                 validate_root_closure(root, set())
 
-    def test_package_channel_plan_binds_channel_workflow_and_profile(self) -> None:
-        manifest = _repository_bootstrap_manifest()
-        channels = cast(
-            Mapping[str, object],
-            cast(Mapping[str, object], manifest["workflow_bindings"])["channels"],
-        )
-        build_plan = cast(
-            BuildPlan,
-            getattr(validate_release_provenance, "_plan"),
-        )
-
-        plan = build_plan(manifest, {}, "1" * 64, "", {}, "channels")
-
-        self.assertEqual(plan["profile"], "repository-bootstrap")
-        self.assertEqual(plan["public_workflow"], channels)
-
-    def test_public_publish_plan_requires_atomic_orchestration_bindings(self) -> None:
-        draft = {
-            "path": ".github/workflows/prepare-draft-release.yml",
-            "commit": "a" * 40,
-            "sha256": "b" * 64,
-        }
-        publish = {
-            "path": ".github/workflows/publish-draft-release.yml",
-            "commit": "a" * 40,
-            "sha256": "c" * 64,
-        }
-        channels = {
-            "path": ".github/workflows/prepare-package-channels.yml",
-            "commit": "a" * 40,
-            "sha256": "d" * 64,
-        }
-        authorized_stages: list[object] = [
-            "source-release",
-            "public-draft",
-            "public-publish",
-            "package-channels",
-        ]
-        workflow_bindings: dict[str, object] = {
-            "draft": draft,
-            "publish": publish,
-            "channels": channels,
-        }
-        manifest: dict[str, object] = {
-            "authorized_stages": authorized_stages,
-            "workflow_bindings": workflow_bindings,
-        }
-        marker = {"verified_run_id": 55, "verified_run_attempt": 2}
-
-        plan = validate_release_provenance.build_publication_plan(
-            {"distribution_commit": "a" * 40, "public_workflow": draft},
-            manifest,
-            marker,
-        )
-
-        self.assertEqual(
-            plan["public_workflows"],
-            {"draft": draft, "publish": publish, "channels": channels},
-        )
-        self.assertEqual(plan["draft_run"], {"id": 55, "attempt": 2})
-        for mutation in ("missing", "reordered"):
-            with self.subTest(mutation=mutation):
-                invalid_bindings = workflow_bindings.copy()
-                invalid_stages = authorized_stages.copy()
-                invalid: dict[str, object] = {
-                    "workflow_bindings": invalid_bindings,
-                    "authorized_stages": invalid_stages,
-                }
-                if mutation == "missing":
-                    del invalid_bindings["channels"]
-                else:
-                    invalid_stages[2:4] = [
-                        "package-channels",
-                        "public-publish",
-                    ]
-                with self.assertRaises(
-                    validate_release_provenance.ReleaseProvenanceValidationError
-                ):
-                    _ = validate_release_provenance.build_publication_plan(
-                        {"distribution_commit": "a" * 40, "public_workflow": draft},
-                        invalid,
-                        marker,
-                    )
-
-    def test_workflow_reauthorization_requires_exact_tag_ref_and_evidence(self) -> None:
-        original = {
-            "path": ".github/workflows/publish-draft-release.yml",
-            "commit": "a" * 40,
-            "sha256": "b" * 64,
-        }
-        replacement = {
-            "path": ".github/workflows/publish-draft-release.yml",
-            "commit": "c" * 40,
-            "sha256": "d" * 64,
-        }
-        record = {
-            "schema_version": 1,
-            "tag": "v1.2.3",
-            "stage": "public-publish",
-            "execution_ref": "refs/tags/release-reauthorization/v1.2.3/public-publish/"
-            + "c" * 40,
-            "original": original,
-            "replacement": replacement,
-            "reason": "critical workflow repair",
-            "approval_evidence": {
-                "issue": "https://github.com/context-engine-app/context-engine-mcp/issues/1"
-            },
-        }
-        _ = validate_release_provenance.validate_workflow_reauthorization(record)
-        invalid = dict(record)
-        invalid["execution_ref"] = "refs/tags/v1.2.3"
-        with self.assertRaises(
-            validate_release_provenance.ReleaseProvenanceValidationError
-        ):
-            _ = validate_release_provenance.validate_workflow_reauthorization(invalid)
-
-    def test_workflow_reauthorization_accepts_bootstrap_tag_and_exact_ref(self) -> None:
-        original = {
-            "path": ".github/workflows/publish-draft-release.yml",
-            "commit": "a" * 40,
-            "sha256": "b" * 64,
-        }
-        replacement = {
-            "path": ".github/workflows/publish-draft-release.yml",
-            "commit": "c" * 40,
-            "sha256": "d" * 64,
-        }
-        tag = "repository-bootstrap-v1.2.3"
-        record = {
-            "schema_version": 1,
-            "tag": tag,
-            "stage": "public-publish",
-            "execution_ref": f"refs/tags/release-reauthorization/{tag}/public-publish/"
-            + "c" * 40,
-            "original": original,
-            "replacement": replacement,
-            "reason": "critical workflow repair",
-            "approval_evidence": {
-                "issue": "https://github.com/context-engine-app/context-engine-mcp/issues/1"
-            },
-        }
-        result = validate_release_provenance.validate_workflow_reauthorization(record)
-        self.assertEqual(result["tag"], tag)
-
-        schema_path = (
-            Path(__file__).parents[2]
-            / "schemas"
-            / "workflow-reauthorization.schema.json"
-        )
-        schema = cast(
-            dict[str, object],
-            validate_release_provenance.parse_json(
-                schema_path.read_text(encoding="utf-8"), str(schema_path)
-            ),
-        )
-        validate_schema = cast(
-            Callable[[Mapping[str, object], dict[str, object], str], None],
-            getattr(validate_release_provenance, "_validate_schema"),
-        )
-        validate_schema(record, schema, "workflow reauthorization")
-
-        mismatched = dict(record)
-        mismatched["execution_ref"] = (
-            "refs/tags/release-reauthorization/v1.2.3/public-publish/" + "c" * 40
-        )
-        with self.assertRaises(
-            validate_release_provenance.ReleaseProvenanceValidationError
-        ):
-            _ = validate_release_provenance.validate_workflow_reauthorization(
-                mismatched
-            )
-
     def test_public_layout_imports_both_validators(self) -> None:
         self.assertTrue(callable(validate_release_provenance.validate_staging))
-        self.assertTrue(callable(validate_release_provenance.validate_public_draft))
         self.assertTrue(
             callable(validate_channel_candidates.validate_channel_candidates)
         )
+        for obsolete_name in (
+            "build_publication_plan",
+            "validate_package_channels",
+            "validate_public_draft",
+            "validate_public_publish",
+        ):
+            self.assertFalse(hasattr(validate_release_provenance, obsolete_name))
 
     def test_validators_pin_the_canonical_schema_bytes(self) -> None:
         self.assertEqual(

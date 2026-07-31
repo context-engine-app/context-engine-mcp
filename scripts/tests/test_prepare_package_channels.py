@@ -234,7 +234,7 @@ class FakeTransport:
         raise AssertionError(f"unexpected API request: {method} {path}")
 
 
-class PublicPreflightTransport:
+class RepositoryTransport:
     """Public unauthenticated transport fixture for destination preflight."""
 
     def __init__(self, *, scoop: bool = True) -> None:
@@ -327,6 +327,7 @@ class TestableChannelCoordinator(channels.ChannelCoordinator):
 def _candidate_root(directory: Path, *, profile: str = "desktop") -> Path:
     homebrew = b"class Formula\n"
     scoop = b'{"version":"1.2.3"}\n'
+    manifest = b"{}\n"
     files = {
         "Formula/context-engine.rb": homebrew,
         "bucket/context-engine.json": scoop,
@@ -349,7 +350,7 @@ def _candidate_root(directory: Path, *, profile: str = "desktop") -> Path:
         "release_tag": "v1.2.3",
         "version": "1.2.3",
         "profile": profile,
-        "source_manifest_sha256": "d" * 64,
+        "source_manifest_sha256": hashlib.sha256(manifest).hexdigest(),
         "candidates": [
             {
                 "kind": "homebrew",
@@ -377,6 +378,7 @@ def _candidate_root(directory: Path, *, profile: str = "desktop") -> Path:
         json.dumps(candidates), encoding="utf-8"
     )
     _ = (directory / "channel-candidates.tar.gz").write_bytes(archive_bytes)
+    _ = (directory / "release-manifest.json").write_bytes(manifest)
     return directory
 
 
@@ -387,35 +389,9 @@ class PackageChannelTests(unittest.TestCase):
             candidates = channels.load_baseline_candidates(root, expected_tag="v1.2.3")
             self.assertEqual(candidates.profile, "desktop-linux")
 
-    def test_repair_schema_is_canonical_private_contract(self) -> None:
-        self.assertEqual(
-            channels.CHANNEL_REPAIR_SCHEMA_SHA256,
-            "5afe8a86eb580553d40158c9fa910cf6ad8f0cd88625673ecc3c3cb592201b26",
-        )
-        schema_path = (
-            Path(__file__).parents[2] / "schemas" / "channel-repair.schema.json"
-        )
-        self.assertEqual(
-            hashlib.sha256(schema_path.read_bytes()).hexdigest(),
-            channels.CHANNEL_REPAIR_SCHEMA_SHA256,
-        )
-
-    def test_apply_cli_requires_anonymous_preflight_plan(self) -> None:
-        with tempfile.TemporaryDirectory() as temporary:
-            root = _candidate_root(Path(temporary))
-            error = io.StringIO()
-            with contextlib.redirect_stderr(error):
-                result = channels.main(
-                    ["apply", "--tag", "v1.2.3", "--candidate-root", str(root)]
-                )
-            self.assertEqual(result, 1)
-            self.assertIn("preflight plan is required", error.getvalue())
-
     def test_apply_cli_rejects_shared_token_without_scoped_tokens(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = _candidate_root(Path(temporary))
-            plan = Path(temporary) / "preflight.json"
-            _ = plan.write_text("{}", encoding="utf-8")
             error = io.StringIO()
             with mock.patch.dict(os.environ, {"GH_TOKEN": "shared"}, clear=False):
                 _ = os.environ.pop("HOMEBREW_GH_TOKEN", None)
@@ -433,64 +409,10 @@ class PackageChannelTests(unittest.TestCase):
                                 "v1.2.3",
                                 "--candidate-root",
                                 str(root),
-                                "--preflight-plan",
-                                str(plan),
                             ]
                         )
             self.assertEqual(result, 1)
             self.assertIn("HOMEBREW_GH_TOKEN is required", error.getvalue())
-
-    def test_nonbaseline_repair_requires_verified_generator_commit(self) -> None:
-        data = b"baseline"
-        digest = hashlib.sha256(data).hexdigest()
-        baseline = channels.CandidateSet(
-            "v1.2.3",
-            "1.2.3",
-            "desktop",
-            "a" * 64,
-            {
-                "Formula/context-engine.rb": channels.CandidateFile(
-                    "Formula/context-engine.rb", data, digest, len(data), "0644"
-                )
-            },
-            {},
-            {"source_commit": "b" * 40},
-        )
-        repair = {
-            "release_tag": "v1.2.3",
-            "version": "1.2.3",
-            "destination": {
-                "kind": "homebrew",
-                "repository": "context-engine-app/homebrew-tap",
-                "channel": "stable",
-            },
-            "baseline": {"path": "Formula/context-engine.rb", "sha256": digest},
-            "replacement": {
-                "path": "Formula/context-engine.rb",
-                "sha256": "c" * 64,
-            },
-            "generator": {"release_source_commit": "b" * 40},
-        }
-        with self.assertRaisesRegex(
-            channels.ChannelPlanError, "verified repair generator commit is required"
-        ):
-            channels.validate_locked_fields(repair, baseline, destination="homebrew")
-
-    def test_binding_steps_have_read_token_before_github_api(self) -> None:
-        workflow = (
-            Path(__file__).parents[2]
-            / ".github"
-            / "workflows"
-            / "prepare-package-channels.yml"
-        ).read_text(encoding="utf-8")
-        self.assertGreaterEqual(workflow.count("GH_TOKEN: ${{ github.token }}"), 2)
-        self.assertIn(
-            "repair_sha256=_sha256(repair_bytes)",
-            Path(__file__)
-            .parents[1]
-            .joinpath("prepare_package_channels.py")
-            .read_text(encoding="utf-8"),
-        )
 
     def test_contents_api_wrapped_base64_is_decoded_strictly(self) -> None:
         data = b"class Formula\n"
@@ -652,53 +574,16 @@ class PackageChannelTests(unittest.TestCase):
     def test_branch_uses_automation_namespace(self) -> None:
         self.assertEqual(channels.BRANCH_PREFIX, "automation/context-engine-")
 
-    def test_anonymous_preflight_captures_both_destination_heads(self) -> None:
-        transport = PublicPreflightTransport()
-        coordinator = channels.ChannelCoordinator(transport)
-
-        plan = coordinator.preflight()
-
-        self.assertEqual(plan["status"], "preflight")
-        destinations = cast(dict[str, object], plan["destinations"])
-        for destination in ("homebrew", "scoop"):
-            snapshot = cast(dict[str, object], destinations[destination])
-            self.assertEqual(snapshot["default_sha"], "a" * 40)
-        self.assertTrue(
-            all(
-                query is None or "Authorization" not in query
-                for _, _, query in transport.calls
+    def test_prepare_fetches_bootstrap_and_candidate_at_resolved_sha(self) -> None:
+        transport = RepositoryTransport()
+        transport.candidate_data["Formula/context-engine.rb"] = b"class Formula\n"
+        transport.candidate_data["bucket/context-engine.json"] = (
+            b'{"version":"1.2.3"}\n'
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            _ = channels.ChannelCoordinator(transport).prepare(
+                tag="v1.2.3", candidate_root=_candidate_root(Path(temporary))
             )
-        )
-
-    def test_anonymous_preflight_missing_scoop_has_no_writes(self) -> None:
-        transport = PublicPreflightTransport(scoop=False)
-        coordinator = channels.ChannelCoordinator(transport)
-
-        with self.assertRaises(channels.ChannelPlanError):
-            _ = coordinator.preflight()
-        self.assertEqual(
-            [method for method, _, _ in transport.calls if method != "GET"], []
-        )
-
-    def test_authenticated_preflight_rejects_repository_state_change(self) -> None:
-        transport = PublicPreflightTransport()
-        coordinator = channels.ChannelCoordinator(transport)
-        plan = coordinator.preflight(tag="v1.2.3")
-        transport.repository_private = True
-        with self.assertRaises(channels.ChannelMutationError):
-            coordinator.verify_preflight(plan, tag="v1.2.3")
-
-    def test_authenticated_preflight_rejects_default_branch_race(self) -> None:
-        transport = PublicPreflightTransport()
-        coordinator = channels.ChannelCoordinator(transport)
-        plan = coordinator.preflight(tag="v1.2.3")
-        transport.default_sha = "c" * 40
-        with self.assertRaises(channels.ChannelMutationError):
-            coordinator.verify_preflight(plan, tag="v1.2.3")
-
-    def test_preflight_fetches_bootstrap_and_candidate_at_resolved_sha(self) -> None:
-        transport = PublicPreflightTransport()
-        _ = channels.ChannelCoordinator(transport).preflight(tag="v1.2.3")
         content_calls = [
             query for _, path, query in transport.calls if "/contents/" in path
         ]
@@ -714,7 +599,7 @@ class PackageChannelTests(unittest.TestCase):
             len(data),
             "0644",
         )
-        transport = PublicPreflightTransport()
+        transport = RepositoryTransport()
         transport.candidate_data[desired.path] = data
         transport.candidate_data["bucket/context-engine.json"] = (
             b'{"version":"1.2.3"}\n'
@@ -739,7 +624,7 @@ class PackageChannelTests(unittest.TestCase):
             ("repository_archived", True),
         ):
             with self.subTest(attribute=attribute):
-                transport = PublicPreflightTransport()
+                transport = RepositoryTransport()
                 setattr(transport, attribute, value)
                 with tempfile.TemporaryDirectory() as temporary:
                     with self.assertRaises(channels.ChannelPlanError):
@@ -747,38 +632,6 @@ class PackageChannelTests(unittest.TestCase):
                             tag="v1.2.3",
                             candidate_root=_candidate_root(Path(temporary)),
                         )
-
-    def test_prepare_rejects_mutation_candidate_binding_change(self) -> None:
-        with tempfile.TemporaryDirectory() as temporary:
-            root = _candidate_root(Path(temporary))
-            transport = PublicPreflightTransport()
-            coordinator = channels.ChannelCoordinator(transport)
-            plan = coordinator.preflight(tag="v1.2.3")
-            transport.candidate_data["Formula/context-engine.rb"] = b"stale\n"
-            with self.assertRaises(channels.ChannelMutationError):
-                _ = coordinator.prepare(
-                    tag="v1.2.3", candidate_root=root, preflight_plan=plan
-                )
-
-    def test_prepare_rejects_mutation_bootstrap_binding_change(self) -> None:
-        with tempfile.TemporaryDirectory() as temporary:
-            root = _candidate_root(Path(temporary))
-            transport = PublicPreflightTransport()
-            coordinator = channels.ChannelCoordinator(transport)
-            plan = coordinator.preflight(tag="v1.2.3")
-            transport.bootstrap_sha = "c" * 40
-            with self.assertRaises(channels.ChannelMutationError):
-                _ = coordinator.prepare(
-                    tag="v1.2.3", candidate_root=root, preflight_plan=plan
-                )
-
-    def test_repair_pair_requires_both_positive_or_both_empty(self) -> None:
-        self.assertTrue(channels.parse_repair_pair("", "").baseline)
-        self.assertEqual(channels.parse_repair_pair("12", "3").run_id, 12)
-        for pair in (("12", ""), ("", "3"), ("0", "1"), ("x", "1")):
-            with self.subTest(pair=pair):
-                with self.assertRaises(channels.ChannelPlanError):
-                    _ = channels.parse_repair_pair(*pair)
 
     def test_missing_scoop_is_rejected_before_any_write(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -889,43 +742,6 @@ class PackageChannelTests(unittest.TestCase):
             )
             with self.assertRaises(channels.ChannelPlanError):
                 _ = channels.load_baseline_candidates(root, expected_tag="v1.2.3")
-
-    def test_repair_metadata_without_candidate_bytes_fails_closed(self) -> None:
-        with tempfile.TemporaryDirectory() as temporary:
-            root = _candidate_root(Path(temporary))
-            baseline = channels.load_baseline_candidates(root, expected_tag="v1.2.3")
-            repair_root = Path(temporary) / "repair"
-            repair_root.mkdir()
-            record = {
-                "release_tag": "v1.2.3",
-                "version": "1.2.3",
-                "profile": "desktop",
-                "destination": "homebrew",
-                "source_run": {"id": 12, "attempt": 3},
-                "locked_fields": {
-                    "release_tag": "v1.2.3",
-                    "version": "1.2.3",
-                    "profile": "desktop",
-                    "source_manifest_sha256": baseline.source_manifest_sha256,
-                    "destination": "homebrew",
-                },
-                "replacement": {
-                    "path": "Formula/context-engine.rb",
-                    "sha256": "e" * 64,
-                    "size": 1,
-                    "mode": "0644",
-                },
-            }
-            _ = (repair_root / "channel-repair.json").write_text(
-                json.dumps(record), encoding="utf-8"
-            )
-            with self.assertRaises(channels.ChannelPlanError):
-                _ = channels.load_repair_candidate(
-                    repair_root,
-                    channels.parse_repair_pair("12", "3"),
-                    baseline,
-                    destination="homebrew",
-                )
 
     def test_resumable_branch_with_extra_changed_path_fails(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
