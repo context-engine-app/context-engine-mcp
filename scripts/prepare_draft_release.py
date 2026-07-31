@@ -6,6 +6,9 @@ assets.  This module validates those bytes, creates or resumes one draft,
 checks GitHub's asset metadata, and performs the single draft-to-published
 transition.  A rerun is read-only when the exact immutable release already
 exists; any metadata mismatch fails closed.
+
+The caller must verify that the existing public tag points to the plan's
+distribution commit before invoking this publisher.
 """
 
 from __future__ import annotations
@@ -421,7 +424,6 @@ class GitHubClient:
     def create_draft(self, plan: ValidatedPlan) -> dict[str, object]:
         body = {
             "tag_name": plan.tag,
-            "target_commitish": plan.distribution_commit,
             "name": plan.tag,
             "body": "Release notes will be added manually before publication.",
             "draft": True,
@@ -453,8 +455,8 @@ class GitHubClient:
             raise PublishError("GitHub asset upload response is not an object")
         return cast(dict[str, object], decoded)
 
-    def publish(self, release_id: int, tag: str, target: str) -> dict[str, object]:
-        body = {"draft": False, "tag_name": tag, "target_commitish": target}
+    def publish(self, release_id: int, tag: str) -> dict[str, object]:
+        body = {"draft": False, "tag_name": tag}
         status, _, payload = self.json(
             "PATCH", self._release_path(release_id), body=body
         )
@@ -534,7 +536,6 @@ def publish(
             release.get("immutable") is not True
             or release.get("tag_name") != plan.tag
             or release.get("name") != plan.tag
-            or release.get("target_commitish") != plan.distribution_commit
         ):
             raise ReleaseMismatchError(
                 "existing published release identity differs from the plan"
@@ -551,7 +552,6 @@ def publish(
         draft is not True
         or release.get("prerelease") is not False
         or release.get("name") != plan.tag
-        or release.get("target_commitish") != plan.distribution_commit
         or (
             release.get("tag_name") != plan.tag
             and not (
@@ -569,7 +569,7 @@ def publish(
                 f"GitHub returned unexpected upload metadata: {name}"
             )
     _ = _assert_metadata(client.assets(release_id), plan)
-    published = client.publish(release_id, plan.tag, plan.distribution_commit)
+    published = client.publish(release_id, plan.tag)
     if published.get("draft") is not False:
         raise ReleaseMismatchError("GitHub did not publish the release")
     final = client.release_by_id(release_id)
@@ -579,7 +579,6 @@ def publish(
         or final.get("published_at") is None
         or final.get("tag_name") != plan.tag
         or final.get("name") != plan.tag
-        or final.get("target_commitish") != plan.distribution_commit
     ):
         raise ReleaseMismatchError("published release identity is not immutable")
     _ = _assert_metadata(client.assets(release_id), plan)

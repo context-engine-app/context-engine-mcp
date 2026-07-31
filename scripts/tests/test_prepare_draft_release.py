@@ -6,6 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from typing import cast
+from unittest import mock
 
 from typing_extensions import override
 
@@ -33,7 +34,6 @@ class FakeClient(publisher.GitHubClient):
             "id": 7,
             "tag_name": plan.tag,
             "name": plan.tag,
-            "target_commitish": plan.distribution_commit,
             "draft": True,
             "prerelease": False,
         }
@@ -71,9 +71,8 @@ class FakeClient(publisher.GitHubClient):
         return row
 
     @override
-    def publish(self, release_id: int, tag: str, target: str) -> dict[str, object]:
+    def publish(self, release_id: int, tag: str) -> dict[str, object]:
         _ = release_id
-        _ = target
         self.publications += 1
         if self.release is None:
             raise AssertionError("release was not created")
@@ -160,6 +159,52 @@ def _fixture() -> tuple[Path, dict[str, object]]:
 
 
 class PublisherTests(unittest.TestCase):
+    def test_create_draft_uses_the_prevalidated_existing_tag(self) -> None:
+        root, raw_plan = _fixture()
+        plan_path = root.parent / "plan.json"
+        _ = plan_path.write_text(json.dumps(raw_plan), encoding="utf-8")
+        plan = publisher.ValidatedPlan.from_file(plan_path)
+        client = publisher.GitHubClient(token="test")
+        with mock.patch.object(
+            client,
+            "json",
+            return_value=(201, {}, {"id": 7}),
+        ) as request_json:
+            _ = client.create_draft(plan)
+        request_json.assert_called_once()
+        body = cast(object, request_json.call_args.kwargs.get("body"))
+        self.assertIsInstance(body, dict)
+        self.assertNotIn("target_commitish", cast(dict[str, object], body))
+
+    def test_publish_draft_uses_the_prevalidated_existing_tag(self) -> None:
+        client = publisher.GitHubClient(token="test")
+        with mock.patch.object(
+            client,
+            "json",
+            return_value=(200, {}, {"id": 7, "draft": False}),
+        ) as request_json:
+            _ = client.publish(7, "v0.1.0")
+        request_json.assert_called_once()
+        body = cast(object, request_json.call_args.kwargs.get("body"))
+        self.assertIsInstance(body, dict)
+        self.assertNotIn("target_commitish", cast(dict[str, object], body))
+
+    def test_publish_uses_the_prevalidated_tag_as_release_identity(self) -> None:
+        root, raw_plan = _fixture()
+        plan_path = root.parent / "plan.json"
+        _ = plan_path.write_text(json.dumps(raw_plan), encoding="utf-8")
+        plan = publisher.ValidatedPlan.from_file(plan_path)
+        client = FakeClient()
+        client.release = {
+            "id": 7,
+            "tag_name": plan.tag,
+            "name": plan.tag,
+            "draft": True,
+            "prerelease": False,
+        }
+        result = publisher.publish(plan, root, client)
+        self.assertEqual(result["status"], "published")
+
     def test_plan_rejects_changed_asset_facts(self) -> None:
         root, plan = _fixture()
         assets = plan["assets"]
