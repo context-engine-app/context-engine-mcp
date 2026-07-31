@@ -42,6 +42,19 @@ class ReleaseWorkflowCheckerTests(unittest.TestCase):
             errors = check_workflow(Path(handle.name))
         self.assertTrue(any("protected main" in error for error in errors))
 
+    def test_unknown_publisher_credentials_are_rejected(self) -> None:
+        source = WORKFLOW.read_text(encoding="utf-8").replace(
+            "IMMUTABLE_RELEASE_PUBLISHER_APP_CLIENT_ID",
+            "UNKNOWN_PUBLISHER_APP_CLIENT_ID",
+        )
+        with tempfile.NamedTemporaryFile(
+            "w", suffix=".yml", encoding="utf-8"
+        ) as handle:
+            _ = handle.write(source)
+            handle.flush()
+            errors = check_workflow(Path(handle.name))
+        self.assertTrue(any("publisher credentials" in error for error in errors))
+
     def test_two_jobs_are_rejected(self) -> None:
         source = WORKFLOW.read_text(encoding="utf-8").replace(
             "  release-publish:\n",

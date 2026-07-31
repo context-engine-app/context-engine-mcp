@@ -143,6 +143,19 @@ def check_workflow(path: Path) -> list[str]:
         revoke_index = names.index("Revoke public publisher token")
         if not publisher_index < publish_index < revoke_index:
             raise WorkflowError("publisher token must surround the one mutation")
+        publisher_inputs = _mapping(
+            steps[publisher_index].get("with"), "publisher token inputs"
+        )
+        if publisher_inputs != {
+            "client-id": "${{ vars.IMMUTABLE_RELEASE_PUBLISHER_APP_CLIENT_ID }}",
+            "private-key": "${{ secrets.IMMUTABLE_RELEASE_PUBLISHER_APP_PRIVATE_KEY }}",
+            "owner": "context-engine-app",
+            "repositories": "context-engine-mcp",
+            "permission-contents": "write",
+        }:
+            raise WorkflowError(
+                "publisher credentials and scope must match release-publish"
+            )
         publish_step = steps[publish_index]
         publish_env = _mapping(publish_step.get("env"), "publisher environment")
         if publish_env.get("GH_TOKEN") != "${{ steps.publisher.outputs.token }}":

@@ -183,8 +183,8 @@ jobs:
         id: publisher
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v2.2.0
         with:
-          client-id: ${{ vars.RELEASE_PUBLISHER_APP_CLIENT_ID }}
-          private-key: ${{ secrets.RELEASE_PUBLISHER_APP_PRIVATE_KEY }}
+          client-id: ${{ vars.IMMUTABLE_RELEASE_PUBLISHER_APP_CLIENT_ID }}
+          private-key: ${{ secrets.IMMUTABLE_RELEASE_PUBLISHER_APP_PRIVATE_KEY }}
           owner: context-engine-app
           repositories: context-engine-mcp
           permission-contents: write
