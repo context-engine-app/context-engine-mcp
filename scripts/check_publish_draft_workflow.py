@@ -191,6 +191,8 @@ def _check_preflight(job: Mapping[str, object], errors: list[str]) -> None:
     if _step_names(steps, "jobs.preflight", errors) != EXPECTED_PREFLIGHT_STEPS:
         errors.append("preflight steps must match the exact approved sequence")
     commands = "\n".join(_step_run(step) for step in steps)
+    if '.name == "Prepare draft release"' in commands:
+        errors.append("preflight must not assume a static draft run name")
     _check_reauthorization_refs(
         commands, "public-publish", "publish-draft-release.yml", errors
     )

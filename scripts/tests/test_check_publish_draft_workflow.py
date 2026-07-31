@@ -21,6 +21,19 @@ class PublishDraftWorkflowCheckerTests(unittest.TestCase):
     def test_valid_workflow_passes(self) -> None:
         self.assertEqual(checker.check_workflow(FIXTURE), [])
 
+    def test_preflight_rejects_a_static_draft_run_name(self) -> None:
+        errors = self._check_mutation(
+            lambda value: value.replace(
+                '             .path == ".github/workflows/prepare-draft-release.yml" and\n',
+                '             .name == "Prepare draft release" and\n'
+                + '             .path == ".github/workflows/prepare-draft-release.yml" and\n',
+                1,
+            )
+        )
+        self.assertTrue(
+            any("must not assume a static draft run name" in error for error in errors)
+        )
+
     def test_workflow_token_permissions_include_attestation_verification(
         self,
     ) -> None:

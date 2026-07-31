@@ -213,7 +213,6 @@ jobs:
             --argjson run_attempt "$draft_run_attempt" \
             '.id == $run_id and
              .run_attempt == $run_attempt and
-             .name == "Prepare draft release" and
              .path == ".github/workflows/prepare-draft-release.yml" and
              .event == "workflow_dispatch" and
              .status == "completed" and
