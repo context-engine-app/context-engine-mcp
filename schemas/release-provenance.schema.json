@@ -396,7 +396,7 @@
       "additionalProperties": false,
       "required": ["kind", "filename", "pass1_sha256", "pass2_sha256", "identical", "final_sha256", "signed", "verified"],
       "properties": {
-        "kind": { "enum": ["archive", "native-package", "bootstrap-package", "candidate-archive"] },
+        "kind": { "enum": ["native-package", "bootstrap-package", "candidate-archive"] },
         "filename": { "type": "string", "pattern": "^[^/\\\\]+$" },
         "pass1_sha256": { "$ref": "#/$defs/sha256" },
         "pass2_sha256": { "$ref": "#/$defs/sha256" },

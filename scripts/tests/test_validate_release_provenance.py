@@ -122,7 +122,7 @@ def _repository_bootstrap_manifest() -> dict[str, object]:
         "schemas": {
             "release_provenance": {
                 "path": "packaging/release-provenance.schema.json",
-                "sha256": "341d27e2074aebfdc539ef157d9d8fa449bff5504f7fb55014b74983c1506130",
+                "sha256": "c13bf530c6fe4befc00b398c2274b3ffeb7e6cbcfb78c38bc1a5da0b8bf4db60",
             },
         },
         "source_workflows": {"release": source_workflow},
@@ -230,7 +230,7 @@ def _cli_manifest(profile: str) -> dict[str, object]:
             "id": "context-engine",
             "version": "1.2.3",
             "filename": "context-engine_1.2.3-1_amd64.deb",
-            "suite": "stable",
+            "suite": "linux",
             "package_format": "deb",
             "architecture": "amd64",
         },
@@ -238,7 +238,7 @@ def _cli_manifest(profile: str) -> dict[str, object]:
             "id": "context-engine",
             "version": "1.2.3",
             "filename": "context-engine-1.2.3-1.x86_64.rpm",
-            "suite": "stable",
+            "suite": "linux",
             "package_format": "rpm",
             "architecture": "x86_64",
         },
@@ -306,17 +306,14 @@ def _cli_manifest(profile: str) -> dict[str, object]:
                 }
             )
     if profile == "desktop-linux":
-        linux_target = "x86_64-unknown-linux-gnu"
         native_package_artifacts: list[dict[str, object]] = []
         for package_index, native_package in enumerate(native_packages):
             filename = cast(str, native_package["filename"])
             native_package_artifacts.append(
                 {
                     "kind": "native-package",
-                    "payload_id": f"context-engine-{linux_target}",
                     "platform": "linux",
-                    "architecture": "x86_64",
-                    "target": linux_target,
+                    "architecture": native_package["architecture"],
                     "package_id": native_package["id"],
                     "package_format": native_package["package_format"],
                     "package_suite": native_package["suite"],
@@ -919,6 +916,19 @@ class PortableValidatorLayoutTests(unittest.TestCase):
             _ = validate_manifest(invalid, schema)
 
         invalid = deepcopy(_cli_manifest("desktop-linux"))
+        native_packages = [
+            cast(dict[str, object], value)
+            for value in cast(list[object], invalid["artifacts"])
+            if cast(dict[str, object], value)["kind"] == "native-package"
+        ]
+        native_packages[0]["architecture"] = "x86_64"
+        native_packages[1]["architecture"] = "amd64"
+        with self.assertRaises(
+            validate_release_provenance.ReleaseProvenanceValidationError
+        ):
+            _ = validate_manifest(invalid, schema)
+
+        invalid = deepcopy(_cli_manifest("desktop-linux"))
         bootstrap_packages = cast(
             list[object], cast(dict[str, object], invalid["bootstrap"])["packages"]
         )
@@ -1005,9 +1015,13 @@ class PortableValidatorLayoutTests(unittest.TestCase):
                     cast(list[object], _cli_manifest("desktop")["artifacts"])[0]
                 )
                 artifact_mapping = cast(dict[str, object], artifact)
+                _ = artifact_mapping.pop("payload_id", None)
+                _ = artifact_mapping.pop("target", None)
                 artifact_mapping.update(
                     {
                         "kind": "native-package",
+                        "platform": "linux",
+                        "architecture": "amd64",
                         "package_id": "context-engine",
                         "package_format": "deb",
                         "package_suite": "stable",
@@ -1678,11 +1692,11 @@ class PortableValidatorLayoutTests(unittest.TestCase):
     def test_validators_pin_the_canonical_schema_bytes(self) -> None:
         self.assertEqual(
             validate_release_provenance.MANIFEST_SCHEMA_SHA256,
-            "1b793cdebab9c3741eccd3aa280c4bb32ec0555fa1aa43c0f09210842a82d76c",
+            "2e398c70916e86ab58734cc77622bdf7e04e756c1ebdef73e9cc903ffb62baa8",
         )
         self.assertEqual(
             validate_release_provenance.PROVENANCE_SCHEMA_SHA256,
-            "341d27e2074aebfdc539ef157d9d8fa449bff5504f7fb55014b74983c1506130",
+            "c13bf530c6fe4befc00b398c2274b3ffeb7e6cbcfb78c38bc1a5da0b8bf4db60",
         )
         self.assertEqual(
             validate_release_provenance.STAGING_SCHEMA_SHA256,
@@ -1694,7 +1708,7 @@ class PortableValidatorLayoutTests(unittest.TestCase):
         )
         self.assertEqual(
             validate_channel_candidates.MANIFEST_SCHEMA_SHA256,
-            "1b793cdebab9c3741eccd3aa280c4bb32ec0555fa1aa43c0f09210842a82d76c",
+            "2e398c70916e86ab58734cc77622bdf7e04e756c1ebdef73e9cc903ffb62baa8",
         )
 
     def test_gnu_archive_without_extensions_is_rejected(self) -> None:
