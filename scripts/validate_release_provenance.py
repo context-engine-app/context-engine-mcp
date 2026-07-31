@@ -23,10 +23,10 @@ from typing import NoReturn, Protocol, TypeAlias, cast
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST_SCHEMA_SHA256 = (
-    "1b793cdebab9c3741eccd3aa280c4bb32ec0555fa1aa43c0f09210842a82d76c"
+    "2e398c70916e86ab58734cc77622bdf7e04e756c1ebdef73e9cc903ffb62baa8"
 )
 PROVENANCE_SCHEMA_SHA256 = (
-    "341d27e2074aebfdc539ef157d9d8fa449bff5504f7fb55014b74983c1506130"
+    "c13bf530c6fe4befc00b398c2274b3ffeb7e6cbcfb78c38bc1a5da0b8bf4db60"
 )
 STAGING_SCHEMA_SHA256 = (
     "b8f1017ce278f762772e236eb08bf18a3c52b65f0e1e30c1d27cace51d305a6d"
@@ -629,17 +629,10 @@ def _package_coordinate(
     )
     architecture = _string(value.get("architecture"), f"{label}.architecture")
     if kind == "native-package":
-        if artifact:
-            _require(
-                architecture in {"x86_64", "arm64"},
-                f"{label}.architecture is not valid for native-package",
-            )
-        else:
-            _require(
-                architecture in {"amd64", "x86_64", "arm64"},
-                f"{label}.architecture is not valid for native-package",
-            )
-        architecture = "x86_64" if architecture in {"amd64", "x86_64"} else "arm64"
+        _require(
+            architecture in {"amd64", "x86_64", "arm64"},
+            f"{label}.architecture is not valid for native-package",
+        )
     elif kind == "bootstrap-package":
         _require(
             architecture in {"all", "noarch"},
@@ -706,16 +699,16 @@ def _validate_package_bindings(
                 "context-engine",
                 version,
                 f"context-engine_{version}-1_amd64.deb",
-                "stable",
+                "linux",
                 "deb",
-                "x86_64",
+                "amd64",
                 "<missing>",
             ),
             (
                 "context-engine",
                 version,
                 f"context-engine-{version}-1.x86_64.rpm",
-                "stable",
+                "linux",
                 "rpm",
                 "x86_64",
                 "<missing>",
@@ -927,7 +920,7 @@ def _validate_cli_artifact_pairing(
     pairs: list[tuple[str, str]] = []
     for artifact in artifacts:
         kind = _string(artifact.get("kind"), "manifest artifact kind")
-        if kind not in {"archive", "sbom", "native-package"}:
+        if kind not in {"archive", "sbom"}:
             continue
         payload_id = _string(artifact.get("payload_id"), "manifest artifact payload_id")
         expected_target = payload_targets.get(payload_id)
@@ -951,12 +944,6 @@ def _validate_cli_artifact_pairing(
             == details["architecture"],
             "manifest artifact architecture does not match its payload target",
         )
-        if kind == "native-package":
-            _require(
-                expected_target == "x86_64-unknown-linux-gnu",
-                "native-package artifacts must bind the Linux payload",
-            )
-            continue
         expected_filename = details[
             "archive_filename" if kind == "archive" else "sbom_filename"
         ]
