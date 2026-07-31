@@ -88,6 +88,14 @@ def _publication_plan() -> dict[str, object]:
         "commit": "b" * 40,
         "sha256": "c" * 64,
     }
+    canonical_asset_facts = [
+        {
+            "filename": asset["name"],
+            "sha256": asset["sha256"],
+            "size": asset["size"],
+        }
+        for asset in assets
+    ]
     return {
         "schema_version": 1,
         "profile": "desktop",
@@ -104,7 +112,7 @@ def _publication_plan() -> dict[str, object]:
         "distribution_repository": "context-engine-app/context-engine-mcp",
         "distribution_commit": "b" * 40,
         "distribution_tag_target": "b" * 40,
-        "release_asset_set_sha256": draft.canonical_sha256(assets),
+        "release_asset_set_sha256": draft.canonical_sha256(canonical_asset_facts),
         "staging_attestation_sha256": "e" * 64,
         "source_workflow": {
             "path": ".github/workflows/release.yml",

@@ -49,9 +49,20 @@ def _plan() -> dict[str, object]:
         }
         for name in NAMES
     ]
+    canonical_asset_facts = [
+        {
+            "filename": asset["name"],
+            "sha256": asset["sha256"],
+            "size": asset["size"],
+        }
+        for asset in assets
+    ]
     release_asset_set_sha256 = _sha(
         json.dumps(
-            assets, ensure_ascii=True, separators=(",", ":"), sort_keys=True
+            canonical_asset_facts,
+            ensure_ascii=True,
+            separators=(",", ":"),
+            sort_keys=True,
         ).encode()
     )
     return {
@@ -113,9 +124,22 @@ def _plan_for_profile(profile: str) -> dict[str, object]:
         key=lambda item: cast(str, cast(Mapping[str, object], item)["name"]),
     )
     plan["assets"] = assets
+    canonical_asset_facts: list[dict[str, object]] = []
+    for asset in assets:
+        asset_mapping = cast(Mapping[str, object], asset)
+        canonical_asset_facts.append(
+            {
+                "filename": asset_mapping["name"],
+                "sha256": asset_mapping["sha256"],
+                "size": asset_mapping["size"],
+            }
+        )
     plan["release_asset_set_sha256"] = _sha(
         json.dumps(
-            assets, ensure_ascii=True, separators=(",", ":"), sort_keys=True
+            canonical_asset_facts,
+            ensure_ascii=True,
+            separators=(",", ":"),
+            sort_keys=True,
         ).encode()
     )
     return plan

@@ -432,7 +432,7 @@ class AssetFact:
     size: int
 
     def as_dict(self) -> dict[str, object]:
-        return {"name": self.name, "sha256": self.sha256, "size": self.size}
+        return {"filename": self.name, "sha256": self.sha256, "size": self.size}
 
 
 @dataclass(frozen=True)
