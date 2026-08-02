@@ -123,7 +123,7 @@ def _repository_bootstrap_manifest() -> dict[str, object]:
         "schemas": {
             "release_provenance": {
                 "path": "packaging/release-provenance.schema.json",
-                "sha256": "5238550f5abd2d36dbb06eb0f50bf2a069791e69bffcafda3cb4f09f17015d8b",
+                "sha256": "eeafb2daf4bcec987b43335131847d567ca4440ece366008e22117abed81dc66",
             },
         },
         "source_workflows": {"release": source_workflow},
@@ -198,6 +198,12 @@ def _cli_manifest(profile: str) -> dict[str, object]:
         "x86_64-unknown-linux-gnu": (
             "linux",
             "x86_64",
+            "context-engine",
+            "scripts/build_linux.sh",
+        ),
+        "aarch64-unknown-linux-gnu": (
+            "linux",
+            "arm64",
             "context-engine",
             "scripts/build_linux.sh",
         ),
@@ -364,6 +370,39 @@ def _cli_manifest(profile: str) -> dict[str, object]:
     manifest["artifacts"] = artifacts
     descriptor["package_binding_sha256"] = _canonical_sha256(
         {"package_binding": package_binding, "bootstrap": bootstrap_binding}
+    )
+    return manifest
+
+
+def _legacy_v010_desktop_linux_manifest() -> dict[str, object]:
+    manifest = cast(
+        dict[str, object],
+        json.loads(
+            json.dumps(_cli_manifest("desktop-linux")).replace("1.2.3", "0.1.0")
+        ),
+    )
+    arm_payload_id = "context-engine-aarch64-unknown-linux-gnu"
+    for field, identity in (
+        ("builds", "payload_id"),
+        ("payloads", "id"),
+        ("artifacts", "payload_id"),
+    ):
+        manifest[field] = [
+            item
+            for item in cast(list[dict[str, object]], manifest[field])
+            if item.get(identity) != arm_payload_id
+        ]
+    schemas = cast(dict[str, object], manifest["schemas"])
+    provenance_schema = cast(dict[str, object], schemas["release_provenance"])
+    provenance_schema["sha256"] = (
+        validate_release_provenance.LEGACY_PROVENANCE_SCHEMA_SHA256
+    )
+    descriptor = cast(dict[str, object], manifest["release_descriptor"])
+    descriptor["package_binding_sha256"] = _canonical_sha256(
+        {
+            "package_binding": manifest["package_binding"],
+            "bootstrap": manifest["bootstrap"],
+        }
     )
     return manifest
 
@@ -561,6 +600,39 @@ class PortableValidatorLayoutTests(unittest.TestCase):
                 validate_release_provenance.ReleaseProvenanceValidationError
             ):
                 _ = validate_manifest(bootstrap, schema)
+
+    def test_exact_legacy_v010_manifest_is_accepted_and_not_extended(self) -> None:
+        schema_path = (
+            Path(__file__).parents[2] / "schemas" / "release-manifest.schema.json"
+        )
+        schema = cast(
+            dict[str, object],
+            validate_release_provenance.parse_json(
+                schema_path.read_text(encoding="utf-8"), str(schema_path)
+            ),
+        )
+        validate_manifest = cast(
+            ValidateManifest,
+            getattr(validate_release_provenance, "_validate_manifest"),
+        )
+        legacy = _legacy_v010_desktop_linux_manifest()
+
+        _ = validate_manifest(legacy, schema)
+
+        mixed = deepcopy(legacy)
+        mixed["version"] = "0.1.1"
+        mixed["tag"] = "v0.1.1"
+        descriptor = cast(dict[str, object], mixed["release_descriptor"])
+        descriptor["path"] = "packaging/releases/v0.1.1.json"
+        schemas = cast(dict[str, object], mixed["schemas"])
+        provenance_schema = cast(dict[str, object], schemas["release_provenance"])
+        provenance_schema["sha256"] = (
+            validate_release_provenance.PROVENANCE_SCHEMA_SHA256
+        )
+        with self.assertRaises(
+            validate_release_provenance.ReleaseProvenanceValidationError
+        ):
+            _ = validate_manifest(mixed, schema)
 
     def test_cli_manifest_requires_one_archive_and_sbom_per_payload(self) -> None:
         schema_path = (
@@ -1469,11 +1541,11 @@ class PortableValidatorLayoutTests(unittest.TestCase):
     def test_validators_pin_the_canonical_schema_bytes(self) -> None:
         self.assertEqual(
             validate_release_provenance.MANIFEST_SCHEMA_SHA256,
-            "2e398c70916e86ab58734cc77622bdf7e04e756c1ebdef73e9cc903ffb62baa8",
+            "250c2d03ff52ca30be5e550ed011fa6b3bcb24f37fd86a25e5858aabd3ea4bbe",
         )
         self.assertEqual(
             validate_release_provenance.PROVENANCE_SCHEMA_SHA256,
-            "5238550f5abd2d36dbb06eb0f50bf2a069791e69bffcafda3cb4f09f17015d8b",
+            "eeafb2daf4bcec987b43335131847d567ca4440ece366008e22117abed81dc66",
         )
         self.assertEqual(
             validate_release_provenance.STAGING_SCHEMA_SHA256,
@@ -1481,11 +1553,11 @@ class PortableValidatorLayoutTests(unittest.TestCase):
         )
         self.assertEqual(
             validate_channel_candidates.CHANNEL_SCHEMA_SHA256,
-            "7ce660193dc346c70fd0c8db57bd1d91d1743d3b6059959b96f76443d037d57a",
+            "15da9460985ad7ec7c48cfad343e4b0e6a706869b1714c5b8a40276952db3393",
         )
         self.assertEqual(
             validate_channel_candidates.MANIFEST_SCHEMA_SHA256,
-            "2e398c70916e86ab58734cc77622bdf7e04e756c1ebdef73e9cc903ffb62baa8",
+            "250c2d03ff52ca30be5e550ed011fa6b3bcb24f37fd86a25e5858aabd3ea4bbe",
         )
 
     def test_provenance_schema_accepts_descriptive_tool_versions(self) -> None:

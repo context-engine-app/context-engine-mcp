@@ -117,15 +117,22 @@
     {
       "if": { "properties": { "profile": { "const": "desktop-linux" } } },
       "then": {
-        "properties": {
-          "build_mode": { "const": "license-enforced" },
-          "package_binding": { "not": { "properties": { "mode": { "const": "none" } } } },
-          "bootstrap": { "not": { "properties": { "mode": { "const": "none" } } } },
-          "license_identity": { "required": ["key_id", "public_key_sha256"] },
-          "grammar_inventory": { "$ref": "#/$defs/fileRef" },
-          "builds": { "minItems": 4 },
-          "payloads": { "minItems": 4 }
-        }
+        "allOf": [
+          {
+            "properties": {
+              "build_mode": { "const": "license-enforced" },
+              "package_binding": { "not": { "properties": { "mode": { "const": "none" } } } },
+              "bootstrap": { "not": { "properties": { "mode": { "const": "none" } } } },
+              "license_identity": { "required": ["key_id", "public_key_sha256"] },
+              "grammar_inventory": { "$ref": "#/$defs/fileRef" }
+            }
+          },
+          {
+            "if": { "properties": { "version": { "const": "0.1.0" } } },
+            "then": { "properties": { "builds": { "minItems": 4, "maxItems": 4 }, "payloads": { "minItems": 4, "maxItems": 4 } } },
+            "else": { "properties": { "builds": { "minItems": 5, "maxItems": 5 }, "payloads": { "minItems": 5, "maxItems": 5 } } }
+          }
+        ]
       }
     },
     {
@@ -152,7 +159,8 @@
         "x86_64-apple-darwin",
         "aarch64-apple-darwin",
         "x86_64-pc-windows-msvc",
-        "x86_64-unknown-linux-gnu"
+        "x86_64-unknown-linux-gnu",
+        "aarch64-unknown-linux-gnu"
       ]
     },
     "licenseIdentity": {

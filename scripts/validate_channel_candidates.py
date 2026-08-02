@@ -27,35 +27,59 @@ from typing import NoReturn, Protocol, TypeAlias, cast
 
 ROOT = Path(__file__).resolve().parents[2]
 CHANNEL_SCHEMA_SHA256 = (
+    "15da9460985ad7ec7c48cfad343e4b0e6a706869b1714c5b8a40276952db3393"
+)
+LEGACY_CHANNEL_SCHEMA_SHA256 = (
     "7ce660193dc346c70fd0c8db57bd1d91d1743d3b6059959b96f76443d037d57a"
 )
 MANIFEST_SCHEMA_SHA256 = (
-    "2e398c70916e86ab58734cc77622bdf7e04e756c1ebdef73e9cc903ffb62baa8"
+    "250c2d03ff52ca30be5e550ed011fa6b3bcb24f37fd86a25e5858aabd3ea4bbe"
 )
 CHANNEL_SCHEMA_NAME = "channel-candidates.schema.json"
 MANIFEST_SCHEMA_NAME = "release-manifest.schema.json"
 EXPECTED_TEMPLATES = {
     "packaging/homebrew/context-engine.rb.in",
     "packaging/scoop/context-engine.json.in",
-    "packaging/winget/package.yaml.in",
-    "packaging/winget/installer.yaml.in",
-    "packaging/winget/locale.en-US.yaml.in",
 }
 EXPECTED_CANDIDATES = {
     ("homebrew", "formula"): "Formula/context-engine.rb",
     ("scoop", "manifest"): "bucket/context-engine.json",
-    ("winget", "version"): (
-        "manifests/c/ContextEngine/ContextEngine/{version}/"
-        "ContextEngine.ContextEngine.yaml"
-    ),
-    ("winget", "installer"): (
-        "manifests/c/ContextEngine/ContextEngine/{version}/"
-        "ContextEngine.ContextEngine.installer.yaml"
-    ),
-    ("winget", "locale"): (
-        "manifests/c/ContextEngine/ContextEngine/{version}/"
-        "ContextEngine.ContextEngine.locale.en-US.yaml"
-    ),
+}
+LEGACY_EXPECTED_TEMPLATES = EXPECTED_TEMPLATES | {
+    "packaging/winget/package.yaml.in",
+    "packaging/winget/installer.yaml.in",
+    "packaging/winget/locale.en-US.yaml.in",
+}
+LEGACY_EXPECTED_CANDIDATES = {
+    **EXPECTED_CANDIDATES,
+    (
+        "winget",
+        "version",
+    ): "manifests/c/ContextEngine/ContextEngine/{version}/ContextEngine.ContextEngine.yaml",
+    (
+        "winget",
+        "installer",
+    ): "manifests/c/ContextEngine/ContextEngine/{version}/ContextEngine.ContextEngine.installer.yaml",
+    (
+        "winget",
+        "locale",
+    ): "manifests/c/ContextEngine/ContextEngine/{version}/ContextEngine.ContextEngine.locale.en-US.yaml",
+}
+EXPECTED_GENERATOR_SOURCES = {
+    "packaging/channel-candidates.schema.json",
+    "packaging/homebrew/context-engine.rb.in",
+    "packaging/scoop/context-engine.json.in",
+    "scripts/release/render_package_metadata.py",
+    "scripts/release/validate_release_contract.py",
+}
+LEGACY_EXPECTED_GENERATOR_SOURCES = EXPECTED_GENERATOR_SOURCES | {
+    "packaging/winget/package.yaml.in",
+    "packaging/winget/installer.yaml.in",
+    "packaging/winget/locale.en-US.yaml.in",
+    "packaging/winget/schema/SOURCE.json",
+    "packaging/winget/schema/manifest.defaultLocale.1.12.0.json",
+    "packaging/winget/schema/manifest.installer.1.12.0.json",
+    "packaging/winget/schema/manifest.version.1.12.0.json",
 }
 CLI_ARCHIVE_IDS: frozenset[str] = frozenset(
     {
@@ -67,8 +91,22 @@ CLI_ARCHIVE_IDS: frozenset[str] = frozenset(
 PROFILE_ARCHIVE_IDS: dict[str, frozenset[str]] = {
     "desktop": CLI_ARCHIVE_IDS,
     "desktop-linux": CLI_ARCHIVE_IDS
-    | frozenset({"context-engine-x86_64-unknown-linux-gnu"}),
+    | frozenset(
+        {
+            "context-engine-x86_64-unknown-linux-gnu",
+            "context-engine-aarch64-unknown-linux-gnu",
+        }
+    ),
 }
+LEGACY_DESKTOP_LINUX_ARCHIVE_IDS = PROFILE_ARCHIVE_IDS["desktop-linux"] - {
+    "context-engine-aarch64-unknown-linux-gnu"
+}
+
+
+def _uses_legacy_channel_contract(profile: str, version: str) -> bool:
+    return profile == "desktop-linux" and version == "0.1.0"
+
+
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 COMMIT_RE = re.compile(r"^[0-9a-fA-F]{40}$")
 URL_RE: re.Pattern[str] = re.compile(r"https?://[^\s\"'<>]+")
@@ -283,7 +321,12 @@ def _manifest_inputs(
         raise CandidateValidationError(
             f"manifest profile does not define an archive set: {profile}"
         )
-    expected_archive_ids = PROFILE_ARCHIVE_IDS[profile]
+    version = _string(manifest.get("version"), "manifest.version")
+    expected_archive_ids = (
+        LEGACY_DESKTOP_LINUX_ARCHIVE_IDS
+        if _uses_legacy_channel_contract(profile, version)
+        else PROFILE_ARCHIVE_IDS[profile]
+    )
     payloads: list[dict[str, str]] = []
     for index, value in enumerate(
         _array(manifest.get("payloads"), "manifest.payloads")
@@ -346,14 +389,29 @@ def _manifest_inputs(
     return payloads, archives, archive_urls
 
 
-def _candidate_paths(version: str) -> dict[tuple[str, str], str]:
+def _candidate_paths(profile: str, version: str) -> dict[tuple[str, str], str]:
+    candidates = (
+        LEGACY_EXPECTED_CANDIDATES
+        if _uses_legacy_channel_contract(profile, version)
+        else EXPECTED_CANDIDATES
+    )
     return {
         coordinate: path.format(version=version)
-        for coordinate, path in EXPECTED_CANDIDATES.items()
+        for coordinate, path in candidates.items()
     }
 
 
-def _validate_generator(generator: Mapping[str, object], source_commit: str) -> None:
+def _validate_generator(
+    generator: Mapping[str, object], source_commit: str, profile: str, version: str
+) -> None:
+    legacy = _uses_legacy_channel_contract(profile, version)
+    expected_schema_sha256 = (
+        LEGACY_CHANNEL_SCHEMA_SHA256 if legacy else CHANNEL_SCHEMA_SHA256
+    )
+    expected_templates = LEGACY_EXPECTED_TEMPLATES if legacy else EXPECTED_TEMPLATES
+    expected_sources = (
+        LEGACY_EXPECTED_GENERATOR_SOURCES if legacy else EXPECTED_GENERATOR_SOURCES
+    )
     _require(
         _string(
             generator.get("release_source_commit"),
@@ -369,7 +427,7 @@ def _validate_generator(generator: Mapping[str, object], source_commit: str) -> 
     )
     _require(
         _string(generator.get("schema_sha256"), "candidate generator schema digest")
-        == CHANNEL_SCHEMA_SHA256,
+        == expected_schema_sha256,
         "candidate generator schema digest is not the pinned public schema",
     )
     _require(
@@ -385,9 +443,9 @@ def _validate_generator(generator: Mapping[str, object], source_commit: str) -> 
         _string(item.get("path"), "candidate template path") for item in templates
     ]
     _require(
-        set(template_paths) == EXPECTED_TEMPLATES
-        and len(template_paths) == len(EXPECTED_TEMPLATES),
-        "candidate generator templates are not the exact five templates",
+        set(template_paths) == expected_templates
+        and len(template_paths) == len(expected_templates),
+        "candidate generator templates are not the exact versioned template set",
     )
     sources = [
         _object(item, "candidate generator source")
@@ -399,6 +457,10 @@ def _validate_generator(generator: Mapping[str, object], source_commit: str) -> 
     _require(
         len(source_paths) == len(set(source_paths)),
         "candidate generator source paths must be unique",
+    )
+    _require(
+        set(source_paths) == expected_sources,
+        "candidate generator sources are not the exact versioned source set",
     )
     for source_path in source_paths:
         _safe_path(source_path, "candidate generator source path")
@@ -530,7 +592,7 @@ def _read_candidate_archive(
         )
         _require(
             set(names) == set(records),
-            "candidate archive does not contain the exact five candidate paths",
+            "candidate archive does not contain the exact candidate paths",
         )
         files: dict[str, bytes] = {}
         for member in members:
@@ -667,9 +729,12 @@ def validate_channel_candidates(root: Path, schemas: Path) -> None:
     )
     generator = _object(candidates.get("generator"), "candidates.generator")
     _validate_generator(
-        generator, _string(manifest.get("source_commit"), "manifest.source_commit")
+        generator,
+        _string(manifest.get("source_commit"), "manifest.source_commit"),
+        profile,
+        version,
     )
-    expected_paths = _candidate_paths(version)
+    expected_paths = _candidate_paths(profile, version)
     records: dict[str, Mapping[str, object]] = {}
     coordinates_by_path: dict[str, tuple[str, str]] = {}
     coordinates: set[tuple[str, str]] = set()
@@ -715,7 +780,7 @@ def validate_channel_candidates(root: Path, schemas: Path) -> None:
         coordinates_by_path[path_value] = coordinate
     _require(
         coordinates == set(expected_paths),
-        "channel candidates must contain exactly five coordinates",
+        "channel candidates must contain the exact versioned coordinates",
     )
     archive_ref = _object(candidates.get("archive"), "candidates.archive")
     archive_path = root / "channel-candidates.tar.gz"
@@ -732,10 +797,11 @@ def validate_channel_candidates(root: Path, schemas: Path) -> None:
             archive_by_id["context-engine-aarch64-apple-darwin"],
         },
         ("scoop", "manifest"): {archive_by_id["context-engine-x86_64-pc-windows-msvc"]},
-        ("winget", "installer"): {
-            archive_by_id["context-engine-x86_64-pc-windows-msvc"]
-        },
     }
+    if _uses_legacy_channel_contract(profile, version):
+        required_urls[("winget", "installer")] = {
+            archive_by_id["context-engine-x86_64-pc-windows-msvc"]
+        }
     for name, data in files.items():
         found_urls = _validate_urls(data, archive_urls, name)
         required = required_urls.get(coordinates_by_path[name], set())

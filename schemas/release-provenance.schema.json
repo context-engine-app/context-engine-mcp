@@ -265,10 +265,8 @@
             "archive": { "$ref": "#/$defs/candidateFileRef" },
             "outputs": {
               "type": "array",
-              "minItems": 5,
-              "maxItems": 5,
               "uniqueItems": true,
-              "items": { "$ref": "#/$defs/candidateOutput" }
+              "items": { "$ref": "#/$defs/legacyCandidateOutput" }
             },
             "generator": { "$ref": "#/$defs/generatorProvenance" }
           }
@@ -303,6 +301,48 @@
           "candidates": { "$ref": "#/properties/candidates" }
         }
       }
+    },
+    {
+      "if": {
+        "properties": {
+          "profile": { "const": "desktop-linux" },
+          "version": { "const": "0.1.0" }
+        },
+        "required": ["profile", "version"]
+      },
+      "then": {
+        "properties": {
+          "candidates": {
+            "properties": {
+              "outputs": { "minItems": 5, "maxItems": 5, "items": { "$ref": "#/$defs/legacyCandidateOutput" } },
+              "generator": {
+                "properties": {
+                  "templates": { "minItems": 5, "maxItems": 5, "items": { "$ref": "#/$defs/legacyTemplateRef" } },
+                  "sources": { "minItems": 12, "maxItems": 12 }
+                }
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "if": { "properties": { "profile": { "enum": ["desktop", "desktop-linux"] } }, "required": ["profile"] },
+        "then": {
+          "properties": {
+            "candidates": {
+              "properties": {
+                "outputs": { "minItems": 2, "maxItems": 2, "items": { "$ref": "#/$defs/currentCandidateOutput" } },
+                "generator": {
+                  "properties": {
+                    "templates": { "minItems": 2, "maxItems": 2, "items": { "$ref": "#/$defs/currentTemplateRef" } },
+                    "sources": { "minItems": 5, "maxItems": 5 }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   ],
   "$defs": {
@@ -318,7 +358,8 @@
         "x86_64-apple-darwin",
         "aarch64-apple-darwin",
         "x86_64-pc-windows-msvc",
-        "x86_64-unknown-linux-gnu"
+        "x86_64-unknown-linux-gnu",
+        "aarch64-unknown-linux-gnu"
       ]
     },
     "licenseIdentity": {
@@ -454,7 +495,20 @@
         "sha256": { "$ref": "#/$defs/sha256" }
       }
     },
-    "candidateOutput": {
+    "currentCandidateOutput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "file_kind", "path", "sha256", "size", "mode"],
+      "properties": {
+        "kind": { "enum": ["homebrew", "scoop"] },
+        "file_kind": { "enum": ["formula", "manifest"] },
+        "path": { "type": "string", "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.?/)[A-Za-z0-9._/-]+$" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "size": { "type": "integer", "minimum": 1 },
+        "mode": { "const": "0644" }
+      }
+    },
+    "legacyCandidateOutput": {
       "type": "object",
       "additionalProperties": false,
       "required": ["kind", "file_kind", "path", "sha256", "size", "mode"],
@@ -467,7 +521,21 @@
         "mode": { "const": "0644" }
       }
     },
-    "templateRef": {
+    "currentTemplateRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {
+          "enum": [
+            "packaging/homebrew/context-engine.rb.in",
+            "packaging/scoop/context-engine.json.in"
+          ]
+        },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "legacyTemplateRef": {
       "type": "object",
       "additionalProperties": false,
       "required": ["path", "sha256"],
@@ -503,10 +571,10 @@
         "source_manifest_sha256": { "$ref": "#/$defs/sha256" },
         "schema_path": { "const": "packaging/channel-candidates.schema.json" },
         "schema_sha256": { "$ref": "#/$defs/sha256" },
-        "templates": { "type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true, "items": { "$ref": "#/$defs/templateRef" } },
+        "templates": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/legacyTemplateRef" } },
         "generator_path": { "const": "scripts/release/render_package_metadata.py" },
         "generator_sha256": { "$ref": "#/$defs/sha256" },
-        "sources": { "type": "array", "minItems": 12, "maxItems": 12, "uniqueItems": true, "items": { "$ref": "#/$defs/sourceRef" } }
+        "sources": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/sourceRef" } }
       }
     },
     "buildRecord": {
@@ -527,7 +595,7 @@
         "license_identity": { "$ref": "#/$defs/licenseIdentity" },
         "bypass_environment_absent": { "const": true },
         "script": { "type": "object", "additionalProperties": false, "required": ["path", "sha256"], "properties": { "path": { "type": "string", "enum": ["scripts/build_mac.sh", "scripts/build_win.sh", "scripts/build_linux.sh"] }, "sha256": { "$ref": "#/$defs/sha256" } } },
-        "output": { "type": "object", "additionalProperties": false, "required": ["path", "sha256", "size", "mode"], "properties": { "path": { "type": "string", "enum": ["dist/mac/context-engine", "dist/win/context-engine.exe", "dist/linux/context-engine"] }, "sha256": { "$ref": "#/$defs/sha256" }, "size": { "type": "integer", "minimum": 1 }, "mode": { "type": "string", "pattern": "^0[0-7]{3}$" } } }
+        "output": { "type": "object", "additionalProperties": false, "required": ["path", "sha256", "size", "mode"], "properties": { "path": { "type": "string", "enum": ["dist/mac/context-engine", "dist/win/context-engine.exe", "dist/linux/context-engine", "dist/linux-arm64/context-engine"] }, "sha256": { "$ref": "#/$defs/sha256" }, "size": { "type": "integer", "minimum": 1 }, "mode": { "type": "string", "pattern": "^0[0-7]{3}$" } } }
       }
     },
     "payloadVerification": {

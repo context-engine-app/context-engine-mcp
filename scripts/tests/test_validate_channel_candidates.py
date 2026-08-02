@@ -35,6 +35,7 @@ def _desktop_linux_manifest() -> dict[str, object]:
         ("aarch64-apple-darwin", "macos", "arm64", "context-engine"),
         ("x86_64-pc-windows-msvc", "windows", "x86_64", "context-engine.exe"),
         ("x86_64-unknown-linux-gnu", "linux", "x86_64", "context-engine"),
+        ("aarch64-unknown-linux-gnu", "linux", "arm64", "context-engine"),
     )
     payloads: list[dict[str, object]] = []
     artifacts: list[dict[str, object]] = []
@@ -160,6 +161,7 @@ def _desktop_linux_manifest() -> dict[str, object]:
                     "scripts/build_mac.sh",
                     "scripts/build_win.sh",
                     "scripts/build_linux.sh",
+                    "scripts/build_linux.sh",
                 ),
                 strict=True,
             )
@@ -191,41 +193,11 @@ def _write_desktop_linux_candidate_fixture(root: Path) -> None:
         "bucket/context-engine.json": (
             f"{archive_by_id['context-engine-x86_64-pc-windows-msvc']}\n"
         ).encode(),
-        (
-            "manifests/c/ContextEngine/ContextEngine/1.2.3/"
-            + "ContextEngine.ContextEngine.yaml"
-        ): b"version: 1.2.3\n",
-        (
-            "manifests/c/ContextEngine/ContextEngine/1.2.3/"
-            + "ContextEngine.ContextEngine.installer.yaml"
-        ): (f"{archive_by_id['context-engine-x86_64-pc-windows-msvc']}\n").encode(),
-        (
-            "manifests/c/ContextEngine/ContextEngine/1.2.3/"
-            + "ContextEngine.ContextEngine.locale.en-US.yaml"
-        ): b"locale: en-US\n",
     }
     candidate_records: list[dict[str, object]] = []
     coordinates = (
         ("homebrew", "formula", "Formula/context-engine.rb"),
         ("scoop", "manifest", "bucket/context-engine.json"),
-        (
-            "winget",
-            "version",
-            "manifests/c/ContextEngine/ContextEngine/1.2.3/"
-            + "ContextEngine.ContextEngine.yaml",
-        ),
-        (
-            "winget",
-            "installer",
-            "manifests/c/ContextEngine/ContextEngine/1.2.3/"
-            + "ContextEngine.ContextEngine.installer.yaml",
-        ),
-        (
-            "winget",
-            "locale",
-            "manifests/c/ContextEngine/ContextEngine/1.2.3/"
-            + "ContextEngine.ContextEngine.locale.en-US.yaml",
-        ),
     )
     for kind, file_kind, path in coordinates:
         data = candidates_data[path]
@@ -261,7 +233,8 @@ def _write_desktop_linux_candidate_fixture(root: Path) -> None:
         for path in sorted(validate_channel_candidates.EXPECTED_TEMPLATES)
     ]
     sources = [
-        {"path": f"src/{index:02d}.py", "sha256": "0" * 64} for index in range(12)
+        {"path": path, "sha256": "0" * 64}
+        for path in sorted(validate_channel_candidates.EXPECTED_GENERATOR_SOURCES)
     ]
     candidate_document: dict[str, object] = {
         "schema_version": 1,
@@ -328,6 +301,126 @@ def _write_desktop_linux_candidate_fixture(root: Path) -> None:
     _ = (root / "channel-candidates.tar.gz").write_bytes(archive_bytes)
 
 
+def _write_legacy_v010_candidate_fixture(root: Path) -> None:
+    _write_desktop_linux_candidate_fixture(root)
+    manifest = cast(
+        dict[str, object],
+        json.loads(
+            (root / "release-manifest.json")
+            .read_text(encoding="utf-8")
+            .replace("1.2.3", "0.1.0")
+        ),
+    )
+    arm_payload_id = "context-engine-aarch64-unknown-linux-gnu"
+    for field, identity in (
+        ("builds", "payload_id"),
+        ("payloads", "id"),
+        ("artifacts", "payload_id"),
+    ):
+        manifest[field] = [
+            item
+            for item in cast(list[dict[str, object]], manifest[field])
+            if item.get(identity) != arm_payload_id
+        ]
+    manifest_bytes = json.dumps(
+        manifest, ensure_ascii=True, separators=(",", ":"), sort_keys=True
+    ).encode()
+    _ = (root / "release-manifest.json").write_bytes(manifest_bytes)
+
+    archive_urls = {
+        cast(str, item["payload_id"]): cast(str, item["url"])
+        for item in cast(list[dict[str, object]], manifest["artifacts"])
+        if item.get("kind") == "archive"
+    }
+    candidates_data = {
+        "Formula/context-engine.rb": (
+            f"{archive_urls['context-engine-x86_64-apple-darwin']}\n"
+            f"{archive_urls['context-engine-aarch64-apple-darwin']}\n"
+        ).encode(),
+        "bucket/context-engine.json": (
+            f"{archive_urls['context-engine-x86_64-pc-windows-msvc']}\n"
+        ).encode(),
+    }
+    windows_url = archive_urls["context-engine-x86_64-pc-windows-msvc"]
+    for path in validate_channel_candidates.LEGACY_EXPECTED_CANDIDATES.values():
+        candidate_path = path.format(version="0.1.0")
+        if candidate_path not in candidates_data:
+            candidates_data[candidate_path] = f"{windows_url}\n".encode()
+
+    output = io.BytesIO()
+    with gzip.GzipFile(fileobj=output, mode="wb", filename="", mtime=0) as stream:
+        with tarfile.open(
+            fileobj=stream, mode="w", format=tarfile.USTAR_FORMAT
+        ) as archive:
+            for path in sorted(candidates_data):
+                data = candidates_data[path]
+                info = tarfile.TarInfo(path)
+                info.size = len(data)
+                info.mode = 0o644
+                info.uid = 0
+                info.gid = 0
+                info.uname = ""
+                info.gname = ""
+                info.mtime = 0
+                archive.addfile(info, io.BytesIO(data))
+    archive_bytes = output.getvalue()
+
+    candidate_document = cast(
+        dict[str, object],
+        json.loads((root / "channel-candidates.json").read_text(encoding="utf-8")),
+    )
+    candidate_document["release_tag"] = "v0.1.0"
+    candidate_document["version"] = "0.1.0"
+    candidate_document["source_manifest_sha256"] = _sha(manifest_bytes)
+    candidate_document["archive"] = {
+        "path": "channel-candidates.tar.gz",
+        "sha256": _sha(archive_bytes),
+    }
+    generator = cast(dict[str, object], candidate_document["generator"])
+    generator["schema_sha256"] = (
+        validate_channel_candidates.LEGACY_CHANNEL_SCHEMA_SHA256
+    )
+    generator["templates"] = [
+        {"path": path, "sha256": "f" * 64}
+        for path in sorted(validate_channel_candidates.LEGACY_EXPECTED_TEMPLATES)
+    ]
+    generator["sources"] = [
+        {"path": path, "sha256": "0" * 64}
+        for path in sorted(
+            validate_channel_candidates.LEGACY_EXPECTED_GENERATOR_SOURCES
+        )
+    ]
+    inputs = cast(dict[str, object], candidate_document["inputs"])
+    for field in ("payloads", "archives"):
+        inputs[field] = [
+            item
+            for item in cast(list[dict[str, object]], inputs[field])
+            if item.get("id") != arm_payload_id
+        ]
+    candidate_document["candidates"] = [
+        {
+            "kind": kind,
+            "file_kind": file_kind,
+            "path": path.format(version="0.1.0"),
+            "sha256": _sha(candidates_data[path.format(version="0.1.0")]),
+            "size": len(candidates_data[path.format(version="0.1.0")]),
+            "mode": "0644",
+        }
+        for (kind, file_kind), path in sorted(
+            validate_channel_candidates.LEGACY_EXPECTED_CANDIDATES.items()
+        )
+    ]
+    _ = (root / "channel-candidates.json").write_bytes(
+        json.dumps(
+            candidate_document,
+            ensure_ascii=True,
+            separators=(",", ":"),
+            sort_keys=True,
+        ).encode()
+    )
+    _ = (root / "channel-candidates.tar.gz").write_bytes(archive_bytes)
+
+
 class RepositoryBootstrapCandidateTests(unittest.TestCase):
     def test_desktop_linux_candidate_bundle_passes(self) -> None:
         schemas = Path(__file__).parents[2] / "schemas"
@@ -335,6 +428,30 @@ class RepositoryBootstrapCandidateTests(unittest.TestCase):
             root = Path(temporary)
             _write_desktop_linux_candidate_fixture(root)
             validate_channel_candidates.validate_channel_candidates(root, schemas)
+
+    def test_exact_legacy_v010_bundle_passes_and_later_versions_reject_it(
+        self,
+    ) -> None:
+        schemas = Path(__file__).parents[2] / "schemas"
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            _write_legacy_v010_candidate_fixture(root)
+            validate_channel_candidates.validate_channel_candidates(root, schemas)
+
+            candidate_path = root / "channel-candidates.json"
+            candidate_document = cast(
+                dict[str, object],
+                json.loads(candidate_path.read_text(encoding="utf-8")),
+            )
+            candidate_document["version"] = "0.1.1"
+            candidate_document["release_tag"] = "v0.1.1"
+            _ = candidate_path.write_text(
+                json.dumps(candidate_document, sort_keys=True), encoding="utf-8"
+            )
+            with self.assertRaises(
+                validate_channel_candidates.CandidateValidationError
+            ):
+                validate_channel_candidates.validate_channel_candidates(root, schemas)
 
     def test_each_profile_rejects_missing_extra_and_duplicate_archives(self) -> None:
         for profile in ("desktop", "desktop-linux"):

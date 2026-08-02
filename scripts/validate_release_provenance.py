@@ -22,9 +22,12 @@ from typing import NoReturn, Protocol, TypeAlias, cast
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST_SCHEMA_SHA256 = (
-    "2e398c70916e86ab58734cc77622bdf7e04e756c1ebdef73e9cc903ffb62baa8"
+    "250c2d03ff52ca30be5e550ed011fa6b3bcb24f37fd86a25e5858aabd3ea4bbe"
 )
 PROVENANCE_SCHEMA_SHA256 = (
+    "eeafb2daf4bcec987b43335131847d567ca4440ece366008e22117abed81dc66"
+)
+LEGACY_PROVENANCE_SCHEMA_SHA256 = (
     "5238550f5abd2d36dbb06eb0f50bf2a069791e69bffcafda3cb4f09f17015d8b"
 )
 STAGING_SCHEMA_SHA256 = (
@@ -71,15 +74,20 @@ PROFILE_TARGETS: dict[str, frozenset[str]] = {
             "aarch64-apple-darwin",
             "x86_64-pc-windows-msvc",
             "x86_64-unknown-linux-gnu",
+            "aarch64-unknown-linux-gnu",
         }
     ),
     "repository-bootstrap": frozenset(),
+}
+LEGACY_DESKTOP_LINUX_TARGETS = PROFILE_TARGETS["desktop-linux"] - {
+    "aarch64-unknown-linux-gnu"
 }
 TARGET_BUILD_SCRIPTS: dict[str, str] = {
     "x86_64-apple-darwin": "scripts/build_mac.sh",
     "aarch64-apple-darwin": "scripts/build_mac.sh",
     "x86_64-pc-windows-msvc": "scripts/build_win.sh",
     "x86_64-unknown-linux-gnu": "scripts/build_linux.sh",
+    "aarch64-unknown-linux-gnu": "scripts/build_linux.sh",
 }
 TARGET_PAYLOAD_DETAILS: dict[str, dict[str, str]] = {
     "x86_64-apple-darwin": {
@@ -109,6 +117,13 @@ TARGET_PAYLOAD_DETAILS: dict[str, dict[str, str]] = {
         "architecture": "x86_64",
         "archive_filename": "context-engine-x86_64-unknown-linux-gnu.tar.gz",
         "sbom_filename": "context-engine-x86_64-unknown-linux-gnu.cdx.json",
+    },
+    "aarch64-unknown-linux-gnu": {
+        "filename": "context-engine",
+        "platform": "linux",
+        "architecture": "arm64",
+        "archive_filename": "context-engine-aarch64-unknown-linux-gnu.tar.gz",
+        "sbom_filename": "context-engine-aarch64-unknown-linux-gnu.cdx.json",
     },
 }
 PROFILE_COMMON_FILENAMES: dict[str, frozenset[str]] = {
@@ -597,7 +612,12 @@ def _validate_package_bindings(
 def _validate_profile_payloads(
     profile: str, manifest: Mapping[str, object]
 ) -> dict[str, str]:
-    expected_targets = PROFILE_TARGETS[profile]
+    version = _string(manifest.get("version"), "manifest.version")
+    expected_targets = (
+        LEGACY_DESKTOP_LINUX_TARGETS
+        if profile == "desktop-linux" and version == "0.1.0"
+        else PROFILE_TARGETS[profile]
+    )
     builds = [
         _object(item, f"manifest.builds[{index}]")
         for index, item in enumerate(_array(manifest.get("builds"), "manifest.builds"))
@@ -838,9 +858,14 @@ def _validate_manifest(
         == "packaging/release-provenance.schema.json",
         "manifest provenance schema path is not canonical",
     )
+    expected_provenance_schema_sha256 = (
+        LEGACY_PROVENANCE_SCHEMA_SHA256
+        if profile == "desktop-linux" and version == "0.1.0"
+        else PROVENANCE_SCHEMA_SHA256
+    )
     _require(
         _sha(provenance_schema.get("sha256"), "manifest provenance schema digest")
-        == PROVENANCE_SCHEMA_SHA256,
+        == expected_provenance_schema_sha256,
         "manifest provenance schema digest is not pinned",
     )
     source_workflows = _object(
