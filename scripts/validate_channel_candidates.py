@@ -33,7 +33,7 @@ LEGACY_CHANNEL_SCHEMA_SHA256 = (
     "7ce660193dc346c70fd0c8db57bd1d91d1743d3b6059959b96f76443d037d57a"
 )
 MANIFEST_SCHEMA_SHA256 = (
-    "250c2d03ff52ca30be5e550ed011fa6b3bcb24f37fd86a25e5858aabd3ea4bbe"
+    "e4e776284db38fb34fe221d75dfef9ce5157a320703b0b701be54dcc224cec44"
 )
 CHANNEL_SCHEMA_NAME = "channel-candidates.schema.json"
 MANIFEST_SCHEMA_NAME = "release-manifest.schema.json"

@@ -87,11 +87,6 @@ def _repository_bootstrap_manifest() -> dict[str, object]:
             "commit": distribution_commit,
             "sha256": "d" * 64,
         },
-        "publish": {
-            "path": ".github/workflows/publish-draft-release.yml",
-            "commit": distribution_commit,
-            "sha256": "e" * 64,
-        },
         "channels": {
             "path": ".github/workflows/prepare-package-channels.yml",
             "commit": distribution_commit,
@@ -123,14 +118,13 @@ def _repository_bootstrap_manifest() -> dict[str, object]:
         "schemas": {
             "release_provenance": {
                 "path": "packaging/release-provenance.schema.json",
-                "sha256": "eeafb2daf4bcec987b43335131847d567ca4440ece366008e22117abed81dc66",
+                "sha256": "8c98193b423175f9c447cc19a3fe3d401ef61bc11b61bcf9760c6ba44b5b0860",
             },
         },
         "source_workflows": {"release": source_workflow},
         "authorized_stages": [
             "source-release",
             "public-draft",
-            "public-publish",
             "package-channels",
         ],
         "workflow_bindings": workflow_bindings,
@@ -397,6 +391,18 @@ def _legacy_v010_desktop_linux_manifest() -> dict[str, object]:
     provenance_schema["sha256"] = (
         validate_release_provenance.LEGACY_PROVENANCE_SCHEMA_SHA256
     )
+    manifest["authorized_stages"] = [
+        "source-release",
+        "public-draft",
+        "public-publish",
+        "package-channels",
+    ]
+    workflow_bindings = cast(dict[str, object], manifest["workflow_bindings"])
+    workflow_bindings["publish"] = {
+        "path": ".github/workflows/publish-draft-release.yml",
+        "commit": manifest["distribution_commit"],
+        "sha256": "e" * 64,
+    }
     descriptor = cast(dict[str, object], manifest["release_descriptor"])
     descriptor["package_binding_sha256"] = _canonical_sha256(
         {
@@ -633,6 +639,40 @@ class PortableValidatorLayoutTests(unittest.TestCase):
             validate_release_provenance.ReleaseProvenanceValidationError
         ):
             _ = validate_manifest(mixed, schema)
+
+    def test_exact_legacy_v010_rejects_current_public_workflows(self) -> None:
+        public_workflows = cast(
+            Callable[[Mapping[str, object], str, str], dict[str, dict[str, str]]],
+            getattr(validate_release_provenance, "_public_workflows"),
+        )
+        manifest = _legacy_v010_desktop_linux_manifest()
+        manifest["authorized_stages"] = [
+            "source-release",
+            "public-draft",
+            "package-channels",
+        ]
+        bindings = cast(dict[str, object], manifest["workflow_bindings"])
+        _ = bindings.pop("publish")
+
+        with self.assertRaises(
+            validate_release_provenance.ReleaseProvenanceValidationError
+        ):
+            _ = public_workflows(
+                manifest, cast(str, manifest["distribution_commit"]), "0.1.0"
+            )
+
+    def test_repository_bootstrap_v010_accepts_current_public_workflows(self) -> None:
+        public_workflows = cast(
+            Callable[[Mapping[str, object], str, str], dict[str, dict[str, str]]],
+            getattr(validate_release_provenance, "_public_workflows"),
+        )
+        manifest = _repository_bootstrap_manifest()
+
+        workflows = public_workflows(
+            manifest, cast(str, manifest["distribution_commit"]), "0.1.0"
+        )
+
+        self.assertEqual(set(workflows), {"draft", "channels"})
 
     def test_cli_manifest_requires_one_archive_and_sbom_per_payload(self) -> None:
         schema_path = (
@@ -1440,10 +1480,6 @@ class PortableValidatorLayoutTests(unittest.TestCase):
                 "stage": "public-draft",
                 **public_workflows["draft"],
             },
-            "public-publish": {
-                "stage": "public-publish",
-                **public_workflows["publish"],
-            },
             "package-channels": {
                 "stage": "package-channels",
                 **public_workflows["channels"],
@@ -1539,17 +1575,28 @@ class PortableValidatorLayoutTests(unittest.TestCase):
             self.assertFalse(hasattr(validate_release_provenance, obsolete_name))
 
     def test_validators_pin_the_canonical_schema_bytes(self) -> None:
+        schema_root = Path(__file__).resolve().parents[2] / "schemas"
+        expected_hashes = {
+            "release-manifest.schema.json": validate_release_provenance.MANIFEST_SCHEMA_SHA256,
+            "release-provenance.schema.json": validate_release_provenance.PROVENANCE_SCHEMA_SHA256,
+            "staging-attestation.schema.json": validate_release_provenance.STAGING_SCHEMA_SHA256,
+        }
+        for filename, expected_sha256 in expected_hashes.items():
+            self.assertEqual(
+                hashlib.sha256((schema_root / filename).read_bytes()).hexdigest(),
+                expected_sha256,
+            )
         self.assertEqual(
             validate_release_provenance.MANIFEST_SCHEMA_SHA256,
-            "250c2d03ff52ca30be5e550ed011fa6b3bcb24f37fd86a25e5858aabd3ea4bbe",
+            "e4e776284db38fb34fe221d75dfef9ce5157a320703b0b701be54dcc224cec44",
         )
         self.assertEqual(
             validate_release_provenance.PROVENANCE_SCHEMA_SHA256,
-            "eeafb2daf4bcec987b43335131847d567ca4440ece366008e22117abed81dc66",
+            "8c98193b423175f9c447cc19a3fe3d401ef61bc11b61bcf9760c6ba44b5b0860",
         )
         self.assertEqual(
             validate_release_provenance.STAGING_SCHEMA_SHA256,
-            "b8f1017ce278f762772e236eb08bf18a3c52b65f0e1e30c1d27cace51d305a6d",
+            "bba16af5be735bf370939e3e93262a119004e15b6e2b2fff7523ac0b0fc4145c",
         )
         self.assertEqual(
             validate_channel_candidates.CHANNEL_SCHEMA_SHA256,
@@ -1557,7 +1604,7 @@ class PortableValidatorLayoutTests(unittest.TestCase):
         )
         self.assertEqual(
             validate_channel_candidates.MANIFEST_SCHEMA_SHA256,
-            "250c2d03ff52ca30be5e550ed011fa6b3bcb24f37fd86a25e5858aabd3ea4bbe",
+            "e4e776284db38fb34fe221d75dfef9ce5157a320703b0b701be54dcc224cec44",
         )
 
     def test_provenance_schema_accepts_descriptive_tool_versions(self) -> None:

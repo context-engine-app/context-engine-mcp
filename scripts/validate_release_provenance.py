@@ -22,16 +22,16 @@ from typing import NoReturn, Protocol, TypeAlias, cast
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST_SCHEMA_SHA256 = (
-    "250c2d03ff52ca30be5e550ed011fa6b3bcb24f37fd86a25e5858aabd3ea4bbe"
+    "e4e776284db38fb34fe221d75dfef9ce5157a320703b0b701be54dcc224cec44"
 )
 PROVENANCE_SCHEMA_SHA256 = (
-    "eeafb2daf4bcec987b43335131847d567ca4440ece366008e22117abed81dc66"
+    "8c98193b423175f9c447cc19a3fe3d401ef61bc11b61bcf9760c6ba44b5b0860"
 )
 LEGACY_PROVENANCE_SCHEMA_SHA256 = (
     "5238550f5abd2d36dbb06eb0f50bf2a069791e69bffcafda3cb4f09f17015d8b"
 )
 STAGING_SCHEMA_SHA256 = (
-    "b8f1017ce278f762772e236eb08bf18a3c52b65f0e1e30c1d27cace51d305a6d"
+    "bba16af5be735bf370939e3e93262a119004e15b6e2b2fff7523ac0b0fc4145c"
 )
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 COMMIT_RE = re.compile(r"^[0-9a-fA-F]{40}$")
@@ -45,7 +45,11 @@ PUBLIC_WORKFLOW_PATH = ".github/workflows/prepare-draft-release.yml"
 PUBLISH_WORKFLOW_PATH = ".github/workflows/publish-draft-release.yml"
 CHANNEL_WORKFLOW_PATH = ".github/workflows/prepare-package-channels.yml"
 FOUNDATION_STAGES = ("source-release", "public-draft")
-ORCHESTRATION_STAGES = FOUNDATION_STAGES + ("public-publish", "package-channels")
+ORCHESTRATION_STAGES = FOUNDATION_STAGES + ("package-channels",)
+LEGACY_ORCHESTRATION_STAGES = FOUNDATION_STAGES + (
+    "public-publish",
+    "package-channels",
+)
 PUBLIC_WORKFLOW_PATHS = {
     "draft": PUBLIC_WORKFLOW_PATH,
     "publish": PUBLISH_WORKFLOW_PATH,
@@ -396,14 +400,22 @@ def _workflow(value: object, label: str, expected_path: str) -> dict[str, str]:
 
 
 def _public_workflows(
-    manifest: Mapping[str, object], distribution_commit: str
+    manifest: Mapping[str, object], distribution_commit: str, version: str
 ) -> dict[str, dict[str, str]]:
     stages = _array(manifest.get("authorized_stages"), "manifest.authorized_stages")
     stage_names = tuple(_string(item, "manifest authorized stage") for item in stages)
     if stage_names == FOUNDATION_STAGES:
         expected_names = ("draft",)
-    elif stage_names == ORCHESTRATION_STAGES:
+    elif (
+        manifest.get("profile") == "desktop-linux"
+        and version == "0.1.0"
+        and stage_names == LEGACY_ORCHESTRATION_STAGES
+    ):
         expected_names = ("draft", "publish", "channels")
+    elif stage_names == ORCHESTRATION_STAGES and not (
+        manifest.get("profile") == "desktop-linux" and version == "0.1.0"
+    ):
+        expected_names = ("draft", "channels")
     else:
         raise ReleaseProvenanceValidationError(
             "manifest authorized stages are incomplete or reordered"
@@ -876,7 +888,7 @@ def _validate_manifest(
         "manifest source workflow",
         SOURCE_WORKFLOW_PATH,
     )
-    public_workflows = _public_workflows(manifest, distribution_commit)
+    public_workflows = _public_workflows(manifest, distribution_commit, version)
     _require(
         source_workflow["commit"] == source_commit,
         "manifest source workflow commit differs from source commit",

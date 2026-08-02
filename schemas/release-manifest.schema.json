@@ -58,6 +58,7 @@
     "authorized_stages": {
       "oneOf": [
         { "const": ["source-release", "public-draft"] },
+        { "const": ["source-release", "public-draft", "package-channels"] },
         { "const": ["source-release", "public-draft", "public-publish", "package-channels"] }
       ]
     },
@@ -71,6 +72,11 @@
       },
       "oneOf": [
         { "required": ["draft"], "minProperties": 1, "maxProperties": 1 },
+        {
+          "required": ["draft", "channels"],
+          "minProperties": 2,
+          "maxProperties": 2
+        },
         {
           "required": ["draft", "publish", "channels"],
           "minProperties": 3,
@@ -100,6 +106,41 @@
     }
   },
   "allOf": [
+    {
+      "if": { "properties": { "profile": { "const": "desktop-linux" }, "version": { "const": "0.1.0" } }, "required": ["profile", "version"] },
+      "then": {
+        "oneOf": [
+          {
+            "properties": {
+              "authorized_stages": { "const": ["source-release", "public-draft"] },
+              "workflow_bindings": { "required": ["draft"], "minProperties": 1, "maxProperties": 1 }
+            }
+          },
+          {
+            "properties": {
+              "authorized_stages": { "const": ["source-release", "public-draft", "public-publish", "package-channels"] },
+              "workflow_bindings": { "required": ["draft", "publish", "channels"], "minProperties": 3, "maxProperties": 3 }
+            }
+          }
+        ]
+      },
+      "else": {
+        "oneOf": [
+          {
+            "properties": {
+              "authorized_stages": { "const": ["source-release", "public-draft"] },
+              "workflow_bindings": { "required": ["draft"], "minProperties": 1, "maxProperties": 1 }
+            }
+          },
+          {
+            "properties": {
+              "authorized_stages": { "const": ["source-release", "public-draft", "package-channels"] },
+              "workflow_bindings": { "required": ["draft", "channels"], "minProperties": 2, "maxProperties": 2 }
+            }
+          }
+        ]
+      }
+    },
     {
       "if": { "properties": { "profile": { "const": "desktop" } } },
       "then": {

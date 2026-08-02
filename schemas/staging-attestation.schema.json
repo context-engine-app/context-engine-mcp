@@ -77,6 +77,11 @@
           "maxProperties": 2
         },
         {
+          "required": ["source-release", "public-draft", "package-channels"],
+          "minProperties": 3,
+          "maxProperties": 3
+        },
+        {
           "required": ["source-release", "public-draft", "public-publish", "package-channels"],
           "minProperties": 4,
           "maxProperties": 4
@@ -105,6 +110,21 @@
     "attempt": { "type": "integer", "minimum": 1 }
   },
   "allOf": [
+    {
+      "if": { "properties": { "profile": { "const": "desktop-linux" }, "version": { "const": "0.1.0" } }, "required": ["profile", "version"] },
+      "then": {
+        "oneOf": [
+          { "properties": { "workflow_bindings": { "required": ["source-release", "public-draft"], "minProperties": 2, "maxProperties": 2 } } },
+          { "properties": { "workflow_bindings": { "required": ["source-release", "public-draft", "public-publish", "package-channels"], "minProperties": 4, "maxProperties": 4 } } }
+        ]
+      },
+      "else": {
+        "oneOf": [
+          { "properties": { "workflow_bindings": { "required": ["source-release", "public-draft"], "minProperties": 2, "maxProperties": 2 } } },
+          { "properties": { "workflow_bindings": { "required": ["source-release", "public-draft", "package-channels"], "minProperties": 3, "maxProperties": 3 } } }
+        ]
+      }
+    },
     {
       "if": { "properties": { "profile": { "const": "repository-bootstrap" } } },
       "then": {

@@ -127,16 +127,10 @@ def _desktop_linux_manifest() -> dict[str, object]:
         "authorized_stages": [
             "source-release",
             "public-draft",
-            "public-publish",
             "package-channels",
         ],
         "workflow_bindings": {
             "draft": workflow,
-            "publish": {
-                "path": ".github/workflows/publish-draft-release.yml",
-                "commit": "c" * 40,
-                "sha256": "8" * 64,
-            },
             "channels": {
                 "path": ".github/workflows/prepare-package-channels.yml",
                 "commit": "d" * 40,
@@ -311,6 +305,18 @@ def _write_legacy_v010_candidate_fixture(root: Path) -> None:
             .replace("1.2.3", "0.1.0")
         ),
     )
+    manifest["authorized_stages"] = [
+        "source-release",
+        "public-draft",
+        "public-publish",
+        "package-channels",
+    ]
+    workflow_bindings = cast(dict[str, object], manifest["workflow_bindings"])
+    workflow_bindings["publish"] = {
+        "path": ".github/workflows/publish-draft-release.yml",
+        "commit": manifest["distribution_commit"],
+        "sha256": "8" * 64,
+    }
     arm_payload_id = "context-engine-aarch64-unknown-linux-gnu"
     for field, identity in (
         ("builds", "payload_id"),
