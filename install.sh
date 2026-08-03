@@ -532,7 +532,7 @@ acquire_installer_lock() {
 	if installer_lock_mode=$(stat -f '%Lp' "$installer_lock_path" 2>/dev/null) && case "$installer_lock_mode" in '' | *[!0-9]*) false ;; *) true ;; esac then :; else
 		installer_lock_mode=$(stat -c '%a' -- "$installer_lock_path" 2>/dev/null) || fail 'cannot inspect installer lock mode'
 	fi
-	[ "$installer_lock_owner" = "$(id -u)" ] || fail 'installer lock file is not owned by the current user'
+	[ "$installer_lock_owner" = "$(command id -u)" ] || fail 'installer lock file is not owned by the current user'
 	[ "$installer_lock_mode" = 600 ] || fail 'installer lock file must have mode 0600'
 	if ! exec 9<>"$installer_lock_path"; then
 		fail 'cannot open installer lock file'

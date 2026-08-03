@@ -354,7 +354,7 @@ fi
             home.mkdir()
             command = (
                 "target_for_host() { printf '%s\\n' x86_64-unknown-linux-gnu; }; "
-                "id() { printf '%s\\n' 501; }; "
+                "id() { printf '%s\\n' 999999; }; "
                 "classify_entrypoint() { printf '%s\\n' fresh; }; "
                 "discover_tag() { printf '%s\\n' v0.2.0; }; "
                 f'curl_get() {{ case "$1" in *release-manifest.json) cp {self.ps_literal(manifest_path)} "$2" ;; *SHA256SUMS) cp {self.ps_literal(checksums_path)} "$2" ;; esac; }}; '
@@ -379,7 +379,7 @@ fi
             home.mkdir()
             temp_root.mkdir()
             result = self.run_shell(
-                "id() { printf '%s\\n' 501; }; "
+                "id() { printf '%s\\n' 999999; }; "
                 + "target_for_host() { printf '%s\\n' x86_64-unknown-linux-gnu; }; "
                 + "classify_entrypoint() { printf '%s\\n' fresh; }; "
                 + "discover_tag() { printf '%s\\n' v0.1.1; }; "
@@ -657,7 +657,7 @@ fi
                     time.sleep(0.05)
                 self.assertTrue((home / "ready").exists(), transition)
                 contender_body = (
-                    "id() { printf '%s\\n' 501; }; "
+                    "id() { printf '%s\\n' 999999; }; "
                     "target_for_host() { printf '%s\\n' x86_64-unknown-linux-gnu; }; "
                     f'classify_entrypoint() {{ printf "%s\\n" {transition if transition != "marked" else "fresh"}; }}; '
                     'discover_tag() { : > "$HOME/network"; printf "%s\\n" v0.2.0; }; '
@@ -2493,6 +2493,8 @@ exit 0
             "shell: pwsh",
             "PowerShell-7.6.4-win-x64.zip",
             "80832551C52809301E6071C8BAC977BEB5A2F1EC953EB4DB9F94DEB953333793",
+            "uv pip install --python .venv/bin/python --requirement scripts/requirements-dev.txt",
+            "uv pip install --python ./.venv/Scripts/python.exe --requirement scripts/requirements-dev.txt",
             '"$env:GITHUB_PATH"',
             "Get-Command pwsh",
             "CONTEXT_ENGINE_TEST_POWERSHELL: powershell.exe",
