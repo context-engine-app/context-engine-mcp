@@ -50,7 +50,7 @@ def _desktop_linux_manifest() -> dict[str, object]:
                 "platform": platform,
                 "architecture": architecture,
                 "sha256": _sha(payload_bytes),
-                "size": len(payload_bytes),
+                "size": str(len(payload_bytes)),
                 "executable_mode": "0755",
                 "license_mode": "enforced",
                 "version_output": "context-engine 1.2.3",
@@ -70,7 +70,7 @@ def _desktop_linux_manifest() -> dict[str, object]:
                     f"releases/download/v1.2.3/{archive_filename}"
                 ),
                 "sha256": _sha(f"archive:{payload_id}".encode()),
-                "size": len(f"archive:{payload_id}".encode()),
+                "size": str(len(f"archive:{payload_id}".encode())),
             }
         )
 

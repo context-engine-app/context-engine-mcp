@@ -33,7 +33,7 @@ LEGACY_CHANNEL_SCHEMA_SHA256 = (
     "7ce660193dc346c70fd0c8db57bd1d91d1743d3b6059959b96f76443d037d57a"
 )
 MANIFEST_SCHEMA_SHA256 = (
-    "e4e776284db38fb34fe221d75dfef9ce5157a320703b0b701be54dcc224cec44"
+    "3205679742c29d033655beb3b7792809faff75f86c73a2478b637922027126cf"
 )
 CHANNEL_SCHEMA_NAME = "channel-candidates.schema.json"
 MANIFEST_SCHEMA_NAME = "release-manifest.schema.json"
@@ -108,6 +108,7 @@ def _uses_legacy_channel_contract(profile: str, version: str) -> bool:
 
 
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+SIZE_RE = re.compile(r"^[1-9][0-9]*$")
 COMMIT_RE = re.compile(r"^[0-9a-fA-F]{40}$")
 URL_RE: re.Pattern[str] = re.compile(r"https?://[^\s\"'<>]+")
 MUTABLE_URL_RE: re.Pattern[str] = re.compile(
@@ -193,6 +194,23 @@ def _integer(value: object, label: str) -> int:
     if isinstance(value, bool) or not isinstance(value, int):
         raise CandidateValidationError(f"{label} must be a JSON integer")
     return value
+
+
+def _size(value: object, label: str) -> int:
+    text = _string(value, label)
+    if not SIZE_RE.fullmatch(text):
+        raise CandidateValidationError(
+            f"{label} must be a positive canonical decimal string"
+        )
+    try:
+        parsed = int(text, 10)
+    except ValueError as exc:
+        raise CandidateValidationError(
+            f"{label} is outside the signed 64-bit range"
+        ) from exc
+    if parsed > 9223372036854775807:
+        raise CandidateValidationError(f"{label} is outside the signed 64-bit range")
+    return parsed
 
 
 def _require(condition: bool, message: str) -> None:
@@ -678,6 +696,12 @@ def validate_channel_candidates(root: Path, schemas: Path) -> None:
                     "repository-bootstrap release must not contain channel candidates"
                 )
         return
+    if "artifacts" in manifest:
+        for index, value in enumerate(
+            _array(manifest.get("artifacts"), "manifest.artifacts")
+        ):
+            artifact = _object(value, f"manifest.artifacts[{index}]")
+            _ = _size(artifact.get("size"), f"manifest.artifacts[{index}].size")
     candidates, _ = _read_json(root / "channel-candidates.json", "channel candidates")
     channel_schema = _load_schema(schemas, CHANNEL_SCHEMA_NAME, CHANNEL_SCHEMA_SHA256)
     _validate_schema(candidates, channel_schema, "channel candidates")

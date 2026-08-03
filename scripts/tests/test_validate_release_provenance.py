@@ -147,7 +147,7 @@ def _repository_bootstrap_manifest() -> dict[str, object]:
                 "filename": "context-engine-release-1.2.3-1.noarch.rpm",
                 "url": "https://github.com/context-engine-app/context-engine-mcp/releases/download/repository-bootstrap-v1.2.3/context-engine-release-1.2.3-1.noarch.rpm",
                 "sha256": "3" * 64,
-                "size": 1,
+                "size": "1",
                 "package_manifest_sha256": "4" * 64,
                 "package_verification_sha256": "5" * 64,
             },
@@ -156,14 +156,14 @@ def _repository_bootstrap_manifest() -> dict[str, object]:
                 "filename": "LICENSE",
                 "url": "https://github.com/context-engine-app/context-engine-mcp/releases/download/repository-bootstrap-v1.2.3/LICENSE",
                 "sha256": "6" * 64,
-                "size": 1,
+                "size": "1",
             },
             {
                 "kind": "common",
                 "filename": "THIRD_PARTY_NOTICES.md",
                 "url": "https://github.com/context-engine-app/context-engine-mcp/releases/download/repository-bootstrap-v1.2.3/THIRD_PARTY_NOTICES.md",
                 "sha256": "7" * 64,
-                "size": 1,
+                "size": "1",
             },
         ],
     }
@@ -272,7 +272,7 @@ def _cli_manifest(profile: str) -> dict[str, object]:
                 "platform": platform,
                 "architecture": architecture,
                 "sha256": f"{index:064x}",
-                "size": 1,
+                "size": "1",
                 "executable_mode": "0755",
                 "license_mode": "enforced",
                 "version_output": "context-engine 1.2.3",
@@ -303,7 +303,7 @@ def _cli_manifest(profile: str) -> dict[str, object]:
                     "filename": filename,
                     "url": f"https://github.com/context-engine-app/context-engine-mcp/releases/download/v1.2.3/{filename}",
                     "sha256": f"{index + (0 if kind == 'archive' else 4):064x}",
-                    "size": 1,
+                    "size": "1",
                 }
             )
     if profile == "desktop-linux":
@@ -324,7 +324,7 @@ def _cli_manifest(profile: str) -> dict[str, object]:
                     "filename": filename,
                     "url": f"https://github.com/context-engine-app/context-engine-mcp/releases/download/v1.2.3/{filename}",
                     "sha256": f"{15 + package_index:064x}",
-                    "size": 1,
+                    "size": "1",
                 }
             )
         bootstrap_package_artifact: dict[str, object] = {
@@ -341,7 +341,7 @@ def _cli_manifest(profile: str) -> dict[str, object]:
             "filename": bootstrap_package["filename"],
             "url": "https://github.com/context-engine-app/context-engine-mcp/releases/download/v1.2.3/context-engine-release-1.2.3-1.noarch.rpm",
             "sha256": "1" * 64,
-            "size": 1,
+            "size": "1",
         }
         artifacts.extend([*native_package_artifacts, bootstrap_package_artifact])
     if profile in {"desktop", "desktop-linux"}:
@@ -356,7 +356,7 @@ def _cli_manifest(profile: str) -> dict[str, object]:
                     "filename": filename,
                     "url": f"https://github.com/context-engine-app/context-engine-mcp/releases/download/v1.2.3/{filename}",
                     "sha256": digest,
-                    "size": 1,
+                    "size": "1",
                 }
             )
     manifest["builds"] = builds
@@ -1498,7 +1498,13 @@ class PortableValidatorLayoutTests(unittest.TestCase):
             },
             "release_descriptor": manifest["release_descriptor"],
             "workflows": workflows,
-            "artifacts": manifest["artifacts"],
+            "artifacts": [
+                {
+                    **artifact,
+                    "size": int(cast(str, artifact["size"])),
+                }
+                for artifact in cast(list[dict[str, object]], manifest["artifacts"])
+            ],
             "candidates": {"status": "not-applicable"},
         }
         validate_provenance = cast(
@@ -1588,7 +1594,7 @@ class PortableValidatorLayoutTests(unittest.TestCase):
             )
         self.assertEqual(
             validate_release_provenance.MANIFEST_SCHEMA_SHA256,
-            "e4e776284db38fb34fe221d75dfef9ce5157a320703b0b701be54dcc224cec44",
+            "3205679742c29d033655beb3b7792809faff75f86c73a2478b637922027126cf",
         )
         self.assertEqual(
             validate_release_provenance.PROVENANCE_SCHEMA_SHA256,
@@ -1604,7 +1610,7 @@ class PortableValidatorLayoutTests(unittest.TestCase):
         )
         self.assertEqual(
             validate_channel_candidates.MANIFEST_SCHEMA_SHA256,
-            "e4e776284db38fb34fe221d75dfef9ce5157a320703b0b701be54dcc224cec44",
+            "3205679742c29d033655beb3b7792809faff75f86c73a2478b637922027126cf",
         )
 
     def test_provenance_schema_accepts_descriptive_tool_versions(self) -> None:

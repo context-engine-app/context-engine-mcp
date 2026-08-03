@@ -463,7 +463,8 @@ class GitHubClient:
         return cast(dict[str, object], decoded)
 
     def publish(self, release_id: int, tag: str) -> dict[str, object]:
-        body = {"draft": False, "tag_name": tag}
+        make_latest = "false" if tag.startswith("repository-bootstrap-") else "true"
+        body = {"draft": False, "tag_name": tag, "make_latest": make_latest}
         status, _, payload = self.json(
             "PATCH", self._release_path(release_id), body=body
         )

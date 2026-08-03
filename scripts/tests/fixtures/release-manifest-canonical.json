@@ -1,0 +1,208 @@
+{
+  "$schema": "https://context-engine.app/schemas/release-manifest.schema.json",
+  "artifacts": [
+    {
+      "architecture": "arm64",
+      "filename": "context-engine-aarch64-apple-darwin.tar.gz",
+      "kind": "archive",
+      "payload_id": "context-engine-aarch64-apple-darwin",
+      "platform": "macos",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "size": "12345",
+      "target": "aarch64-apple-darwin",
+      "url": "https://github.com/context-engine-app/context-engine-mcp/releases/download/v0.2.0/context-engine-aarch64-apple-darwin.tar.gz"
+    },
+    {
+      "architecture": "arm64",
+      "filename": "context-engine-aarch64-unknown-linux-gnu.tar.gz",
+      "kind": "archive",
+      "payload_id": "context-engine-aarch64-unknown-linux-gnu",
+      "platform": "linux",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "size": "12346",
+      "target": "aarch64-unknown-linux-gnu",
+      "url": "https://github.com/context-engine-app/context-engine-mcp/releases/download/v0.2.0/context-engine-aarch64-unknown-linux-gnu.tar.gz"
+    },
+    {
+      "architecture": "x86_64",
+      "filename": "context-engine-x86_64-apple-darwin.tar.gz",
+      "kind": "archive",
+      "payload_id": "context-engine-x86_64-apple-darwin",
+      "platform": "macos",
+      "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "size": "12347",
+      "target": "x86_64-apple-darwin",
+      "url": "https://github.com/context-engine-app/context-engine-mcp/releases/download/v0.2.0/context-engine-x86_64-apple-darwin.tar.gz"
+    },
+    {
+      "architecture": "x86_64",
+      "filename": "context-engine-x86_64-pc-windows-msvc.zip",
+      "kind": "archive",
+      "payload_id": "context-engine-x86_64-pc-windows-msvc",
+      "platform": "windows",
+      "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "size": "12348",
+      "target": "x86_64-pc-windows-msvc",
+      "url": "https://github.com/context-engine-app/context-engine-mcp/releases/download/v0.2.0/context-engine-x86_64-pc-windows-msvc.zip"
+    },
+    {
+      "architecture": "x86_64",
+      "filename": "context-engine-x86_64-unknown-linux-gnu.tar.gz",
+      "kind": "archive",
+      "payload_id": "context-engine-x86_64-unknown-linux-gnu",
+      "platform": "linux",
+      "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "size": "12349",
+      "target": "x86_64-unknown-linux-gnu",
+      "url": "https://github.com/context-engine-app/context-engine-mcp/releases/download/v0.2.0/context-engine-x86_64-unknown-linux-gnu.tar.gz"
+    }
+  ],
+  "assembly_facts": {
+    "path": "packaging/releases/v0.2.0.native-packages.json",
+    "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "authorized_stages": [
+    "source-release",
+    "public-draft"
+  ],
+  "bootstrap": {
+    "mode": "none"
+  },
+  "build_mode": "license-enforced",
+  "builds": [
+    {
+      "build_record_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "payload_id": "context-engine-aarch64-apple-darwin",
+      "payload_verification_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "script": "scripts/build_mac.sh",
+      "script_sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+    },
+    {
+      "build_record_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "payload_id": "context-engine-aarch64-unknown-linux-gnu",
+      "payload_verification_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "script": "scripts/build_linux.sh",
+      "script_sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+    },
+    {
+      "build_record_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "payload_id": "context-engine-x86_64-apple-darwin",
+      "payload_verification_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "script": "scripts/build_mac.sh",
+      "script_sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+    },
+    {
+      "build_record_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "payload_id": "context-engine-x86_64-pc-windows-msvc",
+      "payload_verification_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "script": "scripts/build_win.sh",
+      "script_sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+    },
+    {
+      "build_record_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "payload_id": "context-engine-x86_64-unknown-linux-gnu",
+      "payload_verification_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "script": "scripts/build_linux.sh",
+      "script_sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+    }
+  ],
+  "distribution_commit": "1111111111111111111111111111111111111111",
+  "distribution_repository": "context-engine-app/context-engine-mcp",
+  "distribution_tag_target": "1111111111111111111111111111111111111111",
+  "grammar_inventory": {
+    "path": "packaging/releases/v0.2.0.json",
+    "sha256": "4444444444444444444444444444444444444444444444444444444444444444"
+  },
+  "license_identity": {
+    "key_id": "preview-2026-01",
+    "public_key_sha256": "5555555555555555555555555555555555555555555555555555555555555555"
+  },
+  "package_binding": {
+    "mode": "none"
+  },
+  "payloads": [
+    {
+      "architecture": "arm64",
+      "executable_mode": "0755",
+      "filename": "context-engine",
+      "id": "context-engine-aarch64-apple-darwin",
+      "license_mode": "enforced",
+      "platform": "macos",
+      "sha256": "6666666666666666666666666666666666666666666666666666666666666666",
+      "size": "10001",
+      "target": "aarch64-apple-darwin",
+      "version_output": "context-engine 0.2.0"
+    },
+    {
+      "architecture": "arm64",
+      "executable_mode": "0755",
+      "filename": "context-engine",
+      "id": "context-engine-aarch64-unknown-linux-gnu",
+      "license_mode": "enforced",
+      "platform": "linux",
+      "sha256": "7777777777777777777777777777777777777777777777777777777777777777",
+      "size": "10002",
+      "target": "aarch64-unknown-linux-gnu",
+      "version_output": "context-engine 0.2.0"
+    },
+    {
+      "architecture": "x86_64",
+      "executable_mode": "0755",
+      "filename": "context-engine",
+      "id": "context-engine-x86_64-apple-darwin",
+      "license_mode": "enforced",
+      "platform": "macos",
+      "sha256": "8888888888888888888888888888888888888888888888888888888888888888",
+      "size": "10003",
+      "target": "x86_64-apple-darwin",
+      "version_output": "context-engine 0.2.0"
+    },
+    {
+      "architecture": "x86_64",
+      "executable_mode": "0755",
+      "filename": "context-engine.exe",
+      "id": "context-engine-x86_64-pc-windows-msvc",
+      "license_mode": "enforced",
+      "platform": "windows",
+      "sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+      "size": "10004",
+      "target": "x86_64-pc-windows-msvc",
+      "version_output": "context-engine 0.2.0"
+    },
+    {
+      "architecture": "x86_64",
+      "executable_mode": "0755",
+      "filename": "context-engine",
+      "id": "context-engine-x86_64-unknown-linux-gnu",
+      "license_mode": "enforced",
+      "platform": "linux",
+      "sha256": "abababababababababababababababababababababababababababababababab",
+      "size": "10005",
+      "target": "x86_64-unknown-linux-gnu",
+      "version_output": "context-engine 0.2.0"
+    }
+  ],
+  "profile": "desktop",
+  "release_descriptor": {
+    "path": "packaging/releases/v0.2.0.json",
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "schemas": {
+    "release_provenance": {
+      "path": "schemas/release-provenance.schema.json",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  },
+  "schema_version": 1,
+  "source_commit": "2222222222222222222222222222222222222222",
+  "source_repository": "context-engine-app/context-engine",
+  "source_workflows": {
+    "release": {
+      "commit": "3333333333333333333333333333333333333333",
+      "path": ".github/workflows/release.yml",
+      "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    }
+  },
+  "tag": "v0.2.0",
+  "version": "0.2.0"
+}

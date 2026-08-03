@@ -189,6 +189,30 @@ class PublisherTests(unittest.TestCase):
         self.assertIsInstance(body, dict)
         self.assertNotIn("target_commitish", cast(dict[str, object], body))
 
+    def test_publish_product_release_marks_it_latest(self) -> None:
+        client = publisher.GitHubClient(token="test")
+        with mock.patch.object(
+            client,
+            "json",
+            return_value=(200, {}, {"id": 7, "draft": False}),
+        ) as request_json:
+            _ = client.publish(7, "v0.2.0")
+        body = cast(object, request_json.call_args.kwargs.get("body"))
+        self.assertIsInstance(body, dict)
+        self.assertEqual(cast(dict[str, object], body).get("make_latest"), "true")
+
+    def test_publish_repository_bootstrap_does_not_mark_it_latest(self) -> None:
+        client = publisher.GitHubClient(token="test")
+        with mock.patch.object(
+            client,
+            "json",
+            return_value=(200, {}, {"id": 7, "draft": False}),
+        ) as request_json:
+            _ = client.publish(7, "repository-bootstrap-v0.2.0")
+        body = cast(object, request_json.call_args.kwargs.get("body"))
+        self.assertIsInstance(body, dict)
+        self.assertEqual(cast(dict[str, object], body).get("make_latest"), "false")
+
     def test_asset_upload_uses_github_upload_origin(self) -> None:
         client = publisher.GitHubClient(token="test")
         with mock.patch.object(

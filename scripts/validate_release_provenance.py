@@ -22,7 +22,7 @@ from typing import NoReturn, Protocol, TypeAlias, cast
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST_SCHEMA_SHA256 = (
-    "e4e776284db38fb34fe221d75dfef9ce5157a320703b0b701be54dcc224cec44"
+    "3205679742c29d033655beb3b7792809faff75f86c73a2478b637922027126cf"
 )
 PROVENANCE_SCHEMA_SHA256 = (
     "8c98193b423175f9c447cc19a3fe3d401ef61bc11b61bcf9760c6ba44b5b0860"
@@ -36,6 +36,7 @@ STAGING_SCHEMA_SHA256 = (
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 COMMIT_RE = re.compile(r"^[0-9a-fA-F]{40}$")
 VERSION_RE = re.compile(r"^(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)$")
+SIZE_RE = re.compile(r"^[1-9][0-9]*$")
 RUN_ID_RE = re.compile(r"^[0-9]+$")
 CHECKSUM_RE = re.compile(r"^([0-9a-f]{64})  ([^\x00\r\n\t /\\]+)$")
 SOURCE_REPOSITORY = "context-engine-app/context-engine"
@@ -239,6 +240,25 @@ def _integer(value: object, label: str) -> int:
     if isinstance(value, bool) or not isinstance(value, int):
         raise ReleaseProvenanceValidationError(f"{label} must be a JSON integer")
     return value
+
+
+def _size(value: object, label: str) -> int:
+    text = _string(value, label)
+    if not SIZE_RE.fullmatch(text):
+        raise ReleaseProvenanceValidationError(
+            f"{label} must be a positive canonical decimal string"
+        )
+    try:
+        parsed = int(text, 10)
+    except ValueError as exc:
+        raise ReleaseProvenanceValidationError(
+            f"{label} is outside the signed 64-bit range"
+        ) from exc
+    if parsed > 9223372036854775807:
+        raise ReleaseProvenanceValidationError(
+            f"{label} is outside the signed 64-bit range"
+        )
+    return parsed
 
 
 def _require(condition: bool, message: str) -> None:
@@ -919,7 +939,7 @@ def _validate_manifest(
         )
         _ = _sha(artifact.get("sha256"), f"manifest.artifacts[{index}].sha256")
         _require(
-            _integer(artifact.get("size"), f"manifest.artifacts[{index}].size") >= 1,
+            _size(artifact.get("size"), f"manifest.artifacts[{index}].size") >= 1,
             f"manifest artifact size is not positive: {filename}",
         )
     _validate_profile_artifact_kinds(profile, artifacts, manifest)
@@ -1027,11 +1047,16 @@ def _validate_provenance(
         _object(item, "provenance artifact")
         for item in _array(provenance.get("artifacts"), "provenance.artifacts")
     ]
-    expected_artifacts = [
-        {key: item.get(key) for key in ("kind", "filename", "sha256", "size")}
-        for item in cast(list[dict[str, object]], expected["artifacts"])
-    ]
-    actual_artifacts = [
+    expected_artifacts: list[dict[str, object]] = []
+    for index, item in enumerate(cast(list[dict[str, object]], expected["artifacts"])):
+        expected_artifact = {
+            key: item.get(key) for key in ("kind", "filename", "sha256", "size")
+        }
+        expected_artifact["size"] = _size(
+            item.get("size"), f"manifest.artifacts[{index}].size"
+        )
+        expected_artifacts.append(expected_artifact)
+    actual_artifacts: list[dict[str, object]] = [
         {key: item.get(key) for key in ("kind", "filename", "sha256", "size")}
         for item in artifacts
     ]
@@ -1227,7 +1252,7 @@ def _validate_asset_facts(
         )
         expected = (
             _sha(artifact.get("sha256"), f"manifest.artifacts[{index}].sha256"),
-            _integer(artifact.get("size"), f"manifest.artifacts[{index}].size"),
+            _size(artifact.get("size"), f"manifest.artifacts[{index}].size"),
         )
         _require(
             asset_facts.get(filename) == expected,

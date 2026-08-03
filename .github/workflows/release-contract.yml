@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -62,3 +63,146 @@ jobs:
       - name: Check Ruff formatting for all public Python
         run: |
           .venv/bin/ruff format --check scripts
+
+  unix-installers:
+    name: Verify Unix installer (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15]
+    steps:
+      - name: Check out public contract
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Set up pinned Go for shfmt
+        uses: actions/setup-go@3041bf56c941b39c61721a86cd3ccec9e1f5f8c # v5.0.2
+        with:
+          go-version: "1.23.12"
+
+      - name: Install pinned shfmt
+        run: go install mvdan.cc/sh/v3/cmd/shfmt@v3.8.0
+
+      - name: Install pinned ShellCheck
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = "Linux" ]; then
+            curl --fail --silent --show-error --location \
+              --output /tmp/shellcheck.tar.xz \
+              https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellcheck-v0.11.0.linux.x86_64.tar.xz
+            tar -xJf /tmp/shellcheck.tar.xz -C /tmp
+            echo "/tmp/shellcheck-v0.11.0" >> "$GITHUB_PATH"
+          else
+            curl --fail --silent --show-error --location \
+              --output /tmp/shellcheck.tar.xz \
+              https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellcheck-v0.11.0.darwin.aarch64.tar.xz
+            tar -xJf /tmp/shellcheck.tar.xz -C /tmp
+            echo "/tmp/shellcheck-v0.11.0" >> "$GITHUB_PATH"
+          fi
+
+      - name: Check shell formatting
+        run: shfmt -d install.sh
+
+      - name: Check shell lint
+        run: shellcheck install.sh
+
+      - name: Run Unix installer fixtures
+        run: python3 -m unittest scripts.tests.test_installers -v
+
+  windows-installers:
+    name: Verify Windows installer
+    runs-on: windows-2022
+    timeout-minutes: 20
+    steps:
+      - name: Check out public contract
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Parse with inbox Windows PowerShell 5.1
+        shell: powershell
+        env:
+          CONTEXT_ENGINE_INSTALLER_TEST_ONLY: "1"
+        run: |
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile("install.ps1", [ref]$tokens, [ref]$errors) | Out-Null
+          if ($errors.Count -ne 0) { throw "PowerShell 5.1 parser rejected install.ps1" }
+          $before = [Environment]::GetEnvironmentVariable('PATH', 'User')
+          try {
+            [Environment]::SetEnvironmentVariable('PATH', 'A;B', 'User')
+            $env:CONTEXT_ENGINE_INSTALLER_TEST_ONLY = "1"
+            . ./install.ps1
+            if ((Get-UpdatedUserPath -Directory "C:\Context Engine" -PreviousPath "A;B") -ne "A;B;C:\Context Engine") { throw "PATH transaction failed" }
+          }
+          finally {
+            [Environment]::SetEnvironmentVariable('PATH', $before, 'User')
+          }
+
+      - name: Run installer fixtures with inbox Windows PowerShell 5.1
+        shell: powershell
+        env:
+          CONTEXT_ENGINE_INSTALLER_TEST_ONLY: "1"
+          CONTEXT_ENGINE_TEST_POWERSHELL: powershell.exe
+          CONTEXT_ENGINE_TEST_SHELL: sh.exe
+        run: python -m unittest scripts.tests.test_installers -v
+
+      - name: Install checksum-pinned PowerShell 7.6.4
+        shell: powershell
+        run: |
+          $archive = Join-Path $env:RUNNER_TEMP "PowerShell-7.6.4-win-x64.zip"
+          $destination = Join-Path $env:RUNNER_TEMP "pwsh-7.6.4"
+          $uri = "https://github.com/PowerShell/PowerShell/releases/download/v7.6.4/PowerShell-7.6.4-win-x64.zip"
+          Invoke-WebRequest -UseBasicParsing -Uri $uri -OutFile $archive
+          $actual = (Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash.ToUpperInvariant()
+          $expected = "80832551C52809301E6071C8BAC977BEB5A2F1EC953EB4DB9F94DEB953333793"
+          if ($actual -ne $expected) { throw "PowerShell 7.6.4 archive checksum mismatch" }
+          if (Test-Path -LiteralPath $destination) { Remove-Item -LiteralPath $destination -Recurse -Force }
+          Expand-Archive -LiteralPath $archive -DestinationPath $destination
+          $destination | Out-File -FilePath "$env:GITHUB_PATH" -Encoding utf8 -Append
+
+      - name: Run pinned PowerShell 7.6.4 fixtures
+        shell: pwsh
+        run: |
+          if ($PSVersionTable.PSVersion -ne [version]"7.6.4") { throw "PowerShell 7.6.4 is required" }
+          $expectedPwsh = Join-Path $env:RUNNER_TEMP "pwsh-7.6.4\pwsh.exe"
+          $actualPwsh = (Get-Command pwsh).Source
+          if (-not [StringComparer]::OrdinalIgnoreCase.Equals((Resolve-Path $actualPwsh).Path, (Resolve-Path $expectedPwsh).Path)) { throw "workflow did not resolve the checksum-pinned PowerShell 7.6.4" }
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile("install.ps1", [ref]$tokens, [ref]$errors) | Out-Null
+          if ($errors.Count -ne 0) { throw "PowerShell 7 parser rejected install.ps1" }
+          $before = [Environment]::GetEnvironmentVariable("PATH", "User")
+          try {
+            [Environment]::SetEnvironmentVariable("PATH", "A;B", "User")
+            $env:CONTEXT_ENGINE_INSTALLER_TEST_ONLY = "1"
+            . ./install.ps1
+            if ((Get-UpdatedUserPath -Directory "C:\Context Engine" -PreviousPath "A;B") -ne "A;B;C:\Context Engine") { throw "PATH transaction failed" }
+          }
+          finally {
+            [Environment]::SetEnvironmentVariable("PATH", $before, "User")
+          }
+
+      - name: Run installer fixtures with pinned PowerShell 7.6.4
+        shell: pwsh
+        env:
+          CONTEXT_ENGINE_INSTALLER_TEST_ONLY: "1"
+          CONTEXT_ENGINE_TEST_POWERSHELL: pwsh.exe
+          CONTEXT_ENGINE_TEST_SHELL: sh.exe
+        run: python -m unittest scripts.tests.test_installers -v
+
+      - name: Install pinned PSScriptAnalyzer
+        shell: pwsh
+        run: Install-Module PSScriptAnalyzer -RequiredVersion 1.25.0 -Scope CurrentUser -Force
+
+      - name: Check PowerShell formatting and analysis
+        shell: pwsh
+        run: |
+          Import-Module PSScriptAnalyzer -RequiredVersion 1.25.0
+          $source = Get-Content -LiteralPath install.ps1 -Raw
+          if ((Invoke-Formatter -ScriptDefinition $source) -cne $source) { throw "install.ps1 is not Invoke-Formatter-clean" }
+          $findings = @(Invoke-ScriptAnalyzer -Path install.ps1 -Severity Error,Warning,Information)
+          if ($findings.Count -ne 0) { $findings | Format-List | Out-String | Write-Error; exit 1 }
