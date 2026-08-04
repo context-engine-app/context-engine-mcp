@@ -402,7 +402,7 @@ function Assert-SafeFreshPath([string]$Root) {
 function Invoke-MarkedReinstall([string]$Root) {
     $binary = [IO.Path]::Combine($Root, 'context-engine.exe')
     $backup = [IO.Path]::Combine($Root, '.context-engine.previous.exe')
-    $marker = [IO.Path]::Combine($Root, '.context-engine-installation.json')
+    $marker = [IO.Path]::Combine($Root, 'context-engine-installation.json')
     if (-not (Test-Marker $marker)) { return $false }
     $canonicalItem = Get-Item -LiteralPath $binary -Force -ErrorAction SilentlyContinue
     if ($null -ne $canonicalItem) {
@@ -456,7 +456,7 @@ function Invoke-FreshInstall($Selected, [string]$Version, [string]$Working, [str
         $stage = [IO.Path]::Combine($parent, '.context-engine-install-' + [Guid]::NewGuid().ToString('N'))
         [IO.Directory]::CreateDirectory($stage) | Out-Null
         Copy-Item -LiteralPath (Join-Path $Working 'context-engine.exe') -Destination (Join-Path $stage 'context-engine.exe') -Force
-        Write-Marker (Join-Path $stage '.context-engine-installation.json')
+        Write-Marker (Join-Path $stage 'context-engine-installation.json')
         [IO.Directory]::Move($stage, $Root); $committed = $true; $stage = $null
         if ($pathAfter -ne $pathBefore) { $pathChanged = $true; Set-UserEnvironmentPath -Value $pathAfter }
         Write-Output "Context Engine $Version installed. Open a new terminal to use it."

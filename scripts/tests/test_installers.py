@@ -1708,7 +1708,7 @@ if (-not $caught -or ([DateTimeOffset]::UtcNow - $started).TotalSeconds -gt 2.5)
                 result.stderr,
             )
             self.assertTrue((root / "context-engine").is_file())
-            self.assertTrue((root / ".context-engine-installation.json").is_file())
+            self.assertTrue((root / "context-engine-installation.json").is_file())
             self.assertTrue(entrypoint.is_symlink())
             self.assertEqual(entrypoint.resolve(), (root / "context-engine").resolve())
             self.assertFalse(working.exists())
@@ -1814,7 +1814,7 @@ if (-not $caught -or ([DateTimeOffset]::UtcNow - $started).TotalSeconds -gt 2.5)
     ) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            marker = root / ".context-engine-installation.json"
+            marker = root / "context-engine-installation.json"
             binary = root / "context-engine"
             _ = marker.write_text(
                 '{\n  "schema_version": 1,\n  "installation_method": "direct",\n'
@@ -1839,7 +1839,7 @@ if (-not $caught -or ([DateTimeOffset]::UtcNow - $started).TotalSeconds -gt 2.5)
     ) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            marker = root / ".context-engine-installation.json"
+            marker = root / "context-engine-installation.json"
             binary = root / "context-engine"
             log = root / "updates.log"
             _ = marker.write_text(
@@ -1863,7 +1863,7 @@ if (-not $caught -or ([DateTimeOffset]::UtcNow - $started).TotalSeconds -gt 2.5)
     ) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            marker = root / ".context-engine-installation.json"
+            marker = root / "context-engine-installation.json"
             binary = root / "context-engine"
             log = root / "updates.log"
             _ = marker.write_text(
@@ -2332,7 +2332,7 @@ exit 0
         )
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            marker = root / ".context-engine-installation.json"
+            marker = root / "context-engine-installation.json"
             binary = root / "context-engine.exe"
             _ = marker.write_text(marker_text, encoding="utf-8")
             self.write_executable(binary, "not-a-real-binary")
@@ -2365,7 +2365,7 @@ exit 0
             base = Path(directory)
             root = base / "backup-install"
             root.mkdir()
-            _ = (root / ".context-engine-installation.json").write_text(
+            _ = (root / "context-engine-installation.json").write_text(
                 marker_text, encoding="utf-8"
             )
             backup = root / ".context-engine.previous.exe"
@@ -2386,7 +2386,7 @@ exit 0
 
             unsafe_root = base / "unsafe-canonical"
             unsafe_root.mkdir()
-            _ = (unsafe_root / ".context-engine-installation.json").write_text(
+            _ = (unsafe_root / "context-engine-installation.json").write_text(
                 marker_text, encoding="utf-8"
             )
             (unsafe_root / "context-engine.exe").mkdir()
@@ -2407,7 +2407,7 @@ exit 0
             ):
                 conflict_root = base / name
                 conflict_root.mkdir()
-                _ = (conflict_root / ".context-engine-installation.json").write_text(
+                _ = (conflict_root / "context-engine-installation.json").write_text(
                     marker_text, encoding="utf-8"
                 )
                 if backup_kind == "directory":
@@ -2430,7 +2430,7 @@ exit 0
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory) / "canonical-reparse"
             root.mkdir()
-            _ = (root / ".context-engine-installation.json").write_text(
+            _ = (root / "context-engine-installation.json").write_text(
                 marker_text, encoding="utf-8"
             )
             self.write_executable(root / ".context-engine.previous.exe", "backup")
@@ -2470,7 +2470,7 @@ exit 0
                 self.skipTest(f"symlink test unavailable: {error}")
             root = linked / "existing" / "Context Engine"
             root.mkdir()
-            _ = (root / ".context-engine-installation.json").write_text(
+            _ = (root / "context-engine-installation.json").write_text(
                 marker_text, encoding="utf-8"
             )
             self.write_executable(root / "context-engine.exe", "updater")
@@ -2661,7 +2661,7 @@ exit 0
     def test_shell_marker_rejects_junk_and_noncanonical_field_order(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            marker = root / ".context-engine-installation.json"
+            marker = root / "context-engine-installation.json"
             binary = root / "context-engine"
             self.write_executable(binary, "#!/bin/sh\nexit 0\n")
             entrypoint = root / "bin" / "context-engine"
@@ -2748,7 +2748,7 @@ exit 0
         )
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            _ = (root / ".context-engine-installation.json").write_text(
+            _ = (root / "context-engine-installation.json").write_text(
                 marker_text, encoding="utf-8"
             )
             self.write_executable(root / "context-engine.exe", "updater")

@@ -23,7 +23,7 @@ Direct installations are user-owned at `$HOME/.local/lib/context-engine/context-
 that directory added once to the user's `PATH`. Set `CONTEXT_ENGINE_API_KEY` before first use.
 
 Homebrew, Scoop, APT, DNF, and exact release archives are available from the [download page](https://context-engine.app/download).
-Package installations own an adjacent immutable `.context-engine-installation.json` marker and do not use direct-update
+Package installations own an adjacent immutable `context-engine-installation.json` marker and do not use direct-update
 state or lock files.
 
 Run `context-engine update` to update a direct installation or delegate to Homebrew, Scoop, APT, or DNF as applicable.

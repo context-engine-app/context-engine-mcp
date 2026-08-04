@@ -867,7 +867,7 @@ install_fresh() {
 	stage_name=${stage##*/}
 	cp "$working/$payload_filename" "$stage/context-engine" || fail "cannot stage executable"
 	chmod "$payload_mode" "$stage/context-engine" || fail "cannot set executable mode"
-	write_marker "$stage/.context-engine-installation.json" || fail "cannot stage marker"
+	write_marker "$stage/context-engine-installation.json" || fail "cannot stage marker"
 	[ ! -e "$root" ] || fail "installation directory appeared during install"
 	mv -n "$stage" "$root" || fail "cannot promote installation directory"
 	if [ -e "$stage" ] || [ -L "$stage" ]; then fail "installation directory appeared during install"; fi
@@ -922,7 +922,7 @@ install_fresh() {
 marked_installation_valid() {
 	marked_valid_root=$1
 	marked_valid_entrypoint=$2
-	marked_valid_marker="$marked_valid_root/.context-engine-installation.json"
+	marked_valid_marker="$marked_valid_root/context-engine-installation.json"
 	marked_valid_binary="$marked_valid_root/context-engine"
 	regular_file "$marked_valid_marker" || return 1
 	regular_file "$marked_valid_binary" || return 1
@@ -949,7 +949,7 @@ marked_reinstall() {
 	root=$1
 	entrypoint=$2
 	marked_installation_valid "$root" "$entrypoint" || return 1
-	marker="$root/.context-engine-installation.json"
+	marker="$root/context-engine-installation.json"
 	binary="$root/context-engine"
 	"$binary" update || fail "direct updater failed"
 	repair_entrypoint "$binary" "$entrypoint" || fail "updated binary but could not repair command entrypoint"
