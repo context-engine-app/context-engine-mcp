@@ -1902,6 +1902,7 @@ if (-not $caught -or ([DateTimeOffset]::UtcNow - $started).TotalSeconds -gt 2.5)
         command = (
             "$env:CONTEXT_ENGINE_INSTALLER_TEST_ONLY='1'; . ./install.ps1; "
             f"$manifest = Get-Content -LiteralPath '{FIXTURE}' -Raw | ConvertFrom-Json; "
+            "$manifest.artifacts += [PSCustomObject]@{ kind = 'aggregate-sbom'; filename = 'context-engine-release.cdx.json' }; "
             "$selected = Get-SelectedManifest -Manifest $manifest -Target 'x86_64-pc-windows-msvc' -Tag 'v0.2.0' -Version '0.2.0'; "
             "if ($selected.ArchiveSize -ne 12348 -or $selected.PayloadSize -ne 10004) { exit 1 }; "
             "$manifest.artifacts = @($manifest.artifacts | Where-Object { $_.target -eq 'x86_64-pc-windows-msvc' }); "

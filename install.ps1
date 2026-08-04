@@ -186,8 +186,10 @@ function Get-SelectedManifest($Manifest, [string]$Target, [string]$Tag, [string]
     $archives = @()
     foreach ($candidate in @($artifactRecords)) {
         $kind = Get-ManifestString -Object $candidate -Name 'kind' -Context 'manifest artifact'
-        $candidateTarget = Get-ManifestString -Object $candidate -Name 'target' -Context 'manifest artifact'
-        if ([string]::Equals($kind, 'archive', [StringComparison]::Ordinal) -and [string]::Equals($candidateTarget, $Target, [StringComparison]::Ordinal)) { $archives += $candidate }
+        if ([string]::Equals($kind, 'archive', [StringComparison]::Ordinal)) {
+            $candidateTarget = Get-ManifestString -Object $candidate -Name 'target' -Context 'manifest artifact'
+            if ([string]::Equals($candidateTarget, $Target, [StringComparison]::Ordinal)) { $archives += $candidate }
+        }
     }
     if ($archives.Count -ne 1) { Fail 'manifest archive target is missing or ambiguous' }
     $archive = $archives[0]
