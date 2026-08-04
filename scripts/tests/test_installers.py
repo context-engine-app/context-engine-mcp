@@ -2134,19 +2134,20 @@ exit 0
                         "if ($script:setPathCalls -eq 1) { throw 'after promotion' }; "
                         "[Environment]::SetEnvironmentVariable('PATH', $Value, 'User') }; "
                     )
-                    post_assertion = "if ($script:setPathCalls -ne 2 -or -not [string]::Equals($script:setPathValues[1], [string]$before, [StringComparison]::Ordinal)) { exit 1 }; "
+                    post_assertion = "if ($script:setPathCalls -ne 2 -or -not [string]::Equals($script:setPathValues[1], [string]$pathBeforeInstall, [StringComparison]::Ordinal)) { throw 'rollback did not restore the transaction PATH' }; "
                 command = (
                     "$env:CONTEXT_ENGINE_INSTALLER_TEST_ONLY='1'; "
                     ". ./install.ps1; "
                     "$runningOnWindows = [Environment]::OSVersion.Platform -eq [PlatformID]::Win32NT; "
                     "$before = [Environment]::GetEnvironmentVariable('PATH', 'User'); "
                     "try { if ($runningOnWindows) { [Environment]::SetEnvironmentVariable('PATH', 'context-engine-test-path', 'User') }; "
+                    "$pathBeforeInstall = [Environment]::GetEnvironmentVariable('PATH', 'User'); "
                     f"{hook}"
                     "try { Invoke-FreshInstall -Selected @{} -Version '0.2.0' -Working "
                     f"{working_literal} -Root {root_literal}; exit 1 }} catch {{ }}; "
                     f"if (Test-Path -LiteralPath {root_literal}) {{ throw 'installation root survived rollback' }}; "
                     f"{post_assertion}"
-                    "if ($runningOnWindows -and [Environment]::GetEnvironmentVariable('PATH', 'User') -ne 'context-engine-test-path') { throw 'user PATH was not restored' }; "
+                    "if ($runningOnWindows -and [Environment]::GetEnvironmentVariable('PATH', 'User') -ne $pathBeforeInstall) { throw 'user PATH was not restored' }; "
                     "} finally { if ($runningOnWindows) { [Environment]::SetEnvironmentVariable('PATH', $before, 'User') } }"
                 )
                 result = self.run_pwsh(command)
@@ -2510,6 +2511,8 @@ exit 0
             "Run installer fixtures with inbox Windows PowerShell 5.1",
             "Run installer fixtures with pinned PowerShell 7.6.4",
             "-m unittest scripts.tests.test_installers -k power_shell -v",
+            "actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0",
+            "cache: false",
             "go install mvdan.cc/sh/v3/cmd/shfmt@v3.8.0",
             "shellcheck install.sh",
         ):

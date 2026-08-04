@@ -163,8 +163,11 @@ function Get-ExactPropertyValue($Object, [string]$Name, [string]$Context) {
 }
 
 function Get-ExactArray($Object, [string]$Name, [string]$Context) {
-    $value = Get-ExactPropertyValue -Object $Object -Name $Name -Context $Context
-    if ($value -isnot [Collections.IList]) { Fail "$Context $Name must be a JSON array" }
+    if ($null -eq $Object) { Fail "$Context is missing" }
+    $propertyMatches = @($Object.PSObject.Properties | Where-Object { [string]::Equals($_.Name, $Name, [StringComparison]::Ordinal) })
+    if ($propertyMatches.Count -ne 1) { Fail "$Context has an invalid $Name property" }
+    $value = $propertyMatches[0].Value
+    if ($value -isnot [Array]) { Fail "$Context $Name must be a JSON array" }
     return $value
 }
 

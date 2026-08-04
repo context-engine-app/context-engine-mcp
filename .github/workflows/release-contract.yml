@@ -91,9 +91,10 @@ jobs:
           uv pip install --python .venv/bin/python --requirement scripts/requirements-dev.txt
 
       - name: Set up pinned Go for shfmt
-        uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5.0.2
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
         with:
           go-version: "1.23.12"
+          cache: false
 
       - name: Install pinned shfmt
         run: go install mvdan.cc/sh/v3/cmd/shfmt@v3.8.0
