@@ -102,8 +102,8 @@ jobs:
           gh api -H "X-GitHub-Api-Version: 2026-03-10" "repos/$SOURCE_REPOSITORY/git/ref/tags/$TAG_NAME" > "$tag_ref_json"
           source_repository_id=$(jq -er '.id | select(type == "number" and . > 0)' "$repository_json")
           source_commit=$(jq -er '.head_sha | select(type == "string" and test("^[0-9a-f]{40}$"))' "$run_json")
-          jq -e --arg tag "$TAG_NAME" --arg repository "$SOURCE_REPOSITORY" --argjson run_id "$SOURCE_RUN_ID" --argjson repository_id "$source_repository_id" \
-            '.id == $run_id and .name == "Release" and .path == ".github/workflows/release.yml" and .event == "push" and .status == "completed" and .conclusion == "success" and .head_branch == $tag and .head_repository.full_name == $repository and .repository.full_name == $repository and .head_repository.id == $repository_id and .repository.id == $repository_id' "$run_json" > /dev/null
+          jq -e --arg repository "$SOURCE_REPOSITORY" --argjson run_id "$SOURCE_RUN_ID" --argjson repository_id "$source_repository_id" \
+            '.id == $run_id and .name == "Release" and .path == ".github/workflows/release.yml" and .event == "workflow_dispatch" and .status == "completed" and .conclusion == "success" and .head_branch == "main" and .head_repository.full_name == $repository and .repository.full_name == $repository and .head_repository.id == $repository_id and .repository.id == $repository_id' "$run_json" > /dev/null
           jq -e --arg expected_ref "refs/tags/$TAG_NAME" '.ref == $expected_ref and (.object.sha | type) == "string" and (.object.type == "commit" or .object.type == "tag")' "$tag_ref_json" > /dev/null
           tag_object_type=$(jq -er '.object.type' "$tag_ref_json")
           tag_object_sha=$(jq -er '.object.sha | select(test("^[0-9a-f]{40}$"))' "$tag_ref_json")
@@ -114,8 +114,8 @@ jobs:
             tag_commit_sha="$tag_object_sha"
           fi
           test "$tag_commit_sha" = "$source_commit"
-          artifact=$(jq -e --argjson run_id "$SOURCE_RUN_ID" --arg source_commit "$source_commit" --arg tag "$TAG_NAME" --argjson repository_id "$source_repository_id" \
-            '[.artifacts[] | select(.name == "staging-envelope" and (.id | type) == "number" and .id > 0 and (.size_in_bytes | type) == "number" and .size_in_bytes > 0 and (.digest | type) == "string" and (.digest | test("^sha256:[0-9a-f]{64}$")) and .expired == false and .workflow_run.id == $run_id and .workflow_run.head_sha == $source_commit and .workflow_run.head_branch == $tag and .workflow_run.repository_id == $repository_id and .workflow_run.head_repository_id == $repository_id)] | if length == 1 then .[0] else error("staging artifact identity mismatch") end' "$artifacts_json")
+          artifact=$(jq -e --argjson run_id "$SOURCE_RUN_ID" --arg source_commit "$source_commit" --argjson repository_id "$source_repository_id" \
+            '[.artifacts[] | select(.name == "staging-envelope" and (.id | type) == "number" and .id > 0 and (.size_in_bytes | type) == "number" and .size_in_bytes > 0 and (.digest | type) == "string" and (.digest | test("^sha256:[0-9a-f]{64}$")) and .expired == false and .workflow_run.id == $run_id and .workflow_run.head_sha == $source_commit and .workflow_run.head_branch == "main" and .workflow_run.repository_id == $repository_id and .workflow_run.head_repository_id == $repository_id)] | if length == 1 then .[0] else error("staging artifact identity mismatch") end' "$artifacts_json")
           {
             printf 'artifact_id=%s\n' "$(jq -er '.id' <<<"$artifact")"
             printf 'artifact_digest=%s\n' "$(jq -er '.digest' <<<"$artifact")"
