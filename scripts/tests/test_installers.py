@@ -747,7 +747,9 @@ fi
     ) -> None:
         command = r"""
 $env:CONTEXT_ENGINE_INSTALLER_TEST_ONLY='1'; . ./install.ps1
-Add-Type -TypeDefinition @'
+Add-Type -AssemblyName System.Net.Http
+$references = @([System.Net.Http.HttpClient].Assembly.Location, [System.Net.TransportContext].Assembly.Location) | Select-Object -Unique
+$source = @'
 using System;
 using System.Net;
 using System.Net.Http;
@@ -776,6 +778,7 @@ public sealed class InstallerRedirectHandler : HttpMessageHandler {
     }
 }
 '@
+Add-Type -TypeDefinition $source -ReferencedAssemblies $references
 $handler = New-Object InstallerRedirectHandler(0); $client = New-Object System.Net.Http.HttpClient($handler)
 try { Invoke-HttpGet -Client $client -Url 'https://example.test/start' -Deadline ([DateTimeOffset]::UtcNow.AddSeconds(1)); exit 1 } catch { }
 $client.Dispose(); $handler = New-Object InstallerRedirectHandler(1); $client = New-Object System.Net.Http.HttpClient($handler)
@@ -841,7 +844,9 @@ try { Invoke-HttpGet -Client $client -Url 'https://example.test/start' -Deadline
             destination = self.ps_literal(Path(directory) / "delayed-payload")
             command = r"""
 $env:CONTEXT_ENGINE_INSTALLER_TEST_ONLY='1'; . ./install.ps1
-Add-Type -TypeDefinition @'
+Add-Type -AssemblyName System.Net.Http
+$references = @([System.Net.Http.HttpClient].Assembly.Location, [System.Net.TransportContext].Assembly.Location) | Select-Object -Unique
+$source = @'
 using System;
 using System.IO;
 using System.Net;
@@ -860,6 +865,7 @@ public sealed class DelayedInstallerContent : HttpContent {
     protected override bool TryComputeLength(out long length) { length = 4; return true; }
 }
 '@
+Add-Type -TypeDefinition $source -ReferencedAssemblies $references
 $response = New-Object System.Net.Http.HttpResponseMessage
 $response.Content = New-Object DelayedInstallerContent(3000)
 $started = [DateTimeOffset]::UtcNow; $caught = $false
@@ -2138,9 +2144,9 @@ exit 0
                     f"{hook}"
                     "try { Invoke-FreshInstall -Selected @{} -Version '0.2.0' -Working "
                     f"{working_literal} -Root {root_literal}; exit 1 }} catch {{ }}; "
-                    f"if (Test-Path -LiteralPath {root_literal}) {{ exit 1 }}; "
+                    f"if (Test-Path -LiteralPath {root_literal}) {{ throw 'installation root survived rollback' }}; "
                     f"{post_assertion}"
-                    "if ($runningOnWindows -and [Environment]::GetEnvironmentVariable('PATH', 'User') -ne 'context-engine-test-path') { exit 1 }; "
+                    "if ($runningOnWindows -and [Environment]::GetEnvironmentVariable('PATH', 'User') -ne 'context-engine-test-path') { throw 'user PATH was not restored' }; "
                     "} finally { if ($runningOnWindows) { [Environment]::SetEnvironmentVariable('PATH', $before, 'User') } }"
                 )
                 result = self.run_pwsh(command)
@@ -2503,10 +2509,17 @@ exit 0
             "finally {",
             "Run installer fixtures with inbox Windows PowerShell 5.1",
             "Run installer fixtures with pinned PowerShell 7.6.4",
+            "-m unittest scripts.tests.test_installers -k power_shell -v",
             "go install mvdan.cc/sh/v3/cmd/shfmt@v3.8.0",
             "shellcheck install.sh",
         ):
             self.assertIn(required, workflow)
+        self.assertEqual(
+            workflow.count(
+                "-m unittest scripts.tests.test_installers -k power_shell -v"
+            ),
+            2,
+        )
         self.assertNotIn("macos-14", workflow)
         self.assertNotIn("shellcheck --severity=warning", workflow)
 

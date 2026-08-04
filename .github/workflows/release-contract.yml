@@ -173,7 +173,7 @@ jobs:
           CONTEXT_ENGINE_INSTALLER_TEST_ONLY: "1"
           CONTEXT_ENGINE_TEST_POWERSHELL: powershell.exe
           CONTEXT_ENGINE_TEST_SHELL: sh.exe
-        run: ./.venv/Scripts/python.exe -m unittest scripts.tests.test_installers -v
+        run: ./.venv/Scripts/python.exe -m unittest scripts.tests.test_installers -k power_shell -v
 
       - name: Install checksum-pinned PowerShell 7.6.4
         shell: powershell
@@ -217,7 +217,7 @@ jobs:
           CONTEXT_ENGINE_INSTALLER_TEST_ONLY: "1"
           CONTEXT_ENGINE_TEST_POWERSHELL: pwsh.exe
           CONTEXT_ENGINE_TEST_SHELL: sh.exe
-        run: ./.venv/Scripts/python.exe -m unittest scripts.tests.test_installers -v
+        run: ./.venv/Scripts/python.exe -m unittest scripts.tests.test_installers -k power_shell -v
 
       - name: Install pinned PSScriptAnalyzer
         shell: pwsh

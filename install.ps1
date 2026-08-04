@@ -164,7 +164,7 @@ function Get-ExactPropertyValue($Object, [string]$Name, [string]$Context) {
 
 function Get-ExactArray($Object, [string]$Name, [string]$Context) {
     $value = Get-ExactPropertyValue -Object $Object -Name $Name -Context $Context
-    if ($value -isnot [Array]) { Fail "$Context $Name must be a JSON array" }
+    if ($value -isnot [Collections.IList]) { Fail "$Context $Name must be a JSON array" }
     return $value
 }
 
