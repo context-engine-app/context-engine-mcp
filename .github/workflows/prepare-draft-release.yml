@@ -173,10 +173,10 @@ jobs:
           TAG_NAME: ${{ inputs.tag }}
         run: |
           set -euo pipefail
-          certificate_identity="https://github.com/context-engine-app/context-engine/.github/workflows/release.yml@refs/tags/$TAG_NAME"
+          certificate_identity="https://github.com/context-engine-app/context-engine/.github/workflows/release.yml@refs/heads/main"
           for pair in "SHA256SUMS SHA256SUMS.sigstore.json" "staging-attestation.json staging-attestation.sigstore.json"; do
             read -r payload bundle <<<"$pair"
-            cosign verify-blob --certificate-identity "$certificate_identity" --certificate-oidc-issuer https://token.actions.githubusercontent.com --certificate-github-workflow-repository context-engine-app/context-engine --certificate-github-workflow-ref "refs/tags/$TAG_NAME" --certificate-github-workflow-sha "$SOURCE_COMMIT" --certificate-github-workflow-name Release --certificate-github-workflow-trigger push --bundle "staged-release/$bundle" "staged-release/$payload"
+            cosign verify-blob --certificate-identity "$certificate_identity" --certificate-oidc-issuer https://token.actions.githubusercontent.com --certificate-github-workflow-repository context-engine-app/context-engine --certificate-github-workflow-ref refs/heads/main --certificate-github-workflow-sha "$SOURCE_COMMIT" --certificate-github-workflow-name Release --certificate-github-workflow-trigger workflow_dispatch --bundle "staged-release/$bundle" "staged-release/$payload"
           done
 
       - name: Create public publisher App token
