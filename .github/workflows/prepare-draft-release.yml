@@ -96,6 +96,7 @@ jobs:
           artifacts_json="$RUNNER_TEMP/source-artifacts.json"
           tag_ref_json="$RUNNER_TEMP/source-tag-ref.json"
           tag_object_json="$RUNNER_TEMP/source-tag-object.json"
+          changelog="$RUNNER_TEMP/CHANGELOG.md"
           gh api -H "X-GitHub-Api-Version: 2026-03-10" "repos/$SOURCE_REPOSITORY" > "$repository_json"
           gh api -H "X-GitHub-Api-Version: 2026-03-10" "repos/$SOURCE_REPOSITORY/actions/runs/$SOURCE_RUN_ID" > "$run_json"
           gh api -H "X-GitHub-Api-Version: 2026-03-10" "repos/$SOURCE_REPOSITORY/actions/runs/$SOURCE_RUN_ID/artifacts" > "$artifacts_json"
@@ -114,6 +115,8 @@ jobs:
             tag_commit_sha="$tag_object_sha"
           fi
           test "$tag_commit_sha" = "$source_commit"
+          gh api -H "Accept: application/vnd.github.raw+json" -H "X-GitHub-Api-Version: 2026-03-10" "repos/$SOURCE_REPOSITORY/contents/CHANGELOG.md?ref=$source_commit" > "$changelog"
+          test -s "$changelog"
           artifact=$(jq -e --argjson run_id "$SOURCE_RUN_ID" --arg source_commit "$source_commit" --argjson repository_id "$source_repository_id" \
             '[.artifacts[] | select(.name == "staging-envelope" and (.id | type) == "number" and .id > 0 and (.size_in_bytes | type) == "number" and .size_in_bytes > 0 and (.digest | type) == "string" and (.digest | test("^sha256:[0-9a-f]{64}$")) and .expired == false and .workflow_run.id == $run_id and .workflow_run.head_sha == $source_commit and .workflow_run.head_branch == "main" and .workflow_run.repository_id == $repository_id and .workflow_run.head_repository_id == $repository_id)] | if length == 1 then .[0] else error("staging artifact identity mismatch") end' "$artifacts_json")
           {
@@ -193,7 +196,7 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.publisher.outputs.token }}
           TAG_NAME: ${{ inputs.tag }}
-        run: .venv/bin/python -m scripts.prepare_draft_release --plan validated-plan.json --staged-assets staged-release --tag "$TAG_NAME" --repository "$GITHUB_REPOSITORY"
+        run: .venv/bin/python -m scripts.prepare_draft_release --plan validated-plan.json --staged-assets staged-release --changelog "$RUNNER_TEMP/CHANGELOG.md" --tag "$TAG_NAME" --repository "$GITHUB_REPOSITORY"
 
       - name: Revoke public publisher token
         if: ${{ always() && steps.publisher.outputs.token != '' }}

@@ -12,6 +12,8 @@ from typing_extensions import override
 
 from scripts import prepare_draft_release as publisher
 
+RELEASE_NOTES = "Initial release."
+
 
 class FakeClient(publisher.GitHubClient):
     def __init__(self, mismatch: bool = False, omit_name: str | None = None) -> None:
@@ -29,13 +31,16 @@ class FakeClient(publisher.GitHubClient):
         return self.release
 
     @override
-    def create_draft(self, plan: publisher.ValidatedPlan) -> dict[str, object]:
+    def create_draft(
+        self, plan: publisher.ValidatedPlan, release_notes: str
+    ) -> dict[str, object]:
         self.release = {
             "id": 7,
             "tag_name": plan.tag,
             "name": plan.tag,
             "draft": True,
             "prerelease": False,
+            "body": release_notes,
         }
         return self.release
 
@@ -159,6 +164,38 @@ def _fixture() -> tuple[Path, dict[str, object]]:
 
 
 class PublisherTests(unittest.TestCase):
+    def test_release_notes_are_the_exact_version_section(self) -> None:
+        root, _ = _fixture()
+        changelog = root.parent / "CHANGELOG.md"
+        _ = changelog.write_text(
+            "".join(
+                (
+                    "# Changelog\n\n## [Unreleased]\n\nPending.\n\n",
+                    "## [0.1.0]\n\nFirst line.\n\n- Second line.\n\n",
+                    "## [0.0.1]\n\nOlder.\n",
+                )
+            ),
+            encoding="utf-8",
+        )
+        self.assertEqual(
+            publisher.release_notes_from_changelog(changelog, "0.1.0"),
+            "First line.\n\n- Second line.",
+        )
+
+    def test_release_notes_reject_missing_duplicate_and_empty_sections(self) -> None:
+        root, _ = _fixture()
+        changelog = root.parent / "CHANGELOG.md"
+        invalid = (
+            ("# Changelog\n", "exactly one"),
+            ("## [0.1.0]\nA.\n## [0.1.0]\nB.\n", "exactly one"),
+            ("## [0.1.0]\n\n## [0.0.1]\nOlder.\n", "is empty"),
+        )
+        for content, message in invalid:
+            with self.subTest(content=content):
+                _ = changelog.write_text(content, encoding="utf-8")
+                with self.assertRaisesRegex(publisher.PlanError, message):
+                    _ = publisher.release_notes_from_changelog(changelog, "0.1.0")
+
     def test_create_draft_uses_the_prevalidated_existing_tag(self) -> None:
         root, raw_plan = _fixture()
         plan_path = root.parent / "plan.json"
@@ -170,11 +207,12 @@ class PublisherTests(unittest.TestCase):
             "json",
             return_value=(201, {}, {"id": 7}),
         ) as request_json:
-            _ = client.create_draft(plan)
+            _ = client.create_draft(plan, RELEASE_NOTES)
         request_json.assert_called_once()
         body = cast(object, request_json.call_args.kwargs.get("body"))
         self.assertIsInstance(body, dict)
         self.assertNotIn("target_commitish", cast(dict[str, object], body))
+        self.assertEqual(cast(dict[str, object], body).get("body"), RELEASE_NOTES)
 
     def test_publish_draft_uses_the_prevalidated_existing_tag(self) -> None:
         client = publisher.GitHubClient(token="test")
@@ -253,8 +291,9 @@ class PublisherTests(unittest.TestCase):
             "name": plan.tag,
             "draft": True,
             "prerelease": False,
+            "body": RELEASE_NOTES,
         }
-        result = publisher.publish(plan, root, client)
+        result = publisher.publish(plan, root, client, RELEASE_NOTES)
         self.assertEqual(result["status"], "published")
 
     def test_plan_rejects_changed_asset_facts(self) -> None:
@@ -274,7 +313,7 @@ class PublisherTests(unittest.TestCase):
         _ = plan_path.write_text(json.dumps(raw_plan), encoding="utf-8")
         plan = publisher.ValidatedPlan.from_file(plan_path)
         client = FakeClient()
-        result = publisher.publish(plan, root, client)
+        result = publisher.publish(plan, root, client, RELEASE_NOTES)
         self.assertEqual(result["status"], "published")
         self.assertEqual(len(client.uploads), len(plan.assets))
         self.assertEqual(client.publications, 1)
@@ -285,12 +324,22 @@ class PublisherTests(unittest.TestCase):
         _ = plan_path.write_text(json.dumps(raw_plan), encoding="utf-8")
         plan = publisher.ValidatedPlan.from_file(plan_path)
         client = FakeClient()
-        _ = publisher.publish(plan, root, client)
+        _ = publisher.publish(plan, root, client, RELEASE_NOTES)
         client.uploads.clear()
-        result = publisher.publish(plan, root, client)
+        result = publisher.publish(plan, root, client, RELEASE_NOTES)
         self.assertTrue(result["reused"])
         self.assertEqual(client.uploads, [])
         self.assertEqual(client.publications, 1)
+
+    def test_published_rerun_rejects_mismatched_release_notes(self) -> None:
+        root, raw_plan = _fixture()
+        plan_path = root.parent / "plan.json"
+        _ = plan_path.write_text(json.dumps(raw_plan), encoding="utf-8")
+        plan = publisher.ValidatedPlan.from_file(plan_path)
+        client = FakeClient()
+        _ = publisher.publish(plan, root, client, RELEASE_NOTES)
+        with self.assertRaises(publisher.ReleaseMismatchError):
+            _ = publisher.publish(plan, root, client, "Different notes.")
 
     def test_mismatched_remote_asset_fails_closed(self) -> None:
         root, raw_plan = _fixture()
@@ -299,7 +348,7 @@ class PublisherTests(unittest.TestCase):
         plan = publisher.ValidatedPlan.from_file(plan_path)
         client = FakeClient(mismatch=True)
         with self.assertRaises(publisher.ReleaseMismatchError):
-            _ = publisher.publish(plan, root, client)
+            _ = publisher.publish(plan, root, client, RELEASE_NOTES)
 
     def test_missing_remote_asset_fails_closed(self) -> None:
         root, raw_plan = _fixture()
@@ -308,7 +357,7 @@ class PublisherTests(unittest.TestCase):
         plan = publisher.ValidatedPlan.from_file(plan_path)
         client = FakeClient(omit_name=plan.assets[0].name)
         with self.assertRaises(publisher.ReleaseMismatchError):
-            _ = publisher.publish(plan, root, client)
+            _ = publisher.publish(plan, root, client, RELEASE_NOTES)
 
 
 if __name__ == "__main__":

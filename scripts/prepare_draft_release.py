@@ -63,6 +63,27 @@ class ReleaseMismatchError(PublishError):
     """GitHub contains a release that is not the requested release."""
 
 
+def release_notes_from_changelog(path: Path, version: str) -> str:
+    """Return the non-empty changelog section for one exact release version."""
+    try:
+        lines = path.read_text(encoding="utf-8").splitlines()
+    except OSError as error:
+        raise PlanError(f"cannot read changelog: {error}") from error
+    heading = f"## [{version}]"
+    matches = [index for index, line in enumerate(lines) if line == heading]
+    if len(matches) != 1:
+        raise PlanError(f"changelog must contain exactly one {heading} heading")
+    start = matches[0] + 1
+    end = next(
+        (index for index in range(start, len(lines)) if lines[index].startswith("## ")),
+        len(lines),
+    )
+    notes = "\n".join(lines[start:end]).strip()
+    if not notes:
+        raise PlanError(f"changelog section {heading} is empty")
+    return notes
+
+
 class _UrlResponse(Protocol):
     status: int
     headers: Mapping[str, str]
@@ -427,11 +448,13 @@ class GitHubClient:
             if isinstance(value, dict)
         ]
 
-    def create_draft(self, plan: ValidatedPlan) -> dict[str, object]:
+    def create_draft(
+        self, plan: ValidatedPlan, release_notes: str
+    ) -> dict[str, object]:
         body = {
             "tag_name": plan.tag,
             "name": plan.tag,
-            "body": "Release notes will be added manually before publication.",
+            "body": release_notes,
             "draft": True,
             "prerelease": False,
         }
@@ -532,11 +555,14 @@ def _assert_metadata(
 
 
 def publish(
-    plan: ValidatedPlan, staged_assets: Path, client: GitHubClient
+    plan: ValidatedPlan,
+    staged_assets: Path,
+    client: GitHubClient,
+    release_notes: str,
 ) -> dict[str, object]:
     release = client.release_by_tag(plan.tag)
     if release is None:
-        release = client.create_draft(plan)
+        release = client.create_draft(plan, release_notes)
     release_id = _release_id(release)
     draft = release.get("draft")
     if draft is False:
@@ -544,6 +570,7 @@ def publish(
             release.get("immutable") is not True
             or release.get("tag_name") != plan.tag
             or release.get("name") != plan.tag
+            or release.get("body") != release_notes
         ):
             raise ReleaseMismatchError(
                 "existing published release identity differs from the plan"
@@ -560,6 +587,7 @@ def publish(
         draft is not True
         or release.get("prerelease") is not False
         or release.get("name") != plan.tag
+        or release.get("body") != release_notes
         or (
             release.get("tag_name") != plan.tag
             and not (
@@ -587,6 +615,7 @@ def publish(
         or final.get("published_at") is None
         or final.get("tag_name") != plan.tag
         or final.get("name") != plan.tag
+        or final.get("body") != release_notes
     ):
         raise ReleaseMismatchError("published release identity is not immutable")
     _ = _assert_metadata(client.assets(release_id), plan)
@@ -603,6 +632,7 @@ def _parser() -> argparse.ArgumentParser:
     _ = parser.add_argument("--plan", type=Path, required=True)
     _ = parser.add_argument("--staged-assets", type=Path, required=True)
     _ = parser.add_argument("--tag", required=True)
+    _ = parser.add_argument("--changelog", type=Path, required=True)
     _ = parser.add_argument(
         "--repository", default=os.environ.get("GITHUB_REPOSITORY", PUBLIC_REPOSITORY)
     )
@@ -616,8 +646,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         tag = cast(str, args.tag)
         if plan.tag != tag:
             raise PlanError("input tag does not match the validated plan")
+        release_notes = release_notes_from_changelog(
+            cast(Path, args.changelog), plan.version
+        )
         client = GitHubClient(repository=cast(str, args.repository))
-        result = publish(plan, cast(Path, args.staged_assets), client)
+        result = publish(plan, cast(Path, args.staged_assets), client, release_notes)
         print(json.dumps(result, sort_keys=True, separators=(",", ":")))
         return 0
     except (PublishError, OSError, ValueError) as error:

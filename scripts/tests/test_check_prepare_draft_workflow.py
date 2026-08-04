@@ -42,6 +42,21 @@ class ReleaseWorkflowCheckerTests(unittest.TestCase):
             errors = check_workflow(Path(handle.name))
         self.assertTrue(any("protected main" in error for error in errors))
 
+    def test_non_source_changelog_is_rejected(self) -> None:
+        source = WORKFLOW.read_text(encoding="utf-8").replace(
+            "contents/CHANGELOG.md?ref=$source_commit",
+            "contents/CHANGELOG.md",
+        )
+        with tempfile.NamedTemporaryFile(
+            "w", suffix=".yml", encoding="utf-8"
+        ) as handle:
+            _ = handle.write(source)
+            handle.flush()
+            errors = check_workflow(Path(handle.name))
+        self.assertTrue(
+            any("exact source commit changelog" in error for error in errors)
+        )
+
     def test_unknown_publisher_credentials_are_rejected(self) -> None:
         source = WORKFLOW.read_text(encoding="utf-8").replace(
             "IMMUTABLE_RELEASE_PUBLISHER_APP_CLIENT_ID",

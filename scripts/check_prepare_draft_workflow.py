@@ -128,6 +128,12 @@ def check_workflow(path: Path) -> list[str]:
                 "workflow must invoke the canonical publisher exactly once"
             )
         if (
+            "repos/$SOURCE_REPOSITORY/contents/CHANGELOG.md?ref=$source_commit"
+            not in commands
+            or '--changelog "$RUNNER_TEMP/CHANGELOG.md"' not in commands
+        ):
+            raise WorkflowError("publisher must use the exact source commit changelog")
+        if (
             "prepare_draft_release.py inspect" in commands
             or "publish_draft_release.py" in commands
         ):
